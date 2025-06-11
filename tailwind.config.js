@@ -7,10 +7,36 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-nunito-sans)"],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      colors: {
+        accent: {
+          100: "#CDFF71",
+          80: "#D7FF8D",
+          60: "#E1FFAA",
+          40: "#EBFFC6",
+          20: "#F5FFE3",
+        },
+        neutral: {
+          100: "#232323",
+          90: "#393939",
+          80: "#4F4F4F",
+          70: "#656565",
+          60: "#7B7B7B",
+          50: "#919191",
+          40: "#A7A7A7",
+          30: "#BDBDBD",
+          20: "#D3D3D3",
+          10: "#E9E9E9",
+          3: "#F8F8F8",
+          0: "#FFFFFF",
+        },
       },
     },
   },
