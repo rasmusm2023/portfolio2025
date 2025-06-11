@@ -61,7 +61,7 @@ export default function Hero() {
 
   return (
     <section className="relative min-h-screen">
-      <div className="mx-4 my-4 rounded-2xl h-[85vh] relative overflow-hidden">
+      <div className="mx-8 my-8 rounded-2xl h-[85vh] relative overflow-hidden">
         <div className="absolute inset-0">
           <ParticlesBackground />
         </div>
@@ -73,11 +73,11 @@ export default function Hero() {
             <div className="text-center pointer-events-auto">
               <h1
                 ref={titleRef}
-                className="text-6xl font-bold mb-4 text-accent-80"
+                className="text-8xl font-bold mb-4 text-neutral-0"
               >
                 UX Designer
               </h1>
-              <p className="text-xl">Other text</p>
+              <p className="text-xl text-neutral-40">Other text</p>
             </div>
           </div>
         </div>

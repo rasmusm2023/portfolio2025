@@ -1,12 +1,15 @@
 "use client";
 
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+export default function ClientLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
 

@@ -20,48 +20,40 @@ const Menu = () => {
     { label: "CONTACT", href: "/contact" },
   ];
 
-  const updatePillPosition = () => {
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const target = e.currentTarget as HTMLAnchorElement;
+    window.history.pushState({}, "", target.href);
+  };
+
+  useEffect(() => {
     const activeItem = menuRef.current?.querySelector('[data-active="true"]');
     const menu = menuRef.current;
     if (activeItem && pillRef.current && menu) {
       const { width, left } = activeItem.getBoundingClientRect();
       const menuLeft = menu.getBoundingClientRect().left;
 
-      // Set initial position if not already set
-      if (!pillRef.current.style.width) {
-        gsap.set(pillRef.current, {
-          width: width,
-          x: left - menuLeft,
-        });
-      } else {
-        // Animate to new position
-        gsap.to(pillRef.current, {
-          width: width,
-          x: left - menuLeft,
-          duration: 0.3,
-          ease: "power2.out",
-        });
-      }
+      gsap.to(pillRef.current, {
+        width: width,
+        x: left - menuLeft,
+        duration: 0.3,
+        ease: "power2.out",
+      });
     }
-  };
-
-  // Update position on mount and pathname change
-  useEffect(() => {
-    updatePillPosition();
   }, [pathname]);
 
   return (
     <nav className="flex items-center justify-center">
       <ul
         ref={menuRef}
-        className="flex space-x-0 py-4 px-0 border border-neutral-80 rounded-full bg-neutral-100 relative"
+        className="flex space-x-0 py-4 px-0 border border-accent-20/50 rounded-full bg-neutral-100 relative"
       >
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+8px)] bg-accent-100 rounded-full"
+          className="absolute h-[calc(100%+16px)] bg-accent-100 rounded-full"
           style={{
-            top: "-4px",
-            boxShadow: `0 0 15px ${withOpacity(colors.accent[100], 0.5)}`,
+            top: "-8px",
+            boxShadow: `0 0 12px ${withOpacity(colors.accent[100], 0.4)}`,
           }}
         />
         {menuItems.map((item) => {
@@ -73,13 +65,14 @@ const Menu = () => {
               <Link
                 href={item.href}
                 data-active={isActive}
+                onClick={handleClick}
                 className={`
                   relative
                   z-10
                   transition-all
                   duration-200
-                  font-bold
-                  text-md
+                  font-semibold
+                  text-sm
                   tracking-wide
                   px-8
                   py-0
@@ -87,7 +80,7 @@ const Menu = () => {
                   ${
                     isActive
                       ? "text-neutral-100"
-                      : "text-neutral-40 hover:text-neutral-10"
+                      : "text-neutral-40 hover:text-neutral-0"
                   }
                 `}
               >

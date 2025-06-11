@@ -75,7 +75,7 @@ const ParticlesBackground = () => {
         },
         move: {
           enable: true,
-          speed: 1,
+          speed: 0.5,
           direction: "none",
           random: false,
           straight: false,
@@ -139,16 +139,7 @@ const ParticlesBackground = () => {
   }, []);
 
   return (
-    <div
-      id="particles-js"
-      ref={containerRef}
-      className="absolute inset-0"
-      style={{
-        backgroundColor: colors.neutral[100],
-        pointerEvents: "auto",
-        transform: "translate3d(0, 0, 0)",
-      }}
-    />
+    <div id="particles-js" ref={containerRef} className="absolute inset-0" />
   );
 };
 
