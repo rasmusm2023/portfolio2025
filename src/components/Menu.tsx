@@ -46,13 +46,13 @@ const Menu = () => {
     <nav className="flex items-center justify-center">
       <ul
         ref={menuRef}
-        className="flex space-x-0 py-4 px-0 border border-accent-20/50 rounded-full bg-neutral-100 relative"
+        className="flex space-x-0 py-2 px-0 border border-accent-20/10 rounded-lg bg-neutral-90 relative"
       >
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+16px)] bg-accent-100 rounded-full"
+          className="absolute h-[calc(100%+4px)] bg-accent-100 rounded-lg"
           style={{
-            top: "-8px",
+            top: "-2px",
             boxShadow: `0 0 12px ${withOpacity(colors.accent[100], 0.4)}`,
           }}
         />
