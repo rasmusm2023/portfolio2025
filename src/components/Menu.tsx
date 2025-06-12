@@ -13,17 +13,27 @@ const Menu = () => {
 
   const menuItems = [
     { label: "HOME", href: "/" },
-    { label: "WORK", href: "/work" },
+    { label: "WORK", href: "#work" },
     { label: "DESIGN GALLERY", href: "/design-gallery" },
     { label: "ABOUT ME", href: "/about" },
-    { label: "BLOG", href: "/blog" },
     { label: "CONTACT", href: "/contact" },
   ];
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     const target = e.currentTarget as HTMLAnchorElement;
-    window.history.pushState({}, "", target.href);
+    const href = target.getAttribute("href");
+
+    if (href?.startsWith("#")) {
+      // Handle smooth scrolling for anchor links
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Handle regular navigation
+      window.history.pushState({}, "", href);
+    }
   };
 
   useEffect(() => {
@@ -46,7 +56,7 @@ const Menu = () => {
     <nav className="flex items-center justify-center">
       <ul
         ref={menuRef}
-        className="flex space-x-0 py-2 px-0 border border-accent-20/10 rounded-lg bg-neutral-90 relative"
+        className="flex space-x-0 py-2 px-0 border border-white/10 rounded-lg bg-neutral-0/10 backdrop-blur-sm relative"
       >
         <div
           ref={pillRef}

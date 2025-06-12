@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import ClientLayout from "./ClientLayout";
+import CustomCursor from "@/components/CustomCursor";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        <CustomCursor />
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
