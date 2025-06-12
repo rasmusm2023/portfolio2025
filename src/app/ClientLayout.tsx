@@ -1,6 +1,5 @@
 "use client";
 
-import Hero from "@/components/Hero";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -31,12 +30,5 @@ export default function ClientLayout({
     }
   }, [pathname]);
 
-  return (
-    <>
-      <Hero />
-      <main ref={contentRef} className="container mx-auto px-4">
-        {children}
-      </main>
-    </>
-  );
+  return <div ref={contentRef}>{children}</div>;
 }

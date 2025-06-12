@@ -12,11 +12,11 @@ const Menu = () => {
   const menuRef = useRef<HTMLUListElement>(null);
 
   const menuItems = [
-    { label: "HOME", href: "/" },
+    { label: "HOME", href: "#home" },
     { label: "WORK", href: "#work" },
-    { label: "DESIGN GALLERY", href: "/design-gallery" },
-    { label: "ABOUT ME", href: "/about" },
-    { label: "CONTACT", href: "/contact" },
+    { label: "DESIGN GALLERY", href: "#design-gallery" },
+    { label: "ABOUT ME", href: "#about" },
+    { label: "CONTACT", href: "#contact" },
   ];
 
   const handleClick = (e: React.MouseEvent) => {
@@ -25,32 +25,55 @@ const Menu = () => {
     const href = target.getAttribute("href");
 
     if (href?.startsWith("#")) {
-      // Handle smooth scrolling for anchor links
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
+        // Update URL without page reload
+        window.history.pushState({}, "", href);
       }
-    } else {
-      // Handle regular navigation
-      window.history.pushState({}, "", href);
     }
   };
 
   useEffect(() => {
-    const activeItem = menuRef.current?.querySelector('[data-active="true"]');
-    const menu = menuRef.current;
-    if (activeItem && pillRef.current && menu) {
-      const { width, left } = activeItem.getBoundingClientRect();
-      const menuLeft = menu.getBoundingClientRect().left;
+    const updateActiveItem = () => {
+      const sections = menuItems.map((item) =>
+        document.querySelector(item.href)
+      );
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      gsap.to(pillRef.current, {
-        width: width,
-        x: left - menuLeft,
-        duration: 0.3,
-        ease: "power2.out",
+      let activeIndex = 0;
+      sections.forEach((section, index) => {
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 2) {
+            activeIndex = index;
+          }
+        }
       });
-    }
-  }, [pathname]);
+
+      const activeItem = menuRef.current?.querySelector(
+        `[href="${menuItems[activeIndex].href}"]`
+      );
+      const menu = menuRef.current;
+
+      if (activeItem && pillRef.current && menu) {
+        const { width, left } = activeItem.getBoundingClientRect();
+        const menuLeft = menu.getBoundingClientRect().left;
+
+        gsap.to(pillRef.current, {
+          width: width,
+          x: left - menuLeft,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
+    };
+
+    window.addEventListener("scroll", updateActiveItem);
+    updateActiveItem(); // Initial update
+
+    return () => window.removeEventListener("scroll", updateActiveItem);
+  }, []);
 
   return (
     <nav className="flex items-center justify-center">

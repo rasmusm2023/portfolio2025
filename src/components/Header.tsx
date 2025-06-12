@@ -65,7 +65,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="relative z-50 h-32">
+    <header className="fixed top-0 left-0 right-0 z-50 h-32">
       <div className="px-12 h-full">
         <div className="flex justify-between items-center h-full">
           <Link href="/" className="text-2xl font-bold text-neutral-100">
