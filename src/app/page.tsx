@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <div className="fixed inset-0">
       {/* Background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         <ParticlesBackground />
       </div>
 
@@ -41,7 +41,7 @@ export default function Home() {
               </div>
               <h1 className="text-8xl font-bold mb-8 tracking-tight leading-[0.75]">
                 <span className="text-neutral-0">UX/UI DESIGNER </span>
-                <span className="text-accent-100">&</span>
+                <span className="text-[#00FF9D]">&</span>
                 <br />
                 <span className="text-neutral-20 text-5xl font-medium">
                   LOW-CODE DEVELOPER
@@ -60,14 +60,14 @@ export default function Home() {
                 aria-label="Scroll to work section"
               >
                 <div className="relative">
-                  <div className="absolute inset-0 bg-accent-100/40 rounded-full scale-0 group-hover:scale-110 transition-transform duration-300"></div>
+                  <div className="absolute inset-0 bg-[#00FF9D] rounded-full scale-0 group-hover:scale-110 transition-transform duration-300"></div>
                   <svg
                     width="48"
                     height="48"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    className="text-accent-100 group-hover:text-neutral-100 transition-colors duration-300 relative"
+                    className="text-[#00FF9D] group-hover:text-neutral-100 transition-colors duration-300 relative"
                   >
                     <path
                       d="M12 5V19M12 19L5 12M12 19L19 12"

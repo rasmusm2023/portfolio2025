@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
 
@@ -10,6 +10,7 @@ const Menu = () => {
   const pathname = usePathname();
   const pillRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
+  const [activeSection, setActiveSection] = useState("home");
 
   const menuItems = [
     { label: "HOME", href: "#home" },
@@ -18,6 +19,23 @@ const Menu = () => {
     { label: "ABOUT ME", href: "#about" },
     { label: "CONTACT", href: "#contact" },
   ];
+
+  const movePill = (href: string) => {
+    const activeItem = menuRef.current?.querySelector(`[href="${href}"]`);
+    const menu = menuRef.current;
+
+    if (activeItem && pillRef.current && menu) {
+      const { width, left } = activeItem.getBoundingClientRect();
+      const menuLeft = menu.getBoundingClientRect().left;
+
+      gsap.to(pillRef.current, {
+        width: width,
+        x: left - menuLeft,
+        duration: 0.2,
+        ease: "power2.out",
+      });
+    }
+  };
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -28,51 +46,71 @@ const Menu = () => {
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: "smooth" });
-        // Update URL without page reload
         window.history.pushState({}, "", href);
+        setActiveSection(href.substring(1));
+        movePill(href);
       }
     }
   };
 
   useEffect(() => {
     const updateActiveItem = () => {
-      const sections = menuItems.map((item) =>
-        document.querySelector(item.href)
-      );
-      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      const viewportHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+      const viewportMiddle = viewportHeight / 2;
 
-      let activeIndex = 0;
-      sections.forEach((section, index) => {
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= window.innerHeight / 2) {
-            activeIndex = index;
-          }
+      console.log("Scroll position:", scrollPosition);
+      console.log("Viewport middle:", viewportMiddle);
+
+      // Find which section is currently in view
+      for (const item of menuItems) {
+        const element = document.querySelector(item.href);
+        if (!element) {
+          console.log("Element not found:", item.href);
+          continue;
         }
-      });
 
-      const activeItem = menuRef.current?.querySelector(
-        `[href="${menuItems[activeIndex].href}"]`
-      );
-      const menu = menuRef.current;
+        const rect = element.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionBottom = rect.bottom;
+        const sectionMiddle = (sectionTop + sectionBottom) / 2;
 
-      if (activeItem && pillRef.current && menu) {
-        const { width, left } = activeItem.getBoundingClientRect();
-        const menuLeft = menu.getBoundingClientRect().left;
+        console.log("Section:", item.href);
+        console.log("Section top:", sectionTop);
+        console.log("Section bottom:", sectionBottom);
+        console.log("Section middle:", sectionMiddle);
 
-        gsap.to(pillRef.current, {
-          width: width,
-          x: left - menuLeft,
-          duration: 0.3,
-          ease: "power2.out",
-        });
+        // Check if the section's middle point is in the viewport
+        if (sectionMiddle >= 0 && sectionMiddle <= viewportHeight) {
+          const sectionName = item.href.substring(1);
+          console.log("Found active section:", sectionName);
+
+          if (sectionName !== activeSection) {
+            console.log("Updating active section to:", sectionName);
+            setActiveSection(sectionName);
+            movePill(item.href);
+            window.history.replaceState(null, "", item.href);
+          }
+          break;
+        }
       }
     };
 
-    window.addEventListener("scroll", updateActiveItem);
-    updateActiveItem(); // Initial update
+    // Add scroll event listener with a more aggressive update rate
+    let scrollTimeout: NodeJS.Timeout;
+    const scrollHandler = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(updateActiveItem, 50); // Update every 50ms
+    };
 
-    return () => window.removeEventListener("scroll", updateActiveItem);
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+    // Initial update
+    updateActiveItem();
+
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   return (
@@ -83,21 +121,18 @@ const Menu = () => {
       >
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-accent-100 rounded-lg"
+          className="absolute h-[calc(100%+4px)] bg-[#00FF9D] rounded-lg"
           style={{
             top: "-2px",
             boxShadow: `0 0 12px ${withOpacity(colors.accent[100], 0.4)}`,
           }}
         />
         {menuItems.map((item) => {
-          const isActive =
-            pathname === item.href ||
-            (item.href !== "/" && pathname?.startsWith(item.href));
+          const isActive = activeSection === item.href.substring(1);
           return (
             <li key={item.href}>
               <Link
                 href={item.href}
-                data-active={isActive}
                 onClick={handleClick}
                 className={`
                   relative

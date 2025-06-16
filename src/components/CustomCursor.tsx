@@ -29,7 +29,7 @@ const CustomCursor = () => {
   return (
     <>
       <div
-        className="fixed pointer-events-none z-50 mix-blend-difference"
+        className="fixed pointer-events-none z-[9999]"
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
@@ -51,6 +51,10 @@ const CustomCursor = () => {
       <style jsx global>{`
         * {
           cursor: none !important;
+        }
+        #particles-js,
+        #particles-js * {
+          cursor: auto !important;
         }
       `}</style>
     </>
