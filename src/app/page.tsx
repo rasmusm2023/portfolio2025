@@ -18,22 +18,22 @@ export default function Home() {
           {/* Introduction Section */}
           <section className="h-[calc(100vh-8rem)] flex items-end pb-4">
             <div className="relative text-left w-full max-w-[1600px] mt-4">
-              <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-lg bg-neutral-0/5 backdrop-blur-sm border border-neutral-100/10">
+              <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-lg bg-neutral-0/20 backdrop-blur-sm border border-neutral-100/10">
                 <div className="relative">
                   <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
                 </div>
                 <span className="text-neutral-30 text-base font-medium tracking-wider">
-                  Currently available
+                  Currently available for hire
                 </span>
               </div>
-              <h1 className="text-[10rem] font-bold tracking-tight leading-[0.6]">
-                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent">
-                  UX/UI DESIGNER{" "}
+              <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6]">
+                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent font-hanken">
+                  UX/UI Designer{" "}
                 </span>
-                <span className="text-[#00FF9D]">&</span>
+                <span className="text-[#00FF9D] font-hanken">&</span>
                 <br />
-                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent text-5xl font-medium">
+                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent text-5xl font-medium font-hanken">
                   LOW-CODE DEVELOPER
                 </span>
               </h1>

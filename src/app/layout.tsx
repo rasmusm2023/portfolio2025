@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import CustomCursor from "@/components/CustomCursor";
+import { hankenGrotesk } from "./fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${hankenGrotesk.variable}`}>
       <body className={inter.className}>
         <CustomCursor />
         <ClientLayout>{children}</ClientLayout>

@@ -54,39 +54,32 @@ const Menu = () => {
   };
 
   useEffect(() => {
+    // Initialize pill position for the first item
+    if (menuItems.length > 0) {
+      movePill(menuItems[0].href);
+    }
+  }, []);
+
+  useEffect(() => {
     const updateActiveItem = () => {
       const viewportHeight = window.innerHeight;
       const scrollPosition = window.scrollY;
       const viewportMiddle = viewportHeight / 2;
 
-      console.log("Scroll position:", scrollPosition);
-      console.log("Viewport middle:", viewportMiddle);
-
       // Find which section is currently in view
       for (const item of menuItems) {
         const element = document.querySelector(item.href);
-        if (!element) {
-          console.log("Element not found:", item.href);
-          continue;
-        }
+        if (!element) continue;
 
         const rect = element.getBoundingClientRect();
         const sectionTop = rect.top;
         const sectionBottom = rect.bottom;
         const sectionMiddle = (sectionTop + sectionBottom) / 2;
 
-        console.log("Section:", item.href);
-        console.log("Section top:", sectionTop);
-        console.log("Section bottom:", sectionBottom);
-        console.log("Section middle:", sectionMiddle);
-
         // Check if the section's middle point is in the viewport
         if (sectionMiddle >= 0 && sectionMiddle <= viewportHeight) {
           const sectionName = item.href.substring(1);
-          console.log("Found active section:", sectionName);
-
           if (sectionName !== activeSection) {
-            console.log("Updating active section to:", sectionName);
             setActiveSection(sectionName);
             movePill(item.href);
             window.history.replaceState(null, "", item.href);
@@ -111,19 +104,21 @@ const Menu = () => {
       window.removeEventListener("scroll", scrollHandler);
       clearTimeout(scrollTimeout);
     };
-  }, []);
+  }, [activeSection]);
 
   return (
     <nav className="flex items-center justify-center">
       <ul
         ref={menuRef}
-        className="flex space-x-0 py-2 px-0 border border-white/10 rounded-lg bg-neutral-0/10 backdrop-blur-sm relative"
+        className="flex space-x-0 py-2 px-0 border border-white/10 rounded-lg bg-neutral-0/20 backdrop-blur-sm relative"
       >
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-[#00FF9D] rounded-lg"
+          className="absolute h-[calc(100%+4px)] bg-[#00FF9D] rounded-lg -z-10"
           style={{
             top: "-2px",
+            left: "0",
+            width: "0",
             boxShadow: `0 0 12px ${withOpacity(colors.accent[100], 0.4)}`,
           }}
         />

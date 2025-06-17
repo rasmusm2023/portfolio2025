@@ -53,7 +53,7 @@ const VantaBackground = () => {
                 backgroundColor: 0x232323, // Darker background
                 size: 0.2,
                 THREE: THREE,
-                amplitudeFactor: 10,
+                amplitudeFactor: 20,
                 xOffset: 0.0,
                 yOffset: 0.28, // Center position
                 speed: 0.05,
