@@ -13,11 +13,11 @@ const Menu = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   const menuItems = [
-    { label: "HOME", href: "#home" },
-    { label: "WORK", href: "#work" },
-    { label: "DESIGN GALLERY", href: "#design-gallery" },
-    { label: "ABOUT ME", href: "#about" },
-    { label: "CONTACT", href: "#contact" },
+    { label: "HOME", href: "/" },
+    { label: "WORK", href: "/work" },
+    { label: "DESIGN GALLERY", href: "/design-gallery" },
+    { label: "ABOUT ME", href: "/about" },
+    { label: "CONTACT", href: "/contact" },
   ];
 
   const movePill = (href: string) => {
@@ -37,74 +37,17 @@ const Menu = () => {
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    const target = e.currentTarget as HTMLAnchorElement;
-    const href = target.getAttribute("href");
-
-    if (href?.startsWith("#")) {
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-        window.history.pushState({}, "", href);
-        setActiveSection(href.substring(1));
-        movePill(href);
-      }
-    }
-  };
-
   useEffect(() => {
-    // Initialize pill position for the first item
-    if (menuItems.length > 0) {
-      movePill(menuItems[0].href);
+    // Set active section based on current pathname
+    const currentPath = pathname === "/" ? "home" : pathname.substring(1);
+    setActiveSection(currentPath);
+
+    // Move pill to active item
+    const activeItem = menuItems.find((item) => item.href === pathname);
+    if (activeItem) {
+      movePill(activeItem.href);
     }
-  }, []);
-
-  useEffect(() => {
-    const updateActiveItem = () => {
-      const viewportHeight = window.innerHeight;
-      const scrollPosition = window.scrollY;
-      const viewportMiddle = viewportHeight / 2;
-
-      // Find which section is currently in view
-      for (const item of menuItems) {
-        const element = document.querySelector(item.href);
-        if (!element) continue;
-
-        const rect = element.getBoundingClientRect();
-        const sectionTop = rect.top;
-        const sectionBottom = rect.bottom;
-        const sectionMiddle = (sectionTop + sectionBottom) / 2;
-
-        // Check if the section's middle point is in the viewport
-        if (sectionMiddle >= 0 && sectionMiddle <= viewportHeight) {
-          const sectionName = item.href.substring(1);
-          if (sectionName !== activeSection) {
-            setActiveSection(sectionName);
-            movePill(item.href);
-            window.history.replaceState(null, "", item.href);
-          }
-          break;
-        }
-      }
-    };
-
-    // Add scroll event listener with a more aggressive update rate
-    let scrollTimeout: NodeJS.Timeout;
-    const scrollHandler = () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateActiveItem, 50); // Update every 50ms
-    };
-
-    window.addEventListener("scroll", scrollHandler, { passive: true });
-    // Initial update
-    updateActiveItem();
-
-    return () => {
-      window.removeEventListener("scroll", scrollHandler);
-      clearTimeout(scrollTimeout);
-    };
-  }, [activeSection]);
+  }, [pathname]);
 
   return (
     <nav className="flex items-center justify-center">
@@ -123,12 +66,13 @@ const Menu = () => {
           }}
         />
         {menuItems.map((item) => {
-          const isActive = activeSection === item.href.substring(1);
+          const isActive =
+            activeSection ===
+            (item.href === "/" ? "home" : item.href.substring(1));
           return (
             <li key={item.href}>
               <Link
                 href={item.href}
-                onClick={handleClick}
                 className={`
                   relative
                   z-10

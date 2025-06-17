@@ -16,8 +16,8 @@ export default function Home() {
         {/* Main Content */}
         <main className="container mx-auto px-8">
           {/* Introduction Section */}
-          <section className="h-[calc(100vh-8rem)] flex items-end pb-4">
-            <div className="relative text-left w-full max-w-[1600px] mt-4">
+          <section className="h-[calc(100vh-4rem)] flex items-end">
+            <div className="relative text-left w-full max-w-[1600px]">
               <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-lg bg-neutral-0/20 backdrop-blur-sm border border-neutral-100/10">
                 <div className="relative">
                   <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
@@ -33,7 +33,7 @@ export default function Home() {
                 </span>
                 <span className="text-[#00FF9D] font-hanken">&</span>
                 <br />
-                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent text-5xl font-medium font-hanken">
+                <span className="bg-gradient-to-l from-neutral-0 via-accent-100/80 to-neutral-0 bg-clip-text text-transparent text-5xl font-medium font-hanken">
                   LOW-CODE DEVELOPER
                 </span>
               </h1>
@@ -46,14 +46,14 @@ export default function Home() {
           </section>
 
           {/* Work Section */}
-          <section className="py-32">
-            <div className="text-left w-full max-w-[1600px] p-8 rounded-3xl bg-neutral-0/5 backdrop-blur-md border border-neutral-100/10">
-              <h2 className="text-4xl text-center font-bold text-neutral-0 mb-16">
+          <section className="py-48">
+            <div className="text-left w-full max-w-[1600px] p-8">
+              <h2 className="text-4xl text-center font-medium text-neutral-0 mb-16 font-hanken">
                 Some of my previous projects
               </h2>
               <div className="grid grid-cols-2 gap-8">
                 {/* First Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/9] backdrop-blur-sm">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <h3 className="text-2xl font-bold text-neutral-0 mb-4">
@@ -66,7 +66,7 @@ export default function Home() {
                 </div>
 
                 {/* Second Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/9] backdrop-blur-sm">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <h3 className="text-2xl font-bold text-neutral-0 mb-4">
@@ -79,7 +79,7 @@ export default function Home() {
                 </div>
 
                 {/* Third Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/9] backdrop-blur-sm">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <h3 className="text-2xl font-bold text-neutral-0 mb-4">
@@ -92,7 +92,7 @@ export default function Home() {
                 </div>
 
                 {/* Fourth Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/9] backdrop-blur-sm">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
                   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <h3 className="text-2xl font-bold text-neutral-0 mb-4">

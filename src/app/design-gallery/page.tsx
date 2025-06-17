@@ -1,8 +1,19 @@
+"use client";
+
+import Header from "@/components/Header";
+
 export default function DesignGalleryPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Design Gallery</h1>
-      {/* Add your design gallery content here */}
+    <div className="min-h-screen bg-neutral-100">
+      <div className="relative z-10">
+        <Header />
+        <main className="container mx-auto px-8 pt-32">
+          <h1 className="text-4xl font-medium text-neutral-0 mb-8 font-hanken">
+            Design Gallery
+          </h1>
+          <p className="text-lg text-neutral-30">Coming soon...</p>
+        </main>
+      </div>
     </div>
   );
 }

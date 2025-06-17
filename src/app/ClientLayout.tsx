@@ -3,6 +3,12 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function ClientLayout({
   children,
@@ -11,6 +17,9 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Initialize smooth scrolling
+  useSmoothScroll();
 
   useEffect(() => {
     if (contentRef.current) {
@@ -30,5 +39,11 @@ export default function ClientLayout({
     }
   }, [pathname]);
 
-  return <div ref={contentRef}>{children}</div>;
+  return (
+    <div className="relative w-full h-full">
+      <div ref={contentRef} className="relative w-full h-full">
+        {children}
+      </div>
+    </div>
+  );
 }

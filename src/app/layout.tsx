@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import CustomCursor from "@/components/CustomCursor";
-import { hankenGrotesk } from "./fonts";
 
-const inter = Inter({ subsets: ["latin"] });
+const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio 2025",
-  description: "My personal portfolio website",
+  title: "Rasmus Portfolio",
+  description: "My portfolio website",
 };
 
 export default function RootLayout({
@@ -18,10 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${hankenGrotesk.variable}`}>
-      <body className={inter.className}>
-        <CustomCursor />
-        <ClientLayout>{children}</ClientLayout>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${hanken.className} antialiased bg-neutral-100`}>
+        <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
+          <div id="smooth-content" className="relative">
+            <CustomCursor />
+            <ClientLayout>{children}</ClientLayout>
+          </div>
+        </div>
       </body>
     </html>
   );

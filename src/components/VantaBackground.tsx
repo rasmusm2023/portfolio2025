@@ -77,7 +77,7 @@ const VantaBackground = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 -z-10">
+    <div className="absolute inset-0 -z-10">
       <div ref={vantaRef} className="absolute inset-0" />
       <div className="absolute inset-0 bg-neutral-100/10" />
     </div>
