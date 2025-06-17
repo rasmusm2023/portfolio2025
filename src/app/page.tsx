@@ -1,49 +1,39 @@
 "use client";
 
-import ParticlesBackground from "@/components/ParticlesBackground";
 import Header from "@/components/Header";
+import VantaBackground from "@/components/VantaBackground";
 
 export default function Home() {
-  const scrollToWork = () => {
-    const workSection = document.getElementById("work");
-    if (workSection) {
-      workSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className="fixed inset-0">
+    <div className="min-h-screen">
       {/* Background */}
-      <div className="absolute inset-0 z-0">
-        <ParticlesBackground />
-      </div>
+      <VantaBackground />
 
       {/* Content Container */}
-      <div className="relative h-full z-10">
+      <div className="relative z-10">
         <Header />
 
-        {/* Scrollable Sections Container */}
-        <div className="h-[calc(100vh-8rem)] mt-32 overflow-y-auto snap-y snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+        {/* Main Content */}
+        <main className="container mx-auto px-8">
           {/* Introduction Section */}
-          <section
-            id="home"
-            className="h-[calc(100vh-8rem)] snap-start flex items-center justify-center px-8"
-          >
-            <div className="relative text-left w-full max-w-[1600px] p-16 rounded-3xl bg-neutral-0/5 backdrop-blur-md border border-neutral-100/10 transform -translate-y-16">
-              <div className="inline-flex items-center gap-4 mb-12 px-4 py-2 rounded-lg bg-neutral-0/5 backdrop-blur-sm border border-neutral-100/10">
+          <section className="h-[calc(100vh-8rem)] flex items-end pb-4">
+            <div className="relative text-left w-full max-w-[1600px] mt-4">
+              <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-lg bg-neutral-0/5 backdrop-blur-sm border border-neutral-100/10">
                 <div className="relative">
-                  <div className="absolute inset-0 bg-green-500/40 blur-sm rounded-full animate-[pulse_3s_ease-in-out_infinite] scale-110"></div>
+                  <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
                 </div>
                 <span className="text-neutral-30 text-base font-medium tracking-wider">
                   Currently available
                 </span>
               </div>
-              <h1 className="text-8xl font-bold mb-8 tracking-tight leading-[0.75]">
-                <span className="text-neutral-0">UX/UI DESIGNER </span>
+              <h1 className="text-[10rem] font-bold tracking-tight leading-[0.6]">
+                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent">
+                  UX/UI DESIGNER{" "}
+                </span>
                 <span className="text-[#00FF9D]">&</span>
                 <br />
-                <span className="text-neutral-20 text-5xl font-medium">
+                <span className="bg-gradient-to-l from-neutral-0 via-[#00FF9D]/80 to-neutral-0 bg-clip-text text-transparent text-5xl font-medium">
                   LOW-CODE DEVELOPER
                 </span>
               </h1>
@@ -52,44 +42,14 @@ export default function Home() {
                 Sweden I create purposeful, goal-driven digital solutions that
                 serves both users and the business.
               </p>
-
-              {/* Scroll Arrow */}
-              <button
-                onClick={scrollToWork}
-                className="absolute right-8 bottom-8 animate-bounce hover:scale-110 transition-all cursor-pointer group"
-                aria-label="Scroll to work section"
-              >
-                <div className="relative">
-                  <div className="absolute inset-0 bg-[#00FF9D] rounded-full scale-0 group-hover:scale-110 transition-transform duration-300"></div>
-                  <svg
-                    width="48"
-                    height="48"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-[#00FF9D] group-hover:text-neutral-100 transition-colors duration-300 relative"
-                  >
-                    <path
-                      d="M12 5V19M12 19L5 12M12 19L19 12"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </button>
             </div>
           </section>
 
           {/* Work Section */}
-          <section
-            id="work"
-            className="h-[calc(100vh-8rem)] snap-start flex items-center justify-center px-8"
-          >
+          <section className="py-32">
             <div className="text-left w-full max-w-[1600px] p-8 rounded-3xl bg-neutral-0/5 backdrop-blur-md border border-neutral-100/10">
               <h2 className="text-4xl text-center font-bold text-neutral-0 mb-16">
-                My Work
+                Some of my previous projects
               </h2>
               <div className="grid grid-cols-2 gap-8">
                 {/* First Work Box */}
@@ -146,7 +106,7 @@ export default function Home() {
               </div>
             </div>
           </section>
-        </div>
+        </main>
       </div>
     </div>
   );
