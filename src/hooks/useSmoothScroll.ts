@@ -15,11 +15,11 @@ export const useSmoothScroll = () => {
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
       smooth: 1,
-      effects: true,
+      effects: false,
       normalizeScroll: true,
-      smoothTouch: 0.1,
+      smoothTouch: 0.05,
       ease: "power2.out",
-      speed: 2,
+      speed: 1,
     });
 
     // Add smooth class to html

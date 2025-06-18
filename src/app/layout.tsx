@@ -4,6 +4,7 @@ import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import CustomCursor from "@/components/CustomCursor";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content" className="relative">
             <ClientLayout>{children}</ClientLayout>
+            <Footer />
           </div>
         </div>
       </body>

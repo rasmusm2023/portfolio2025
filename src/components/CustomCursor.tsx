@@ -1,21 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { colors } from "@/styles/colors";
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isPointer, setIsPointer] = useState(false);
 
-  useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+  // Throttle function to limit updates
+  const throttle = useCallback((func: Function, limit: number) => {
+    let inThrottle: boolean;
+    return function (this: any, ...args: any[]) {
+      if (!inThrottle) {
+        func.apply(this, args);
+        inThrottle = true;
+        setTimeout(() => (inThrottle = false), limit);
+      }
     };
+  }, []);
 
-    const updateCursor = (e: MouseEvent) => {
+  useEffect(() => {
+    const updatePosition = throttle((e: MouseEvent) => {
+      setPosition({ x: e.clientX, y: e.clientY });
+    }, 16); // ~60fps
+
+    const updateCursor = throttle((e: MouseEvent) => {
       const target = e.target as HTMLElement;
       setIsPointer(window.getComputedStyle(target).cursor === "pointer");
-    };
+    }, 100); // Update cursor state less frequently
 
     window.addEventListener("mousemove", updatePosition);
     window.addEventListener("mouseover", updateCursor);
@@ -24,7 +36,7 @@ const CustomCursor = () => {
       window.removeEventListener("mousemove", updatePosition);
       window.removeEventListener("mouseover", updateCursor);
     };
-  }, []);
+  }, [throttle]);
 
   return (
     <>
