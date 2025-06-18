@@ -3,6 +3,7 @@ import { Hanken_Grotesk } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import CustomCursor from "@/components/CustomCursor";
+import Header from "@/components/Header";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -19,9 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${hanken.className} antialiased bg-neutral-100`}>
+        <Header />
+        <CustomCursor />
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
           <div id="smooth-content" className="relative">
-            <CustomCursor />
             <ClientLayout>{children}</ClientLayout>
           </div>
         </div>

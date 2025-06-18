@@ -52,9 +52,18 @@ const CustomCursor = () => {
         * {
           cursor: none !important;
         }
-        #particles-js,
-        #particles-js * {
-          cursor: auto !important;
+        .cursor-dot {
+          pointer-events: none;
+        }
+
+        #vanta-canvas,
+        #vanta-canvas * {
+          cursor: none !important;
+        }
+
+        #smooth-wrapper,
+        #smooth-content {
+          cursor: none !important;
         }
       `}</style>
     </>

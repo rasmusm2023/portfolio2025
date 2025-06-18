@@ -2,13 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --gradient-hero-home: radial-gradient(
+    55.95% 97.37% at 46.69% 2.63%,
+    #ffb571 0%,
+    #ff8cf4 36.01%,
+    #fff 82.09%
+  );
+  --gradient-hero-home-accent: radial-gradient(
+    55.95% 97.37% at 46.69% 2.63%,
+    #00ff9d 0%,
+    #00ff9d 36.01%,
+    #fff 82.09%
+  );
+  --gradient-heading-projects: radial-gradient(
+    47.08% 208.33% at 79.71% 128.33%,
+    rgba(237, 125, 255, 0.8) 11.69%,
+    rgba(108, 84, 255, 0.8) 35.44%,
+    rgba(248, 248, 248, 0.8) 70.24%
+  );
+
+  /* Shimmer button variables */
+  --shimmer-hue-1: 213deg;
+  --shimmer-sat-1: 95%;
+  --shimmer-lit-1: 91%;
+  --shimmer-hue-2: 248deg;
+  --shimmer-sat-2: 100%;
+  --shimmer-lit-2: 86%;
+  --shimmer-hue-3: 293deg;
+  --shimmer-sat-3: 78%;
+  --shimmer-lit-3: 89%;
+  --glow-hue: 222deg;
+  --spring-duration: 1.33s;
+  --spring-easing: linear(
+    0,
+    0.002,
+    0.01 0.9%,
+    0.038 1.8%,
+    0.156,
+    0.312 5.8%,
+    0.789 11.1%,
+    1.015 14.2%,
+    1.096,
+    1.157,
+    1.199,
+    1.224 20.3%,
+    1.231,
+    1.231,
+    1.226,
+    1.214 24.6%,
+    1.176 26.9%,
+    1.057 32.6%,
+    1.007 35.5%,
+    0.984,
+    0.968,
+    0.956,
+    0.949 42%,
+    0.946 44.1%,
+    0.95 46.5%,
+    0.998 57.2%,
+    1.007,
+    1.011 63.3%,
+    1.012 68.3%,
+    0.998 84%,
+    1
+  );
+  --mask: 0deg;
+}
+
+@property --mask {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
 /* ---- reset ---- */
 body {
   margin: 0;
   padding: 0;
   font: normal 75% Arial, Helvetica, sans-serif;
-  overflow: hidden;
-  position: fixed;
   width: 100%;
   min-height: 100vh;
   overflow-y: auto;
@@ -17,58 +89,6 @@ body {
 
 canvas {
   display: block;
-}
-
-/* ---- particles.js container ---- */
-#particles-js {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #232323;
-  background-image: url("");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50% 50%;
-}
-
-/* ---- stats.js ---- */
-.count-particles {
-  background: #000022;
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 80px;
-  color: #13e8e9;
-  font-size: 0.8em;
-  text-align: left;
-  text-indent: 4px;
-  line-height: 14px;
-  padding-bottom: 2px;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: bold;
-}
-
-.js-count-particles {
-  font-size: 1.1em;
-}
-
-#stats,
-.count-particles {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  margin-top: 5px;
-  margin-left: 5px;
-}
-
-#stats {
-  border-radius: 3px 3px 0 0;
-  overflow: hidden;
-}
-
-.count-particles {
-  border-radius: 0 0 3px 3px;
 }
 
 /* Smooth Scroll Styles */
@@ -116,4 +136,168 @@ body {
   width: 100%;
   position: relative;
   z-index: 2;
+}
+
+@keyframes glow {
+  0% {
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+  50% {
+    opacity: 0.7;
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 0.5;
+    filter: blur(4px);
+  }
+}
+
+.glow-line {
+  animation: glow 3s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    --mask: 0deg;
+  }
+  100% {
+    --mask: 360deg;
+  }
+}
+
+.shimmer-button {
+  color: theme("colors.neutral.100");
+  font-weight: 600;
+  font-size: 1.2em;
+  background-image: linear-gradient(
+    315deg,
+    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)) 0%,
+    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)) 47%,
+    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)) 100%
+  );
+  padding: 0.6em;
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 2px 3px 1px hsl(var(--glow-hue) 50% 20% / 50%);
+  border: none;
+  outline: none;
+  border-radius: 0.66em;
+  scale: 1;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+  min-width: 2.8em;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shimmer-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from var(--mask),
+    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)),
+    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)),
+    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)),
+    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1))
+  );
+  border-radius: inherit;
+  animation: spin 2.5s linear infinite;
+  z-index: -2;
+}
+
+.shimmer-button::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: inherit;
+  border-radius: calc(0.66em - 1px);
+  z-index: -1;
+}
+
+.shimmer-button .text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: theme("colors.neutral.100");
+  white-space: nowrap;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.shimmer-button:not(:hover) .text {
+  justify-content: center;
+}
+
+.shimmer-button:hover {
+  padding: 0.6em 1em;
+}
+
+.shimmer-button .text .label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.shimmer-button:hover .text .label {
+  max-width: 200px;
+  opacity: 1;
+}
+
+.shimmer {
+  position: absolute;
+  inset: -40px;
+  border-radius: inherit;
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+  mask-image: conic-gradient(
+    from var(--mask),
+    transparent 0%,
+    transparent 10%,
+    black 36%,
+    black 45%,
+    transparent 50%,
+    transparent 60%,
+    black 85%,
+    black 95%,
+    transparent 100%
+  );
+  animation: spin 3s linear infinite both;
+}
+
+.shimmer::before,
+.shimmer::after {
+  transition: all 0.5s ease;
+  opacity: 0;
+  content: "";
+  border-radius: inherit;
+  position: absolute;
+  inset: 40px;
+}
+
+.shimmer::before {
+  box-shadow: 0 0 3px 2px hsl(var(--shimmer-hue-1) 20% 95%),
+    0 0 7px 4px hsl(var(--shimmer-hue-1) 20% 80%),
+    0 0 13px 8px hsl(var(--shimmer-hue-2) 40% 60%),
+    0 0 22px 6px hsl(var(--shimmer-hue-2) 20% 40%);
+  z-index: -1;
+}
+
+.shimmer::after {
+  box-shadow: inset 0 0 0 1px hsl(var(--shimmer-hue-2) 70% 95%),
+    inset 0 0 3px 1px hsl(var(--shimmer-hue-2) 100% 80%),
+    inset 0 0 9px 1px hsl(var(--shimmer-hue-2) 100% 70%);
+  z-index: 2;
+}
+
+.shimmer-button:hover .shimmer::before,
+.shimmer-button:hover .shimmer::after {
+  opacity: 1;
 }

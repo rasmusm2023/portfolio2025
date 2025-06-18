@@ -14,12 +14,12 @@ export const useSmoothScroll = () => {
     const smoother = ScrollSmoother.create({
       wrapper: "#smooth-wrapper",
       content: "#smooth-content",
-      smooth: 1.5,
+      smooth: 1,
       effects: true,
       normalizeScroll: true,
       smoothTouch: 0.1,
       ease: "power2.out",
-      speed: 1,
+      speed: 2,
     });
 
     // Add smooth class to html

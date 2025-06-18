@@ -13,11 +13,11 @@ const Menu = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   const menuItems = [
-    { label: "HOME", href: "/" },
-    { label: "WORK", href: "/work" },
-    { label: "DESIGN GALLERY", href: "/design-gallery" },
-    { label: "ABOUT ME", href: "/about" },
-    { label: "CONTACT", href: "/contact" },
+    { label: "Home", href: "/" },
+    { label: "Work", href: "/work" },
+    { label: "Design Gallery", href: "/design-gallery" },
+    { label: "About me", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const movePill = (href: string) => {
@@ -51,18 +51,15 @@ const Menu = () => {
 
   return (
     <nav className="flex items-center justify-center">
-      <ul
-        ref={menuRef}
-        className="flex space-x-0 py-2 px-0 border border-white/10 rounded-lg bg-neutral-0/20 backdrop-blur-sm relative"
-      >
+      <ul ref={menuRef} className="flex space-x-0 py-2 px-0 relative">
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-[#00FF9D] rounded-lg -z-10"
+          className="absolute h-[calc(100%+4px)] bg-neutral-0 rounded-lg -z-10"
           style={{
             top: "-2px",
             left: "0",
             width: "0",
-            boxShadow: `0 0 12px ${withOpacity(colors.accent[100], 0.4)}`,
+            boxShadow: `0 0 12px ${withOpacity(colors.neutral[0], 0.4)}`,
           }}
         />
         {menuItems.map((item) => {
@@ -78,11 +75,11 @@ const Menu = () => {
                   z-10
                   transition-all
                   duration-200
-                  font-semibold
-                  text-sm
+                  font-bold
+                  text-base
                   tracking-wide
                   px-8
-                  py-0
+                  py-4
                   rounded-full
                   ${
                     isActive

@@ -77,6 +77,16 @@ export const theme: Theme = {
   },
 };
 
+// Gradients
+export const gradients = {
+  "gradient-hero-home":
+    "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #ffb571 0%, #ff8cf4 36.01%, #fff 82.09%)",
+  "gradient-hero-home-accent":
+    "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #00FF9D 0%, #00FF9D 36.01%, #fff 82.09%)",
+  "gradient-heading-projects":
+    "radial-gradient(47.08% 208.33% at 79.71% 128.33%,rgba(237,125,255,.8) 11.69%,rgba(108,84,255,.8) 35.44%,rgba(248,248,248,.8) 70.24%)",
+} as const;
+
 // Helper function to get color with opacity
 export const withOpacity = (color: ColorValue, opacity: number): string => {
   const r = parseInt(color.slice(1, 3), 16);
