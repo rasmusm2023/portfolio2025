@@ -2,8 +2,19 @@
 
 import VantaBackground from "@/components/VantaBackground";
 import { gradients } from "@/styles/colors";
+import { useState } from "react";
 
 export default function Home() {
+  const [emailCopied, setEmailCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("hello@rasmusmattsson.com");
+    setEmailCopied(true);
+    setTimeout(() => {
+      setEmailCopied(false);
+    }, 5000);
+  };
+
   return (
     <div className="min-h-screen bg-neutral-100">
       {/* Background */}
@@ -251,15 +262,12 @@ export default function Home() {
                           Open
                         </button>
                         <button
-                          onClick={() => {
-                            navigator.clipboard.writeText(
-                              "hello@rasmusmattsson.com"
-                            );
-                            // Optional: Add a visual feedback here
-                          }}
-                          className="px-3 py-1.5 bg-neutral-80 text-neutral-0 text-xs font-medium rounded-md hover:bg-neutral-70 transition-colors duration-200"
+                          onClick={handleCopyEmail}
+                          className={`px-3 py-1.5 ${
+                            emailCopied ? "bg-green-500" : "bg-neutral-80"
+                          } text-neutral-0 text-xs font-medium rounded-md hover:bg-neutral-70 transition-colors duration-200`}
                         >
-                          Copy
+                          {emailCopied ? "Copied" : "Copy"}
                         </button>
                       </div>
                     </div>
