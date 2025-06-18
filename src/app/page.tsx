@@ -14,7 +14,7 @@ export default function Home() {
         {/* Main Content */}
         <main className="container mx-auto px-8">
           {/* Introduction Section */}
-          <section className="h-[calc(100vh-4rem)] relative">
+          <section className="h-[calc(100vh-0rem)] relative">
             <div className="absolute bottom-[5vh] text-left w-full max-w-[1600px]">
               <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-full bg-neutral-0/20 backdrop-blur-sm border border-neutral-100/10">
                 <div className="relative">
@@ -25,7 +25,7 @@ export default function Home() {
                   Currently available for hire
                 </span>
               </div>
-              <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-12">
+              <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
                 <span className="[background-image:var(--gradient-hero-home-accent)] bg-clip-text text-transparent font-hanken">
                   UX/UI Designer{" "}
                 </span>
@@ -37,10 +37,11 @@ export default function Home() {
                   </span>
                 </div>
               </h1>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 -mt-4">
                 <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
-                  I'm a curious digital designer with an eye for detail, a heart
-                  for the user, and a drive for the business.
+                  Hi, I'm Rasmus Mattsson - a curious digital designer with an
+                  eye for detail, a heart for the user, and a drive for the
+                  business.
                 </p>
                 <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
                   I see great products as I do great games – easy to get into,
