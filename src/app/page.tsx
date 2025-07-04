@@ -283,12 +283,12 @@ export default function Home() {
                           LinkedIn
                         </h4>
                         <a
-                          href="https://linkedin.com/in/rasmusmattsson"
+                          href="https://linkedin.com/in/rasmus-mattsson"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200"
                         >
-                          linkedin.com/in/rasmusmattsson
+                          linkedin.com/in/rasmus-mattsson
                         </a>
                       </div>
                     </div>

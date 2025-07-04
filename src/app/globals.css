@@ -3,36 +3,30 @@
 @tailwind utilities;
 
 :root {
-  --gradient-hero-home: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ffb571 0%,
-    #ff8cf4 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-home-accent: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #00ff9d 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-accent: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #fff 82.09%
-  );
-  --gradient-heading-projects: radial-gradient(
-    47.08% 208.33% at 79.71% 128.33%,
-    rgba(237, 125, 255, 0.8) 11.69%,
-    rgba(108, 84, 255, 0.8) 35.44%,
-    rgba(248, 248, 248, 0.8) 70.24%
-  );
-  --gradient-home-who: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #fff 82.09%
-  );
+  --gradient-hero-home: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ff8cf4 36.01%,
+      #fff 82.09%);
+  --gradient-hero-home-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #00ff9d 36.01%,
+      #fff 82.09%);
+  --gradient-hero-design-gallery: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #FFB571 0%,
+      #FFD93D 36.01%,
+      #fff 82.09%);
+  --gradient-hero-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
+  --gradient-heading-projects: radial-gradient(47.08% 208.33% at 79.71% 128.33%,
+      rgba(237, 125, 255, 0.8) 11.69%,
+      rgba(108, 84, 255, 0.8) 35.44%,
+      rgba(248, 248, 248, 0.8) 70.24%);
+  --gradient-home-who: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
 
   /* Shimmer button variables */
   --shimmer-hue-1: 213deg;
@@ -46,39 +40,37 @@
   --shimmer-lit-3: 89%;
   --glow-hue: 222deg;
   --spring-duration: 1.33s;
-  --spring-easing: linear(
-    0,
-    0.002,
-    0.01 0.9%,
-    0.038 1.8%,
-    0.156,
-    0.312 5.8%,
-    0.789 11.1%,
-    1.015 14.2%,
-    1.096,
-    1.157,
-    1.199,
-    1.224 20.3%,
-    1.231,
-    1.231,
-    1.226,
-    1.214 24.6%,
-    1.176 26.9%,
-    1.057 32.6%,
-    1.007 35.5%,
-    0.984,
-    0.968,
-    0.956,
-    0.949 42%,
-    0.946 44.1%,
-    0.95 46.5%,
-    0.998 57.2%,
-    1.007,
-    1.011 63.3%,
-    1.012 68.3%,
-    0.998 84%,
-    1
-  );
+  --spring-easing: linear(0,
+      0.002,
+      0.01 0.9%,
+      0.038 1.8%,
+      0.156,
+      0.312 5.8%,
+      0.789 11.1%,
+      1.015 14.2%,
+      1.096,
+      1.157,
+      1.199,
+      1.224 20.3%,
+      1.231,
+      1.231,
+      1.226,
+      1.214 24.6%,
+      1.176 26.9%,
+      1.057 32.6%,
+      1.007 35.5%,
+      0.984,
+      0.968,
+      0.956,
+      0.949 42%,
+      0.946 44.1%,
+      0.95 46.5%,
+      0.998 57.2%,
+      1.007,
+      1.011 63.3%,
+      1.012 68.3%,
+      0.998 84%,
+      1);
   --mask: 0deg;
 }
 
@@ -183,19 +175,23 @@ body {
 
 /* Work page hero background animations */
 @keyframes float-blob {
+
   0%,
   100% {
     transform: translate(0, 0) scale(1);
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
   }
+
   25% {
     transform: translate(20px, -20px) scale(1.1);
     border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
   }
+
   50% {
     transform: translate(-10px, -30px) scale(0.9);
     border-radius: 50% 60% 30% 80% / 25% 80% 20% 75%;
   }
+
   75% {
     transform: translate(-20px, 10px) scale(1.05);
     border-radius: 80% 30% 50% 60% / 30% 50% 60% 50%;
@@ -203,22 +199,27 @@ body {
 }
 
 @keyframes color-transition {
+
   0%,
   20% {
     background: radial-gradient(circle, var(--color-1), transparent 70%);
   }
+
   20%,
   40% {
     background: radial-gradient(circle, var(--color-2), transparent 70%);
   }
+
   40%,
   60% {
     background: radial-gradient(circle, var(--color-3), transparent 70%);
   }
+
   60%,
   80% {
     background: radial-gradient(circle, var(--color-4), transparent 70%);
   }
+
   80%,
   100% {
     background: radial-gradient(circle, var(--color-5), transparent 70%);
@@ -229,44 +230,56 @@ body {
   0% {
     background: radial-gradient(circle, #00ff9d, transparent 70%);
   }
+
   10% {
     background: radial-gradient(circle, #ff6b6b, transparent 70%);
   }
+
   20% {
     background: radial-gradient(circle, #4ecdc4, transparent 70%);
   }
+
   30% {
     background: radial-gradient(circle, #45b7d1, transparent 70%);
   }
+
   40% {
     background: radial-gradient(circle, #96ceb4, transparent 70%);
   }
+
   50% {
     background: radial-gradient(circle, #ffeaa7, transparent 70%);
   }
+
   60% {
     background: radial-gradient(circle, #dda0dd, transparent 70%);
   }
+
   70% {
     background: radial-gradient(circle, #ff8e53, transparent 70%);
   }
+
   80% {
     background: radial-gradient(circle, #6c5ce7, transparent 70%);
   }
+
   90% {
     background: radial-gradient(circle, #a8e6cf, transparent 70%);
   }
+
   100% {
     background: radial-gradient(circle, #00ff9d, transparent 70%);
   }
 }
 
 @keyframes pulse-slow {
+
   0%,
   100% {
     opacity: 0.3;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.6;
     transform: scale(1.1);
@@ -274,11 +287,13 @@ body {
 }
 
 @keyframes pulse-medium {
+
   0%,
   100% {
     opacity: 0.2;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.4;
     transform: scale(1.05);
@@ -289,51 +304,67 @@ body {
   0% {
     background: radial-gradient(circle, #00ff9d, transparent 70%);
   }
+
   6.25% {
     background: radial-gradient(circle, #ff6b6b, transparent 70%);
   }
+
   12.5% {
     background: radial-gradient(circle, #4ecdc4, transparent 70%);
   }
+
   18.75% {
     background: radial-gradient(circle, #45b7d1, transparent 70%);
   }
+
   25% {
     background: radial-gradient(circle, #96ceb4, transparent 70%);
   }
+
   31.25% {
     background: radial-gradient(circle, #ffeaa7, transparent 70%);
   }
+
   37.5% {
     background: radial-gradient(circle, #dda0dd, transparent 70%);
   }
+
   43.75% {
     background: radial-gradient(circle, #ff8e53, transparent 70%);
   }
+
   50% {
     background: radial-gradient(circle, #6c5ce7, transparent 70%);
   }
+
   56.25% {
     background: radial-gradient(circle, #a8e6cf, transparent 70%);
   }
+
   62.5% {
     background: radial-gradient(circle, #ff69b4, transparent 70%);
   }
+
   68.75% {
     background: radial-gradient(circle, #87ceeb, transparent 70%);
   }
+
   75% {
     background: radial-gradient(circle, #f7dc6f, transparent 70%);
   }
+
   81.25% {
     background: radial-gradient(circle, #ffb6c1, transparent 70%);
   }
+
   87.5% {
     background: radial-gradient(circle, #98d8c8, transparent 70%);
   }
+
   93.75% {
     background: radial-gradient(circle, #dda0dd, transparent 70%);
   }
+
   100% {
     background: radial-gradient(circle, #00ff9d, transparent 70%);
   }
@@ -369,10 +400,12 @@ body {
 }
 
 @keyframes pulse-random {
+
   0%,
   100% {
     transform: translate(-50%, -50%) scale(1);
   }
+
   50% {
     transform: translate(-50%, -50%) scale(1.1);
   }
@@ -383,11 +416,13 @@ body {
 }
 
 @keyframes pulse-sequential {
+
   0%,
   50%,
   100% {
     transform: translate(-50%, -50%) scale(1);
   }
+
   25% {
     transform: translate(-50%, -50%) scale(1.15);
   }
@@ -397,12 +432,10 @@ body {
   color: theme("colors.neutral.100");
   font-weight: 600;
   font-size: 1.2em;
-  background-image: linear-gradient(
-    315deg,
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)) 0%,
-    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)) 47%,
-    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)) 100%
-  );
+  background-image: linear-gradient(315deg,
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)) 0%,
+      hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)) 47%,
+      hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)) 100%);
   padding: 0.6em;
   position: relative;
   isolation: isolate;
@@ -424,13 +457,11 @@ body {
   content: "";
   position: absolute;
   inset: -2px;
-  background: conic-gradient(
-    from var(--mask),
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)),
-    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)),
-    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)),
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1))
-  );
+  background: conic-gradient(from var(--mask),
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)),
+      hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)),
+      hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)),
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)));
   border-radius: inherit;
   animation: spin 2.5s linear infinite;
   z-index: -2;
@@ -484,18 +515,16 @@ body {
   border-radius: inherit;
   mix-blend-mode: plus-lighter;
   pointer-events: none;
-  mask-image: conic-gradient(
-    from var(--mask),
-    transparent 0%,
-    transparent 10%,
-    black 36%,
-    black 45%,
-    transparent 50%,
-    transparent 60%,
-    black 85%,
-    black 95%,
-    transparent 100%
-  );
+  mask-image: conic-gradient(from var(--mask),
+      transparent 0%,
+      transparent 10%,
+      black 36%,
+      black 45%,
+      transparent 50%,
+      transparent 60%,
+      black 85%,
+      black 95%,
+      transparent 100%);
   animation: spin 3s linear infinite both;
 }
 
@@ -533,51 +562,67 @@ body {
   0% {
     background: radial-gradient(circle, hsl(120, 100%, 60%), transparent 70%);
   }
+
   6.25% {
     background: radial-gradient(circle, hsl(0, 100%, 60%), transparent 70%);
   }
+
   12.5% {
     background: radial-gradient(circle, hsl(30, 100%, 60%), transparent 70%);
   }
+
   18.75% {
     background: radial-gradient(circle, hsl(60, 100%, 60%), transparent 70%);
   }
+
   25% {
     background: radial-gradient(circle, hsl(90, 100%, 60%), transparent 70%);
   }
+
   31.25% {
     background: radial-gradient(circle, hsl(120, 100%, 60%), transparent 70%);
   }
+
   37.5% {
     background: radial-gradient(circle, hsl(150, 100%, 60%), transparent 70%);
   }
+
   43.75% {
     background: radial-gradient(circle, hsl(180, 100%, 60%), transparent 70%);
   }
+
   50% {
     background: radial-gradient(circle, hsl(210, 100%, 60%), transparent 70%);
   }
+
   56.25% {
     background: radial-gradient(circle, hsl(240, 100%, 60%), transparent 70%);
   }
+
   62.5% {
     background: radial-gradient(circle, hsl(270, 100%, 60%), transparent 70%);
   }
+
   68.75% {
     background: radial-gradient(circle, hsl(300, 100%, 60%), transparent 70%);
   }
+
   75% {
     background: radial-gradient(circle, hsl(330, 100%, 60%), transparent 70%);
   }
+
   81.25% {
     background: radial-gradient(circle, hsl(360, 100%, 60%), transparent 70%);
   }
+
   87.5% {
     background: radial-gradient(circle, hsl(390, 100%, 60%), transparent 70%);
   }
+
   93.75% {
     background: radial-gradient(circle, hsl(420, 100%, 60%), transparent 70%);
   }
+
   100% {
     background: radial-gradient(circle, hsl(120, 100%, 60%), transparent 70%);
   }

@@ -79,7 +79,7 @@ const Footer = () => {
                 hello@rasmusmattsson.com
               </a>
               <a
-                href="https://linkedin.com/in/rasmusmattsson"
+                href="https://linkedin.com/in/rasmus-mattsson"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"

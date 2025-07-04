@@ -17,11 +17,13 @@
     "@phosphor-icons/react": "^2.1.10",
     "@types/three": "^0.177.0",
     "gsap": "^3.13.0",
+    "lucide-react": "^0.525.0",
     "next": "latest",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",
-    "three": "^0.177.0"
+    "three": "^0.177.0",
+    "yet-another-react-lightbox": "^3.24.0"
   },
   "devDependencies": {
     "@types/node": "24.0.1",
