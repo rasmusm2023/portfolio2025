@@ -76,7 +76,12 @@ export default function DesignGalleryPage() {
         <main className="container mx-auto px-8">
           {/* Hero Section */}
           <section className="h-[80vh] relative">
-            <AnimatedBlob />
+            <AnimatedBlob
+              gradientColors={{
+                primary: "rgba(255, 181, 113, 0.6)", // Orange
+                secondary: "rgba(255, 217, 61, 0.4)", // Yellow
+              }}
+            />
             <div
               className="absolute inset-0 flex items-center justify-start w-full max-w-[1600px]"
               style={{ height: "100vh" }}
@@ -112,7 +117,7 @@ export default function DesignGalleryPage() {
           {/* Bento Gallery Grid */}
           <section className="py-16">
             <div className="text-left w-full max-w-[1600px]">
-              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-4 auto-rows-[250px]">
+              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[250px]">
                 {/* Large hero image - spans 4 columns */}
                 <div className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
                   <img

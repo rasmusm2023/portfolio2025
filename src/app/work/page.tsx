@@ -84,7 +84,12 @@ export default function WorkPage() {
         <main className="container mx-auto px-8">
           {/* Hero Section */}
           <section className="h-[80vh] relative">
-            <AnimatedBlob />
+            <AnimatedBlob
+              gradientColors={{
+                primary: "rgba(255, 181, 113, 0.6)", // Peach/orange
+                secondary: "rgba(255, 140, 244, 0.4)", // Pink
+              }}
+            />
             <div
               className="absolute inset-0 flex items-center justify-start w-full max-w-[1600px]"
               style={{ height: "100vh" }}

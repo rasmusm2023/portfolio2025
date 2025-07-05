@@ -87,6 +87,10 @@ export const gradients = {
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #00FF9D 0%, #99FFD9 36.01%, #fff 82.09%)",
   "gradient-hero-design-gallery":
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #FFB571 0%, #FFD93D 36.01%, #fff 82.09%)",
+  "gradient-hero-about":
+    "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #4F46E5 0%, #06B6D4 36.01%, #fff 82.09%)",
+  "gradient-hero-contact":
+    "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #8B5CF6 0%, #A855F7 36.01%, #fff 82.09%)",
   "gradient-heading-projects":
     "radial-gradient(47.08% 208.33% at 79.71% 128.33%,rgba(237,125,255,.8) 11.69%,rgba(108,84,255,.8) 35.44%,rgba(248,248,248,.8) 70.24%)",
   "gradient-home-who":

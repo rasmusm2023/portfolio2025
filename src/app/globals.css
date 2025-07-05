@@ -15,6 +15,14 @@
       #FFB571 0%,
       #FFD93D 36.01%,
       #fff 82.09%);
+  --gradient-hero-about: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #4F46E5 0%,
+      #06B6D4 36.01%,
+      #fff 82.09%);
+  --gradient-hero-contact: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #8B5CF6 0%,
+      #A855F7 36.01%,
+      #fff 82.09%);
   --gradient-hero-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #00ff9d 0%,
       #99ffd9 36.01%,
@@ -395,19 +403,27 @@ body {
   animation: simple-color-transition 128s linear infinite;
 }
 
-.animate-pulse-random {
-  animation: pulse-random 3s ease-in-out infinite;
-}
-
 @keyframes pulse-random {
 
   0%,
   100% {
-    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.4;
   }
 
   50% {
-    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 0.6;
+  }
+}
+
+@keyframes pulse-blob {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
   }
 }
 
@@ -629,5 +645,9 @@ body {
 }
 
 .animate-smooth-color-transition {
-  animation: smooth-color-transition 128s linear infinite;
+  animation: smooth-color-transition 8s ease-in-out infinite;
+}
+
+.animate-pulse-blob {
+  animation: pulse-blob 8s ease-in-out infinite;
 }
