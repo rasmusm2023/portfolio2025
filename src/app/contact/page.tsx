@@ -53,18 +53,19 @@ export default function ContactPage() {
                 <div className="flex flex-col gap-6 mt-16">
                   <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
                     Ready to bring your ideas to life? I'm always excited to
-                    discuss new projects and opportunities.
+                    discuss new opportunities and career possibilities.
                   </p>
                   <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
-                    Whether you have a specific project in mind or just want to
-                    explore possibilities, let's start a conversation.
+                    Whether you have a specific role in mind or just want to
+                    explore how I can contribute to your team, let's start a
+                    conversation.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Contact Form on the right side */}
-            <div className="absolute right-8 top-1/2 transform -translate-y-1/2 w-[28rem]">
+            <div className="absolute right-8 top-[60%] transform -translate-y-1/2 w-[32rem]">
               <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8">
                 <h2 className="text-3xl font-bold text-neutral-0 mb-6 font-hanken">
                   Let's Talk
@@ -75,7 +76,7 @@ export default function ContactPage() {
                       htmlFor="name"
                       className="block text-sm font-medium text-neutral-30 mb-2"
                     >
-                      Name *
+                      Name
                     </label>
                     <input
                       type="text"
@@ -94,7 +95,7 @@ export default function ContactPage() {
                       htmlFor="email"
                       className="block text-sm font-medium text-neutral-30 mb-2"
                     >
-                      Email *
+                      Email
                     </label>
                     <input
                       type="email"
@@ -113,7 +114,7 @@ export default function ContactPage() {
                       htmlFor="subject"
                       className="block text-sm font-medium text-neutral-30 mb-2"
                     >
-                      Subject *
+                      Subject
                     </label>
                     <input
                       type="text"
@@ -132,7 +133,7 @@ export default function ContactPage() {
                       htmlFor="message"
                       className="block text-sm font-medium text-neutral-30 mb-2"
                     >
-                      Message *
+                      Message
                     </label>
                     <textarea
                       id="message"
@@ -159,8 +160,8 @@ export default function ContactPage() {
 
           {/* Contact Information Section */}
           <section className="py-16">
-            <div className="text-left w-full max-w-[1600px]">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center w-full max-w-[1600px]">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center max-w-4xl mx-auto">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
                     <svg

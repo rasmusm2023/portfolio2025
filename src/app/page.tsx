@@ -1,6 +1,7 @@
 "use client";
 
 import VantaBackground from "@/components/VantaBackground";
+import AnimatedBlob from "@/components/AnimatedBlob";
 import { gradients } from "@/styles/colors";
 import { useState } from "react";
 
@@ -26,6 +27,12 @@ export default function Home() {
         <main className="container mx-auto px-8">
           {/* Introduction Section */}
           <section className="h-[calc(100vh-0rem)] relative">
+            <AnimatedBlob
+              gradientColors={{
+                primary: "rgba(0, 255, 157, 0.6)", // Neon green from gradient-hero-home-accent
+                secondary: "rgba(153, 255, 217, 0.4)", // Lighter green variant
+              }}
+            />
             <div className="absolute inset-0 flex items-center justify-start w-full max-w-[1600px]">
               <div className="text-left w-full">
                 <div className="inline-flex items-center gap-4 mb-8 px-4 py-2 rounded-full bg-neutral-80 backdrop-blur-sm border border-neutral-100/10">
