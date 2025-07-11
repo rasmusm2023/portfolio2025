@@ -99,12 +99,12 @@ export default function DesignGalleryPage() {
                   </div>
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     A collection of design work that doesn't fit into
                     traditional case studies - from branding and logos to
                     typography, print design, and experimental projects.
                   </p>
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     These pieces showcase my versatility across different design
                     disciplines, demonstrating creative thinking and technical
                     skills beyond just UX/UI work.

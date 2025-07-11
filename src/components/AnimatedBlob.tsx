@@ -32,7 +32,7 @@ const AnimatedBlob = ({ gradientColors }: AnimatedBlobProps) => {
         }}
       >
         <div
-          className="w-[500px] h-[500px] rounded-full opacity-40 blur-3xl animate-pulse-blob"
+          className="w-[500px] h-[500px] rounded-full opacity-40 animate-pulse-blob"
           style={{
             background: `radial-gradient(circle, ${colors.primary} 0%, ${colors.secondary} 50%, transparent 70%)`,
             filter: "blur(80px)",

@@ -17,23 +17,31 @@ export default function ClientLayout({
 }) {
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
+  const isFirstLoad = useRef(true);
 
   // Initialize smooth scrolling
   useSmoothScroll();
 
   useEffect(() => {
+    // Skip animation on first load for better performance
+    if (isFirstLoad.current) {
+      isFirstLoad.current = false;
+      return;
+    }
+
     if (contentRef.current) {
+      // Use a lighter animation for better performance
       gsap.fromTo(
         contentRef.current,
         {
           opacity: 0,
-          y: 20,
+          y: 10, // Reduced from 20
         },
         {
           opacity: 1,
           y: 0,
-          duration: 0.5,
-          ease: "power2.out",
+          duration: 0.3, // Reduced from 0.5
+          ease: "power1.out", // Lighter easing
         }
       );
     }

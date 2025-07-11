@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer className="relative z-10 border-t border-neutral-100/10 bg-neutral-100/5 backdrop-blur-sm">
-      <div className="container mx-auto px-8 py-12">
+      <div className="container mx-auto px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">

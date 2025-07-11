@@ -26,7 +26,7 @@ export default function Home() {
         {/* Main Content */}
         <main className="container mx-auto px-8">
           {/* Introduction Section */}
-          <section className="h-[calc(100vh-0rem)] relative">
+          <section id="home" className="h-[calc(100vh-0rem)] relative">
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(0, 255, 157, 0.6)", // Neon green from gradient-hero-home-accent
@@ -57,16 +57,10 @@ export default function Home() {
                   </div>
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     Hi, I'm Rasmus Mattsson - a curious digital designer with an
                     eye for detail, a heart for the user, and a drive for the
                     business.
-                  </p>
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
-                    I see great products as I do great games – easy to get into,
-                    but the more you explore, the better it gets. And that's
-                    where I thrive – in team play, navigating different complex
-                    levels together.
                   </p>
                 </div>
               </div>
@@ -74,7 +68,7 @@ export default function Home() {
           </section>
 
           {/* Work Section */}
-          <section className="py-48">
+          <section id="projects-section" className="py-48">
             <div className="text-left w-full max-w-[1600px] p-8">
               <div className="relative w-fit mx-auto mb-16">
                 <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
@@ -84,55 +78,131 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-2 gap-12">
                 {/* First Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                  {/* Project background image */}
+                  <img
+                    src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
+                    alt="Noted App Interface"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+
+                  {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-4">
+                    <div className="mb-4">
+                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                        UX/UI Design
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
                       Noted
                     </h3>
-                    <p className="text-xl text-neutral-30">
-                      A brief description of the project and its impact.
+                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                      A comprehensive note-taking app with intuitive design and
+                      seamless user experience.
                     </p>
                   </div>
+
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Second Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                  {/* Project background image */}
+                  <img
+                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
+                    alt="Zmartrest AI Dashboard"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+
+                  {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-4">
+                    <div className="mb-4">
+                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                        AI/ML
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
                       Zmartrest AI
                     </h3>
-                    <p className="text-xl text-neutral-30">
-                      A brief description of the project and its impact.
+                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                      AI-powered platform for intelligent decision making and
+                      data analysis.
                     </p>
                   </div>
+
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Third Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                  {/* Project background image */}
+                  <img
+                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
+                    alt="Fokus Mobile App"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+
+                  {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-4">
+                    <div className="mb-4">
+                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                        Mobile App
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
                       Fokus
                     </h3>
-                    <p className="text-xl text-neutral-30">
-                      A brief description of the project and its impact.
+                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                      Productivity app designed to help users stay focused and
+                      achieve their goals.
                     </p>
                   </div>
+
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Fourth Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90/50 aspect-[16/12] backdrop-blur-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-100/90" />
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                  {/* Project background image */}
+                  <img
+                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
+                    alt="Emplojd HR Platform"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+
+                  {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-4">
+                    <div className="mb-4">
+                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                        SaaS Platform
+                      </span>
+                    </div>
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
                       Emplojd
                     </h3>
-                    <p className="text-xl text-neutral-30">
-                      A brief description of the project and its impact.
+                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                      Comprehensive HR platform for modern workplace management
+                      and employee engagement.
                     </p>
                   </div>
+
+                  {/* Hover effect */}
+                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
             </div>

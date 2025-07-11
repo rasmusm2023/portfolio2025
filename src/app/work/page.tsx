@@ -107,15 +107,13 @@ export default function WorkPage() {
                   </div>
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     A collection of projects that showcase my journey in design
-                    and development. Each case study represents a unique
-                    challenge and solution.
+                    and development.
                   </p>
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
-                    From web applications to mobile experiences, these projects
-                    demonstrate my approach to creating user-centered solutions
-                    that drive business value.
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
+                    From web apps to mobile experiences, these projects
+                    demonstrate my approach.
                   </p>
                 </div>
               </div>

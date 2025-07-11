@@ -88,6 +88,33 @@
   initial-value: 0deg;
 }
 
+/* Performance optimizations */
+* {
+  box-sizing: border-box;
+}
+
+/* Hide scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+  /* Safari and Chrome */
+}
+
+
+
+/* Optimize for animations */
+.animate-optimized {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
 /* ---- reset ---- */
 body {
   margin: 0;

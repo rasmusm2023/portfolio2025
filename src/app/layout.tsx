@@ -5,12 +5,22 @@ import ClientLayout from "./ClientLayout";
 // import CustomCursor from "@/components/CustomCursor";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import PerformanceOptimizer from "@/components/PerformanceOptimizer";
+import PerformanceMonitor from "@/components/PerformanceMonitor";
 
-const hanken = Hanken_Grotesk({ subsets: ["latin"] });
+const hanken = Hanken_Grotesk({
+  subsets: ["latin"],
+  display: "swap", // Optimize font loading
+  preload: true,
+});
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
   description: "My portfolio website",
+  // Add performance optimizations
+  other: {
+    "X-DNS-Prefetch-Control": "on",
+  },
 };
 
 export default function RootLayout({
@@ -20,7 +30,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Preload critical resources */}
+        <link
+          rel="preload"
+          href="/rm-logo-portfolio-white.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+        <link
+          rel="preload"
+          href="/rm-logo-portfolio-dark.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+      </head>
       <body className={`${hanken.className} antialiased bg-neutral-100`}>
+        <PerformanceOptimizer />
+        <PerformanceMonitor />
         <Header />
         {/* <CustomCursor /> */}
         <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">

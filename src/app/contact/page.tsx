@@ -51,11 +51,11 @@ export default function ContactPage() {
                   <br />
                 </h1>
                 <div className="flex flex-col gap-6 mt-16">
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     Ready to bring your ideas to life? I'm always excited to
                     discuss new opportunities and career possibilities.
                   </p>
-                  <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     Whether you have a specific role in mind or just want to
                     explore how I can contribute to your team, let's start a
                     conversation.
@@ -212,7 +212,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-semibold text-neutral-0">
                       Location
                     </h3>
-                    <p className="text-neutral-60">Copenhagen, Denmark</p>
+                    <p className="text-neutral-60">Stockholm, Sweden</p>
                   </div>
                 </div>
 

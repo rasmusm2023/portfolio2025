@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
 
@@ -11,16 +11,17 @@ const Menu = () => {
   const pillRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const [activeSection, setActiveSection] = useState("home");
+  const isInitialized = useRef(false);
 
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
     { label: "Design Gallery", href: "/design-gallery" },
-    { label: "About me", href: "/about" },
+    { label: "About Me", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
 
-  const movePill = (href: string) => {
+  const movePill = useCallback((href: string) => {
     const activeItem = menuRef.current?.querySelector(`[href="${href}"]`);
     const menu = menuRef.current;
 
@@ -28,14 +29,15 @@ const Menu = () => {
       const { width, left } = activeItem.getBoundingClientRect();
       const menuLeft = menu.getBoundingClientRect().left;
 
+      // Use a faster animation for better performance
       gsap.to(pillRef.current, {
         width: width,
         x: left - menuLeft,
-        duration: 0.2,
-        ease: "power2.out",
+        duration: 0.15, // Reduced from 0.2
+        ease: "power1.out", // Lighter easing
       });
     }
-  };
+  }, []);
 
   useEffect(() => {
     // Set active section based on current pathname
@@ -45,9 +47,27 @@ const Menu = () => {
     // Move pill to active item
     const activeItem = menuItems.find((item) => item.href === pathname);
     if (activeItem) {
-      movePill(activeItem.href);
+      // Skip animation on first load for better performance
+      if (!isInitialized.current) {
+        isInitialized.current = true;
+        // Set initial position without animation
+        const activeItemElement = menuRef.current?.querySelector(
+          `[href="${activeItem.href}"]`
+        );
+        const menu = menuRef.current;
+        if (activeItemElement && pillRef.current && menu) {
+          const { width, left } = activeItemElement.getBoundingClientRect();
+          const menuLeft = menu.getBoundingClientRect().left;
+          gsap.set(pillRef.current, {
+            width: width,
+            x: left - menuLeft,
+          });
+        }
+      } else {
+        movePill(activeItem.href);
+      }
     }
-  }, [pathname]);
+  }, [pathname, movePill]);
 
   return (
     <nav className="flex items-center justify-center">
