@@ -6,6 +6,7 @@ import SpotifyIcon from "@/logos/Symbol.svg";
 import TheEqualizerCover from "@/films/The-Equalizer.png";
 import TheEqualizer2Cover from "@/films/The-Equalizer-2.png";
 import RasmusImage from "@/images/rasmus.jpg";
+import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import { useState, useEffect } from "react";
 
 // Live Clock Component
@@ -119,45 +120,88 @@ function BookCard({
   author,
   coverImage,
   amazonUrl,
+  currentPage,
+  totalPages,
 }: {
   title: string;
   author: string;
   coverImage?: any;
   amazonUrl?: string;
+  currentPage?: number;
+  totalPages?: number;
 }) {
+  const progressPercentage =
+    currentPage && totalPages ? (currentPage / totalPages) * 100 : 0;
+
   return (
     <a
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-32 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200 cursor-pointer group"
+      className="flex-shrink-0 w-64 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
     >
-      <div className="relative w-full h-full">
-        {coverImage ? (
-          <>
-            <img
-              src={coverImage.src}
-              alt={`${title} by ${author}`}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/30"></div>
-          </>
-        ) : (
-          <div className="w-full h-full bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-2xl p-4">
-            <div className="space-y-2">
-              <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
-              <div className="space-y-1">
-                <p className="text-neutral-60 text-xs">by {author}</p>
+      <div className="flex w-full h-full">
+        {/* Book Cover */}
+        <div className="w-32 h-48 rounded-l-2xl overflow-hidden">
+          {coverImage ? (
+            <>
+              <img
+                src={coverImage.src}
+                alt={`${title} by ${author}`}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30"></div>
+            </>
+          ) : (
+            <div className="w-full h-full bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-l-2xl p-4">
+              <div className="space-y-2">
+                <h3 className="text-neutral-0 font-semibold text-sm">
+                  {title}
+                </h3>
+                <div className="space-y-1">
+                  <p className="text-neutral-60 text-xs">by {author}</p>
+                </div>
               </div>
             </div>
+          )}
+        </div>
+
+        {/* Book Info */}
+        <div className="flex-1 p-4 flex flex-col justify-between">
+          <div className="space-y-2">
+            <h3 className="text-neutral-0 font-semibold text-sm leading-tight">
+              {title}
+            </h3>
+            <p className="text-neutral-60 text-xs">by {author}</p>
           </div>
-        )}
-        {coverImage && (
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
-            <h3 className="text-white font-semibold text-sm mb-1">{title}</h3>
-            <p className="text-white/80 text-xs">by {author}</p>
-          </div>
-        )}
+
+          {/* Current Page */}
+          {currentPage && totalPages && (
+            <div className="mt-auto space-y-2">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <span className="text-neutral-60 text-xs font-medium">
+                  Page {currentPage} of {totalPages}
+                </span>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                <div
+                  className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full transition-all duration-500 ease-out"
+                  style={{ width: `${progressPercentage}%` }}
+                ></div>
+              </div>
+
+              {/* Percentage */}
+              <div className="text-right">
+                <span className="text-neutral-60 text-xs font-medium">
+                  {Math.round(progressPercentage)}% complete
+                </span>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </a>
   );
@@ -217,29 +261,38 @@ function FavoriteSongs() {
   return (
     <>
       {songs.map((song, index) => (
-        <a
-          key={index}
-          href={song.spotifyUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-shrink-0 group cursor-pointer"
-        >
-          <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover:border-[#00FF9D] transition-colors duration-200">
-            <img
-              src={song.albumCover}
-              alt={`${song.title} by ${song.artist}`}
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div className="mt-2 text-center">
-            <p className="text-neutral-0 text-sm font-medium truncate max-w-28">
-              {song.title}
-            </p>
-            <p className="text-neutral-60 text-sm truncate max-w-28">
-              {song.artist}
-            </p>
-          </div>
-        </a>
+        <div key={index} className="flex-shrink-0">
+          <a
+            href={song.spotifyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="cursor-pointer group/song"
+          >
+            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover/song:border-[#00FF9D] transition-colors duration-200 relative">
+              <img
+                src={song.albumCover}
+                alt={`${song.title} by ${song.artist}`}
+                className="w-full h-full object-cover"
+              />
+              {/* Radial green shine effect */}
+              <div
+                className="absolute inset-0 opacity-0 group-hover/song:opacity-100 transition-opacity duration-300 rounded-xl"
+                style={{
+                  background:
+                    "radial-gradient(ellipse at top, rgba(0,255,157,0.4) 0%, rgba(0,255,157,0.1) 40%, transparent 80%)",
+                }}
+              ></div>
+            </div>
+            <div className="mt-2 text-center">
+              <p className="text-neutral-0 text-sm font-medium truncate max-w-28">
+                {song.title}
+              </p>
+              <p className="text-neutral-60 text-sm truncate max-w-28">
+                {song.artist}
+              </p>
+            </div>
+          </a>
+        </div>
       ))}
     </>
   );
@@ -293,7 +346,7 @@ export default function AboutPage() {
             <div className="text-left w-full max-w-[1600px]">
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
                 {/* About Me - Standing section */}
-                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center row-span-2 relative group hover:shadow-lg transition-all duration-300">
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center row-span-2 relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300">
                   {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
@@ -346,7 +399,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* I work in - Large section */}
-                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg transition-all duration-300">
+                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300">
                   {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
@@ -369,7 +422,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Skills - Large section */}
-                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     Core Skills
                   </h2>
@@ -428,7 +481,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Experience - Medium section */}
-                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     Experience
                   </h2>
@@ -455,7 +508,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Philosophy - Medium section */}
-                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     Philosophy
                   </h2>
@@ -466,7 +519,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* My Approach - Medium section */}
-                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     My Approach
                   </h2>
@@ -478,7 +531,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Values - Medium section */}
-                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     Values
                   </h2>
@@ -504,47 +557,75 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Currently - Medium section */}
-                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                {/* Music - Medium section */}
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Currently...
+                      Music
                     </h2>
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <a
+                      href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-6 h-6 animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer"
+                    >
+                      <img
+                        src={SpotifyIcon.src}
+                        alt="Spotify"
+                        className="w-full h-full"
+                      />
+                    </a>
                   </div>
-                  <div className="space-y-4">
-                    <div className="space-y-2">
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center gap-2">
-                          <img
-                            src={SpotifyIcon.src}
-                            alt="Spotify"
-                            className="w-4 h-4"
-                          />
-                          <span className="text-neutral-60 text-base font-semibold">
-                            Listening to:
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-neutral-60 text-base font-semibold">
-                            📚 Reading:
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                        <FavoriteSongs />
-                        <BookCard
-                          title="Designing for the Digital Age"
-                          author="Kim Goodwin"
-                          amazonUrl="https://www.amazon.com/Designing-Digital-Age-Kim-Goodwin/dp/047013211X"
-                        />
-                      </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-neutral-60 text-base font-semibold">
+                        I'm currently listening to:
+                      </span>
+                    </div>
+                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                      <FavoriteSongs />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Currently Reading - Medium section */}
+                <div className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300">
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                      Books
+                    </h2>
+                    <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="text-neutral-60 text-base font-semibold">
+                        📚 Reading:
+                      </span>
+                    </div>
+                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                      <BookCard
+                        title="Hjärnstark : hur motion och träning stärker din hjärna"
+                        author="Anders Hansen"
+                        coverImage={HjarnstarkCover}
+                        amazonUrl="https://www.amazon.com/Hjärnstark-hur-motion-träning-stärker/dp/9175031234"
+                        currentPage={127}
+                        totalPages={280}
+                      />
                     </div>
                   </div>
                 </div>
 
                 {/* Currently Working On - Standing section */}
-                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center row-span-2">
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-6 font-hanken">
                     Currently Working On
                   </h2>
@@ -588,7 +669,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Favourite Films - Large section */}
-                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     Favourite Films
                   </h2>
@@ -626,7 +707,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Local Time - Small section */}
-                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-6 flex flex-col justify-center">
+                <div className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-6 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     My Time
                   </h2>
@@ -648,7 +729,7 @@ export default function AboutPage() {
                 </div>
 
                 {/* Personal Traits - Large section */}
-                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8 flex flex-col justify-center">
+                <div className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300">
                   <h2 className="text-2xl font-bold text-neutral-0 mb-4 font-hanken">
                     About Me
                   </h2>
