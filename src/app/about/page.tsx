@@ -7,6 +7,8 @@ import SpotifyIcon from "@/logos/Symbol.svg";
 import TheEqualizerCover from "@/films/The-Equalizer.png";
 import TheEqualizer2Cover from "@/films/The-Equalizer-2.png";
 import TheBeekeeperCover from "@/films/the-beekeeper.png";
+import TheDarkKnightCover from "@/films/the-dark-knight.png";
+import ArrivalCover from "@/films/arrival.png";
 import RasmusImage from "@/images/rasmus.jpg";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
@@ -244,10 +246,10 @@ function SkillCard({
   skills: string[];
 }) {
   return (
-    <div className="flex-shrink-0 w-40 h-52 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
+    <div className="flex-shrink-0 w-48 h-56 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
       <div className="flex flex-col h-full">
         <div className="flex flex-col items-center text-center mb-3">
-          <span className="text-4xl mb-2">{icon}</span>
+          <span className="text-3xl mb-2">{icon}</span>
           <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
         </div>
         <div className="flex-1 flex flex-col justify-center">
@@ -388,11 +390,11 @@ export default function AboutPage() {
           <section className="py-16 px-24">
             <div className="text-left w-full max-w-[1600px]">
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
-                {/* About Me - Standing section */}
+                {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("about-me")})` }}
-                  onMouseEnter={() => setHoveredBox("about-me")}
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-6 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
+                  style={{ transform: `scale(${getBoxScale("time")})` }}
+                  onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
                   {/* Radial shine effect */}
@@ -403,329 +405,111 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-start gap-4 mb-6">
-                    {/* Profile image with animated border */}
-                    <div className="w-14 h-14 rounded-full overflow-hidden flex-shrink-0 relative">
-                      <img
-                        src={RasmusImage.src}
-                        alt="Rasmus Mattsson"
-                        className="w-full h-full object-cover object-top"
-                        style={{ objectPosition: "center 30%" }}
-                      />
-                      {/* Animated border - positioned outside the image */}
-                      <svg
-                        className="absolute -inset-0.5 w-17 h-17"
-                        viewBox="0 0 68 68"
-                        style={{ transform: "rotate(-90deg)" }}
-                      >
-                        <defs>
-                          <linearGradient
-                            id="borderGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="0%"
-                          >
-                            <stop
-                              offset="0%"
-                              stopColor="#00FF9D"
-                              stopOpacity="1"
-                            />
-                            <stop
-                              offset="30%"
-                              stopColor="#00FF9D"
-                              stopOpacity="0.7"
-                            />
-                            <stop
-                              offset="60%"
-                              stopColor="#00FF9D"
-                              stopOpacity="0.3"
-                            />
-                            <stop
-                              offset="100%"
-                              stopColor="#00FF9D"
-                              stopOpacity="0"
-                            />
-                          </linearGradient>
-                        </defs>
-                        <circle
-                          cx="34"
-                          cy="34"
-                          r="32"
-                          fill="none"
-                          stroke="url(#borderGradient)"
-                          strokeWidth="4"
-                          strokeDasharray="201"
-                          strokeDashoffset="201"
-                          style={{
-                            animation: "spin-border 5s linear infinite",
-                          }}
-                        />
-                      </svg>
-                    </div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                      My Time
+                    </h2>
+                    <span className="text-2xl animate-pulse-subtle">⏰</span>
                   </div>
-                  <div className="space-y-4">
-                    <p className="text-neutral-10 text-base font-medium leading-relaxed">
-                      👋 Hi, I'm Rasmus Mattsson — a UX/UI Designer and Low-code
-                      Developer based in Stockholm, Sweden. I love creating
-                      digital experiences that bridge creativity with
-                      technology.
-                    </p>
-
-                    <div className="flex flex-col gap-2 pt-2">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                        <span className="text-neutral-60 text-sm">
-                          📍 Based in Stockholm, Sweden
-                        </span>
+                  <div className="space-y-3">
+                    <div className="text-center">
+                      <div className="text-3xl font-mono font-bold text-accent-100 mb-1">
+                        <LiveClock />
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                        <span className="text-neutral-60 text-sm">
-                          🎓 Design & Development
-                        </span>
+                      <div className="text-neutral-60 text-xs">
+                        Stockholm Time (CET/CEST)
+                      </div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-neutral-60 text-sm">
+                        <LiveDate />
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* I work in - Large section */}
+                {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("toolkit")})` }}
-                  onMouseEnter={() => setHoveredBox("toolkit")}
+                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300 row-span-2 relative group"
+                  style={{ transform: `scale(${getBoxScale("traits")})` }}
+                  onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
+                  {/* Radial shine effect - behind content */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl -z-10"
                     style={{
                       background:
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-2 p-8">
-                    <div className="flex items-baseline gap-2">
-                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                        My toolkit include
-                      </h2>
-                      <p className="text-lg text-neutral-30 font-hanken">
-                        but is not limited to:
-                      </p>
-                    </div>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🛠️
-                    </span>
-                  </div>
-
-                  {/* GSAP-powered Infinite Scroll Banner */}
-                  <InfiniteScrollBanner />
-                </div>
-
-                {/* Expertise - Large section */}
-                <div
-                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("skills")})` }}
-                  onMouseEnter={() => setHoveredBox("skills")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Expertise{" "}
+                      Traits
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⚡
-                    </span>
+                    <span className="text-2xl animate-pulse-subtle">🎭</span>
                   </div>
-                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                    <SkillCard
-                      title="UX Research"
-                      icon="🔍"
-                      skills={[
-                        "Interviews",
-                        "Testing",
-                        "Data/metrics analysis",
-                      ]}
-                    />
-                    <SkillCard
-                      title="UI Design"
-                      icon="🎨"
-                      skills={[
-                        "Visual design",
-                        "Component systems",
-                        "Design systems",
-                      ]}
-                    />
-                    <SkillCard
-                      title="UX Design"
-                      icon="💡"
-                      skills={[
-                        "User flows",
-                        "Information architecture",
-                        "Interaction design",
-                      ]}
-                    />
-                    <SkillCard
-                      title="Development"
-                      icon="💻"
-                      skills={[
-                        "React/Next.js",
-                        "TypeScript",
-                        "Modern web apps",
-                      ]}
-                    />
-                    <SkillCard
-                      title="Product"
-                      icon="📊"
-                      skills={[
-                        "Strategy",
-                        "Roadmapping",
-                        "Analytics",
-                        "Growth",
-                      ]}
-                    />
-                    <SkillCard
-                      title="AI & Automation"
-                      icon="🤖"
-                      skills={[
-                        "Updated workflows",
-                        "AI integration",
-                        "Efficiency tools",
-                        "Future-ready",
-                      ]}
-                    />
-                    <SkillCard
-                      title="Tailwind CSS"
-                      icon="🎨"
-                      skills={["Utility-first", "Responsive", "Rapid dev"]}
-                    />
-                  </div>
-                </div>
-
-                {/* Experience - Medium section */}
-                <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("experience")})` }}
-                  onMouseEnter={() => setHoveredBox("experience")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Experience
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      💼
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        5+ years in UX/UI Design
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        3+ years in Development
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        20+ projects completed
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Philosophy - Medium section */}
-                <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("philosophy")})` }}
-                  onMouseEnter={() => setHoveredBox("philosophy")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Philosophy
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎯
-                    </span>
-                  </div>
-                  <p className="text-neutral-60 text-sm leading-relaxed">
-                    Design should be invisible. When users focus on their goals
-                    rather than the interface, that's when we've succeeded.
-                  </p>
-                </div>
-
-                {/* My Approach - Medium section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("approach")})` }}
-                  onMouseEnter={() => setHoveredBox("approach")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      My Approach
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🔍
-                    </span>
-                  </div>
-                  <p className="text-neutral-60 text-sm leading-relaxed">
-                    I believe great design starts with understanding the user.
-                    Every project begins with research, empathy, and a deep dive
-                    into the problem space.
-                  </p>
-                </div>
-
-                {/* Values - Medium section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("values")})` }}
-                  onMouseEnter={() => setHoveredBox("values")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Values
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⭐
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Empathy First
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Continuous Learning
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Quality Over Speed
-                      </span>
-                    </div>
-                  </div>
+                  <TraitsCarousel
+                    traits={[
+                      {
+                        title: "Home Cook",
+                        description:
+                          "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
+                        emoji: "👨‍🍳",
+                        image:
+                          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Tech Explorer",
+                        description:
+                          "Always curious about new technologies and how they can improve user experiences.",
+                        emoji: "🔬",
+                        image:
+                          "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Design Thinker",
+                        description:
+                          "I approach problems with empathy and user-centered design principles.",
+                        emoji: "💭",
+                        image:
+                          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Stockholm Local",
+                        description:
+                          "Living in one of the world's most design-forward cities inspires my work daily.",
+                        emoji: "🏙️",
+                        image:
+                          "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Animal Lover",
+                        description:
+                          "I love animals - I have had both cats and dogs as pets.",
+                        emoji: "🐶",
+                        image:
+                          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=400&h=400&fit=crop&crop=center",
+                      },
+                    ]}
+                  />
                 </div>
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
                   style={{ transform: `scale(${getBoxScale("music")})` }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Music
@@ -774,9 +558,12 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Books
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <a
+                      href="/reading-list"
+                      className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                    >
                       📚
-                    </span>
+                    </a>
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
@@ -805,74 +592,26 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Currently Working On - Standing section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("current-work")})` }}
-                  onMouseEnter={() => setHoveredBox("current-work")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Currently Working On
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🚀
-                    </span>
-                  </div>
-                  <div className="space-y-6">
-                    <div className="flex justify-center">
-                      <div className="w-64 h-64 rounded-2xl overflow-hidden bg-neutral-80 border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200">
-                        <img
-                          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop&crop=center"
-                          alt="Project Cover"
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-0 text-center">
-                        Portfolio Website 2025
-                      </h3>
-                      <p className="text-neutral-60 text-sm leading-relaxed text-center">
-                        A modern, interactive portfolio showcasing my design and
-                        development skills. Built with Next.js, TypeScript, and
-                        Tailwind CSS. Features smooth animations, responsive
-                        design, and a unique bento box layout for the about
-                        page.
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          Next.js
-                        </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          TypeScript
-                        </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          Tailwind CSS
-                        </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          GSAP
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300 relative group"
                   style={{ transform: `scale(${getBoxScale("films")})` }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎬
-                    </span>
+                    <span className="text-2xl animate-pulse-subtle">🎬</span>
                   </div>
                   <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                     <FilmCard
@@ -897,109 +636,20 @@ export default function AboutPage() {
                       imdbUrl="https://www.imdb.com/title/tt15314262/"
                     />
                     <FilmCard
-                      title="Interstellar"
-                      year="2014"
+                      title="The Dark Knight"
+                      year="2008"
                       director="Christopher Nolan"
+                      coverImage={TheDarkKnightCover}
+                      imdbUrl="https://www.imdb.com/title/tt0468569/"
                     />
                     <FilmCard
                       title="Arrival"
                       year="2016"
                       director="Denis Villeneuve"
+                      coverImage={ArrivalCover}
+                      imdbUrl="https://www.imdb.com/title/tt2543164/"
                     />
                   </div>
-                </div>
-
-                {/* Local Time - Small section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-6 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
-                  style={{ transform: `scale(${getBoxScale("time")})` }}
-                  onMouseEnter={() => setHoveredBox("time")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      My Time
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⏰
-                    </span>
-                  </div>
-                  <div className="space-y-3">
-                    <div className="text-center">
-                      <div className="text-3xl font-mono font-bold text-accent-100 mb-1">
-                        <LiveClock />
-                      </div>
-                      <div className="text-neutral-60 text-xs">
-                        Stockholm Time (CET/CEST)
-                      </div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-neutral-60 text-sm">
-                        <LiveDate />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Personal Traits - Large section */}
-                <div
-                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300 row-span-2"
-                  style={{ transform: `scale(${getBoxScale("traits")})` }}
-                  onMouseEnter={() => setHoveredBox("traits")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Traits
-                    </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎭
-                    </span>
-                  </div>
-                  <TraitsCarousel
-                    traits={[
-                      {
-                        title: "Home Cook",
-                        description:
-                          "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
-                        emoji: "👨‍🍳",
-                        image:
-                          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Tech Explorer",
-                        description:
-                          "Always curious about new technologies and how they can improve user experiences.",
-                        emoji: "🔬",
-                        image:
-                          "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Design Thinker",
-                        description:
-                          "I approach problems with empathy and user-centered design principles.",
-                        emoji: "💭",
-                        image:
-                          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Stockholm Local",
-                        description:
-                          "Living in one of the world's most design-forward cities inspires my work daily.",
-                        emoji: "🏙️",
-                        image:
-                          "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Animal Lover",
-                        description:
-                          "I love animals - I have had both cats and dogs as pets.",
-                        emoji: "🐶",
-                        image:
-                          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=400&h=400&fit=crop&crop=center",
-                      },
-                    ]}
-                  />
                 </div>
               </div>
             </div>
