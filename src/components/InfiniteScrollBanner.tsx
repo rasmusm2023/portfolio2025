@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import FigmaIcon from "@/logos/Figma-Icon.svg";
 import MiroIcon from "@/logos/Miro_Miro_Icon_0.svg";
@@ -14,6 +14,7 @@ import WixIcon from "@/logos/idyfLKvIsN_1752235000777.png";
 const InfiniteScrollBanner = () => {
   const bannerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (!bannerRef.current) return;
@@ -38,13 +39,17 @@ const InfiniteScrollBanner = () => {
       ease: "none",
     });
 
-    // Pause/resume on hover
+    // Slow down/speed up on hover
     const handleMouseEnter = () => {
-      animationRef.current?.pause();
+      if (animationRef.current) {
+        animationRef.current.timeScale(0.5); // Slow down to 50% speed
+      }
     };
 
     const handleMouseLeave = () => {
-      animationRef.current?.resume();
+      if (animationRef.current) {
+        animationRef.current.timeScale(1); // Return to normal speed
+      }
     };
 
     banner.addEventListener("mouseenter", handleMouseEnter);
