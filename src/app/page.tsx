@@ -260,11 +260,11 @@ function FavoriteSongs() {
         "https://open.spotify.com/track/4lkpfY2wfmHj958Fr32kHS?si=a5abdd08a45f4c7f",
     },
     {
-      title: "Stairway to Heaven",
-      artist: "Led Zeppelin",
-      albumCover:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=150&h=150&fit=crop&crop=center",
-      spotifyUrl: "https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc",
+      title: "MO UP FRONT",
+      artist: "NLE Choppa",
+      albumCover: "/music/mo-up-front.jpg",
+      spotifyUrl:
+        "https://open.spotify.com/track/0wZ0RnMZFR97fq1Yq8Ee57?si=260919d34b1144b0",
     },
   ];
 
@@ -351,7 +351,7 @@ export default function Home() {
               style={{ height: "100vh" }}
             >
               <div className="text-left w-full">
-                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border border-neutral-100/10 overflow-hidden transition-all duration-300">
+                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border border-neutral-100/10 overflow-hidden transition-all duration-500">
                   <div className="flex items-center gap-4 px-4 py-2">
                     <div className="relative">
                       <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
@@ -364,7 +364,7 @@ export default function Home() {
                   <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white font-medium text-sm hover:from-purple-600 hover:to-violet-600 transition-all duration-300 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white font-medium text-sm hover:from-purple-600 hover:to-violet-600 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
@@ -433,7 +433,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
                 {/* About Me - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-300"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
                   style={{ transform: `scale(${getBoxScale("about-me")})` }}
                   onMouseEnter={() => setHoveredBox("about-me")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -519,24 +519,18 @@ export default function Home() {
 
                     <div className="flex flex-col gap-2 pt-2">
                       <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                        <span className="text-neutral-60 text-sm">
+                        <span className="text-neutral-30 text-base">
                           📍 Stockholm, Sweden
                         </span>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                        <span className="text-neutral-60 text-sm">
-                          🎓 Design & Development
-                        </span>
-                      </div>
+                      <div className="flex items-center gap-2"></div>
                     </div>
                   </div>
                 </div>
 
                 {/* I work in - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-300"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
                   style={{ transform: `scale(${getBoxScale("toolkit")})` }}
                   onMouseEnter={() => setHoveredBox("toolkit")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -558,9 +552,7 @@ export default function Home() {
                         but is not limited to:
                       </p>
                     </div>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🛠️
-                    </span>
+                    <span className="text-2xl animate-pulse">🛠️</span>
                   </div>
 
                   {/* GSAP-powered Infinite Scroll Banner */}
@@ -569,7 +561,7 @@ export default function Home() {
 
                 {/* Skills - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("skills")})` }}
                   onMouseEnter={() => setHoveredBox("skills")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -586,58 +578,129 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Core Skills
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⚡
-                    </span>
+                    <span className="text-2xl animate-pulse">⚡</span>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <h3 className="text-neutral-0 font-semibold text-sm">
-                        Design
-                      </h3>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            User Research
-                          </span>
+                  <div className="space-y-4">
+                    {/* Design Skills */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg">🎨</span>
+                        <h3 className="text-neutral-0 font-semibold text-sm">
+                          Design
+                        </h3>
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              User Research
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Expert
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500"
+                              style={{ width: "95%" }}
+                            ></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Wireframing
-                          </span>
+
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              Wireframing
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Advanced
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-500"
+                              style={{ width: "90%" }}
+                            ></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Prototyping
-                          </span>
+
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              Prototyping
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Expert
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-500"
+                              style={{ width: "92%" }}
+                            ></div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="text-neutral-0 font-semibold text-sm">
-                        Development
-                      </h3>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            React/Next.js
-                          </span>
+
+                    {/* Development Skills */}
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-lg">💻</span>
+                        <h3 className="text-neutral-0 font-semibold text-sm">
+                          Development
+                        </h3>
+                      </div>
+                      <div className="grid grid-cols-1 gap-2">
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              React/Next.js
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Advanced
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-500"
+                              style={{ width: "88%" }}
+                            ></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            TypeScript
-                          </span>
+
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              TypeScript
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Intermediate
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500"
+                              style={{ width: "75%" }}
+                            ></div>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Tailwind CSS
-                          </span>
+
+                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-neutral-0 text-xs font-medium">
+                              Tailwind CSS
+                            </span>
+                            <span className="text-[#00FF9D] text-xs">
+                              Advanced
+                            </span>
+                          </div>
+                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+                            <div
+                              className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full transition-all duration-500"
+                              style={{ width: "85%" }}
+                            ></div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -646,7 +709,7 @@ export default function Home() {
 
                 {/* Experience - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("experience")})` }}
                   onMouseEnter={() => setHoveredBox("experience")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -663,9 +726,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Experience
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      💼
-                    </span>
+                    <span className="text-2xl animate-pulse">💼</span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -691,7 +752,7 @@ export default function Home() {
 
                 {/* Philosophy - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("philosophy")})` }}
                   onMouseEnter={() => setHoveredBox("philosophy")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -708,9 +769,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Philosophy
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎯
-                    </span>
+                    <span className="text-2xl animate-pulse">🎯</span>
                   </div>
                   <p className="text-neutral-60 text-sm leading-relaxed">
                     Design should be invisible. When users focus on their goals
@@ -720,7 +779,7 @@ export default function Home() {
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -737,9 +796,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Approach
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🔍
-                    </span>
+                    <span className="text-2xl animate-pulse">🔍</span>
                   </div>
                   <p className="text-neutral-60 text-sm leading-relaxed">
                     I believe great design starts with understanding the user.
@@ -750,7 +807,7 @@ export default function Home() {
 
                 {/* Values - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("values")})` }}
                   onMouseEnter={() => setHoveredBox("values")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -767,9 +824,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Values
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⭐
-                    </span>
+                    <span className="text-2xl animate-pulse">⭐</span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -795,7 +850,7 @@ export default function Home() {
 
                 {/* Currently Working On - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("current-work")})` }}
                   onMouseEnter={() => setHoveredBox("current-work")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -812,9 +867,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Currently Working On
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🚀
-                    </span>
+                    <span className="text-2xl animate-pulse">🚀</span>
                   </div>
                   <div className="space-y-6">
                     <div className="flex justify-center">
@@ -859,7 +912,7 @@ export default function Home() {
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-6 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-6 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("time")})` }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -876,9 +929,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Time
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      ⏰
-                    </span>
+                    <span className="text-2xl animate-pulse">⏰</span>
                   </div>
                   <div className="space-y-3">
                     <div className="text-center">
@@ -899,7 +950,7 @@ export default function Home() {
 
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 row-span-2 relative group"
+                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 row-span-2 relative group"
                   style={{ transform: `scale(${getBoxScale("traits")})` }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -916,9 +967,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Traits
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎭
-                    </span>
+                    <span className="text-2xl animate-pulse">🎭</span>
                   </div>
                   <TraitsCarousel
                     traits={[
@@ -968,7 +1017,7 @@ export default function Home() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-300"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
                   style={{ transform: `scale(${getBoxScale("music")})` }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1014,7 +1063,7 @@ export default function Home() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-300"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
                   style={{ transform: `scale(${getBoxScale("books")})` }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1031,9 +1080,12 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Books
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <a
+                      href="/reading-list"
+                      className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer"
+                    >
                       📚
-                    </span>
+                    </a>
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
@@ -1064,7 +1116,7 @@ export default function Home() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-300 relative group"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("films")})` }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1081,9 +1133,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
-                      🎬
-                    </span>
+                    <span className="text-2xl animate-pulse">🎬</span>
                   </div>
                   <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                     <FilmCard

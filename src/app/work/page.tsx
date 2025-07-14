@@ -190,7 +190,7 @@ export default function WorkPage() {
                   href="/contact"
                   className="inline-block px-8 py-3 bg-accent-100 text-neutral-100 font-medium rounded-full hover:bg-accent-200 transition-colors duration-300 font-hanken"
                 >
-                  Message me
+                  Let's Talk
                 </a>
               </div>
             </div>

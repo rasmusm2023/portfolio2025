@@ -21,17 +21,21 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
-  // Auto-scroll animation
+  // Create infinite carousel by duplicating traits
+  const infiniteTraits = [...traits, ...traits, ...traits]; // Triple the array for seamless looping
+
+  // Auto-scroll animation with infinite loop
   useEffect(() => {
     const scrollSpeed = isHovered ? 3 : 6; // Slower when hovered, but still moving
 
     const animate = () => {
       if (carouselRef.current && !isDragging) {
         const container = carouselRef.current;
-        const scrollWidth = container.scrollWidth - container.clientWidth;
+        const singleSetWidth = container.scrollWidth / 3; // Width of one complete set of traits
 
-        if (container.scrollLeft >= scrollWidth) {
-          container.scrollLeft = 0;
+        if (container.scrollLeft >= singleSetWidth * 2) {
+          // Reset to middle set when reaching the end
+          container.scrollLeft = singleSetWidth;
         } else {
           container.scrollLeft += scrollSpeed;
         }
@@ -112,7 +116,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
         }}
         style={{ scrollBehavior: isDragging ? "auto" : "smooth" }}
       >
-        {traits.map((trait, index) => (
+        {infiniteTraits.map((trait, index) => (
           <div
             key={index}
             className="flex-shrink-0 w-80 bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-2xl p-6 hover:border-[#00FF9D] transition-all duration-300 cursor-pointer relative z-10 group/card"
