@@ -233,6 +233,37 @@ function TraitCard({
   );
 }
 
+// Skill Card Component
+function SkillCard({
+  title,
+  icon,
+  skills,
+}: {
+  title: string;
+  icon: string;
+  skills: string[];
+}) {
+  return (
+    <div className="flex-shrink-0 w-40 h-52 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
+      <div className="flex flex-col h-full">
+        <div className="flex flex-col items-center text-center mb-3">
+          <span className="text-4xl mb-2">{icon}</span>
+          <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <ul className="space-y-1">
+            {skills.map((skill, index) => (
+              <li key={index} className="text-neutral-60 text-xs text-left">
+                • {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Favorite Songs Component
 function FavoriteSongs() {
   const songs = [
@@ -445,7 +476,7 @@ export default function AboutPage() {
                       <div className="flex items-center gap-2">
                         <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
                         <span className="text-neutral-60 text-sm">
-                          📍 Stockholm, Sweden
+                          📍 Based in Stockholm, Sweden
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -482,7 +513,7 @@ export default function AboutPage() {
                         but is not limited to:
                       </p>
                     </div>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       🛠️
                     </span>
                   </div>
@@ -491,72 +522,83 @@ export default function AboutPage() {
                   <InfiniteScrollBanner />
                 </div>
 
-                {/* Skills - Large section */}
+                {/* Expertise - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
                   style={{ transform: `scale(${getBoxScale("skills")})` }}
                   onMouseEnter={() => setHoveredBox("skills")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Core Skills
+                      Expertise{" "}
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       ⚡
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <h3 className="text-neutral-0 font-semibold text-sm">
-                        Design
-                      </h3>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            User Research
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Wireframing
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Prototyping
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <h3 className="text-neutral-0 font-semibold text-sm">
-                        Development
-                      </h3>
-                      <div className="space-y-1">
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            React/Next.js
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            TypeScript
-                          </span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                          <span className="text-neutral-60 text-xs">
-                            Tailwind CSS
-                          </span>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    <SkillCard
+                      title="UX Research"
+                      icon="🔍"
+                      skills={[
+                        "Interviews",
+                        "Testing",
+                        "Data/metrics analysis",
+                      ]}
+                    />
+                    <SkillCard
+                      title="UI Design"
+                      icon="🎨"
+                      skills={[
+                        "Visual design",
+                        "Component systems",
+                        "Design systems",
+                      ]}
+                    />
+                    <SkillCard
+                      title="UX Design"
+                      icon="💡"
+                      skills={[
+                        "User flows",
+                        "Information architecture",
+                        "Interaction design",
+                      ]}
+                    />
+                    <SkillCard
+                      title="Development"
+                      icon="💻"
+                      skills={[
+                        "React/Next.js",
+                        "TypeScript",
+                        "Modern web apps",
+                      ]}
+                    />
+                    <SkillCard
+                      title="Product"
+                      icon="📊"
+                      skills={[
+                        "Strategy",
+                        "Roadmapping",
+                        "Analytics",
+                        "Growth",
+                      ]}
+                    />
+                    <SkillCard
+                      title="AI & Automation"
+                      icon="🤖"
+                      skills={[
+                        "Updated workflows",
+                        "AI integration",
+                        "Efficiency tools",
+                        "Future-ready",
+                      ]}
+                    />
+                    <SkillCard
+                      title="Tailwind CSS"
+                      icon="🎨"
+                      skills={["Utility-first", "Responsive", "Rapid dev"]}
+                    />
                   </div>
                 </div>
 
@@ -571,7 +613,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Experience
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       💼
                     </span>
                   </div>
@@ -608,7 +650,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Philosophy
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       🎯
                     </span>
                   </div>
@@ -629,7 +671,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Approach
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       🔍
                     </span>
                   </div>
@@ -651,7 +693,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Values
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       ⭐
                     </span>
                   </div>
@@ -692,7 +734,7 @@ export default function AboutPage() {
                       href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-6 h-6 animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      className="w-6 h-6 animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                     >
                       <img
                         src={SpotifyIcon.src}
@@ -732,7 +774,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Books
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       📚
                     </span>
                   </div>
@@ -774,7 +816,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Currently Working On
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       🚀
                     </span>
                   </div>
@@ -828,7 +870,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       🎬
                     </span>
                   </div>
@@ -878,7 +920,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Time
                     </h2>
-                    <span className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer">
+                    <span className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer">
                       ⏰
                     </span>
                   </div>

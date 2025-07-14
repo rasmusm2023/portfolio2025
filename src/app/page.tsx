@@ -240,6 +240,37 @@ function TraitCard({
   );
 }
 
+// Skill Card Component
+function SkillCard({
+  title,
+  icon,
+  skills,
+}: {
+  title: string;
+  icon: string;
+  skills: string[];
+}) {
+  return (
+    <div className="flex-shrink-0 w-40 h-52 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
+      <div className="flex flex-col h-full">
+        <div className="flex flex-col items-center text-center mb-3">
+          <span className="text-4xl mb-2">{icon}</span>
+          <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <ul className="space-y-1">
+            {skills.map((skill, index) => (
+              <li key={index} className="text-neutral-60 text-xs text-left">
+                • {skill}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // Favorite Songs Component
 function FavoriteSongs() {
   const songs = [
@@ -510,21 +541,12 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="space-y-4">
-                    <p className="text-neutral-10 text-base font-medium leading-relaxed">
+                    <p className="text-neutral-10 text-base font-bold leading-relaxed">
                       👋 Hi, I'm Rasmus Mattsson — a UX/UI Designer and Low-code
                       Developer based in Stockholm, Sweden. I love creating
                       digital experiences that bridge creativity with
                       technology.
                     </p>
-
-                    <div className="flex flex-col gap-2 pt-2">
-                      <div className="flex items-center gap-2">
-                        <span className="text-neutral-30 text-base">
-                          📍 Stockholm, Sweden
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2"></div>
-                    </div>
                   </div>
                 </div>
 
@@ -552,16 +574,16 @@ export default function Home() {
                         but is not limited to:
                       </p>
                     </div>
-                    <span className="text-2xl animate-pulse">🛠️</span>
+                    <span className="text-2xl animate-pulse-subtle">🛠️</span>
                   </div>
 
                   {/* GSAP-powered Infinite Scroll Banner */}
                   <InfiniteScrollBanner />
                 </div>
 
-                {/* Skills - Large section */}
+                {/* Expertise - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
+                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
                   style={{ transform: `scale(${getBoxScale("skills")})` }}
                   onMouseEnter={() => setHoveredBox("skills")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -576,134 +598,67 @@ export default function Home() {
                   ></div>
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Core Skills
+                      Expertise{" "}
                     </h2>
-                    <span className="text-2xl animate-pulse">⚡</span>
+                    <span className="text-2xl animate-pulse-subtle">⚡</span>
                   </div>
-                  <div className="space-y-4">
-                    {/* Design Skills */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-lg">🎨</span>
-                        <h3 className="text-neutral-0 font-semibold text-sm">
-                          Design
-                        </h3>
-                      </div>
-                      <div className="grid grid-cols-1 gap-2">
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              User Research
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Expert
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full transition-all duration-500"
-                              style={{ width: "95%" }}
-                            ></div>
-                          </div>
-                        </div>
-
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              Wireframing
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Advanced
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full transition-all duration-500"
-                              style={{ width: "90%" }}
-                            ></div>
-                          </div>
-                        </div>
-
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              Prototyping
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Expert
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full transition-all duration-500"
-                              style={{ width: "92%" }}
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Development Skills */}
-                    <div className="space-y-3">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-lg">💻</span>
-                        <h3 className="text-neutral-0 font-semibold text-sm">
-                          Development
-                        </h3>
-                      </div>
-                      <div className="grid grid-cols-1 gap-2">
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              React/Next.js
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Advanced
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full transition-all duration-500"
-                              style={{ width: "88%" }}
-                            ></div>
-                          </div>
-                        </div>
-
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              TypeScript
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Intermediate
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500"
-                              style={{ width: "75%" }}
-                            ></div>
-                          </div>
-                        </div>
-
-                        <div className="group/skill relative p-3 rounded-xl bg-neutral-80/30 border border-neutral-100/10 hover:border-[#00FF9D]/40 transition-all duration-300 cursor-pointer">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-neutral-0 text-xs font-medium">
-                              Tailwind CSS
-                            </span>
-                            <span className="text-[#00FF9D] text-xs">
-                              Advanced
-                            </span>
-                          </div>
-                          <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
-                            <div
-                              className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full transition-all duration-500"
-                              style={{ width: "85%" }}
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    <SkillCard
+                      title="UX Research"
+                      icon="🔍"
+                      skills={[
+                        "Interviews",
+                        "Testing",
+                        "Data/metrics analysis",
+                        "Workshops",
+                      ]}
+                    />
+                    <SkillCard
+                      title="UI Design"
+                      icon="🎨"
+                      skills={[
+                        "Prototyping",
+                        "Component systems",
+                        "Design systems",
+                      ]}
+                    />
+                    <SkillCard
+                      title="UX Design"
+                      icon="💡"
+                      skills={[
+                        "User flows",
+                        "Information architecture",
+                        "Interaction design",
+                        "Wireframing",
+                        "User testing",
+                        "Flowcharts",
+                      ]}
+                    />
+                    <SkillCard
+                      title="Development"
+                      icon="💻"
+                      skills={["Cursor AI", "Lovable", "Frontend", "Firebase"]}
+                    />
+                    <SkillCard
+                      title="Product"
+                      icon="📊"
+                      skills={[
+                        "Strategy",
+                        "Roadmapping",
+                        "Analytics",
+                        "Growth",
+                      ]}
+                    />
+                    <SkillCard
+                      title="AI & Automation"
+                      icon="🤖"
+                      skills={[
+                        "Updated workflows",
+                        "AI integration",
+                        "Efficiency tools",
+                        "Future-ready",
+                      ]}
+                    />
                   </div>
                 </div>
 
@@ -726,7 +681,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Experience
                     </h2>
-                    <span className="text-2xl animate-pulse">💼</span>
+                    <span className="text-2xl animate-pulse-subtle">💼</span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -750,33 +705,6 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Philosophy - Medium section */}
-                <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
-                  style={{ transform: `scale(${getBoxScale("philosophy")})` }}
-                  onMouseEnter={() => setHoveredBox("philosophy")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Philosophy
-                    </h2>
-                    <span className="text-2xl animate-pulse">🎯</span>
-                  </div>
-                  <p className="text-neutral-60 text-sm leading-relaxed">
-                    Design should be invisible. When users focus on their goals
-                    rather than the interface, that's when we've succeeded.
-                  </p>
-                </div>
-
                 {/* My Approach - Medium section */}
                 <div
                   className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
@@ -796,7 +724,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Approach
                     </h2>
-                    <span className="text-2xl animate-pulse">🔍</span>
+                    <span className="text-2xl animate-pulse-subtle">🔍</span>
                   </div>
                   <p className="text-neutral-60 text-sm leading-relaxed">
                     I believe great design starts with understanding the user.
@@ -824,7 +752,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Values
                     </h2>
-                    <span className="text-2xl animate-pulse">⭐</span>
+                    <span className="text-2xl animate-pulse-subtle">⭐</span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -867,7 +795,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Currently Working On
                     </h2>
-                    <span className="text-2xl animate-pulse">🚀</span>
+                    <span className="text-2xl animate-pulse-subtle">🚀</span>
                   </div>
                   <div className="space-y-6">
                     <div className="flex justify-center">
@@ -929,7 +857,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Time
                     </h2>
-                    <span className="text-2xl animate-pulse">⏰</span>
+                    <span className="text-2xl animate-pulse-subtle">⏰</span>
                   </div>
                   <div className="space-y-3">
                     <div className="text-center">
@@ -967,7 +895,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Traits
                     </h2>
-                    <span className="text-2xl animate-pulse">🎭</span>
+                    <span className="text-2xl animate-pulse-subtle">🎭</span>
                   </div>
                   <TraitsCarousel
                     traits={[
@@ -1038,7 +966,7 @@ export default function Home() {
                       href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-6 h-6 animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      className="w-6 h-6 animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                     >
                       <Image
                         src={SpotifyIcon.src}
@@ -1082,7 +1010,7 @@ export default function Home() {
                     </h2>
                     <a
                       href="/reading-list"
-                      className="text-2xl animate-pulse hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                     >
                       📚
                     </a>
@@ -1133,7 +1061,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl animate-pulse">🎬</span>
+                    <span className="text-2xl animate-pulse-subtle">🎬</span>
                   </div>
                   <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                     <FilmCard
