@@ -38,7 +38,7 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
     // When hovered, show static green gradient border
     if (isHovered) {
       return {
-        background: `linear-gradient(180deg, ${colors.join(", ")})`,
+        background: `linear-gradient(135deg, ${colors.join(", ")})`,
         backgroundSize: "100% 100%",
       };
     }
@@ -46,7 +46,7 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
     switch (variant) {
       case "dash":
         return {
-          background: `linear-gradient(180deg, ${cardBackground}, ${colors.join(
+          background: `linear-gradient(135deg, ${cardBackground}, ${colors.join(
             ", "
           )}, ${cardBackground})`,
           backgroundSize: "200% 200%",
@@ -61,7 +61,7 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
         };
       case "pulse":
         return {
-          background: `linear-gradient(180deg, ${cardBackground}, ${colors.join(
+          background: `linear-gradient(135deg, ${cardBackground}, ${colors.join(
             ", "
           )}, ${cardBackground})`,
           backgroundSize: "200% 200%",
@@ -78,18 +78,22 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Layer 1: Animated gradient background (full size) */}
+      {/* Animated gradient background (larger than content) */}
       <div
-        className="absolute inset-0 rounded-2xl transition-all duration-500 ease-out"
+        className="absolute rounded-2xl"
         style={{
           ...getBorderStyle(),
-          zIndex: 1,
+          top: `-${borderWidth}px`,
+          left: `-${borderWidth}px`,
+          right: `-${borderWidth}px`,
+          bottom: `-${borderWidth}px`,
+          transform: "translateY(2px)", // Reduced from 4px to 2px to show top border
         }}
       />
 
-      {/* Layer 2: Dark content card (smaller to create border) */}
+      {/* Content card positioned on top to create border effect */}
       <div
-        className={`relative backdrop-blur-sm rounded-2xl ${sizeClasses[size]}`}
+        className={`relative backdrop-blur-sm rounded-2xl ${sizeClasses[size]} flex items-center justify-center`}
         style={{
           margin: `${borderWidth}px`,
           height: `calc(100% - ${borderWidth * 2}px)`,
@@ -103,10 +107,10 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
       <style jsx>{`
         @keyframes dash {
           0% {
-            background-position: 50% 200%;
+            background-position: 100% 100%;
           }
           100% {
-            background-position: 50% 0%;
+            background-position: 0% 0%;
           }
         }
 
@@ -121,13 +125,13 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
 
         @keyframes pulse {
           0% {
-            background-position: 50% 200%;
+            background-position: 100% 100%;
           }
           50% {
-            background-position: 50% 0%;
+            background-position: 0% 0%;
           }
           100% {
-            background-position: 50% 200%;
+            background-position: 100% 100%;
           }
         }
       `}</style>
