@@ -215,7 +215,6 @@ export default function ReadingListPage() {
                       key={index}
                       title={book.title}
                       author={book.author}
-                      coverImage={book.coverImage}
                       amazonUrl={book.amazonUrl}
                       currentPage={book.currentPage}
                       totalPages={book.totalPages}

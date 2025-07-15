@@ -13,7 +13,7 @@ import RasmusImage from "@/images/rasmus.jpg";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
 import { gradients } from "@/styles/colors";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import AnimatedBorder from "@/components/AnimatedBorder";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
@@ -445,6 +445,67 @@ function FavoriteSongs() {
 export default function Home() {
   const [emailCopied, setEmailCopied] = useState(false);
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const scrambleRefs = useRef<(HTMLSpanElement | null)[]>([]);
+
+  // GSAP Scramble Effect
+  useEffect(() => {
+    const loadGSAP = async () => {
+      try {
+        const { gsap } = await import("gsap");
+        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Initialize scramble effect for each number
+        scrambleRefs.current.forEach((ref, index) => {
+          if (ref) {
+            const originalText = ref.getAttribute("data-value") || "";
+
+            // Set initial state
+            gsap.set(ref, {
+              opacity: 0,
+              scale: 0.8,
+              text: "0+",
+            });
+
+            // Create scroll trigger for each number
+            ScrollTrigger.create({
+              trigger: ref,
+              start: "top 80%",
+              onEnter: () => {
+                // Fade in animation
+                gsap.to(ref, {
+                  opacity: 1,
+                  scale: 1,
+                  duration: 0.5,
+                  ease: "power2.out",
+                });
+
+                // Simple fade in animation
+                gsap.fromTo(
+                  ref,
+                  {
+                    opacity: 0,
+                    scale: 0.8,
+                  },
+                  {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1,
+                    ease: "power2.out",
+                  }
+                );
+              },
+            });
+          }
+        });
+      } catch (error) {
+        console.log("GSAP not available for scramble effect");
+      }
+    };
+
+    loadGSAP();
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("hello@rasmusmattsson.com");
@@ -565,7 +626,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
                 {/* About Me - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("about-me")})` }}
                   onMouseEnter={() => setHoveredBox("about-me")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -653,7 +714,7 @@ export default function Home() {
 
                 {/* I work in - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("toolkit")})` }}
                   onMouseEnter={() => setHoveredBox("toolkit")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -675,7 +736,9 @@ export default function Home() {
                         but is not limited to:
                       </p>
                     </div>
-                    <span className="text-2xl animate-pulse-subtle">🛠️</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">🛠️</span>
+                    </span>
                   </div>
 
                   {/* GSAP-powered Infinite Scroll Banner */}
@@ -684,7 +747,7 @@ export default function Home() {
 
                 {/* Expertise with Dotted Background - Large section */}
                 <div
-                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("skills-dotted")})`,
                   }}
@@ -703,7 +766,9 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Expertise{" "}
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">⚡</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">⚡</span>
+                    </span>
                   </div>
                   <div className="grid grid-cols-3 gap-8">
                     <SkillCardWithGradientBorder
@@ -773,7 +838,7 @@ export default function Home() {
 
                 {/* Experience - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("experience")})` }}
                   onMouseEnter={() => setHoveredBox("experience")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -786,29 +851,98 @@ export default function Home() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Experience
-                    </h2>
-                    <span className="text-2xl animate-pulse-subtle">💼</span>
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-baseline gap-2">
+                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                        Experience
+                      </h2>
+                      <p className="text-lg text-neutral-30 font-hanken">
+                        employments & studies
+                      </p>
+                    </div>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">💼</span>
+                    </span>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        5+ years in UX/UI Design
+                  <div className="space-y-6">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                        <span
+                          ref={(el) => {
+                            scrambleRefs.current[0] = el;
+                          }}
+                          className="text-neutral-0 text-4xl font-bold"
+                          data-value="5"
+                        >
+                          5
+                        </span>
+                      </div>
+                      <span className="text-neutral-40 text-lg">
+                        years within UX/UI Design
                       </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        3+ years in Development
+                    <div className="flex items-center gap-4">
+                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                        <span
+                          ref={(el) => {
+                            scrambleRefs.current[1] = el;
+                          }}
+                          className="text-neutral-0 text-4xl font-bold"
+                          data-value="4"
+                        >
+                          4
+                        </span>
+                      </div>
+                      <span className="text-neutral-40 text-lg">
+                        years within E-Commerce
                       </span>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-3 h-3 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        20+ projects completed
+                    <div className="flex items-center gap-4">
+                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                        <span
+                          ref={(el) => {
+                            scrambleRefs.current[2] = el;
+                          }}
+                          className="text-neutral-0 text-4xl font-bold"
+                          data-value="2"
+                        >
+                          2
+                        </span>
+                      </div>
+                      <span className="text-neutral-40 text-lg">
+                        years of Frontend Development
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                        <span
+                          ref={(el) => {
+                            scrambleRefs.current[3] = el;
+                          }}
+                          className="text-neutral-0 text-4xl font-bold"
+                          data-value="20"
+                        >
+                          20
+                        </span>
+                      </div>
+                      <span className="text-neutral-40 text-lg">
+                        Projects Completed
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                        <span
+                          ref={(el) => {
+                            scrambleRefs.current[4] = el;
+                          }}
+                          className="text-neutral-0 text-4xl font-bold"
+                          data-value="1"
+                        >
+                          1
+                        </span>
+                      </div>
+                      <span className="text-neutral-40 text-lg">
+                        years of SoMe & SEO work
                       </span>
                     </div>
                   </div>
@@ -816,7 +950,7 @@ export default function Home() {
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -833,7 +967,9 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Approach
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">🔍</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">🔍</span>
+                    </span>
                   </div>
                   <p className="text-neutral-60 text-sm leading-relaxed">
                     I believe great design starts with understanding the user.
@@ -844,7 +980,7 @@ export default function Home() {
 
                 {/* Values - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("values")})` }}
                   onMouseEnter={() => setHoveredBox("values")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -861,7 +997,9 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Values
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">⭐</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">⭐</span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
@@ -887,7 +1025,7 @@ export default function Home() {
 
                 {/* Currently Working On - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("current-work")})` }}
                   onMouseEnter={() => setHoveredBox("current-work")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -904,7 +1042,9 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Currently Working On
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">🚀</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">🚀</span>
+                    </span>
                   </div>
                   <div className="space-y-6">
                     <div className="flex justify-center">
