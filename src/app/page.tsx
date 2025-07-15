@@ -15,6 +15,17 @@ import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
 import { gradients } from "@/styles/colors";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import AnimatedBorder from "@/components/AnimatedBorder";
+import RadialGradientBorder from "@/components/RadialGradientBorder";
+import {
+  MagnifyingGlass,
+  Palette,
+  Lightbulb,
+  Code,
+  ChartLine,
+  Robot,
+  Icon,
+} from "@phosphor-icons/react";
 
 // Live Clock Component
 function LiveClock() {
@@ -244,31 +255,120 @@ function TraitCard({
 // Skill Card Component
 function SkillCard({
   title,
-  icon,
+  icon: IconComponent,
   skills,
 }: {
   title: string;
-  icon: string;
+  icon: Icon;
   skills: string[];
 }) {
   return (
-    <div className="flex-shrink-0 w-40 h-52 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
+    <AnimatedBorder className="flex-shrink-0 h-52 cursor-pointer hover:scale-105 transition-transform duration-300 group">
       <div className="flex flex-col h-full">
-        <div className="flex flex-col items-center text-center mb-3">
-          <span className="text-4xl mb-2">{icon}</span>
-          <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
+        <div className="flex flex-col items-center text-center mb-4">
+          <div className="relative mb-3">
+            <IconComponent
+              size={40}
+              weight="fill"
+              className="text-[#00FF9D] group-hover:scale-110 transition-transform duration-300"
+            />
+            {/* Subtle glow behind icon */}
+            <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <h3 className="text-neutral-0 font-bold text-base tracking-wide">
+            {title}
+          </h3>
         </div>
         <div className="flex-1 flex flex-col justify-center">
-          <ul className="space-y-1">
+          <ul className="space-y-1.5">
             {skills.map((skill, index) => (
-              <li key={index} className="text-neutral-60 text-xs text-left">
-                • {skill}
+              <li
+                key={index}
+                className="text-neutral-80 text-xs text-left font-medium flex items-center gap-2 group-hover:text-neutral-60 transition-colors duration-200"
+              >
+                <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                {skill}
               </li>
             ))}
           </ul>
         </div>
       </div>
-    </div>
+    </AnimatedBorder>
+  );
+}
+
+// Skill Card with Gradient Border Component
+function SkillCardWithGradientBorder({
+  title,
+  icon: IconComponent,
+  skills,
+  borderColors,
+  duration = 3,
+}: {
+  title: string;
+  icon: Icon;
+  skills: string[];
+  borderColors: string[];
+  duration?: number;
+}) {
+  return (
+    <RadialGradientBorder
+      variant="dash"
+      shineColor={borderColors}
+      borderWidth={2}
+      duration={duration}
+      size="md"
+      className="flex-shrink-0 h-52 cursor-pointer transition-all duration-300 group"
+    >
+      <div className="flex flex-col h-full">
+        <div className="flex flex-col items-center text-center mb-4">
+          <div className="relative mb-3">
+            <IconComponent
+              size={40}
+              weight="fill"
+              className="text-[#00FF9D] group-hover:scale-110 transition-transform duration-300"
+            />
+            {/* Subtle glow behind icon */}
+            <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </div>
+          <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+            {title}
+          </h3>
+        </div>
+        <div className="flex-1 flex flex-col justify-center">
+          <div className="grid grid-cols-2 gap-x-4">
+            {/* Left column */}
+            <ul className="space-y-1.5">
+              {skills
+                .slice(0, Math.ceil(skills.length / 2))
+                .map((skill, index) => (
+                  <li
+                    key={index}
+                    className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover:text-neutral-20 transition-colors duration-200"
+                  >
+                    <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                    {skill}
+                  </li>
+                ))}
+            </ul>
+            {/* Right column */}
+            <ul className="space-y-1.5">
+              {skills
+                .slice(Math.ceil(skills.length / 2))
+                .map((skill, index) => (
+                  <li
+                    key={index + Math.ceil(skills.length / 2)}
+                    className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover:text-neutral-20 transition-colors duration-200"
+                  >
+                    <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                    {skill}
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </RadialGradientBorder>
   );
 }
 
@@ -357,7 +457,7 @@ export default function Home() {
   // Calculate scale for each box based on hover state
   const getBoxScale = (boxId: string) => {
     if (!hoveredBox) return 1; // No hover - all boxes normal size
-    if (hoveredBox === boxId) return 1.05; // Hovered box grows
+    if (hoveredBox === boxId) return 1.02; // Hovered box grows (reduced from 1.05)
     return 1; // Other boxes stay normal size
   };
 
@@ -465,7 +565,7 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
                 {/* About Me - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("about-me")})` }}
                   onMouseEnter={() => setHoveredBox("about-me")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -553,7 +653,7 @@ export default function Home() {
 
                 {/* I work in - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-[#00FF9D]/40 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("toolkit")})` }}
                   onMouseEnter={() => setHoveredBox("toolkit")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -582,11 +682,13 @@ export default function Home() {
                   <InfiniteScrollBanner />
                 </div>
 
-                {/* Expertise - Large section */}
+                {/* Expertise with Dotted Background - Large section */}
                 <div
-                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
-                  style={{ transform: `scale(${getBoxScale("skills")})` }}
-                  onMouseEnter={() => setHoveredBox("skills")}
+                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("skills-dotted")})`,
+                  }}
+                  onMouseEnter={() => setHoveredBox("skills-dotted")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
                   {/* Radial shine effect */}
@@ -597,35 +699,37 @@ export default function Home() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-16">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Expertise{" "}
                     </h2>
                     <span className="text-2xl animate-pulse-subtle">⚡</span>
                   </div>
-                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                    <SkillCard
+                  <div className="grid grid-cols-3 gap-8">
+                    <SkillCardWithGradientBorder
                       title="UX Research"
-                      icon="🔍"
+                      icon={MagnifyingGlass}
                       skills={[
                         "Interviews",
                         "Testing",
                         "Data/metrics analysis",
                         "Workshops",
                       ]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
-                    <SkillCard
+                    <SkillCardWithGradientBorder
                       title="UI Design"
-                      icon="🎨"
+                      icon={Palette}
                       skills={[
                         "Prototyping",
                         "Component systems",
                         "Design systems",
                       ]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
-                    <SkillCard
+                    <SkillCardWithGradientBorder
                       title="UX Design"
-                      icon="💡"
+                      icon={Lightbulb}
                       skills={[
                         "User flows",
                         "Information architecture",
@@ -634,38 +738,42 @@ export default function Home() {
                         "User testing",
                         "Flowcharts",
                       ]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
-                    <SkillCard
+                    <SkillCardWithGradientBorder
                       title="Development"
-                      icon="💻"
+                      icon={Code}
                       skills={["Cursor AI", "Lovable", "Frontend", "Firebase"]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
-                    <SkillCard
+                    <SkillCardWithGradientBorder
                       title="Product"
-                      icon="📊"
+                      icon={ChartLine}
                       skills={[
                         "Strategy",
                         "Roadmapping",
                         "Analytics",
                         "Growth",
                       ]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
-                    <SkillCard
+                    <SkillCardWithGradientBorder
                       title="AI & Automation"
-                      icon="🤖"
+                      icon={Robot}
                       skills={[
                         "Updated workflows",
                         "AI integration",
                         "Efficiency tools",
                         "Future-ready",
                       ]}
+                      borderColors={["#00FF9D", "#10b981"]}
                     />
                   </div>
                 </div>
 
                 {/* Experience - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
+                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("experience")})` }}
                   onMouseEnter={() => setHoveredBox("experience")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -708,7 +816,7 @@ export default function Home() {
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -736,7 +844,7 @@ export default function Home() {
 
                 {/* Values - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("values")})` }}
                   onMouseEnter={() => setHoveredBox("values")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -779,7 +887,7 @@ export default function Home() {
 
                 {/* Currently Working On - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#00FF9D]/40 transition-all duration-500 relative group"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#00FF9D]/20 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-[#00FF9D]/40 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("current-work")})` }}
                   onMouseEnter={() => setHoveredBox("current-work")}
                   onMouseLeave={() => setHoveredBox(null)}

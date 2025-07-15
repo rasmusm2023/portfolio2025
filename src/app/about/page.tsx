@@ -246,7 +246,7 @@ function SkillCard({
   skills: string[];
 }) {
   return (
-    <div className="flex-shrink-0 w-48 h-56 bg-neutral-90/80 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
+    <div className="flex-shrink-0 w-48 h-56 bg-neutral-100 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
       <div className="flex flex-col h-full">
         <div className="flex flex-col items-center text-center mb-3">
           <span className="text-3xl mb-2">{icon}</span>
