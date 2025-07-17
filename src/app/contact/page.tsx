@@ -52,13 +52,12 @@ export default function ContactPage() {
                 </h1>
                 <div className="flex flex-col gap-6 mt-16">
                   <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
-                    Ready to bring your ideas to life? I'm always excited to
-                    discuss new opportunities and career possibilities.
+                    I'm always excited to discuss new opportunities and
+                    possibilities.
                   </p>
                   <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     Whether you have a specific role in mind or just want to
-                    explore how I can contribute to your team, let's start a
-                    conversation.
+                    discuss how I can contribute, let's start a conversation.
                   </p>
                 </div>
               </div>
