@@ -46,11 +46,9 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
     switch (variant) {
       case "dash":
         return {
-          background: `linear-gradient(135deg, ${cardBackground}, ${colors.join(
-            ", "
-          )}, ${cardBackground})`,
-          backgroundSize: "200% 200%",
-          animation: `dash ${duration}s ease-in-out infinite`,
+          background: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
+          backgroundSize: "300% 300%",
+          animation: `sweep ${duration * 8}s linear infinite`,
         };
       case "gradient":
         return {
@@ -61,11 +59,9 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
         };
       case "pulse":
         return {
-          background: `linear-gradient(135deg, ${cardBackground}, ${colors.join(
-            ", "
-          )}, ${cardBackground})`,
-          backgroundSize: "200% 200%",
-          animation: `pulse ${duration}s ease-in-out infinite`,
+          background: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
+          backgroundSize: "300% 300%",
+          animation: `sweep ${duration * 8}s linear infinite`,
         };
       default:
         return {};
@@ -87,7 +83,6 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
           left: `-${borderWidth}px`,
           right: `-${borderWidth}px`,
           bottom: `-${borderWidth}px`,
-          transform: "translateY(2px)", // Reduced from 4px to 2px to show top border
         }}
       />
 
@@ -95,8 +90,11 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
       <div
         className={`relative backdrop-blur-sm rounded-2xl ${sizeClasses[size]} flex items-center justify-center`}
         style={{
-          margin: `${borderWidth}px`,
-          height: `calc(100% - ${borderWidth * 2}px)`,
+          position: "absolute",
+          top: `${borderWidth}px`,
+          left: `${borderWidth}px`,
+          right: `${borderWidth}px`,
+          bottom: `${borderWidth}px`,
           backgroundColor: "#232323",
           zIndex: 2,
         }}
@@ -105,12 +103,12 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
       </div>
 
       <style jsx>{`
-        @keyframes dash {
+        @keyframes sweep {
           0% {
-            background-position: 100% 100%;
+            background-position: 0% 0%;
           }
           100% {
-            background-position: 0% 0%;
+            background-position: 100% 100%;
           }
         }
 
@@ -120,18 +118,6 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
           }
           100% {
             transform: rotate(0deg);
-          }
-        }
-
-        @keyframes pulse {
-          0% {
-            background-position: 100% 100%;
-          }
-          50% {
-            background-position: 0% 0%;
-          }
-          100% {
-            background-position: 100% 100%;
           }
         }
       `}</style>

@@ -2,14 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import FigmaIcon from "@/logos/Figma-Icon.svg";
-import MiroIcon from "@/logos/Miro_Miro_Icon_0.svg";
-import LovableIcon from "@/logos/Lovable_Icon_1.webp";
-import NextJsIcon from "@/logos/Next.js_Symbol_Alternative_0.svg";
-import AdobeIcon from "@/logos/adobe-creative-cloud-svgrepo-com.svg";
-import FramerIcon from "@/logos/framer-svgrepo-com.svg";
-import CursorIcon from "@/logos/Icon.jpeg";
-import WixIcon from "@/logos/idyfLKvIsN_1752235000777.png";
+import FigmaIcon from "@/logos/inner-square-logos-svg/figma.svg";
+import MiroIcon from "@/logos/inner-square-logos-svg/miro.svg";
+import LovableIcon from "@/logos/inner-square-logos-svg/lovable.svg";
+import NextJsIcon from "@/logos/inner-square-logos-svg/nextjs.svg";
+import AdobeIcon from "@/logos/inner-square-logos-svg/adobe.svg";
+import FramerIcon from "@/logos/inner-square-logos-svg/framer.svg";
+import CursorIcon from "@/logos/inner-square-logos-svg/cursor.svg";
+import WixIcon from "@/logos/inner-square-logos-svg/wix.svg";
+import ReactIcon from "@/logos/inner-square-logos-svg/react.svg";
 
 const InfiniteScrollBanner = () => {
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -63,14 +64,15 @@ const InfiniteScrollBanner = () => {
   }, []);
 
   const tools = [
-    { name: "Figma", icon: FigmaIcon, bg: "bg-neutral-3" },
+    { name: "Figma", icon: FigmaIcon, bg: "bg-neutral-90" },
     { name: "Framer", icon: FramerIcon, bg: "bg-neutral-90" },
     { name: "Adobe", icon: AdobeIcon, bg: "bg-neutral-90" },
     { name: "Miro", icon: MiroIcon, bg: "bg-neutral-90" },
     { name: "Lovable", icon: LovableIcon, bg: "bg-neutral-90" },
     { name: "Wix", icon: WixIcon, bg: "bg-neutral-90" },
     { name: "Next.js", icon: NextJsIcon, bg: "bg-neutral-90" },
-    { name: "Cursor", icon: CursorIcon, bg: "bg-neutral-3" },
+    { name: "React", icon: ReactIcon, bg: "bg-neutral-90" },
+    { name: "Cursor", icon: CursorIcon, bg: "bg-neutral-90" },
   ];
 
   return (

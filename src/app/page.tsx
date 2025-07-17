@@ -590,9 +590,8 @@ export default function Home() {
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
                   <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
-                    Hi, I'm Rasmus Mattsson - a curious digital designer with an
-                    eye for detail, a heart for the user, and a drive for the
-                    business.
+                    — with an eye for detail, a heart for the user, and a drive
+                    for the business.
                   </p>
                   <div className="flex justify-center mt-8">
                     <a href="/work" className="shimmer-button-green">
@@ -772,10 +771,7 @@ export default function Home() {
                   </div>
                   <div className="grid grid-cols-3 gap-8">
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -832,10 +828,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -888,10 +881,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -956,10 +946,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -1016,10 +1003,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -1076,10 +1060,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div
-                        className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
-                        style={{ transform: "translateY(1px)" }}
-                      >
+                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -1092,316 +1073,6 @@ export default function Home() {
                         </RadialGradientBorder>
                       </div>
                       <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <Robot
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              AI & Automation
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Updated workflows
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  AI integration
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Efficiency tools
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Future-ready
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Expertise Duplicate - Large section */}
-                <div
-                  className="md:col-span-8 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{
-                    transform: `scale(${getBoxScale(
-                      "skills-dotted-duplicate"
-                    )})`,
-                  }}
-                  onMouseEnter={() => setHoveredBox("skills-dotted-duplicate")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-16">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Expertise (Duplicate){" "}
-                    </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
-                      <span className="animate-pulse-subtle">⚡</span>
-                    </span>
-                  </div>
-                  <div className="grid grid-cols-3 gap-8">
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <MagnifyingGlass
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              UX Research
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Interviews
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Testing
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Data/metrics analysis
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Workshops
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <Palette
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              UI Design
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Prototyping
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Component systems
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Design systems
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <Lightbulb
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              UX Design
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  User flows
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Information architecture
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Interaction design
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Wireframing
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  User testing
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Flowcharts
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <Code
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              Development
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Cursor AI
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Lovable
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Frontend
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Firebase
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
-                        <div className="flex flex-col h-full">
-                          <div className="flex flex-col items-center text-center mb-4">
-                            <div className="relative mb-3">
-                              <ChartLine
-                                size={40}
-                                weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
-                              />
-                              {/* Glow effect only on card hover */}
-                              <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
-                              Product
-                            </h3>
-                          </div>
-                          <div className="flex-1 flex flex-col justify-center">
-                            <div className="grid grid-cols-2 gap-x-4">
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Strategy
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Roadmapping
-                                </li>
-                              </ul>
-                              <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Analytics
-                                </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
-                                  Growth
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="group/card relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D] to-[#10b981] rounded-2xl p-0.5 opacity-0 group-hover/card:opacity-100 transition-all duration-300 scale-105 group-hover/card:scale-110"></div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
