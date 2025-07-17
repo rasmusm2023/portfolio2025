@@ -1232,7 +1232,7 @@ export default function Home() {
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1245,19 +1245,166 @@ export default function Home() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      My Approach
+                      My Process
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
                       <span className="animate-pulse-subtle">🔍</span>
                     </span>
                   </div>
-                  <p className="text-neutral-60 text-sm leading-relaxed">
-                    I believe great design starts with understanding the user.
-                    Every project begins with research, empathy, and a deep dive
-                    into the problem space.
-                  </p>
+
+                  {/* Process Philosophy */}
+                  <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-[#10b981]/10 border border-[#00FF9D]/20">
+                    <p className="text-neutral-20 text-sm font-medium text-center leading-relaxed">
+                      Human-centered. AI-empowered. Always adaptable.
+                    </p>
+                  </div>
+
+                  {/* Design Process Steps */}
+                  <div className="space-y-4">
+                    {/* Step 1: Discover */}
+                    <div className="flex items-start gap-3 group/step">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-neutral-100 text-sm font-bold">
+                          1
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          Discover & Understand
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            AI Research Analysis
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            User Interviews
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Research Tools
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            User Needs
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Business Goals
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Market Context
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Deep Search
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Step 2: Ideate */}
+                    <div className="flex items-start gap-3 group/step">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-neutral-100 text-sm font-bold">
+                          2
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          Ideate & Concept
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            AI Ideation
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Figma
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Google Stitch
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Wireframes
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Sketching
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Prototyping
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Alternatives
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Step 3: Build */}
+                    <div className="flex items-start gap-3 group/step">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-neutral-100 text-sm font-bold">
+                          3
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          Build & Test
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            Cursor AI
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Next.js
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Component Libraries
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Accessibility
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Performance
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Testing
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Step 4: Systems */}
+                    <div className="flex items-start gap-3 group/step">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <span className="text-neutral-100 text-sm font-bold">
+                          4
+                        </span>
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          Systems & Scale
+                        </h4>
+                        <div className="flex flex-wrap gap-1">
+                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            AI Color Systems
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Design Systems
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Content Patterns
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Color Tokens
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Scalable Content
+                          </span>
+                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            Consistency
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Values - Medium section */}

@@ -11,6 +11,7 @@ import FramerIcon from "@/logos/inner-square-logos-svg/framer.svg";
 import CursorIcon from "@/logos/inner-square-logos-svg/cursor.svg";
 import WixIcon from "@/logos/inner-square-logos-svg/wix.svg";
 import ReactIcon from "@/logos/inner-square-logos-svg/react.svg";
+import StitchIcon from "@/logos/inner-square-logos-svg/stitch.svg";
 
 const InfiniteScrollBanner = () => {
   const bannerRef = useRef<HTMLDivElement>(null);
@@ -73,6 +74,7 @@ const InfiniteScrollBanner = () => {
     { name: "Next.js", icon: NextJsIcon, bg: "bg-neutral-90" },
     { name: "React", icon: ReactIcon, bg: "bg-neutral-90" },
     { name: "Cursor", icon: CursorIcon, bg: "bg-neutral-90" },
+    { name: "Google Stitch", icon: StitchIcon, bg: "bg-neutral-90" },
   ];
 
   return (
