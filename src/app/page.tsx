@@ -1407,10 +1407,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Work Link - Medium section */}
-                <a
-                  href="/work"
-                  className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-neutral-90/50 to-neutral-80/30 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/60 hover:from-neutral-90/60 hover:to-neutral-80/40 transition-all duration-300 relative group cursor-pointer hover:scale-[1.02] hover:shadow-lg hover:shadow-[#00FF9D]/10"
+                {/* Work Links - Medium section */}
+                <div
+                  className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-neutral-90/50 to-neutral-80/30 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/60 hover:from-neutral-90/60 hover:to-neutral-80/40 transition-all duration-300 relative group"
                   style={{ transform: `scale(${getBoxScale("work-link")})` }}
                   onMouseEnter={() => setHoveredBox("work-link")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1418,39 +1417,83 @@ export default function Home() {
                   {/* Button glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-br from-[#00FF9D]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                  <div className="relative z-10 flex flex-col items-center text-center space-y-6">
-                    <div className="w-16 h-16 bg-gradient-to-br from-[#00FF9D] to-[#10b981] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <span className="text-2xl">🚀</span>
-                    </div>
-
-                    <div className="space-y-3">
-                      <h2 className="text-3xl font-bold text-neutral-0 font-hanken group-hover:text-[#00FF9D] transition-colors duration-200">
+                  <div className="relative z-10 flex flex-col h-full">
+                    <div className="flex items-center justify-between mb-6">
+                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                         View My Work
                       </h2>
-                      <p className="text-neutral-60 text-base leading-relaxed max-w-xs">
-                        Explore my latest projects, case studies, and creative
-                        work
-                      </p>
+                      <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                        <span className="animate-pulse-subtle">📁</span>
+                      </span>
                     </div>
 
-                    <div className="flex items-center gap-2 text-[#00FF9D] text-lg font-semibold group-hover:gap-3 transition-all duration-200">
-                      <span>Explore Projects</span>
-                      <svg
-                        className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <div className="flex flex-col gap-3 w-full">
+                      <a
+                        href="/work"
+                        className="flex items-center justify-between p-4 rounded-xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 hover:border-[#00FF9D]/60 hover:bg-neutral-80/70 transition-all duration-200 group/work"
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-[#00FF9D] to-[#10b981] rounded-lg flex items-center justify-center">
+                            <span className="text-sm">📋</span>
+                          </div>
+                          <div className="text-left">
+                            <h3 className="text-neutral-0 font-semibold text-sm group-hover/work:text-[#00FF9D] transition-colors duration-200">
+                              Case Studies
+                            </h3>
+                            <p className="text-neutral-60 text-xs">
+                              Full project cases & detailed processes
+                            </p>
+                          </div>
+                        </div>
+                        <svg
+                          className="w-4 h-4 text-neutral-60 group-hover/work:text-[#00FF9D] group-hover/work:translate-x-1 transition-all duration-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </a>
+
+                      <a
+                        href="/design-gallery"
+                        className="flex items-center justify-between p-4 rounded-xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 hover:border-[#00FF9D]/60 hover:bg-neutral-80/70 transition-all duration-200 group/gallery"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-[#ED7DFF] to-[#a855f7] rounded-lg flex items-center justify-center">
+                            <span className="text-sm">🎨</span>
+                          </div>
+                          <div className="text-left">
+                            <h3 className="text-neutral-0 font-semibold text-sm group-hover/gallery:text-[#ED7DFF] transition-colors duration-200">
+                              Design Gallery
+                            </h3>
+                            <p className="text-neutral-60 text-xs">
+                              Smaller projects & design explorations
+                            </p>
+                          </div>
+                        </div>
+                        <svg
+                          className="w-4 h-4 text-neutral-60 group-hover/gallery:text-[#ED7DFF] group-hover/gallery:translate-x-1 transition-all duration-200"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </a>
                     </div>
                   </div>
-                </a>
+                </div>
 
                 {/* Currently Working On - Standing section */}
                 <div
