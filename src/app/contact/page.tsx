@@ -67,7 +67,7 @@ export default function ContactPage() {
             <div className="absolute right-8 top-[60%] transform -translate-y-1/2 w-[32rem]">
               <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8">
                 <h2 className="text-3xl font-bold text-neutral-0 mb-6 font-hanken">
-                  Let's Talk
+                  Let's have a chat 💬
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                       required
                       rows={4}
                       className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200 resize-none"
-                      placeholder="Tell me about your project or idea..."
+                      placeholder="Type your message..."
                     />
                   </div>
 
@@ -181,7 +181,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-semibold text-neutral-0">
                       Email
                     </h3>
-                    <p className="text-neutral-60">hello@rasmus.com</p>
+                    <p className="text-neutral-60 text-lg">hello@rasmus.com</p>
                   </div>
                 </div>
 
@@ -211,7 +211,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-semibold text-neutral-0">
                       Location
                     </h3>
-                    <p className="text-neutral-60">Stockholm, Sweden</p>
+                    <p className="text-neutral-60 text-lg">Stockholm, Sweden</p>
                   </div>
                 </div>
 
@@ -235,7 +235,7 @@ export default function ContactPage() {
                     <h3 className="text-lg font-semibold text-neutral-0">
                       Response Time
                     </h3>
-                    <p className="text-neutral-60">Within 24 hours</p>
+                    <p className="text-neutral-60 text-lg">Within 24 hours</p>
                   </div>
                 </div>
               </div>

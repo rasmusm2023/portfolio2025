@@ -790,12 +790,12 @@ export default function Home() {
                               <MagnifyingGlass
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               UX Research
                             </h3>
                           </div>
@@ -847,12 +847,12 @@ export default function Home() {
                               <Palette
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               UI Design
                             </h3>
                           </div>
@@ -900,12 +900,12 @@ export default function Home() {
                               <Lightbulb
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               UX Design
                             </h3>
                           </div>
@@ -965,12 +965,12 @@ export default function Home() {
                               <Code
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               Development
                             </h3>
                           </div>
@@ -1022,12 +1022,12 @@ export default function Home() {
                               <ChartLine
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               Product
                             </h3>
                           </div>
@@ -1079,12 +1079,12 @@ export default function Home() {
                               <Robot
                                 size={40}
                                 weight="fill"
-                                className="text-[#00FF9D] group-hover/card:scale-110 transition-transform duration-300"
+                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-neutral-10 font-bold text-lg tracking-wide">
+                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
                               AI & Automation
                             </h3>
                           </div>
@@ -1232,7 +1232,7 @@ export default function Home() {
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1407,54 +1407,54 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Values - Medium section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("values")})` }}
-                  onMouseEnter={() => setHoveredBox("values")}
+                {/* Work Link - Medium section */}
+                <a
+                  href="/work"
+                  className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-neutral-90/50 to-neutral-80/30 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/60 hover:from-neutral-90/60 hover:to-neutral-80/40 transition-all duration-300 relative group cursor-pointer hover:scale-[1.02] hover:shadow-lg hover:shadow-[#00FF9D]/10"
+                  style={{ transform: `scale(${getBoxScale("work-link")})` }}
+                  onMouseEnter={() => setHoveredBox("work-link")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Values
-                    </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
-                      <span className="animate-pulse-subtle">⭐</span>
-                    </span>
+                  {/* Button glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00FF9D]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                  <div className="relative z-10 flex flex-col items-center text-center space-y-6">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#00FF9D] to-[#10b981] rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <span className="text-2xl">🚀</span>
+                    </div>
+
+                    <div className="space-y-3">
+                      <h2 className="text-3xl font-bold text-neutral-0 font-hanken group-hover:text-[#00FF9D] transition-colors duration-200">
+                        View My Work
+                      </h2>
+                      <p className="text-neutral-60 text-base leading-relaxed max-w-xs">
+                        Explore my latest projects, case studies, and creative
+                        work
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2 text-[#00FF9D] text-lg font-semibold group-hover:gap-3 transition-all duration-200">
+                      <span>Explore Projects</span>
+                      <svg
+                        className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
                   </div>
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Empathy First
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Continuous Learning
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent-100 rounded-full"></div>
-                      <span className="text-neutral-60 text-sm">
-                        Quality Over Speed
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                </a>
 
                 {/* Currently Working On - Standing section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center row-span-2 hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("current-work")})` }}
                   onMouseEnter={() => setHoveredBox("current-work")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1475,41 +1475,41 @@ export default function Home() {
                       <span className="animate-pulse-subtle">🚀</span>
                     </span>
                   </div>
-                  <div className="space-y-6">
-                    <div className="flex justify-center">
-                      <div className="w-64 h-64 rounded-2xl overflow-hidden bg-neutral-80 border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200">
+                  <div className="flex items-center gap-8">
+                    <div className="flex-shrink-0">
+                      <div className="w-48 h-48 rounded-2xl overflow-hidden bg-neutral-80 border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200">
                         <Image
                           src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop&crop=center"
                           alt="Project Cover"
                           className="w-full h-full object-cover"
-                          width={256}
-                          height={256}
+                          width={192}
+                          height={192}
                         />
                       </div>
                     </div>
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-0 text-center">
+                    <div className="flex-1 space-y-4">
+                      <h3 className="text-xl font-bold text-neutral-0">
                         Portfolio Website 2025
                       </h3>
-                      <p className="text-neutral-60 text-sm leading-relaxed text-center">
+                      <p className="text-neutral-60 text-base leading-relaxed">
                         A modern, interactive portfolio showcasing my design and
                         development skills. Built with Next.js, TypeScript, and
                         Tailwind CSS. Features smooth animations, responsive
                         design, and a unique bento box layout for the about
                         page.
                       </p>
-                      <div className="flex flex-wrap gap-2 justify-center">
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          Next.js
+                      <div className="flex flex-wrap gap-3">
+                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
+                          Next.js{" "}
                         </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          TypeScript
+                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
+                          TypeScript{" "}
                         </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          Tailwind CSS
+                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
+                          Tailwind CSS{" "}
                         </span>
-                        <span className="px-3 py-1 bg-accent-100/20 text-accent-100 text-xs font-medium rounded-full">
-                          GSAP
+                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
+                          GSAP{" "}
                         </span>
                       </div>
                     </div>
@@ -1746,7 +1746,7 @@ export default function Home() {
                           required
                           rows={4}
                           className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#1ab182] transition-colors duration-200 resize-none"
-                          placeholder="Tell me about your project..."
+                          placeholder="Write your message..."
                         />
                       </div>
                     </div>

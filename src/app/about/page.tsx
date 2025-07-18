@@ -13,6 +13,7 @@ import RasmusImage from "@/images/rasmus.jpg";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 // Live Clock Component
 function LiveClock() {
@@ -90,10 +91,12 @@ function FilmCard({
       <div className="relative w-full h-full">
         {coverImage ? (
           <>
-            <img
+            <Image
               src={coverImage.src}
               alt={`${title} (${year})`}
               className="w-full h-full object-cover"
+              width={128}
+              height={192}
             />
             <div className="absolute inset-0 bg-black/30"></div>
           </>
@@ -127,6 +130,7 @@ function BookCard({
   amazonUrl,
   currentPage,
   totalPages,
+  isFinished = false,
 }: {
   title: string;
   author: string;
@@ -134,6 +138,7 @@ function BookCard({
   amazonUrl?: string;
   currentPage?: number;
   totalPages?: number;
+  isFinished?: boolean;
 }) {
   const progressPercentage =
     currentPage && totalPages ? (currentPage / totalPages) * 100 : 0;
@@ -150,10 +155,12 @@ function BookCard({
         <div className="w-32 h-48 rounded-l-2xl overflow-hidden">
           {coverImage ? (
             <>
-              <img
+              <Image
                 src={coverImage.src}
                 alt={`${title} by ${author}`}
                 className="w-full h-full object-cover"
+                width={128}
+                height={192}
               />
               <div className="absolute inset-0 bg-black/30"></div>
             </>
@@ -180,28 +187,40 @@ function BookCard({
             <p className="text-neutral-60 text-xs">by {author}</p>
           </div>
 
-          {/* Current Page */}
+          {/* Status */}
           {currentPage && totalPages && (
             <div className="mt-auto space-y-2">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    isFinished ? "bg-green-500" : "bg-blue-500 animate-pulse"
+                  }`}
+                ></div>
                 <span className="text-neutral-60 text-xs font-medium">
-                  Page {currentPage} of {totalPages}
+                  {isFinished
+                    ? "Finished"
+                    : `Page ${currentPage} of ${totalPages}`}
                 </span>
               </div>
 
               {/* Progress Bar */}
               <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-blue-500 to-blue-400 rounded-full transition-all duration-500 ease-out"
-                  style={{ width: `${progressPercentage}%` }}
+                  className={`h-full rounded-full transition-all duration-500 ease-out ${
+                    isFinished
+                      ? "bg-gradient-to-r from-green-500 to-green-400"
+                      : "bg-gradient-to-r from-blue-500 to-blue-400"
+                  }`}
+                  style={{ width: `${isFinished ? 100 : progressPercentage}%` }}
                 ></div>
               </div>
 
-              {/* Percentage */}
+              {/* Status Text */}
               <div className="text-right">
                 <span className="text-neutral-60 text-xs font-medium">
-                  {Math.round(progressPercentage)}% complete
+                  {isFinished
+                    ? "100% complete"
+                    : `${Math.round(progressPercentage)}% complete`}
                 </span>
               </div>
             </div>
@@ -286,11 +305,11 @@ function FavoriteSongs() {
         "https://open.spotify.com/track/4lkpfY2wfmHj958Fr32kHS?si=a5abdd08a45f4c7f",
     },
     {
-      title: "Stairway to Heaven",
-      artist: "Led Zeppelin",
-      albumCover:
-        "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=150&h=150&fit=crop&crop=center",
-      spotifyUrl: "https://open.spotify.com/track/5CQ30WqJwcep0pYcV4AMNc",
+      title: "MO UP FRONT",
+      artist: "NLE Choppa",
+      albumCover: "/music/mo-up-front.jpg",
+      spotifyUrl:
+        "https://open.spotify.com/track/0wZ0RnMZFR97fq1Yq8Ee57?si=260919d34b1144b0",
     },
   ];
 
@@ -305,10 +324,12 @@ function FavoriteSongs() {
             className="cursor-pointer group/song"
           >
             <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover/song:border-[#00FF9D] transition-colors duration-200 relative">
-              <img
+              <Image
                 src={song.albumCover}
                 alt={`${song.title} by ${song.artist}`}
                 className="w-full h-full object-cover"
+                width={112}
+                height={112}
               />
               {/* Radial green shine effect */}
               <div
@@ -340,7 +361,7 @@ export default function AboutPage() {
   // Calculate scale for each box based on hover state
   const getBoxScale = (boxId: string) => {
     if (!hoveredBox) return 1; // No hover - all boxes normal size
-    if (hoveredBox === boxId) return 1.05; // Hovered box grows
+    if (hoveredBox === boxId) return 1.02; // Hovered box grows (reduced from 1.05)
     return 1; // Other boxes stay normal size
   };
 
@@ -392,7 +413,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-6 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("time")})` }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -405,15 +426,17 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Time
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">⏰</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">⏰</span>
+                    </span>
                   </div>
                   <div className="space-y-3">
                     <div className="text-center">
-                      <div className="text-3xl font-mono font-bold text-accent-100 mb-1">
+                      <div className="text-3xl font-mono font-bold text-[#00FF9D] mb-1">
                         <LiveClock />
                       </div>
                       <div className="text-neutral-60 text-xs">
@@ -430,24 +453,26 @@ export default function AboutPage() {
 
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300 row-span-2 relative group"
+                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("traits")})` }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect - behind content */}
+                  {/* Radial shine effect */}
                   <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl -z-10"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
                       background:
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Traits
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">🎭</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">🎭</span>
+                    </span>
                   </div>
                   <TraitsCarousel
                     traits={[
@@ -497,7 +522,7 @@ export default function AboutPage() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("music")})` }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -510,7 +535,7 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Music
                     </h2>
@@ -520,10 +545,12 @@ export default function AboutPage() {
                       rel="noopener noreferrer"
                       className="w-6 h-6 animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                     >
-                      <img
+                      <Image
                         src={SpotifyIcon.src}
                         alt="Spotify"
                         className="w-full h-full"
+                        width={24}
+                        height={24}
                       />
                     </a>
                   </div>
@@ -541,7 +568,7 @@ export default function AboutPage() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-[#4F46E5]/80 transition-all duration-300"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("books")})` }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -554,13 +581,13 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Books
                     </h2>
                     <a
                       href="/reading-list"
-                      className="text-2xl animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                     >
                       📚
                     </a>
@@ -587,6 +614,7 @@ export default function AboutPage() {
                         amazonUrl="https://www.amazon.com/Mikael-Persbrandt-så-minns-det/dp/9175031234"
                         currentPage={431}
                         totalPages={431}
+                        isFinished={true}
                       />
                     </div>
                   </div>
@@ -594,7 +622,7 @@ export default function AboutPage() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-[#4F46E5]/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#4F46E5]/80 transition-all duration-300 relative group"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("films")})` }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -607,11 +635,13 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl animate-pulse-subtle">🎬</span>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="animate-pulse-subtle">🎬</span>
+                    </span>
                   </div>
                   <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                     <FilmCard
