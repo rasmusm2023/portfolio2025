@@ -544,8 +544,23 @@ export default function Home() {
               style={{ height: "100vh" }}
             >
               <div className="text-left w-full">
-                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border border-neutral-100/10 overflow-hidden transition-all duration-500">
-                  <div className="flex items-center gap-4 px-4 py-2">
+                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border-2 border-neutral-100/10 hover:border-transparent overflow-hidden transition-all duration-500 relative">
+                  {/* Gradient border on hover */}
+                  <div
+                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{
+                      background: "var(--gradient-hero-home-accent)",
+                      padding: "2px",
+                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      maskComposite: "exclude",
+                      WebkitMask:
+                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                    }}
+                  >
+                    <div className="w-full h-full rounded-full bg-neutral-80 backdrop-blur-sm"></div>
+                  </div>
+                  <div className="flex items-center gap-4 px-4 py-2 relative z-10">
                     <div className="relative">
                       <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
                       <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
@@ -554,10 +569,10 @@ export default function Home() {
                       Currently exploring opportunities
                     </span>
                   </div>
-                  <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out">
+                  <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white font-medium text-sm hover:from-purple-600 hover:to-violet-600 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-[#10b981] text-neutral-80 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-[#10b981]/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
@@ -728,10 +743,10 @@ export default function Home() {
                   ></div>
                   <div className="flex items-center justify-between mb-2 p-8">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                         My toolkit include
                       </h2>
-                      <p className="text-lg text-neutral-30 font-hanken">
+                      <p className="text-lg text-neutral-50 font-hanken">
                         but is not limited to:
                       </p>
                     </div>
@@ -762,7 +777,7 @@ export default function Home() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-16">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Expertise{" "}
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
@@ -795,7 +810,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                               UX Research
                             </h3>
                           </div>
@@ -852,7 +867,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                               UI Design
                             </h3>
                           </div>
@@ -905,7 +920,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                               UX Design
                             </h3>
                           </div>
@@ -970,7 +985,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                               Development
                             </h3>
                           </div>
@@ -1027,7 +1042,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                               Product
                             </h3>
                           </div>
@@ -1084,7 +1099,7 @@ export default function Home() {
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <h3 className="text-white font-black text-xl tracking-wide uppercase">
+                            <h3 className="text-neutral-30 group-hover/card:text-neutral-10 font-bold text-xl tracking-wide transition-colors duration-200">
                               AI & Automation
                             </h3>
                           </div>
@@ -1120,7 +1135,7 @@ export default function Home() {
 
                 {/* Experience - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("experience")})` }}
                   onMouseEnter={() => setHoveredBox("experience")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1135,10 +1150,10 @@ export default function Home() {
                   ></div>
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                         Experience
                       </h2>
-                      <p className="text-lg text-neutral-30 font-hanken">
+                      <p className="text-lg text-neutral-50 font-hanken">
                         employments & studies
                       </p>
                     </div>
@@ -1146,93 +1161,95 @@ export default function Home() {
                       <span className="animate-pulse-subtle">💼</span>
                     </span>
                   </div>
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-4">
-                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                        <span
-                          ref={(el) => {
-                            scrambleRefs.current[0] = el;
-                          }}
-                          className="text-neutral-0 text-4xl font-bold"
-                          data-value="5"
-                        >
-                          5
+                  <div className="flex-1 flex flex-col justify-center">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                          <span
+                            ref={(el) => {
+                              scrambleRefs.current[0] = el;
+                            }}
+                            className="text-neutral-0 text-4xl font-bold"
+                            data-value="5"
+                          >
+                            5
+                          </span>
+                        </div>
+                        <span className="text-neutral-40 text-lg">
+                          years within UX/UI Design
                         </span>
                       </div>
-                      <span className="text-neutral-40 text-lg">
-                        years within UX/UI Design
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                        <span
-                          ref={(el) => {
-                            scrambleRefs.current[1] = el;
-                          }}
-                          className="text-neutral-0 text-4xl font-bold"
-                          data-value="4"
-                        >
-                          4
+                      <div className="flex items-center gap-4">
+                        <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                          <span
+                            ref={(el) => {
+                              scrambleRefs.current[1] = el;
+                            }}
+                            className="text-neutral-0 text-4xl font-bold"
+                            data-value="4"
+                          >
+                            4
+                          </span>
+                        </div>
+                        <span className="text-neutral-40 text-lg">
+                          years within E-Commerce
                         </span>
                       </div>
-                      <span className="text-neutral-40 text-lg">
-                        years within E-Commerce
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                        <span
-                          ref={(el) => {
-                            scrambleRefs.current[2] = el;
-                          }}
-                          className="text-neutral-0 text-4xl font-bold"
-                          data-value="2"
-                        >
-                          2
+                      <div className="flex items-center gap-4">
+                        <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                          <span
+                            ref={(el) => {
+                              scrambleRefs.current[2] = el;
+                            }}
+                            className="text-neutral-0 text-4xl font-bold"
+                            data-value="2"
+                          >
+                            2
+                          </span>
+                        </div>
+                        <span className="text-neutral-40 text-lg">
+                          years of Frontend Development
                         </span>
                       </div>
-                      <span className="text-neutral-40 text-lg">
-                        years of Frontend Development
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                        <span
-                          ref={(el) => {
-                            scrambleRefs.current[3] = el;
-                          }}
-                          className="text-neutral-0 text-4xl font-bold"
-                          data-value="20"
-                        >
-                          20
+                      <div className="flex items-center gap-4">
+                        <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                          <span
+                            ref={(el) => {
+                              scrambleRefs.current[3] = el;
+                            }}
+                            className="text-neutral-0 text-4xl font-bold"
+                            data-value="20"
+                          >
+                            20
+                          </span>
+                        </div>
+                        <span className="text-neutral-40 text-lg">
+                          Completed projects
                         </span>
                       </div>
-                      <span className="text-neutral-40 text-lg">
-                        Completed projects
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                        <span
-                          ref={(el) => {
-                            scrambleRefs.current[4] = el;
-                          }}
-                          className="text-neutral-0 text-4xl font-bold"
-                          data-value="1"
-                        >
-                          1
+                      <div className="flex items-center gap-4">
+                        <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
+                          <span
+                            ref={(el) => {
+                              scrambleRefs.current[4] = el;
+                            }}
+                            className="text-neutral-0 text-4xl font-bold"
+                            data-value="1"
+                          >
+                            1
+                          </span>
+                        </div>
+                        <span className="text-neutral-40 text-lg">
+                          year of SoMe & SEO work
                         </span>
                       </div>
-                      <span className="text-neutral-40 text-lg">
-                        year of SoMe & SEO work
-                      </span>
                     </div>
                   </div>
                 </div>
 
                 {/* My Approach - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("approach")})` }}
                   onMouseEnter={() => setHoveredBox("approach")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1246,7 +1263,7 @@ export default function Home() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       My Process
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
@@ -1254,153 +1271,156 @@ export default function Home() {
                     </span>
                   </div>
 
-                  {/* Process Philosophy */}
-                  <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-[#10b981]/10 border border-[#00FF9D]/20">
-                    <p className="text-neutral-20 text-sm font-medium text-center leading-relaxed">
-                      Human-centered. AI-empowered. Always adaptable.
-                    </p>
-                  </div>
-
-                  {/* Design Process Steps */}
-                  <div className="space-y-4">
-                    {/* Step 1: Discover */}
-                    <div className="flex items-start gap-3 group/step">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-neutral-100 text-sm font-bold">
-                          1
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                          Discover & Understand
-                        </h4>
-                        <div className="flex flex-wrap gap-1">
-                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
-                            AI Research Analysis
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            User Interviews
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Research Tools
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            User Needs
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Business Goals
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Market Context
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Deep Search
-                          </span>
-                        </div>
-                      </div>
+                  <div className="flex-1 flex flex-col justify-center">
+                    {/* Process Philosophy */}
+                    <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-[#10b981]/10 border border-[#00FF9D]/20">
+                      <p className="text-neutral-30 text-base font-medium text-center leading-relaxed">
+                        Human-centered. AI-empowered. Always adaptable &
+                        reconsidered.
+                      </p>
                     </div>
 
-                    {/* Step 2: Ideate */}
-                    <div className="flex items-start gap-3 group/step">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-neutral-100 text-sm font-bold">
-                          2
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                          Ideate & Concept
-                        </h4>
-                        <div className="flex flex-wrap gap-1">
-                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
-                            AI Ideation
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Figma
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Google Stitch
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Wireframes
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Sketching
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Prototyping
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Alternatives
+                    {/* Design Process Steps */}
+                    <div className="space-y-4">
+                      {/* Step 1: Discover */}
+                      <div className="flex items-start gap-3 group/step">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-neutral-100 text-sm font-bold">
+                            1
                           </span>
                         </div>
-                      </div>
-                    </div>
-
-                    {/* Step 3: Build */}
-                    <div className="flex items-start gap-3 group/step">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-neutral-100 text-sm font-bold">
-                          3
-                        </span>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                          Build & Test
-                        </h4>
-                        <div className="flex flex-wrap gap-1">
-                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
-                            Cursor AI
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Next.js
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Component Libraries
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Accessibility
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Performance
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Testing
-                          </span>
+                        <div className="flex-1">
+                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                            Discover & Understand
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                              AI Research Analysis
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              User Interviews
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Research Tools
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              User Needs
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Business Goals
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Market Context
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Deep Search
+                            </span>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Step 4: Systems */}
-                    <div className="flex items-start gap-3 group/step">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
-                        <span className="text-neutral-100 text-sm font-bold">
-                          4
-                        </span>
+                      {/* Step 2: Ideate */}
+                      <div className="flex items-start gap-3 group/step">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-neutral-100 text-sm font-bold">
+                            2
+                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                            Ideate & Concept
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                              AI Ideation
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Figma
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Google Stitch
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Wireframes
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Sketching
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Prototyping
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Alternatives
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                          Systems & Scale
-                        </h4>
-                        <div className="flex flex-wrap gap-1">
-                          <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
-                            AI Color Systems
+
+                      {/* Step 3: Build */}
+                      <div className="flex items-start gap-3 group/step">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-neutral-100 text-sm font-bold">
+                            3
                           </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Design Systems
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                            Build & Test
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                              Cursor AI
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Next.js
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Component Libraries
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Accessibility
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Performance
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Testing
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Step 4: Systems */}
+                      <div className="flex items-start gap-3 group/step">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-neutral-100 text-sm font-bold">
+                            4
                           </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Content Patterns
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Color Tokens
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Scalable Content
-                          </span>
-                          <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
-                            Consistency
-                          </span>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                            Systems & Scale
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                              AI Color Systems
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Design Systems
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Content Patterns
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Color Tokens
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Scalable Content
+                            </span>
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                              Consistency
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1419,7 +1439,7 @@ export default function Home() {
 
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                         View My Work
                       </h2>
                       <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
@@ -1430,17 +1450,17 @@ export default function Home() {
                     <div className="flex flex-col gap-3 w-full">
                       <a
                         href="/work"
-                        className="flex items-center justify-between p-4 rounded-xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 hover:border-[#00FF9D]/60 hover:bg-neutral-80/70 transition-all duration-200 group/work"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#00FF9D]/20 to-[#10b981]/20 backdrop-blur-sm border border-[#00FF9D]/30 hover:shadow-[0_0_10px_rgba(0,255,157,0.2)] transition-all duration-200 group/work"
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-gradient-to-br from-[#00FF9D] to-[#10b981] rounded-lg flex items-center justify-center">
                             <span className="text-sm">📋</span>
                           </div>
                           <div className="text-left">
-                            <h3 className="text-neutral-0 font-semibold text-sm group-hover/work:text-[#00FF9D] transition-colors duration-200">
+                            <h3 className="text-neutral-10 font-semibold text-base">
                               Case Studies
                             </h3>
-                            <p className="text-neutral-60 text-xs">
+                            <p className="text-neutral-40 text-sm">
                               Full project cases & detailed processes
                             </p>
                           </div>
@@ -1462,17 +1482,17 @@ export default function Home() {
 
                       <a
                         href="/design-gallery"
-                        className="flex items-center justify-between p-4 rounded-xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 hover:border-[#00FF9D]/60 hover:bg-neutral-80/70 transition-all duration-200 group/gallery"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#ED7DFF]/20 to-[#a855f7]/20 backdrop-blur-sm border border-[#ED7DFF]/30 hover:shadow-[0_0_10px_rgba(237,125,255,0.2)] transition-all duration-200 group/gallery"
                       >
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-gradient-to-br from-[#ED7DFF] to-[#a855f7] rounded-lg flex items-center justify-center">
                             <span className="text-sm">🎨</span>
                           </div>
                           <div className="text-left">
-                            <h3 className="text-neutral-0 font-semibold text-sm group-hover/gallery:text-[#ED7DFF] transition-colors duration-200">
+                            <h3 className="text-neutral-10 font-semibold text-base">
                               Design Gallery
                             </h3>
-                            <p className="text-neutral-60 text-xs">
+                            <p className="text-neutral-40 text-sm">
                               Smaller projects & design explorations
                             </p>
                           </div>
@@ -1511,7 +1531,7 @@ export default function Home() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Currently Working On
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
@@ -1531,7 +1551,7 @@ export default function Home() {
                       </div>
                     </div>
                     <div className="flex-1 space-y-4">
-                      <h3 className="text-xl font-bold text-neutral-0">
+                      <h3 className="text-xl font-bold text-neutral-40">
                         Portfolio Website 2025
                       </h3>
                       <p className="text-neutral-60 text-base leading-relaxed">

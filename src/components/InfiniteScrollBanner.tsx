@@ -31,15 +31,58 @@ const InfiniteScrollBanner = () => {
 
     if (!scrollContainer || !originalContent) return;
 
-    // Calculate the width of the original content (first set of icons)
-    const contentWidth = originalContent.offsetWidth;
+    // Function to initialize animation
+    const initializeAnimation = () => {
+      // Calculate the width of the original content (first set of icons)
+      const contentWidth = originalContent.offsetWidth;
 
-    // Create the infinite scroll animation
-    animationRef.current = gsap.timeline({ repeat: -1 }).to(scrollContainer, {
-      x: -contentWidth,
-      duration: 20,
-      ease: "none",
+      // Only proceed if we have a valid width
+      if (contentWidth <= 0) {
+        // Retry after a short delay if width is still 0
+        setTimeout(initializeAnimation, 100);
+        return;
+      }
+
+      // Kill any existing animation
+      if (animationRef.current) {
+        animationRef.current.kill();
+      }
+
+      // Create the infinite scroll animation
+      animationRef.current = gsap.timeline({ repeat: -1 }).to(scrollContainer, {
+        x: -contentWidth,
+        duration: 20,
+        ease: "none",
+      });
+    };
+
+    // Initialize animation immediately
+    initializeAnimation();
+
+    // Also initialize after a short delay to ensure images are loaded
+    const timeoutId = setTimeout(initializeAnimation, 500);
+
+    // Initialize when window is fully loaded (including all images)
+    const handleWindowLoad = () => {
+      initializeAnimation();
+    };
+
+    // Add window load listener
+    if (document.readyState === "complete") {
+      // If already loaded, initialize immediately
+      setTimeout(initializeAnimation, 100);
+    } else {
+      // Otherwise wait for load event
+      window.addEventListener("load", handleWindowLoad);
+    }
+
+    // Use ResizeObserver to detect when content dimensions change
+    const resizeObserver = new ResizeObserver(() => {
+      // Reinitialize animation when content size changes
+      initializeAnimation();
     });
+
+    resizeObserver.observe(originalContent);
 
     // Slow down/speed up on hover
     const handleMouseEnter = () => {
@@ -58,6 +101,9 @@ const InfiniteScrollBanner = () => {
     banner.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
+      clearTimeout(timeoutId);
+      window.removeEventListener("load", handleWindowLoad);
+      resizeObserver.disconnect();
       animationRef.current?.kill();
       banner.removeEventListener("mouseenter", handleMouseEnter);
       banner.removeEventListener("mouseleave", handleMouseLeave);
