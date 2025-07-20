@@ -1274,7 +1274,7 @@ export default function Home() {
                   <div className="flex-1 flex flex-col justify-center">
                     {/* Process Philosophy */}
                     <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-accent-2-100/10 border border-[#00FF9D]/20">
-                      <p className="text-neutral-30 text-base font-medium text-center leading-relaxed">
+                      <p className="text-neutral-30 text-lg font-medium text-center leading-relaxed">
                         Human-centered. AI-empowered. Always adaptable &
                         reconsidered.
                       </p>
@@ -1285,34 +1285,34 @@ export default function Home() {
                       {/* Step 1: Discover */}
                       <div className="flex items-start gap-3 group/step">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-sm font-bold">
+                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
                             1
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
                             Discover & Understand
                           </h4>
                           <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
                               AI Research Analysis
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               User Interviews
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Research Tools
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               User Needs
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Business Goals
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Market Context
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Deep Search
                             </span>
                           </div>
@@ -1322,34 +1322,34 @@ export default function Home() {
                       {/* Step 2: Ideate */}
                       <div className="flex items-start gap-3 group/step">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-sm font-bold">
+                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
                             2
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
                             Ideate & Concept
                           </h4>
                           <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
                               AI Ideation
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Figma
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Google Stitch
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Wireframes
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Sketching
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Prototyping
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Alternatives
                             </span>
                           </div>
@@ -1359,31 +1359,31 @@ export default function Home() {
                       {/* Step 3: Build */}
                       <div className="flex items-start gap-3 group/step">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-sm font-bold">
+                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
                             3
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
                             Build & Test
                           </h4>
                           <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
                               Cursor AI
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Next.js
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Component Libraries
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Accessibility
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Performance
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Testing
                             </span>
                           </div>
@@ -1393,31 +1393,31 @@ export default function Home() {
                       {/* Step 4: Systems */}
                       <div className="flex items-start gap-3 group/step">
                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-sm font-bold">
+                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
                             4
                           </span>
                         </div>
                         <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-sm mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
+                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
                             Systems & Scale
                           </h4>
                           <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full">
+                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
                               AI Color Systems
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Design Systems
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Content Patterns
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Color Tokens
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Scalable Content
                             </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-xs rounded-full">
+                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
                               Consistency
                             </span>
                           </div>

@@ -73,7 +73,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-neutral-30 mb-2"
+                      className="block text-base font-medium text-neutral-30 mb-2"
                     >
                       Name
                     </label>
@@ -84,7 +84,7 @@ export default function ContactPage() {
                       value={formData.name}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
                       placeholder="Your name"
                     />
                   </div>
@@ -92,7 +92,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-neutral-30 mb-2"
+                      className="block text-base font-medium text-neutral-30 mb-2"
                     >
                       Email
                     </label>
@@ -103,7 +103,7 @@ export default function ContactPage() {
                       value={formData.email}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -111,7 +111,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="subject"
-                      className="block text-sm font-medium text-neutral-30 mb-2"
+                      className="block text-base font-medium text-neutral-30 mb-2"
                     >
                       Subject
                     </label>
@@ -122,7 +122,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
+                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
                       placeholder="What's this about?"
                     />
                   </div>
@@ -130,7 +130,7 @@ export default function ContactPage() {
                   <div>
                     <label
                       htmlFor="message"
-                      className="block text-sm font-medium text-neutral-30 mb-2"
+                      className="block text-base font-medium text-neutral-30 mb-2"
                     >
                       Message
                     </label>
@@ -141,14 +141,14 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       rows={4}
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200 resize-none"
+                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200 resize-none"
                       placeholder="Type your message..."
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   >
                     Send Message
                   </button>
