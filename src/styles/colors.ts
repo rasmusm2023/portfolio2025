@@ -21,6 +21,7 @@ export type NeutralColorScale = ColorScale & {
 
 export type ColorPalette = {
   accent: ColorScale;
+  accentEmerald: ColorScale;
   neutral: NeutralColorScale;
   test: ColorValue;
 };
@@ -33,6 +34,13 @@ export const colors: ColorPalette = {
     60: "#66FFC5",
     40: "#99FFD9",
     20: "#CCFFED",
+  },
+  accentEmerald: {
+    100: "#10b981", // Accent Emerald Green
+    80: "#34d399",
+    60: "#6ee7b7",
+    40: "#a7f3d0",
+    20: "#d1fae5",
   },
   neutral: {
     100: "#232323", // Primary Neutral - Darkest

@@ -12,7 +12,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1ab182] to-[#ED7DFF] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
                 <span className="text-sm font-bold text-white">RM</span>
               </div>
               <span className="text-xl font-bold text-neutral-0">

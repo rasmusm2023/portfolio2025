@@ -12,7 +12,7 @@ import TheDarkKnightCover from "@/films/the-dark-knight.png";
 import RasmusImage from "@/images/rasmus.jpg";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
-import { gradients } from "@/styles/colors";
+import { gradients, colors } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import AnimatedBorder from "@/components/AnimatedBorder";
@@ -572,7 +572,7 @@ export default function Home() {
                   <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-[#10b981] text-neutral-80 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-[#10b981]/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-80 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
@@ -1273,7 +1273,7 @@ export default function Home() {
 
                   <div className="flex-1 flex flex-col justify-center">
                     {/* Process Philosophy */}
-                    <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-[#10b981]/10 border border-[#00FF9D]/20">
+                    <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-accent-2-100/10 border border-[#00FF9D]/20">
                       <p className="text-neutral-30 text-base font-medium text-center leading-relaxed">
                         Human-centered. AI-empowered. Always adaptable &
                         reconsidered.
@@ -1284,7 +1284,7 @@ export default function Home() {
                     <div className="space-y-4">
                       {/* Step 1: Discover */}
                       <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
                           <span className="text-neutral-100 text-sm font-bold">
                             1
                           </span>
@@ -1321,7 +1321,7 @@ export default function Home() {
 
                       {/* Step 2: Ideate */}
                       <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
                           <span className="text-neutral-100 text-sm font-bold">
                             2
                           </span>
@@ -1358,7 +1358,7 @@ export default function Home() {
 
                       {/* Step 3: Build */}
                       <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
                           <span className="text-neutral-100 text-sm font-bold">
                             3
                           </span>
@@ -1392,7 +1392,7 @@ export default function Home() {
 
                       {/* Step 4: Systems */}
                       <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#10b981] flex items-center justify-center flex-shrink-0 mt-1">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
                           <span className="text-neutral-100 text-sm font-bold">
                             4
                           </span>
@@ -1450,10 +1450,10 @@ export default function Home() {
                     <div className="flex flex-col gap-3 w-full">
                       <a
                         href="/work"
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#00FF9D]/20 to-[#10b981]/20 backdrop-blur-sm border border-[#00FF9D]/30 hover:shadow-[0_0_10px_rgba(0,255,157,0.2)] transition-all duration-200 group/work"
+                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#00FF9D]/20 to-accent-2-100/20 backdrop-blur-sm border border-[#00FF9D]/30 hover:shadow-[0_0_10px_rgba(0,255,157,0.2)] transition-all duration-200 group/work"
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#00FF9D] to-[#10b981] rounded-lg flex items-center justify-center">
+                          <div className="w-8 h-8 bg-gradient-to-br from-[#00FF9D] to-accent-2-100 rounded-lg flex items-center justify-center">
                             <span className="text-sm">📋</span>
                           </div>
                           <div className="text-left">
@@ -1593,7 +1593,7 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-2 gap-12">
                 {/* First Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
@@ -1609,11 +1609,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
                         UX/UI Design
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
                       Noted
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1623,11 +1623,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Second Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
@@ -1643,11 +1643,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
                         AI/ML
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
                       Zmartrest AI
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1657,11 +1657,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Third Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
@@ -1677,11 +1677,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
                         Mobile App
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
                       Fokus
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1691,11 +1691,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Fourth Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
@@ -1711,11 +1711,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-accent-100/20 text-accent-100 text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
                         SaaS Platform
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-accent-100 transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
                       Emplojd
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1725,7 +1725,7 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
             </div>
@@ -1774,7 +1774,7 @@ export default function Home() {
                           id="name"
                           name="name"
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#1ab182] transition-colors duration-200"
+                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200"
                           placeholder="Your name"
                         />
                       </div>
@@ -1791,7 +1791,7 @@ export default function Home() {
                           id="email"
                           name="email"
                           required
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#1ab182] transition-colors duration-200"
+                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -1808,7 +1808,7 @@ export default function Home() {
                           name="message"
                           required
                           rows={4}
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#1ab182] transition-colors duration-200 resize-none"
+                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200 resize-none"
                           placeholder="Write your message..."
                         />
                       </div>
@@ -1816,7 +1816,7 @@ export default function Home() {
 
                     <button
                       type="submit"
-                      className="px-8 py-3 bg-gradient-to-r from-[#1ab182] to-[#ED7DFF] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200"
+                      className="px-8 py-3 bg-gradient-to-r from-[#00FF9D] to-[#ED7DFF] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200"
                     >
                       Send Message
                     </button>
@@ -1837,7 +1837,7 @@ export default function Home() {
 
                   <div className="space-y-6">
                     <div className="flex items-center gap-4 p-6 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1ab182] to-[#ED7DFF] flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
                         <span className="text-white font-bold">✉️</span>
                       </div>
                       <div className="flex-1">
@@ -1859,7 +1859,7 @@ export default function Home() {
                               "_self"
                             )
                           }
-                          className="px-3 py-1.5 bg-[#1ab182] text-white text-xs font-medium rounded-md hover:opacity-90 transition-opacity duration-200"
+                          className="px-3 py-1.5 bg-[#00FF9D] text-white text-xs font-medium rounded-md hover:opacity-90 transition-opacity duration-200"
                         >
                           Open
                         </button>
@@ -1875,7 +1875,7 @@ export default function Home() {
                     </div>
 
                     <div className="flex items-center gap-4 p-6 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#1ab182] to-[#ED7DFF] flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
                         <span className="text-white font-bold">💼</span>
                       </div>
                       <div>
@@ -1894,7 +1894,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="p-6 rounded-lg bg-gradient-to-br from-[#1ab182]/10 to-[#ED7DFF]/10 border border-neutral-100/10">
+                  <div className="p-6 rounded-lg bg-gradient-to-br from-[#00FF9D]/10 to-[#ED7DFF]/10 border border-neutral-100/10">
                     <h4 className="text-neutral-0 font-semibold mb-3">
                       Response Time
                     </h4>
