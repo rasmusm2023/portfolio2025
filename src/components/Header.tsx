@@ -6,12 +6,47 @@ import { LegoIcon } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
+import { useEffect, useState } from "react";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 const Header = () => {
+  const [showBackground, setShowBackground] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
+    const handleScroll = () => {
+      // Show background when user scrolls
+      setShowBackground(true);
+
+      // Clear existing timeout
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+
+      // Hide background after 1 second (accounting for animation duration)
+      timeoutId = setTimeout(() => {
+        setShowBackground(false);
+      }, 500);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 h-24 bg-transparent backdrop-blur-lg">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 h-24 backdrop-blur-lg transition-all duration-1000 ${
+        showBackground ? "bg-neutral-900/80" : "bg-transparent"
+      }`}
+    >
       <div className={`px-12 h-full ${hanken.className}`}>
         <div className="flex justify-between items-center h-full">
           <Link href="/" className="text-2xl font-bold text-neutral-100">

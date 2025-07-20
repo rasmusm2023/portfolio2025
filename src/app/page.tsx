@@ -572,7 +572,7 @@ export default function Home() {
                   <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-80 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-10 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
