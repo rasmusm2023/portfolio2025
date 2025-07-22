@@ -10,6 +10,8 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-nunito-sans)"],
         hanken: ["var(--font-hanken-grotesk)", "sans-serif"],
+        orbitron: ["var(--font-orbitron)", "monospace"],
+        audiowide: ["var(--font-audiowide)", "cursive"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -750,7 +750,7 @@ export default function Home() {
                         but is not limited to:
                       </p>
                     </div>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">🛠️</span>
                     </span>
                   </div>
@@ -780,13 +780,13 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Expertise{" "}
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">⚡</span>
                     </span>
                   </div>
                   <div className="grid grid-cols-3 gap-8">
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -794,18 +794,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <MagnifyingGlass
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -817,22 +815,22 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Interviews
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Testing
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Data/metrics analysis
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Workshops
                                 </li>
                               </ul>
@@ -843,7 +841,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -851,18 +849,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <Palette
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -874,18 +870,18 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Prototyping
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Component systems
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Design systems
                                 </li>
                               </ul>
@@ -896,7 +892,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -904,18 +900,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <Lightbulb
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -927,30 +921,30 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   User flows
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Information architecture
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Interaction design
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Wireframing
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   User testing
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Flowcharts
                                 </li>
                               </ul>
@@ -961,7 +955,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -969,18 +963,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <Code
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -992,22 +984,22 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Cursor AI
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Lovable
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Frontend
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Firebase
                                 </li>
                               </ul>
@@ -1018,7 +1010,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -1026,18 +1018,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <ChartLine
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -1049,22 +1039,22 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Strategy
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Roadmapping
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Analytics
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Growth
                                 </li>
                               </ul>
@@ -1075,7 +1065,7 @@ export default function Home() {
                     </div>
 
                     <div className="group/card relative">
-                      <div className="absolute -inset-1 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                         <RadialGradientBorder
                           variant="dash"
                           shineColor={["#00FF9D", "#10b981"]}
@@ -1083,18 +1073,16 @@ export default function Home() {
                           duration={3}
                           size="md"
                           className="w-full h-full"
-                        >
-                          <div className="w-full h-full"></div>
-                        </RadialGradientBorder>
+                        />
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
                               <Robot
                                 size={40}
                                 weight="fill"
-                                className="text-neutral-60 group-hover/card:text-[#00FF9D] group-hover/card:scale-110 transition-all duration-300"
+                                className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
                               />
                               {/* Glow effect only on card hover */}
                               <div className="absolute inset-0 bg-[#00FF9D]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -1106,22 +1094,22 @@ export default function Home() {
                           <div className="flex-1 flex flex-col justify-center">
                             <div className="grid grid-cols-2 gap-x-4">
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Updated workflows
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   AI integration
                                 </li>
                               </ul>
                               <ul className="space-y-1.5">
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Efficiency tools
                                 </li>
-                                <li className="text-neutral-40 text-xs text-left font-medium flex items-center gap-2 group-hover/card:text-neutral-20 transition-colors duration-200">
-                                  <div className="w-1 h-1 bg-[#00FF9D] rounded-full flex-shrink-0"></div>
+                                <li className="text-neutral-40 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                                  <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#00FF9D] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                                   Future-ready
                                 </li>
                               </ul>
@@ -1157,7 +1145,7 @@ export default function Home() {
                         employments & studies
                       </p>
                     </div>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">💼</span>
                     </span>
                   </div>
@@ -1266,7 +1254,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       My Process
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">🔍</span>
                     </span>
                   </div>
@@ -1442,7 +1430,7 @@ export default function Home() {
                       <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                         View My Work
                       </h2>
-                      <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                      <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                         <span className="animate-pulse-subtle">📁</span>
                       </span>
                     </div>
@@ -1534,7 +1522,7 @@ export default function Home() {
                     <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Currently Working On
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">🚀</span>
                     </span>
                   </div>

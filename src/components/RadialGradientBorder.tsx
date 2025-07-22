@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 interface RadialGradientBorderProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   variant?: "dash" | "gradient" | "pulse";
   shineColor?: string[];
   borderWidth?: number;
@@ -88,14 +88,14 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
 
       {/* Content card positioned on top to create border effect */}
       <div
-        className={`relative backdrop-blur-sm rounded-2xl ${sizeClasses[size]} flex items-center justify-center`}
+        className={`relative rounded-2xl ${sizeClasses[size]} flex items-center justify-center`}
         style={{
           position: "absolute",
           top: `${borderWidth}px`,
           left: `${borderWidth}px`,
           right: `${borderWidth}px`,
           bottom: `${borderWidth}px`,
-          backgroundColor: "#232323",
+          backgroundColor: "transparent",
           zIndex: 2,
         }}
       >

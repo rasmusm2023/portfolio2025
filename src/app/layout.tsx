@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk } from "next/font/google";
+import { hankenGrotesk, orbitron, audiowide } from "./fonts";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 // import CustomCursor from "@/components/CustomCursor";
@@ -7,12 +7,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
-
-const hanken = Hanken_Grotesk({
-  subsets: ["latin"],
-  display: "swap", // Optimize font loading
-  preload: true,
-});
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
@@ -45,7 +39,9 @@ export default function RootLayout({
           type="image/svg+xml"
         />
       </head>
-      <body className={`${hanken.className} antialiased bg-neutral-100`}>
+      <body
+        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} antialiased bg-neutral-100`}
+      >
         <PerformanceOptimizer />
         <PerformanceMonitor />
         <Header />

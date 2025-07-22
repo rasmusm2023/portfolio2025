@@ -86,7 +86,7 @@ function FilmCard({
       href={imdbUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-32 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200 cursor-pointer group"
+      className="flex-shrink-0 w-32 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#4F46E5] transition-colors duration-200 cursor-pointer group"
     >
       <div className="relative w-full h-full">
         {coverImage ? (
@@ -148,7 +148,7 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
+      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#4F46E5] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
@@ -323,7 +323,7 @@ function FavoriteSongs() {
             rel="noopener noreferrer"
             className="cursor-pointer group/song"
           >
-            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover/song:border-[#00FF9D] transition-colors duration-200 relative">
+            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover/song:border-[#4F46E5] transition-colors duration-200 relative">
               <Image
                 src={song.albumCover}
                 alt={`${song.title} by ${song.artist}`}
@@ -426,22 +426,55 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       My Time
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">⏰</span>
                     </span>
                   </div>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
+                    {/* Time Display */}
                     <div className="text-center">
-                      <div className="text-3xl font-mono font-bold text-[#00FF9D] mb-1">
-                        <LiveClock />
-                      </div>
-                      <div className="text-neutral-60 text-xs">
-                        Stockholm Time (CET/CEST)
+                      <div className="relative">
+                        <div className="text-4xl font-audiowide font-bold text-[#4F46E5] mb-2 tracking-wider">
+                          <LiveClock />
+                        </div>
+                        {/* Animated dots */}
+                        <div className="flex justify-center gap-1 mb-2">
+                          <div className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"></div>
+                          <div
+                            className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"
+                            style={{ animationDelay: "0.5s" }}
+                          ></div>
+                          <div
+                            className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"
+                            style={{ animationDelay: "1s" }}
+                          ></div>
+                        </div>
+                        <div className="text-neutral-60 text-xs font-medium">
+                          Stockholm Time (CET/CEST)
+                        </div>
                       </div>
                     </div>
+
+                    {/* Calendar Style Date */}
                     <div className="text-center">
-                      <div className="text-neutral-60 text-sm">
-                        <LiveDate />
+                      <div className="inline-block bg-neutral-80/30 backdrop-blur-sm border border-neutral-100/20 rounded-xl p-6">
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-12 h-12 bg-gradient-to-br from-[#4F46E5] to-[#06B6D4] rounded-lg flex items-center justify-center">
+                            <span className="text-neutral-100 text-lg font-bold">
+                              {new Date().getDate()}
+                            </span>
+                          </div>
+                          <div className="text-left">
+                            <div className="text-neutral-0 text-base font-semibold">
+                              {new Date().toLocaleDateString("en-US", {
+                                month: "long",
+                              })}
+                            </div>
+                            <div className="text-neutral-60 text-sm">
+                              {new Date().getFullYear()}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -466,7 +499,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Traits
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">🎭</span>
                     </span>
                   </div>
@@ -635,7 +668,7 @@ export default function AboutPage() {
                     <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center">
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
                       <span className="animate-pulse-subtle">🎬</span>
                     </span>
                   </div>
