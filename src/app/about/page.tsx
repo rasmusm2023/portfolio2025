@@ -398,10 +398,6 @@ export default function AboutPage() {
                     A passionate designer and developer with a love for creating
                     beautiful, functional experiences that make a difference.
                   </p>
-                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
-                    From concept to execution, I bring ideas to life through
-                    thoughtful design and clean code.
-                  </p>
                 </div>
               </div>
             </div>

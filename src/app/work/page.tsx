@@ -11,7 +11,8 @@ const caseStudies = {
       title: "Portfolio Website 2025",
       description: "Modern portfolio built with Next.js and Tailwind CSS",
       category: "Web Development",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
     {
@@ -19,7 +20,8 @@ const caseStudies = {
       title: "E-commerce Platform",
       description: "Full-stack e-commerce solution with modern UI/UX",
       category: "Full Stack",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
     {
@@ -27,7 +29,8 @@ const caseStudies = {
       title: "AI Chat Application",
       description: "Real-time chat app with AI-powered responses and analytics",
       category: "AI/ML",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
   ],
@@ -37,7 +40,8 @@ const caseStudies = {
       title: "Mobile App Design",
       description: "Cross-platform mobile application with intuitive design",
       category: "Mobile Development",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
     {
@@ -45,7 +49,8 @@ const caseStudies = {
       title: "Brand Identity System",
       description: "Complete brand identity and design system for startup",
       category: "Branding",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
     {
@@ -53,7 +58,8 @@ const caseStudies = {
       title: "SaaS Dashboard",
       description: "Comprehensive admin dashboard with advanced analytics",
       category: "SaaS",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
   ],
@@ -63,7 +69,8 @@ const caseStudies = {
       title: "Data Visualization Dashboard",
       description: "Interactive dashboard for business analytics",
       category: "Data Visualization",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
     {
@@ -71,7 +78,8 @@ const caseStudies = {
       title: "Restaurant Management System",
       description: "Complete POS and inventory management solution",
       category: "Business Software",
-      image: "/placeholder-project.jpg",
+      image:
+        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
       link: "#",
     },
   ],
@@ -86,8 +94,8 @@ export default function WorkPage() {
           <section className="h-[80vh] relative">
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(255, 181, 113, 0.6)", // Peach/orange
-                secondary: "rgba(255, 140, 244, 0.4)", // Pink
+                primary: "rgba(205, 255, 113, 0.6)", // Lime/avocado green #CDFF71
+                secondary: "rgba(215, 255, 141, 0.4)", // Lighter green #D7FF8D
               }}
             />
             <div
@@ -96,7 +104,7 @@ export default function WorkPage() {
             >
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-home)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-work)] bg-clip-text text-transparent font-hanken">
                     My Work
                   </span>
                   <br />
@@ -150,8 +158,12 @@ export default function WorkPage() {
                               key={project.id}
                               className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer"
                             >
-                              {/* Project background - you can add actual images here */}
-                              <div className="absolute inset-0 bg-gradient-to-br from-neutral-80 to-neutral-90" />
+                              {/* Project background image */}
+                              <img
+                                src={project.image}
+                                alt={project.title}
+                                className="absolute inset-0 w-full h-full object-cover"
+                              />
 
                               {/* Overlay gradient */}
                               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />

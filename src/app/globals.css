@@ -40,15 +40,27 @@
     #fff 82.09%
   );
   --gradient-heading-projects: radial-gradient(
-    47.08% 208.33% at 79.71% 128.33%,
-    rgba(237, 125, 255, 0.8) 11.69%,
-    rgba(108, 84, 255, 0.8) 35.44%,
-    rgba(248, 248, 248, 0.8) 70.24%
+    55.95% 97.37% at 46.69% 2.63%,
+    rgba(237, 125, 255, 0.8) 0%,
+    rgba(108, 84, 255, 0.8) 36.01%,
+    rgba(248, 248, 248, 0.8) 82.09%
+  );
+  --gradient-heading-projects-pink: radial-gradient(
+    55.95% 97.37% at 46.69% 2.63%,
+    rgba(237, 125, 255, 0.8) 0%,
+    rgba(237, 125, 255, 0.6) 36.01%,
+    rgba(248, 248, 248, 0.8) 82.09%
   );
   --gradient-home-who: radial-gradient(
     55.95% 97.37% at 46.69% 2.63%,
     #00ff9d 0%,
     #99ffd9 36.01%,
+    #fff 82.09%
+  );
+  --gradient-hero-work: radial-gradient(
+    55.95% 97.37% at 46.69% 2.63%,
+    #cdff71 0%,
+    #d7ff8d 36.01%,
     #fff 82.09%
   );
 

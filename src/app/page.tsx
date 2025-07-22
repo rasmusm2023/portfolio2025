@@ -572,7 +572,7 @@ export default function Home() {
                   <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-10 font-medium text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-100 font-bold text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
@@ -795,10 +795,10 @@ export default function Home() {
                           size="md"
                           className="w-full h-full"
                         >
-                          <div className="w-full h-full"></div>
+                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -855,7 +855,7 @@ export default function Home() {
                           <div className="w-full h-full"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -905,10 +905,10 @@ export default function Home() {
                           size="md"
                           className="w-full h-full"
                         >
-                          <div className="w-full h-full"></div>
+                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -973,7 +973,7 @@ export default function Home() {
                           <div className="w-full h-full"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -1027,10 +1027,10 @@ export default function Home() {
                           size="md"
                           className="w-full h-full"
                         >
-                          <div className="w-full h-full"></div>
+                          <div className="w-full h-full bg-neutral-90/50 backdrop-blur-sm rounded-2xl"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -1087,7 +1087,7 @@ export default function Home() {
                           <div className="w-full h-full"></div>
                         </RadialGradientBorder>
                       </div>
-                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300 z-10">
+                      <div className="relative bg-neutral-90/50 backdrop-blur-sm rounded-2xl p-6 h-52 cursor-pointer transition-all duration-300">
                         <div className="flex flex-col h-full">
                           <div className="flex flex-col items-center text-center mb-4">
                             <div className="relative mb-3">
@@ -1586,14 +1586,14 @@ export default function Home() {
           <section id="projects-section" className="py-48">
             <div className="text-left w-full max-w-[1600px] p-8">
               <div className="relative w-fit mx-auto mb-16">
-                <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
+                <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects-pink)] bg-clip-text text-transparent font-hanken pb-2">
                   Some of my previous projects
                 </h2>
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ED7DFF] to-transparent opacity-50" />
               </div>
               <div className="grid grid-cols-2 gap-12">
                 {/* First Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
@@ -1609,11 +1609,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
                         UX/UI Design
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
                       Noted
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1623,11 +1623,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Second Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
@@ -1643,11 +1643,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
                         AI/ML
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
                       Zmartrest AI
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1657,11 +1657,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Third Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
@@ -1677,11 +1677,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
                         Mobile App
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
                       Fokus
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1691,11 +1691,11 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 {/* Fourth Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#10b981]/60">
+                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
                   {/* Project background image */}
                   <Image
                     src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
@@ -1711,11 +1711,11 @@ export default function Home() {
                   {/* Project content */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#10b981]/20 text-[#10b981] text-base font-medium rounded-full font-hanken">
+                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
                         SaaS Platform
                       </span>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#10b981] transition-colors font-hanken">
+                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
                       Emplojd
                     </h3>
                     <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1725,7 +1725,7 @@ export default function Home() {
                   </div>
 
                   {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#10b981]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
             </div>
