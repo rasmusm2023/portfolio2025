@@ -119,14 +119,14 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
         {infiniteTraits.map((trait, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-80 bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-2xl p-6 hover:border-[#00FF9D] transition-all duration-300 cursor-pointer relative z-10 group/card"
+            className="flex-shrink-0 w-80 bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-2xl p-6 hover:border-[#ffb571] transition-all duration-300 cursor-pointer relative z-10 group/card"
           >
             {/* Radial shine effect */}
             <div
               className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-2xl"
               style={{
                 background:
-                  "radial-gradient(ellipse at top, rgba(0,255,157,0.1) 0%, transparent 70%)",
+                  "radial-gradient(ellipse at top, rgba(255,181,113,0.1) 0%, transparent 70%)",
               }}
             ></div>
 

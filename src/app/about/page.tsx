@@ -12,8 +12,11 @@ import ArrivalCover from "@/films/arrival.png";
 import RasmusImage from "@/images/rasmus.jpg";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
-import { useState, useEffect } from "react";
+import HideawayCover from "@/music/hideaway-hardwell-atmozfears.jpg";
+import MoUpFrontCover from "@/music/mo-up-front.jpg";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import CursorTooltip from "@/components/CursorTooltip";
 
 // Live Clock Component
 function LiveClock() {
@@ -86,7 +89,7 @@ function FilmCard({
       href={imdbUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-32 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#4F46E5] transition-colors duration-200 cursor-pointer group"
+      className="flex-shrink-0 w-32 h-44 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#ffb571] transition-colors duration-200 cursor-pointer group"
     >
       <div className="relative w-full h-full">
         {coverImage ? (
@@ -96,7 +99,7 @@ function FilmCard({
               alt={`${title} (${year})`}
               className="w-full h-full object-cover"
               width={128}
-              height={192}
+              height={176}
             />
             <div className="absolute inset-0 bg-black/30"></div>
           </>
@@ -112,7 +115,7 @@ function FilmCard({
           </div>
         )}
         {coverImage && (
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3">
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-3 pb-4">
             <h3 className="text-white font-semibold text-sm mb-1">{title}</h3>
             <p className="text-white/80 text-xs">{year}</p>
           </div>
@@ -148,7 +151,7 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#4F46E5] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
+      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#ffb571] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
@@ -297,17 +300,16 @@ function FavoriteSongs() {
         "https://open.spotify.com/track/4Q0qVhFQa7j6jRKzo3HDmP?si=a1ad3bd57d994472ttps://open.spotify.com/track/3z8h0TU7ReDPLIbEnYhWZb",
     },
     {
-      title: "whoa (mind in awe) - Remix",
-      artist: "Juice WRLD, XXXTENTACION",
-      albumCover:
-        "https://upload.wikimedia.org/wikipedia/en/8/8c/Whoa_%28Mind_in_Awe%29_cover.png",
+      title: "Hideaway",
+      artist: "Hardwell, Atmozfears",
+      albumCover: HideawayCover,
       spotifyUrl:
-        "https://open.spotify.com/track/4lkpfY2wfmHj958Fr32kHS?si=a5abdd08a45f4c7f",
+        "https://open.spotify.com/track/1mBF7Ulsa4z5hWor4eduYb?si=45bf22053e694e18",
     },
     {
       title: "MO UP FRONT",
       artist: "NLE Choppa",
-      albumCover: "/music/mo-up-front.jpg",
+      albumCover: MoUpFrontCover,
       spotifyUrl:
         "https://open.spotify.com/track/0wZ0RnMZFR97fq1Yq8Ee57?si=260919d34b1144b0",
     },
@@ -317,13 +319,42 @@ function FavoriteSongs() {
     <>
       {songs.map((song, index) => (
         <div key={index} className="flex-shrink-0">
-          <a
-            href={song.spotifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer group/song"
-          >
-            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent group-hover/song:border-[#4F46E5] transition-colors duration-200 relative">
+          <div className="relative">
+            <a
+              href={song.spotifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0 z-10 cursor-pointer"
+              onMouseEnter={(e) => {
+                const coverDiv = e.currentTarget.parentElement?.querySelector(
+                  ".album-cover"
+                ) as HTMLElement;
+                if (coverDiv) {
+                  coverDiv.style.borderColor = "#ffb571";
+                  const glowElement = coverDiv.querySelector(
+                    ".glow-effect"
+                  ) as HTMLElement;
+                  if (glowElement) {
+                    glowElement.style.opacity = "1";
+                  }
+                }
+              }}
+              onMouseLeave={(e) => {
+                const coverDiv = e.currentTarget.parentElement?.querySelector(
+                  ".album-cover"
+                ) as HTMLElement;
+                if (coverDiv) {
+                  coverDiv.style.borderColor = "transparent";
+                  const glowElement = coverDiv.querySelector(
+                    ".glow-effect"
+                  ) as HTMLElement;
+                  if (glowElement) {
+                    glowElement.style.opacity = "0";
+                  }
+                }
+              }}
+            />
+            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent transition-all duration-200 relative album-cover">
               <Image
                 src={song.albumCover}
                 alt={`${song.title} by ${song.artist}`}
@@ -331,12 +362,13 @@ function FavoriteSongs() {
                 width={112}
                 height={112}
               />
-              {/* Radial green shine effect */}
+              {/* Radial blue shine effect */}
               <div
-                className="absolute inset-0 opacity-0 group-hover/song:opacity-100 transition-opacity duration-300 rounded-xl"
+                className="absolute inset-0 transition-opacity duration-300 rounded-xl glow-effect"
                 style={{
+                  opacity: "0",
                   background:
-                    "radial-gradient(ellipse at top, rgba(0,255,157,0.4) 0%, rgba(0,255,157,0.1) 40%, transparent 80%)",
+                    "radial-gradient(ellipse at top, rgba(255,181,113,0.4) 0%, rgba(255,181,113,0.1) 40%, transparent 80%)",
                 }}
               ></div>
             </div>
@@ -348,7 +380,7 @@ function FavoriteSongs() {
                 {song.artist}
               </p>
             </div>
-          </a>
+          </div>
         </div>
       ))}
     </>
@@ -373,8 +405,8 @@ export default function AboutPage() {
           <section className="h-[80vh] relative">
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(79, 70, 229, 0.6)", // Indigo blue
-                secondary: "rgba(6, 182, 212, 0.4)", // Cyan/teal
+                primary: "rgba(255, 181, 113, 0.6)", // Peach
+                secondary: "rgba(255, 140, 244, 0.4)", // Pink
               }}
             />
             <div
@@ -423,7 +455,7 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       My Time
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
@@ -434,18 +466,18 @@ export default function AboutPage() {
                     {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
-                        <div className="text-4xl font-audiowide font-bold text-[#4F46E5] mb-2 tracking-wider">
+                        <div className="text-4xl font-audiowide font-bold text-[#ffb571] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
                         {/* Animated dots */}
                         <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"></div>
                           <div
-                            className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"
+                            className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"
                             style={{ animationDelay: "0.5s" }}
                           ></div>
                           <div
-                            className="w-1 h-1 bg-[#4F46E5] rounded-full animate-pulse"
+                            className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"
                             style={{ animationDelay: "1s" }}
                           ></div>
                         </div>
@@ -459,8 +491,8 @@ export default function AboutPage() {
                     <div className="text-center">
                       <div className="inline-block bg-neutral-80/30 backdrop-blur-sm border border-neutral-100/20 rounded-xl p-6">
                         <div className="flex items-center justify-center gap-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-[#4F46E5] to-[#06B6D4] rounded-lg flex items-center justify-center">
-                            <span className="text-neutral-100 text-lg font-bold">
+                          <div className="w-12 h-12 bg-gradient-to-br from-[#ffb571] to-[#ff8cf4] rounded-lg flex items-center justify-center">
+                            <span className="text-neutral-100 text-2xl font-bold">
                               {new Date().getDate()}
                             </span>
                           </div>
@@ -496,7 +528,7 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Traits
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
@@ -565,30 +597,34 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Music
-                    </h2>
-                    <a
-                      href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-6 h-6 animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
-                    >
-                      <Image
-                        src={SpotifyIcon.src}
-                        alt="Spotify"
-                        className="w-full h-full"
-                        width={24}
-                        height={24}
-                      />
-                    </a>
+                    <div className="flex items-baseline gap-2">
+                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                        Music
+                      </h2>
+                      <p className="text-lg text-neutral-50 font-hanken">
+                        I'm currently listening to
+                      </p>
+                    </div>
+                    <CursorTooltip>
+                      <a
+                        href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                        data-tooltip="Open My Spotify"
+                        data-tooltip-icon="🎵"
+                      >
+                        <Image
+                          src={SpotifyIcon.src}
+                          alt="Spotify"
+                          className="w-6 h-6"
+                          width={24}
+                          height={24}
+                        />
+                      </a>
+                    </CursorTooltip>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-neutral-60 text-base font-semibold">
-                        I'm currently listening to:
-                      </span>
-                    </div>
                     <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                       <FavoriteSongs />
                     </div>
@@ -611,22 +647,26 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
-                      Books
-                    </h2>
-                    <a
-                      href="/reading-list"
-                      className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
-                    >
-                      📚
-                    </a>
+                    <div className="flex items-baseline gap-2">
+                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                        Books
+                      </h2>
+                      <p className="text-lg text-neutral-50 font-hanken">
+                        I'm currently reading or listening to
+                      </p>
+                    </div>
+                    <CursorTooltip>
+                      <a
+                        href="/reading-list"
+                        className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                        data-tooltip="View Reading List"
+                        data-tooltip-icon="📚"
+                      >
+                        📚
+                      </a>
+                    </CursorTooltip>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-neutral-60 text-base font-semibold">
-                        I'm currently reading or listening to:
-                      </span>
-                    </div>
                     <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                       <BookCard
                         title="Hjärnstark : hur motion och träning stärker din hjärna"
@@ -665,7 +705,7 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-0 font-hanken">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
                       Favourite Films
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">

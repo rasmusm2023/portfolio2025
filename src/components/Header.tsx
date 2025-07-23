@@ -25,10 +25,10 @@ const Header = () => {
         clearTimeout(timeoutId);
       }
 
-      // Hide background after 1 second (accounting for animation duration)
+      // Hide background after 1.5 seconds (1 second longer than before)
       timeoutId = setTimeout(() => {
         setShowBackground(false);
-      }, 500);
+      }, 1500);
     };
 
     window.addEventListener("scroll", handleScroll);
