@@ -3,6 +3,106 @@
 import { useState } from "react";
 import AnimatedBlob from "@/components/AnimatedBlob";
 
+// Custom Floating Label Input Component
+function FloatingLabelInput({
+  id,
+  name,
+  type = "text",
+  placeholder,
+  required = false,
+  rows = 4,
+  isTextarea = false,
+  value,
+  onChange,
+}: {
+  id: string;
+  name: string;
+  type?: string;
+  placeholder: string;
+  required?: boolean;
+  rows?: number;
+  isTextarea?: boolean;
+  value: string;
+  onChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(value.length > 0);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setIsFocused(false);
+    setHasValue(e.target.value.length > 0);
+  };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setHasValue(e.target.value.length > 0);
+    onChange(e);
+  };
+
+  const isActive = isFocused || hasValue;
+
+  if (isTextarea) {
+    return (
+      <div className="relative">
+        <textarea
+          id={id}
+          name={name}
+          value={value}
+          required={required}
+          rows={rows}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          placeholder={placeholder}
+        />
+        <label
+          htmlFor={id}
+          className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
+            isActive
+              ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+              : "top-3 text-base text-neutral-40"
+          }`}
+        >
+          {placeholder}
+        </label>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
+      <input
+        type={type}
+        id={id}
+        name={name}
+        value={value}
+        required={required}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        placeholder={placeholder}
+      />
+      <label
+        htmlFor={id}
+        className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
+          isActive
+            ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-40"
+        }`}
+      >
+        {placeholder}
+      </label>
+    </div>
+  );
+}
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -88,87 +188,52 @@ export default function ContactPage() {
                   Let's have a chat 💬
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-base font-medium text-neutral-30 mb-2"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
-                      placeholder="Your name"
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
 
-                  <div>
-                    <label
-                      htmlFor="email"
-                      className="block text-base font-medium text-neutral-30 mb-2"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
-                      placeholder="your@email.com"
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
 
-                  <div>
-                    <label
-                      htmlFor="subject"
-                      className="block text-base font-medium text-neutral-30 mb-2"
-                    >
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200"
-                      placeholder="What's this about?"
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    id="subject"
+                    name="subject"
+                    type="text"
+                    placeholder="Subject"
+                    required
+                    value={formData.subject}
+                    onChange={handleChange}
+                  />
 
-                  <div>
-                    <label
-                      htmlFor="message"
-                      className="block text-base font-medium text-neutral-30 mb-2"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={4}
-                      className="w-full px-4 py-3 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-neutral-40 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500 transition-all duration-200 resize-none"
-                      placeholder="Type your message..."
-                    />
-                  </div>
+                  <FloatingLabelInput
+                    id="message"
+                    name="message"
+                    placeholder="Message"
+                    required
+                    rows={4}
+                    isTextarea
+                    value={formData.message}
+                    onChange={handleChange}
+                  />
 
                   <button
                     type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
                   >
-                    Send Message
+                    Send message
                   </button>
 
                   {/* OR Divider */}
@@ -205,7 +270,7 @@ export default function ContactPage() {
                             : "bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 hover:shadow-lg"
                         }`}
                       >
-                        {emailCopied ? "Copied!" : "Copy"}
+                        {emailCopied ? "Copied!" : "Copy email"}
                       </button>
                     </div>
                   </div>

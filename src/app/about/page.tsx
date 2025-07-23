@@ -439,6 +439,75 @@ export default function AboutPage() {
           <section className="py-16 px-24">
             <div className="text-left w-full max-w-[1600px]">
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
+                {/* Personal Traits - Large section */}
+                <div
+                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{ transform: `scale(${getBoxScale("traits")})` }}
+                  onMouseEnter={() => setHoveredBox("traits")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                      Traits
+                    </h2>
+                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
+                      <span className="animate-pulse-subtle">🎭</span>
+                    </span>
+                  </div>
+                  <TraitsCarousel
+                    traits={[
+                      {
+                        title: "Home Cook",
+                        description:
+                          "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
+                        emoji: "👨‍🍳",
+                        image:
+                          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Tech Explorer",
+                        description:
+                          "Always curious about new technologies and how they can improve user experiences.",
+                        emoji: "🔬",
+                        image:
+                          "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Design Thinker",
+                        description:
+                          "I approach problems with empathy and user-centered design principles.",
+                        emoji: "💭",
+                        image:
+                          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Stockholm Local",
+                        description:
+                          "Living in one of the world's most design-forward cities inspires my work daily.",
+                        emoji: "🏙️",
+                        image:
+                          "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
+                      },
+                      {
+                        title: "Animal Lover",
+                        description:
+                          "I love animals - I have had both cats and dogs as pets.",
+                        emoji: "🐶",
+                        image:
+                          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=400&h=400&fit=crop&crop=center",
+                      },
+                    ]}
+                  />
+                </div>
+
                 {/* Local Time - Small section */}
                 <div
                   className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
@@ -512,75 +581,6 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Personal Traits - Large section */}
-                <div
-                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("traits")})` }}
-                  onMouseEnter={() => setHoveredBox("traits")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
-                      Traits
-                    </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">🎭</span>
-                    </span>
-                  </div>
-                  <TraitsCarousel
-                    traits={[
-                      {
-                        title: "Home Cook",
-                        description:
-                          "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
-                        emoji: "👨‍🍳",
-                        image:
-                          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Tech Explorer",
-                        description:
-                          "Always curious about new technologies and how they can improve user experiences.",
-                        emoji: "🔬",
-                        image:
-                          "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Design Thinker",
-                        description:
-                          "I approach problems with empathy and user-centered design principles.",
-                        emoji: "💭",
-                        image:
-                          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Stockholm Local",
-                        description:
-                          "Living in one of the world's most design-forward cities inspires my work daily.",
-                        emoji: "🏙️",
-                        image:
-                          "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Animal Lover",
-                        description:
-                          "I love animals - I have had both cats and dogs as pets.",
-                        emoji: "🐶",
-                        image:
-                          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=400&h=400&fit=crop&crop=center",
-                      },
-                    ]}
-                  />
-                </div>
-
                 {/* Music - Medium section */}
                 <div
                   className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
@@ -612,7 +612,7 @@ export default function AboutPage() {
                         rel="noopener noreferrer"
                         className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                         data-tooltip="Open My Spotify"
-                        data-tooltip-icon="🎵"
+                        data-tooltip-icon="↗"
                       >
                         <Image
                           src={SpotifyIcon.src}
@@ -660,7 +660,7 @@ export default function AboutPage() {
                         href="/reading-list"
                         className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
                         data-tooltip="View Reading List"
-                        data-tooltip-icon="📚"
+                        data-tooltip-icon="→"
                       >
                         📚
                       </a>

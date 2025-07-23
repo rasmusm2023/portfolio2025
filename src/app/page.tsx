@@ -17,6 +17,7 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import AnimatedBorder from "@/components/AnimatedBorder";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
+import CircularTooltip from "@/components/CircularTooltip";
 import {
   MagnifyingGlass,
   Palette,
@@ -26,6 +27,97 @@ import {
   Robot,
   Icon,
 } from "@phosphor-icons/react";
+
+// Custom Floating Label Input Component
+function FloatingLabelInput({
+  id,
+  name,
+  type = "text",
+  placeholder,
+  required = false,
+  rows = 4,
+  isTextarea = false,
+}: {
+  id: string;
+  name: string;
+  type?: string;
+  placeholder: string;
+  required?: boolean;
+  rows?: number;
+  isTextarea?: boolean;
+}) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setIsFocused(false);
+    setHasValue(e.target.value.length > 0);
+  };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setHasValue(e.target.value.length > 0);
+  };
+
+  const isActive = isFocused || hasValue;
+
+  if (isTextarea) {
+    return (
+      <div className="relative">
+        <textarea
+          id={id}
+          name={name}
+          required={required}
+          rows={rows}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          onChange={handleChange}
+          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          placeholder={placeholder}
+        />
+        <label
+          htmlFor={id}
+          className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
+            isActive
+              ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+              : "top-3 text-base text-neutral-40"
+          }`}
+        >
+          {placeholder}
+        </label>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative">
+      <input
+        type={type}
+        id={id}
+        name={name}
+        required={required}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        placeholder={placeholder}
+      />
+      <label
+        htmlFor={id}
+        className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
+          isActive
+            ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-40"
+        }`}
+      >
+        {placeholder}
+      </label>
+    </div>
+  );
+}
 
 // Live Clock Component
 function LiveClock() {
@@ -447,64 +539,51 @@ export default function Home() {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
   const scrambleRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
-  // GSAP Scramble Effect
+  // Number Counter Animation
   useEffect(() => {
-    const loadGSAP = async () => {
-      try {
-        const { gsap } = await import("gsap");
-        const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-
-        gsap.registerPlugin(ScrollTrigger);
-
-        // Initialize scramble effect for each number
-        scrambleRefs.current.forEach((ref, index) => {
-          if (ref) {
-            const originalText = ref.getAttribute("data-value") || "";
-
-            // Set initial state
-            gsap.set(ref, {
-              opacity: 0,
-              scale: 0.8,
-              text: "0+",
-            });
-
-            // Create scroll trigger for each number
-            ScrollTrigger.create({
-              trigger: ref,
-              start: "top 80%",
-              onEnter: () => {
-                // Fade in animation
-                gsap.to(ref, {
-                  opacity: 1,
-                  scale: 1,
-                  duration: 0.5,
-                  ease: "power2.out",
-                });
-
-                // Simple fade in animation
-                gsap.fromTo(
-                  ref,
-                  {
-                    opacity: 0,
-                    scale: 0.8,
-                  },
-                  {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 1,
-                    ease: "power2.out",
-                  }
-                );
-              },
-            });
-          }
-        });
-      } catch (error) {
-        console.log("GSAP not available for scramble effect");
-      }
+    const observerOptions = {
+      threshold: 0.5,
+      rootMargin: "0px 0px -100px 0px",
     };
 
-    loadGSAP();
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const target = entry.target as HTMLElement;
+          const finalValue = parseInt(target.getAttribute("data-value") || "0");
+
+          // Reset to 0 and set opacity to 0
+          target.textContent = "0";
+          target.style.opacity = "0";
+
+          // Animate counting up and fade in
+          let currentValue = 0;
+          const increment = finalValue / 24; // 24 steps over 0.8 seconds
+          const timer = setInterval(() => {
+            currentValue += increment;
+            if (currentValue >= finalValue) {
+              currentValue = finalValue;
+              clearInterval(timer);
+            }
+            target.textContent = Math.floor(currentValue).toString();
+            // Fade in opacity from 0 to 1 over the same duration
+            const progress = currentValue / finalValue;
+            target.style.opacity = progress.toString();
+          }, 33); // ~30fps
+        }
+      });
+    }, observerOptions);
+
+    // Observe all number elements
+    scrambleRefs.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const handleCopyEmail = () => {
@@ -544,22 +623,7 @@ export default function Home() {
               style={{ height: "100vh" }}
             >
               <div className="text-left w-full">
-                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border-2 border-neutral-100/10 hover:border-transparent overflow-hidden transition-all duration-500 relative">
-                  {/* Gradient border on hover */}
-                  <div
-                    className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{
-                      background: "var(--gradient-hero-home-accent)",
-                      padding: "2px",
-                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      maskComposite: "exclude",
-                      WebkitMask:
-                        "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "xor",
-                    }}
-                  >
-                    <div className="w-full h-full rounded-full bg-neutral-80 backdrop-blur-sm"></div>
-                  </div>
+                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border-2 border-neutral-100/10 overflow-hidden transition-all duration-500 relative">
                   <div className="flex items-center gap-4 px-4 py-2 relative z-10">
                     <div className="relative">
                       <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
@@ -572,7 +636,7 @@ export default function Home() {
                   <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
                     <a
                       href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#00ff9d] to-accent-2-100 text-neutral-100 font-bold text-sm hover:from-[#00ff9d]/90 hover:to-accent-2-100/90 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-10 text-neutral-100 font-bold text-sm hover:bg-neutral-20 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
                     >
                       <span>Message me</span>
                       <svg
@@ -1414,158 +1478,6 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Work Links - Medium section */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 bg-gradient-to-br from-neutral-90/50 to-neutral-80/30 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-[#00FF9D]/60 hover:from-neutral-90/60 hover:to-neutral-80/40 transition-all duration-300 relative group"
-                  style={{ transform: `scale(${getBoxScale("work-link")})` }}
-                  onMouseEnter={() => setHoveredBox("work-link")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Button glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#00FF9D]/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                  <div className="relative z-10 flex flex-col h-full">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
-                        View My Work
-                      </h2>
-                      <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                        <span className="animate-pulse-subtle">📁</span>
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-3 w-full">
-                      <a
-                        href="/work"
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#00FF9D]/20 to-accent-2-100/20 backdrop-blur-sm border border-[#00FF9D]/30 hover:shadow-[0_0_10px_rgba(0,255,157,0.2)] transition-all duration-200 group/work"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#00FF9D] to-accent-2-100 rounded-lg flex items-center justify-center">
-                            <span className="text-sm">📋</span>
-                          </div>
-                          <div className="text-left">
-                            <h3 className="text-neutral-10 font-semibold text-base">
-                              Case Studies
-                            </h3>
-                            <p className="text-neutral-40 text-sm">
-                              Full project cases & detailed processes
-                            </p>
-                          </div>
-                        </div>
-                        <svg
-                          className="w-4 h-4 text-neutral-60 group-hover/work:text-[#00FF9D] group-hover/work:translate-x-1 transition-all duration-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </a>
-
-                      <a
-                        href="/design-gallery"
-                        className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-[#ED7DFF]/20 to-[#a855f7]/20 backdrop-blur-sm border border-[#ED7DFF]/30 hover:shadow-[0_0_10px_rgba(237,125,255,0.2)] transition-all duration-200 group/gallery"
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 bg-gradient-to-br from-[#ED7DFF] to-[#a855f7] rounded-lg flex items-center justify-center">
-                            <span className="text-sm">🎨</span>
-                          </div>
-                          <div className="text-left">
-                            <h3 className="text-neutral-10 font-semibold text-base">
-                              Design Gallery
-                            </h3>
-                            <p className="text-neutral-40 text-sm">
-                              Smaller projects & design explorations
-                            </p>
-                          </div>
-                        </div>
-                        <svg
-                          className="w-4 h-4 text-neutral-60 group-hover/gallery:text-[#ED7DFF] group-hover/gallery:translate-x-1 transition-all duration-200"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Currently Working On - Standing section */}
-                <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("current-work")})` }}
-                  onMouseEnter={() => setHoveredBox("current-work")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
-                      Currently Working On
-                    </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">🚀</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-8">
-                    <div className="flex-shrink-0">
-                      <div className="w-48 h-48 rounded-2xl overflow-hidden bg-neutral-80 border-2 border-transparent hover:border-[#00FF9D] transition-colors duration-200">
-                        <Image
-                          src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=400&fit=crop&crop=center"
-                          alt="Project Cover"
-                          className="w-full h-full object-cover"
-                          width={192}
-                          height={192}
-                        />
-                      </div>
-                    </div>
-                    <div className="flex-1 space-y-4">
-                      <h3 className="text-xl font-bold text-neutral-40">
-                        Portfolio Website 2025
-                      </h3>
-                      <p className="text-neutral-60 text-base leading-relaxed">
-                        A modern, interactive portfolio showcasing my design and
-                        development skills. Built with Next.js, TypeScript, and
-                        Tailwind CSS. Features smooth animations, responsive
-                        design, and a unique bento box layout for the about
-                        page.
-                      </p>
-                      <div className="flex flex-wrap gap-3">
-                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                          Next.js{" "}
-                        </span>
-                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                          TypeScript{" "}
-                        </span>
-                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                          Tailwind CSS{" "}
-                        </span>
-                        <span className="px-4 py-2 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                          GSAP{" "}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </section>
@@ -1581,315 +1493,300 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-2 gap-12">
                 {/* First Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
-                  {/* Project background image */}
-                  <Image
-                    src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
-                    alt="Noted App Interface"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    width={1200}
-                    height={900}
-                  />
+                <CircularTooltip>
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                    {/* Project background image */}
+                    <Image
+                      src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
+                      alt="Noted App Interface"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      width={1200}
+                      height={900}
+                    />
 
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
 
-                  {/* Project content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
-                        UX/UI Design
-                      </span>
+                    {/* Project content */}
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      <div className="mb-4">
+                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                          UX/UI Design
+                        </span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                        Noted
+                      </h3>
+                      <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                        A comprehensive note-taking app with intuitive design
+                        and seamless user experience.
+                      </p>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
-                      Noted
-                    </h3>
-                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
-                      A comprehensive note-taking app with intuitive design and
-                      seamless user experience.
-                    </p>
-                  </div>
 
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                    {/* Hover effect */}
+                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </CircularTooltip>
 
                 {/* Second Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
-                  {/* Project background image */}
-                  <Image
-                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
-                    alt="Zmartrest AI Dashboard"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    width={1200}
-                    height={900}
-                  />
+                <CircularTooltip>
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                    {/* Project background image */}
+                    <Image
+                      src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
+                      alt="Zmartrest AI Dashboard"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      width={1200}
+                      height={900}
+                    />
 
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
 
-                  {/* Project content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
-                        AI/ML
-                      </span>
+                    {/* Project content */}
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      <div className="mb-4">
+                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                          AI/ML
+                        </span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                        Zmartrest AI
+                      </h3>
+                      <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                        AI-powered platform for intelligent decision making and
+                        data analysis.
+                      </p>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
-                      Zmartrest AI
-                    </h3>
-                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
-                      AI-powered platform for intelligent decision making and
-                      data analysis.
-                    </p>
-                  </div>
 
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                    {/* Hover effect */}
+                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </CircularTooltip>
 
                 {/* Third Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
-                  {/* Project background image */}
-                  <Image
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
-                    alt="Fokus Mobile App"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    width={1200}
-                    height={900}
-                  />
+                <CircularTooltip>
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                    {/* Project background image */}
+                    <Image
+                      src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
+                      alt="Fokus Mobile App"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      width={1200}
+                      height={900}
+                    />
 
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
 
-                  {/* Project content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
-                        Mobile App
-                      </span>
+                    {/* Project content */}
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      <div className="mb-4">
+                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                          Mobile App
+                        </span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                        Fokus
+                      </h3>
+                      <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                        Productivity app designed to help users stay focused and
+                        achieve their goals.
+                      </p>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
-                      Fokus
-                    </h3>
-                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
-                      Productivity app designed to help users stay focused and
-                      achieve their goals.
-                    </p>
-                  </div>
 
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                    {/* Hover effect */}
+                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </CircularTooltip>
 
                 {/* Fourth Work Box */}
-                <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
-                  {/* Project background image */}
-                  <Image
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
-                    alt="Emplojd HR Platform"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    width={1200}
-                    height={900}
-                  />
+                <CircularTooltip>
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                    {/* Project background image */}
+                    <Image
+                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
+                      alt="Emplojd HR Platform"
+                      className="absolute inset-0 w-full h-full object-cover"
+                      width={1200}
+                      height={900}
+                    />
 
-                  {/* Overlay gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-neutral-100/95" />
 
-                  {/* Project content */}
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
-                        SaaS Platform
-                      </span>
+                    {/* Project content */}
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      <div className="mb-4">
+                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                          SaaS Platform
+                        </span>
+                      </div>
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                        Emplojd
+                      </h3>
+                      <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
+                        Comprehensive HR platform for modern workplace
+                        management and employee engagement.
+                      </p>
                     </div>
-                    <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
-                      Emplojd
-                    </h3>
-                    <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
-                      Comprehensive HR platform for modern workplace management
-                      and employee engagement.
-                    </p>
-                  </div>
 
-                  {/* Hover effect */}
-                  <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                    {/* Hover effect */}
+                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </div>
+                </CircularTooltip>
               </div>
             </div>
           </section>
 
           {/* Contact Section */}
-          <section className="py-48">
+          <section className="py-32">
             <div className="text-left w-full max-w-[1600px] p-8">
-              <div className="relative w-fit mx-auto mb-16">
-                <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-hero-accent)] bg-clip-text text-transparent font-hanken pb-2">
-                  Sounds interesting?
-                </h2>
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ED7DFF] to-transparent opacity-50" />
-              </div>
-
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-                {/* Contact Form */}
-                <div className="space-y-8">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-6">
-                      Let's work together
+                {/* Contact Form - Redesigned */}
+                <div className="space-y-6">
+                  <div className="space-y-4">
+                    <h3 className="text-5xl font-bold text-neutral-0 mb-4 font-hanken">
+                      Let's have a chat 💬
                     </h3>
-                    <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide">
-                      Have a project in mind? I'd love to hear about it. Send me
-                      a message and let's discuss how we can bring your ideas to
-                      life.
+                    <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
+                      I'm always excited to discuss new opportunities and
+                      possibilities.
                     </p>
                   </div>
 
-                  <form
-                    action="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
-                    method="post"
-                    encType="text/plain"
-                    className="space-y-6"
-                  >
-                    <div className="space-y-4">
-                      <div>
-                        <label
-                          htmlFor="name"
-                          className="block text-neutral-0 font-medium mb-2"
-                        >
-                          Name
-                        </label>
-                        <input
-                          type="text"
-                          id="name"
-                          name="name"
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200"
-                          placeholder="Your name"
-                        />
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="email"
-                          className="block text-neutral-0 font-medium mb-2"
-                        >
-                          Email
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          name="email"
-                          required
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200"
-                          placeholder="your.email@example.com"
-                        />
-                      </div>
-
-                      <div>
-                        <label
-                          htmlFor="message"
-                          className="block text-neutral-0 font-medium mb-2"
-                        >
-                          Message
-                        </label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          required
-                          rows={4}
-                          className="w-full px-4 py-3 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 text-neutral-0 placeholder-neutral-60 focus:outline-none focus:border-[#00FF9D] transition-colors duration-200 resize-none"
-                          placeholder="Write your message..."
-                        />
-                      </div>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="px-8 py-3 bg-gradient-to-r from-[#00FF9D] to-[#ED7DFF] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity duration-200"
+                  <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-6">
+                    <form
+                      action="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
+                      method="post"
+                      encType="text/plain"
+                      className="space-y-6"
                     >
-                      Send Message
-                    </button>
-                  </form>
+                      <FloatingLabelInput
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        required
+                      />
+
+                      <FloatingLabelInput
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                      />
+
+                      <FloatingLabelInput
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        placeholder="Subject"
+                        required
+                      />
+
+                      <FloatingLabelInput
+                        id="message"
+                        name="message"
+                        placeholder="Message"
+                        required
+                        rows={4}
+                        isTextarea
+                      />
+
+                      <button
+                        type="submit"
+                        className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                      >
+                        Send message
+                      </button>
+                    </form>
+                  </div>
                 </div>
 
-                {/* Contact Information */}
-                <div className="space-y-8">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold text-neutral-0 mb-6">
-                      Contact Information
+                {/* Contact Information - Redesigned */}
+                <div className="space-y-6">
+                  <div className="space-y-4">
+                    <h3 className="text-5xl font-bold text-neutral-50 mb-4 font-hanken">
+                      Get in touch
                     </h3>
-                    <p className="text-neutral-60 text-lg font-normal leading-relaxed tracking-wide">
+                    <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
                       Prefer to reach out directly? Here are the best ways to
                       get in touch with me.
                     </p>
                   </div>
 
                   <div className="space-y-6">
-                    <div className="flex items-center gap-4 p-6 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
-                        <span className="text-white font-bold">✉️</span>
+                    <div className="flex items-center gap-4 p-6 rounded-xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:border-purple-500/20 transition-all duration-200">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                          />
+                        </svg>
                       </div>
                       <div className="flex-1">
-                        <h4 className="text-neutral-0 font-semibold mb-1">
+                        <h4 className="text-neutral-0 font-semibold mb-1 text-lg">
                           Email
                         </h4>
                         <a
                           href="mailto:hello@rasmusmattsson.com"
-                          className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200"
+                          className={`transition-colors duration-200 text-base cursor-pointer hover:opacity-90 ${
+                            emailCopied
+                              ? "text-green-500"
+                              : "text-neutral-60 hover:text-neutral-0"
+                          }`}
                         >
                           hello@rasmusmattsson.com
                         </a>
                       </div>
                       <div className="flex gap-2">
                         <button
-                          onClick={() =>
-                            window.open(
-                              "mailto:hello@rasmusmattsson.com",
-                              "_self"
-                            )
-                          }
-                          className="px-3 py-1.5 bg-[#00FF9D] text-white text-xs font-medium rounded-md hover:opacity-90 transition-opacity duration-200"
-                        >
-                          Open
-                        </button>
-                        <button
                           onClick={handleCopyEmail}
-                          className={`px-3 py-1.5 ${
-                            emailCopied ? "bg-green-500" : "bg-neutral-80"
-                          } text-neutral-0 text-xs font-medium rounded-md hover:bg-neutral-70 transition-colors duration-200`}
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                            emailCopied
+                              ? "bg-green-500 text-white shadow-lg"
+                              : "bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 hover:shadow-lg"
+                          }`}
                         >
-                          {emailCopied ? "Copied" : "Copy"}
+                          {emailCopied ? "Copied!" : "Copy email"}
                         </button>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 p-6 rounded-lg bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
-                        <span className="text-white font-bold">💼</span>
+                    <div className="flex items-center gap-4 p-6 rounded-xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:border-purple-500/20 transition-all duration-200">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                        </svg>
                       </div>
-                      <div>
-                        <h4 className="text-neutral-0 font-semibold mb-1">
+                      <div className="flex-1">
+                        <h4 className="text-neutral-0 font-semibold mb-1 text-lg">
                           LinkedIn
                         </h4>
                         <a
                           href="https://linkedin.com/in/rasmus-mattsson"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200"
+                          className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-base"
                         >
                           linkedin.com/in/rasmus-mattsson
                         </a>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="p-6 rounded-lg bg-gradient-to-br from-[#00FF9D]/10 to-[#ED7DFF]/10 border border-neutral-100/10">
-                    <h4 className="text-neutral-0 font-semibold mb-3">
-                      Response Time
-                    </h4>
-                    <p className="text-neutral-60 text-sm">
-                      I typically respond within 24 hours during business days.
-                      For urgent matters, feel free to reach out on LinkedIn.
-                    </p>
                   </div>
                 </div>
               </div>

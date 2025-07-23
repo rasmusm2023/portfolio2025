@@ -97,19 +97,24 @@ export default function CursorTooltip({ children }: CursorTooltipProps) {
         typeof document !== "undefined" &&
         createPortal(
           <div
-            className="fixed px-4 py-3 bg-red-500 border-2 border-white rounded-lg text-white text-base font-bold pointer-events-none whitespace-nowrap transition-all duration-300 ease-out"
+            className="fixed px-3 py-1.5 bg-white/95 backdrop-blur-md border border-white/40 rounded-xl text-neutral-90 text-xs font-medium pointer-events-none shadow-lg flex items-center justify-center text-center select-none"
             style={{
-              left: `${position.x}px`,
-              top: `${position.y}px`,
-              opacity: isVisible ? 1 : 0,
+              left: `${position.x + 16}px`,
+              top: `${position.y - 8}px`,
+              transform: "translate(0%, -50%)",
               zIndex: 999999,
               position: "fixed",
-              transform: isVisible ? "scale(1)" : "scale(0.95)",
+              transition: "opacity 200ms ease-out",
+              opacity: 1,
             }}
           >
             <div className="flex items-center gap-2">
-              {tooltipData.icon && <span>{tooltipData.icon}</span>}
-              <span>{tooltipData.text}</span>
+              {tooltipData.icon && (
+                <span className="text-xs">{tooltipData.icon}</span>
+              )}
+              <span className="text-xs font-medium leading-tight">
+                {tooltipData.text}
+              </span>
             </div>
           </div>,
           document.body
