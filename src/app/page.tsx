@@ -614,8 +614,8 @@ export default function Home() {
           <section id="home" className="h-[80vh] relative">
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(0, 255, 157, 0.6)", // Neon green from gradient-hero-home-accent
-                secondary: "rgba(153, 255, 217, 0.4)", // Lighter green variant
+                primary: "rgba(255, 181, 113, 0.6)", // Orange from about page
+                secondary: "rgba(255, 140, 244, 0.4)", // Pink/magenta variant
               }}
             />
             <div
@@ -623,43 +623,11 @@ export default function Home() {
               style={{ height: "100vh" }}
             >
               <div className="text-left w-full">
-                <div className="group inline-flex items-stretch gap-0 mb-8 rounded-full bg-neutral-80 backdrop-blur-sm border-2 border-neutral-100/10 overflow-hidden transition-all duration-500 relative">
-                  <div className="flex items-center gap-4 px-4 py-2 relative z-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-green-500/50 blur-sm rounded-full animate-[pulse_1.5s_ease-in-out_infinite] scale-150"></div>
-                      <div className="w-3 h-3 bg-green-500 rounded-full relative"></div>
-                    </div>
-                    <span className="text-neutral-30 text-base font-medium tracking-wider">
-                      Currently exploring opportunities
-                    </span>
-                  </div>
-                  <div className="w-0 group-hover:w-32 overflow-hidden transition-all duration-500 ease-out relative z-10">
-                    <a
-                      href="/contact"
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-10 text-neutral-100 font-bold text-sm hover:bg-neutral-20 transition-all duration-500 cursor-pointer h-full whitespace-nowrap rounded-r-full -mr-1"
-                    >
-                      <span>Message me</span>
-                      <svg
-                        className="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M9 5l7 7-7 7"
-                        />
-                      </svg>
-                    </a>
-                  </div>
-                </div>
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-home-accent)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-home-orange)] bg-clip-text text-transparent font-hanken">
                     UX/UI Designer{" "}
                   </span>
-                  <span className="text-[#00FF9D] font-hanken">&</span>
+                  <span className="text-[#ffb571] font-hanken">&</span>
                   <br />
                   <div className="flex justify-end">
                     <span className="text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
@@ -668,9 +636,26 @@ export default function Home() {
                   </div>
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
-                    — with an eye for detail, a heart for the user, and a drive
-                    for the business.
+                  <p className="text-neutral-30 text-2xl font-semibold leading-loose tracking-wide max-w-[40rem]">
+                    — with an{" "}
+                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">eye</span>{" "}
+                    for{" "}
+                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                      detail
+                    </span>
+                    , a{" "}
+                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">heart</span>{" "}
+                    for the{" "}
+                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                      user
+                    </span>
+                    , and a{" "}
+                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">drive</span>
+                    for the{" "}
+                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                      business
+                    </span>
+                    .
                   </p>
                   <div className="flex justify-center mt-8">
                     <a href="/work" className="shimmer-button-green">
@@ -688,7 +673,7 @@ export default function Home() {
                             d="M17 8l4 4m0 0l-4 4m4-4H3"
                           />
                         </svg>
-                        <span>View My Work</span>
+                        <span>View Case Studies</span>
                       </span>
                       <span className="shimmer"></span>
                     </a>
@@ -702,7 +687,7 @@ export default function Home() {
           <section className="py-16 px-24">
             <div className="text-left w-full max-w-[1600px]">
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
-                {/* About Me - Standing section */}
+                {/* About - Standing section */}
                 <div
                   className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("about-me")})` }}
@@ -1299,11 +1284,11 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* My Approach - Medium section */}
+                {/* Currently Working On - Medium section */}
                 <div
                   className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("approach")})` }}
-                  onMouseEnter={() => setHoveredBox("approach")}
+                  style={{ transform: `scale(${getBoxScale("current-work")})` }}
+                  onMouseEnter={() => setHoveredBox("current-work")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
                   {/* Radial shine effect */}
@@ -1316,164 +1301,47 @@ export default function Home() {
                   ></div>
                   <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
-                      My Process
+                      Currently working on
                     </h2>
                     <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">🔍</span>
+                      <span className="animate-pulse-subtle">🚀</span>
                     </span>
                   </div>
 
-                  <div className="flex-1 flex flex-col justify-center">
-                    {/* Process Philosophy */}
-                    <div className="mb-6 p-4 rounded-xl bg-gradient-to-br from-[#00FF9D]/10 to-accent-2-100/10 border border-[#00FF9D]/20">
-                      <p className="text-neutral-30 text-lg font-medium text-center leading-relaxed">
-                        Human-centered. AI-empowered. Always adaptable &
-                        reconsidered.
-                      </p>
-                    </div>
+                  <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
+                    {/* Large Project Image/GIF */}
+                    <img
+                      src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
+                      alt="Current Project Preview"
+                      className="w-full h-full object-cover"
+                    />
 
-                    {/* Design Process Steps */}
-                    <div className="space-y-4">
-                      {/* Step 1: Discover */}
-                      <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
-                            1
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                            Discover & Understand
-                          </h4>
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
-                              AI Research Analysis
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              User Interviews
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Research Tools
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              User Needs
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Business Goals
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Market Context
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Deep Search
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                    {/* Dark Overlay */}
+                    <div className="absolute inset-0 bg-black/40"></div>
 
-                      {/* Step 2: Ideate */}
-                      <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
-                            2
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                            Ideate & Concept
-                          </h4>
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
-                              AI Ideation
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Figma
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Google Stitch
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Wireframes
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Sketching
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Prototyping
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Alternatives
-                            </span>
-                          </div>
-                        </div>
-                      </div>
+                    {/* Project Title and Tech Stack Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 space-y-3">
+                      <h3 className="text-lg font-semibold text-white">
+                        AI-Powered Design System
+                      </h3>
 
-                      {/* Step 3: Build */}
-                      <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
-                            3
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                            Build & Test
-                          </h4>
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
-                              Cursor AI
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Next.js
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Component Libraries
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Accessibility
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Performance
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Testing
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* Step 4: Systems */}
-                      <div className="flex items-start gap-3 group/step">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-accent-2-100 flex items-center justify-center flex-shrink-0 mt-1">
-                          <span className="text-neutral-100 text-base font-bold drop-shadow-sm">
-                            4
-                          </span>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-neutral-10 font-semibold text-base mb-3 group-hover/step:text-[#00FF9D] transition-colors duration-200">
-                            Systems & Scale
-                          </h4>
-                          <div className="flex flex-wrap gap-1">
-                            <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-sm rounded-full">
-                              AI Color Systems
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Design Systems
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Content Patterns
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Color Tokens
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Scalable Content
-                            </span>
-                            <span className="px-2 py-1 bg-neutral-80/50 text-neutral-40 text-sm rounded-full">
-                              Consistency
-                            </span>
-                          </div>
-                        </div>
+                      {/* Tech Stack Pills */}
+                      <div className="flex flex-wrap gap-2">
+                        <span className="px-2 py-1 bg-[#00FF9D]/20 text-[#00FF9D] text-xs rounded-full font-medium backdrop-blur-sm">
+                          React
+                        </span>
+                        <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                          TypeScript
+                        </span>
+                        <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                          OpenAI API
+                        </span>
+                        <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                          Figma
+                        </span>
+                        <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                          Tailwind CSS
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -1486,15 +1354,15 @@ export default function Home() {
           <section id="projects-section" className="py-48">
             <div className="text-left w-full max-w-[1600px] p-8">
               <div className="relative w-fit mx-auto mb-16">
-                <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects-pink)] bg-clip-text text-transparent font-hanken pb-2">
+                <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects-orange)] bg-clip-text text-transparent font-hanken pb-2">
                   Some of my previous projects
                 </h2>
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ED7DFF] to-transparent opacity-50" />
+                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ffb571] to-transparent opacity-50" />
               </div>
               <div className="grid grid-cols-2 gap-12">
                 {/* First Work Box */}
                 <CircularTooltip>
-                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
                     {/* Project background image */}
                     <Image
                       src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
@@ -1510,11 +1378,11 @@ export default function Home() {
                     {/* Project content */}
                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                       <div className="mb-4">
-                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                        <span className="inline-block px-4 py-2 bg-[#ffb571]/20 text-[#ffb571] text-base font-medium rounded-full font-hanken">
                           UX/UI Design
                         </span>
                       </div>
-                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ffb571] transition-colors font-hanken">
                         Noted
                       </h3>
                       <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1524,13 +1392,13 @@ export default function Home() {
                     </div>
 
                     {/* Hover effect */}
-                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-[#ffb571]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </CircularTooltip>
 
                 {/* Second Work Box */}
                 <CircularTooltip>
-                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
                     {/* Project background image */}
                     <Image
                       src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center"
@@ -1546,11 +1414,11 @@ export default function Home() {
                     {/* Project content */}
                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                       <div className="mb-4">
-                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                        <span className="inline-block px-4 py-2 bg-[#ffb571]/20 text-[#ffb571] text-base font-medium rounded-full font-hanken">
                           AI/ML
                         </span>
                       </div>
-                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ffb571] transition-colors font-hanken">
                         Zmartrest AI
                       </h3>
                       <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1560,13 +1428,13 @@ export default function Home() {
                     </div>
 
                     {/* Hover effect */}
-                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-[#ffb571]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </CircularTooltip>
 
                 {/* Third Work Box */}
                 <CircularTooltip>
-                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
                     {/* Project background image */}
                     <Image
                       src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center"
@@ -1582,11 +1450,11 @@ export default function Home() {
                     {/* Project content */}
                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                       <div className="mb-4">
-                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                        <span className="inline-block px-4 py-2 bg-[#ffb571]/20 text-[#ffb571] text-base font-medium rounded-full font-hanken">
                           Mobile App
                         </span>
                       </div>
-                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ffb571] transition-colors font-hanken">
                         Fokus
                       </h3>
                       <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1596,13 +1464,13 @@ export default function Home() {
                     </div>
 
                     {/* Hover effect */}
-                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-[#ffb571]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </CircularTooltip>
 
                 {/* Fourth Work Box */}
                 <CircularTooltip>
-                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ED7DFF]/60">
+                  <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
                     {/* Project background image */}
                     <Image
                       src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center"
@@ -1618,11 +1486,11 @@ export default function Home() {
                     {/* Project content */}
                     <div className="absolute inset-0 p-8 flex flex-col justify-end">
                       <div className="mb-4">
-                        <span className="inline-block px-4 py-2 bg-[#ED7DFF]/20 text-[#ED7DFF] text-base font-medium rounded-full font-hanken">
+                        <span className="inline-block px-4 py-2 bg-[#ffb571]/20 text-[#ffb571] text-base font-medium rounded-full font-hanken">
                           SaaS Platform
                         </span>
                       </div>
-                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ED7DFF] transition-colors font-hanken">
+                      <h3 className="text-3xl font-bold text-neutral-0 mb-4 group-hover:text-[#ffb571] transition-colors font-hanken">
                         Emplojd
                       </h3>
                       <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
@@ -1632,7 +1500,7 @@ export default function Home() {
                     </div>
 
                     {/* Hover effect */}
-                    <div className="absolute inset-0 bg-[#ED7DFF]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-[#ffb571]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </CircularTooltip>
               </div>
@@ -1640,7 +1508,7 @@ export default function Home() {
           </section>
 
           {/* Contact Section */}
-          <section className="py-32">
+          <section className="py-16">
             <div className="text-left w-full max-w-[1600px] p-8">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 {/* Contact Form - Redesigned */}

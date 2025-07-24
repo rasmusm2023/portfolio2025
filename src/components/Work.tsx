@@ -6,7 +6,7 @@ const Work = () => {
   return (
     <section className="min-h-screen bg-neutral-100 p-8">
       <div className="max-w-[1200px] mx-auto">
-        <h2 className="text-4xl font-bold text-neutral-0 mb-12">My Work</h2>
+        <h2 className="text-4xl font-bold text-neutral-0 mb-12">Work</h2>
         <div className="grid grid-cols-2 gap-8">
           {/* First Work Box */}
           <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3]">

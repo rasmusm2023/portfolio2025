@@ -2,6 +2,7 @@
 
 import { colors, gradients } from "@/styles/colors";
 import AnimatedBlob from "@/components/AnimatedBlob";
+import Link from "next/link";
 
 // Sample case study data - you can replace with your actual projects
 const caseStudies = {
@@ -13,16 +14,16 @@ const caseStudies = {
       category: "Web Development",
       image:
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
-      link: "#",
+      link: "/case-studies/portfolio-2025",
     },
     {
       id: 2,
-      title: "E-commerce Platform",
-      description: "Full-stack e-commerce solution with modern UI/UX",
-      category: "Full Stack",
+      title: "Noted App",
+      description: "A comprehensive note-taking app with intuitive design",
+      category: "UX/UI Design",
       image:
         "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
-      link: "#",
+      link: "/case-studies/noted-app",
     },
     {
       id: 3,
@@ -105,7 +106,7 @@ export default function WorkPage() {
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
                   <span className="[background-image:var(--gradient-hero-work)] bg-clip-text text-transparent font-hanken">
-                    My Work
+                    Work
                   </span>
                   <br />
                   <div className="flex justify-end">
@@ -154,8 +155,9 @@ export default function WorkPage() {
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {caseStudies[year as keyof typeof caseStudies].map(
                           (project) => (
-                            <div
+                            <Link
                               key={project.id}
+                              href={project.link}
                               className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer"
                             >
                               {/* Project background image */}
@@ -185,7 +187,7 @@ export default function WorkPage() {
 
                               {/* Hover effect */}
                               <div className="absolute inset-0 bg-accent-100/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                            </div>
+                            </Link>
                           )
                         )}
                       </div>

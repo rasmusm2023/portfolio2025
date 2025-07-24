@@ -17,7 +17,7 @@ const Menu = () => {
     { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
     { label: "Design Gallery", href: "/design-gallery" },
-    { label: "About Me", href: "/about" },
+    { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
   ];
 

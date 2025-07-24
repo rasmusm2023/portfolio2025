@@ -416,7 +416,7 @@ export default function AboutPage() {
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
                   <span className="[background-image:var(--gradient-hero-about)] bg-clip-text text-transparent font-hanken">
-                    About Me
+                    About
                   </span>
                   <br />
                   <div className="flex justify-end">
