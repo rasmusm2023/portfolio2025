@@ -5,7 +5,7 @@ import CircularTooltip from "@/components/CircularTooltip";
 
 const Projects = () => {
   return (
-    <section id="projects-section" className="py-48">
+    <section id="projects-section" className="pt-48 pb-24">
       <div className="text-left w-full max-w-[1600px] p-8">
         <div className="relative w-fit mx-auto mb-16">
           <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects-orange)] bg-clip-text text-transparent font-hanken pb-2">

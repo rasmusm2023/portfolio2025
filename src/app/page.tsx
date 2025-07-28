@@ -99,7 +99,7 @@ export default function Home() {
           <Projects />
 
           {/* Footer Section */}
-          <div className="pb-16">
+          <div className="pt-8 pb-16">
             <Footer />
           </div>
         </main>

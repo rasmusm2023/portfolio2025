@@ -1,6 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { Copy, FileText, Envelope } from "@phosphor-icons/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLinkedinIn,
+  faDribbble,
+  faGithub,
+} from "@fortawesome/free-brands-svg-icons";
 import { colors } from "@/styles/colors";
 
 // Custom Floating Label Input Component
@@ -57,7 +64,7 @@ function FloatingLabelInput({
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+              ? "-top-2 text-sm text-neutral-3 font-medium bg-purple-600 rounded-lg"
               : "top-3 text-base text-neutral-40"
           }`}
         >
@@ -84,7 +91,7 @@ function FloatingLabelInput({
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
+            ? "-top-2 text-sm text-neutral-3 font-medium bg-purple-600 rounded-lg"
             : "top-1/2 -translate-y-1/2 text-base text-neutral-40"
         }`}
       >
@@ -110,6 +117,20 @@ const Footer = () => {
     <>
       {/* Contact Section with Noise Background */}
       <section className="py-16 relative">
+        {/* Animated gradient border */}
+        <div className="absolute inset-0 rounded-[2.5rem] p-[1px] overflow-hidden">
+          <div
+            className="absolute inset-0 rounded-[2.5rem]"
+            style={{
+              background:
+                "linear-gradient(45deg, rgba(139, 92, 246, 0.3), rgba(168, 85, 247, 0.2), rgba(192, 132, 252, 0.3), rgba(139, 92, 246, 0.3))",
+              backgroundSize: "400% 400%",
+              animation: "gradient-shift 4s ease-in-out infinite",
+            }}
+          />
+          <div className="absolute inset-[1px] rounded-[2.5rem] bg-neutral-100"></div>
+        </div>
+
         {/* Noise background overlay */}
         <div
           className="absolute inset-0 opacity-[0.16] pointer-events-none rounded-[2.5rem] overflow-hidden px-12 sm:px-16 md:px-24 lg:px-40"
@@ -197,22 +218,14 @@ const Footer = () => {
                 <div className="space-y-6">
                   <div className="flex items-center gap-4 p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
-                      <svg
-                        className="w-6 h-6 text-white"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                      </svg>
+                      <Envelope
+                        size={24}
+                        weight="regular"
+                        className="text-white"
+                      />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-neutral-0 font-semibold mb-1 text-lg">
+                      <h4 className="text-neutral-10 font-semibold mb-1 text-lg">
                         Email
                       </h4>
                       <a
@@ -229,29 +242,27 @@ const Footer = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={handleCopyEmail}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
                           emailCopied
-                            ? "bg-green-500 text-white shadow-lg"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 hover:shadow-lg"
+                            ? "bg-green-500 text-neutral-3 shadow-lg"
+                            : "bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
                         }`}
                       >
-                        {emailCopied ? "Copied!" : "Copy email"}
+                        <Copy size={16} weight="regular" />
+                        {emailCopied ? "Copied!" : "Copy Email"}
                       </button>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-4 p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
-                      <svg
+                      <FontAwesomeIcon
+                        icon={faLinkedinIn}
                         className="w-6 h-6 text-white"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                      </svg>
+                      />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-neutral-0 font-semibold mb-1 text-lg">
+                      <h4 className="text-neutral-10 font-semibold mb-1 text-lg">
                         LinkedIn
                       </h4>
                       <a
@@ -270,92 +281,70 @@ const Footer = () => {
           </div>
 
           {/* Footer Content - Inside Noise Background */}
-          <div className="mt-24 pt-16 border-t border-neutral-100/10">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="mt-8 pt-4 border-t border-neutral-100/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Brand Section */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#00FF9D] to-[#ED7DFF] flex items-center justify-center">
-                    <span className="text-sm font-bold text-white">RM</span>
+                  <div className="w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse">
+                    <span className="text-sm font-bold text-white"></span>
                   </div>
-                  <span className="text-xl font-bold text-neutral-0">
+                  <span className="text-xl font-bold text-neutral-30">
                     Rasmus Mattsson
                   </span>
                 </div>
-                <p className="text-neutral-60 text-sm leading-relaxed max-w-xs">
+                <p className="text-neutral-60 text-base leading-relaxed max-w-md font-medium">
                   UX/UI Designer & Low-code Developer crafting digital
                   experiences that bridge creativity with technology.
                 </p>
               </div>
 
-              {/* Quick Links */}
-              <div className="space-y-4">
-                <h3 className="text-neutral-0 font-semibold text-lg">
-                  Quick Links
-                </h3>
-                <ul className="space-y-2">
-                  <li>
+              {/* Links & Resume */}
+              <div className="flex flex-col justify-end h-full">
+                <div className="flex items-center justify-between">
+                  {/* Social Links */}
+                  <div className="flex gap-12">
                     <a
-                      href="/work"
-                      className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
+                      href="https://dribbble.com/rasmusmattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
-                      Work
+                      <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
+                      Dribbble
                     </a>
-                  </li>
-                  <li>
                     <a
-                      href="/about"
-                      className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
+                      href="https://linkedin.com/in/rasmus-mattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
-                      About
+                      <FontAwesomeIcon
+                        icon={faLinkedinIn}
+                        className="w-4 h-4"
+                      />
+                      LinkedIn
                     </a>
-                  </li>
-                  <li>
                     <a
-                      href="/blog"
-                      className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
+                      href="https://github.com/rasmusmattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
-                      Blog
+                      <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
+                      GitHub
                     </a>
-                  </li>
-                  <li>
-                    <a
-                      href="/contact"
-                      className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
-                    >
-                      Contact
-                    </a>
-                  </li>
-                </ul>
-              </div>
+                  </div>
 
-              {/* Contact & Social */}
-              <div className="space-y-4">
-                <h3 className="text-neutral-0 font-semibold text-lg">
-                  Get in Touch
-                </h3>
-                <div className="space-y-2">
+                  {/* Resume Button */}
                   <a
-                    href="mailto:hello@rasmusmattsson.com"
-                    className="block text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
-                  >
-                    hello@rasmusmattsson.com
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/rasmus-mattsson"
+                    href="/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
+                    className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
                   >
-                    LinkedIn
-                  </a>
-                  <a
-                    href="https://github.com/rasmusmattsson"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-sm"
-                  >
-                    GitHub
+                    <FileText size={16} weight="regular" />
+                    View Resume
                   </a>
                 </div>
               </div>
