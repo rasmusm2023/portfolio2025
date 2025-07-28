@@ -3,6 +3,7 @@
 import VantaBackground from "@/components/VantaBackground";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import BentoBox from "@/components/BentoBox";
+import ProjectShowcase from "@/components/ProjectShowcase";
 import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
 import { gradients, colors } from "@/styles/colors";
@@ -91,7 +92,13 @@ export default function Home() {
               </div>
             </div>
           </section>
+        </main>
 
+        {/* Project Showcase Section - Full Width */}
+        <ProjectShowcase />
+
+        {/* Main Content Continued */}
+        <main className="container mx-auto px-8">
           {/* Bento Box Layout */}
           <BentoBox />
 
