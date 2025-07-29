@@ -17,7 +17,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: "noted",
-    title: "Noted",
+    title: "Reduced onboarding time by 60% with intuitive note-taking design",
     keywords: ["UX/UI Design", "Mobile App", "User Research", "Prototyping"],
     image:
       "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
@@ -26,7 +26,7 @@ const projects: Project[] = [
   },
   {
     id: "zmartrest",
-    title: "Zmartrest AI",
+    title: "75% reduction in decision-making time with AI-powered insights",
     keywords: [
       "AI/ML",
       "Dashboard Design",
@@ -41,7 +41,7 @@ const projects: Project[] = [
   },
   {
     id: "fokus",
-    title: "Fokus",
+    title: "65% increase in user productivity through focused design",
     keywords: ["Mobile App", "Productivity", "User Interface", "App Design"],
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
@@ -51,7 +51,7 @@ const projects: Project[] = [
   },
   {
     id: "emplojd",
-    title: "Emplojd",
+    title: "50% reduction in HR administrative tasks with streamlined platform",
     keywords: [
       "SaaS Platform",
       "HR Management",
@@ -71,10 +71,10 @@ const ProjectShowcase = () => {
       <div className="w-full">
         <div className="container mx-auto px-8 mb-16">
           <div className="relative w-fit mx-auto">
-            <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects-orange)] bg-clip-text text-transparent font-hanken pb-2">
+            <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
               Some of my previous projects
             </h2>
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ffb571] to-transparent opacity-50" />
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
           </div>
         </div>
 
@@ -83,7 +83,7 @@ const ProjectShowcase = () => {
             <Link
               key={project.id}
               href={project.link}
-              className="group block w-full h-48 bg-neutral-100 hover:bg-gradient-to-r hover:from-[#ffb571]/60 hover:via-[#ff8c42]/50 hover:to-[#ff6b35]/60 transition-all duration-300 overflow-hidden"
+              className="group block w-full h-48 bg-neutral-100 hover:bg-gradient-to-r hover:from-[#8B5CF6]/60 hover:via-[#A855F7]/50 hover:to-[#C084FC]/60 transition-all duration-300 overflow-hidden"
             >
               <div
                 className="flex items-center justify-between h-full py-8"
@@ -96,7 +96,10 @@ const ProjectShowcase = () => {
               >
                 {/* Left side - Project info */}
                 <div className="flex flex-col justify-center">
-                  <h3 className="text-3xl font-bold text-neutral-0 group-hover:text-[#ffb571] transition-colors font-hanken">
+                  <div className="text-sm font-bold text-neutral-40 tracking-wider mb-1">
+                    {project.id.toUpperCase()}
+                  </div>
+                  <h3 className="text-2xl font-bold text-neutral-0 group-hover:text-[#ffb571] transition-colors font-hanken">
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-3">
@@ -128,7 +131,7 @@ const ProjectShowcase = () => {
                   <div className="absolute inset-0 bg-neutral-100/10 group-hover:bg-neutral-100/20 transition-colors duration-300" />
                   {/* GIF indicator */}
                   {project.isGif && (
-                    <div className="absolute top-2 right-2 bg-[#ffb571] text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
+                    <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
                       GIF
                     </div>
                   )}

@@ -24,8 +24,8 @@ export default function Home() {
           <section id="home" className="h-[80vh] relative">
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(255, 181, 113, 0.6)", // Orange from about page
-                secondary: "rgba(255, 140, 244, 0.4)", // Pink/magenta variant
+                primary: "rgba(139, 92, 246, 0.6)", // Purple primary
+                secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
               }}
             />
             <div
@@ -34,10 +34,10 @@ export default function Home() {
             >
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-home-orange)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-contact)] bg-clip-text text-transparent font-hanken">
                     UX/UI Designer{" "}
                   </span>
-                  <span className="text-[#ffb571] font-hanken">&</span>
+                  <span className="text-[#8B5CF6] font-hanken">&</span>
                   <br />
                   <div className="flex justify-end">
                     <span className="text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
@@ -48,21 +48,21 @@ export default function Home() {
                 <div className="flex flex-col gap-6 -mt-4">
                   <p className="text-neutral-30 text-2xl font-semibold leading-loose tracking-wide max-w-[40rem]">
                     — with an{" "}
-                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">eye</span>{" "}
+                    <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">eye</span>{" "}
                     for{" "}
-                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                    <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
                       detail
                     </span>
                     , a{" "}
-                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">heart</span>{" "}
+                    <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">heart</span>{" "}
                     for the{" "}
-                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                    <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
                       user
                     </span>
                     , and a{" "}
-                    <span className="bg-[#ffb571]/20 px-0.5 py-0.5">drive</span>
+                    <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">drive</span>
                     for the{" "}
-                    <span className="border-2 border-dashed border-[#ffb571]/30 px-0.5 py-0.5">
+                    <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
                       business
                     </span>
                     .
