@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { hankenGrotesk, orbitron, audiowide } from "./fonts";
+import { hankenGrotesk, orbitron, audiowide, montserrat } from "./fonts";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 // import CustomCursor from "@/components/CustomCursor";
@@ -39,7 +39,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} antialiased bg-neutral-100`}
+        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-100`}
       >
         <PerformanceOptimizer />
         <PerformanceMonitor />

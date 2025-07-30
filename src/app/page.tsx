@@ -2,10 +2,11 @@
 
 import VantaBackground from "@/components/VantaBackground";
 import AnimatedBlob from "@/components/AnimatedBlob";
-import BentoBox from "@/components/BentoBox";
+import BentoBoxFirstTwo from "@/components/BentoBoxFirstTwo";
+import BentoBoxRest from "@/components/BentoBoxRest";
 import ProjectShowcase from "@/components/ProjectShowcase";
-import Projects from "@/components/Projects";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
 import { gradients, colors } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
@@ -13,6 +14,9 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="min-h-screen bg-neutral-100">
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       {/* Background */}
       <VantaBackground />
 
@@ -67,49 +71,65 @@ export default function Home() {
                     </span>
                     .
                   </p>
-                  <div className="flex justify-center mt-8">
-                    <a href="/work" className="shimmer-button-green">
-                      <span className="text">
-                        <svg
-                          className="w-5 h-5"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M17 8l4 4m0 0l-4 4m4-4H3"
-                          />
-                        </svg>
-                        <span>View Case Studies</span>
-                      </span>
-                      <span className="shimmer"></span>
-                    </a>
-                  </div>
+                </div>
+                <div className="flex justify-end mt-32">
+                  <button
+                    onClick={() => {
+                      const element = document.getElementById("case-studies");
+                      if (element) {
+                        const offset = 300; // Increased offset to show part of the hero section
+                        const elementPosition =
+                          element.getBoundingClientRect().top;
+                        const offsetPosition =
+                          elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                          top: offsetPosition,
+                          behavior: "smooth",
+                        });
+                      }
+                    }}
+                    className="shimmer-button-green w-fit"
+                  >
+                    <span className="text">
+                      <svg
+                        className="w-5 h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        />
+                      </svg>
+                      <span>View previous work</span>
+                    </span>
+                    <span className="shimmer"></span>
+                  </button>
                 </div>
               </div>
             </div>
           </section>
         </main>
 
+        {/* First Two Bento Boxes */}
+        <BentoBoxFirstTwo />
+
         {/* Project Showcase Section - Full Width */}
         <ProjectShowcase />
 
-        {/* Main Content Continued */}
-        <main className="container mx-auto px-8">
-          {/* Bento Box Layout */}
-          <BentoBox />
+        {/* Rest of Bento Boxes */}
+        <BentoBoxRest />
 
-          {/* Work Section */}
-          <Projects />
-
-          {/* Footer Section */}
-          <div className="pt-8 pb-16">
+        {/* Footer Section */}
+        <div className="pt-16 pb-16">
+          <div className="container mx-auto">
             <Footer />
           </div>
-        </main>
+        </div>
       </div>
     </div>
   );

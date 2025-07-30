@@ -109,6 +109,12 @@
   box-sizing: border-box;
 }
 
+/* Custom cursor styles */
+.custom-cursor {
+  pointer-events: none;
+  z-index: 9999;
+}
+
 /* Hide scrollbar while maintaining scroll functionality */
 .scrollbar-hide {
   -ms-overflow-style: none;

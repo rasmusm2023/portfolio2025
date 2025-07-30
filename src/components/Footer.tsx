@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, FileText, Envelope } from "@phosphor-icons/react";
+import { Copy, FileText, Envelope, User } from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedinIn,
@@ -139,7 +139,7 @@ const Footer = () => {
             backgroundSize: "256px 256px",
           }}
         />
-        <div className="text-left w-full max-w-[1200px] mx-auto p-0 relative z-10">
+        <div className="text-left w-full max-w-[1600px] mx-auto px-16 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
             {/* Contact Form - Redesigned */}
             <div className="space-y-6">
@@ -274,6 +274,17 @@ const Footer = () => {
                         linkedin.com/in/rasmus-mattsson
                       </a>
                     </div>
+                    <div className="flex gap-2">
+                      <a
+                        href="https://linkedin.com/in/rasmus-mattsson"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
+                      >
+                        <User size={16} weight="regular" />
+                        See Profile
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -326,7 +337,7 @@ const Footer = () => {
                       LinkedIn
                     </a>
                     <a
-                      href="https://github.com/rasmusmattsson"
+                      href="https://github.com/rasmusm2023"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"

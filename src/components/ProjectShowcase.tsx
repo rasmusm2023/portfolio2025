@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { colors } from "@/styles/colors";
+import { useState, useRef, useEffect } from "react";
 
 interface Project {
   id: string;
@@ -66,29 +67,84 @@ const projects: Project[] = [
 ];
 
 const ProjectShowcase = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovering, setIsHovering] = useState(false);
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    setMousePosition({
+      x: e.clientX + window.scrollX,
+      y: e.clientY + window.scrollY,
+    });
+  };
+
+  const handleMouseEnter = (projectId: string) => {
+    setIsHovering(true);
+    setHoveredProject(projectId);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    setHoveredProject(null);
+  };
+
   return (
-    <section className="py-16">
+    <section id="previous-work" className="py-16">
       <div className="w-full">
-        <div className="container mx-auto px-8 mb-16">
-          <div className="relative w-fit mx-auto">
-            <h2 className="text-5xl text-center font-regular [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
-              Some of my previous projects
-            </h2>
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
+        <div className="w-full mb-16">
+          <div
+            className="flex items-center justify-between"
+            style={{
+              maxWidth: "1600px",
+              margin: "0 auto",
+              paddingLeft: "2rem",
+              paddingRight: "2rem",
+            }}
+          >
+            <div className="relative w-fit">
+              <button
+                onClick={() => {
+                  const element = document.getElementById("case-studies");
+                  if (element) {
+                    const offset = 300; // Increased offset to show part of the hero section
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const offsetPosition =
+                      elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth",
+                    });
+                  }
+                }}
+                className="text-left cursor-pointer"
+              >
+                <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
+                  Previous Work
+                </h2>
+                <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="space-y-0 w-full">
+        <div id="case-studies" className="space-y-0 w-full">
           {projects.map((project) => (
             <Link
               key={project.id}
               href={project.link}
-              className="group block w-full h-48 bg-neutral-100 hover:bg-gradient-to-r hover:from-[#8B5CF6]/60 hover:via-[#A855F7]/50 hover:to-[#C084FC]/60 transition-all duration-300 overflow-hidden"
+              className="group project-showcase-card block w-full h-48 bg-neutral-100 overflow-hidden relative"
+              onMouseMove={handleMouseMove}
+              onMouseEnter={() => handleMouseEnter(project.id)}
+              onMouseLeave={handleMouseLeave}
             >
+              {/* Growing purple background from center */}
+              <div className="absolute inset-0 bg-neutral-100" />
+              <div className="absolute inset-0 bg-gradient-to-b from-[#4C1D95] via-[#6D28D9] to-[#8B5CF6] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-0 group-hover:scale-y-100 origin-center" />
               <div
-                className="flex items-center justify-between h-full py-8"
+                className="flex items-center justify-between h-full py-8 relative z-10"
                 style={{
-                  maxWidth: "1200px",
+                  maxWidth: "1600px",
                   margin: "0 auto",
                   paddingLeft: "2rem",
                   paddingRight: "2rem",
@@ -96,20 +152,20 @@ const ProjectShowcase = () => {
               >
                 {/* Left side - Project info */}
                 <div className="flex flex-col justify-center">
-                  <div className="text-sm font-bold text-neutral-40 tracking-wider mb-1">
+                  <div className="text-sm font-black text-neutral-40 group-hover:text-neutral-3 tracking-wider mb-1 transition-colors duration-500 ease-in-out">
                     {project.id.toUpperCase()}
                   </div>
-                  <h3 className="text-2xl font-bold text-neutral-0 group-hover:text-[#ffb571] transition-colors font-hanken">
+                  <h3 className="text-2xl font-bold text-neutral-0 group-hover:text-[#FFD700] transition-colors duration-500 ease-in-out font-hanken">
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-3">
                     {project.keywords.map((keyword, index) => (
                       <div key={index} className="flex items-center">
-                        <span className="text-lg text-neutral-60 group-hover:text-neutral-30 font-medium transition-colors duration-300">
+                        <span className="text-lg text-neutral-60 group-hover:text-neutral-20 font-medium transition-colors duration-500 ease-in-out">
                           {keyword}
                         </span>
                         {index < project.keywords.length - 1 && (
-                          <span className="text-neutral-40 group-hover:text-neutral-20 mx-2 transition-colors duration-300">
+                          <span className="text-neutral-40 group-hover:text-neutral-20 mx-2 transition-colors duration-500 ease-in-out">
                             |
                           </span>
                         )}
@@ -125,10 +181,10 @@ const ProjectShowcase = () => {
                     alt={project.alt}
                     width={256}
                     height={160}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
                   {/* Overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-neutral-100/10 group-hover:bg-neutral-100/20 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-neutral-100/10 group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
                   {/* GIF indicator */}
                   {project.isGif && (
                     <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
@@ -139,6 +195,61 @@ const ProjectShowcase = () => {
               </div>
             </Link>
           ))}
+        </div>
+
+        {/* Cursor-following image gallery */}
+        <div
+          className={`absolute pointer-events-none z-50 transition-all duration-150 ease-out ${
+            isHovering && hoveredProject
+              ? "opacity-100 scale-100"
+              : "opacity-0 scale-95 pointer-events-none"
+          }`}
+          style={{
+            left: mousePosition.x - 320, // Center horizontally (640px total width / 2)
+            top: mousePosition.y + 80, // Position below cursor with doubled offset
+          }}
+        >
+          <div className="flex flex-row gap-8 bg-white/20 backdrop-blur-sm px-6 py-4 shadow-lg border-2 border-[#8B5CF6]/30">
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+              <Image
+                src={
+                  hoveredProject === "zmartrest"
+                    ? "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200&h=200&fit=crop&crop=center"
+                    : "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop&crop=center"
+                }
+                alt="Gallery image 1"
+                width={200}
+                height={200}
+                className="w-full h-full object-cover transition-all duration-150 ease-out"
+              />
+            </div>
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+              <Image
+                src={
+                  hoveredProject === "zmartrest"
+                    ? "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=200&h=200&fit=crop&crop=center"
+                    : "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=200&fit=crop&crop=center"
+                }
+                alt="Gallery image 2"
+                width={200}
+                height={200}
+                className="w-full h-full object-cover transition-all duration-150 ease-out"
+              />
+            </div>
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+              <Image
+                src={
+                  hoveredProject === "zmartrest"
+                    ? "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=200&h=200&fit=crop&crop=center"
+                    : "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop&crop=center"
+                }
+                alt="Gallery image 3"
+                width={200}
+                height={200}
+                className="w-full h-full object-cover transition-all duration-150 ease-out"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

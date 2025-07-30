@@ -1,4 +1,9 @@
-import { Hanken_Grotesk, Orbitron, Audiowide } from "next/font/google";
+import {
+  Hanken_Grotesk,
+  Orbitron,
+  Audiowide,
+  Montserrat,
+} from "next/font/google";
 
 export const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],
@@ -16,5 +21,12 @@ export const audiowide = Audiowide({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-audiowide",
+  display: "swap",
+});
+
+export const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["700"],
+  variable: "--font-montserrat",
   display: "swap",
 });
