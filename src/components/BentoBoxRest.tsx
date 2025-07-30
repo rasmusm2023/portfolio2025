@@ -6,9 +6,54 @@ import Image from "next/image";
 
 const BentoBoxRest = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const [cardTilts, setCardTilts] = useState<{
+    [key: string]: { x: number; y: number };
+  }>({});
 
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
+  };
+
+  const handleCardMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cardId: string
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const deltaX = mouseX - centerX;
+    const deltaY = mouseY - centerY;
+
+    // Calculate tilt angles (max 15 degrees for more noticeable effect)
+    const tiltX = (deltaY / (rect.height / 2)) * -15;
+    const tiltY = (deltaX / (rect.width / 2)) * 15;
+
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: tiltX, y: tiltY },
+    }));
+  };
+
+  const handleCardMouseLeave = (cardId: string) => {
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: 0, y: 0 },
+    }));
+  };
+
+  const getCardTransform = (cardId: string) => {
+    const tilt = cardTilts[cardId] || { x: 0, y: 0 };
+    return `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`;
+  };
+
+  const getCardTiltIntensity = (cardId: string) => {
+    const tilt = cardTilts[cardId] || { x: 0, y: 0 };
+    return Math.abs(tilt.x) + Math.abs(tilt.y);
   };
 
   return (
@@ -45,7 +90,12 @@ const BentoBoxRest = () => {
               />
             </div>
             <div className="grid grid-cols-3 gap-8 items-center -mt-4">
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("ux-research") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "ux-research")}
+                onMouseLeave={() => handleCardMouseLeave("ux-research")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"
@@ -102,7 +152,12 @@ const BentoBoxRest = () => {
                 </div>
               </div>
 
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("ui-design") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "ui-design")}
+                onMouseLeave={() => handleCardMouseLeave("ui-design")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"
@@ -155,7 +210,12 @@ const BentoBoxRest = () => {
                 </div>
               </div>
 
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("ux-design") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "ux-design")}
+                onMouseLeave={() => handleCardMouseLeave("ux-design")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"
@@ -220,7 +280,12 @@ const BentoBoxRest = () => {
                 </div>
               </div>
 
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("development") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "development")}
+                onMouseLeave={() => handleCardMouseLeave("development")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"
@@ -277,7 +342,12 @@ const BentoBoxRest = () => {
                 </div>
               </div>
 
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("product") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "product")}
+                onMouseLeave={() => handleCardMouseLeave("product")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"
@@ -334,7 +404,12 @@ const BentoBoxRest = () => {
                 </div>
               </div>
 
-              <div className="group/card relative">
+              <div
+                className="group/card relative"
+                style={{ transform: getCardTransform("ai-automation") }}
+                onMouseMove={(e) => handleCardMouseMove(e, "ai-automation")}
+                onMouseLeave={() => handleCardMouseLeave("ai-automation")}
+              >
                 <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
                   <RadialGradientBorder
                     variant="dash"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Copy } from "@phosphor-icons/react";
 import AnimatedBlob from "@/components/AnimatedBlob";
 
 // Custom Floating Label Input Component
@@ -58,15 +59,15 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          className="w-full px-4 py-4 bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
-              : "top-3 text-base text-neutral-40"
+              ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-100 rounded-lg"
+              : "top-3 text-base text-neutral-80 font-bold"
           }`}
         >
           {placeholder}
@@ -86,15 +87,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        className="w-full px-4 py-4 bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200"
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-white font-medium bg-purple-600 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-40"
+            ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-100 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-80 font-bold"
         }`}
       >
         {placeholder}
@@ -139,7 +140,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-neutral-100">
       <div className="relative z-10">
-        <main className="container mx-auto px-8">
+        <main className="container mx-auto">
           {/* Hero Section */}
           <section className="h-[80vh] relative">
             <AnimatedBlob
@@ -183,7 +184,7 @@ export default function ContactPage() {
               className="absolute right-0 w-[32rem]"
               style={{ top: "65%", transform: "translateY(-50%)" }}
             >
-              <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-8">
+              <div className="bg-neutral-100 backdrop-blur-sm border border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
                 <h2 className="text-3xl font-bold text-neutral-0 mb-6 font-hanken">
                   Let's have a chat 💬
                 </h2>
@@ -252,7 +253,7 @@ export default function ContactPage() {
                     </p>
                     <div className="flex items-center justify-center gap-4">
                       <span
-                        className={`font-bold text-xl transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                        className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
                           emailCopied
                             ? "text-green-500"
                             : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
@@ -264,12 +265,13 @@ export default function ContactPage() {
                       <button
                         type="button"
                         onClick={handleCopyEmail}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
+                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
                           emailCopied
-                            ? "bg-green-500 text-white shadow-lg"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 hover:shadow-lg"
+                            ? "bg-green-500 text-neutral-3 shadow-lg"
+                            : "bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
                         }`}
                       >
+                        <Copy size={16} weight="regular" />
                         {emailCopied ? "Copied!" : "Copy email"}
                       </button>
                     </div>

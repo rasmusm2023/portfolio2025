@@ -23,7 +23,7 @@ export default function Home() {
       {/* Content Container */}
       <div className="relative z-10">
         {/* Main Content */}
-        <main className="container mx-auto px-8">
+        <main className="container mx-auto">
           {/* Introduction Section */}
           <section id="home" className="h-[80vh] relative">
             <AnimatedBlob
@@ -44,7 +44,7 @@ export default function Home() {
                   <span className="text-[#8B5CF6] font-hanken">&</span>
                   <br />
                   <div className="flex justify-end">
-                    <span className="text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
+                    <span className="text-neutral-60 text-5xl font-medium font-hanken uppercase mr-32 mt-8 tracking-wide">
                       Low-code Developer
                     </span>
                   </div>

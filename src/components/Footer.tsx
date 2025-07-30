@@ -57,15 +57,15 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-3 font-medium bg-purple-600 rounded-lg"
-              : "top-3 text-base text-neutral-40"
+              ? "-top-2 text-sm text-neutral-3 font-bold bg-purple-600 rounded-lg"
+              : "top-3 text-base text-neutral-40 font-bold"
           }`}
         >
           {placeholder}
@@ -84,15 +84,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-neutral-3 font-medium bg-purple-600 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-40"
+            ? "-top-2 text-sm text-neutral-3 font-bold bg-purple-600 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-40 font-bold"
         }`}
       >
         {placeholder}

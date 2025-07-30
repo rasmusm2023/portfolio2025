@@ -93,7 +93,7 @@ function FilmCard({
       href={imdbUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-32 h-44 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group"
+      className="flex-shrink-0 w-32 h-44 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group relative"
     >
       <div className="relative w-full h-full">
         {coverImage ? (
@@ -155,11 +155,11 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
+      className="flex-shrink-0 w-80 h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
-        <div className="w-32 h-48 rounded-l-2xl overflow-hidden">
+        <div className="w-32 h-40 rounded-l-2xl overflow-hidden flex-shrink-0">
           {coverImage ? (
             <>
               <Image
@@ -434,8 +434,9 @@ export default function AboutPage() {
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
                   <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
-                    A passionate designer and developer with a love for creating
-                    beautiful, functional experiences that make a difference.
+                    I am a passionate designer and developer with a love for
+                    creating beautiful, functional experiences that make a
+                    difference.
                   </p>
                 </div>
               </div>
@@ -448,7 +449,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("traits")})` }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -461,7 +462,7 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-8">
+                  <div className="flex items-center justify-between -mt-2">
                     <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       Traits
                     </h2>
@@ -473,68 +474,112 @@ export default function AboutPage() {
                       className="animate-pulse-subtle"
                     />
                   </div>
-                  <TraitsCarousel
-                    traits={[
-                      {
-                        title: "Home Cook",
-                        description:
-                          "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
-                        emoji: "👨‍🍳",
-                        image:
-                          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Tech Explorer",
-                        description:
-                          "Always curious about new technologies and how they can improve user experiences.",
-                        emoji: "🔬",
-                        image:
-                          "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Design Thinker",
-                        description:
-                          "I approach problems with empathy and user-centered design principles.",
-                        emoji: "💭",
-                        image:
-                          "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Stockholm Local",
-                        description:
-                          "Living in one of the world's most design-forward cities inspires my work daily.",
-                        emoji: "🏙️",
-                        image:
-                          "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
-                      },
-                      {
-                        title: "Animal Lover",
-                        description:
-                          "I love animals - I have had both cats and dogs as pets.",
-                        emoji: "🐶",
-                        image: AnimalsImage.src,
-                      },
-                      {
-                        title: "From Mellbystrand, Sweden",
-                        description:
-                          "Born in coastal Mellbystrand with its warm summers and quiet winters — shaped my appreciation for nature and serenity.",
-                        emoji: "🌅",
-                        image: MellbystrandImage.src,
-                      },
-                      {
-                        title: "Night Owl",
-                        description:
-                          "I'm most productive and creative during the late hours when the world is quiet.",
-                        emoji: "🦉",
-                        image: NightOwlImage.src,
-                      },
-                    ]}
-                  />
+                  <div className="mt-8">
+                    <TraitsCarousel
+                      traits={[
+                        {
+                          title: "Home Cook",
+                          description:
+                            "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
+                          emoji: "👨‍🍳",
+                          image:
+                            "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
+                        },
+                        {
+                          title: "Tech Explorer",
+                          description:
+                            "Always curious about new technologies and how they can improve user experiences.",
+                          emoji: "🔬",
+                          image:
+                            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&crop=center",
+                        },
+                        {
+                          title: "Design Thinker",
+                          description:
+                            "I approach problems with empathy and user-centered design principles.",
+                          emoji: "💭",
+                          image:
+                            "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
+                        },
+                        {
+                          title: "Stockholm Local",
+                          description:
+                            "Living in one of the world's most design-forward cities inspires my work daily.",
+                          emoji: "🏙️",
+                          image:
+                            "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
+                        },
+                        {
+                          title: "Animal Lover",
+                          description:
+                            "I love animals - I have had both cats and dogs as pets.",
+                          emoji: "🐶",
+                          image: AnimalsImage.src,
+                        },
+                        {
+                          title: "From Mellbystrand, Sweden",
+                          description:
+                            "Born in coastal Mellbystrand with its warm summers and quiet winters — shaped my appreciation for nature and serenity.",
+                          emoji: "🌅",
+                          image: MellbystrandImage.src,
+                        },
+                        {
+                          title: "Night Owl",
+                          description:
+                            "I'm most productive and creative during the late hours when the world is quiet.",
+                          emoji: "🦉",
+                          image: NightOwlImage.src,
+                        },
+                      ]}
+                    />
+                  </div>
+                </div>
+
+                {/* About Me - Medium section */}
+                <div
+                  className="md:col-span-3 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{ transform: `scale(${getBoxScale("about")})` }}
+                  onMouseEnter={() => setHoveredBox("about")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between -mt-2">
+                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                      Who am I?
+                    </h2>
+                    <Image
+                      src="/icons/3dicons-bulb-dynamic-premium.png"
+                      alt="About Me"
+                      width={80}
+                      height={80}
+                      className="animate-pulse-subtle"
+                    />
+                  </div>
+                  <div className="mt-6">
+                    <p className="text-neutral-60 text-base leading-relaxed">
+                      A passionate designer and developer with a love for
+                      creating beautiful, functional experiences that make a
+                      difference. I believe in the power of thoughtful design to
+                      solve real problems and create meaningful connections.
+                    </p>
+                    <p className="text-neutral-60 text-base leading-relaxed mt-3">
+                      Based in Stockholm, I work at the intersection of
+                      creativity and technology, always exploring new ways to
+                      bring ideas to life.
+                    </p>
+                  </div>
                 </div>
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("time")})` }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -547,7 +592,7 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between -mt-2">
                     <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       My Time
                     </h2>
@@ -563,7 +608,7 @@ export default function AboutPage() {
                     {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
-                        <div className="text-4xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
+                        <div className="text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
                         {/* Animated dots */}
@@ -578,87 +623,52 @@ export default function AboutPage() {
                             style={{ animationDelay: "1s" }}
                           ></div>
                         </div>
-                        <div className="text-neutral-60 text-xs font-medium">
-                          Stockholm Time (CET/CEST)
-                        </div>
                       </div>
                     </div>
 
                     {/* Calendar Style Date */}
                     <div className="text-center">
-                      <div className="inline-block bg-neutral-80/30 backdrop-blur-sm border border-neutral-100/20 rounded-xl p-6">
-                        <div className="flex items-center justify-center gap-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#fbbf24] rounded-lg flex items-center justify-center">
-                            <span className="text-neutral-100 text-2xl font-bold">
-                              {new Date().getDate()}
-                            </span>
+                      <div className="w-full bg-gradient-to-br from-neutral-80/40 to-neutral-90/40 backdrop-blur-sm border border-neutral-100/30 rounded-2xl p-3 shadow-lg">
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div className="relative">
+                              <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] via-[#a855f7] to-[#c084fc] rounded-xl flex items-center justify-center shadow-lg">
+                                <span className="text-white text-xl font-bold drop-shadow-sm">
+                                  {new Date().getDate()}
+                                </span>
+                              </div>
+                              <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#fbbf24] rounded-full border-2 border-white"></div>
+                            </div>
+                            <div className="text-left">
+                              <div className="text-neutral-0 text-sm font-bold tracking-wide">
+                                {new Date().toLocaleDateString("en-US", {
+                                  month: "long",
+                                })}
+                              </div>
+                              <div className="text-neutral-60 text-sm font-medium">
+                                {new Date().getFullYear()}
+                              </div>
+                            </div>
                           </div>
-                          <div className="text-left">
-                            <div className="text-neutral-0 text-base font-semibold">
+                          <div className="text-right">
+                            <div className="text-neutral-50 text-xs font-bold">
                               {new Date().toLocaleDateString("en-US", {
-                                month: "long",
+                                weekday: "long",
                               })}
                             </div>
-                            <div className="text-neutral-60 text-sm">
-                              {new Date().getFullYear()}
+                            <div className="text-neutral-60 text-xs font-medium mt-1">
+                              Stockholm Time (CET/CEST)
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Music - Medium section */}
-                <div
-                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("music")})` }}
-                  onMouseEnter={() => setHoveredBox("music")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-baseline gap-2">
-                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
-                        Music
-                      </h2>
-                      <p className="text-lg text-neutral-50 font-hanken">
-                        I'm currently listening to
-                      </p>
-                    </div>
-                    <a
-                      href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
-                      data-tooltip="Open My Spotify"
-                      data-tooltip-icon="↗"
-                    >
-                      <Image
-                        src="/icons/3dicons-headphone-dynamic-premium.png"
-                        alt="Spotify"
-                        width={80}
-                        height={80}
-                      />
-                    </a>
-                  </div>
-                  <div className="space-y-2">
-                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                      <FavoriteSongs />
                     </div>
                   </div>
                 </div>
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("books")})` }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -671,7 +681,7 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between -mt-2">
                     <div className="flex items-baseline gap-2">
                       <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                         Books
@@ -719,7 +729,7 @@ export default function AboutPage() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("films")})` }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -732,7 +742,7 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="flex items-center justify-between -mt-2">
                     <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       Favourite Films
                     </h2>
@@ -744,7 +754,7 @@ export default function AboutPage() {
                       className="animate-pulse-subtle"
                     />
                   </div>
-                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  <div className="flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
                     <FilmCard
                       title="The Equalizer"
                       year="2014"
@@ -780,6 +790,53 @@ export default function AboutPage() {
                       coverImage={ArrivalCover}
                       imdbUrl="https://www.imdb.com/title/tt2543164/"
                     />
+                  </div>
+                </div>
+
+                {/* Music - Medium section */}
+                <div
+                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{ transform: `scale(${getBoxScale("music")})` }}
+                  onMouseEnter={() => setHoveredBox("music")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between -mt-2">
+                    <div className="flex items-baseline gap-2">
+                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                        Music
+                      </h2>
+                      <p className="text-lg text-neutral-50 font-hanken">
+                        I'm currently listening to
+                      </p>
+                    </div>
+                    <a
+                      href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      data-tooltip="Open My Spotify"
+                      data-tooltip-icon="↗"
+                    >
+                      <Image
+                        src="/icons/3dicons-headphone-dynamic-premium.png"
+                        alt="Spotify"
+                        width={80}
+                        height={80}
+                      />
+                    </a>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                      <FavoriteSongs />
+                    </div>
                   </div>
                 </div>
               </div>

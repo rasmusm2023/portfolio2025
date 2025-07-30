@@ -1,6 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollSmoother);
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -52,7 +57,22 @@ const CustomCursor = () => {
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       const newClientPos = { x: e.clientX, y: e.clientY };
-      const newPagePos = { x: e.pageX, y: e.pageY };
+
+      // Get the ScrollSmoother instance
+      const smoother = ScrollSmoother.get();
+
+      let newPagePos;
+      if (smoother) {
+        // Use the smooth scroll position instead of e.pageY
+        const smoothScrollY = smoother.scrollTop();
+        newPagePos = {
+          x: e.clientX,
+          y: e.clientY + smoothScrollY,
+        };
+      } else {
+        // Fallback to page position if smoother is not available
+        newPagePos = { x: e.pageX, y: e.pageY };
+      }
 
       setLastClientPosition(newClientPos);
       setMousePosition(newPagePos);
@@ -67,13 +87,41 @@ const CustomCursor = () => {
     };
 
     const updatePositionOnScroll = () => {
-      // Update the page position based on the last known client position and current scroll
-      const newPagePos = {
-        x: lastClientPositionRef.current.x + window.scrollX,
-        y: lastClientPositionRef.current.y + window.scrollY,
-      };
-      setMousePosition(newPagePos);
-      mousePositionRef.current = newPagePos;
+      // Get the ScrollSmoother instance
+      const smoother = ScrollSmoother.get();
+
+      if (smoother) {
+        // Use the smooth scroll position instead of window scroll position
+        const smoothScrollY = smoother.scrollTop();
+        const newPagePos = {
+          x: lastClientPositionRef.current.x,
+          y: lastClientPositionRef.current.y + smoothScrollY,
+        };
+        setMousePosition(newPagePos);
+        mousePositionRef.current = newPagePos;
+      } else {
+        // Fallback to window scroll position if smoother is not available
+        const newPagePos = {
+          x: lastClientPositionRef.current.x + window.scrollX,
+          y: lastClientPositionRef.current.y + window.scrollY,
+        };
+        setMousePosition(newPagePos);
+        mousePositionRef.current = newPagePos;
+      }
+    };
+
+    // Continuous update function for smooth cursor following during scroll
+    const continuousUpdate = () => {
+      const smoother = ScrollSmoother.get();
+      if (smoother) {
+        const smoothScrollY = smoother.scrollTop();
+        const newPagePos = {
+          x: lastClientPositionRef.current.x,
+          y: lastClientPositionRef.current.y + smoothScrollY,
+        };
+        setMousePosition(newPagePos);
+        mousePositionRef.current = newPagePos;
+      }
     };
 
     const handleMouseEnter = (e: MouseEvent) => {
@@ -136,11 +184,18 @@ const CustomCursor = () => {
 
     let scrollAnimationId: number | null = null;
     let isScrolling = false;
+    let continuousUpdateId: number | null = null;
 
     const handleScroll = () => {
       if (!isScrolling) {
         isScrolling = true;
-        updatePositionOnScroll();
+
+        // Start continuous updates during scroll
+        const startContinuousUpdate = () => {
+          continuousUpdate();
+          continuousUpdateId = requestAnimationFrame(startContinuousUpdate);
+        };
+        startContinuousUpdate();
       }
 
       if (scrollAnimationId) {
@@ -150,6 +205,12 @@ const CustomCursor = () => {
       scrollAnimationId = requestAnimationFrame(() => {
         updatePositionOnScroll();
         isScrolling = false;
+
+        // Stop continuous updates after scroll ends
+        if (continuousUpdateId) {
+          cancelAnimationFrame(continuousUpdateId);
+          continuousUpdateId = null;
+        }
       });
     };
 
@@ -165,6 +226,9 @@ const CustomCursor = () => {
       document.removeEventListener("mouseout", handleMouseLeave);
       if (scrollAnimationId) {
         cancelAnimationFrame(scrollAnimationId);
+      }
+      if (continuousUpdateId) {
+        cancelAnimationFrame(continuousUpdateId);
       }
     };
   }, [hoverTarget]);

@@ -109,6 +109,19 @@
   box-sizing: border-box;
 }
 
+/* Text selection styling */
+::selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  /* Purple with transparency */
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(139, 92, 246, 0.3);
+  /* Purple with transparency for Firefox */
+  color: inherit;
+}
+
 /* Custom cursor styles */
 .custom-cursor {
   pointer-events: none;

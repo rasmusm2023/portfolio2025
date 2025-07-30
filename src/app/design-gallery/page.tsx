@@ -74,7 +74,7 @@ export default function DesignGalleryPage() {
   return (
     <div className="min-h-screen bg-neutral-100">
       <div className="relative z-10">
-        <main className="container mx-auto px-8">
+        <main className="container mx-auto">
           {/* Hero Section */}
           <section className="h-[80vh] relative">
             <AnimatedBlob
@@ -102,7 +102,7 @@ export default function DesignGalleryPage() {
                 <div className="flex flex-col gap-6 -mt-4">
                   <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
                     A collection of design work that doesn't fit into
-                    traditional case studies - from branding and logos to
+                    traditional case studies — from branding and logos to
                     typography, print design, and experimental projects. These
                     go beyond just UX/UI work.
                   </p>
