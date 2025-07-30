@@ -3,6 +3,7 @@
 import { useState } from "react";
 import CustomLightbox from "@/components/Lightbox";
 import AnimatedBlob from "@/components/AnimatedBlob";
+import Footer from "@/components/Footer";
 
 // Sample gallery data - replace with your actual images
 const galleryImages = [
@@ -247,6 +248,13 @@ export default function DesignGalleryPage() {
             </div>
           </section>
         </main>
+
+        {/* Footer Section */}
+        <div className="pt-16 pb-16">
+          <div className="container mx-auto">
+            <Footer />
+          </div>
+        </div>
       </div>
 
       {/* Lightbox */}

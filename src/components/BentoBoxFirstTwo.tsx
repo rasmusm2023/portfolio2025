@@ -15,7 +15,7 @@ const BentoBoxFirstTwo = () => {
   return (
     <section className="py-16 relative">
       <div className="text-left w-full max-w-[1600px] mx-auto px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
           {/* About - Standing section */}
           <div
             className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
@@ -121,9 +121,13 @@ const BentoBoxFirstTwo = () => {
                   but is not limited to:
                 </p>
               </div>
-              <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                <span className="animate-pulse-subtle">🛠️</span>
-              </span>
+              <Image
+                src="/icons/3dicons-tools-dynamic-premium.png"
+                alt="Tools"
+                width={80}
+                height={80}
+                className="animate-pulse-subtle"
+              />
             </div>
 
             {/* GSAP-powered Infinite Scroll Banner - centered in remaining space */}

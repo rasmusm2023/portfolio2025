@@ -2,14 +2,7 @@
 
 import { useState } from "react";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
-import {
-  MagnifyingGlass,
-  Palette,
-  Lightbulb,
-  Code,
-  ChartLine,
-  Robot,
-} from "@phosphor-icons/react";
+import Image from "next/image";
 
 const BentoBoxRest = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
@@ -21,7 +14,7 @@ const BentoBoxRest = () => {
   return (
     <section className="py-16 relative">
       <div className="text-left w-full max-w-[1600px] mx-auto px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
             className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
@@ -43,9 +36,13 @@ const BentoBoxRest = () => {
               <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                 Expertise{" "}
               </h2>
-              <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                <span className="animate-pulse-subtle">⚡</span>
-              </span>
+              <Image
+                src="/icons/3dicons-flash-dynamic-premium.png"
+                alt="Expertise"
+                width={80}
+                height={80}
+                className="animate-pulse-subtle"
+              />
             </div>
             <div className="grid grid-cols-3 gap-8 items-center -mt-4">
               <div className="group/card relative">
@@ -63,10 +60,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <MagnifyingGlass
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-zoom-dynamic-premium.png"
+                          alt="UX Research"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -118,10 +117,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <Palette
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-color-palette-dynamic-premium.png"
+                          alt="UI Design"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -169,10 +170,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <Lightbulb
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-bulb-dynamic-premium.png"
+                          alt="UX Design"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -232,10 +235,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <Code
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-computer-dynamic-premium.png"
+                          alt="Development"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -287,10 +292,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <ChartLine
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-chart-dynamic-premium.png"
+                          alt="Product"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -342,10 +349,12 @@ const BentoBoxRest = () => {
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
-                        <Robot
-                          size={40}
-                          weight="fill"
-                          className="text-neutral-60 group-hover/card:text-neutral-3 group-hover/card:scale-110 transition-all duration-300"
+                        <Image
+                          src="/icons/3dicons-fire-dynamic-premium.png"
+                          alt="AI & Automation"
+                          width={56}
+                          height={56}
+                          className="group-hover/card:scale-110 transition-all duration-300"
                         />
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
@@ -408,9 +417,13 @@ const BentoBoxRest = () => {
                   employments & studies
                 </p>
               </div>
-              <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                <span className="animate-pulse-subtle">💼</span>
-              </span>
+              <Image
+                src="/icons/3dicons-travel-dynamic-premium.png"
+                alt="Experience"
+                width={80}
+                height={80}
+                className="animate-pulse-subtle"
+              />
             </div>
             <div className="flex-1 flex flex-col justify-center">
               <div className="space-y-6">
@@ -479,9 +492,13 @@ const BentoBoxRest = () => {
               <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                 Currently working on
               </h2>
-              <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                <span className="animate-pulse-subtle">🚀</span>
-              </span>
+              <Image
+                src="/icons/3dicons-rocket-dynamic-premium.png"
+                alt="Currently Working On"
+                width={80}
+                height={80}
+                className="animate-pulse-subtle"
+              />
             </div>
 
             <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">

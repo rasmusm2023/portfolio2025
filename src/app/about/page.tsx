@@ -3,7 +3,8 @@
 import AnimatedBlob from "@/components/AnimatedBlob";
 import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
 import TraitsCarousel from "@/components/TraitsCarousel";
-import SpotifyIcon from "@/logos/Symbol.svg";
+import CustomCursor from "@/components/CustomCursor";
+
 import TheEqualizerCover from "@/films/The-Equalizer.png";
 import TheEqualizer2Cover from "@/films/The-Equalizer-2.png";
 import TheBeekeeperCover from "@/films/the-beekeeper.png";
@@ -14,9 +15,12 @@ import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
 import HideawayCover from "@/music/hideaway-hardwell-atmozfears.jpg";
 import MoUpFrontCover from "@/music/mo-up-front.jpg";
+import MellbystrandImage from "@/images/8bit/mellbystrand.jpg";
+import NightOwlImage from "@/images/8bit/nightowl.jpg";
+import AnimalsImage from "@/images/8bit/animals.jpg";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import CursorTooltip from "@/components/CursorTooltip";
+import Footer from "@/components/Footer";
 
 // Live Clock Component
 function LiveClock() {
@@ -89,7 +93,7 @@ function FilmCard({
       href={imdbUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-32 h-44 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#ffb571] transition-colors duration-200 cursor-pointer group"
+      className="flex-shrink-0 w-32 h-44 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group"
     >
       <div className="relative w-full h-full">
         {coverImage ? (
@@ -151,7 +155,7 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#ffb571] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
+      className="flex-shrink-0 w-80 h-48 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
@@ -330,7 +334,7 @@ function FavoriteSongs() {
                   ".album-cover"
                 ) as HTMLElement;
                 if (coverDiv) {
-                  coverDiv.style.borderColor = "#ffb571";
+                  coverDiv.style.borderColor = "#8B5CF6";
                   const glowElement = coverDiv.querySelector(
                     ".glow-effect"
                   ) as HTMLElement;
@@ -368,7 +372,7 @@ function FavoriteSongs() {
                 style={{
                   opacity: "0",
                   background:
-                    "radial-gradient(ellipse at top, rgba(255,181,113,0.4) 0%, rgba(255,181,113,0.1) 40%, transparent 80%)",
+                    "radial-gradient(ellipse at top, rgba(139,92,246,0.4) 0%, rgba(139,92,246,0.1) 40%, transparent 80%)",
                 }}
               ></div>
             </div>
@@ -399,14 +403,17 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       <div className="relative z-10">
-        <main className="container mx-auto px-8">
+        <main className="container mx-auto">
           {/* Hero Section */}
           <section className="h-[80vh] relative">
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(255, 181, 113, 0.6)", // Peach
-                secondary: "rgba(255, 140, 244, 0.4)", // Pink
+                primary: "rgba(139, 92, 246, 0.6)", // Purple primary
+                secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
               }}
             />
             <div
@@ -415,7 +422,7 @@ export default function AboutPage() {
             >
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-about)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-contact)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
                   <br />
@@ -436,12 +443,12 @@ export default function AboutPage() {
           </section>
 
           {/* Bento Box Layout */}
-          <section className="py-16 px-24">
-            <div className="text-left w-full max-w-[1600px]">
-              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
+          <section className="py-16 relative">
+            <div className="text-left w-full max-w-[1600px] mx-auto relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-5 lg:col-span-6 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("traits")})` }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -454,13 +461,17 @@ export default function AboutPage() {
                         "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                  <div className="flex items-center justify-between mb-8">
+                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       Traits
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">🎭</span>
-                    </span>
+                    <Image
+                      src="/icons/3dicons-puzzle-dynamic-premium.png"
+                      alt="Traits"
+                      width={80}
+                      height={80}
+                      className="animate-pulse-subtle"
+                    />
                   </div>
                   <TraitsCarousel
                     traits={[
@@ -501,8 +512,21 @@ export default function AboutPage() {
                         description:
                           "I love animals - I have had both cats and dogs as pets.",
                         emoji: "🐶",
-                        image:
-                          "https://images.unsplash.com/photo-1450778869180-41d0601e046e?w=400&h=400&fit=crop&crop=center",
+                        image: AnimalsImage.src,
+                      },
+                      {
+                        title: "From Mellbystrand, Sweden",
+                        description:
+                          "Born in coastal Mellbystrand with its warm summers and quiet winters — shaped my appreciation for nature and serenity.",
+                        emoji: "🌅",
+                        image: MellbystrandImage.src,
+                      },
+                      {
+                        title: "Night Owl",
+                        description:
+                          "I'm most productive and creative during the late hours when the world is quiet.",
+                        emoji: "🦉",
+                        image: NightOwlImage.src,
                       },
                     ]}
                   />
@@ -510,7 +534,7 @@ export default function AboutPage() {
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("time")})` }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -524,29 +548,33 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       My Time
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">⏰</span>
-                    </span>
+                    <Image
+                      src="/icons/3dicons-clock-dynamic-premium.png"
+                      alt="My Time"
+                      width={80}
+                      height={80}
+                      className="animate-pulse-subtle"
+                    />
                   </div>
                   <div className="space-y-4">
                     {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
-                        <div className="text-4xl font-audiowide font-bold text-[#ffb571] mb-2 tracking-wider">
+                        <div className="text-4xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
                         {/* Animated dots */}
                         <div className="flex justify-center gap-1 mb-2">
-                          <div className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"></div>
+                          <div className="w-2 h-2 bg-[#fbbf24] rounded-full animate-pulse"></div>
                           <div
-                            className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"
+                            className="w-2 h-2 bg-[#fbbf24] rounded-full animate-pulse"
                             style={{ animationDelay: "0.5s" }}
                           ></div>
                           <div
-                            className="w-2 h-2 bg-[#ffb571] rounded-full animate-pulse"
+                            className="w-2 h-2 bg-[#fbbf24] rounded-full animate-pulse"
                             style={{ animationDelay: "1s" }}
                           ></div>
                         </div>
@@ -560,7 +588,7 @@ export default function AboutPage() {
                     <div className="text-center">
                       <div className="inline-block bg-neutral-80/30 backdrop-blur-sm border border-neutral-100/20 rounded-xl p-6">
                         <div className="flex items-center justify-center gap-3">
-                          <div className="w-12 h-12 bg-gradient-to-br from-[#ffb571] to-[#ff8cf4] rounded-lg flex items-center justify-center">
+                          <div className="w-12 h-12 bg-gradient-to-br from-[#8B5CF6] to-[#fbbf24] rounded-lg flex items-center justify-center">
                             <span className="text-neutral-100 text-2xl font-bold">
                               {new Date().getDate()}
                             </span>
@@ -583,7 +611,7 @@ export default function AboutPage() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("music")})` }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -598,31 +626,28 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                         Music
                       </h2>
                       <p className="text-lg text-neutral-50 font-hanken">
                         I'm currently listening to
                       </p>
                     </div>
-                    <CursorTooltip>
-                      <a
-                        href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
-                        data-tooltip="Open My Spotify"
-                        data-tooltip-icon="↗"
-                      >
-                        <Image
-                          src={SpotifyIcon.src}
-                          alt="Spotify"
-                          className="w-6 h-6"
-                          width={24}
-                          height={24}
-                        />
-                      </a>
-                    </CursorTooltip>
+                    <a
+                      href="https://open.spotify.com/user/mttssn?si=290f1aee519542bb"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      data-tooltip="Open My Spotify"
+                      data-tooltip-icon="↗"
+                    >
+                      <Image
+                        src="/icons/3dicons-headphone-dynamic-premium.png"
+                        alt="Spotify"
+                        width={80}
+                        height={80}
+                      />
+                    </a>
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
@@ -633,7 +658,7 @@ export default function AboutPage() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("books")})` }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -648,23 +673,26 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between mb-6">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                         Books
                       </h2>
                       <p className="text-lg text-neutral-50 font-hanken">
                         I'm currently reading or listening to
                       </p>
                     </div>
-                    <CursorTooltip>
-                      <a
-                        href="/reading-list"
-                        className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
-                        data-tooltip="View Reading List"
-                        data-tooltip-icon="→"
-                      >
-                        📚
-                      </a>
-                    </CursorTooltip>
+                    <a
+                      href="/reading-list"
+                      className="animate-pulse-subtle hover:scale-110 transition-transform duration-200 cursor-pointer"
+                      data-tooltip="View Reading List"
+                      data-tooltip-icon="→"
+                    >
+                      <Image
+                        src="/icons/3dicons-notebook-dynamic-premium.png"
+                        alt="Books"
+                        width={80}
+                        height={80}
+                      />
+                    </a>
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
@@ -691,7 +719,7 @@ export default function AboutPage() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{ transform: `scale(${getBoxScale("films")})` }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -705,12 +733,16 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold text-neutral-30 font-hanken">
+                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
                       Favourite Films
                     </h2>
-                    <span className="text-2xl bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/20 rounded-full w-12 h-12 flex items-center justify-center pointer-events-none">
-                      <span className="animate-pulse-subtle">🎬</span>
-                    </span>
+                    <Image
+                      src="/icons/3dicons-video-cam-dynamic-premium.png"
+                      alt="Favourite Films"
+                      width={80}
+                      height={80}
+                      className="animate-pulse-subtle"
+                    />
                   </div>
                   <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
                     <FilmCard
@@ -754,6 +786,13 @@ export default function AboutPage() {
             </div>
           </section>
         </main>
+
+        {/* Footer Section */}
+        <div className="pt-16 pb-16">
+          <div className="container mx-auto">
+            <Footer />
+          </div>
+        </div>
       </div>
     </div>
   );

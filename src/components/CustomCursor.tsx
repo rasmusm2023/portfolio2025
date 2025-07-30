@@ -4,11 +4,14 @@ import { useState, useEffect, useRef } from "react";
 
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [lastClientPosition, setLastClientPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoverTarget, setHoverTarget] = useState<string | null>(null);
   const [backgroundColor, setBackgroundColor] = useState(
-    "rgba(255, 215, 0, 0.8)"
+    "rgba(255, 255, 255, 0.8)"
   );
+  const mousePositionRef = useRef({ x: 0, y: 0 });
+  const lastClientPositionRef = useRef({ x: 0, y: 0 });
 
   const getColorAtPosition = (x: number, y: number) => {
     try {
@@ -40,15 +43,21 @@ const CustomCursor = () => {
         }
       }
 
-      return "rgba(255, 215, 0, 0.8)"; // Fallback to yellow
+      return "rgba(255, 255, 255, 0.8)"; // Fallback to white
     } catch (error) {
-      return "rgba(255, 215, 0, 0.8)"; // Fallback to yellow
+      return "rgba(255, 255, 255, 0.8)"; // Fallback to white
     }
   };
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
-      setMousePosition({ x: e.pageX, y: e.pageY });
+      const newClientPos = { x: e.clientX, y: e.clientY };
+      const newPagePos = { x: e.pageX, y: e.pageY };
+
+      setLastClientPosition(newClientPos);
+      setMousePosition(newPagePos);
+      lastClientPositionRef.current = newClientPos;
+      mousePositionRef.current = newPagePos;
 
       // Update background color based on what's beneath the cursor
       if (!hoverTarget) {
@@ -57,12 +66,34 @@ const CustomCursor = () => {
       }
     };
 
+    const updatePositionOnScroll = () => {
+      // Update the page position based on the last known client position and current scroll
+      const newPagePos = {
+        x: lastClientPositionRef.current.x + window.scrollX,
+        y: lastClientPositionRef.current.y + window.scrollY,
+      };
+      setMousePosition(newPagePos);
+      mousePositionRef.current = newPagePos;
+    };
+
     const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
       // Check for different hover targets
       if (target.closest(".project-showcase-card")) {
         setHoverTarget("project-card");
+        setIsHovering(true);
+      } else if (
+        target.closest(".group\\/card") &&
+        target.closest("[data-tooltip='Swipe']")
+      ) {
+        setHoverTarget("traits-card");
+        setIsHovering(true);
+      } else if (target.closest("[data-tooltip='Open My Spotify']")) {
+        setHoverTarget("spotify-card");
+        setIsHovering(true);
+      } else if (target.closest("[data-tooltip='View Reading List']")) {
+        setHoverTarget("reading-card");
         setIsHovering(true);
       } else if (target.closest("button")) {
         setHoverTarget("button");
@@ -103,14 +134,38 @@ const CustomCursor = () => {
       setHoverTarget(null);
     };
 
+    let scrollAnimationId: number | null = null;
+    let isScrolling = false;
+
+    const handleScroll = () => {
+      if (!isScrolling) {
+        isScrolling = true;
+        updatePositionOnScroll();
+      }
+
+      if (scrollAnimationId) {
+        cancelAnimationFrame(scrollAnimationId);
+      }
+
+      scrollAnimationId = requestAnimationFrame(() => {
+        updatePositionOnScroll();
+        isScrolling = false;
+      });
+    };
+
     window.addEventListener("mousemove", updateMousePosition);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("mouseover", handleMouseEnter);
     document.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
       window.removeEventListener("mousemove", updateMousePosition);
+      window.removeEventListener("scroll", handleScroll);
       document.removeEventListener("mouseover", handleMouseEnter);
       document.removeEventListener("mouseout", handleMouseLeave);
+      if (scrollAnimationId) {
+        cancelAnimationFrame(scrollAnimationId);
+      }
     };
   }, [hoverTarget]);
 
@@ -143,6 +198,60 @@ const CustomCursor = () => {
           fontWeight: "bold",
           letterSpacing: "0.5px",
         };
+      case "traits-card":
+        return {
+          ...baseStyle,
+          left: mousePosition.x + 80, // More offset to the right
+          top: mousePosition.y + 20, // Offset like default cursor
+          width: "120px",
+          height: "36px",
+          borderRadius: "18px",
+          backgroundColor: "rgb(255, 255, 255)", // white
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          fontSize: "12px",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+        };
+      case "spotify-card":
+        return {
+          ...baseStyle,
+          left: mousePosition.x + 80, // More offset to the right
+          top: mousePosition.y + 20, // Offset like default cursor
+          width: "160px",
+          height: "36px",
+          borderRadius: "18px",
+          backgroundColor: "rgb(255, 255, 255)", // white
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          fontSize: "12px",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+        };
+      case "reading-card":
+        return {
+          ...baseStyle,
+          left: mousePosition.x + 80, // More offset to the right
+          top: mousePosition.y + 20, // Offset like default cursor
+          width: "160px",
+          height: "36px",
+          borderRadius: "18px",
+          backgroundColor: "rgb(255, 255, 255)", // white
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          fontSize: "12px",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+        };
       case "button":
         return {
           ...baseStyle,
@@ -163,8 +272,8 @@ const CustomCursor = () => {
           width: "84px",
           height: "84px",
           borderRadius: "50%",
-          backgroundColor: "rgba(255, 215, 0, 0.3)",
-          border: "2px solid rgba(255, 215, 0, 0.8)",
+          backgroundColor: "rgba(255, 255, 255, 0.3)",
+          border: "2px solid rgba(255, 255, 255, 0.8)",
           transform: "translate(-50%, -50%)",
         };
       case "card":
@@ -196,6 +305,24 @@ const CustomCursor = () => {
   return (
     <div style={cursorStyle} className="custom-cursor">
       {hoverTarget === "project-card" && "VIEW CASE"}
+      {hoverTarget === "traits-card" && (
+        <>
+          <span style={{ fontSize: "16px" }}>↔</span>
+          <span style={{ marginLeft: "4px" }}>SWIPE</span>
+        </>
+      )}
+      {hoverTarget === "spotify-card" && (
+        <>
+          <span style={{ fontSize: "16px" }}>↗</span>
+          <span style={{ marginLeft: "4px" }}>OPEN MY SPOTIFY</span>
+        </>
+      )}
+      {hoverTarget === "reading-card" && (
+        <>
+          <span style={{ fontSize: "16px" }}>→</span>
+          <span style={{ marginLeft: "4px" }}>VIEW READING LIST</span>
+        </>
+      )}
     </div>
   );
 };

@@ -15,6 +15,7 @@ import {
   ArrowUpRight,
 } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
+import Footer from "@/components/Footer";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -240,6 +241,13 @@ const CaseStudy = ({
           )}
         </div>
       </section>
+
+      {/* Footer Section */}
+      <div className="pt-16 pb-16">
+        <div className="container mx-auto">
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 };

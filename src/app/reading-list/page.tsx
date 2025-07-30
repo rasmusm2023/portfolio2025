@@ -4,6 +4,7 @@ import AnimatedBlob from "@/components/AnimatedBlob";
 import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
 import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
 import Image from "next/image";
+import Footer from "@/components/Footer";
 
 // Book Card Component (same as in main page)
 function BookCard({
@@ -248,6 +249,13 @@ export default function ReadingListPage() {
             </div>
           </section>
         </main>
+
+        {/* Footer Section */}
+        <div className="pt-16 pb-16">
+          <div className="container mx-auto">
+            <Footer />
+          </div>
+        </div>
       </div>
     </div>
   );
