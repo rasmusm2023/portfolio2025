@@ -8,6 +8,11 @@ import RasmusImage from "@/images/rasmus.jpg";
 const BentoBoxFirstTwo = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
 
+  // SSR check
+  const isDarkMode =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
   };
@@ -18,8 +23,11 @@ const BentoBoxFirstTwo = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
           {/* About - Standing section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-            style={{ transform: `scale(${getBoxScale("about-me")})` }}
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            style={{
+              transform: `scale(${getBoxScale("about-me")})`,
+              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+            }}
             onMouseEnter={() => setHoveredBox("about-me")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -27,8 +35,9 @@ const BentoBoxFirstTwo = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                background: isDarkMode
+                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
             <div className="flex items-start gap-4 mb-6">
@@ -87,7 +96,12 @@ const BentoBoxFirstTwo = () => {
               </div>
             </div>
             <div className="space-y-4">
-              <p className="text-neutral-10 text-xl font-bold leading-relaxed">
+              <p
+                className="text-xl font-bold leading-relaxed"
+                style={{
+                  color: isDarkMode ? "rgb(255, 255, 255)" : "#5D5E63",
+                }}
+              >
                 👋 Hi, I'm Rasmus Mattsson — a UX/UI Designer and Low-code
                 Developer based in Stockholm, Sweden. I love creating digital
                 experiences that bridge creativity with technology.
@@ -97,8 +111,11 @@ const BentoBoxFirstTwo = () => {
 
           {/* I work in - Large section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl flex flex-col overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-            style={{ transform: `scale(${getBoxScale("toolkit")})` }}
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl flex flex-col overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            style={{
+              transform: `scale(${getBoxScale("toolkit")})`,
+              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+            }}
             onMouseEnter={() => setHoveredBox("toolkit")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -106,18 +123,29 @@ const BentoBoxFirstTwo = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                background: isDarkMode
+                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
 
             {/* Title section - positioned at top */}
             <div className="flex items-center justify-between p-8">
               <div className="flex items-baseline gap-2">
-                <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                <h2
+                  className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                  style={{
+                    color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                  }}
+                >
                   My toolkit include
                 </h2>
-                <p className="text-lg text-neutral-50 font-hanken">
+                <p
+                  className="text-lg font-hanken"
+                  style={{
+                    color: isDarkMode ? "rgb(255, 255, 255)" : "#5D5E63",
+                  }}
+                >
                   but is not limited to:
                 </p>
               </div>

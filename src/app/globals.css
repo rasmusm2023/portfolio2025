@@ -3,53 +3,84 @@
 @tailwind utilities;
 
 :root {
+  /* Light mode gradients (neutral gray base) */
   --gradient-hero-home: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #ffb571 0%,
       #ff8cf4 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-home-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #00ff9d 0%,
       #00ff9d 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-home-orange: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #ffb571 0%,
       #ffb571 50%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-design-gallery: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #ffb571 0%,
       #ffd93d 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-about: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #ffb571 0%,
       #ff8cf4 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-contact: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #8b5cf6 0%,
       #a855f7 36.01%,
-      #fff 82.09%);
+      #5A5A5A 82.09%);
   --gradient-hero-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #00ff9d 0%,
       #99ffd9 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-heading-projects: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       rgba(237, 125, 255, 0.8) 0%,
       rgba(108, 84, 255, 0.8) 36.01%,
-      rgba(248, 248, 248, 0.8) 82.09%);
+      rgba(79, 79, 79, 0.8) 82.09%);
   --gradient-heading-projects-pink: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       rgba(237, 125, 255, 0.8) 0%,
       rgba(237, 125, 255, 0.6) 36.01%,
-      rgba(248, 248, 248, 0.8) 82.09%);
+      rgba(79, 79, 79, 0.8) 82.09%);
   --gradient-heading-projects-orange: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       rgba(255, 181, 113, 0.8) 0%,
       rgba(255, 181, 113, 0.8) 50%,
-      rgba(248, 248, 248, 0.8) 82.09%);
+      rgba(79, 79, 79, 0.8) 82.09%);
   --gradient-home-who: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #00ff9d 0%,
       #99ffd9 36.01%,
-      #fff 82.09%);
+      #4F4F4F 82.09%);
   --gradient-hero-work: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #cdff71 0%,
       #d7ff8d 36.01%,
+      #4F4F4F 82.09%);
+
+  /* Dark mode gradients (white base) */
+  --gradient-hero-home-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ff8cf4 36.01%,
+      #fff 82.09%);
+  --gradient-hero-home-accent-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #00ff9d 36.01%,
+      #fff 82.09%);
+  --gradient-hero-contact-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #8b5cf6 0%,
+      #a855f7 36.01%,
+      #fff 82.09%);
+  --gradient-hero-accent-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
+  --gradient-home-who-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
+  --gradient-hero-work-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #cdff71 0%,
+      #d7ff8d 36.01%,
+      #fff 82.09%);
+  --gradient-hero-design-gallery-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ffd93d 36.01%,
       #fff 82.09%);
 
   /* Shimmer button variables */
@@ -120,6 +151,16 @@
   background-color: rgba(139, 92, 246, 0.3);
   /* Purple with transparency for Firefox */
   color: inherit;
+}
+
+/* Dark mode support */
+.dark {
+  color-scheme: dark;
+}
+
+/* Light mode support */
+:root {
+  color-scheme: light;
 }
 
 /* Custom cursor styles */
@@ -467,6 +508,10 @@ body {
   animation: pulse-subtle 2s ease-in-out infinite;
 }
 
+.animate-pulse-opacity {
+  animation: pulse-opacity 4s ease-in-out infinite;
+}
+
 @keyframes pulse-random {
 
   0%,
@@ -544,8 +589,20 @@ body {
   }
 }
 
+@keyframes pulse-opacity {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+}
+
 .shimmer-button {
-  color: theme("colors.neutral.100");
+  color: theme("colors.neutral.0");
   font-weight: 600;
   font-size: 1.2em;
   background-image: linear-gradient(315deg,
@@ -567,6 +624,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.dark .shimmer-button {
+  color: theme("colors.neutral.100");
 }
 
 .shimmer-button::before {
@@ -598,10 +659,14 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: theme("colors.neutral.100");
+  color: theme("colors.neutral.0");
   white-space: nowrap;
   width: 100%;
   justify-content: flex-start;
+}
+
+.dark .shimmer-button .text {
+  color: theme("colors.neutral.100");
 }
 
 .shimmer-button:not(:hover) .text {
@@ -676,16 +741,16 @@ body {
 
 /* Green shimmer button variant */
 .shimmer-button-green {
-  color: theme("colors.neutral.100");
+  color: theme("colors.neutral.0");
   font-weight: 600;
   font-size: 1.4em;
-  background: rgba(255, 255, 255, 0.5);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(168, 85, 247, 0.8));
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(139, 92, 246, 0.5);
   padding: 1em 1.5em;
   position: relative;
   isolation: isolate;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.2);
   outline: none;
   border-radius: 2em;
   scale: 1;
@@ -698,20 +763,35 @@ body {
   align-items: center;
 }
 
+.dark .shimmer-button-green {
+  color: theme("colors.neutral.100");
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
 .shimmer-button-green::before {
   content: "";
   position: absolute;
   inset: -2px;
   background: conic-gradient(from var(--mask),
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.4),
-      rgba(255, 255, 255, 0.8),
-      rgba(255, 255, 255, 0.8));
+      rgba(255, 181, 113, 0.8),
+      rgba(255, 217, 61, 0.6),
+      rgba(255, 193, 7, 0.8),
+      rgba(255, 181, 113, 0.8));
   border-radius: inherit;
   animation: none;
   z-index: -2;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.dark .shimmer-button-green::before {
+  background: conic-gradient(from var(--mask),
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8));
 }
 
 .shimmer-button-green:hover::before {
@@ -734,24 +814,40 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: theme("colors.neutral.100");
+  color: theme("colors.neutral.0");
   white-space: nowrap;
   width: 100%;
   justify-content: center;
 }
 
+.dark .shimmer-button-green .text {
+  color: theme("colors.neutral.100");
+}
+
 .shimmer-button-green .shimmer::before {
-  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.8),
-    0 0 7px 4px rgba(255, 255, 255, 0.6), 0 0 13px 8px rgba(255, 255, 255, 0.4),
-    0 0 22px 6px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 3px 2px rgba(255, 181, 113, 0.8),
+    0 0 7px 4px rgba(255, 181, 113, 0.6), 0 0 13px 8px rgba(255, 181, 113, 0.4),
+    0 0 22px 6px rgba(255, 181, 113, 0.2);
   z-index: -1;
 }
 
 .shimmer-button-green .shimmer::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 181, 113, 0.8),
+    inset 0 0 3px 1px rgba(255, 181, 113, 0.6),
+    inset 0 0 9px 1px rgba(255, 181, 113, 0.4);
+  z-index: 2;
+}
+
+.dark .shimmer-button-green .shimmer::before {
+  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.8),
+    0 0 7px 4px rgba(255, 255, 255, 0.6), 0 0 13px 8px rgba(255, 255, 255, 0.4),
+    0 0 22px 6px rgba(255, 255, 255, 0.2);
+}
+
+.dark .shimmer-button-green .shimmer::after {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8),
     inset 0 0 3px 1px rgba(255, 255, 255, 0.6),
     inset 0 0 9px 1px rgba(255, 255, 255, 0.4);
-  z-index: 2;
 }
 
 .shimmer-button-green:hover .shimmer::before,

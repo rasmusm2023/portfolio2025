@@ -121,14 +121,25 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
         {infiniteTraits.map((trait, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-80 border border-neutral-100/10 rounded-2xl p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden"
+            className="flex-shrink-0 w-80 border border-neutral-20/10 dark:border-neutral-100/10 rounded-2xl p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden shadow-lg"
+            style={{
+              backgroundColor: document.documentElement.classList.contains(
+                "dark"
+              )
+                ? "rgba(35, 35, 35, 0.5)"
+                : "rgba(248, 248, 248, 0.95)",
+            }}
           >
             {/* Blurred Background Layer */}
             {trait.image && (
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background: `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${trait.image})`,
+                  background: document.documentElement.classList.contains(
+                    "dark"
+                  )
+                    ? `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${trait.image})`
+                    : `linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.95)), url(${trait.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -141,8 +152,11 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background:
-                    "linear-gradient(to bottom, rgba(64,64,64,0.8), rgba(32,32,32,0.9))",
+                  background: document.documentElement.classList.contains(
+                    "dark"
+                  )
+                    ? "linear-gradient(to bottom, rgba(64,64,64,0.8), rgba(32,32,32,0.9))"
+                    : "linear-gradient(to bottom, rgba(240,240,240,0.8), rgba(230,230,230,0.9))",
                   zIndex: -1,
                 }}
               />
@@ -151,8 +165,9 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
             <div
               className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-2xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                background: document.documentElement.classList.contains("dark")
+                  ? "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 70%)",
               }}
             ></div>
 
@@ -165,7 +180,16 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full bg-gradient-to-br from-neutral-70 to-neutral-80 flex items-center justify-center">
+                <div
+                  className="w-full h-full flex items-center justify-center"
+                  style={{
+                    background: document.documentElement.classList.contains(
+                      "dark"
+                    )
+                      ? "linear-gradient(to bottom right, rgb(64, 64, 64), rgb(32, 32, 32))"
+                      : "linear-gradient(to bottom right, rgb(240, 240, 240), rgb(220, 220, 220))",
+                  }}
+                >
                   <span className="text-6xl">{trait.emoji}</span>
                 </div>
               )}
@@ -175,12 +199,24 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
             <div className="space-y-3 relative z-10">
               <div className="flex items-center gap-3">
                 <span className="text-2xl">{trait.emoji}</span>
-                <h3 className="text-neutral-0 font-semibold text-base">
+                <h3
+                  className="font-semibold text-base"
+                  style={{
+                    color: document.documentElement.classList.contains("dark")
+                      ? "rgb(255, 255, 255)"
+                      : "#000000",
+                  }}
+                >
                   {trait.title}
                 </h3>
               </div>
               <p
-                className="text-neutral-60 text-sm leading-relaxed"
+                className="text-sm leading-relaxed"
+                style={{
+                  color: document.documentElement.classList.contains("dark")
+                    ? "rgb(255, 255, 255)"
+                    : "#5D5E63",
+                }}
                 dangerouslySetInnerHTML={{ __html: trait.description }}
               />
             </div>

@@ -72,7 +72,7 @@ export default function DesignGalleryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-100">
+    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
@@ -89,23 +89,24 @@ export default function DesignGalleryPage() {
             >
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-design-gallery)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-design-gallery)] dark:[background-image:var(--gradient-hero-design-gallery-dark)] bg-clip-text text-transparent font-hanken">
                     Design Gallery
                   </span>
-                  <br />
-                  <div className="flex justify-end">
-                    <span className="text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
+                </h1>
+                <div className="flex justify-between items-start mt-16">
+                  <div className="flex-1 max-w-[48rem]">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                      A collection of design work that doesn't fit into
+                      traditional case studies — from branding and logos to
+                      typography, print design, and experimental projects. These
+                      go beyond just UX/UI work.
+                    </p>
+                  </div>
+                  <div className="ml-8">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken tracking-wide">
                       Miscellaneous
                     </span>
                   </div>
-                </h1>
-                <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
-                    A collection of design work that doesn't fit into
-                    traditional case studies — from branding and logos to
-                    typography, print design, and experimental projects. These
-                    go beyond just UX/UI work.
-                  </p>
                 </div>
               </div>
             </div>
@@ -116,7 +117,15 @@ export default function DesignGalleryPage() {
             <div className="text-left w-full max-w-[1600px]">
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[250px]">
                 {/* Large hero image - spans 4 columns */}
-                <div className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[0].src}
                     alt={galleryImages[0].alt}
@@ -126,7 +135,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Tall vertical image - spans 2 rows */}
-                <div className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[1].src}
                     alt={galleryImages[1].alt}
@@ -136,7 +153,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[2].src}
                     alt={galleryImages[2].alt}
@@ -146,7 +171,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[3].src}
                     alt={galleryImages[3].alt}
@@ -156,7 +189,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[4].src}
                     alt={galleryImages[4].alt}
@@ -166,7 +207,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[5].src}
                     alt={galleryImages[5].alt}
@@ -176,7 +225,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Wide horizontal image - spans 3 columns */}
-                <div className="md:col-span-3 lg:col-span-4 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-3 lg:col-span-4 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[6].src}
                     alt={galleryImages[6].alt}
@@ -186,7 +243,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[7].src}
                     alt={galleryImages[7].alt}
@@ -196,7 +261,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[8].src}
                     alt={galleryImages[8].alt}
@@ -206,7 +279,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Tall vertical image - spans 2 rows */}
-                <div className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[0].src}
                     alt={galleryImages[0].alt}
@@ -216,7 +297,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[1].src}
                     alt={galleryImages[1].alt}
@@ -226,7 +315,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[2].src}
                     alt={galleryImages[2].alt}
@@ -236,7 +333,15 @@ export default function DesignGalleryPage() {
                 </div>
 
                 {/* Medium square image */}
-                <div className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 hover:scale-[1.02] transition-transform duration-300">
+                <div
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
+                >
                   <img
                     src={galleryImages[3].src}
                     alt={galleryImages[3].alt}

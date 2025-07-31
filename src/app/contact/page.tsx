@@ -59,15 +59,15 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200 resize-none"
+          className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-100 rounded-lg"
-              : "top-3 text-base text-neutral-80 font-bold"
+              ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-20/50 dark:bg-neutral-100 rounded-lg"
+              : "top-3 text-base text-neutral-60 dark:text-neutral-80 font-bold"
           }`}
         >
           {placeholder}
@@ -87,15 +87,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200"
+        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200"
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-100 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-80 font-bold"
+            ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-20/50 dark:bg-neutral-100 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-80 font-bold"
         }`}
       >
         {placeholder}
@@ -138,7 +138,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-100">
+    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
@@ -158,21 +158,27 @@ export default function ContactPage() {
                 <div className="flex-1 flex items-center">
                   <div>
                     <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                      <span className="[background-image:var(--gradient-hero-contact)] bg-clip-text text-transparent font-hanken">
+                      <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                         Contact
                       </span>
-                      <br />
                     </h1>
-                    <div className="flex flex-col gap-6 mt-16">
-                      <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
-                        I'm always excited to discuss new opportunities and
-                        possibilities.
-                      </p>
-                      <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[48rem]">
-                        Whether you have a specific role in mind or just want to
-                        discuss how I can contribute, let's start a
-                        conversation.
-                      </p>
+                    <div className="flex justify-between items-start mt-16">
+                      <div className="flex-1 max-w-[48rem]">
+                        <div className="flex flex-col gap-6">
+                          <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                            I'm always excited to discuss new opportunities and
+                            possibilities.
+                          </p>
+                          <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                            Whether you have a specific role in mind or just
+                            want to discuss how I can contribute, let's start a
+                            conversation.
+                          </p>
+                        </div>
+                      </div>
+                      <div className="ml-8">
+                        {/* Empty space for balance since no subtitle */}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -184,8 +190,8 @@ export default function ContactPage() {
               className="absolute right-0 w-[32rem]"
               style={{ top: "65%", transform: "translateY(-50%)" }}
             >
-              <div className="bg-neutral-100 backdrop-blur-sm border border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
-                <h2 className="text-3xl font-bold text-neutral-0 mb-6 font-hanken">
+              <div className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
+                <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
                   Let's have a chat 💬
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -240,7 +246,7 @@ export default function ContactPage() {
                   {/* OR Divider */}
                   <div className="flex items-center justify-center space-x-4 my-6">
                     <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 text-sm font-medium px-4">
+                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
                       OR
                     </span>
                     <div className="flex-1 h-px bg-neutral-60/30"></div>
@@ -248,7 +254,7 @@ export default function ContactPage() {
 
                   {/* Email Alternative */}
                   <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
-                    <p className="text-neutral-30 text-base font-medium">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
                       Prefer to email directly?
                     </p>
                     <div className="flex items-center justify-center gap-4">
@@ -268,7 +274,7 @@ export default function ContactPage() {
                         className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
                           emailCopied
                             ? "bg-green-500 text-neutral-3 shadow-lg"
-                            : "bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
+                            : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
                         }`}
                       >
                         <Copy size={16} weight="regular" />
@@ -306,10 +312,12 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-neutral-0">
+                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
                       Location
                     </h3>
-                    <p className="text-neutral-60 text-lg">Stockholm, Sweden</p>
+                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
+                      Stockholm, Sweden
+                    </p>
                   </div>
                 </div>
 
@@ -330,10 +338,12 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-neutral-0">
+                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
                       Response Time
                     </h3>
-                    <p className="text-neutral-60 text-lg">Within 24 hours</p>
+                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
+                      Within 24 hours
+                    </p>
                   </div>
                 </div>
               </div>

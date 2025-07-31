@@ -57,15 +57,15 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-3 font-bold bg-purple-600 rounded-lg"
-              : "top-3 text-base text-neutral-40 font-bold"
+              ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
+              : "top-3 text-base text-neutral-60 dark:text-neutral-40 font-bold"
           }`}
         >
           {placeholder}
@@ -84,15 +84,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-80/50 border border-neutral-100/20 rounded-xl text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-neutral-3 font-bold bg-purple-600 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-40 font-bold"
+            ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-40 font-bold"
         }`}
       >
         {placeholder}
@@ -128,7 +128,7 @@ const Footer = () => {
               animation: "gradient-shift 4s ease-in-out infinite",
             }}
           />
-          <div className="absolute inset-[1px] rounded-[2.5rem] bg-neutral-100"></div>
+          <div className="absolute inset-[1px] rounded-[2.5rem] bg-neutral-0 dark:bg-neutral-100"></div>
         </div>
 
         {/* Noise background overlay */}
@@ -144,7 +144,7 @@ const Footer = () => {
             {/* Contact Form - Redesigned */}
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-5xl font-bold text-neutral-0 mb-4 font-hanken">
+                <h3 className="text-5xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 font-hanken">
                   Let's have a chat 💬
                 </h3>
                 <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
@@ -153,7 +153,7 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-6">
+              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-6">
                 <form
                   action="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
                   method="post"
@@ -206,7 +206,7 @@ const Footer = () => {
             {/* Contact Information - Redesigned */}
             <div className="space-y-6">
               <div className="space-y-4">
-                <h3 className="text-5xl font-bold text-neutral-50 mb-4 font-hanken">
+                <h3 className="text-5xl font-bold text-neutral-70 dark:text-neutral-50 mb-4 font-hanken">
                   Get in touch
                 </h3>
                 <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
@@ -214,7 +214,7 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/10 rounded-3xl p-6">
+              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-6">
                 <div className="space-y-6">
                   <div className="flex items-center gap-4 p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
@@ -225,7 +225,7 @@ const Footer = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-neutral-10 font-semibold mb-1 text-lg">
+                      <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
                         Email
                       </h4>
                       <a
@@ -233,7 +233,7 @@ const Footer = () => {
                         className={`transition-colors duration-200 text-base cursor-pointer hover:opacity-90 ${
                           emailCopied
                             ? "text-green-500"
-                            : "text-neutral-60 hover:text-neutral-0"
+                            : "text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0"
                         }`}
                       >
                         hello@rasmusmattsson.com
@@ -244,8 +244,8 @@ const Footer = () => {
                         onClick={handleCopyEmail}
                         className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
                           emailCopied
-                            ? "bg-green-500 text-neutral-3 shadow-lg"
-                            : "bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
+                            ? "bg-green-500 text-neutral-0 shadow-lg"
+                            : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
                         }`}
                       >
                         <Copy size={16} weight="regular" />
@@ -262,14 +262,14 @@ const Footer = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <h4 className="text-neutral-10 font-semibold mb-1 text-lg">
+                      <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
                         LinkedIn
                       </h4>
                       <a
                         href="https://linkedin.com/in/rasmus-mattsson"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-neutral-60 hover:text-neutral-0 transition-colors duration-200 text-base"
+                        className="text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base"
                       >
                         linkedin.com/in/rasmus-mattsson
                       </a>
@@ -279,7 +279,7 @@ const Footer = () => {
                         href="https://linkedin.com/in/rasmus-mattsson"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40"
+                        className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
                       >
                         <User size={16} weight="regular" />
                         See Profile
@@ -292,7 +292,7 @@ const Footer = () => {
           </div>
 
           {/* Footer Content - Inside Noise Background */}
-          <div className="mt-8 pt-4 border-t border-neutral-100/10">
+          <div className="mt-8 pt-4 border-t border-neutral-20/10 dark:border-neutral-100/10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Brand Section */}
               <div className="space-y-4">
@@ -300,7 +300,7 @@ const Footer = () => {
                   <div className="w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-[0_0_20px_rgba(147,51,234,0.6)] animate-pulse">
                     <span className="text-sm font-bold text-white"></span>
                   </div>
-                  <span className="text-xl font-bold text-neutral-30">
+                  <span className="text-xl font-bold text-neutral-70 dark:text-neutral-30">
                     Rasmus Mattsson
                   </span>
                 </div>
@@ -319,7 +319,7 @@ const Footer = () => {
                       href="https://dribbble.com/rasmusmattsson"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
+                      className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
                       <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
                       Dribbble
@@ -328,7 +328,7 @@ const Footer = () => {
                       href="https://linkedin.com/in/rasmus-mattsson"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
+                      className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
                       <FontAwesomeIcon
                         icon={faLinkedinIn}
@@ -340,7 +340,7 @@ const Footer = () => {
                       href="https://github.com/rasmusm2023"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-neutral-50 hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
+                      className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
                     >
                       <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
                       GitHub
@@ -352,7 +352,7 @@ const Footer = () => {
                     href="/resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-neutral-30 hover:text-white hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
+                    className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
                   >
                     <FileText size={16} weight="regular" />
                     View Resume

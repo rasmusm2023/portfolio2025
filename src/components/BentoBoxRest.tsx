@@ -10,6 +10,11 @@ const BentoBoxRest = () => {
     [key: string]: { x: number; y: number };
   }>({});
 
+  // SSR check
+  const isDarkMode =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
   };
@@ -62,9 +67,10 @@ const BentoBoxRest = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
-            className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
+              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("skills-dotted")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -73,12 +79,18 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                background: isDarkMode
+                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+              <h2
+                className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                style={{
+                  color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                }}
+              >
                 Expertise{" "}
               </h2>
               <Image
@@ -106,7 +118,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -120,7 +139,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         UX Research
                       </h3>
                     </div>
@@ -168,7 +192,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -182,7 +213,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         UI Design
                       </h3>
                     </div>
@@ -226,7 +262,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -240,7 +283,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         UX Design
                       </h3>
                     </div>
@@ -296,7 +344,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -310,7 +365,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         Development
                       </h3>
                     </div>
@@ -358,7 +418,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -372,7 +439,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         Product
                       </h3>
                     </div>
@@ -420,7 +492,14 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div
+                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
+                  style={{
+                    backgroundColor: isDarkMode
+                      ? "rgb(255, 255, 255)"
+                      : "rgba(248, 248, 248, 0.95)",
+                  }}
+                >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -434,7 +513,12 @@ const BentoBoxRest = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3
+                        className="font-black text-xl tracking-wide transition-colors duration-200"
+                        style={{
+                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                        }}
+                      >
                         AI & Automation
                       </h3>
                     </div>
@@ -470,8 +554,11 @@ const BentoBoxRest = () => {
 
           {/* Experience - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-            style={{ transform: `scale(${getBoxScale("experience")})` }}
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            style={{
+              transform: `scale(${getBoxScale("experience")})`,
+              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+            }}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -479,16 +566,27 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                background: isDarkMode
+                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-baseline gap-2">
-                <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                <h2
+                  className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                  style={{
+                    color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                  }}
+                >
                   Experience
                 </h2>
-                <p className="text-lg text-neutral-50 font-hanken">
+                <p
+                  className="text-lg font-hanken"
+                  style={{
+                    color: isDarkMode ? "rgb(255, 255, 255)" : "#5D5E63",
+                  }}
+                >
                   employments & studies
                 </p>
               </div>
@@ -550,8 +648,11 @@ const BentoBoxRest = () => {
 
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-            style={{ transform: `scale(${getBoxScale("current-work")})` }}
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            style={{
+              transform: `scale(${getBoxScale("current-work")})`,
+              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+            }}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -559,12 +660,18 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background:
-                  "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                background: isDarkMode
+                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+              <h2
+                className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                style={{
+                  color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                }}
+              >
                 Currently working on
               </h2>
               <Image

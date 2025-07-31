@@ -21,7 +21,10 @@ const CustomCursor = () => {
   const getColorAtPosition = (x: number, y: number) => {
     try {
       const element = document.elementFromPoint(x, y);
-      if (!element) return "rgba(255, 215, 0, 0.8)";
+      if (!element) return "rgba(139, 92, 246, 0.8)"; // Purple fallback
+
+      // Check if dark mode is active
+      const isDarkMode = document.documentElement.classList.contains("dark");
 
       // Get computed styles
       const styles = window.getComputedStyle(element);
@@ -40,17 +43,31 @@ const CustomCursor = () => {
         // Calculate brightness
         const brightness = (r * 299 + g * 587 + b * 114) / 1000;
 
-        // Return contrasting color based on brightness
-        if (brightness > 128) {
-          return "rgba(0, 0, 0, 0.8)"; // Dark color for light backgrounds
+        // Return contrasting color based on brightness and theme
+        if (isDarkMode) {
+          if (brightness > 128) {
+            return "rgba(0, 0, 0, 0.8)"; // Dark color for light backgrounds in dark mode
+          } else {
+            return "rgba(255, 255, 255, 0.8)"; // Light color for dark backgrounds in dark mode
+          }
         } else {
-          return "rgba(255, 255, 255, 0.8)"; // Light color for dark backgrounds
+          if (brightness > 128) {
+            return "rgba(139, 92, 246, 0.8)"; // Purple for light backgrounds in light mode
+          } else {
+            return "rgba(0, 0, 0, 0.8)"; // Dark color for dark backgrounds in light mode
+          }
         }
       }
 
-      return "rgba(255, 255, 255, 0.8)"; // Fallback to white
+      // Fallback based on theme
+      return isDarkMode
+        ? "rgba(255, 255, 255, 0.8)"
+        : "rgba(139, 92, 246, 0.8)";
     } catch (error) {
-      return "rgba(255, 255, 255, 0.8)"; // Fallback to white
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      return isDarkMode
+        ? "rgba(255, 255, 255, 0.8)"
+        : "rgba(139, 92, 246, 0.8)";
     }
   };
 
@@ -149,26 +166,8 @@ const CustomCursor = () => {
       } else if (target.closest("a")) {
         setHoverTarget("link");
         setIsHovering(true);
-      } else if (target.closest(".group")) {
-        setHoverTarget("card");
-        setIsHovering(true);
-      } else if (target.closest("[class*='hover:']")) {
-        // Detect any element with hover classes
-        setHoverTarget("card");
-        setIsHovering(true);
-      } else if (target.closest("[class*='group-hover:']")) {
-        // Detect elements with group-hover classes
-        setHoverTarget("card");
-        setIsHovering(true);
-      } else if (target.closest("[class*='transition']")) {
-        // Detect elements with transition classes
-        setHoverTarget("card");
-        setIsHovering(true);
-      } else if (
-        target.style.cursor === "pointer" ||
-        target.closest("[style*='cursor: pointer']")
-      ) {
-        // Detect elements with pointer cursor
+      } else if (target.closest("button") || target.closest("a")) {
+        // Only show large circle for actual interactive elements
         setHoverTarget("card");
         setIsHovering(true);
       } else {
@@ -234,6 +233,11 @@ const CustomCursor = () => {
   }, [hoverTarget]);
 
   const getCursorStyle = () => {
+    // SSR check
+    const isDarkMode =
+      typeof document !== "undefined" &&
+      document.documentElement.classList.contains("dark");
+
     const baseStyle = {
       position: "fixed" as const,
       left: mousePosition.x + 20, // Offset from actual cursor
@@ -252,12 +256,14 @@ const CustomCursor = () => {
           width: "120px",
           height: "36px",
           borderRadius: "18px",
-          backgroundColor: "rgb(255, 255, 255)", // white
+          backgroundColor: isDarkMode
+            ? "rgb(255, 255, 255)"
+            : "rgb(35, 35, 35)", // white in dark mode, dark in light mode
           transform: "translate(-50%, -50%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          color: isDarkMode ? "rgb(51, 51, 51)" : "rgb(255, 255, 255)", // black text in dark mode, white text in light mode
           fontSize: "12px",
           fontWeight: "bold",
           letterSpacing: "0.5px",
@@ -270,12 +276,14 @@ const CustomCursor = () => {
           width: "120px",
           height: "36px",
           borderRadius: "18px",
-          backgroundColor: "rgb(255, 255, 255)", // white
+          backgroundColor: isDarkMode
+            ? "rgb(255, 255, 255)"
+            : "rgb(35, 35, 35)", // white in dark mode, dark in light mode
           transform: "translate(-50%, -50%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          color: isDarkMode ? "rgb(51, 51, 51)" : "rgb(255, 255, 255)", // black text in dark mode, white text in light mode
           fontSize: "12px",
           fontWeight: "bold",
           letterSpacing: "0.5px",
@@ -288,12 +296,14 @@ const CustomCursor = () => {
           width: "160px",
           height: "36px",
           borderRadius: "18px",
-          backgroundColor: "rgb(255, 255, 255)", // white
+          backgroundColor: isDarkMode
+            ? "rgb(255, 255, 255)"
+            : "rgb(35, 35, 35)", // white in dark mode, dark in light mode
           transform: "translate(-50%, -50%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          color: isDarkMode ? "rgb(51, 51, 51)" : "rgb(255, 255, 255)", // black text in dark mode, white text in light mode
           fontSize: "12px",
           fontWeight: "bold",
           letterSpacing: "0.5px",
@@ -306,12 +316,14 @@ const CustomCursor = () => {
           width: "160px",
           height: "36px",
           borderRadius: "18px",
-          backgroundColor: "rgb(255, 255, 255)", // white
+          backgroundColor: isDarkMode
+            ? "rgb(255, 255, 255)"
+            : "rgb(35, 35, 35)", // white in dark mode, dark in light mode
           transform: "translate(-50%, -50%)",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "rgb(51, 51, 51)", // neutral-3 (black text)
+          color: isDarkMode ? "rgb(51, 51, 51)" : "rgb(255, 255, 255)", // black text in dark mode, white text in light mode
           fontSize: "12px",
           fontWeight: "bold",
           letterSpacing: "0.5px",
@@ -336,8 +348,12 @@ const CustomCursor = () => {
           width: "84px",
           height: "84px",
           borderRadius: "50%",
-          backgroundColor: "rgba(255, 255, 255, 0.3)",
-          border: "2px solid rgba(255, 255, 255, 0.8)",
+          backgroundColor: isDarkMode
+            ? "rgba(255, 255, 255, 0.3)"
+            : "rgba(35, 35, 35, 0.3)", // Dark in light mode, white in dark mode
+          border: isDarkMode
+            ? "2px solid rgba(255, 255, 255, 0.8)"
+            : "2px solid rgba(35, 35, 35, 0.8)", // Dark border in light mode, white border in dark mode
           transform: "translate(-50%, -50%)",
         };
       case "card":
@@ -358,7 +374,9 @@ const CustomCursor = () => {
           width: "12px",
           height: "12px",
           borderRadius: "50%",
-          backgroundColor: backgroundColor,
+          backgroundColor: isDarkMode
+            ? backgroundColor
+            : "rgba(35, 35, 35, 0.8)", // Dark color in light mode
           transform: "translate(-50%, -50%)",
         };
     }

@@ -71,6 +71,11 @@ const ProjectShowcase = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
+  // SSR check
+  const isDarkMode =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({
       x: e.clientX + window.scrollX,
@@ -119,7 +124,7 @@ const ProjectShowcase = () => {
                 }}
                 className="text-left cursor-pointer"
               >
-                <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-heading-projects)] bg-clip-text text-transparent font-hanken pb-2">
+                <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
                   Previous Work
                 </h2>
                 <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
@@ -133,14 +138,21 @@ const ProjectShowcase = () => {
             <Link
               key={project.id}
               href={project.link}
-              className="group project-showcase-card block w-full h-48 bg-neutral-100 overflow-hidden relative"
+              className="group project-showcase-card block w-full h-48 bg-neutral-0 dark:bg-neutral-100 overflow-hidden relative"
               onMouseMove={handleMouseMove}
               onMouseEnter={() => handleMouseEnter(project.id)}
               onMouseLeave={handleMouseLeave}
             >
               {/* Growing purple background from center */}
-              <div className="absolute inset-0 bg-neutral-100" />
-              <div className="absolute inset-0 bg-gradient-to-b from-[#4C1D95] via-[#6D28D9] to-[#8B5CF6] opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-0 group-hover:scale-y-100 origin-center" />
+              <div className="absolute inset-0 bg-neutral-0 dark:bg-neutral-100" />
+              <div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-0 group-hover:scale-y-100 origin-center"
+                style={{
+                  background: isDarkMode
+                    ? "linear-gradient(to bottom, #4C1D95, #6D28D9, #8B5CF6)"
+                    : "linear-gradient(to bottom, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.25), rgba(196, 181, 253, 0.3))",
+                }}
+              />
               <div
                 className="flex items-center justify-between h-full py-8 relative z-10"
                 style={{
@@ -152,20 +164,31 @@ const ProjectShowcase = () => {
               >
                 {/* Left side - Project info */}
                 <div className="flex flex-col justify-center">
-                  <div className="text-sm font-black text-neutral-40 group-hover:text-neutral-3 tracking-wider mb-1 transition-colors duration-500 ease-in-out">
+                  <div className="text-sm font-black text-neutral-60 dark:text-neutral-40 group-hover:text-neutral-100 dark:group-hover:text-neutral-3 tracking-wider mb-1 transition-colors duration-500 ease-in-out">
                     {project.id.toUpperCase()}
                   </div>
-                  <h3 className="text-2xl font-bold text-neutral-0 group-hover:text-[#FFD700] transition-colors duration-500 ease-in-out font-hanken">
+                  <h3
+                    className="text-2xl font-bold text-neutral-100 dark:text-neutral-0 transition-colors duration-500 ease-in-out font-hanken"
+                    style={{
+                      color: isDarkMode
+                        ? hoveredProject === project.id
+                          ? "#FFD700"
+                          : "rgb(255, 255, 255)"
+                        : hoveredProject === project.id
+                        ? "#8B5CF6"
+                        : "#000000",
+                    }}
+                  >
                     {project.title}
                   </h3>
                   <div className="flex items-center gap-2 mt-3">
                     {project.keywords.map((keyword, index) => (
                       <div key={index} className="flex items-center">
-                        <span className="text-lg text-neutral-60 group-hover:text-neutral-20 font-medium transition-colors duration-500 ease-in-out">
+                        <span className="text-lg text-neutral-70 dark:text-neutral-60 group-hover:text-neutral-100 dark:group-hover:text-neutral-20 font-medium transition-colors duration-500 ease-in-out">
                           {keyword}
                         </span>
                         {index < project.keywords.length - 1 && (
-                          <span className="text-neutral-40 group-hover:text-neutral-20 mx-2 transition-colors duration-500 ease-in-out">
+                          <span className="text-neutral-50 dark:text-neutral-40 group-hover:text-neutral-100 dark:group-hover:text-neutral-20 mx-2 transition-colors duration-500 ease-in-out">
                             |
                           </span>
                         )}
@@ -175,7 +198,7 @@ const ProjectShowcase = () => {
                 </div>
 
                 {/* Right side - Project image */}
-                <div className="relative h-40 w-64 overflow-hidden bg-neutral-80 rounded-2xl">
+                <div className="relative h-40 w-64 overflow-hidden bg-neutral-20 dark:bg-neutral-80 rounded-2xl">
                   <Image
                     src={project.image}
                     alt={project.alt}
@@ -184,10 +207,10 @@ const ProjectShowcase = () => {
                     className="w-full h-full object-cover"
                   />
                   {/* Overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-neutral-100/10 group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
+                  <div className="absolute inset-0 bg-neutral-100/10 dark:bg-neutral-100/10 group-hover:bg-neutral-100/20 dark:group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
                   {/* GIF indicator */}
                   {project.isGif && (
-                    <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
+                    <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-0 dark:text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
                       GIF
                     </div>
                   )}
@@ -209,8 +232,8 @@ const ProjectShowcase = () => {
             top: mousePosition.y + 80, // Position below cursor with doubled offset
           }}
         >
-          <div className="flex flex-row gap-8 bg-white/20 backdrop-blur-sm px-6 py-4 shadow-lg border-2 border-[#8B5CF6]/30">
-            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+          <div className="flex flex-row gap-8 bg-neutral-10/20 dark:bg-white/20 backdrop-blur-sm px-6 py-4 shadow-lg border-2 border-[#8B5CF6]/30">
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
                   hoveredProject === "zmartrest"
@@ -223,7 +246,7 @@ const ProjectShowcase = () => {
                 className="w-full h-full object-cover transition-all duration-150 ease-out"
               />
             </div>
-            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
                   hoveredProject === "zmartrest"
@@ -236,7 +259,7 @@ const ProjectShowcase = () => {
                 className="w-full h-full object-cover transition-all duration-150 ease-out"
               />
             </div>
-            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-80">
+            <div className="w-[200px] h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
                   hoveredProject === "zmartrest"

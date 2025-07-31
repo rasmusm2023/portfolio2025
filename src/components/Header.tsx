@@ -7,6 +7,7 @@ import { Hanken_Grotesk } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState } from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -44,22 +45,33 @@ const Header = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 h-24 backdrop-blur-lg transition-all duration-1000 ${
-        showBackground ? "bg-neutral-900/80" : "bg-transparent"
+        showBackground
+          ? "bg-neutral-0/80 dark:bg-neutral-900/80"
+          : "bg-transparent"
       }`}
     >
       <div className={`px-12 h-full ${hanken.className}`}>
         <div className="flex justify-between items-center h-full">
-          <Link href="/" className="text-2xl font-bold text-neutral-100">
+          <Link
+            href="/"
+            className="text-2xl font-bold text-neutral-100 dark:text-neutral-100"
+          >
             <img
               src="/rm-logo-portfolio-white.svg"
               alt="Logo"
-              className="h-8"
+              className="h-8 dark:block hidden"
+            />
+            <img
+              src="/rm-logo-portfolio-dark.svg"
+              alt="Logo"
+              className="h-8 block dark:hidden"
             />
           </Link>
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <Menu />
           </div>
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             <Link
               href="https://www.linkedin.com/in/rasmus-mattsson/"
               target="_blank"

@@ -39,6 +39,18 @@ const Menu = () => {
     }
   }, []);
 
+  // Get the appropriate shadow color based on theme
+  const getShadowColor = () => {
+    if (typeof document !== "undefined") {
+      const isDarkMode = document.documentElement.classList.contains("dark");
+      return isDarkMode
+        ? withOpacity(colors.neutral[0], 0.4)
+        : withOpacity(colors.neutral[100], 0.4);
+    }
+    // Default to light mode shadow during SSR
+    return withOpacity(colors.neutral[100], 0.4);
+  };
+
   useEffect(() => {
     // Set active section based on current pathname
     const currentPath = pathname === "/" ? "home" : pathname.substring(1);
@@ -74,12 +86,12 @@ const Menu = () => {
       <ul ref={menuRef} className="flex space-x-0 py-2 px-0 relative">
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-neutral-0 rounded-lg -z-10"
+          className="absolute h-[calc(100%+4px)] bg-neutral-90 dark:bg-neutral-0 rounded-lg -z-10"
           style={{
             top: "-2px",
             left: "0",
             width: "0",
-            boxShadow: `0 0 12px ${withOpacity(colors.neutral[0], 0.4)}`,
+            boxShadow: `0 0 12px ${getShadowColor()}`,
           }}
         />
         {menuItems.map((item) => {
@@ -103,8 +115,8 @@ const Menu = () => {
                   rounded-full
                   ${
                     isActive
-                      ? "text-neutral-100"
-                      : "text-neutral-40 hover:text-neutral-0"
+                      ? "text-neutral-0 dark:text-neutral-100"
+                      : "text-neutral-60 dark:text-neutral-40 hover:text-neutral-100 dark:hover:text-neutral-0"
                   }
                 `}
               >

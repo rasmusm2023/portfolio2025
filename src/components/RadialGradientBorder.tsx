@@ -22,6 +22,12 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
   size = "md",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  // SSR check
+  const isDarkMode =
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("dark");
+
   const sizeClasses = {
     sm: "p-3",
     md: "p-4",
@@ -32,8 +38,10 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
   const getBorderStyle = () => {
     // Take only the first 2 colors from shineColor array and make them less dominant
     const colors = shineColor.slice(0, 2).map((color) => `${color}80`); // Add 50% opacity
-    // Use the darkest background color (neutral-100)
-    const cardBackground = "#232323"; // This is the darkest color from colors.js
+    // Use theme-aware background color
+    const cardBackground = isDarkMode
+      ? "#232323" // Dark mode: darkest color
+      : "#ffffff"; // Light mode: white background
 
     // When hovered, show static green gradient border
     if (isHovered) {

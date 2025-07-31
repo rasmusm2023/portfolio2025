@@ -4,6 +4,7 @@ import AnimatedBlob from "@/components/AnimatedBlob";
 import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
 import TraitsCarousel from "@/components/TraitsCarousel";
 import CustomCursor from "@/components/CustomCursor";
+import RadialGradientBorder from "@/components/RadialGradientBorder";
 
 import TheEqualizerCover from "@/films/The-Equalizer.png";
 import TheEqualizer2Cover from "@/films/The-Equalizer-2.png";
@@ -155,7 +156,12 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group bg-neutral-80/50 backdrop-blur-sm"
+      className="flex-shrink-0 w-80 h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group backdrop-blur-sm"
+      style={{
+        backgroundColor: document.documentElement.classList.contains("dark")
+          ? "rgba(35, 35, 35, 0.5)"
+          : "rgba(255, 255, 255, 0.95)",
+      }}
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
@@ -169,16 +175,53 @@ function BookCard({
                 width={128}
                 height={192}
               />
-              <div className="absolute inset-0 bg-black/30"></div>
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundColor: document.documentElement.classList.contains(
+                    "dark"
+                  )
+                    ? "rgba(0, 0, 0, 0.3)"
+                    : "rgba(0, 0, 0, 0.1)",
+                }}
+              ></div>
             </>
           ) : (
-            <div className="w-full h-full bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/10 rounded-l-2xl p-4">
+            <div
+              className="w-full h-full backdrop-blur-sm border rounded-l-2xl p-4"
+              style={{
+                backgroundColor: document.documentElement.classList.contains(
+                  "dark"
+                )
+                  ? "rgba(35, 35, 35, 0.5)"
+                  : "rgba(255, 255, 255, 0.9)",
+                borderColor: document.documentElement.classList.contains("dark")
+                  ? "rgba(255, 255, 255, 0.1)"
+                  : "rgba(0, 0, 0, 0.05)",
+              }}
+            >
               <div className="space-y-2">
-                <h3 className="text-neutral-0 font-semibold text-sm">
+                <h3
+                  className="font-semibold text-sm"
+                  style={{
+                    color: document.documentElement.classList.contains("dark")
+                      ? "rgb(255, 255, 255)"
+                      : "#000000",
+                  }}
+                >
                   {title}
                 </h3>
                 <div className="space-y-1">
-                  <p className="text-neutral-60 text-xs">by {author}</p>
+                  <p
+                    className="text-xs"
+                    style={{
+                      color: document.documentElement.classList.contains("dark")
+                        ? "rgb(255, 255, 255)"
+                        : "#5D5E63",
+                    }}
+                  >
+                    by {author}
+                  </p>
                 </div>
               </div>
             </div>
@@ -188,10 +231,26 @@ function BookCard({
         {/* Book Info */}
         <div className="flex-1 p-4 flex flex-col justify-between">
           <div className="space-y-2">
-            <h3 className="text-neutral-0 font-semibold text-sm leading-tight">
+            <h3
+              className="font-semibold text-sm leading-tight"
+              style={{
+                color: document.documentElement.classList.contains("dark")
+                  ? "rgb(255, 255, 255)"
+                  : "#000000",
+              }}
+            >
               {title}
             </h3>
-            <p className="text-neutral-60 text-xs">by {author}</p>
+            <p
+              className="text-xs"
+              style={{
+                color: document.documentElement.classList.contains("dark")
+                  ? "rgb(255, 255, 255)"
+                  : "#5D5E63",
+              }}
+            >
+              by {author}
+            </p>
           </div>
 
           {/* Status */}
@@ -203,7 +262,14 @@ function BookCard({
                     isFinished ? "bg-green-500" : "bg-blue-500 animate-pulse"
                   }`}
                 ></div>
-                <span className="text-neutral-60 text-xs font-medium">
+                <span
+                  className="text-xs font-medium"
+                  style={{
+                    color: document.documentElement.classList.contains("dark")
+                      ? "rgb(255, 255, 255)"
+                      : "#5D5E63",
+                  }}
+                >
                   {isFinished
                     ? "Finished"
                     : `Page ${currentPage} of ${totalPages}`}
@@ -211,7 +277,16 @@ function BookCard({
               </div>
 
               {/* Progress Bar */}
-              <div className="w-full bg-neutral-100/20 rounded-full h-1.5 overflow-hidden">
+              <div
+                className="w-full rounded-full h-1.5 overflow-hidden"
+                style={{
+                  backgroundColor: document.documentElement.classList.contains(
+                    "dark"
+                  )
+                    ? "rgba(255, 255, 255, 0.2)"
+                    : "rgba(0, 0, 0, 0.1)",
+                }}
+              >
                 <div
                   className={`h-full rounded-full transition-all duration-500 ease-out ${
                     isFinished
@@ -224,7 +299,14 @@ function BookCard({
 
               {/* Status Text */}
               <div className="text-right">
-                <span className="text-neutral-60 text-xs font-medium">
+                <span
+                  className="text-xs font-medium"
+                  style={{
+                    color: document.documentElement.classList.contains("dark")
+                      ? "rgb(255, 255, 255)"
+                      : "#5D5E63",
+                  }}
+                >
                   {isFinished
                     ? "100% complete"
                     : `${Math.round(progressPercentage)}% complete`}
@@ -272,16 +354,56 @@ function SkillCard({
   skills: string[];
 }) {
   return (
-    <div className="flex-shrink-0 w-48 h-56 bg-neutral-100 backdrop-blur-sm border border-neutral-100/20 rounded-2xl p-4 cursor-pointer shadow-lg">
-      <div className="flex flex-col h-full">
+    <div
+      className="flex-shrink-0 w-48 h-56 backdrop-blur-sm border rounded-2xl p-4 cursor-pointer shadow-lg group/card relative"
+      style={{
+        backgroundColor: document.documentElement.classList.contains("dark")
+          ? "rgba(255, 255, 255, 0.1)"
+          : "rgba(248, 248, 248, 0.95)",
+        borderColor: document.documentElement.classList.contains("dark")
+          ? "rgba(255, 255, 255, 0.1)"
+          : "rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      {/* Animated gradient border on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+        <RadialGradientBorder
+          variant="dash"
+          shineColor={["#8B5CF6", "#A855F7"]}
+          borderWidth={4}
+          duration={3}
+          size="md"
+          className="w-full h-full"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-col h-full group-hover/card:bg-transparent">
         <div className="flex flex-col items-center text-center mb-3">
           <span className="text-3xl mb-2">{icon}</span>
-          <h3 className="text-neutral-0 font-semibold text-sm">{title}</h3>
+          <h3
+            className="font-semibold text-sm"
+            style={{
+              color: document.documentElement.classList.contains("dark")
+                ? "rgb(255, 255, 255)"
+                : "#000000",
+            }}
+          >
+            {title}
+          </h3>
         </div>
         <div className="flex-1 flex flex-col justify-center">
           <ul className="space-y-1">
             {skills.map((skill, index) => (
-              <li key={index} className="text-neutral-60 text-xs text-left">
+              <li
+                key={index}
+                className="text-xs text-left"
+                style={{
+                  color: document.documentElement.classList.contains("dark")
+                    ? "rgb(255, 255, 255)"
+                    : "#5D5E63",
+                }}
+              >
                 • {skill}
               </li>
             ))}
@@ -358,7 +480,16 @@ function FavoriteSongs() {
                 }
               }}
             />
-            <div className="w-28 h-28 rounded-xl overflow-hidden bg-neutral-80 border-2 border-transparent transition-all duration-200 relative album-cover">
+            <div
+              className="w-28 h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover"
+              style={{
+                backgroundColor: document.documentElement.classList.contains(
+                  "dark"
+                )
+                  ? "rgb(35, 35, 35)"
+                  : "rgb(240, 240, 240)",
+              }}
+            >
               <Image
                 src={song.albumCover}
                 alt={`${song.title} by ${song.artist}`}
@@ -377,10 +508,24 @@ function FavoriteSongs() {
               ></div>
             </div>
             <div className="mt-2 text-center">
-              <p className="text-neutral-0 text-sm font-medium truncate max-w-28">
+              <p
+                className="text-sm font-medium truncate max-w-28"
+                style={{
+                  color: document.documentElement.classList.contains("dark")
+                    ? "rgb(255, 255, 255)"
+                    : "#000000",
+                }}
+              >
                 {song.title}
               </p>
-              <p className="text-neutral-60 text-sm truncate max-w-28">
+              <p
+                className="text-sm truncate max-w-28"
+                style={{
+                  color: document.documentElement.classList.contains("dark")
+                    ? "rgb(255, 255, 255)"
+                    : "#5D5E63",
+                }}
+              >
                 {song.artist}
               </p>
             </div>
@@ -402,7 +547,7 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-100">
+    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
       {/* Custom Cursor */}
       <CustomCursor />
 
@@ -422,18 +567,18 @@ export default function AboutPage() {
             >
               <div className="text-left w-full">
                 <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
-                  <span className="[background-image:var(--gradient-hero-contact)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
                   <br />
                   <div className="flex justify-end">
-                    <span className="text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
                       My Story
                     </span>
                   </div>
                 </h1>
                 <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
+                  <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
                     I am a passionate designer and developer with a love for
                     creating beautiful, functional experiences that make a
                     difference.
@@ -449,8 +594,14 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-3 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("traits")})` }}
+                  className="md:col-span-3 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("traits")})`,
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -458,12 +609,24 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      background: document.documentElement.classList.contains(
+                        "dark"
+                      )
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                    <h2
+                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: document.documentElement.classList.contains(
+                          "dark"
+                        )
+                          ? "rgb(255, 255, 255)"
+                          : "#000000",
+                      }}
+                    >
                       Traits
                     </h2>
                     <Image
@@ -530,6 +693,14 @@ export default function AboutPage() {
                           emoji: "🦉",
                           image: NightOwlImage.src,
                         },
+                        {
+                          title: "Formula 1 Enthusiast",
+                          description:
+                            "Passionate about Formula 1 racing. My favorite team is Mercedes and driver is Lewis Hamilton. I love the engineering, strategy, and pure speed of the sport.",
+                          emoji: "🏎️",
+                          image:
+                            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&crop=center",
+                        },
                       ]}
                     />
                   </div>
@@ -537,8 +708,11 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("about")})` }}
+                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("about")})`,
+                    backgroundColor: "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("about")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -547,11 +721,14 @@ export default function AboutPage() {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
                       background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                        "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                    <h2
+                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{ color: "#000000" }}
+                    >
                       Who am I?
                     </h2>
                     <Image
@@ -563,13 +740,19 @@ export default function AboutPage() {
                     />
                   </div>
                   <div className="mt-6">
-                    <p className="text-neutral-60 text-base leading-relaxed">
+                    <p
+                      className="leading-relaxed"
+                      style={{ color: "#5D5E63", fontSize: "22px" }}
+                    >
                       A passionate designer and developer with a love for
                       creating beautiful, functional experiences that make a
                       difference. I believe in the power of thoughtful design to
                       solve real problems and create meaningful connections.
                     </p>
-                    <p className="text-neutral-60 text-base leading-relaxed mt-3">
+                    <p
+                      className="leading-relaxed mt-3"
+                      style={{ color: "#5D5E63", fontSize: "22px" }}
+                    >
                       Based in Stockholm, I work at the intersection of
                       creativity and technology, always exploring new ways to
                       bring ideas to life.
@@ -579,8 +762,14 @@ export default function AboutPage() {
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("time")})` }}
+                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("time")})`,
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -588,12 +777,24 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      background: document.documentElement.classList.contains(
+                        "dark"
+                      )
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                    <h2
+                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: document.documentElement.classList.contains(
+                          "dark"
+                        )
+                          ? "rgb(255, 255, 255)"
+                          : "#000000",
+                      }}
+                    >
                       My Time
                     </h2>
                     <Image
@@ -628,7 +829,19 @@ export default function AboutPage() {
 
                     {/* Calendar Style Date */}
                     <div className="text-center">
-                      <div className="w-full bg-gradient-to-br from-neutral-80/40 to-neutral-90/40 backdrop-blur-sm border border-neutral-100/30 rounded-2xl p-3 shadow-lg">
+                      <div
+                        className="w-full backdrop-blur-sm border rounded-2xl p-3 shadow-lg"
+                        style={{
+                          background:
+                            document.documentElement.classList.contains("dark")
+                              ? "linear-gradient(to bottom right, rgba(35, 35, 35, 0.4), rgba(45, 45, 45, 0.4))"
+                              : "linear-gradient(to bottom right, rgba(240, 240, 240, 0.4), rgba(230, 230, 230, 0.4))",
+                          borderColor:
+                            document.documentElement.classList.contains("dark")
+                              ? "rgba(255, 255, 255, 0.3)"
+                              : "rgba(0, 0, 0, 0.1)",
+                        }}
+                      >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
                             <div className="relative">
@@ -640,23 +853,63 @@ export default function AboutPage() {
                               <div className="absolute -top-1 -right-1 w-3 h-3 bg-[#fbbf24] rounded-full border-2 border-white"></div>
                             </div>
                             <div className="text-left">
-                              <div className="text-neutral-0 text-sm font-bold tracking-wide">
+                              <div
+                                className="text-sm font-bold tracking-wide"
+                                style={{
+                                  color:
+                                    document.documentElement.classList.contains(
+                                      "dark"
+                                    )
+                                      ? "rgb(255, 255, 255)"
+                                      : "#000000",
+                                }}
+                              >
                                 {new Date().toLocaleDateString("en-US", {
                                   month: "long",
                                 })}
                               </div>
-                              <div className="text-neutral-60 text-sm font-medium">
+                              <div
+                                className="text-sm font-medium"
+                                style={{
+                                  color:
+                                    document.documentElement.classList.contains(
+                                      "dark"
+                                    )
+                                      ? "rgb(255, 255, 255)"
+                                      : "#5D5E63",
+                                }}
+                              >
                                 {new Date().getFullYear()}
                               </div>
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-neutral-50 text-xs font-bold">
+                            <div
+                              className="text-xs font-bold"
+                              style={{
+                                color:
+                                  document.documentElement.classList.contains(
+                                    "dark"
+                                  )
+                                    ? "rgb(255, 255, 255)"
+                                    : "#5D5E63",
+                              }}
+                            >
                               {new Date().toLocaleDateString("en-US", {
                                 weekday: "long",
                               })}
                             </div>
-                            <div className="text-neutral-60 text-xs font-medium mt-1">
+                            <div
+                              className="text-xs font-medium mt-1"
+                              style={{
+                                color:
+                                  document.documentElement.classList.contains(
+                                    "dark"
+                                  )
+                                    ? "rgb(255, 255, 255)"
+                                    : "#5D5E63",
+                              }}
+                            >
                               Stockholm Time (CET/CEST)
                             </div>
                           </div>
@@ -668,8 +921,14 @@ export default function AboutPage() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("books")})` }}
+                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("books")})`,
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -677,16 +936,37 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      background: document.documentElement.classList.contains(
+                        "dark"
+                      )
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                      <h2
+                        className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                        style={{
+                          color: document.documentElement.classList.contains(
+                            "dark"
+                          )
+                            ? "rgb(255, 255, 255)"
+                            : "#000000",
+                        }}
+                      >
                         Books
                       </h2>
-                      <p className="text-lg text-neutral-50 font-hanken">
+                      <p
+                        className="text-lg font-hanken"
+                        style={{
+                          color: document.documentElement.classList.contains(
+                            "dark"
+                          )
+                            ? "rgb(255, 255, 255)"
+                            : "#5D5E63",
+                        }}
+                      >
                         I'm currently reading or listening to
                       </p>
                     </div>
@@ -729,8 +1009,14 @@ export default function AboutPage() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("films")})` }}
+                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("films")})`,
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -738,12 +1024,24 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      background: document.documentElement.classList.contains(
+                        "dark"
+                      )
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                    <h2
+                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: document.documentElement.classList.contains(
+                          "dark"
+                        )
+                          ? "rgb(255, 255, 255)"
+                          : "#000000",
+                      }}
+                    >
                       Favourite Films
                     </h2>
                     <Image
@@ -795,8 +1093,14 @@ export default function AboutPage() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{ transform: `scale(${getBoxScale("music")})` }}
+                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("music")})`,
+                    backgroundColor:
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(35, 35, 35, 0.5)"
+                        : "#ffffff",
+                  }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -804,16 +1108,37 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)",
+                      background: document.documentElement.classList.contains(
+                        "dark"
+                      )
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <div className="flex items-baseline gap-2">
-                      <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
+                      <h2
+                        className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                        style={{
+                          color: document.documentElement.classList.contains(
+                            "dark"
+                          )
+                            ? "rgb(255, 255, 255)"
+                            : "#000000",
+                        }}
+                      >
                         Music
                       </h2>
-                      <p className="text-lg text-neutral-50 font-hanken">
+                      <p
+                        className="text-lg font-hanken"
+                        style={{
+                          color: document.documentElement.classList.contains(
+                            "dark"
+                          )
+                            ? "rgb(255, 255, 255)"
+                            : "#5D5E63",
+                        }}
+                      >
                         I'm currently listening to
                       </p>
                     </div>

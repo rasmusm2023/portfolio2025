@@ -6,6 +6,7 @@ import ClientLayout from "./ClientLayout";
 import Header from "@/components/Header";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
@@ -39,17 +40,19 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-100`}
+        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300`}
       >
-        <PerformanceOptimizer />
-        <PerformanceMonitor />
-        <Header />
-        {/* <CustomCursor /> */}
-        <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
-          <div id="smooth-content" className="relative">
-            <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider>
+          <PerformanceOptimizer />
+          <PerformanceMonitor />
+          <Header />
+          {/* <CustomCursor /> */}
+          <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
+            <div id="smooth-content" className="relative">
+              <ClientLayout>{children}</ClientLayout>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );
