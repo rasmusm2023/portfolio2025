@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { useTheme } from "@/contexts/ThemeContext";
 import FigmaIcon from "@/logos/inner-square-logos-svg/figma.svg";
 import MiroIcon from "@/logos/inner-square-logos-svg/miro.svg";
 import LovableIcon from "@/logos/inner-square-logos-svg/lovable.svg";
@@ -12,8 +13,20 @@ import CursorIcon from "@/logos/inner-square-logos-svg/cursor.svg";
 import WixIcon from "@/logos/inner-square-logos-svg/wix.svg";
 import ReactIcon from "@/logos/inner-square-logos-svg/react.svg";
 import StitchIcon from "@/logos/inner-square-logos-svg/stitch.svg";
+// Light mode icons
+import FigmaIconLight from "@/logos/inner-square-logos-light-svg/figma.svg";
+import MiroIconLight from "@/logos/inner-square-logos-light-svg/miro.svg";
+import LovableIconLight from "@/logos/inner-square-logos-light-svg/lovable.svg";
+import NextJsIconLight from "@/logos/inner-square-logos-light-svg/nextjs.svg";
+import AdobeIconLight from "@/logos/inner-square-logos-light-svg/adobe.svg";
+import FramerIconLight from "@/logos/inner-square-logos-light-svg/framer.svg";
+import CursorIconLight from "@/logos/inner-square-logos-light-svg/cursor.svg";
+import WixIconLight from "@/logos/inner-square-logos-light-svg/wix.svg";
+import ReactIconLight from "@/logos/inner-square-logos-light-svg/react.svg";
+import StitchIconLight from "@/logos/inner-square-logos-light-svg/stitch.svg";
 
 const InfiniteScrollBanner = () => {
+  const { isDark } = useTheme();
   const bannerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
   const [isHovered, setIsHovered] = useState(false);
@@ -111,16 +124,56 @@ const InfiniteScrollBanner = () => {
   }, []);
 
   const tools = [
-    { name: "Figma", icon: FigmaIcon, bg: "bg-neutral-90" },
-    { name: "Framer", icon: FramerIcon, bg: "bg-neutral-90" },
-    { name: "Adobe", icon: AdobeIcon, bg: "bg-neutral-90" },
-    { name: "Miro", icon: MiroIcon, bg: "bg-neutral-90" },
-    { name: "Lovable", icon: LovableIcon, bg: "bg-neutral-90" },
-    { name: "Wix", icon: WixIcon, bg: "bg-neutral-90" },
-    { name: "Next.js", icon: NextJsIcon, bg: "bg-neutral-90" },
-    { name: "React", icon: ReactIcon, bg: "bg-neutral-90" },
-    { name: "Cursor", icon: CursorIcon, bg: "bg-neutral-90" },
-    { name: "Google Stitch", icon: StitchIcon, bg: "bg-neutral-90" },
+    {
+      name: "Figma",
+      icon: isDark ? FigmaIcon : FigmaIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Framer",
+      icon: isDark ? FramerIcon : FramerIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Adobe",
+      icon: isDark ? AdobeIcon : AdobeIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Miro",
+      icon: isDark ? MiroIcon : MiroIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Lovable",
+      icon: isDark ? LovableIcon : LovableIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Wix",
+      icon: isDark ? WixIcon : WixIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Next.js",
+      icon: isDark ? NextJsIcon : NextJsIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "React",
+      icon: isDark ? ReactIcon : ReactIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Cursor",
+      icon: isDark ? CursorIcon : CursorIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Google Stitch",
+      icon: isDark ? StitchIcon : StitchIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
   ];
 
   return (
@@ -142,7 +195,13 @@ const InfiniteScrollBanner = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-xs font-medium text-neutral-60 group-hover:text-neutral-0 transition-colors">
+              <span
+                className={`text-xs font-medium text-neutral-60 transition-colors ${
+                  isDark
+                    ? "group-hover:text-neutral-0"
+                    : "group-hover:text-neutral-90"
+                }`}
+              >
                 {tool.name}
               </span>
             </div>
@@ -165,7 +224,13 @@ const InfiniteScrollBanner = () => {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <span className="text-xs font-medium text-neutral-60 group-hover:text-neutral-0 transition-colors">
+              <span
+                className={`text-xs font-medium text-neutral-60 transition-colors ${
+                  isDark
+                    ? "group-hover:text-neutral-0"
+                    : "group-hover:text-neutral-90"
+                }`}
+              >
                 {tool.name}
               </span>
             </div>

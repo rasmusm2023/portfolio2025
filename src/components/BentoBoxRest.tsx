@@ -34,9 +34,9 @@ const BentoBoxRest = () => {
     const deltaX = mouseX - centerX;
     const deltaY = mouseY - centerY;
 
-    // Calculate tilt angles (max 15 degrees for more noticeable effect)
-    const tiltX = (deltaY / (rect.height / 2)) * -15;
-    const tiltY = (deltaX / (rect.width / 2)) * 15;
+    // Calculate tilt angles (max 10 degrees for more subtle effect)
+    const tiltX = (deltaY / (rect.height / 2)) * -10;
+    const tiltY = (deltaX / (rect.width / 2)) * 10;
 
     setCardTilts((prev) => ({
       ...prev,

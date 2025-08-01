@@ -19,6 +19,8 @@ import MoUpFrontCover from "@/music/mo-up-front.jpg";
 import MellbystrandImage from "@/images/8bit/mellbystrand.jpg";
 import NightOwlImage from "@/images/8bit/nightowl.jpg";
 import AnimalsImage from "@/images/8bit/animals.jpg";
+import Formula1Image from "@/images/8bit/formula1.jpg";
+import StockholmImage from "@/images/8bit/stockholm.jpg";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Footer from "@/components/Footer";
@@ -355,7 +357,7 @@ function SkillCard({
 }) {
   return (
     <div
-      className="flex-shrink-0 w-48 h-56 backdrop-blur-sm border rounded-2xl p-4 cursor-pointer shadow-lg group/card relative"
+      className="flex-shrink-0 w-48 h-56 border rounded-2xl p-4 cursor-pointer shadow-lg group/card relative overflow-hidden transition-all duration-300"
       style={{
         backgroundColor: document.documentElement.classList.contains("dark")
           ? "rgba(255, 255, 255, 0.1)"
@@ -363,22 +365,27 @@ function SkillCard({
         borderColor: document.documentElement.classList.contains("dark")
           ? "rgba(255, 255, 255, 0.1)"
           : "rgba(0, 0, 0, 0.1)",
+        backdropFilter: "blur(8px)",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.background =
+          "linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #8B5CF6 100%)";
+        e.currentTarget.style.backgroundSize = "300% 300%";
+        e.currentTarget.style.animation = "sweep 24s linear infinite";
+        e.currentTarget.style.backdropFilter = "none";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.background =
+          document.documentElement.classList.contains("dark")
+            ? "rgba(255, 255, 255, 0.1)"
+            : "rgba(248, 248, 248, 0.95)";
+        e.currentTarget.style.backgroundSize = "auto";
+        e.currentTarget.style.animation = "none";
+        e.currentTarget.style.backdropFilter = "blur(8px)";
       }}
     >
-      {/* Animated gradient border on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
-        <RadialGradientBorder
-          variant="dash"
-          shineColor={["#8B5CF6", "#A855F7"]}
-          borderWidth={4}
-          duration={3}
-          size="md"
-          className="w-full h-full"
-        />
-      </div>
-
       {/* Content */}
-      <div className="relative z-10 flex flex-col h-full group-hover/card:bg-transparent">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex flex-col items-center text-center mb-3">
           <span className="text-3xl mb-2">{icon}</span>
           <h3
@@ -410,6 +417,22 @@ function SkillCard({
           </ul>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes sweep {
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: 100% 100%;
+          }
+        }
+
+        .group:hover .group-hover\\/card\\:opacity-100 {
+          background-color: transparent !important;
+          backdrop-filter: none !important;
+        }
+      `}</style>
     </div>
   );
 }
@@ -669,8 +692,7 @@ export default function AboutPage() {
                           description:
                             "Living in one of the world's most design-forward cities inspires my work daily.",
                           emoji: "🏙️",
-                          image:
-                            "https://images.unsplash.com/photo-1513622470522-26c3c8a854bc?w=400&h=400&fit=crop&crop=center",
+                          image: StockholmImage.src,
                         },
                         {
                           title: "Animal Lover",
@@ -698,8 +720,7 @@ export default function AboutPage() {
                           description:
                             "Passionate about Formula 1 racing. My favorite team is Mercedes and driver is Lewis Hamilton. I love the engineering, strategy, and pure speed of the sport.",
                           emoji: "🏎️",
-                          image:
-                            "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=400&fit=crop&crop=center",
+                          image: Formula1Image.src,
                         },
                       ]}
                     />

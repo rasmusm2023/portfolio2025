@@ -87,13 +87,18 @@ export default function Home() {
                       <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                         Product Designer{" "}
                       </span>
-                      <Image
-                        src="/icons/3dicons-pencil-dynamic-premium.png"
-                        alt="Pencil"
-                        width={240}
-                        height={240}
-                        className="inline-block animate-pulse-opacity"
-                      />
+                      <span
+                        className="inline-block text-[10rem] font-extrabold tracking-tight leading-[1] font-hanken"
+                        style={{
+                          background:
+                            "linear-gradient(to bottom, #000000 0%, #5A5A5A 50%, #8B5CF6 100%)",
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                        }}
+                      >
+                        &
+                      </span>
                     </h1>
                     <div className="flex justify-between items-start mt-16 w-full max-w-full mx-auto">
                       <div className="flex-1 max-w-[48rem]">

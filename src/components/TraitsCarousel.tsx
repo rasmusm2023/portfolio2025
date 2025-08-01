@@ -178,6 +178,12 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
                   src={trait.image}
                   alt={trait.title}
                   className="w-full h-full object-cover"
+                  style={{
+                    objectPosition:
+                      trait.title === "Formula 1 Enthusiast"
+                        ? "bottom right"
+                        : "center",
+                  }}
                 />
               ) : (
                 <div
