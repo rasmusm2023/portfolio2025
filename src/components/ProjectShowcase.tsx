@@ -19,7 +19,7 @@ interface Project {
 const projects: Project[] = [
   {
     id: "noted",
-    title: "Reduced onboarding time by 60% with intuitive note-taking design",
+    title: "Enhancing job applicants without sacrificing authenticity",
     keywords: ["UX/UI Design", "Mobile App", "User Research", "Prototyping"],
     image:
       "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
