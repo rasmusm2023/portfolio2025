@@ -3,17 +3,14 @@
 import { useState } from "react";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
 import Image from "next/image";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const BentoBoxRest = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
   const [cardTilts, setCardTilts] = useState<{
     [key: string]: { x: number; y: number };
   }>({});
-
-  // SSR check
-  const isDarkMode =
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+  const { isDark } = useTheme();
 
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
@@ -70,7 +67,7 @@ const BentoBoxRest = () => {
             className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
-              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("skills-dotted")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -79,7 +76,7 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background: isDarkMode
+                background: isDark
                   ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                   : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
@@ -88,7 +85,7 @@ const BentoBoxRest = () => {
               <h2
                 className="text-xl font-bold font-montserrat uppercase tracking-wider"
                 style={{
-                  color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                  color: isDark ? "rgb(255, 255, 255)" : "#000000",
                 }}
               >
                 Expertise{" "}
@@ -119,12 +116,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -142,7 +138,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         UX Research
@@ -151,21 +147,45 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Interviews
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Testing
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Data/metrics analysis
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Workshops
                           </li>
@@ -193,12 +213,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -216,7 +235,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         UI Design
@@ -225,17 +244,35 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Prototyping
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Component systems
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Design systems
                           </li>
@@ -263,12 +300,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -286,7 +322,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         UX Design
@@ -295,29 +331,65 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             User flows
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Information architecture
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Interaction design
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Wireframing
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             User testing
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Flowcharts
                           </li>
@@ -345,12 +417,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -368,7 +439,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         Development
@@ -377,21 +448,45 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Cursor AI
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Lovable
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Wix
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Miro
                           </li>
@@ -419,12 +514,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -442,7 +536,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         Product
@@ -451,21 +545,45 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Strategy
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Roadmapping
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Analytics
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Growth
                           </li>
@@ -493,12 +611,11 @@ const BentoBoxRest = () => {
                   />
                 </div>
                 <div
-                  className="relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent"
-                  style={{
-                    backgroundColor: isDarkMode
-                      ? "rgb(255, 255, 255)"
-                      : "rgba(248, 248, 248, 0.95)",
-                  }}
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
+                    isDark
+                      ? "bg-neutral-80/50 group-hover/card:bg-transparent"
+                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                  }`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
@@ -516,7 +633,7 @@ const BentoBoxRest = () => {
                       <h3
                         className="font-black text-xl tracking-wide transition-colors duration-200"
                         style={{
-                          color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         AI & Automation
@@ -525,21 +642,45 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <div className="grid grid-cols-2 gap-x-4">
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Updated workflows
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             AI integration
                           </li>
                         </ul>
                         <ul className="space-y-1.5">
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Efficiency tools
                           </li>
-                          <li className="text-neutral-60 text-sm text-left font-bold flex items-center gap-2 group-hover/card:text-neutral-3 transition-colors duration-200">
+                          <li
+                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
+                              isDark
+                                ? "group-hover/card:text-neutral-3"
+                                : "group-hover/card:text-neutral-90"
+                            }`}
+                          >
                             <div className="w-2 h-2 bg-neutral-60 group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
                             Future-ready
                           </li>
@@ -557,7 +698,7 @@ const BentoBoxRest = () => {
             className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("experience")})`,
-              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -566,7 +707,7 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background: isDarkMode
+                background: isDark
                   ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                   : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
@@ -576,7 +717,7 @@ const BentoBoxRest = () => {
                 <h2
                   className="text-xl font-bold font-montserrat uppercase tracking-wider"
                   style={{
-                    color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
                   Experience
@@ -584,7 +725,7 @@ const BentoBoxRest = () => {
                 <p
                   className="text-lg font-hanken"
                   style={{
-                    color: isDarkMode ? "rgb(255, 255, 255)" : "#5D5E63",
+                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
                   employments & studies
@@ -601,44 +742,62 @@ const BentoBoxRest = () => {
             <div className="flex-1 flex flex-col justify-center">
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                    <span className="text-neutral-0 text-4xl font-bold">5</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-4xl font-bold">5</span>
                   </div>
-                  <span className="text-neutral-40 text-xl">
+                  <span
+                    className={`text-xl ${
+                      isDark ? "text-neutral-40" : "text-neutral-100"
+                    }`}
+                  >
                     years within UX/UI Design
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                    <span className="text-neutral-0 text-4xl font-bold">4</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-4xl font-bold">4</span>
                   </div>
-                  <span className="text-neutral-40 text-xl">
+                  <span
+                    className={`text-xl ${
+                      isDark ? "text-neutral-40" : "text-neutral-100"
+                    }`}
+                  >
                     years within E-Commerce
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                    <span className="text-neutral-0 text-4xl font-bold">2</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-4xl font-bold">2</span>
                   </div>
-                  <span className="text-neutral-40 text-xl">
+                  <span
+                    className={`text-xl ${
+                      isDark ? "text-neutral-40" : "text-neutral-100"
+                    }`}
+                  >
                     years of Frontend Development
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                    <span className="text-neutral-0 text-4xl font-bold">
-                      20
-                    </span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-4xl font-bold">20</span>
                   </div>
-                  <span className="text-neutral-40 text-xl">
+                  <span
+                    className={`text-xl ${
+                      isDark ? "text-neutral-40" : "text-neutral-100"
+                    }`}
+                  >
                     Completed projects
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-neutral-80/50 backdrop-blur-sm border border-neutral-100/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer">
-                    <span className="text-neutral-0 text-4xl font-bold">1</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-4xl font-bold">1</span>
                   </div>
-                  <span className="text-neutral-40 text-xl">
+                  <span
+                    className={`text-xl ${
+                      isDark ? "text-neutral-40" : "text-neutral-100"
+                    }`}
+                  >
                     year of SoMe & SEO work
                   </span>
                 </div>
@@ -651,7 +810,7 @@ const BentoBoxRest = () => {
             className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
-              backgroundColor: isDarkMode ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -660,7 +819,7 @@ const BentoBoxRest = () => {
             <div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
               style={{
-                background: isDarkMode
+                background: isDark
                   ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                   : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
@@ -669,7 +828,7 @@ const BentoBoxRest = () => {
               <h2
                 className="text-xl font-bold font-montserrat uppercase tracking-wider"
                 style={{
-                  color: isDarkMode ? "rgb(255, 255, 255)" : "#000000",
+                  color: isDark ? "rgb(255, 255, 255)" : "#000000",
                 }}
               >
                 Currently working on

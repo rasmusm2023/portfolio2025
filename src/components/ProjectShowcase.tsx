@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { colors } from "@/styles/colors";
 import { useState, useRef, useEffect } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface Project {
   id: string;
@@ -70,11 +71,7 @@ const ProjectShowcase = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-
-  // SSR check
-  const isDarkMode =
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+  const { isDark } = useTheme();
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({
@@ -148,7 +145,7 @@ const ProjectShowcase = () => {
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-0 group-hover:scale-y-100 origin-center"
                 style={{
-                  background: isDarkMode
+                  background: isDark
                     ? "linear-gradient(to bottom, #4C1D95, #6D28D9, #8B5CF6)"
                     : "linear-gradient(to bottom, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.25), rgba(196, 181, 253, 0.3))",
                 }}
@@ -170,7 +167,7 @@ const ProjectShowcase = () => {
                   <h3
                     className="text-2xl font-bold text-neutral-100 dark:text-neutral-0 transition-colors duration-500 ease-in-out font-hanken"
                     style={{
-                      color: isDarkMode
+                      color: isDark
                         ? hoveredProject === project.id
                           ? "#FFD700"
                           : "rgb(255, 255, 255)"

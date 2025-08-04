@@ -18,7 +18,7 @@ const ThemeToggle = () => {
           weight="fill"
           className={`w-6 h-6 transition-all duration-300 ${
             isDark
-              ? "text-yellow-400 opacity-100 rotate-0"
+              ? "text-[#8B5CF6] opacity-100 rotate-0"
               : "text-neutral-60 opacity-0 -rotate-90"
           }`}
         />

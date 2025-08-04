@@ -4,6 +4,8 @@ import { useState } from "react";
 import CustomLightbox from "@/components/Lightbox";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import { useTheme } from "@/contexts/ThemeContext";
 
 // Sample gallery data - replace with your actual images
 const galleryImages = [
@@ -55,6 +57,7 @@ const galleryImages = [
 ];
 
 export default function DesignGalleryPage() {
+  const { isDark } = useTheme();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -73,6 +76,9 @@ export default function DesignGalleryPage() {
 
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
@@ -118,12 +124,11 @@ export default function DesignGalleryPage() {
               <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[250px]">
                 {/* Large hero image - spans 4 columns */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -136,12 +141,11 @@ export default function DesignGalleryPage() {
 
                 {/* Tall vertical image - spans 2 rows */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -154,12 +158,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -172,12 +175,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -190,12 +192,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -208,12 +209,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -226,12 +226,11 @@ export default function DesignGalleryPage() {
 
                 {/* Wide horizontal image - spans 3 columns */}
                 <div
-                  className="md:col-span-3 lg:col-span-4 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-4 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -244,12 +243,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -262,12 +260,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -280,12 +277,11 @@ export default function DesignGalleryPage() {
 
                 {/* Tall vertical image - spans 2 rows */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -298,12 +294,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -316,12 +311,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img
@@ -334,12 +328,11 @@ export default function DesignGalleryPage() {
 
                 {/* Medium square image */}
                 <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
                   style={{
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                 >
                   <img

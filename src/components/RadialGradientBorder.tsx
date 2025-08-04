@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface RadialGradientBorderProps {
   children?: React.ReactNode;
@@ -22,11 +23,7 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
   size = "md",
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  // SSR check
-  const isDarkMode =
-    typeof document !== "undefined" &&
-    document.documentElement.classList.contains("dark");
+  const { isDark } = useTheme();
 
   const sizeClasses = {
     sm: "p-3",
@@ -39,14 +36,14 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
     // Take only the first 2 colors from shineColor array and make them less dominant
     const colors = shineColor.slice(0, 2).map((color) => `${color}80`); // Add 50% opacity
     // Use theme-aware background color
-    const cardBackground = isDarkMode
+    const cardBackground = isDark
       ? "#232323" // Dark mode: darkest color
       : "#ffffff"; // Light mode: white background
 
     // When hovered, show static green gradient border
     if (isHovered) {
       return {
-        background: `linear-gradient(135deg, ${colors.join(", ")})`,
+        backgroundImage: `linear-gradient(135deg, ${colors.join(", ")})`,
         backgroundSize: "100% 100%",
       };
     }
@@ -54,20 +51,20 @@ const RadialGradientBorder: React.FC<RadialGradientBorderProps> = ({
     switch (variant) {
       case "dash":
         return {
-          background: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
+          backgroundImage: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
           backgroundSize: "300% 300%",
           animation: `sweep ${duration * 8}s linear infinite`,
         };
       case "gradient":
         return {
-          background: `conic-gradient(from 0deg, ${cardBackground}, ${colors.join(
+          backgroundImage: `conic-gradient(from 0deg, ${cardBackground}, ${colors.join(
             ", "
           )}, ${cardBackground})`,
           animation: `gradient ${duration}s linear infinite`,
         };
       case "pulse":
         return {
-          background: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
+          backgroundImage: `linear-gradient(135deg, ${colors[0]} 0%, ${colors[1]} 10%, ${cardBackground} 20%, ${cardBackground} 30%, ${colors[0]} 40%, ${colors[1]} 50%, ${cardBackground} 60%, ${cardBackground} 70%, ${colors[0]} 80%, ${colors[1]} 90%, ${cardBackground} 100%)`,
           backgroundSize: "300% 300%",
           animation: `sweep ${duration * 8}s linear infinite`,
         };

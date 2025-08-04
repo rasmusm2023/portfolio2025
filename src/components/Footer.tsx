@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { Copy, FileText, Envelope, User } from "@phosphor-icons/react";
+import {
+  Copy,
+  FileText,
+  Envelope,
+  User,
+  ArrowsOutCardinal,
+} from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedinIn,
@@ -30,6 +36,8 @@ function FloatingLabelInput({
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
+  const [isResizing, setIsResizing] = useState(false);
+  const [textareaHeight, setTextareaHeight] = useState(rows * 24); // Approximate height based on rows
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = (
@@ -42,6 +50,30 @@ function FloatingLabelInput({
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setHasValue(e.target.value.length > 0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!isTextarea) return;
+    e.preventDefault();
+    setIsResizing(true);
+
+    const startY = e.clientY;
+    const startHeight = textareaHeight;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const deltaY = e.clientY - startY;
+      const newHeight = Math.max(rows * 24, startHeight + deltaY); // Minimum height
+      setTextareaHeight(newHeight);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
   };
 
   const isActive = isFocused || hasValue;
@@ -57,9 +89,19 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          style={{ height: `${textareaHeight}px` }}
+          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
+        <div
+          className="absolute bottom-2 right-2 cursor-nw-resize opacity-50 hover:opacity-100 transition-opacity duration-200"
+          onMouseDown={handleMouseDown}
+        >
+          <ArrowsOutCardinal
+            size={16}
+            className="text-neutral-60 dark:text-neutral-40"
+          />
+        </div>
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
@@ -249,7 +291,7 @@ const Footer = () => {
                         }`}
                       >
                         <Copy size={16} weight="regular" />
-                        {emailCopied ? "Copied!" : "Copy Email"}
+                        {emailCopied ? "Copied!" : "Copy email"}
                       </button>
                     </div>
                   </div>
@@ -282,7 +324,7 @@ const Footer = () => {
                         className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
                       >
                         <User size={16} weight="regular" />
-                        See Profile
+                        See profile
                       </a>
                     </div>
                   </div>
@@ -355,7 +397,7 @@ const Footer = () => {
                     className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
                   >
                     <FileText size={16} weight="regular" />
-                    View Resume
+                    View resume
                   </a>
                 </div>
               </div>

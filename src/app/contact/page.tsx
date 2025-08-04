@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Copy } from "@phosphor-icons/react";
+import { Copy, ArrowsOutCardinal } from "@phosphor-icons/react";
 import AnimatedBlob from "@/components/AnimatedBlob";
+import CustomCursor from "@/components/CustomCursor";
 
 // Custom Floating Label Input Component
 function FloatingLabelInput({
@@ -30,6 +31,8 @@ function FloatingLabelInput({
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(value.length > 0);
+  const [isResizing, setIsResizing] = useState(false);
+  const [textareaHeight, setTextareaHeight] = useState(rows * 24); // Approximate height based on rows
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = (
@@ -43,6 +46,30 @@ function FloatingLabelInput({
   ) => {
     setHasValue(e.target.value.length > 0);
     onChange(e);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!isTextarea) return;
+    e.preventDefault();
+    setIsResizing(true);
+
+    const startY = e.clientY;
+    const startHeight = textareaHeight;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const deltaY = e.clientY - startY;
+      const newHeight = Math.max(rows * 24, startHeight + deltaY); // Minimum height
+      setTextareaHeight(newHeight);
+    };
+
+    const handleMouseUp = () => {
+      setIsResizing(false);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
   };
 
   const isActive = isFocused || hasValue;
@@ -59,15 +86,25 @@ function FloatingLabelInput({
           onFocus={handleFocus}
           onBlur={handleBlur}
           onChange={handleChange}
-          className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200 resize-none"
+          style={{ height: `${textareaHeight}px` }}
+          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
           placeholder={placeholder}
         />
+        <div
+          className="absolute bottom-2 right-2 cursor-nw-resize opacity-50 hover:opacity-100 transition-opacity duration-200"
+          onMouseDown={handleMouseDown}
+        >
+          <ArrowsOutCardinal
+            size={16}
+            className="text-neutral-60 dark:text-neutral-40"
+          />
+        </div>
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-20/50 dark:bg-neutral-100 rounded-lg"
-              : "top-3 text-base text-neutral-60 dark:text-neutral-80 font-bold"
+              ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
+              : "top-3 text-base text-neutral-60 dark:text-neutral-40 font-bold"
           }`}
         >
           {placeholder}
@@ -87,15 +124,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-100 border border-purple-500/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/30 focus:border-purple-600/40 transition-all duration-200"
+        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
           isActive
-            ? "-top-2 text-sm text-purple-500 font-bold bg-neutral-20/50 dark:bg-neutral-100 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-80 font-bold"
+            ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
+            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-40 font-bold"
         }`}
       >
         {placeholder}
@@ -139,6 +176,9 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+      {/* Custom Cursor */}
+      <CustomCursor />
+
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
@@ -238,7 +278,7 @@ export default function ContactPage() {
 
                   <button
                     type="submit"
-                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+                    className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
                   >
                     Send message
                   </button>

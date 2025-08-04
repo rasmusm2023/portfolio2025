@@ -76,9 +76,15 @@ const Header = () => {
               href="https://www.linkedin.com/in/rasmus-mattsson/"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative text-neutral-40 hover:text-neutral-0 transition-all duration-200 text-sm font-semibold inline-flex items-center gap-2 tracking-wider px-4 py-2 rounded-lg"
+              className="relative p-2 rounded-lg transition-all duration-200 hover:bg-neutral-100/10 dark:hover:bg-neutral-0/10 group"
             >
-              <FontAwesomeIcon icon={faLinkedinIn} className="w-5 h-5" />
+              <FontAwesomeIcon
+                icon={faLinkedinIn}
+                className="w-5 h-5 text-neutral-40 group-hover:text-neutral-0 transition-all duration-200"
+              />
+
+              {/* Hover effect */}
+              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-neutral-100/5 to-neutral-0/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </Link>
             <Link href="/fun" className="shimmer-button">
               <span className="text">

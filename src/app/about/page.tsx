@@ -593,19 +593,45 @@ export default function AboutPage() {
                   <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
-                  <br />
-                  <div className="flex justify-end">
-                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken mr-32 mt-8 tracking-wide">
+                </h1>
+                <div className="flex justify-between items-start mt-16">
+                  <div className="flex-1 max-w-[48rem]">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                      I am a passionate designer and developer with a love for
+                      creating beautiful, functional experiences that make a
+                      difference.
+                    </p>
+                    <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-loose tracking-wide mt-8">
+                      — with an{" "}
+                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">eye</span>{" "}
+                      for{" "}
+                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                        detail
+                      </span>
+                      , a{" "}
+                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">
+                        heart
+                      </span>{" "}
+                      for the{" "}
+                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                        user
+                      </span>
+                      , and a{" "}
+                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">
+                        drive
+                      </span>
+                      for the{" "}
+                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                        business
+                      </span>
+                      .
+                    </p>
+                  </div>
+                  <div className="ml-8">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken tracking-wide">
                       My Story
                     </span>
                   </div>
-                </h1>
-                <div className="flex flex-col gap-6 -mt-4">
-                  <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide max-w-[40rem]">
-                    I am a passionate designer and developer with a love for
-                    creating beautiful, functional experiences that make a
-                    difference.
-                  </p>
                 </div>
               </div>
             </div>
