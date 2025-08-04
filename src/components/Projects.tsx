@@ -20,7 +20,7 @@ const Projects = () => {
               {/* Project background image */}
               <Image
                 src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center"
-                alt="Noted App Interface"
+                alt="Emplojd"
                 className="absolute inset-0 w-full h-full object-cover"
                 width={1200}
                 height={900}
@@ -40,8 +40,7 @@ const Projects = () => {
                   Noted
                 </h3>
                 <p className="text-neutral-30 text-lg leading-relaxed font-hanken">
-                  A comprehensive note-taking app with intuitive design and
-                  seamless user experience.
+                  Enhancing job applicants without sacrificing authenticity
                 </p>
               </div>
 

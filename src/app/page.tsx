@@ -73,6 +73,32 @@ export default function Home() {
     };
   }, [isHovered]);
 
+  // Handle scrolling to case studies section when coming from case study page
+  useEffect(() => {
+    const shouldScrollToCaseStudies = sessionStorage.getItem(
+      "scrollToCaseStudies"
+    );
+    if (shouldScrollToCaseStudies === "true") {
+      // Clear the flag
+      sessionStorage.removeItem("scrollToCaseStudies");
+
+      // Wait a bit for the page to load, then scroll
+      setTimeout(() => {
+        const element = document.getElementById("case-studies");
+        if (element) {
+          const offset = 300;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 200);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
       {/* Custom Cursor */}

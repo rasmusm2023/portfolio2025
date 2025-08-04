@@ -2,9 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
+
+interface MenuItem {
+  label: string;
+  href: string;
+}
 
 const Menu = () => {
   const pathname = usePathname();
@@ -13,13 +18,15 @@ const Menu = () => {
   const [activeSection, setActiveSection] = useState("home");
   const isInitialized = useRef(false);
 
-  const menuItems = [
-    { label: "Home", href: "/" },
-
-    { label: "Design Gallery", href: "/design-gallery" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-  ];
+  const menuItems = useMemo<MenuItem[]>(
+    () => [
+      { label: "Home", href: "/" },
+      { label: "Design Gallery", href: "/design-gallery" },
+      { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
+    ],
+    []
+  );
 
   const movePill = useCallback((href: string) => {
     const activeItem = menuRef.current?.querySelector(`[href="${href}"]`);
@@ -78,8 +85,16 @@ const Menu = () => {
       } else {
         movePill(activeItem.href);
       }
+    } else {
+      // Hide pill when no active item (like on case study pages)
+      if (pillRef.current) {
+        gsap.set(pillRef.current, {
+          width: 0,
+          x: 0,
+        });
+      }
     }
-  }, [pathname, movePill]);
+  }, [pathname, movePill, menuItems]);
 
   return (
     <nav className="flex items-center justify-center">
@@ -95,9 +110,7 @@ const Menu = () => {
           }}
         />
         {menuItems.map((item) => {
-          const isActive =
-            activeSection ===
-            (item.href === "/" ? "home" : item.href.substring(1));
+          const isActive = item.href === pathname;
           return (
             <li key={item.href}>
               <Link

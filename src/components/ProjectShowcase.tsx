@@ -23,7 +23,7 @@ const projects: Project[] = [
     keywords: ["UX/UI Design", "Mobile App", "User Research", "Prototyping"],
     image:
       "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
-    alt: "Noted App Interface",
+    alt: "Emplojd",
     link: "/case-studies/noted-app",
   },
   {
