@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import FloatingNavbar from "@/components/FloatingNavbar";
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
@@ -52,6 +53,7 @@ export default function RootLayout({
               <ClientLayout>{children}</ClientLayout>
             </div>
           </div>
+          <FloatingNavbar />
         </ThemeProvider>
       </body>
     </html>
