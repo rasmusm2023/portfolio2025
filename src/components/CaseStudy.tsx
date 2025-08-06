@@ -81,6 +81,11 @@ const CaseStudy = ({
   const processMorphRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLElement>(null);
+  const problemRef = useRef<HTMLElement>(null);
+  const roleRef = useRef<HTMLElement>(null);
+  const insightsRef = useRef<HTMLElement>(null);
+  const designSystemRef = useRef<HTMLElement>(null);
+  const resultsRef = useRef<HTMLElement>(null);
   const { setActiveSection } = useNavbar();
 
   const handleCaseStudiesClick = () => {
@@ -98,6 +103,16 @@ const CaseStudy = ({
       summaryRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "process") {
       processRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "problem") {
+      problemRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "role") {
+      roleRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "insights") {
+      insightsRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "design-system") {
+      designSystemRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "results") {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -168,92 +183,66 @@ const CaseStudy = ({
 
   // Process Section Morphing Effect
   useEffect(() => {
+    gsap.registerPlugin(MorphSVGPlugin);
+
     const processContainer = processMorphRef.current;
     if (!processContainer) return;
 
     const morphPath = processContainer.querySelector(
       ".process-morph-path"
     ) as SVGPathElement;
-    const shape1Path = processContainer.querySelector(
-      ".shape-1-path"
-    ) as SVGPathElement;
-    const shape2Path = processContainer.querySelector(
-      ".shape-2-path"
-    ) as SVGPathElement;
-    const shape3Path = processContainer.querySelector(
-      ".shape-3-path"
-    ) as SVGPathElement;
-    const shape4Path = processContainer.querySelector(
-      ".shape-4-path"
-    ) as SVGPathElement;
+    const targets = processContainer.querySelectorAll(
+      ".morph-target"
+    ) as NodeListOf<SVGPathElement>;
+    const svgElement = processContainer.querySelector("svg");
 
-    if (!morphPath || !shape1Path || !shape2Path || !shape3Path || !shape4Path)
+    if (!morphPath || targets.length === 0) {
+      console.log("Missing SVG elements for morphing");
       return;
+    }
 
-    // Set initial state
-    gsap.set(morphPath, { morphSVG: shape1Path });
+    console.log(
+      "Setting up morphing animation with",
+      targets.length,
+      "targets"
+    );
 
-    // Create morphing timeline with longer duration and smoother easing
-    const morphTimeline = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 0.5,
+    // Create the morphing timeline - EXACTLY like home page
+    const morphTimeline = gsap.timeline({ repeat: -1 });
+
+    // Add morphing animations for all shapes
+    targets.forEach((target, index) => {
+      morphTimeline.to(morphPath, {
+        morphSVG: target,
+        duration: 1.5,
+        ease: "power2.inOut",
+      });
+    });
+
+    // Return to the first shape to complete the cycle
+    morphTimeline.to(morphPath, {
+      morphSVG: targets[0],
+      duration: 1.5,
+      ease: "power2.inOut",
+    });
+
+    // Create spinning animation
+    const spinTimeline = gsap.timeline({ repeat: -1 });
+    spinTimeline.to(svgElement, {
+      rotation: 360,
+      duration: 8,
       ease: "power1.inOut",
     });
 
-    morphTimeline
-      .to(morphPath, {
-        morphSVG: shape2Path,
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        morphSVG: shape3Path,
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        morphSVG: shape4Path,
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        morphSVG: shape1Path,
-        duration: 3,
-        ease: "power1.inOut",
-      });
+    // Start the animations
+    morphTimeline.play();
+    spinTimeline.play();
 
-    // Create gradient animation timeline synchronized with morphing
-    const gradientTimeline = gsap.timeline({
-      repeat: -1,
-      repeatDelay: 0.5,
-      ease: "power1.inOut",
-    });
-
-    gradientTimeline
-      .to(morphPath, {
-        attr: { fill: "url(#processGradient2)" },
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        attr: { fill: "url(#processGradient3)" },
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        attr: { fill: "url(#processGradient4)" },
-        duration: 3,
-        ease: "power1.inOut",
-      })
-      .to(morphPath, {
-        attr: { fill: "url(#processGradient1)" },
-        duration: 3,
-        ease: "power1.inOut",
-      });
+    console.log("Morphing and spinning animation started");
 
     return () => {
       morphTimeline.kill();
-      gradientTimeline.kill();
+      spinTimeline.kill();
     };
   }, []);
 
@@ -266,12 +255,26 @@ const CaseStudy = ({
       // Get section positions
       const summaryTop = summaryRef.current?.offsetTop || 0;
       const processTop = processRef.current?.offsetTop || 0;
+      const problemTop = problemRef.current?.offsetTop || 0;
+      const roleTop = roleRef.current?.offsetTop || 0;
+      const insightsTop = insightsRef.current?.offsetTop || 0;
+      const designSystemTop = designSystemRef.current?.offsetTop || 0;
+      const resultsTop = resultsRef.current?.offsetTop || 0;
 
       // Calculate section boundaries
       const summaryBottom =
         summaryTop + (summaryRef.current?.offsetHeight || 0);
       const processBottom =
         processTop + (processRef.current?.offsetHeight || 0);
+      const problemBottom =
+        problemTop + (problemRef.current?.offsetHeight || 0);
+      const roleBottom = roleTop + (roleRef.current?.offsetHeight || 0);
+      const insightsBottom =
+        insightsTop + (insightsRef.current?.offsetHeight || 0);
+      const designSystemBottom =
+        designSystemTop + (designSystemRef.current?.offsetHeight || 0);
+      const resultsBottom =
+        resultsTop + (resultsRef.current?.offsetHeight || 0);
 
       // Determine which section is currently in view
       const scrollCenter = scrollY + windowHeight / 2;
@@ -280,6 +283,19 @@ const CaseStudy = ({
         setActiveSection("summary");
       } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
         setActiveSection("process");
+      } else if (scrollCenter >= problemTop && scrollCenter < problemBottom) {
+        setActiveSection("problem");
+      } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
+        setActiveSection("role");
+      } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
+        setActiveSection("insights");
+      } else if (
+        scrollCenter >= designSystemTop &&
+        scrollCenter < designSystemBottom
+      ) {
+        setActiveSection("design-system");
+      } else if (scrollCenter >= resultsTop && scrollCenter < resultsBottom) {
+        setActiveSection("results");
       } else {
         // Default to summary if not in any specific section
         setActiveSection("summary");
@@ -337,14 +353,19 @@ const CaseStudy = ({
                 </div>
               </div>
 
-              {/* Description Text */}
+              {/* Summary Title */}
               <div className="mt-12 ml-12">
+                <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
+                  Summary
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-8"></div>
+              </div>
+
+              {/* Description Text */}
+              <div className="ml-12">
                 <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%]">
-                  <span className="text-3xl font-black text-neutral-100 dark:text-neutral-0">
-                    Emplojd
-                  </span>{" "}
-                  is an AI-powered job search platform designed to make job
-                  applications smarter and more personal. The platform
+                  Emplojd is an AI-powered job search platform designed to make
+                  job applications smarter and more personal. The platform
                   recommends relevant job listings and also writes tailored
                   cover letters using AI.
                 </p>
@@ -355,10 +376,10 @@ const CaseStudy = ({
                 </p>
               </div>
 
-              {/* Bento Boxes */}
-              <div className="mt-12 ml-12 space-y-6">
-                {/* Box 1 - Role */}
-                <div className="w-full p-4 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
+              {/* Bento Boxes and Button Layout */}
+              <div className="mt-12 ml-12">
+                {/* Box 1 - Role (Full width) */}
+                <div className="w-full p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg mb-6">
                   <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                     Role
                   </h3>
@@ -367,10 +388,10 @@ const CaseStudy = ({
                   </p>
                 </div>
 
-                {/* Box 2 & 3 - Company/Type and Year */}
-                <div className="flex gap-4">
-                  {/* Box 2 - Company/Type */}
-                  <div className="w-1/2 p-4 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
+                {/* Grid Layout with proper spacing */}
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Company Box - top left, half height */}
+                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       {companyOrType}
                     </h3>
@@ -381,8 +402,8 @@ const CaseStudy = ({
                     </p>
                   </div>
 
-                  {/* Box 3 - Year */}
-                  <div className="w-1/2 p-4 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
+                  {/* Year Box - top middle, half height */}
+                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Year
                     </h3>
@@ -390,102 +411,102 @@ const CaseStudy = ({
                       {yearText}
                     </p>
                   </div>
-                </div>
 
-                {/* Box 4 - Team */}
-                <div className="w-full p-4 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
-                  <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
-                    Team
-                  </h3>
-                  <div className="flex gap-8">
-                    {teamRoles.map((role, index) => (
-                      <p
-                        key={index}
-                        className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed"
-                      >
-                        {role}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
+                  {/* CTA Button - top right, full height */}
+                  <button
+                    ref={morphRef}
+                    className="row-span-2 flex flex-col items-center justify-center px-6 py-12 rounded-2xl transition-all duration-300 group shadow-lg hover:shadow-xl animate-shake"
+                    style={{
+                      background:
+                        "linear-gradient(to right, var(--gradient-from, #907EFF), var(--gradient-to, #7c3aed))",
+                      animationIterationCount: "infinite",
+                      animationDuration: "5s",
+                    }}
+                  >
+                    <div className="flex items-center gap-3 mb-4 whitespace-nowrap">
+                      {/* Pulsating Live Dot */}
+                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse relative flex-shrink-0">
+                        <div className="absolute inset-0 bg-green-400 rounded-full animate-ping"></div>
+                      </div>
 
-              {/* Live Button with Morphing SVG */}
-              <div className="mt-12 ml-12">
-                <button
-                  ref={morphRef}
-                  className="w-full flex items-center justify-between px-6 py-6 rounded-2xl transition-all duration-300 group shadow-lg hover:shadow-xl"
-                  style={{
-                    background:
-                      "linear-gradient(to right, var(--gradient-from, #907EFF), var(--gradient-to, #7c3aed))",
-                  }}
-                >
-                  <div className="flex items-center gap-3">
-                    {/* Pulsating Live Dot */}
-                    <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse relative">
-                      <div className="absolute inset-0 bg-green-400 rounded-full animate-ping"></div>
+                      <span className="text-white font-bold text-xl">
+                        {buttonText}
+                      </span>
                     </div>
 
-                    <span className="text-white font-bold text-2xl">
-                      {buttonText}
-                    </span>
-                  </div>
-
-                  {/* Morphing SVG Container */}
-                  <div className="w-8 h-8 relative">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 200 200"
-                      width="24"
-                      height="24"
-                      className="w-full h-full"
-                    >
-                      <defs>
-                        <linearGradient
-                          id="yellowGradient"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stopColor="#F8F8F8" />
-                          <stop offset="50%" stopColor="#E9E9E9" />
-                          <stop offset="100%" stopColor="#D3D3D3" />
-                        </linearGradient>
-                        <linearGradient
-                          id="purpleGradient"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stopColor="#FFFFFF" />
-                          <stop offset="100%" stopColor="#F8F8F8" />
-                        </linearGradient>
-                      </defs>
-                      {/* Main morphing path */}
-                      <path
-                        d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
-                        fill="url(#yellowGradient)"
-                        className="morph-path"
-                        style={{ transition: "fill 0.3s ease-in-out" }}
-                      />
-
-                      {/* Hidden target paths for morphing */}
-                      <path
-                        d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
+                    {/* Morphing SVG Container */}
+                    <div className="w-12 h-12 relative">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
                         fill="none"
-                        className="moon-1-path"
-                      />
-                      <path
-                        d="M193.481 31.456c13.436 23.267 5.44 52.966-17.886 66.43l-1.522.88c-15.647 9.031-25.278 25.67-25.278 43.672v2.001c0 26.82-21.845 48.561-48.793 48.561s-48.794-21.741-48.794-48.561v-1.998c0-18.002-9.631-34.642-25.278-43.674l-1.525-.88C1.079 84.423-6.917 54.723 6.519 31.456 20.031 8.058 50.078.046 73.534 13.586l1.205.695a50.559 50.559 0 0050.522 0l1.205-.696c23.456-13.54 53.503-5.527 67.015 17.87z"
-                        fill="none"
-                        className="moon-2-path"
-                      />
-                    </svg>
+                        viewBox="0 0 200 200"
+                        width="48"
+                        height="48"
+                        className="w-full h-full"
+                      >
+                        <defs>
+                          <linearGradient
+                            id="yellowGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop offset="0%" stopColor="#F8F8F8" />
+                            <stop offset="50%" stopColor="#E9E9E9" />
+                            <stop offset="100%" stopColor="#D3D3D3" />
+                          </linearGradient>
+                          <linearGradient
+                            id="purpleGradient"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                          >
+                            <stop offset="0%" stopColor="#FFFFFF" />
+                            <stop offset="100%" stopColor="#F8F8F8" />
+                          </linearGradient>
+                        </defs>
+                        {/* Main morphing path */}
+                        <path
+                          d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
+                          fill="url(#yellowGradient)"
+                          className="morph-path"
+                          style={{ transition: "fill 0.3s ease-in-out" }}
+                        />
+
+                        {/* Hidden target paths for morphing */}
+                        <path
+                          d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
+                          fill="none"
+                          className="moon-1-path"
+                        />
+                        <path
+                          d="M193.481 31.456c13.436 23.267 5.44 52.966-17.886 66.43l-1.522.88c-15.647 9.031-25.278 25.67-25.278 43.672v2.001c0 26.82-21.845 48.561-48.793 48.561s-48.794-21.741-48.794-48.561v-1.998c0-18.002-9.631-34.642-25.278-43.674l-1.525-.88C1.079 84.423-6.917 54.723 6.519 31.456 20.031 8.058 50.078.046 73.534 13.586l1.205.695a50.559 50.559 0 0050.522 0l1.205-.696c23.456-13.54 53.503-5.527 67.015 17.87z"
+                          fill="none"
+                          className="moon-2-path"
+                        />
+                      </svg>
+                    </div>
+                  </button>
+
+                  {/* Team Box - bottom left and middle, spans 2/3 width */}
+                  <div className="col-span-2 p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg">
+                    <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
+                      Team
+                    </h3>
+                    <div className="flex gap-8">
+                      {teamRoles.map((role, index) => (
+                        <p
+                          key={index}
+                          className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed"
+                        >
+                          {role}
+                        </p>
+                      ))}
+                    </div>
                   </div>
-                </button>
+                </div>
               </div>
             </div>
 
@@ -571,7 +592,10 @@ const CaseStudy = ({
         </section>
 
         {/* The Process Section */}
-        <section ref={processRef} className="py-16 mt-32">
+        <section
+          ref={processRef}
+          className="py-16 mt-32 bg-neutral-3 dark:bg-neutral-90"
+        >
           <div className="flex">
             {/* Left margin - 20% */}
             <div className="w-[20%]"></div>
@@ -579,105 +603,94 @@ const CaseStudy = ({
             {/* Left container - 30% */}
             <div className="w-[30%] px-6">
               <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
-                The Process
+                The process
               </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100"></div>
+              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-90 dark:to-neutral-10"></div>
 
               {/* Morphing SVGs Container */}
               <div
                 ref={processMorphRef}
-                className="mt-8 flex justify-center items-center h-96"
+                className="mt-8 flex justify-center items-center h-96 w-full"
               >
-                <div className="w-80 h-80 relative">
+                <div className="w-80 h-80 relative flex items-center justify-center self-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 200 200"
                     width="320"
                     height="320"
-                    className="w-full h-full"
+                    className="w-full h-full opacity-40"
                   >
                     <defs>
-                      {/* Gradient 1 - Purple to Blue */}
+                      {/* Single gradient like home page */}
                       <linearGradient
-                        id="processGradient1"
+                        id="processGradient"
                         x1="0%"
                         y1="0%"
                         x2="100%"
                         y2="100%"
                       >
                         <stop offset="0%" stopColor="#907EFF" />
-                        <stop offset="50%" stopColor="#3B82F6" />
-                        <stop offset="100%" stopColor="#1E40AF" />
-                      </linearGradient>
-
-                      {/* Gradient 2 - Orange to Pink */}
-                      <linearGradient
-                        id="processGradient2"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#FF6B6B" />
-                        <stop offset="50%" stopColor="#FF8E53" />
-                        <stop offset="100%" stopColor="#EC4899" />
-                      </linearGradient>
-
-                      {/* Gradient 3 - Green to Cyan */}
-                      <linearGradient
-                        id="processGradient3"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#10B981" />
-                        <stop offset="50%" stopColor="#06B6D4" />
-                        <stop offset="100%" stopColor="#0EA5E9" />
-                      </linearGradient>
-
-                      {/* Gradient 4 - Yellow to Orange */}
-                      <linearGradient
-                        id="processGradient4"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop offset="0%" stopColor="#F59E0B" />
-                        <stop offset="50%" stopColor="#F97316" />
-                        <stop offset="100%" stopColor="#EF4444" />
+                        <stop offset="50%" stopColor="#A855F7" />
+                        <stop offset="100%" stopColor="#C084FC" />
                       </linearGradient>
                     </defs>
 
-                    {/* Main morphing path */}
+                    {/* Main morphing path - Starting with Ellipse 1 */}
                     <path
-                      d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
-                      fill="url(#processGradient1)"
+                      d="M0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
+                      fill="url(#processGradient)"
                       className="process-morph-path"
                     />
 
-                    {/* Hidden target paths for morphing */}
+                    {/* Hidden target paths for morphing - ALL icons from MorphingShapesLarge folder */}
+                    {/* Ellipse 1 */}
                     <path
-                      d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
+                      d="M0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
                       fill="none"
-                      className="shape-1-path"
+                      className="morph-target"
                     />
+                    {/* Ellipse 2 */}
                     <path
-                      d="M200 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.334-14.924-33.334-33.334C133.333 14.923 148.257 0 166.667 0 185.076 0 200 14.924 200 33.333zM200 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.333 33.334-33.333C185.076 66.667 200 81.59 200 100zM200 166.667C200 185.076 185.076 200 166.667 200c-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.334 33.334-33.334 18.409 0 33.333 14.924 33.333 33.334zM133.333 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.333-14.924-33.333-33.334C66.667 14.923 81.59 0 100 0s33.333 14.924 33.333 33.333zM133.333 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.333 33.333-33.333S133.333 81.59 133.333 100zM133.333 166.667C133.333 185.076 118.409 200 100 200c-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.334 33.333-33.334s33.333 14.924 33.333 33.334zM66.667 33.333c0 18.41-14.924 33.334-33.334 33.334C14.923 66.667 0 51.743 0 33.333 0 14.923 14.924 0 33.333 0c18.41 0 33.334 14.924 33.334 33.333zM66.667 100c0 18.409-14.924 33.333-33.334 33.333C14.923 133.333 0 118.409 0 100c0-18.41 14.924-33.333 33.333-33.333 18.41 0 33.334 14.924 33.334 33.333zM66.667 166.667c0 18.409-14.924 33.333-33.334 33.333C14.923 200 0 185.076 0 166.667c0-18.41 14.924-33.334 33.333-33.334 18.41 0 33.334 14.924 33.334 33.334z"
+                      d="M100 72c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28zM0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
                       fill="none"
-                      className="shape-2-path"
+                      className="morph-target"
                     />
+                    {/* Ellipse 3 */}
                     <path
                       d="M200 30c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM200 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM151 100c0 28.167-22.833 51-51 51-28.166 0-51-22.833-51-51 0-28.166 22.834-51 51-51 28.167 0 51 22.834 51 51zM60 30c0 16.569-13.431 30-30 30C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0c16.569 0 30 13.431 30 30zM60 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30z"
                       fill="none"
-                      className="shape-3-path"
+                      className="morph-target"
                     />
+                    {/* Ellipse 5 */}
                     <path
                       d="M200 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.334-14.924-33.334-33.334C133.333 14.923 148.257 0 166.667 0 185.076 0 200 14.924 200 33.333zM200 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.333 33.334-33.333C185.076 66.667 200 81.59 200 100zM200 166.667C200 185.076 185.076 200 166.667 200c-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.334 33.334-33.334 18.409 0 33.333 14.924 33.333 33.334zM133.333 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.333-14.924-33.333-33.334C66.667 14.923 81.59 0 100 0s33.333 14.924 33.333 33.333zM133.333 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.333 33.333-33.333S133.333 81.59 133.333 100zM133.333 166.667C133.333 185.076 118.409 200 100 200c-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.334 33.333-33.334s33.333 14.924 33.333 33.334zM66.667 33.333c0 18.41-14.924 33.334-33.334 33.334C14.923 66.667 0 51.743 0 33.333 0 14.923 14.924 0 33.333 0c18.41 0 33.334 14.924 33.334 33.333zM66.667 100c0 18.409-14.924 33.333-33.334 33.333C14.923 133.333 0 118.409 0 100c0-18.41 14.924-33.333 33.333-33.333 18.41 0 33.334 14.924 33.334 33.333zM66.667 166.667c0 18.409-14.924 33.333-33.334 33.333C14.923 200 0 185.076 0 166.667c0-18.41 14.924-33.334 33.333-33.334 18.41 0 33.334 14.924 33.334 33.334z"
                       fill="none"
-                      className="shape-4-path"
+                      className="morph-target"
+                    />
+                    {/* Ellipse 6 */}
+                    <path
+                      d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
+                      fill="none"
+                      className="morph-target"
+                    />
+                    {/* Ellipse 8 */}
+                    <path
+                      d="M139 39c0 21.54-17.461 39-39 39-21.54 0-39-17.46-39-39S78.46 0 100 0c21.539 0 39 17.46 39 39zM139 161c0 21.539-17.461 39-39 39-21.54 0-39-17.461-39-39s17.46-39 39-39c21.539 0 39 17.461 39 39zM161 139c-21.539 0-39-17.461-39-39 0-21.54 17.461-39 39-39s39 17.46 39 39c0 21.539-17.461 39-39 39zM39 139c-21.54 0-39-17.461-39-39 0-21.54 17.46-39 39-39s39 17.46 39 39c0 21.539-17.46 39-39 39z"
+                      fill="none"
+                      className="morph-target"
+                    />
+                    {/* Ellipse 10 - Circle with rectangle cutout */}
+                    <path
+                      d="M100 200c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100zM49 49h102v102H49z"
+                      fill="none"
+                      className="morph-target"
+                    />
+                    {/* Ellipse 12 - Circle with inner circle cutout */}
+                    <path
+                      d="M100 200c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100zM100 50c27.614 0 50 22.386 50 50s-22.386 50-50 50-50-22.386-50-50 22.386-50 50-50z"
+                      fill="none"
+                      className="morph-target"
                     />
                   </svg>
                 </div>
@@ -719,6 +732,398 @@ const CaseStudy = ({
 
             {/* Right margin - 20% */}
             <div className="w-[20%]"></div>
+          </div>
+        </section>
+
+        {/* The challenge Section with Centered Layout */}
+        <section ref={problemRef} className="py-16">
+          <div className="flex">
+            {/* Left margin - 20% */}
+            <div className="w-[20%]"></div>
+
+            {/* Main content - 60% */}
+            <div className="w-[60%] px-6">
+              {/* Section Title */}
+              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
+                The challenge
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
+
+              {/* Main Problem Statement */}
+              <div className="text-center mb-12">
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed max-w-4xl mx-auto">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              </div>
+
+              {/* Problem Details Grid */}
+              <div className="grid grid-cols-3 gap-6 mb-12">
+                {/* Challenge Card */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                      The Challenge
+                    </h3>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse cillum dolore eu fugiat nulla pariatur.
+                  </p>
+                </div>
+
+                {/* Problem Card */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                      The Problem
+                    </h3>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                  </p>
+                </div>
+
+                {/* Goals Card */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                      The Goals
+                    </h3>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium.
+                  </p>
+                </div>
+              </div>
+
+              {/* Additional Context */}
+              <div className="bg-gradient-to-r from-purple-500/10 to-purple-700/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-8">
+                <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl mb-4">
+                  Context & Background
+                </h3>
+                <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia
+                  deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+
+            {/* Right margin - 20% */}
+            <div className="w-[20%]"></div>
+          </div>
+        </section>
+
+        {/* My Role Section with 40/60 Layout */}
+        <section ref={roleRef} className="py-16">
+          <div className="flex items-start">
+            {/* Left Container - 40% width */}
+            <div className="w-[40%] px-12">
+              <div className="ml-12">
+                <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
+                  My role
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-8"></div>
+
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
+                  occaecat cupidatat non proident, sunt in culpa qui officia
+                  deserunt mollit anim id est laborum.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Container - 60% width */}
+            <div className="w-[60%]">
+              <div className="w-full h-[700px] bg-[#907EFF] relative">
+                {/* Placeholder for future image */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-white/60 text-lg font-medium">
+                    Image placeholder
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Insights Section */}
+        <section ref={insightsRef} className="py-16">
+          <div className="flex">
+            {/* Left margin - 20% */}
+            <div className="w-[20%]"></div>
+
+            {/* Main content - 60% */}
+            <div className="w-[60%] px-6">
+              {/* Section Title */}
+              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
+                Insights
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
+
+              {/* Centered Summary Text */}
+              <div className="text-center mb-16">
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed max-w-3xl mx-auto">
+                  Through comprehensive user research, interviews, and data
+                  analysis, we uncovered key insights that shaped the direction
+                  of our design decisions. Here are the most significant
+                  findings from our research process.
+                </p>
+              </div>
+
+              {/* Insights Grid */}
+              <div className="grid grid-cols-2 gap-8">
+                {/* Early Insights */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                      Early Insights
+                    </h3>
+                  </div>
+
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Users found the job application process overwhelming and
+                        time-consuming
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Cover letter writing was identified as the biggest pain
+                        point
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Job seekers wanted more personalized recommendations
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Mobile usage was higher than expected during job
+                        searches
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Later Insights */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                      Later Insights
+                    </h3>
+                  </div>
+
+                  <ul className="space-y-4">
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        AI-generated content needed human oversight for
+                        authenticity
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Users preferred gradual AI assistance over full
+                        automation
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Trust in AI recommendations increased with transparency
+                      </p>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                        Success metrics should focus on user confidence and time
+                        saved
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            {/* Right margin - 20% */}
+            <div className="w-[20%]"></div>
+          </div>
+        </section>
+
+        {/* Design Guide / Design System Section */}
+        <section
+          ref={designSystemRef}
+          className="py-16"
+          style={{ backgroundColor: "#907EFF" }}
+        >
+          <div className="flex">
+            {/* Left margin - 15% */}
+            <div className="w-[15%]"></div>
+
+            {/* Main content - 70% */}
+            <div className="w-[70%] px-6">
+              {/* Section Title */}
+              <h2 className="text-3xl font-black text-white mb-4 text-center">
+                Design Guide / Design System
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-white to-white/50 mb-12"></div>
+
+              {/* Placeholder Box for Image/Video */}
+              <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                    <svg
+                      className="w-8 h-8 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-white/80 text-lg font-medium">
+                    Design System Placeholder
+                  </p>
+                  <p className="text-white/60 text-sm mt-2">
+                    Image for small design systems • Video for larger ones
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right margin - 15% */}
+            <div className="w-[15%]"></div>
+          </div>
+        </section>
+
+        {/* Results Section */}
+        <section ref={resultsRef} className="py-16">
+          <div className="flex">
+            {/* Left margin - 10% */}
+            <div className="w-[10%]"></div>
+
+            {/* Main content - 80% */}
+            <div className="w-[80%] px-6">
+              {/* Section Title */}
+              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
+                Results
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
+
+              {/* Video Showcase Box */}
+              <div className="w-full h-[600px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
+                    <svg
+                      className="w-10 h-10 text-purple-500"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl font-medium mb-2">
+                    Live Website / Prototype Video
+                  </p>
+                  <p className="text-neutral-60 dark:text-neutral-40 text-base">
+                    Showcase of the final product in action
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right margin - 10% */}
+            <div className="w-[10%]"></div>
+          </div>
+        </section>
+
+        {/* Mockup Section - Full Width */}
+        <section className="w-full">
+          {/* 60/40 Mockup Layout */}
+          <div className="flex gap-0">
+            {/* Left Container - 60% */}
+            <div className="w-[60%] bg-neutral-20 dark:bg-neutral-80 p-8 h-[800px]">
+              <div className="grid grid-cols-2 gap-8 h-full items-center">
+                {/* Mockup Placeholder 1 */}
+                <div className="h-80 bg-neutral-30 dark:bg-neutral-70 rounded-lg flex items-center justify-center">
+                  <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                    Mockup 1
+                  </span>
+                </div>
+                {/* Mockup Placeholder 2 */}
+                <div className="h-80 bg-neutral-30 dark:bg-neutral-70 rounded-lg flex items-center justify-center">
+                  <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                    Mockup 2
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Container - 40% */}
+            <div className="w-[40%] bg-neutral-30 dark:bg-neutral-70 p-8 h-[800px]">
+              <div className="h-full flex items-center justify-center">
+                {/* Mockup Placeholder 3 */}
+                <div className="h-80 w-4/5 bg-neutral-40 dark:bg-neutral-60 rounded-lg flex items-center justify-center">
+                  <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                    Mockup 3
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Full Width Mockup Section */}
+          <div className="w-full bg-neutral-10 dark:bg-neutral-90 p-8 h-[800px]">
+            <div className="grid grid-cols-2 gap-12 h-full items-center">
+              {/* Mockup Placeholder 4 */}
+              <div className="h-80 bg-neutral-20 dark:bg-neutral-80 rounded-lg flex items-center justify-center">
+                <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                  Mockup 4
+                </span>
+              </div>
+              {/* Mockup Placeholder 5 */}
+              <div className="h-80 bg-neutral-20 dark:bg-neutral-80 rounded-lg flex items-center justify-center">
+                <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                  Mockup 5
+                </span>
+              </div>
+            </div>
           </div>
         </section>
       </div>

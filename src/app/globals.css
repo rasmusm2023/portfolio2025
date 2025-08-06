@@ -1295,3 +1295,40 @@ body {
     border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%;
   }
 }
+
+@keyframes shake {
+
+  0%,
+  85%,
+  100% {
+    transform: translateX(0);
+  }
+
+  87% {
+    transform: translateX(-2px);
+  }
+
+  89% {
+    transform: translateX(2px);
+  }
+
+  91% {
+    transform: translateX(-1px);
+  }
+
+  93% {
+    transform: translateX(1px);
+  }
+
+  95% {
+    transform: translateX(-0.5px);
+  }
+
+  97% {
+    transform: translateX(0.5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 5s ease-in-out infinite;
+}
