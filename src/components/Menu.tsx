@@ -21,6 +21,7 @@ const Menu = () => {
   const menuItems = useMemo<MenuItem[]>(
     () => [
       { label: "Home", href: "/" },
+      { label: "Work", href: "/work" },
       { label: "Design Gallery", href: "/design-gallery" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },

@@ -13,6 +13,7 @@ import CursorIcon from "@/logos/inner-square-logos-svg/cursor.svg";
 import WixIcon from "@/logos/inner-square-logos-svg/wix.svg";
 import ReactIcon from "@/logos/inner-square-logos-svg/react.svg";
 import StitchIcon from "@/logos/inner-square-logos-svg/stitch.svg";
+import NotionIcon from "@/logos/inner-square-logos-svg/notion.svg";
 // Light mode icons
 import FigmaIconLight from "@/logos/inner-square-logos-light-svg/figma.svg";
 import MiroIconLight from "@/logos/inner-square-logos-light-svg/miro.svg";
@@ -24,6 +25,7 @@ import CursorIconLight from "@/logos/inner-square-logos-light-svg/cursor.svg";
 import WixIconLight from "@/logos/inner-square-logos-light-svg/wix.svg";
 import ReactIconLight from "@/logos/inner-square-logos-light-svg/react.svg";
 import StitchIconLight from "@/logos/inner-square-logos-light-svg/stitch.svg";
+import NotionIconLight from "@/logos/inner-square-logos-light-svg/notion.svg";
 
 const InfiniteScrollBanner = () => {
   const { isDark } = useTheme();
@@ -172,6 +174,11 @@ const InfiniteScrollBanner = () => {
     {
       name: "Google Stitch",
       icon: isDark ? StitchIcon : StitchIconLight,
+      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
+    },
+    {
+      name: "Notion",
+      icon: isDark ? NotionIcon : NotionIconLight,
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
   ];

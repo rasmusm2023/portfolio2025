@@ -332,10 +332,8 @@ const CaseStudy = ({
         setActiveSection("design-system");
       } else if (scrollCenter >= resultsTop && scrollCenter < resultsBottom) {
         setActiveSection("results");
-      } else {
-        // Default to summary if not in any specific section
-        setActiveSection("summary");
       }
+      // Removed fallback to summary - will keep previous section active
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -563,8 +561,11 @@ const CaseStudy = ({
                   {technologies.map((tech, index) => (
                     <span
                       key={index}
-                      className="px-3 py-1.5 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-sm font-medium rounded-full"
+                      className="px-3 py-1.5 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-sm font-medium rounded-full flex items-center gap-2"
                     >
+                      {tech === "Live" && (
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      )}
                       {tech}
                     </span>
                   ))}

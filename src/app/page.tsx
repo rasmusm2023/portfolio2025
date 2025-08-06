@@ -160,7 +160,7 @@ export default function Home() {
                         d="M19 14l-7 7m0 0l-7-7m7 7V3"
                       />
                     </svg>
-                    <span>View previous work</span>
+                    <span>View selected works</span>
                   </span>
                   <span className="shimmer"></span>
                 </button>

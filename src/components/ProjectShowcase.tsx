@@ -122,7 +122,7 @@ const ProjectShowcase = () => {
                 className="text-left cursor-pointer"
               >
                 <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
-                  Previous Work
+                  Selected works
                 </h2>
                 <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
               </button>

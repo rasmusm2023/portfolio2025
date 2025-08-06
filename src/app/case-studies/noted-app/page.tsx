@@ -23,21 +23,24 @@ export default function NotedAppCaseStudy() {
           "50,000+ downloads in first month",
         ]}
         technologies={[
+          "Live",
+          "Solo project",
+          "User testing",
           "React",
-          "Vite",
-          "Tailwind CSS",
-          "API Integration",
           "TypeScript",
           "Figma",
+          "API Integration",
           "Firebase",
-          "Firestore",
-          "Firebase Auth",
-          "Netlify",
-          "Web App",
           "Prototyping",
+          "Web App",
+          "Firestore",
           "Wireframing",
-          "User testing",
-          "Desktop & Mobile",
+          "Firebase Auth",
+          "Tailwind CSS",
+          "Desktop & mobile",
+          "Cursor AI",
+          "Vite",
+          "Netlify",
         ]}
         heroImage="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&h=800&fit=crop&crop=center"
         heroImageAlt="Noted"
