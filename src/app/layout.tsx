@@ -7,6 +7,7 @@ import Header from "@/components/Header";
 import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import { NavbarProvider } from "@/contexts/NavbarContext";
 import FloatingNavbar from "@/components/FloatingNavbar";
 
 export const metadata: Metadata = {
@@ -44,16 +45,18 @@ export default function RootLayout({
         className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300`}
       >
         <ThemeProvider>
-          <PerformanceOptimizer />
-          <PerformanceMonitor />
-          <Header />
-          {/* <CustomCursor /> */}
-          <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
-            <div id="smooth-content" className="relative">
-              <ClientLayout>{children}</ClientLayout>
+          <NavbarProvider>
+            <PerformanceOptimizer />
+            <PerformanceMonitor />
+            <Header />
+            {/* <CustomCursor /> */}
+            <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
+              <div id="smooth-content" className="relative">
+                <ClientLayout>{children}</ClientLayout>
+              </div>
             </div>
-          </div>
-          <FloatingNavbar />
+            <FloatingNavbar />
+          </NavbarProvider>
         </ThemeProvider>
       </body>
     </html>

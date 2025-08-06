@@ -7,6 +7,7 @@ import { ArrowLeft } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { useNavbar } from "@/contexts/NavbarContext";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -75,9 +76,12 @@ const CaseStudy = ({
   teamRoles = ["01 Lead UX/UI Designer", "01 UX Designer"],
 }: CaseStudyProps) => {
   const router = useRouter();
-  const [activeSection, setActiveSection] = useState<string>("summary");
   const morphRef = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const processMorphRef = useRef<HTMLDivElement>(null);
+  const summaryRef = useRef<HTMLDivElement>(null);
+  const processRef = useRef<HTMLElement>(null);
+  const { setActiveSection } = useNavbar();
 
   const handleCaseStudiesClick = () => {
     // Navigate to home page first
@@ -89,10 +93,11 @@ const CaseStudy = ({
 
   const handleSectionClick = (sectionId: string) => {
     setActiveSection(sectionId);
-    // Scroll to section (you can implement this later when you add the actual sections)
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    // Scroll to section
+    if (sectionId === "summary") {
+      summaryRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "process") {
+      processRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -145,7 +150,7 @@ const CaseStudy = ({
       morphTimeline.reverse();
       // Smooth gradient transition back to original purple
       gsap.to(morphContainer, {
-        "--gradient-from": "#8b5cf6",
+        "--gradient-from": "#907EFF",
         "--gradient-to": "#7c3aed",
         duration: 0.3,
         ease: "power2.inOut",
@@ -161,11 +166,139 @@ const CaseStudy = ({
     };
   }, []);
 
+  // Process Section Morphing Effect
+  useEffect(() => {
+    const processContainer = processMorphRef.current;
+    if (!processContainer) return;
+
+    const morphPath = processContainer.querySelector(
+      ".process-morph-path"
+    ) as SVGPathElement;
+    const shape1Path = processContainer.querySelector(
+      ".shape-1-path"
+    ) as SVGPathElement;
+    const shape2Path = processContainer.querySelector(
+      ".shape-2-path"
+    ) as SVGPathElement;
+    const shape3Path = processContainer.querySelector(
+      ".shape-3-path"
+    ) as SVGPathElement;
+    const shape4Path = processContainer.querySelector(
+      ".shape-4-path"
+    ) as SVGPathElement;
+
+    if (!morphPath || !shape1Path || !shape2Path || !shape3Path || !shape4Path)
+      return;
+
+    // Set initial state
+    gsap.set(morphPath, { morphSVG: shape1Path });
+
+    // Create morphing timeline with longer duration and smoother easing
+    const morphTimeline = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.5,
+      ease: "power1.inOut",
+    });
+
+    morphTimeline
+      .to(morphPath, {
+        morphSVG: shape2Path,
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        morphSVG: shape3Path,
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        morphSVG: shape4Path,
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        morphSVG: shape1Path,
+        duration: 3,
+        ease: "power1.inOut",
+      });
+
+    // Create gradient animation timeline synchronized with morphing
+    const gradientTimeline = gsap.timeline({
+      repeat: -1,
+      repeatDelay: 0.5,
+      ease: "power1.inOut",
+    });
+
+    gradientTimeline
+      .to(morphPath, {
+        attr: { fill: "url(#processGradient2)" },
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        attr: { fill: "url(#processGradient3)" },
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        attr: { fill: "url(#processGradient4)" },
+        duration: 3,
+        ease: "power1.inOut",
+      })
+      .to(morphPath, {
+        attr: { fill: "url(#processGradient1)" },
+        duration: 3,
+        ease: "power1.inOut",
+      });
+
+    return () => {
+      morphTimeline.kill();
+      gradientTimeline.kill();
+    };
+  }, []);
+
+  // Scroll-based active section detection
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Get section positions
+      const summaryTop = summaryRef.current?.offsetTop || 0;
+      const processTop = processRef.current?.offsetTop || 0;
+
+      // Calculate section boundaries
+      const summaryBottom =
+        summaryTop + (summaryRef.current?.offsetHeight || 0);
+      const processBottom =
+        processTop + (processRef.current?.offsetHeight || 0);
+
+      // Determine which section is currently in view
+      const scrollCenter = scrollY + windowHeight / 2;
+
+      if (scrollCenter < summaryBottom) {
+        setActiveSection("summary");
+      } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
+        setActiveSection("process");
+      } else {
+        // Default to summary if not in any specific section
+        setActiveSection("summary");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
         {/* Header Section with 40/60 Layout */}
-        <section className="pt-32 pb-16">
+        <section ref={summaryRef} className="pt-32 pb-16">
           <div className="flex items-start">
             {/* Left Container - 40% width */}
             <div className="w-[40%] px-12">
@@ -284,7 +417,7 @@ const CaseStudy = ({
                   className="w-full flex items-center justify-between px-6 py-6 rounded-2xl transition-all duration-300 group shadow-lg hover:shadow-xl"
                   style={{
                     background:
-                      "linear-gradient(to right, var(--gradient-from, #8b5cf6), var(--gradient-to, #7c3aed))",
+                      "linear-gradient(to right, var(--gradient-from, #907EFF), var(--gradient-to, #7c3aed))",
                   }}
                 >
                   <div className="flex items-center gap-3">
@@ -316,9 +449,9 @@ const CaseStudy = ({
                           x2="100%"
                           y2="100%"
                         >
-                          <stop offset="0%" stopColor="#3B82F6" />
-                          <stop offset="50%" stopColor="#8B5CF6" />
-                          <stop offset="100%" stopColor="#EC4899" />
+                          <stop offset="0%" stopColor="#F8F8F8" />
+                          <stop offset="50%" stopColor="#E9E9E9" />
+                          <stop offset="100%" stopColor="#D3D3D3" />
                         </linearGradient>
                         <linearGradient
                           id="purpleGradient"
@@ -327,8 +460,8 @@ const CaseStudy = ({
                           x2="100%"
                           y2="100%"
                         >
-                          <stop offset="0%" stopColor="#8b5cf6" />
-                          <stop offset="100%" stopColor="#7c3aed" />
+                          <stop offset="0%" stopColor="#FFFFFF" />
+                          <stop offset="100%" stopColor="#F8F8F8" />
                         </linearGradient>
                       </defs>
                       {/* Main morphing path */}
@@ -359,11 +492,11 @@ const CaseStudy = ({
             {/* Right Container - 60% width */}
             <div className="w-[60%]">
               <h1
-                className={`text-2xl md:text-2xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className}`}
+                className={`text-4xl md:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className}`}
               >
                 {subtitle}
               </h1>
-              <div className="w-full h-[800px] bg-neutral-20 dark:bg-neutral-90 mt-4 relative">
+              <div className="w-full h-[700px] bg-[#907EFF] mt-4 relative">
                 {/* Glass-styled technology pills */}
                 <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                   {technologies.map((tech, index) => (
@@ -438,7 +571,7 @@ const CaseStudy = ({
         </section>
 
         {/* The Process Section */}
-        <section className="py-16 mt-32">
+        <section ref={processRef} className="py-16 mt-32">
           <div className="flex">
             {/* Left margin - 20% */}
             <div className="w-[20%]"></div>
@@ -449,6 +582,106 @@ const CaseStudy = ({
                 The Process
               </h2>
               <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100"></div>
+
+              {/* Morphing SVGs Container */}
+              <div
+                ref={processMorphRef}
+                className="mt-8 flex justify-center items-center h-96"
+              >
+                <div className="w-80 h-80 relative">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 200 200"
+                    width="320"
+                    height="320"
+                    className="w-full h-full"
+                  >
+                    <defs>
+                      {/* Gradient 1 - Purple to Blue */}
+                      <linearGradient
+                        id="processGradient1"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stopColor="#907EFF" />
+                        <stop offset="50%" stopColor="#3B82F6" />
+                        <stop offset="100%" stopColor="#1E40AF" />
+                      </linearGradient>
+
+                      {/* Gradient 2 - Orange to Pink */}
+                      <linearGradient
+                        id="processGradient2"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stopColor="#FF6B6B" />
+                        <stop offset="50%" stopColor="#FF8E53" />
+                        <stop offset="100%" stopColor="#EC4899" />
+                      </linearGradient>
+
+                      {/* Gradient 3 - Green to Cyan */}
+                      <linearGradient
+                        id="processGradient3"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stopColor="#10B981" />
+                        <stop offset="50%" stopColor="#06B6D4" />
+                        <stop offset="100%" stopColor="#0EA5E9" />
+                      </linearGradient>
+
+                      {/* Gradient 4 - Yellow to Orange */}
+                      <linearGradient
+                        id="processGradient4"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stopColor="#F59E0B" />
+                        <stop offset="50%" stopColor="#F97316" />
+                        <stop offset="100%" stopColor="#EF4444" />
+                      </linearGradient>
+                    </defs>
+
+                    {/* Main morphing path */}
+                    <path
+                      d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
+                      fill="url(#processGradient1)"
+                      className="process-morph-path"
+                    />
+
+                    {/* Hidden target paths for morphing */}
+                    <path
+                      d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
+                      fill="none"
+                      className="shape-1-path"
+                    />
+                    <path
+                      d="M200 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.334-14.924-33.334-33.334C133.333 14.923 148.257 0 166.667 0 185.076 0 200 14.924 200 33.333zM200 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.333 33.334-33.333C185.076 66.667 200 81.59 200 100zM200 166.667C200 185.076 185.076 200 166.667 200c-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.334 33.334-33.334 18.409 0 33.333 14.924 33.333 33.334zM133.333 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.333-14.924-33.333-33.334C66.667 14.923 81.59 0 100 0s33.333 14.924 33.333 33.333zM133.333 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.333 33.333-33.333S133.333 81.59 133.333 100zM133.333 166.667C133.333 185.076 118.409 200 100 200c-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.334 33.333-33.334s33.333 14.924 33.333 33.334zM66.667 33.333c0 18.41-14.924 33.334-33.334 33.334C14.923 66.667 0 51.743 0 33.333 0 14.923 14.924 0 33.333 0c18.41 0 33.334 14.924 33.334 33.333zM66.667 100c0 18.409-14.924 33.333-33.334 33.333C14.923 133.333 0 118.409 0 100c0-18.41 14.924-33.333 33.333-33.333 18.41 0 33.334 14.924 33.334 33.333zM66.667 166.667c0 18.409-14.924 33.333-33.334 33.333C14.923 200 0 185.076 0 166.667c0-18.41 14.924-33.334 33.333-33.334 18.41 0 33.334 14.924 33.334 33.334z"
+                      fill="none"
+                      className="shape-2-path"
+                    />
+                    <path
+                      d="M200 30c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM200 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM151 100c0 28.167-22.833 51-51 51-28.166 0-51-22.833-51-51 0-28.166 22.834-51 51-51 28.167 0 51 22.834 51 51zM60 30c0 16.569-13.431 30-30 30C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0c16.569 0 30 13.431 30 30zM60 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30z"
+                      fill="none"
+                      className="shape-3-path"
+                    />
+                    <path
+                      d="M200 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.334-14.924-33.334-33.334C133.333 14.923 148.257 0 166.667 0 185.076 0 200 14.924 200 33.333zM200 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.333 33.334-33.333C185.076 66.667 200 81.59 200 100zM200 166.667C200 185.076 185.076 200 166.667 200c-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.334 33.334-33.334 18.409 0 33.333 14.924 33.333 33.334zM133.333 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.333-14.924-33.333-33.334C66.667 14.923 81.59 0 100 0s33.333 14.924 33.333 33.333zM133.333 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.333 33.333-33.333S133.333 81.59 133.333 100zM133.333 166.667C133.333 185.076 118.409 200 100 200c-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.334 33.333-33.334s33.333 14.924 33.333 33.334zM66.667 33.333c0 18.41-14.924 33.334-33.334 33.334C14.923 66.667 0 51.743 0 33.333 0 14.923 14.924 0 33.333 0c18.41 0 33.334 14.924 33.334 33.333zM66.667 100c0 18.409-14.924 33.333-33.334 33.333C14.923 133.333 0 118.409 0 100c0-18.41 14.924-33.333 33.333-33.333 18.41 0 33.334 14.924 33.334 33.333zM66.667 166.667c0 18.409-14.924 33.333-33.334 33.333C14.923 200 0 185.076 0 166.667c0-18.41 14.924-33.334 33.333-33.334 18.41 0 33.334 14.924 33.334 33.334z"
+                      fill="none"
+                      className="shape-4-path"
+                    />
+                  </svg>
+                </div>
+              </div>
             </div>
 
             {/* Right container - 30% */}

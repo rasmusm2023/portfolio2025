@@ -1,44 +1,49 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useNavbar } from "@/contexts/NavbarContext";
 
 interface Section {
   id: string;
   label: string;
 }
 
-interface FloatingNavbarProps {
-  sections?: Section[];
-  activeSection?: string;
-  onSectionClick?: (sectionId: string) => void;
-}
+const FloatingNavbar = () => {
+  const pathname = usePathname();
+  const [isCaseStudyPage, setIsCaseStudyPage] = useState(false);
+  const { activeSection, onSectionClick } = useNavbar();
 
-const FloatingNavbar = ({
-  sections = [
+  useEffect(() => {
+    setIsCaseStudyPage(pathname?.startsWith("/case-studies/") || false);
+  }, [pathname]);
+
+  const sections = [
     { id: "summary", label: "Summary" },
     { id: "process", label: "Process" },
-    { id: "problem", label: "Problem" },
-    { id: "role", label: "My role" },
-    { id: "insights", label: "Insights" },
-    { id: "design-system", label: "Design System" },
-    { id: "results", label: "Results" },
-  ],
-  activeSection = "summary",
-  onSectionClick,
-}: FloatingNavbarProps) => {
+  ];
+
+  // Don't render if not on a case study page
+  if (!isCaseStudyPage) {
+    return null;
+  }
   const handleSectionClick = (sectionId: string) => {
     if (onSectionClick) {
       onSectionClick(sectionId);
     }
-    // Scroll to section (you can implement this later when you add the actual sections)
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
   };
 
   return (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-fit px-6">
+    <div
+      className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[9999] w-full max-w-fit px-6"
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: 9999,
+      }}
+    >
       <div className="flex items-center gap-0 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg shadow-lg overflow-hidden">
         {sections.map((section, index) => (
           <button
