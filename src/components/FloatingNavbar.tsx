@@ -42,7 +42,7 @@ const FloatingNavbar = () => {
   const sections = [
     { id: "summary", label: "Summary" },
     { id: "process", label: "Process" },
-    { id: "problem", label: "Problem" },
+    { id: "challenge", label: "challenge" },
     { id: "role", label: "My role" },
     { id: "insights", label: "Insights" },
     { id: "design-system", label: "Design System" },
@@ -54,8 +54,25 @@ const FloatingNavbar = () => {
     return null;
   }
   const handleSectionClick = (sectionId: string) => {
+    // Update active section
     if (onSectionClick) {
       onSectionClick(sectionId);
+    }
+
+    // Scroll to section with offset
+    const sectionElement = document.querySelector(
+      `[data-section="${sectionId}"]`
+    );
+    if (sectionElement) {
+      const elementTop =
+        sectionElement.getBoundingClientRect().top + window.scrollY;
+      const offset = 120; // Offset to account for header
+      const targetPosition = elementTop - offset;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth",
+      });
     }
   };
 

@@ -8,6 +8,7 @@ import { Hanken_Grotesk } from "next/font/google";
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
+import Footer from "@/components/Footer";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -62,7 +63,7 @@ const CaseStudy = ({
   sections = [
     { id: "summary", label: "Summary" },
     { id: "process", label: "Process" },
-    { id: "problem", label: "Problem" },
+    { id: "challenge", label: "Challenge" },
     { id: "role", label: "My role" },
     { id: "insights", label: "Insights" },
     { id: "design-system", label: "Design System" },
@@ -81,11 +82,12 @@ const CaseStudy = ({
   const processMorphRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLElement>(null);
-  const problemRef = useRef<HTMLElement>(null);
+  const challengeRef = useRef<HTMLElement>(null);
   const roleRef = useRef<HTMLElement>(null);
   const insightsRef = useRef<HTMLElement>(null);
   const designSystemRef = useRef<HTMLElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
+  const mockupRef = useRef<HTMLElement>(null);
   const { setActiveSection } = useNavbar();
 
   const handleCaseStudiesClick = () => {
@@ -103,8 +105,8 @@ const CaseStudy = ({
       summaryRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "process") {
       processRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "problem") {
-      problemRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "challenge") {
+      challengeRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "role") {
       roleRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "insights") {
@@ -163,6 +165,12 @@ const CaseStudy = ({
     const handleMouseLeave = () => {
       setIsHovered(false);
       morphTimeline.reverse();
+      // Reset morphing when hover ends
+      gsap.to(morphPath, {
+        morphSVG: moon1Path,
+        duration: 0.3,
+        ease: "power2.inOut",
+      });
       // Smooth gradient transition back to original purple
       gsap.to(morphContainer, {
         "--gradient-from": "#907EFF",
@@ -179,6 +187,26 @@ const CaseStudy = ({
       morphContainer.removeEventListener("mouseenter", handleMouseEnter);
       morphContainer.removeEventListener("mouseleave", handleMouseLeave);
     };
+  }, []);
+
+  // Flower Icons Spinning Animation
+  useEffect(() => {
+    // Add flower-icon class to all flower SVG containers
+    const flowerContainers = document.querySelectorAll('[class*="flower-2"]');
+    flowerContainers.forEach((container) => {
+      container.classList.add("flower-icon");
+    });
+
+    // Animate all flower icons with GSAP
+    const flowerIcons = document.querySelectorAll(".flower-icon");
+    flowerIcons.forEach((icon) => {
+      gsap.to(icon, {
+        rotation: 360,
+        duration: 3,
+        ease: "none",
+        repeat: -1,
+      });
+    });
   }, []);
 
   // Process Section Morphing Effect
@@ -255,7 +283,7 @@ const CaseStudy = ({
       // Get section positions
       const summaryTop = summaryRef.current?.offsetTop || 0;
       const processTop = processRef.current?.offsetTop || 0;
-      const problemTop = problemRef.current?.offsetTop || 0;
+      const challengeTop = challengeRef.current?.offsetTop || 0;
       const roleTop = roleRef.current?.offsetTop || 0;
       const insightsTop = insightsRef.current?.offsetTop || 0;
       const designSystemTop = designSystemRef.current?.offsetTop || 0;
@@ -266,15 +294,20 @@ const CaseStudy = ({
         summaryTop + (summaryRef.current?.offsetHeight || 0);
       const processBottom =
         processTop + (processRef.current?.offsetHeight || 0);
-      const problemBottom =
-        problemTop + (problemRef.current?.offsetHeight || 0);
+      const challengeBottom =
+        challengeTop + (challengeRef.current?.offsetHeight || 0);
       const roleBottom = roleTop + (roleRef.current?.offsetHeight || 0);
       const insightsBottom =
         insightsTop + (insightsRef.current?.offsetHeight || 0);
       const designSystemBottom =
         designSystemTop + (designSystemRef.current?.offsetHeight || 0);
-      const resultsBottom =
-        resultsTop + (resultsRef.current?.offsetHeight || 0);
+      // Calculate Results section bottom to include the mockup section
+      const mockupTop = mockupRef.current?.offsetTop || 0;
+      const mockupBottom = mockupTop + (mockupRef.current?.offsetHeight || 0);
+      const resultsBottom = Math.max(
+        resultsTop + (resultsRef.current?.offsetHeight || 0),
+        mockupBottom
+      );
 
       // Determine which section is currently in view
       const scrollCenter = scrollY + windowHeight / 2;
@@ -283,8 +316,11 @@ const CaseStudy = ({
         setActiveSection("summary");
       } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
         setActiveSection("process");
-      } else if (scrollCenter >= problemTop && scrollCenter < problemBottom) {
-        setActiveSection("problem");
+      } else if (
+        scrollCenter >= challengeTop &&
+        scrollCenter < challengeBottom
+      ) {
+        setActiveSection("challenge");
       } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
         setActiveSection("role");
       } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
@@ -314,7 +350,11 @@ const CaseStudy = ({
     <>
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
         {/* Header Section with 40/60 Layout */}
-        <section ref={summaryRef} className="pt-32 pb-16">
+        <section
+          ref={summaryRef}
+          data-section="summary"
+          className="pt-32 pb-16 relative"
+        >
           <div className="flex items-start">
             {/* Left Container - 40% width */}
             <div className="w-[40%] px-12">
@@ -356,9 +396,9 @@ const CaseStudy = ({
               {/* Summary Title */}
               <div className="mt-12 ml-12">
                 <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
-                  Summary
+                  Summary — {title}
                 </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-8"></div>
+                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-90 dark:to-neutral-10 mb-8"></div>
               </div>
 
               {/* Description Text */}
@@ -477,12 +517,12 @@ const CaseStudy = ({
 
                         {/* Hidden target paths for morphing */}
                         <path
-                          d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
+                          d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
                           fill="none"
                           className="moon-1-path"
                         />
                         <path
-                          d="M193.481 31.456c13.436 23.267 5.44 52.966-17.886 66.43l-1.522.88c-15.647 9.031-25.278 25.67-25.278 43.672v2.001c0 26.82-21.845 48.561-48.793 48.561s-48.794-21.741-48.794-48.561v-1.998c0-18.002-9.631-34.642-25.278-43.674l-1.525-.88C1.079 84.423-6.917 54.723 6.519 31.456 20.031 8.058 50.078.046 73.534 13.586l1.205.695a50.559 50.559 0 0050.522 0l1.205-.696c23.456-13.54 53.503-5.527 67.015 17.87z"
+                          d="M60 40L160 100L60 160Z"
                           fill="none"
                           className="moon-2-path"
                         />
@@ -545,14 +585,14 @@ const CaseStudy = ({
               <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
                 About
               </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100"></div>
+              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-90 dark:to-neutral-10"></div>
 
               {/* Business Objectives Title */}
               <div className="mt-96">
                 <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
                   Business objectives
                 </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100"></div>
+                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-90 dark:to-neutral-10"></div>
               </div>
             </div>
 
@@ -594,7 +634,8 @@ const CaseStudy = ({
         {/* The Process Section */}
         <section
           ref={processRef}
-          className="py-16 mt-32 bg-neutral-3 dark:bg-neutral-90"
+          data-section="process"
+          className="py-32 my-16 bg-neutral-3 dark:bg-neutral-90"
         >
           <div className="flex">
             {/* Left margin - 20% */}
@@ -736,22 +777,25 @@ const CaseStudy = ({
         </section>
 
         {/* The challenge Section with Centered Layout */}
-        <section ref={problemRef} className="py-16">
+        <section
+          ref={challengeRef}
+          data-section="challenge"
+          className="py-32 my-16"
+        >
           <div className="flex">
-            {/* Left margin - 20% */}
-            <div className="w-[20%]"></div>
+            {/* Left margin - 10% */}
+            <div className="w-[10%]"></div>
 
-            {/* Main content - 60% */}
-            <div className="w-[60%] px-6">
+            {/* Main content - 80% */}
+            <div className="w-[80%] px-8">
               {/* Section Title */}
-              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
+              <h2 className="text-4xl font-black text-neutral-100 dark:text-neutral-0 mb-6 text-center">
                 The challenge
               </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
 
-              {/* Main Problem Statement */}
-              <div className="text-center mb-12">
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed max-w-4xl mx-auto">
+              {/* Main Challenge Statement */}
+              <div className="text-center mb-16">
+                <p className="text-neutral-80 dark:text-neutral-20 text-2xl leading-relaxed max-w-5xl mx-auto">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -759,45 +803,45 @@ const CaseStudy = ({
                 </p>
               </div>
 
-              {/* Problem Details Grid */}
-              <div className="grid grid-cols-3 gap-6 mb-12">
+              {/* Challenge Details Grid */}
+              <div className="grid grid-cols-3 gap-8 mb-16">
                 {/* Challenge Card */}
-                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-4 h-4 bg-red-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
                       The Challenge
                     </h3>
                   </div>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                     Duis aute irure dolor in reprehenderit in voluptate velit
                     esse cillum dolore eu fugiat nulla pariatur.
                   </p>
                 </div>
 
-                {/* Problem Card */}
-                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
-                      The Problem
+                {/* Challenge Card */}
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-4 h-4 bg-orange-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
+                      The Challenge
                     </h3>
                   </div>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                     Excepteur sint occaecat cupidatat non proident, sunt in
                     culpa qui officia deserunt mollit anim id est laborum.
                   </p>
                 </div>
 
                 {/* Goals Card */}
-                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-4 h-4 bg-green-500 rounded-full"></div>
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
                       The Goals
                     </h3>
                   </div>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                     Sed ut perspiciatis unde omnis iste natus error sit
                     voluptatem accusantium doloremque laudantium.
                   </p>
@@ -805,11 +849,11 @@ const CaseStudy = ({
               </div>
 
               {/* Additional Context */}
-              <div className="bg-gradient-to-r from-purple-500/10 to-purple-700/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-8">
-                <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl mb-4">
+              <div className="bg-gradient-to-r from-purple-500/10 to-purple-700/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-10">
+                <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
                   Context & Background
                 </h3>
-                <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
                   Duis aute irure dolor in reprehenderit in voluptate velit esse
                   cillum dolore eu fugiat nulla pariatur. Excepteur sint
                   occaecat cupidatat non proident, sunt in culpa qui officia
@@ -818,13 +862,13 @@ const CaseStudy = ({
               </div>
             </div>
 
-            {/* Right margin - 20% */}
-            <div className="w-[20%]"></div>
+            {/* Right margin - 10% */}
+            <div className="w-[10%]"></div>
           </div>
         </section>
 
         {/* My Role Section with 40/60 Layout */}
-        <section ref={roleRef} className="py-16">
+        <section ref={roleRef} data-section="role" className="py-16">
           <div className="flex items-start">
             {/* Left Container - 40% width */}
             <div className="w-[40%] px-12">
@@ -832,7 +876,7 @@ const CaseStudy = ({
                 <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
                   My role
                 </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-8"></div>
+                <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-90 dark:to-neutral-10 mb-8"></div>
 
                 <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -865,22 +909,25 @@ const CaseStudy = ({
         </section>
 
         {/* Insights Section */}
-        <section ref={insightsRef} className="py-16">
+        <section
+          ref={insightsRef}
+          data-section="insights"
+          className="py-32 my-16"
+        >
           <div className="flex">
-            {/* Left margin - 20% */}
-            <div className="w-[20%]"></div>
+            {/* Left margin - 10% */}
+            <div className="w-[10%]"></div>
 
-            {/* Main content - 60% */}
-            <div className="w-[60%] px-6">
+            {/* Main content - 80% */}
+            <div className="w-[80%] px-8">
               {/* Section Title */}
-              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
+              <h2 className="text-4xl font-black text-neutral-100 dark:text-neutral-0 mb-6 text-center">
                 Insights
               </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
 
               {/* Centered Summary Text */}
-              <div className="text-center mb-16">
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed max-w-3xl mx-auto">
+              <div className="text-center mb-20">
+                <p className="text-neutral-80 dark:text-neutral-20 text-2xl leading-relaxed max-w-4xl mx-auto">
                   Through comprehensive user research, interviews, and data
                   analysis, we uncovered key insights that shaped the direction
                   of our design decisions. Here are the most significant
@@ -889,39 +936,265 @@ const CaseStudy = ({
               </div>
 
               {/* Insights Grid */}
-              <div className="grid grid-cols-2 gap-8">
+              <div className="grid grid-cols-2 gap-12">
                 {/* Early Insights */}
-                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-10">
+                  <div className="flex items-center gap-3 mb-8">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
                       Early Insights
                     </h3>
                   </div>
 
-                  <ul className="space-y-4">
+                  <ul className="space-y-6">
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_1_flower-2)">
+                            <mask
+                              id="cs_mask_1_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_1_flower-2)">
+                              <path
+                                fill="#EAB308"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EAB308"></stop>
+                              <stop offset="1" stopColor="#CA8A04"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_1_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Users found the job application process overwhelming and
                         time-consuming
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div className="w-4 h-4 mt-1 flex-shrink-0 animate-spin">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_2_flower-2)">
+                            <mask
+                              id="cs_mask_2_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_2_flower-2)">
+                              <path
+                                fill="#EAB308"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_2)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_2"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EAB308"></stop>
+                              <stop offset="1" stopColor="#CA8A04"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_2_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Cover letter writing was identified as the biggest pain
                         point
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_3_flower-2)">
+                            <mask
+                              id="cs_mask_3_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_3_flower-2)">
+                              <path
+                                fill="#EAB308"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_3)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_3"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EAB308"></stop>
+                              <stop offset="1" stopColor="#CA8A04"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_3_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Job seekers wanted more personalized recommendations
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_4_flower-2)">
+                            <mask
+                              id="cs_mask_4_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_4_flower-2)">
+                              <path
+                                fill="#EAB308"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_4)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_4"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EAB308"></stop>
+                              <stop offset="1" stopColor="#CA8A04"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_4_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Mobile usage was higher than expected during job
                         searches
                       </p>
@@ -930,37 +1203,269 @@ const CaseStudy = ({
                 </div>
 
                 {/* Later Insights */}
-                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
-                  <div className="flex items-center gap-3 mb-6">
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-lg">
+                <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-10">
+                  <div className="flex items-center gap-3 mb-8">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
                       Later Insights
                     </h3>
                   </div>
 
-                  <ul className="space-y-4">
+                  <ul className="space-y-6">
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_5_flower-2)">
+                            <mask
+                              id="cs_mask_5_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_5_flower-2)">
+                              <path
+                                fill="#EF4444"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_5)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_5"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EF4444"></stop>
+                              <stop offset="1" stopColor="#DC2626"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_5_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         AI-generated content needed human oversight for
                         authenticity
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_6_flower-2)">
+                            <mask
+                              id="cs_mask_6_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_6_flower-2)">
+                              <path
+                                fill="#EF4444"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_6)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_6"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EF4444"></stop>
+                              <stop offset="1" stopColor="#DC2626"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_6_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Users preferred gradual AI assistance over full
                         automation
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_7_flower-2)">
+                            <mask
+                              id="cs_mask_7_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_7_flower-2)">
+                              <path
+                                fill="#EF4444"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_7)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_7"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EF4444"></stop>
+                              <stop offset="1" stopColor="#DC2626"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_7_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Trust in AI recommendations increased with transparency
                       </p>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                      <div
+                        className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
+                        style={{
+                          animationDuration: "3s",
+                          animationTimingFunction: "ease-in-out",
+                        }}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 200 200"
+                          width="16"
+                          height="16"
+                          className="w-full h-full"
+                        >
+                          <g clipPath="url(#cs_clip_8_flower-2)">
+                            <mask
+                              id="cs_mask_8_flower-2"
+                              style={{ maskType: "alpha" }}
+                              width="200"
+                              height="190"
+                              x="0"
+                              y="5"
+                              maskUnits="userSpaceOnUse"
+                            >
+                              <path
+                                fill="#fff"
+                                d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
+                              ></path>
+                            </mask>
+                            <g mask="url(#cs_mask_8_flower-2)">
+                              <path
+                                fill="#EF4444"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                              <path
+                                fill="url(#paint0_linear_748_4701_8)"
+                                d="M200 0H0v200h200V0z"
+                              ></path>
+                            </g>
+                          </g>
+                          <defs>
+                            <linearGradient
+                              id="paint0_linear_748_4701_8"
+                              x1="158.5"
+                              x2="29"
+                              y1="12.5"
+                              y2="200"
+                              gradientUnits="userSpaceOnUse"
+                            >
+                              <stop stopColor="#EF4444"></stop>
+                              <stop offset="1" stopColor="#DC2626"></stop>
+                            </linearGradient>
+                            <clipPath id="cs_clip_8_flower-2">
+                              <path fill="#fff" d="M0 0H200V200H0z"></path>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </div>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Success metrics should focus on user confidence and time
                         saved
                       </p>
@@ -970,14 +1475,15 @@ const CaseStudy = ({
               </div>
             </div>
 
-            {/* Right margin - 20% */}
-            <div className="w-[20%]"></div>
+            {/* Right margin - 10% */}
+            <div className="w-[10%]"></div>
           </div>
         </section>
 
         {/* Design Guide / Design System Section */}
         <section
           ref={designSystemRef}
+          data-section="design-system"
           className="py-16"
           style={{ backgroundColor: "#907EFF" }}
         >
@@ -1027,7 +1533,7 @@ const CaseStudy = ({
         </section>
 
         {/* Results Section */}
-        <section ref={resultsRef} className="py-16">
+        <section ref={resultsRef} data-section="results" className="py-16">
           <div className="flex">
             {/* Left margin - 10% */}
             <div className="w-[10%]"></div>
@@ -1038,10 +1544,9 @@ const CaseStudy = ({
               <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
                 Results
               </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-purple-500 to-neutral-0 dark:to-neutral-100 mb-12"></div>
 
               {/* Video Showcase Box */}
-              <div className="w-full h-[600px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
+              <div className="w-full h-[800px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
                 <div className="text-center">
                   <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
                     <svg
@@ -1074,7 +1579,7 @@ const CaseStudy = ({
         </section>
 
         {/* Mockup Section - Full Width */}
-        <section className="w-full">
+        <section ref={mockupRef} className="w-full">
           {/* 60/40 Mockup Layout */}
           <div className="flex gap-0">
             {/* Left Container - 60% */}
@@ -1126,6 +1631,168 @@ const CaseStudy = ({
             </div>
           </div>
         </section>
+
+        {/* Other Case Studies Section */}
+        <section className="py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90">
+          <div className="flex">
+            {/* Left margin - 10% */}
+            <div className="w-[10%]"></div>
+
+            {/* Main content - 80% */}
+            <div className="w-[80%] px-8">
+              {/* Section Title */}
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
+                  Explore More Case Studies
+                </h2>
+                <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed max-w-2xl mx-auto">
+                  Discover more of my design work and see how I approach
+                  different challenges across various industries and project
+                  types.
+                </p>
+              </div>
+
+              {/* Case Studies Grid */}
+              <div className="grid grid-cols-3 gap-6">
+                {/* Emplojd Case Study */}
+                <Link
+                  href="/case-studies/emplojd"
+                  className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+                >
+                  <div className="aspect-[3/2] bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 group-hover:text-purple-200 transition-colors">
+                        Emplojd
+                      </h3>
+                      <p className="text-white/90 text-xs leading-relaxed">
+                        AI-powered job search platform with personalized
+                        recommendations and cover letter generation
+                      </p>
+                    </div>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </div>
+                        <span className="font-semibold text-sm">
+                          View Case Study
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* ZMartRest AI Case Study */}
+                <Link
+                  href="/case-studies/zmartrest-ai"
+                  className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+                >
+                  <div className="aspect-[3/2] bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 group-hover:text-orange-200 transition-colors">
+                        ZMartRest AI
+                      </h3>
+                      <p className="text-white/90 text-xs leading-relaxed">
+                        AI-powered restaurant management system with intelligent
+                        inventory and ordering
+                      </p>
+                    </div>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </div>
+                        <span className="font-semibold text-sm">
+                          View Case Study
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+
+                {/* Noted App Case Study */}
+                <Link
+                  href="/case-studies/noted-app"
+                  className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+                >
+                  <div className="aspect-[3/2] bg-gradient-to-br from-purple-500 to-pink-600 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div className="absolute bottom-6 left-6 right-6">
+                      <h3 className="text-white font-bold text-xl mb-2 group-hover:text-pink-200 transition-colors">
+                        Noted App
+                      </h3>
+                      <p className="text-white/90 text-xs leading-relaxed">
+                        Smart note-taking app with AI-powered organization and
+                        search capabilities
+                      </p>
+                    </div>
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-white text-center">
+                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
+                          <svg
+                            className="w-5 h-5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </div>
+                        <span className="font-semibold text-sm">
+                          View Case Study
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right margin - 10% */}
+            <div className="w-[10%]"></div>
+          </div>
+        </section>
+
+        {/* Footer Section */}
+        <div className="pt-16 pb-16">
+          <div className="container mx-auto">
+            <Footer />
+          </div>
+        </div>
       </div>
     </>
   );

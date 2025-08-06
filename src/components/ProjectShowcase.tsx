@@ -53,7 +53,7 @@ const projects: Project[] = [
   },
   {
     id: "emplojd",
-    title: "50% reduction in HR administrative tasks with streamlined platform",
+    title: "Enhancing job applications without compromising authenticity.",
     keywords: [
       "SaaS Platform",
       "HR Management",
