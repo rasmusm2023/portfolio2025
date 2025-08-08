@@ -91,8 +91,12 @@ const FloatingNavbar = () => {
       <div className="relative">
         <div className="w-full h-12 bg-neutral-20 dark:bg-neutral-80 rounded-3xl overflow-hidden absolute bottom-0 left-0 right-0 z-0">
           <div
-            className="h-full bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-3xl transition-all duration-300 ease-out"
-            style={{ width: `${scrollProgress}%` }}
+            className="h-full rounded-3xl transition-all duration-300 ease-out"
+            style={{
+              width: `${scrollProgress}%`,
+              background:
+                "linear-gradient(to right, #8B5CF6, #907EFF, #10B981)",
+            }}
           />
         </div>
 
