@@ -67,7 +67,11 @@ const projects: Project[] = [
   },
 ];
 
-const ProjectShowcase = () => {
+interface ProjectShowcaseProps {
+  showTitle?: boolean;
+}
+
+const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
@@ -93,42 +97,45 @@ const ProjectShowcase = () => {
   return (
     <section id="previous-work" className="py-16">
       <div className="w-full">
-        <div className="w-full mb-16">
-          <div
-            className="flex items-center justify-between"
-            style={{
-              maxWidth: "1600px",
-              margin: "0 auto",
-              paddingLeft: "2rem",
-              paddingRight: "2rem",
-            }}
-          >
-            <div className="relative w-fit">
-              <button
-                onClick={() => {
-                  const element = document.getElementById("case-studies");
-                  if (element) {
-                    const offset = 300; // Increased offset to show part of the hero section
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const offsetPosition =
-                      elementPosition + window.pageYOffset - offset;
+        {showTitle && (
+          <div className="w-full mb-16">
+            <div
+              className="flex items-center justify-between"
+              style={{
+                maxWidth: "1600px",
+                margin: "0 auto",
+                paddingLeft: "2rem",
+                paddingRight: "2rem",
+              }}
+            >
+              <div className="relative w-fit">
+                <button
+                  onClick={() => {
+                    const element = document.getElementById("case-studies");
+                    if (element) {
+                      const offset = 300; // Increased offset to show part of the hero section
+                      const elementPosition =
+                        element.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
 
-                    window.scrollTo({
-                      top: offsetPosition,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                className="text-left cursor-pointer"
-              >
-                <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
-                  Selected works
-                </h2>
-                <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
-              </button>
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="text-left cursor-pointer"
+                >
+                  <h2 className="text-7xl uppercase font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
+                    Selected works
+                  </h2>
+                  <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <div id="case-studies" className="space-y-0 w-full">
           {projects.map((project) => (

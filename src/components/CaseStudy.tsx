@@ -44,6 +44,9 @@ interface CaseStudyProps {
   appIconPath?: string;
   logotypeBlackPath?: string;
   logotypeWhitePath?: string;
+  aboutText?: React.ReactNode;
+  processSteps?: string[];
+  businessObjectivesText?: React.ReactNode;
 }
 
 const CaseStudy = ({
@@ -81,6 +84,9 @@ const CaseStudy = ({
   appIconPath,
   logotypeBlackPath,
   logotypeWhitePath,
+  aboutText,
+  processSteps,
+  businessObjectivesText,
 }: CaseStudyProps) => {
   const router = useRouter();
   const morphRef = useRef<HTMLButtonElement>(null);
@@ -134,29 +140,31 @@ const CaseStudy = ({
     const morphPath = morphContainer.querySelector(
       ".morph-path"
     ) as SVGPathElement;
-    const moon1Path = morphContainer.querySelector(
-      ".moon-1-path"
+    const starPath = morphContainer.querySelector(
+      ".star-target"
     ) as SVGPathElement;
-    const moon2Path = morphContainer.querySelector(
-      ".moon-2-path"
+    const trianglePath = morphContainer.querySelector(
+      ".triangle-target"
     ) as SVGPathElement;
 
-    if (!morphPath || !moon1Path || !moon2Path) return;
+    if (!morphPath || !starPath || !trianglePath) return;
 
-    // Set initial state
-    gsap.set(morphPath, { morphSVG: moon1Path });
+    // Set initial state to star
+    gsap.set(morphPath, { morphSVG: starPath });
 
-    // Create morphing timeline
+    // Create morphing timeline - only on hover
     const morphTimeline = gsap.timeline({ paused: true });
 
+    // Morph to triangle on hover
     morphTimeline.to(morphPath, {
-      morphSVG: moon2Path,
+      morphSVG: trianglePath,
       duration: 0.6,
       ease: "power2.inOut",
     });
 
     // Handle hover events
     const handleMouseEnter = () => {
+      console.log("Button hover enter - morphing to triangle");
       setIsHovered(true);
       morphTimeline.play();
       // Smooth gradient transition to different purple
@@ -169,14 +177,9 @@ const CaseStudy = ({
     };
 
     const handleMouseLeave = () => {
+      console.log("Button hover leave - morphing back to star");
       setIsHovered(false);
       morphTimeline.reverse();
-      // Reset morphing when hover ends
-      gsap.to(morphPath, {
-        morphSVG: moon1Path,
-        duration: 0.3,
-        ease: "power2.inOut",
-      });
       // Smooth gradient transition back to original purple
       gsap.to(morphContainer, {
         "--gradient-from": "#907EFF",
@@ -192,6 +195,7 @@ const CaseStudy = ({
     return () => {
       morphContainer.removeEventListener("mouseenter", handleMouseEnter);
       morphContainer.removeEventListener("mouseleave", handleMouseLeave);
+      morphTimeline.kill();
     };
   }, []);
 
@@ -414,9 +418,9 @@ const CaseStudy = ({
                   cover letters using AI.
                 </p>
                 <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%] mt-4">
-                  My focus was on creating a clean, intuitive experience that
-                  reduces overwhelm while keeping the process authentic and
-                  user-driven.
+                  My role focused extensively on leading and managing the UX/UI
+                  design process, ensuring the platform is not only functional
+                  but also provides an intuitive and enjoyable user experience.
                 </p>
               </div>
 
@@ -479,7 +483,7 @@ const CaseStudy = ({
                     </div>
 
                     {/* Morphing SVG Container */}
-                    <div className="w-12 h-12 relative">
+                    <div className="w-12 h-12 relative morphing-container">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -511,24 +515,23 @@ const CaseStudy = ({
                             <stop offset="100%" stopColor="#F8F8F8" />
                           </linearGradient>
                         </defs>
-                        {/* Main morphing path */}
+                        {/* Main morphing path - starts as star from CS_Star_8.svg */}
                         <path
-                          d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
-                          fill="url(#yellowGradient)"
+                          d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
+                          fill="white"
                           className="morph-path"
-                          style={{ transition: "fill 0.3s ease-in-out" }}
                         />
 
                         {/* Hidden target paths for morphing */}
                         <path
                           d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
                           fill="none"
-                          className="moon-1-path"
+                          className="star-target"
                         />
                         <path
                           d="M60 40L160 100L60 160Z"
                           fill="none"
-                          className="moon-2-path"
+                          className="triangle-target"
                         />
                       </svg>
                     </div>
@@ -605,24 +608,32 @@ const CaseStudy = ({
 
             {/* Right container - 30% */}
             <div className="w-[30%] px-6">
-              <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                Emplojd was born out of the frustration many feel with
-                repetitive and time-consuming job applications. Created during
-                the{" "}
-                <a
-                  href="https://chasacademy.se/article/chas-challenge-2024"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative inline-block cursor-pointer group"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, transparent 15%, rgba(255, 182, 193, 0.5) 15%, rgba(255, 182, 193, 0.5) 98%, transparent 98%)",
-                    textDecoration: "none",
-                    color: "inherit",
-                  }}
-                >
-                  Chas Challenge
-                  {/* Custom cursor tooltip */}
+              {aboutText ? (
+                aboutText
+              ) : (
+                <div className="relative">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+                    Emplojd was born out of the frustration many feel with
+                    repetitive and time-consuming job applications. Created
+                    during the{" "}
+                    <a
+                      href="https://chasacademy.se/article/chas-challenge-2024"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative inline-block cursor-pointer group"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(255, 182, 193, 0.5) 0%, rgba(255, 182, 193, 0.5) 100%)",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      Chas Challenge
+                    </a>
+                    , this AI-powered platform was our teams way of exploring
+                    how design and tech could simplify the process.
+                  </p>
+                  {/* Custom cursor tooltip - moved outside p element */}
                   <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-96">
                     <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-6 py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-sm leading-relaxed">
                       <div className="mb-3">
@@ -638,10 +649,8 @@ const CaseStudy = ({
                       <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-100 dark:border-t-neutral-0"></div>
                     </div>
                   </div>
-                </a>
-                , this AI-powered platform was our teams way of exploring how
-                design and tech could simplify the process.
-              </p>
+                </div>
+              )}
               <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
                 I led the UX/UI work to make sure the experience felt personal,
                 efficient, and genuinely helpful for job seekers.
@@ -680,12 +689,16 @@ const CaseStudy = ({
               </div>
 
               {/* Business Objectives Text */}
-              <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mt-12">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
+              {businessObjectivesText ? (
+                <div className="mt-12">{businessObjectivesText}</div>
+              ) : (
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mt-12">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+              )}
             </div>
 
             {/* Right margin - 20% */}
@@ -802,35 +815,45 @@ const CaseStudy = ({
 
             {/* Right container - 30% */}
             <div className="w-[30%] px-6">
-              {/* First Iteration */}
-              <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
-                FIRST ITERATION
-              </h3>
-              <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed mb-8 space-y-1">
-                <li>• App Review</li>
-                <li>• User Interviews</li>
-                <li>• Competitor analysis</li>
-                <li>• Ideation Workshop</li>
-                <li>• Design Principles</li>
-                <li>• Moderated and Unmoderated User Testing</li>
-                <li>• New UI Exploration</li>
-                <li>• Build Design System</li>
-                <li>• Finalise UI</li>
-                <li>• Release → 18% engagement rate</li>
-              </ul>
+              {processSteps ? (
+                <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed space-y-1">
+                  {processSteps.map((step, index) => (
+                    <li key={index}>• {step}</li>
+                  ))}
+                </ul>
+              ) : (
+                <>
+                  {/* First Iteration */}
+                  <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
+                    FIRST ITERATION
+                  </h3>
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed mb-8 space-y-1">
+                    <li>• App Review</li>
+                    <li>• User Interviews</li>
+                    <li>• Competitor analysis</li>
+                    <li>• Ideation Workshop</li>
+                    <li>• Design Principles</li>
+                    <li>• Moderated and Unmoderated User Testing</li>
+                    <li>• New UI Exploration</li>
+                    <li>• Build Design System</li>
+                    <li>• Finalise UI</li>
+                    <li>• Release → 18% engagement rate</li>
+                  </ul>
 
-              {/* Second Iteration */}
-              <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
-                SECOND ITERATION
-              </h3>
-              <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed space-y-1">
-                <li>• Opportunity Solution Tree</li>
-                <li>• Customer Journey Mapping</li>
-                <li>• Diary Study (attempted)</li>
-                <li>• Competitor Analysis</li>
-                <li>• Moderated and Unmoderated User Testing</li>
-                <li>• Release → 42% engagement rate</li>
-              </ul>
+                  {/* Second Iteration */}
+                  <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
+                    SECOND ITERATION
+                  </h3>
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed space-y-1">
+                    <li>• Opportunity Solution Tree</li>
+                    <li>• Customer Journey Mapping</li>
+                    <li>• Diary Study (attempted)</li>
+                    <li>• Competitor Analysis</li>
+                    <li>• Moderated and Unmoderated User Testing</li>
+                    <li>• Release → 42% engagement rate</li>
+                  </ul>
+                </>
+              )}
             </div>
 
             {/* Right margin - 20% */}

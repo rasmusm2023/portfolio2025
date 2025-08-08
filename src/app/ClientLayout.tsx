@@ -29,6 +29,21 @@ export default function ClientLayout({
       return;
     }
 
+    // Scroll to top on page navigation
+    const scrollToTop = () => {
+      const smoother = ScrollSmoother.get();
+      if (smoother) {
+        // Use smooth scrolling if available
+        smoother.scrollTo(0);
+      } else {
+        // Fallback to regular scroll
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    // Scroll to top immediately when pathname changes
+    scrollToTop();
+
     if (contentRef.current) {
       // Use a lighter animation for better performance
       gsap.fromTo(

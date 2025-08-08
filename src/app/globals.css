@@ -1333,3 +1333,30 @@ body {
 .animate-shake {
   animation: shake 5s ease-in-out infinite;
 }
+
+/* Hide any potential play icons that might be covering the morphing animation */
+.morphing-container::before,
+.morphing-container::after {
+  display: none !important;
+  content: none !important;
+}
+
+/* Ensure the morphing SVG is visible */
+.morphing-container svg {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hide any play icons that might be added by browser or other CSS */
+button::before,
+button::after,
+.group::before,
+.group::after {
+  content: none !important;
+}
+
+/* Ensure the button content is visible */
+button .morphing-container {
+  position: relative;
+  z-index: 2;
+}
