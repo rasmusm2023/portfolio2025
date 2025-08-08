@@ -23,13 +23,21 @@ export default function EmplojdCaseStudy() {
           "500+ companies using the platform",
         ]}
         technologies={[
-          "React",
-          "TypeScript",
-          "Node.js",
-          "PostgreSQL",
+          "UX Research",
+          "UI Design",
           "Figma",
-          "Redux",
-          "AWS",
+          "Prototyping",
+          "Wireframing",
+          "Design System",
+          "Workshops",
+          "Dev Handoff",
+          "Documentation",
+          "React",
+          "TailwindCSS",
+          "API Integration",
+          "Mobile Web App",
+          "AI Product",
+          "Logo Design",
         ]}
         heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop&crop=center"
         heroImageAlt="Emplojd - HR Platform Dashboard"
@@ -47,6 +55,19 @@ export default function EmplojdCaseStudy() {
         ]}
         link="https://emplojd.com"
         linkText="View Live Platform"
+        companyOrType="Type"
+        companyText="School project"
+        roleText="Lead UX/UI Designer: worked on strategy, research, facilitating workshops, prototyping, dev collaboration and delivery."
+        teamRoles={[
+          "01 Lead UX/UI Designer",
+          "01 UX Designer",
+          "04 Backend developers",
+          "03 Frontend developers",
+          "01 DevOps Engineer",
+        ]}
+        appIconPath="/logos/CaseStudies/Emplojd/Emplojd-App-Icon.svg"
+        logotypeBlackPath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-Black.svg"
+        logotypeWhitePath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-White.svg"
       />
     </>
   );

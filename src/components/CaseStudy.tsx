@@ -41,6 +41,9 @@ interface CaseStudyProps {
   companyText?: string;
   yearText?: string;
   teamRoles?: string[];
+  appIconPath?: string;
+  logotypeBlackPath?: string;
+  logotypeWhitePath?: string;
 }
 
 const CaseStudy = ({
@@ -75,6 +78,9 @@ const CaseStudy = ({
   companyText = "Emplojd",
   yearText = "2024",
   teamRoles = ["01 Lead UX/UI Designer", "01 UX Designer"],
+  appIconPath,
+  logotypeBlackPath,
+  logotypeWhitePath,
 }: CaseStudyProps) => {
   const router = useRouter();
   const morphRef = useRef<HTMLButtonElement>(null);
@@ -533,7 +539,7 @@ const CaseStudy = ({
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Team
                     </h3>
-                    <div className="flex gap-8">
+                    <div className="grid grid-cols-2 gap-x-8 gap-y-2">
                       {teamRoles.map((role, index) => (
                         <p
                           key={index}
@@ -600,22 +606,77 @@ const CaseStudy = ({
             {/* Right container - 30% */}
             <div className="w-[30%] px-6">
               <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                Emplojd is an AI-powered job search platform designed to make
-                job applications smarter and more personal. The platform
-                recommends relevant job listings and even writes tailored cover
-                letters using AI.
+                Emplojd was born out of the frustration many feel with
+                repetitive and time-consuming job applications. Created during
+                the{" "}
+                <a
+                  href="https://chasacademy.se/article/chas-challenge-2024"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative inline-block cursor-pointer group"
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 15%, rgba(255, 182, 193, 0.5) 15%, rgba(255, 182, 193, 0.5) 98%, transparent 98%)",
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  Chas Challenge
+                  {/* Custom cursor tooltip */}
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-96">
+                    <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-6 py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-sm leading-relaxed">
+                      <div className="mb-3">
+                        Chas Academy's annual, cross-program student project
+                        where first-year students team up across disciplines
+                        over an 8‑week period (2024's theme: AI) to ideate and
+                        prototype real solutions, then pitch them to industry
+                        professionals.
+                      </div>
+                      <div className="text-xs text-neutral-60 dark:text-neutral-40 font-medium border-t border-neutral-200 dark:border-neutral-700 pt-3">
+                        Click to read more
+                      </div>
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-100 dark:border-t-neutral-0"></div>
+                    </div>
+                  </div>
+                </a>
+                , this AI-powered platform was our teams way of exploring how
+                design and tech could simplify the process.
               </p>
               <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                My focus was on creating a clean, intuitive experience that
-                reduces overwhelm while keeping the process authentic and
-                user-driven.
+                I led the UX/UI work to make sure the experience felt personal,
+                efficient, and genuinely helpful for job seekers.
               </p>
 
               {/* Logo Box */}
-              <div className="w-full h-32 mt-6 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center justify-center">
-                <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                  Logo placeholder
-                </span>
+              <div className="w-full h-32 mt-6 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center px-6">
+                {appIconPath && (
+                  <img
+                    src={appIconPath}
+                    alt="App Icon"
+                    className="h-20 w-20 object-contain"
+                  />
+                )}
+                <div className="flex-1 flex justify-center">
+                  {logotypeBlackPath && logotypeWhitePath && (
+                    <img
+                      src={logotypeBlackPath}
+                      alt="Logotype"
+                      className="h-10 object-contain dark:hidden"
+                    />
+                  )}
+                  {logotypeBlackPath && logotypeWhitePath && (
+                    <img
+                      src={logotypeWhitePath}
+                      alt="Logotype"
+                      className="h-10 object-contain hidden dark:block"
+                    />
+                  )}
+                </div>
+                {!appIconPath && !logotypeBlackPath && (
+                  <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                    Logo placeholder
+                  </span>
+                )}
               </div>
 
               {/* Business Objectives Text */}
