@@ -170,7 +170,7 @@ const BentoBox = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
           {/* About - Standing section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-50/5 backdrop-blur-sm border-2 border-neutral-20/40 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-20/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:bg-neutral-90/50 dark:border-neutral-80/40 dark:hover:border-neutral-80/60 dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("about-me")})` }}
             onMouseEnter={() => setHoveredBox("about-me")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -249,7 +249,7 @@ const BentoBox = () => {
 
           {/* I work in - Large section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-50/5 backdrop-blur-sm border-2 border-neutral-20/40 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-neutral-20/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:bg-neutral-90/50 dark:border-neutral-80/40 dark:hover:border-neutral-80/60 dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("toolkit")})` }}
             onMouseEnter={() => setHoveredBox("toolkit")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -282,7 +282,7 @@ const BentoBox = () => {
 
           {/* Expertise with Dotted Background - Large section */}
           <div
-            className="md:col-span-6 lg:col-span-8 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-6 lg:col-span-8 bg-neutral-50/5 backdrop-blur-sm border-2 border-neutral-20/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-20/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:bg-neutral-90/50 dark:border-neutral-80/40 dark:hover:border-neutral-80/60 dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
             }}
@@ -317,7 +317,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -372,7 +372,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -423,7 +423,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -486,7 +486,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -541,7 +541,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -553,7 +553,7 @@ const BentoBox = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
+                      <h3 className="text-neutral-10 font-black text-xl tracking-wide transition-colors duration-200">
                         Product
                       </h3>
                     </div>
@@ -596,7 +596,7 @@ const BentoBox = () => {
                     className="w-full h-full"
                   />
                 </div>
-                <div className="relative bg-neutral-100 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent">
+                <div className="relative bg-neutral-60 backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 group-hover/card:bg-transparent dark:bg-neutral-80">
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col items-center text-center mb-4">
                       <div className="relative mb-3">
@@ -608,7 +608,7 @@ const BentoBox = () => {
                         {/* Glow effect only on card hover */}
                         <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300"></div>
                       </div>
-                      <h3 className="text-neutral-50 group-hover/card:text-neutral-10 font-bold text-xl tracking-wide transition-colors duration-200">
+                      <h3 className="text-neutral-10 font-bold text-xl tracking-wide transition-colors duration-200">
                         AI & Automation
                       </h3>
                     </div>
@@ -644,7 +644,7 @@ const BentoBox = () => {
 
           {/* Experience - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-50/5 backdrop-blur-sm border-2 border-neutral-20/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-20/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:bg-neutral-90/50 dark:border-neutral-80/40 dark:hover:border-neutral-80/60 dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("experience")})` }}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -758,7 +758,7 @@ const BentoBox = () => {
 
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-90/50 backdrop-blur-sm border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-50/5 backdrop-blur-sm border-2 border-neutral-20/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-20/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:bg-neutral-90/50 dark:border-neutral-80/40 dark:hover:border-neutral-80/60 dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("current-work")})` }}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}

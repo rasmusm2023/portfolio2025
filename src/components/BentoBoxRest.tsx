@@ -64,7 +64,7 @@ const BentoBoxRest = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
-            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
@@ -119,7 +119,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -216,7 +216,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -303,7 +303,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -420,7 +420,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -517,7 +517,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -614,7 +614,7 @@ const BentoBoxRest = () => {
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-80/50 group-hover/card:bg-transparent"
-                      : "bg-[rgba(248,248,248,0.95)] group-hover/card:bg-transparent"
+                      : "bg-neutral-20/50 group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -695,7 +695,7 @@ const BentoBoxRest = () => {
 
           {/* Experience - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("experience")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
@@ -807,7 +807,7 @@ const BentoBoxRest = () => {
 
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",

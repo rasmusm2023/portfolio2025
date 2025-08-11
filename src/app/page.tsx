@@ -172,7 +172,7 @@ export default function Home() {
                   <div className="w-full">
                     <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
                       <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                        Product Designer{" "}
+                        UX/UI Designer{" "}
                       </span>
                       <span className="inline-block text-[10rem] font-extrabold tracking-tight leading-[1] font-hanken text-[#8B5CF6]">
                         &

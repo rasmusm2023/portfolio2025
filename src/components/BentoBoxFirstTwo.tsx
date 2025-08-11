@@ -108,7 +108,7 @@ const BentoBoxFirstTwo = () => {
 
           {/* I work in - Large section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl flex flex-col overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl flex flex-col overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("toolkit")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",

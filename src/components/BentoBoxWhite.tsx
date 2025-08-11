@@ -193,7 +193,7 @@ const BentoBoxWhite = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[320px]">
           {/* About - Standing section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("about-me")})` }}
             onMouseEnter={() => setHoveredBox("about-me")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -272,7 +272,7 @@ const BentoBoxWhite = () => {
 
           {/* I work in - Large section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl flex flex-col justify-center overflow-hidden relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("toolkit")})` }}
             onMouseEnter={() => setHoveredBox("toolkit")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -305,7 +305,7 @@ const BentoBoxWhite = () => {
 
           {/* Expertise with Dotted Background - Large section */}
           <div
-            className="md:col-span-6 lg:col-span-8 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+            className="md:col-span-6 lg:col-span-8 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
             }}
@@ -667,7 +667,7 @@ const BentoBoxWhite = () => {
 
           {/* Experience - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("experience")})` }}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -781,7 +781,7 @@ const BentoBoxWhite = () => {
 
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 bg-neutral-0 backdrop-blur-sm border-2 border-neutral-20 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
             style={{ transform: `scale(${getBoxScale("current-work")})` }}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}
