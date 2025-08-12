@@ -1040,27 +1040,57 @@ const CaseStudy = ({
               </div>
               <div className="w-[600px]">
                 <div className="mb-16">
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                    After eight weeks of intensive design and development, we
-                    successfully delivered Emplojd - an AI-powered job
-                    application platform that revolutionizes how candidates
-                    apply to positions and how recruiters discover talent.
-                  </p>
-
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                    The platform leverages advanced AI algorithms to
-                    automatically generate personalized cover letters and
-                    optimize resumes based on job requirements, significantly
-                    reducing application time while maintaining the personal
-                    touch that recruiters value.
-                  </p>
-
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                    Emplojd features an intuitive, modern interface that guides
-                    users through a streamlined application process, with
-                    real-time feedback and optimization suggestions that help
-                    candidates present their best selves to potential employers.
-                  </p>
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>AI-powered personalization</strong> — uses each
+                        job seeker's "job profile" and specific job postings to
+                        create tailored cover letters that preserve their unique
+                        voice.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>Smart job discovery</strong> — integrates with
+                        job listing APIs and offers strong search functionality
+                        to quickly find relevant opportunities.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>On-the-go convenience</strong> — allows
+                        logged-in users to save jobs with a single click to
+                        revisit and generate cover letters later.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>Streamlined workflow</strong> — enables users to
+                        apply to more jobs with less friction, without
+                        compromising application quality.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>Respectful balance</strong> — ensures
+                        applications remain personal while avoiding generic
+                        overload for recruiters.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>User-focused UI</strong> — designed a clean,
+                        intuitive interface that encourages productivity and
+                        removes overwhelm.
+                      </span>
+                    </li>
+                  </ul>
                 </div>
 
                 {/* Solution Features */}
@@ -1075,7 +1105,10 @@ const CaseStudy = ({
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>Smart resume optimization</span>
+                      <span>
+                        Three tools in one — save your profile, search jobs, and
+                        tailor cover letters all within the same platform.
+                      </span>
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
@@ -1083,7 +1116,10 @@ const CaseStudy = ({
                     </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>Real-time feedback and suggestions</span>
+                      <span>
+                        Prioritises applicant needs over traditional
+                        recruiter-focused tools
+                      </span>
                     </li>
                   </ul>
                 </div>
@@ -1714,8 +1750,7 @@ const CaseStudy = ({
         <section
           ref={designSystemRef}
           data-section="design-system"
-          className="py-16"
-          style={{ backgroundColor: "#907EFF" }}
+          className="py-16 bg-neutral-10 dark:bg-neutral-90"
         >
           <div className="flex">
             {/* Left margin - 15% */}
@@ -1724,10 +1759,12 @@ const CaseStudy = ({
             {/* Main content - 70% */}
             <div className="w-[70%] px-6">
               {/* Section Title */}
-              <h2 className="text-3xl font-black text-white mb-4 text-center">
-                Design Guide & Components
-              </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-white to-white/50 mb-12"></div>
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  Design Guide & Components
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent mb-8"></div>
+              </div>
 
               {/* Infinite Scroll Design System Showcase */}
               <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden relative">
