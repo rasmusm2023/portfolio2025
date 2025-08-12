@@ -514,8 +514,8 @@ const CaseStudy = ({
                 </div>
 
                 {/* Grid Layout with proper spacing */}
-                <div className="grid grid-cols-3 gap-4">
-                  {/* Company Box - top left, half height */}
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Company Box - top left */}
                   <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       {companyOrType}
@@ -527,7 +527,7 @@ const CaseStudy = ({
                     </p>
                   </div>
 
-                  {/* Year Box - top middle, half height */}
+                  {/* Year Box - top right */}
                   <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Year
@@ -537,84 +537,7 @@ const CaseStudy = ({
                     </p>
                   </div>
 
-                  {/* CTA Button - top right, full height */}
-                  <button
-                    ref={morphRef}
-                    className="row-span-2 flex flex-col items-center justify-center px-6 py-12 rounded-2xl transition-all duration-300 group shadow-lg hover:shadow-xl animate-shake min-h-[160px]"
-                    style={{
-                      background:
-                        "linear-gradient(to right, var(--gradient-from, #907EFF), var(--gradient-to, #7c3aed))",
-                      animationIterationCount: "infinite",
-                      animationDuration: "5s",
-                    }}
-                  >
-                    <div className="flex items-center gap-3 mb-4 whitespace-nowrap">
-                      {/* Pulsating Live Dot */}
-                      <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse relative flex-shrink-0">
-                        <div className="absolute inset-0 bg-green-400 rounded-full animate-ping"></div>
-                      </div>
-
-                      <span className="text-white font-bold text-xl">
-                        {buttonText}
-                      </span>
-                    </div>
-
-                    {/* Morphing SVG Container */}
-                    <div className="w-12 h-12 relative morphing-container">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 200 200"
-                        width="48"
-                        height="48"
-                        className="w-full h-full"
-                      >
-                        <defs>
-                          <linearGradient
-                            id="yellowGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop offset="0%" stopColor="#F8F8F8" />
-                            <stop offset="50%" stopColor="#E9E9E9" />
-                            <stop offset="100%" stopColor="#D3D3D3" />
-                          </linearGradient>
-                          <linearGradient
-                            id="purpleGradient"
-                            x1="0%"
-                            y1="0%"
-                            x2="100%"
-                            y2="100%"
-                          >
-                            <stop offset="0%" stopColor="#FFFFFF" />
-                            <stop offset="100%" stopColor="#F8F8F8" />
-                          </linearGradient>
-                        </defs>
-                        {/* Main morphing path - starts as star from CS_Star_8.svg */}
-                        <path
-                          d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
-                          fill="white"
-                          className="morph-path"
-                        />
-
-                        {/* Hidden target paths for morphing */}
-                        <path
-                          d="M100 0c12.424 62.382 37.256 87.456 100 100-62.759 12.544-87.591 37.618-100 100-12.424-62.382-37.256-87.471-100-100C62.758 87.456 87.591 62.382 100 0z"
-                          fill="none"
-                          className="star-target"
-                        />
-                        <path
-                          d="M60 40L160 100L60 160Z"
-                          fill="none"
-                          className="triangle-target"
-                        />
-                      </svg>
-                    </div>
-                  </button>
-
-                  {/* Team Box - bottom left and middle, spans 2/3 width */}
+                  {/* Team Box - bottom, spans full width */}
                   <div className="col-span-2 p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Team
@@ -631,6 +554,19 @@ const CaseStudy = ({
                     </div>
                   </div>
                 </div>
+
+                {/* Live Prototype Button - spans same width as grid */}
+                <button
+                  ref={morphRef}
+                  className="w-full mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
+                >
+                  {/* Pulsating Live Dot */}
+                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse relative flex-shrink-0">
+                    <div className="absolute inset-0 bg-green-400 rounded-full animate-ping"></div>
+                  </div>
+
+                  <span className="whitespace-nowrap">{buttonText}</span>
+                </button>
               </div>
             </div>
 

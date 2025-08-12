@@ -110,20 +110,21 @@ export default function EmplojdCaseStudy() {
           </div>
         }
         processSteps={[
-          "Market Research & Competitor Analysis",
+          "Market Research",
+          "Competitor Analysis",
           "Ideation Workshop",
           "Flowcharts",
           "Wireframes",
           "Moderated and Unmoderated User Testing",
-          "Lo-fi mockups",
+          "Lo-fi Mockups",
           "Mini Design system",
-          "First Hi-fi mockups",
-          "Expand design system",
-          "Finalize hi-fi mockups",
+          "First Hi-fi Mockups",
+          "Expand Design System",
+          "Finalize Hi-fi mockups",
           "Moderated and Unmoderated User Testing",
           "Interactive Prototype",
           "Moderated and Unmoderated User Testing",
-          "Recognition as a likely winner of Chas Challenge (3rd place)",
+          "Recognition as a Likely Winner of Chas Challenge",
         ]}
         businessObjectivesText={
           <div className="space-y-6">
