@@ -54,12 +54,7 @@ const projects: Project[] = [
   {
     id: "emplojd",
     title: "Enhancing job applications without compromising authenticity.",
-    keywords: [
-      "SaaS Platform",
-      "HR Management",
-      "Web Design",
-      "User Experience",
-    ],
+    keywords: ["SaaS Platform", "AI-powered", "Web Design", "UX/UI Design"],
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
     alt: "Emplojd HR Platform",

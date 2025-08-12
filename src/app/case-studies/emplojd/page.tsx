@@ -81,7 +81,7 @@ export default function EmplojdCaseStudy() {
                   className="relative inline-block cursor-pointer"
                   style={{
                     background:
-                      "linear-gradient(180deg, transparent 10%, rgba(255, 182, 193, 0.5) 10%, rgba(255, 182, 193, 0.5) 95%, transparent 95%)",
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
                     textDecoration: "none",
                     color: "inherit",
                   }}
@@ -110,20 +110,20 @@ export default function EmplojdCaseStudy() {
           </div>
         }
         processSteps={[
-          "Workshop",
-          "Market Research",
+          "Market Research & Competitor Analysis",
+          "Ideation Workshop",
           "Flowcharts",
           "Wireframes",
-          "Testing",
+          "Moderated and Unmoderated User Testing",
           "Lo-fi mockups",
           "Mini Design system",
           "First Hi-fi mockups",
           "Expand design system",
           "Finalize hi-fi mockups",
-          "Testing",
+          "Moderated and Unmoderated User Testing",
           "Interactive Prototype",
-          "Testing",
-          "Recognition as a likely winner of Chas Challenge",
+          "Moderated and Unmoderated User Testing",
+          "Recognition as a likely winner of Chas Challenge (3rd place)",
         ]}
         businessObjectivesText={
           <div className="space-y-6">
@@ -134,7 +134,7 @@ export default function EmplojdCaseStudy() {
               <span
                 style={{
                   background:
-                    "linear-gradient(180deg, rgba(255, 182, 193, 0.5) 0%, rgba(255, 182, 193, 0.5) 100%)",
+                    "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
                 }}
               >
                 The goal was to reduce the time spent tailoring resumes and
