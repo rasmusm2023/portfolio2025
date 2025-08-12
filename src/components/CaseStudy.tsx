@@ -560,12 +560,12 @@ const CaseStudy = ({
                   ref={morphRef}
                   className="w-full mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
                 >
-                  {/* Pulsating Live Dot */}
-                  <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse relative flex-shrink-0">
-                    <div className="absolute inset-0 bg-green-400 rounded-full animate-ping"></div>
-                  </div>
+                  {/* Status Dot */}
+                  <div className="w-3 h-3 bg-gray-400 rounded-full relative flex-shrink-0"></div>
 
-                  <span className="whitespace-nowrap">{buttonText}</span>
+                  <span className="whitespace-nowrap">
+                    Sorry, Emplojd is no longer live 🙁
+                  </span>
                 </button>
               </div>
             </div>
@@ -932,58 +932,28 @@ const CaseStudy = ({
               </div>
               <div className="w-[600px]">
                 {/* Main Challenge Statement */}
-                <div className="mb-16">
+                <div className="mb-16 space-y-6">
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    We had eight weeks, a small cross-disciplinary team, and the
+                    broad theme of "AI" to work with. In that time, we needed to
+                    design and deliver a functional, interactive prototype that
+                    could stand out at the Chas Challenge showcase.
                   </p>
-                </div>
 
-                {/* Challenge Details Grid */}
-                <div className="grid grid-cols-3 gap-8 mb-16">
-                  {/* Challenge Card */}
-                  <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                      <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
-                        The Challenge
-                      </h3>
-                    </div>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                      Duis aute irure dolor in reprehenderit in voluptate velit
-                      esse cillum dolore eu fugiat nulla pariatur.
-                    </p>
-                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    The job-search market is already crowded, yet most platforms
+                    still demand time-consuming, repetitive application
+                    processes. Job seekers risk losing opportunities by applying
+                    to fewer roles, while recruiters lose time reviewing
+                    generic, low-quality submissions.
+                  </p>
 
-                  {/* Challenge Card */}
-                  <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-4 h-4 bg-orange-500 rounded-full"></div>
-                      <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
-                        The Challenge
-                      </h3>
-                    </div>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                      Excepteur sint occaecat cupidatat non proident, sunt in
-                      culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                  </div>
-
-                  {/* Goals Card */}
-                  <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                      <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl">
-                        The Goals
-                      </h3>
-                    </div>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium doloremque laudantium.
-                    </p>
-                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    Our challenge was to create a solution that used AI
+                    meaningfully-reducing friction for applicants without
+                    sacrificing the personal touch recruiters value-all within
+                    tight time and resource limits.
+                  </p>
                 </div>
 
                 {/* Additional Context */}
@@ -991,12 +961,131 @@ const CaseStudy = ({
                   <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
                     Context & Background
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 font-bold mt-1">•</span>
+                      <span>
+                        Limited time, as the project ran alongside my regular
+                        studies
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 font-bold mt-1">•</span>
+                      <span>
+                        Broad initial theme (AI), requiring us to define our own
+                        scope and boundaries
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-purple-400 font-bold mt-1">•</span>
+                      <span>
+                        Had to start development early, adding extra pressure on
+                        the design process
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Goals */}
+                <div className="bg-gradient-to-r from-blue-500/10 to-blue-700/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-10 mt-8">
+                  <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
+                    Goals
+                  </h3>
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 font-bold mt-1">•</span>
+                      <span>
+                        Design and deliver a functional, interactive prototype
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 font-bold mt-1">•</span>
+                      <span>
+                        Create a solution that meaningfully uses AI to reduce
+                        friction
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 font-bold mt-1">•</span>
+                      <span>Stand out at the Chas Challenge showcase</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-blue-400 font-bold mt-1">•</span>
+                      <span>
+                        Intuitive design and highly satisfactory experience
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Solution Section */}
+        <section className="py-16">
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  The Solution
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:text-neutral-20 to-transparent"></div>
+              </div>
+              <div className="w-[600px]">
+                <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+                    After eight weeks of intensive design and development, we
+                    successfully delivered Emplojd - an AI-powered job
+                    application platform that revolutionizes how candidates
+                    apply to positions and how recruiters discover talent.
                   </p>
+
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+                    The platform leverages advanced AI algorithms to
+                    automatically generate personalized cover letters and
+                    optimize resumes based on job requirements, significantly
+                    reducing application time while maintaining the personal
+                    touch that recruiters value.
+                  </p>
+
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    Emplojd features an intuitive, modern interface that guides
+                    users through a streamlined application process, with
+                    real-time feedback and optimization suggestions that help
+                    candidates present their best selves to potential employers.
+                  </p>
+                </div>
+
+                {/* Solution Features */}
+                <div className="bg-gradient-to-r from-green-500/10 to-green-700/10 backdrop-blur-sm border border-green-500/20 rounded-2xl p-10">
+                  <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
+                    Key Features
+                  </h3>
+                  <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>AI-powered cover letter generation</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>Smart resume optimization</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>Streamlined application workflow</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>Real-time feedback and suggestions</span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

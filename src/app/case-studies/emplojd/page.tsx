@@ -120,7 +120,7 @@ export default function EmplojdCaseStudy() {
           "Mini Design system",
           "First Hi-fi Mockups",
           "Expand Design System",
-          "Finalize Hi-fi mockups",
+          "Finalize Hi-fi Mockups",
           "Moderated and Unmoderated User Testing",
           "Interactive Prototype",
           "Moderated and Unmoderated User Testing",
