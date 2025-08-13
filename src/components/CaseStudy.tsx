@@ -68,11 +68,15 @@ const CaseStudy = ({
   linkText,
   sections = [
     { id: "summary", label: "Summary" },
-    { id: "process", label: "Process" },
-    { id: "challenge", label: "Challenge" },
-    { id: "role", label: "My role" },
+    { id: "about", label: "About" },
+    { id: "business-objective", label: "Business Objective" },
+    { id: "challenge", label: "The Challenge" },
+    { id: "solution", label: "The Solution" },
+    { id: "craft", label: "The Craft" },
+    { id: "design-system", label: "Design Guide & Components" },
+    { id: "process", label: "The Process" },
+    { id: "role", label: "My Role" },
     { id: "insights", label: "Insights" },
-    { id: "design-system", label: "Design System" },
     { id: "results", label: "Results" },
   ],
   buttonText = "Live prototype",
@@ -91,16 +95,20 @@ const CaseStudy = ({
   const router = useRouter();
   const morphRef = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
-  const processMorphRef = useRef<HTMLDivElement>(null);
   const summaryRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLElement>(null);
+  const businessObjectiveRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
+  const solutionRef = useRef<HTMLElement>(null);
   const roleRef = useRef<HTMLElement>(null);
   const insightsRef = useRef<HTMLElement>(null);
   const designSystemRef = useRef<HTMLElement>(null);
+  const craftRef = useRef<HTMLElement>(null);
   const resultsRef = useRef<HTMLElement>(null);
-  const mockupRef = useRef<HTMLElement>(null);
-  const { setActiveSection } = useNavbar();
+  const mockupRef = useRef<HTMLDivElement>(null);
+  const processMorphRef = useRef<HTMLDivElement>(null);
+  const { setActiveSection, activeSection } = useNavbar();
 
   const handleCaseStudiesClick = () => {
     // Navigate to home page first
@@ -115,10 +123,18 @@ const CaseStudy = ({
     // Scroll to section
     if (sectionId === "summary") {
       summaryRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "about") {
+      aboutRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "business-objective") {
+      businessObjectiveRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "process") {
       processRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "challenge") {
       challengeRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "solution") {
+      solutionRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "craft") {
+      craftRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "role") {
       roleRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "insights") {
@@ -217,71 +233,6 @@ const CaseStudy = ({
         repeat: -1,
       });
     });
-  }, []);
-
-  // Process Section Morphing Effect
-  useEffect(() => {
-    gsap.registerPlugin(MorphSVGPlugin);
-
-    const processContainer = processMorphRef.current;
-    if (!processContainer) return;
-
-    const morphPath = processContainer.querySelector(
-      ".process-morph-path"
-    ) as SVGPathElement;
-    const targets = processContainer.querySelectorAll(
-      ".morph-target"
-    ) as NodeListOf<SVGPathElement>;
-    const svgElement = processContainer.querySelector("svg");
-
-    if (!morphPath || targets.length === 0) {
-      console.log("Missing SVG elements for morphing");
-      return;
-    }
-
-    console.log(
-      "Setting up morphing animation with",
-      targets.length,
-      "targets"
-    );
-
-    // Create the morphing timeline - EXACTLY like home page
-    const morphTimeline = gsap.timeline({ repeat: -1 });
-
-    // Add morphing animations for all shapes
-    targets.forEach((target, index) => {
-      morphTimeline.to(morphPath, {
-        morphSVG: target,
-        duration: 1.5,
-        ease: "power2.inOut",
-      });
-    });
-
-    // Return to the first shape to complete the cycle
-    morphTimeline.to(morphPath, {
-      morphSVG: targets[0],
-      duration: 1.5,
-      ease: "power2.inOut",
-    });
-
-    // Create spinning animation
-    const spinTimeline = gsap.timeline({ repeat: -1 });
-    spinTimeline.to(svgElement, {
-      rotation: 360,
-      duration: 8,
-      ease: "power1.inOut",
-    });
-
-    // Start the animations
-    morphTimeline.play();
-    spinTimeline.play();
-
-    console.log("Morphing and spinning animation started");
-
-    return () => {
-      morphTimeline.kill();
-      spinTimeline.kill();
-    };
   }, []);
 
   // Design System Infinite Scroll Effect
@@ -387,8 +338,12 @@ const CaseStudy = ({
 
       // Get section positions
       const summaryTop = summaryRef.current?.offsetTop || 0;
+      const aboutTop = aboutRef.current?.offsetTop || 0;
+      const businessObjectiveTop = businessObjectiveRef.current?.offsetTop || 0;
       const processTop = processRef.current?.offsetTop || 0;
       const challengeTop = challengeRef.current?.offsetTop || 0;
+      const solutionTop = solutionRef.current?.offsetTop || 0;
+      const craftTop = craftRef.current?.offsetTop || 0;
       const roleTop = roleRef.current?.offsetTop || 0;
       const insightsTop = insightsRef.current?.offsetTop || 0;
       const designSystemTop = designSystemRef.current?.offsetTop || 0;
@@ -397,10 +352,17 @@ const CaseStudy = ({
       // Calculate section boundaries
       const summaryBottom =
         summaryTop + (summaryRef.current?.offsetHeight || 0);
+      const aboutBottom = aboutTop + (aboutRef.current?.offsetHeight || 0);
+      const businessObjectiveBottom =
+        businessObjectiveTop +
+        (businessObjectiveRef.current?.offsetHeight || 0);
       const processBottom =
         processTop + (processRef.current?.offsetHeight || 0);
       const challengeBottom =
         challengeTop + (challengeRef.current?.offsetHeight || 0);
+      const solutionBottom =
+        solutionTop + (solutionRef.current?.offsetHeight || 0);
+      const craftBottom = craftTop + (craftRef.current?.offsetHeight || 0);
       const roleBottom = roleTop + (roleRef.current?.offsetHeight || 0);
       const insightsBottom =
         insightsTop + (insightsRef.current?.offsetHeight || 0);
@@ -419,6 +381,13 @@ const CaseStudy = ({
 
       if (scrollCenter < summaryBottom) {
         setActiveSection("summary");
+      } else if (scrollCenter >= aboutTop && scrollCenter < aboutBottom) {
+        setActiveSection("about");
+      } else if (
+        scrollCenter >= businessObjectiveTop &&
+        scrollCenter < businessObjectiveBottom
+      ) {
+        setActiveSection("business-objective");
       } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
         setActiveSection("process");
       } else if (
@@ -426,6 +395,10 @@ const CaseStudy = ({
         scrollCenter < challengeBottom
       ) {
         setActiveSection("challenge");
+      } else if (scrollCenter >= solutionTop && scrollCenter < solutionBottom) {
+        setActiveSection("solution");
+      } else if (scrollCenter >= craftTop && scrollCenter < craftBottom) {
+        setActiveSection("craft");
       } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
         setActiveSection("role");
       } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
@@ -447,6 +420,63 @@ const CaseStudy = ({
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, [activeSection]);
+
+  // Process Section Morphing Effect
+  useEffect(() => {
+    if (!processMorphRef.current) return;
+
+    const morphContainer = processMorphRef.current;
+    const shapes = morphContainer.querySelectorAll("path");
+    let currentShapeIndex = 0;
+
+    const morphToNextShape = () => {
+      if (shapes.length === 0) return;
+
+      const currentShape = shapes[currentShapeIndex];
+      const nextShapeIndex = (currentShapeIndex + 1) % shapes.length;
+      const nextShape = shapes[nextShapeIndex];
+
+      gsap.to(currentShape, {
+        morphSVG: nextShape,
+        duration: 2,
+        ease: "power2.inOut",
+        onComplete: () => {
+          currentShapeIndex = nextShapeIndex;
+          setTimeout(morphToNextShape, 1000);
+        },
+      });
+    };
+
+    if (shapes.length > 0) {
+      morphToNextShape();
+    }
+
+    return () => {
+      gsap.killTweensOf(shapes);
+    };
+  }, []);
+
+  // Hero Section Spinning Icons Effect
+  useEffect(() => {
+    // Add spinning-icon class to all hero image containers
+    const heroContainers = document.querySelectorAll(
+      '[class*="hero-image-container"]'
+    );
+    heroContainers.forEach((container) => {
+      container.classList.add("spinning-icon");
+    });
+
+    // Animate all hero images with GSAP
+    const heroImages = document.querySelectorAll(".spinning-icon");
+    heroImages.forEach((image) => {
+      gsap.to(image, {
+        rotation: 360,
+        duration: 10, // Adjust duration as needed
+        repeat: -1,
+        ease: "linear",
+      });
+    });
   }, []);
 
   return (
@@ -597,10 +627,9 @@ const CaseStudy = ({
           </div>
         </section>
 
-        {/* About Section */}
+        {/* Summary Section */}
         <section className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
-            {/* Summary Box */}
             <div
               className="flex justify-center gap-12"
               style={{
@@ -631,7 +660,12 @@ const CaseStudy = ({
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
+        {/* About Section */}
+        <section ref={aboutRef} data-section="about" className="py-16">
+          <div className="max-w-[1200px] mx-auto px-8">
             {/* About Box */}
             <div
               className="flex justify-center gap-12"
@@ -728,8 +762,16 @@ const CaseStudy = ({
                 </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            {/* Business Objective Box */}
+        {/* Business Objective Section */}
+        <section
+          ref={businessObjectiveRef}
+          data-section="business-objective"
+          className="py-16"
+        >
+          <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
               style={{
@@ -753,161 +795,6 @@ const CaseStudy = ({
                     aliqua. Ut enim ad minim veniam, quis nostrud exercitation
                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                   </p>
-                )}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* The Process Section */}
-        <section
-          ref={processRef}
-          data-section="process"
-          className="py-16 bg-neutral-3 dark:bg-neutral-90"
-        >
-          <div className="max-w-[1200px] mx-auto px-8">
-            <div
-              className="flex justify-center gap-12"
-              style={{
-                paddingTop: "calc(40vmax / 10)",
-                paddingBottom: "calc(40vmax / 10)",
-              }}
-            >
-              <div className="w-[600px]">
-                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                  The Process
-                </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
-
-                {/* Morphing SVGs Container */}
-                <div
-                  ref={processMorphRef}
-                  className="mt-8 flex justify-center items-center h-96 w-full"
-                >
-                  <div className="w-80 h-80 relative flex items-center justify-center self-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 200 200"
-                      width="320"
-                      height="320"
-                      className="w-full h-full opacity-40"
-                    >
-                      <defs>
-                        {/* Single gradient like home page */}
-                        <linearGradient
-                          id="processGradient"
-                          x1="0%"
-                          y1="0%"
-                          x2="100%"
-                          y2="100%"
-                        >
-                          <stop offset="0%" stopColor="#907EFF" />
-                          <stop offset="50%" stopColor="#A855F7" />
-                          <stop offset="100%" stopColor="#C084FC" />
-                        </linearGradient>
-                      </defs>
-
-                      {/* Main morphing path - Starting with Ellipse 1 */}
-                      <path
-                        d="M0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
-                        fill="url(#processGradient)"
-                        className="process-morph-path"
-                      />
-
-                      {/* Hidden target paths for morphing - ALL icons from MorphingShapesLarge folder */}
-                      {/* Ellipse 1 */}
-                      <path
-                        d="M0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 2 */}
-                      <path
-                        d="M100 72c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28zM0 100C0 44.772 44.772 0 100 0s100 44.772 100 100-44.772 100-100 100S0 155.228 0 100z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 3 */}
-                      <path
-                        d="M200 30c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM200 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM151 100c0 28.167-22.833 51-51 51-28.166 0-51-22.833-51-51 0-28.166 22.834-51 51-51 28.167 0 51 22.834 51 51zM60 30c0 16.569-13.431 30-30 30C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0c16.569 0 30 13.431 30 30zM60 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 5 */}
-                      <path
-                        d="M200 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.334-14.924-33.334-33.334C133.333 14.923 148.257 0 166.667 0 185.076 0 200 14.924 200 33.333zM200 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.333 33.334-33.333C185.076 66.667 200 81.59 200 100zM200 166.667C200 185.076 185.076 200 166.667 200c-18.41 0-33.334-14.924-33.334-33.333 0-18.41 14.924-33.334 33.334-33.334 18.409 0 33.333 14.924 33.333 33.334zM133.333 33.333c0 18.41-14.924 33.334-33.333 33.334-18.41 0-33.333-14.924-33.333-33.334C66.667 14.923 81.59 0 100 0s33.333 14.924 33.333 33.333zM133.333 100c0 18.409-14.924 33.333-33.333 33.333-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.333 33.333-33.333S133.333 81.59 133.333 100zM133.333 166.667C133.333 185.076 118.409 200 100 200c-18.41 0-33.333-14.924-33.333-33.333 0-18.41 14.924-33.334 33.333-33.334s33.333 14.924 33.333 33.334zM66.667 33.333c0 18.41-14.924 33.334-33.334 33.334C14.923 66.667 0 51.743 0 33.333 0 14.923 14.924 0 33.333 0c18.41 0 33.334 14.924 33.334 33.333zM66.667 100c0 18.409-14.924 33.333-33.334 33.333C14.923 133.333 0 118.409 0 100c0-18.41 14.924-33.333 33.333-33.333 18.41 0 33.334 14.924 33.334 33.333zM66.667 166.667c0 18.409-14.924 33.333-33.334 33.333C14.923 200 0 185.076 0 166.667c0-18.41 14.924-33.334 33.333-33.334 18.41 0 33.334 14.924 33.334 33.334z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 6 */}
-                      <path
-                        d="M200 25c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM200 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM175 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM125 175c0 13.807-11.193 25-25 25s-25-11.193-25-25 11.193-25 25-25 25 11.193 25 25zM100 50c13.807 0 25-11.193 25-25S113.807 0 100 0 75 11.193 75 25s11.193 25 25 25zM50 175c0 13.807-11.193 25-25 25S0 188.807 0 175s11.193-25 25-25 25 11.193 25 25zM100 125c13.807 0 25-11.193 25-25s-11.193-25-25-25-25 11.193-25 25 11.193 25 25 25zM50 25c0 13.807-11.193 25-25 25S0 38.807 0 25 11.193 0 25 0s25 11.193 25 25zM25 125c13.807 0 25-11.193 25-25S38.807 75 25 75 0 86.193 0 100s11.193 25 25 25z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 8 */}
-                      <path
-                        d="M139 39c0 21.54-17.461 39-39 39-21.54 0-39-17.46-39-39S78.46 0 100 0c21.539 0 39 17.46 39 39zM139 161c0 21.539-17.461 39-39 39-21.54 0-39-17.461-39-39s17.46-39 39-39c21.539 0 39 17.461 39 39zM161 139c-21.539 0-39-17.461-39-39 0-21.54 17.461-39 39-39s39 17.46 39 39c0 21.539-17.461 39-39 39zM39 139c-21.54 0-39-17.461-39-39 0-21.54 17.46-39 39-39s39 17.46 39 39c0 21.539-17.46 39-39 39z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 10 - Circle with rectangle cutout */}
-                      <path
-                        d="M100 200c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100zM49 49h102v102H49z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                      {/* Ellipse 12 - Circle with inner circle cutout */}
-                      <path
-                        d="M100 200c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100zM100 50c27.614 0 50 22.386 50 50s-22.386 50-50 50-50-22.386-50-50 22.386-50 50-50z"
-                        fill="none"
-                        className="morph-target"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-[600px]">
-                {processSteps ? (
-                  <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed leading-relaxed space-y-1">
-                    {processSteps.map((step, index) => (
-                      <li key={index}>• {step}</li>
-                    ))}
-                  </ul>
-                ) : (
-                  <>
-                    {/* First Iteration */}
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
-                      FIRST ITERATION
-                    </h3>
-                    <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed mb-8 space-y-1">
-                      <li>• App Review</li>
-                      <li>• User Interviews</li>
-                      <li>• Competitor analysis</li>
-                      <li>• Ideation Workshop</li>
-                      <li>• Design Principles</li>
-                      <li>• Moderated and Unmoderated User Testing</li>
-                      <li>• New UI Exploration</li>
-                      <li>• Build Design System</li>
-                      <li>• Finalise UI</li>
-                      <li>• Release → 18% engagement rate</li>
-                    </ul>
-
-                    {/* Second Iteration */}
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-sm uppercase mb-3">
-                      SECOND ITERATION
-                    </h3>
-                    <ul className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed space-y-1">
-                      <li>• Opportunity Solution Tree</li>
-                      <li>• Customer Journey Mapping</li>
-                      <li>• Diary Study (attempted)</li>
-                      <li>• Competitor Analysis</li>
-                      <li>• Moderated and Unmoderated User Testing</li>
-                      <li>• Release → 42% engagement rate</li>
-                    </ul>
-                  </>
                 )}
               </div>
             </div>
@@ -949,10 +836,21 @@ const CaseStudy = ({
                   </p>
 
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                    Our challenge was to create a solution that used AI
-                    meaningfully-reducing friction for applicants without
-                    sacrificing the personal touch recruiters value-all within
-                    tight time and resource limits.
+                    Our challenge was to create a solution that used{" "}
+                    <span
+                      className="relative inline-block cursor-pointer group"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      AI meaningfully-reducing friction for applicants without
+                      sacrificing the personal touch recruiters value-all within
+                      tight time and resource limits
+                    </span>
+                    .
                   </p>
                 </div>
 
@@ -1023,7 +921,7 @@ const CaseStudy = ({
         </section>
 
         {/* The Solution Section */}
-        <section className="py-16">
+        <section ref={solutionRef} data-section="solution" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
@@ -1040,16 +938,38 @@ const CaseStudy = ({
               </div>
               <div className="w-[600px]">
                 <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+                    Built with a{" "}
+                    <span
+                      className="relative inline-block cursor-pointer group"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      user-first mindset
+                    </span>
+                    , the platform shifts focus away from the recruiter and
+                    towards the needs of the applicant.{" "}
+                    <span
+                      className="relative inline-block cursor-pointer group"
+                      style={{
+                        background:
+                          "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                        textDecoration: "none",
+                        color: "inherit",
+                      }}
+                    >
+                      Three core tools work together
+                    </span>{" "}
+                    seamlessly: saving a personalised profile, searching for
+                    relevant job postings, and tailoring cover letters. All in
+                    one place, the process becomes faster, simpler, and more
+                    personal.
+                  </p>
                   <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>
-                        <strong>AI-powered personalization</strong> — uses each
-                        job seeker's "job profile" and specific job postings to
-                        create tailored cover letters that preserve their unique
-                        voice.
-                      </span>
-                    </li>
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
@@ -1066,14 +986,7 @@ const CaseStudy = ({
                         revisit and generate cover letters later.
                       </span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>
-                        <strong>Streamlined workflow</strong> — enables users to
-                        apply to more jobs with less friction, without
-                        compromising application quality.
-                      </span>
-                    </li>
+
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
@@ -1101,27 +1014,110 @@ const CaseStudy = ({
                   <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>AI-powered cover letter generation</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
-                        Three tools in one — save your profile, search jobs, and
-                        tailor cover letters all within the same platform.
+                        <strong>AI-powered personalization</strong> — uses each
+                        job seeker's "job profile" and specific job postings to
+                        create tailored cover letters that preserve their unique
+                        voice.
                       </span>
                     </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-green-400 font-bold mt-1">•</span>
-                      <span>Streamlined application workflow</span>
-                    </li>
+
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
-                        Prioritises applicant needs over traditional
-                        recruiter-focused tools
+                        <strong>Streamlined workflow</strong> — enables users to
+                        apply to more jobs with less friction.
+                      </span>
+                    </li>
+
+                    <li className="flex items-start gap-3">
+                      <span className="text-green-400 font-bold mt-1">•</span>
+                      <span>
+                        <strong>Flexible profile data</strong> — store your
+                        information to avoid re-entering details for every
+                        application, with the option to edit for each cover
+                        letter when needed.
                       </span>
                     </li>
                   </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Craft Section */}
+        <section ref={craftRef} data-section="craft" className="py-16">
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  The Craft
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+              </div>
+              <div className="w-[600px]">
+                <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+                    Mapped user flows to create a natural, low-friction journey.
+                    Built wireframes, tested, and iterated for clarity and
+                    usability. Developed a consistent design system to unify
+                    visuals and speed up production. Designed features to
+                    simplify job applications without sacrificing
+                    personalisation.
+                  </p>
+
+                  <div className="grid grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
+                        User Experience Design
+                      </h3>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                        Created intuitive user flows that guide job seekers
+                        through the application process seamlessly, reducing
+                        cognitive load and improving completion rates.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
+                        Design System
+                      </h3>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                        Established a comprehensive design system with reusable
+                        components, ensuring visual consistency and accelerating
+                        development across the platform.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
+                        Iterative Testing
+                      </h3>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                        Conducted multiple rounds of user testing and iteration,
+                        refining the interface based on real user feedback to
+                        optimize usability and satisfaction.
+                      </p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
+                        Personalization Balance
+                      </h3>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                        Carefully balanced automation with personal touch,
+                        ensuring AI-generated content maintains authenticity
+                        while streamlining the application process.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1815,6 +1811,174 @@ const CaseStudy = ({
 
             {/* Right margin - 15% */}
             <div className="w-[15%]"></div>
+          </div>
+        </section>
+
+        {/* The Process Section */}
+        <section
+          ref={processRef}
+          data-section="process"
+          className="py-16 bg-neutral-3 dark:bg-neutral-90"
+        >
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  The Process
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+
+                {/* Morphing SVG Container */}
+                <div
+                  ref={processMorphRef}
+                  className="mt-8 flex items-center justify-center"
+                >
+                  <svg
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                    className="morphing-shape"
+                  >
+                    <path
+                      d="M100 20 C 140 20, 180 60, 180 100 C 180 140, 140 180, 100 180 C 60 180, 20 140, 20 100 C 20 60, 60 20, 100 20 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="gradient1"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          style={{
+                            stopColor: "#8B5CF6",
+                            stopOpacity: 0.3,
+                          }}
+                        />
+                        <stop
+                          offset="100%"
+                          style={{
+                            stopColor: "#EC4899",
+                            stopOpacity: 0.3,
+                          }}
+                        />
+                      </linearGradient>
+                      <linearGradient
+                        id="gradient2"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          style={{
+                            stopColor: "#8B5CF6",
+                            stopOpacity: 0.8,
+                          }}
+                        />
+                        <stop
+                          offset="100%"
+                          style={{
+                            stopColor: "#EC4899",
+                            stopOpacity: 0.8,
+                          }}
+                        />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* Hidden shapes for morphing */}
+                  <svg
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 L 180 100 L 100 180 L 20 100 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+
+                  <svg
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 L 160 40 L 180 100 L 160 160 L 100 180 L 40 160 L 20 100 L 40 40 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+
+                  <svg
+                    width="200"
+                    height="200"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 C 120 20, 140 30, 150 50 C 160 70, 160 90, 150 110 C 140 130, 120 140, 100 140 C 80 140, 60 130, 50 110 C 40 90, 40 70, 50 50 C 60 30, 80 20, 100 20 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div className="w-[600px]">
+                <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                  {processSteps ? (
+                    processSteps.map((step, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Research & Discovery</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Design & Prototyping</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Testing & Iteration</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
           </div>
         </section>
 
