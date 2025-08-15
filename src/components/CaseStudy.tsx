@@ -836,19 +836,17 @@ const CaseStudy = ({
                   </p>
 
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                    Our challenge was to create a solution that used{" "}
+                    Our challenge was to create a solution that used AI
+                    meaningfully,{" "}
                     <span
-                      className="relative inline-block cursor-pointer group"
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
-                        textDecoration: "none",
-                        color: "inherit",
                       }}
                     >
-                      AI meaningfully-reducing friction for applicants without
-                      sacrificing the personal touch recruiters value-all within
-                      tight time and resource limits
+                      reducing friction for applicants without sacrificing the
+                      personal touch recruiters value. All within tight time and
+                      resource limits
                     </span>
                     .
                   </p>
@@ -1064,6 +1062,9 @@ const CaseStudy = ({
               </div>
               <div className="w-[600px]">
                 <div className="mb-16">
+                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    Design Approach & Methodology
+                  </h3>
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
                     Mapped user flows to create a natural, low-friction journey.
                     Built wireframes, tested, and iterated for clarity and
@@ -1073,7 +1074,7 @@ const CaseStudy = ({
                     personalisation.
                   </p>
 
-                  <div className="grid grid-cols-2 gap-8">
+                  <div className="space-y-8">
                     <div className="space-y-4">
                       <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
                         User Experience Design
@@ -1090,7 +1091,7 @@ const CaseStudy = ({
                         Design System
                       </h3>
                       <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                        Established a comprehensive design system with reusable
+                        Established a lightweight design system with reusable
                         components, ensuring visual consistency and accelerating
                         development across the platform.
                       </p>
@@ -1119,6 +1120,68 @@ const CaseStudy = ({
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Image Placeholder Below - Constrained Width with Navigation */}
+          <div className="mt-16">
+            <div className="max-w-[1200px] mx-auto px-8">
+              <div className="w-full h-[800px] bg-white relative rounded-2xl overflow-hidden">
+                {/* First Image - Wireframes */}
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Wireframes.svg"
+                  alt="Emplojd wireframes showing user flow mapping and interface design"
+                  className="w-full h-full object-cover"
+                />
+
+                {/* Navigation Arrows */}
+                <button className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group">
+                  <svg
+                    className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group">
+                  <svg
+                    className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2">
+                  <span className="text-white/90 text-sm font-medium">
+                    1 of 3
+                  </span>
+                </div>
+              </div>
+
+              {/* Image Caption - Updates based on current image */}
+              <div className="mt-4 text-center">
+                <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                  Image 1: User flow mapping and wireframe development for job
+                  application process
+                </p>
               </div>
             </div>
           </div>
@@ -1991,9 +2054,14 @@ const CaseStudy = ({
             {/* Main content - 80% */}
             <div className="w-[80%] px-6">
               {/* Section Title */}
-              <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4 text-center">
-                Results
-              </h2>
+              <div className="flex justify-start mb-8">
+                <div className="w-[600px]">
+                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
+                    Results
+                  </h2>
+                  <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+                </div>
+              </div>
 
               {/* Video Showcase Box */}
               <div className="w-full h-[800px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
