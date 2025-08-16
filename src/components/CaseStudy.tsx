@@ -491,153 +491,155 @@ const CaseStudy = ({
   return (
     <>
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
-        {/* Header Section with 40/60 Layout */}
+        {/* Header Section with Responsive Layout */}
         <section
           ref={summaryRef}
           data-section="summary"
-          className="pt-32 pb-16 relative"
+          className="pt-40 pb-16 relative"
         >
-          <div className="flex items-start">
-            {/* Left Container - 40% width */}
-            <div className="w-[40%] px-12">
-              <div className="flex items-start gap-0">
-                {/* Back Arrow + Case Studies Rectangle */}
-                <button
-                  onClick={handleCaseStudiesClick}
-                  className="flex items-center gap-3 px-4 py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-l-lg hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full"
-                >
-                  <ArrowLeft
-                    size={16}
-                    className="text-neutral-100 dark:text-neutral-0 group-hover:text-neutral-70 dark:group-hover:text-neutral-30 transition-colors"
-                  />
-                  <span className="text-neutral-100 dark:text-neutral-0 uppercase group-hover:text-neutral-70 dark:group-hover:text-neutral-30 font-bold text-xs transition-colors">
-                    Case studies
-                  </span>
-                </button>
+          {/* Left Container - Fixed position, starts at same place as section titles */}
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div className="flex items-start gap-0">
+              {/* Back Arrow + Case Studies Rectangle */}
+              <button
+                onClick={handleCaseStudiesClick}
+                className="flex items-center gap-3 px-4 py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-l-lg hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full"
+              >
+                <ArrowLeft
+                  size={16}
+                  className="text-neutral-100 dark:text-neutral-0 group-hover:text-neutral-70 dark:group-hover:text-neutral-30 transition-colors"
+                />
+                <span className="text-neutral-100 dark:text-neutral-0 uppercase group-hover:text-neutral-70 dark:group-hover:text-neutral-30 font-bold text-xs transition-colors">
+                  Case studies
+                </span>
+              </button>
 
-                {/* Project Name Rectangle */}
-                <div className="px-4 py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 border-l-0 rounded-r-lg flex items-center h-full relative">
-                  <span className="text-neutral-0 dark:text-neutral-100 font-bold text-xs uppercase relative z-10">
-                    {title.split(" ").slice(0, 3).join(" ")}
-                  </span>
-                  {/* Active pill shadow effect */}
-                  <div
-                    className="absolute inset-0 rounded-r-lg -z-10"
-                    style={{
-                      boxShadow: `0 0 12px ${
-                        typeof document !== "undefined" &&
-                        document.documentElement.classList.contains("dark")
-                          ? "rgba(255, 255, 255, 0.4)"
-                          : "rgba(0, 0, 0, 0.4)"
-                      }`,
-                    }}
-                  />
-                </div>
+              {/* Project Name Rectangle */}
+              <div className="px-4 py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 border-l-0 rounded-r-lg flex items-center h-full relative">
+                <span className="text-neutral-0 dark:text-neutral-100 font-bold text-xs uppercase relative z-10">
+                  {title.split(" ").slice(0, 3).join(" ")}
+                </span>
+                {/* Active pill shadow effect */}
+                <div
+                  className="absolute inset-0 rounded-r-lg -z-10"
+                  style={{
+                    boxShadow: `0 0 12px ${
+                      typeof document !== "undefined" &&
+                      document.documentElement.classList.contains("dark")
+                        ? "rgba(255, 255, 255, 0.4)"
+                        : "rgba(0, 0, 0, 0.4)"
+                    }`,
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Project Title */}
+            <h1 className="text-6xl lg:text-7xl xl:text-8xl font-black text-neutral-80 dark:text-neutral-20 mb-8 mt-16">
+              {title}
+            </h1>
+
+            {/* Bento Boxes and Button Layout */}
+            <div className="mt-12 max-w-[640px]">
+              {/* Box 1 - Role (Full width) */}
+              <div className="w-full p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg mb-6 min-h-[80px] flex flex-col justify-center">
+                <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
+                  Role
+                </h3>
+                <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  {roleText}
+                </p>
               </div>
 
-              {/* Project Title */}
-              <h1 className="text-8xl font-black text-neutral-80 dark:text-neutral-20 mb-8 mt-16 ml-12">
-                {title}
-              </h1>
-
-              {/* Bento Boxes and Button Layout */}
-              <div className="mt-12 ml-12 max-w-[640px]">
-                {/* Box 1 - Role (Full width) */}
-                <div className="w-full p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg mb-6 min-h-[80px] flex flex-col justify-center">
+              {/* Grid Layout with proper spacing */}
+              <div className="grid grid-cols-2 gap-4">
+                {/* Company Box - top left */}
+                <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
                   <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
-                    Role
+                    {companyOrType}
                   </h3>
                   <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
-                    {roleText}
+                    {companyOrType === "Type" ? "School project" : companyText}
                   </p>
                 </div>
 
-                {/* Grid Layout with proper spacing */}
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Company Box - top left */}
-                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
-                    <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
-                      {companyOrType}
-                    </h3>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
-                      {companyOrType === "Type"
-                        ? "School project"
-                        : companyText}
-                    </p>
-                  </div>
-
-                  {/* Year Box - top right */}
-                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
-                    <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
-                      Year
-                    </h3>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
-                      {yearText}
-                    </p>
-                  </div>
-
-                  {/* Team Box - bottom, spans full width */}
-                  <div className="col-span-2 p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
-                    <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
-                      Team
-                    </h3>
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-2">
-                      {teamRoles.map((role, index) => (
-                        <p
-                          key={index}
-                          className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed"
-                        >
-                          {role}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
+                {/* Year Box - top right */}
+                <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
+                  <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
+                    Year
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    {yearText}
+                  </p>
                 </div>
 
-                {/* Live Prototype Button - spans same width as grid */}
-                <button
-                  ref={morphRef}
-                  className="w-full mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
-                >
-                  {/* Status Dot */}
-                  <div className="w-3 h-3 bg-gray-400 rounded-full relative flex-shrink-0"></div>
-
-                  <span className="whitespace-nowrap">
-                    Sorry, Emplojd is no longer live 🙁
-                  </span>
-                </button>
+                {/* Team Box - bottom, spans full width */}
+                <div className="col-span-2 p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
+                  <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
+                    Team
+                  </h3>
+                  <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                    {teamRoles.map((role, index) => (
+                      <p
+                        key={index}
+                        className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed"
+                      >
+                        {role}
+                      </p>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
 
-            {/* Right Container - 60% width */}
-            <div className="w-[60%]">
-              <h1
-                className={`text-4xl md:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className}`}
+              {/* Live Prototype Button - spans same width as grid */}
+              <button
+                ref={morphRef}
+                className="w-full mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
               >
-                {subtitle}
-              </h1>
-              <div className="w-full h-[700px] bg-[#907EFF] mt-4 relative">
-                {/* Glass-styled technology pills */}
-                <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                  {technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1.5 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-sm font-medium rounded-full flex items-center gap-2"
-                    >
-                      {tech === "Live" && (
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      )}
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                {/* Status Dot */}
+                <div className="w-3 h-3 bg-gray-400 rounded-full relative flex-shrink-0"></div>
+
+                <span className="whitespace-nowrap">
+                  Sorry, Emplojd is no longer live 🙁
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* Title and Purple Box Container - positioned together */}
+          <div className="absolute top-24 left-[calc(50%+200px)] right-0 z-10">
+            {/* Title */}
+            <h1
+              className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className} mb-4 text-left`}
+            >
+              {subtitle}
+            </h1>
+
+            {/* Purple box that starts after title and extends to right edge */}
+            <div className="w-full h-[860px] bg-[#907EFF] flex flex-col p-8">
+              {/* Glass-styled technology pills at the top */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {technologies.map((tech, index) => (
+                  <span
+                    key={index}
+                    className="px-3 py-1.5 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-sm font-medium rounded-full flex items-center gap-2"
+                  >
+                    {tech === "Live" && (
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                    )}
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
+
+          {/* Spacer to ensure proper spacing below purple box */}
+          <div className="h-[100px]"></div>
         </section>
 
         {/* Summary Section */}
-        <section className="py-16">
+        <section className="pt-32 pb-16">
           <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
@@ -1214,48 +1216,114 @@ const CaseStudy = ({
           </div>
         </section>
 
-        {/* My Role Section */}
+        {/* Kickoff Workshop Section */}
         <section ref={roleRef} data-section="role" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
-            <div
-              className="flex justify-center gap-12"
-              style={{
-                paddingTop: "calc(40vmax / 10)",
-                paddingBottom: "calc(40vmax / 10)",
-              }}
-            >
-              <div className="w-[600px]">
-                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                  My Role
-                </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
-              </div>
-              <div className="w-[600px]">
+            {/* Section Title */}
+            <div className="w-[600px] mb-12">
+              <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                Kickoff Workshop
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+            </div>
+
+            {/* Content */}
+            <div className="space-y-12">
+              {/* Introduction Text */}
+              <div className="max-w-[800px]">
                 <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  At the start of the project, I facilitated a kickoff workshop
+                  to align the entire team around our vision and expectations
+                  for Emplojd. The session was designed to get to know each
+                  other, define what we wanted to achieve, and explore possible
+                  directions for the product.
                 </p>
 
                 <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse
-                  cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                  occaecat cupidatat non proident, sunt in culpa qui officia
-                  deserunt mollit anim id est laborum.
+                  We began with a Mentimeter quiz to spark discussion, then
+                  moved into a Crazy 8 exercise to quickly capture individual
+                  ideas. After sharing and consolidating our thoughts, we
+                  identified a set of themes that would guide our design
+                  approach:
+                </p>
+              </div>
+
+              {/* Workshop Insights Cards - Full Width */}
+              <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full">
+                {/* User Experience Card */}
+                <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                    User Experience
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    The platform should feel simple, modern, and stress-free,
+                    with no learning curve.
+                  </p>
+                </div>
+
+                {/* Personalisation Card */}
+                <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                    Personalisation
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    AI should assist the user while preserving their
+                    individuality, avoiding anything that feels "generic" or
+                    "robotic."
+                  </p>
+                </div>
+
+                {/* Value for Both Sides Card */}
+                <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                    Value for Both Sides
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    The service must be useful to job seekers and recruiters,
+                    ensuring quality applications that stand out.
+                  </p>
+                </div>
+
+                {/* Accessibility & Inclusivity Card */}
+                <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 backdrop-blur-sm border border-orange-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                    Accessibility & Inclusivity
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    The product should be easy to use for everyone, including
+                    those with less experience or language challenges.
+                  </p>
+                </div>
+
+                {/* Efficiency Card */}
+                <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-red-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                    Efficiency
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    The process should save time, reduce anxiety, and encourage
+                    applicants to apply to more jobs with confidence.
+                  </p>
+                </div>
+              </div>
+
+              {/* Closing Text */}
+              <div className="max-w-[800px]">
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                  These insights became the foundation for how we defined the
+                  product's goals and features.
                 </p>
               </div>
             </div>
 
-            {/* Image Placeholder Below - Full Width */}
+            {/* Crazy 8 Workshop Image */}
             <div className="mt-16">
-              <div className="w-full h-[800px] bg-[#907EFF] relative rounded-2xl">
-                {/* Placeholder for future image */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-white/60 text-lg font-medium">
-                    Image placeholder
-                  </span>
-                </div>
+              <div className="w-full h-[800px] bg-white relative rounded-2xl overflow-hidden">
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Ideation Workshop-Crazy-8.svg"
+                  alt="Emplojd Crazy 8 ideation workshop showing design exploration and sketching process"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -1289,7 +1357,7 @@ const CaseStudy = ({
                 </div>
 
                 {/* Insights Grid */}
-                <div className="grid grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 gap-12">
                   {/* Early Insights */}
                   <div className="bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl p-10">
                     <div className="flex items-center gap-3 mb-8">
@@ -1838,69 +1906,60 @@ const CaseStudy = ({
           data-section="design-system"
           className="py-16 bg-neutral-10 dark:bg-neutral-90"
         >
-          <div className="flex">
-            {/* Left margin - 15% */}
-            <div className="w-[15%]"></div>
-
-            {/* Main content - 70% */}
-            <div className="w-[70%] px-6">
-              {/* Section Title */}
-              <div className="w-[600px]">
-                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                  Design Guide & Components
-                </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent mb-8"></div>
-              </div>
-
-              {/* Infinite Scroll Design System Showcase */}
-              <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden relative">
-                <div className="infinite-scroll-container h-full relative">
-                  <img
-                    src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
-                    alt="Emplojd Design System Components"
-                    className="design-system-svg w-full h-auto absolute top-0 left-0"
-                    onError={(e) => {
-                      console.error("SVG failed to load:", e);
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                    }}
-                    onLoad={(e) => {
-                      console.log("SVG loaded successfully:", e);
-                      const target = e.target as HTMLImageElement;
-                      console.log(
-                        "Image dimensions:",
-                        target.offsetWidth,
-                        "x",
-                        target.offsetHeight
-                      );
-                    }}
-                  />
-                  <img
-                    src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
-                    alt="Emplojd Design System Components"
-                    className="design-system-svg w-full h-auto absolute top-0 left-0"
-                    onError={(e) => {
-                      console.error("SVG failed to load:", e);
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                    }}
-                    onLoad={(e) => {
-                      console.log("SVG loaded successfully:", e);
-                      const target = e.target as HTMLImageElement;
-                      console.log(
-                        "Image dimensions:",
-                        target.offsetWidth,
-                        "x",
-                        target.offsetHeight
-                      );
-                    }}
-                  />
-                </div>
-              </div>
+          <div className="max-w-[1200px] mx-auto px-8">
+            {/* Section Title */}
+            <div className="w-[600px] mb-8">
+              <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                Design Guide & Components
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
             </div>
 
-            {/* Right margin - 15% */}
-            <div className="w-[15%]"></div>
+            {/* Infinite Scroll Design System Showcase */}
+            <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden relative">
+              <div className="infinite-scroll-container h-full relative">
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
+                  alt="Emplojd Design System Components"
+                  className="design-system-svg w-full h-auto absolute top-0 left-0"
+                  onError={(e) => {
+                    console.error("SVG failed to load:", e);
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                  onLoad={(e) => {
+                    console.log("SVG loaded successfully:", e);
+                    const target = e.target as HTMLImageElement;
+                    console.log(
+                      "Image dimensions:",
+                      target.offsetWidth,
+                      "x",
+                      target.offsetHeight
+                    );
+                  }}
+                />
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
+                  alt="Emplojd Design System Components"
+                  className="design-system-svg w-full h-auto absolute top-0 left-0"
+                  onError={(e) => {
+                    console.error("SVG failed to load:", e);
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                  onLoad={(e) => {
+                    console.log("SVG loaded successfully:", e);
+                    const target = e.target as HTMLImageElement;
+                    console.log(
+                      "Image dimensions:",
+                      target.offsetWidth,
+                      "x",
+                      target.offsetHeight
+                    );
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
