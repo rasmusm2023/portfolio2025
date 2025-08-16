@@ -109,6 +109,7 @@ const CaseStudy = ({
   const mockupRef = useRef<HTMLDivElement>(null);
   const processMorphRef = useRef<HTMLDivElement>(null);
   const { setActiveSection, activeSection } = useNavbar();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const handleCaseStudiesClick = () => {
     // Navigate to home page first
@@ -116,6 +117,14 @@ const CaseStudy = ({
 
     // Set a flag in sessionStorage to trigger scroll after navigation
     sessionStorage.setItem("scrollToCaseStudies", "true");
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % 2);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + 2) % 2);
   };
 
   const handleSectionClick = (sectionId: string) => {
@@ -439,11 +448,11 @@ const CaseStudy = ({
 
       gsap.to(currentShape, {
         morphSVG: nextShape,
-        duration: 2,
+        duration: 1.5,
         ease: "power2.inOut",
         onComplete: () => {
           currentShapeIndex = nextShapeIndex;
-          setTimeout(morphToNextShape, 1000);
+          setTimeout(morphToNextShape, 300);
         },
       });
     };
@@ -1088,7 +1097,7 @@ const CaseStudy = ({
 
                     <div className="space-y-4">
                       <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
-                        Design System
+                        Design System & Components
                       </h3>
                       <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                         Established a lightweight design system with reusable
@@ -1132,11 +1141,25 @@ const CaseStudy = ({
                 <img
                   src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Wireframes.svg"
                   alt="Emplojd wireframes showing user flow mapping and interface design"
-                  className="w-full h-full object-cover"
+                  className={`w-full h-full object-cover transition-opacity duration-300 ${
+                    currentImageIndex === 0 ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                {/* Second Image - Ideation Workshop */}
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Ideation Workshop-Crazy-8.svg"
+                  alt="Emplojd ideation workshop showing Crazy 8 sketching process and design exploration"
+                  className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-300 ${
+                    currentImageIndex === 1 ? "opacity-100" : "opacity-0"
+                  }`}
                 />
 
                 {/* Navigation Arrows */}
-                <button className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group">
+                <button
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
                     fill="none"
@@ -1152,7 +1175,10 @@ const CaseStudy = ({
                   </svg>
                 </button>
 
-                <button className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group">
+                <button
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
                     fill="none"
@@ -1171,7 +1197,7 @@ const CaseStudy = ({
                 {/* Image Counter */}
                 <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2">
                   <span className="text-white/90 text-sm font-medium">
-                    1 of 3
+                    {currentImageIndex + 1} of 2
                   </span>
                 </div>
               </div>
@@ -1179,8 +1205,9 @@ const CaseStudy = ({
               {/* Image Caption - Updates based on current image */}
               <div className="mt-4 text-center">
                 <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
-                  Image 1: User flow mapping and wireframe development for job
-                  application process
+                  {currentImageIndex === 0
+                    ? "Image 1: Initial wireframes for sign in, job search, and cover letter generation."
+                    : "Image 2: Ideation workshop showing Crazy 8 sketching process and design exploration techniques."}
                 </p>
               </div>
             </div>
@@ -1903,8 +1930,8 @@ const CaseStudy = ({
                   className="mt-8 flex items-center justify-center"
                 >
                   <svg
-                    width="200"
-                    height="200"
+                    width="400"
+                    height="400"
                     viewBox="0 0 200 200"
                     className="morphing-shape"
                   >
@@ -1964,8 +1991,8 @@ const CaseStudy = ({
 
                   {/* Hidden shapes for morphing */}
                   <svg
-                    width="200"
-                    height="200"
+                    width="400"
+                    height="400"
                     viewBox="0 0 200 200"
                     style={{ display: "none" }}
                   >
@@ -1978,8 +2005,8 @@ const CaseStudy = ({
                   </svg>
 
                   <svg
-                    width="200"
-                    height="200"
+                    width="400"
+                    height="400"
                     viewBox="0 0 200 200"
                     style={{ display: "none" }}
                   >
@@ -1992,8 +2019,8 @@ const CaseStudy = ({
                   </svg>
 
                   <svg
-                    width="200"
-                    height="200"
+                    width="400"
+                    height="400"
                     viewBox="0 0 200 200"
                     style={{ display: "none" }}
                   >
@@ -2054,7 +2081,7 @@ const CaseStudy = ({
             {/* Main content - 80% */}
             <div className="w-[80%] px-6">
               {/* Section Title */}
-              <div className="flex justify-start mb-8">
+              <div className="flex justify-start max-w-[1200px] mx-auto px-8 mb-8">
                 <div className="w-[600px]">
                   <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
                     Results
