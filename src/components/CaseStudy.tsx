@@ -631,6 +631,27 @@ const CaseStudy = ({
                   </span>
                 ))}
               </div>
+
+              {/* Video Container */}
+              <div className="flex-1 flex items-center justify-center relative">
+                {/* Rounded Container for Videos */}
+                <div className="relative w-full max-w-[900px] h-[600px] rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:scale-105">
+                  {/* Single Video */}
+                  <video
+                    className="absolute inset-0 w-full h-full object-contain"
+                    muted
+                    loop={false}
+                    playsInline
+                    controls={false}
+                    autoPlay
+                  >
+                    <source
+                      src="/case-study-assets/emplojd/LANDING_PAGE_FINAL_8.webm"
+                      type="video/webm"
+                    />
+                  </video>
+                </div>
+              </div>
             </div>
           </div>
 
