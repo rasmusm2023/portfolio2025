@@ -22,6 +22,7 @@ import AnimalsImage from "@/images/8bit/animals.jpg";
 import Formula1Image from "@/images/8bit/formula1.jpg";
 import StockholmImage from "@/images/8bit/stockholm.jpg";
 import { useState, useEffect, useRef } from "react";
+import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
 import Footer from "@/components/Footer";
 
@@ -141,6 +142,7 @@ function BookCard({
   currentPage,
   totalPages,
   isFinished = false,
+  isDark,
 }: {
   title: string;
   author: string;
@@ -149,6 +151,7 @@ function BookCard({
   currentPage?: number;
   totalPages?: number;
   isFinished?: boolean;
+  isDark: boolean;
 }) {
   const progressPercentage =
     currentPage && totalPages ? (currentPage / totalPages) * 100 : 0;
@@ -160,7 +163,7 @@ function BookCard({
       rel="noopener noreferrer"
       className="flex-shrink-0 w-80 h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group backdrop-blur-sm"
       style={{
-        backgroundColor: document.documentElement.classList.contains("dark")
+        backgroundColor: isDark
           ? "rgba(35, 35, 35, 0.5)"
           : "rgba(255, 255, 255, 0.95)",
       }}
@@ -180,9 +183,7 @@ function BookCard({
               <div
                 className="absolute inset-0"
                 style={{
-                  backgroundColor: document.documentElement.classList.contains(
-                    "dark"
-                  )
+                  backgroundColor: isDark
                     ? "rgba(0, 0, 0, 0.3)"
                     : "rgba(0, 0, 0, 0.1)",
                 }}
@@ -192,12 +193,10 @@ function BookCard({
             <div
               className="w-full h-full backdrop-blur-sm border rounded-l-2xl p-4"
               style={{
-                backgroundColor: document.documentElement.classList.contains(
-                  "dark"
-                )
+                backgroundColor: isDark
                   ? "rgba(35, 35, 35, 0.5)"
                   : "rgba(255, 255, 255, 0.9)",
-                borderColor: document.documentElement.classList.contains("dark")
+                borderColor: isDark
                   ? "rgba(255, 255, 255, 0.1)"
                   : "rgba(0, 0, 0, 0.05)",
               }}
@@ -206,9 +205,7 @@ function BookCard({
                 <h3
                   className="font-semibold text-sm"
                   style={{
-                    color: document.documentElement.classList.contains("dark")
-                      ? "rgb(255, 255, 255)"
-                      : "#000000",
+                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
                   {title}
@@ -217,9 +214,7 @@ function BookCard({
                   <p
                     className="text-xs"
                     style={{
-                      color: document.documentElement.classList.contains("dark")
-                        ? "rgb(255, 255, 255)"
-                        : "#5D5E63",
+                      color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                     }}
                   >
                     by {author}
@@ -236,9 +231,7 @@ function BookCard({
             <h3
               className="font-semibold text-sm leading-tight"
               style={{
-                color: document.documentElement.classList.contains("dark")
-                  ? "rgb(255, 255, 255)"
-                  : "#000000",
+                color: isDark ? "rgb(255, 255, 255)" : "#000000",
               }}
             >
               {title}
@@ -246,9 +239,7 @@ function BookCard({
             <p
               className="text-xs"
               style={{
-                color: document.documentElement.classList.contains("dark")
-                  ? "rgb(255, 255, 255)"
-                  : "#5D5E63",
+                color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
               }}
             >
               by {author}
@@ -267,9 +258,7 @@ function BookCard({
                 <span
                   className="text-xs font-medium"
                   style={{
-                    color: document.documentElement.classList.contains("dark")
-                      ? "rgb(255, 255, 255)"
-                      : "#5D5E63",
+                    color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                   }}
                 >
                   {isFinished
@@ -282,9 +271,7 @@ function BookCard({
               <div
                 className="w-full rounded-full h-1.5 overflow-hidden"
                 style={{
-                  backgroundColor: document.documentElement.classList.contains(
-                    "dark"
-                  )
+                  backgroundColor: isDark
                     ? "rgba(255, 255, 255, 0.2)"
                     : "rgba(0, 0, 0, 0.1)",
                 }}
@@ -304,9 +291,7 @@ function BookCard({
                 <span
                   className="text-xs font-medium"
                   style={{
-                    color: document.documentElement.classList.contains("dark")
-                      ? "rgb(255, 255, 255)"
-                      : "#5D5E63",
+                    color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                   }}
                 >
                   {isFinished
@@ -350,35 +335,35 @@ function SkillCard({
   title,
   icon,
   skills,
+  isDark,
 }: {
   title: string;
   icon: string;
   skills: string[];
+  isDark: boolean;
 }) {
   return (
     <div
       className="flex-shrink-0 w-48 h-56 border rounded-2xl p-4 cursor-pointer shadow-lg group/card relative overflow-hidden transition-all duration-300"
       style={{
-        backgroundColor: document.documentElement.classList.contains("dark")
+        backgroundColor: isDark
           ? "rgba(255, 255, 255, 0.1)"
           : "rgba(248, 248, 248, 0.95)",
-        borderColor: document.documentElement.classList.contains("dark")
-          ? "rgba(255, 255, 255, 0.1)"
-          : "rgba(0, 0, 0, 0.1)",
+        borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)",
         backdropFilter: "blur(8px)",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background =
+        e.currentTarget.style.backgroundImage =
           "linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #8B5CF6 100%)";
         e.currentTarget.style.backgroundSize = "300% 300%";
         e.currentTarget.style.animation = "sweep 24s linear infinite";
         e.currentTarget.style.backdropFilter = "none";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.background =
-          document.documentElement.classList.contains("dark")
-            ? "rgba(255, 255, 255, 0.1)"
-            : "rgba(248, 248, 248, 0.95)";
+        e.currentTarget.style.backgroundImage = "none";
+        e.currentTarget.style.backgroundColor = isDark
+          ? "rgba(255, 255, 255, 0.1)"
+          : "rgba(248, 248, 248, 0.95)";
         e.currentTarget.style.backgroundSize = "auto";
         e.currentTarget.style.animation = "none";
         e.currentTarget.style.backdropFilter = "blur(8px)";
@@ -391,9 +376,7 @@ function SkillCard({
           <h3
             className="font-semibold text-sm"
             style={{
-              color: document.documentElement.classList.contains("dark")
-                ? "rgb(255, 255, 255)"
-                : "#000000",
+              color: isDark ? "rgb(255, 255, 255)" : "#000000",
             }}
           >
             {title}
@@ -406,9 +389,7 @@ function SkillCard({
                 key={index}
                 className="text-xs text-left"
                 style={{
-                  color: document.documentElement.classList.contains("dark")
-                    ? "rgb(255, 255, 255)"
-                    : "#5D5E63",
+                  color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
               >
                 • {skill}
@@ -438,7 +419,7 @@ function SkillCard({
 }
 
 // Favorite Songs Component
-function FavoriteSongs() {
+function FavoriteSongs({ isDark }: { isDark: boolean }) {
   const songs = [
     {
       title: "Sapphire",
@@ -506,9 +487,7 @@ function FavoriteSongs() {
             <div
               className="w-28 h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover"
               style={{
-                backgroundColor: document.documentElement.classList.contains(
-                  "dark"
-                )
+                backgroundColor: isDark
                   ? "rgb(35, 35, 35)"
                   : "rgb(240, 240, 240)",
               }}
@@ -534,9 +513,7 @@ function FavoriteSongs() {
               <p
                 className="text-sm font-medium truncate max-w-28"
                 style={{
-                  color: document.documentElement.classList.contains("dark")
-                    ? "rgb(255, 255, 255)"
-                    : "#000000",
+                  color: isDark ? "rgb(255, 255, 255)" : "#000000",
                 }}
               >
                 {song.title}
@@ -544,9 +521,7 @@ function FavoriteSongs() {
               <p
                 className="text-sm truncate max-w-28"
                 style={{
-                  color: document.documentElement.classList.contains("dark")
-                    ? "rgb(255, 255, 255)"
-                    : "#5D5E63",
+                  color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
               >
                 {song.artist}
@@ -561,6 +536,7 @@ function FavoriteSongs() {
 
 export default function AboutPage() {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const { isDark } = useTheme();
 
   // Calculate scale for each box based on hover state
   const getBoxScale = (boxId: string) => {
@@ -646,10 +622,9 @@ export default function AboutPage() {
                   className="md:col-span-3 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("traits")})`,
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("traits")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -658,9 +633,7 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background: document.documentElement.classList.contains(
-                        "dark"
-                      )
+                      background: isDark
                         ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
@@ -669,11 +642,7 @@ export default function AboutPage() {
                     <h2
                       className="text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
-                        color: document.documentElement.classList.contains(
-                          "dark"
-                        )
-                          ? "rgb(255, 255, 255)"
-                          : "#000000",
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
                     >
                       Traits
@@ -688,6 +657,7 @@ export default function AboutPage() {
                   </div>
                   <div className="mt-8">
                     <TraitsCarousel
+                      isDark={isDark}
                       traits={[
                         {
                           title: "Home Cook",
@@ -755,10 +725,12 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("about")})`,
-                    backgroundColor: "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("about")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -767,14 +739,17 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background:
-                        "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
                       className="text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{ color: "#000000" }}
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                      }}
                     >
                       Who am I?
                     </h2>
@@ -789,20 +764,70 @@ export default function AboutPage() {
                   <div className="mt-6">
                     <p
                       className="leading-relaxed"
-                      style={{ color: "#5D5E63", fontSize: "22px" }}
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
+                        fontSize: "18px",
+                      }}
                     >
                       A passionate designer and developer with a love for
                       creating beautiful, functional experiences that make a
                       difference. I believe in the power of thoughtful design to
                       solve real problems and create meaningful connections.
                     </p>
-                    <p
-                      className="leading-relaxed mt-3"
-                      style={{ color: "#5D5E63", fontSize: "22px" }}
+                  </div>
+                </div>
+
+                {/* Why This Portfolio - Medium section */}
+                <div
+                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("portfolio")})`,
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
+                  }}
+                  onMouseEnter={() => setHoveredBox("portfolio")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between -mt-2">
+                    <h2
+                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                      }}
                     >
-                      Based in Stockholm, I work at the intersection of
-                      creativity and technology, always exploring new ways to
-                      bring ideas to life.
+                      Why This Portfolio?
+                    </h2>
+                    <Image
+                      src="/assets/icons/Gold3D/3dicons-star-dynamic-premium.png"
+                      alt="Why This Portfolio"
+                      width={80}
+                      height={80}
+                      className="animate-pulse-subtle"
+                    />
+                  </div>
+                  <div className="mt-6">
+                    <p
+                      className="leading-relaxed"
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
+                        fontSize: "18px",
+                      }}
+                    >
+                      This portfolio is more than a showcase — it’s a personal
+                      space that evolves over time. Case studies are kept
+                      lightweight to be easily digested, while also giving room
+                      for reflection and a closer connection to who I am as a
+                      person and designer.
                     </p>
                   </div>
                 </div>
@@ -812,10 +837,9 @@ export default function AboutPage() {
                   className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("time")})`,
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -824,9 +848,7 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background: document.documentElement.classList.contains(
-                        "dark"
-                      )
+                      background: isDark
                         ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
@@ -835,11 +857,7 @@ export default function AboutPage() {
                     <h2
                       className="text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
-                        color: document.documentElement.classList.contains(
-                          "dark"
-                        )
-                          ? "rgb(255, 255, 255)"
-                          : "#000000",
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
                     >
                       My Time
@@ -879,14 +897,12 @@ export default function AboutPage() {
                       <div
                         className="w-full backdrop-blur-sm border rounded-2xl p-3 shadow-lg"
                         style={{
-                          background:
-                            document.documentElement.classList.contains("dark")
-                              ? "linear-gradient(to bottom right, rgba(35, 35, 35, 0.4), rgba(45, 45, 45, 0.4))"
-                              : "linear-gradient(to bottom right, rgba(240, 240, 240, 0.4), rgba(230, 230, 230, 0.4))",
-                          borderColor:
-                            document.documentElement.classList.contains("dark")
-                              ? "rgba(255, 255, 255, 0.3)"
-                              : "rgba(0, 0, 0, 0.1)",
+                          background: isDark
+                            ? "linear-gradient(to bottom right, rgba(35, 35, 35, 0.4), rgba(45, 45, 45, 0.4))"
+                            : "linear-gradient(to bottom right, rgba(240, 240, 240, 0.4), rgba(230, 230, 230, 0.4))",
+                          borderColor: isDark
+                            ? "rgba(255, 255, 255, 0.3)"
+                            : "rgba(0, 0, 0, 0.1)",
                         }}
                       >
                         <div className="flex items-center justify-between">
@@ -903,12 +919,9 @@ export default function AboutPage() {
                               <div
                                 className="text-sm font-bold tracking-wide"
                                 style={{
-                                  color:
-                                    document.documentElement.classList.contains(
-                                      "dark"
-                                    )
-                                      ? "rgb(255, 255, 255)"
-                                      : "#000000",
+                                  color: isDark
+                                    ? "rgb(255, 255, 255)"
+                                    : "#000000",
                                 }}
                               >
                                 {new Date().toLocaleDateString("en-US", {
@@ -918,12 +931,9 @@ export default function AboutPage() {
                               <div
                                 className="text-sm font-medium"
                                 style={{
-                                  color:
-                                    document.documentElement.classList.contains(
-                                      "dark"
-                                    )
-                                      ? "rgb(255, 255, 255)"
-                                      : "#5D5E63",
+                                  color: isDark
+                                    ? "rgb(255, 255, 255)"
+                                    : "#5D5E63",
                                 }}
                               >
                                 {new Date().getFullYear()}
@@ -934,12 +944,9 @@ export default function AboutPage() {
                             <div
                               className="text-xs font-bold"
                               style={{
-                                color:
-                                  document.documentElement.classList.contains(
-                                    "dark"
-                                  )
-                                    ? "rgb(255, 255, 255)"
-                                    : "#5D5E63",
+                                color: isDark
+                                  ? "rgb(255, 255, 255)"
+                                  : "#5D5E63",
                               }}
                             >
                               {new Date().toLocaleDateString("en-US", {
@@ -949,12 +956,9 @@ export default function AboutPage() {
                             <div
                               className="text-xs font-medium mt-1"
                               style={{
-                                color:
-                                  document.documentElement.classList.contains(
-                                    "dark"
-                                  )
-                                    ? "rgb(255, 255, 255)"
-                                    : "#5D5E63",
+                                color: isDark
+                                  ? "rgb(255, 255, 255)"
+                                  : "#5D5E63",
                               }}
                             >
                               Stockholm Time (CET/CEST)
@@ -971,10 +975,9 @@ export default function AboutPage() {
                   className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("books")})`,
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -983,9 +986,7 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background: document.documentElement.classList.contains(
-                        "dark"
-                      )
+                      background: isDark
                         ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
@@ -995,11 +996,7 @@ export default function AboutPage() {
                       <h2
                         className="text-xl font-bold font-montserrat uppercase tracking-wider"
                         style={{
-                          color: document.documentElement.classList.contains(
-                            "dark"
-                          )
-                            ? "rgb(255, 255, 255)"
-                            : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         Books
@@ -1007,11 +1004,7 @@ export default function AboutPage() {
                       <p
                         className="text-lg font-hanken"
                         style={{
-                          color: document.documentElement.classList.contains(
-                            "dark"
-                          )
-                            ? "rgb(255, 255, 255)"
-                            : "#5D5E63",
+                          color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                         }}
                       >
                         I'm currently reading or listening to
@@ -1040,6 +1033,7 @@ export default function AboutPage() {
                         amazonUrl="https://www.amazon.com/Hjärnstark-hur-motion-träning-stärker/dp/9175031234"
                         currentPage={127}
                         totalPages={280}
+                        isDark={isDark}
                       />
                       <BookCard
                         title="Mikael Persbrandt : så som jag minns det"
@@ -1049,6 +1043,7 @@ export default function AboutPage() {
                         currentPage={431}
                         totalPages={431}
                         isFinished={true}
+                        isDark={isDark}
                       />
                     </div>
                   </div>
@@ -1059,10 +1054,9 @@ export default function AboutPage() {
                   className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("films")})`,
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1071,9 +1065,7 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background: document.documentElement.classList.contains(
-                        "dark"
-                      )
+                      background: isDark
                         ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
@@ -1082,11 +1074,7 @@ export default function AboutPage() {
                     <h2
                       className="text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
-                        color: document.documentElement.classList.contains(
-                          "dark"
-                        )
-                          ? "rgb(255, 255, 255)"
-                          : "#000000",
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
                     >
                       Favourite Films
@@ -1143,10 +1131,9 @@ export default function AboutPage() {
                   className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("music")})`,
-                    backgroundColor:
-                      document.documentElement.classList.contains("dark")
-                        ? "rgba(35, 35, 35, 0.5)"
-                        : "#ffffff",
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -1155,9 +1142,7 @@ export default function AboutPage() {
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
-                      background: document.documentElement.classList.contains(
-                        "dark"
-                      )
+                      background: isDark
                         ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
@@ -1167,11 +1152,7 @@ export default function AboutPage() {
                       <h2
                         className="text-xl font-bold font-montserrat uppercase tracking-wider"
                         style={{
-                          color: document.documentElement.classList.contains(
-                            "dark"
-                          )
-                            ? "rgb(255, 255, 255)"
-                            : "#000000",
+                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
                         Music
@@ -1179,11 +1160,7 @@ export default function AboutPage() {
                       <p
                         className="text-lg font-hanken"
                         style={{
-                          color: document.documentElement.classList.contains(
-                            "dark"
-                          )
-                            ? "rgb(255, 255, 255)"
-                            : "#5D5E63",
+                          color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                         }}
                       >
                         I'm currently listening to
@@ -1207,7 +1184,7 @@ export default function AboutPage() {
                   </div>
                   <div className="space-y-2">
                     <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                      <FavoriteSongs />
+                      <FavoriteSongs isDark={isDark} />
                     </div>
                   </div>
                 </div>

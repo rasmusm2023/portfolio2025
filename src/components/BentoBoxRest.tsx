@@ -842,37 +842,64 @@ const BentoBoxRest = () => {
               />
             </div>
 
-            <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
-              <img
-                src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=600&fit=crop&crop=center"
-                alt="Dog-sitting App Preview"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 space-y-3">
-                <h3 className="text-lg font-semibold text-white">
-                  Dog-sitting app
-                </h3>
-                <p className="text-sm text-white/80">
-                  Designing and developing a mobile booking platform for pet
-                  care services.
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="px-2 py-1 bg-[#8B5CF6]/20 text-[#8B5CF6] text-xs rounded-full font-medium backdrop-blur-sm">
-                    React Native
-                  </span>
-                  <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                    TypeScript
-                  </span>
-                  <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                    Firebase
-                  </span>
-                  <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                    Figma
-                  </span>
-                  <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                    Stripe
-                  </span>
+            <div className="flex-1 flex gap-4">
+              {/* Dog-sitting App Card */}
+              <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
+                <img
+                  src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=600&fit=crop&crop=center"
+                  alt="Dog-sitting App Preview"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
+                  <h3 className="text-lg font-semibold text-white">
+                    Dog-sitting app
+                  </h3>
+                  <p className="text-sm text-white/80">
+                    Designing and developing a mobile booking platform for pet
+                    care services.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      React Native
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      TypeScript
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      Firebase
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* E-commerce Website & App Card */}
+              <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
+                <img
+                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center"
+                  alt="E-commerce Website & App Preview"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/40"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
+                  <h3 className="text-lg font-semibold text-white">
+                    E-commerce website & app
+                  </h3>
+                  <p className="text-sm text-white/80">
+                    Building a modern e-commerce platform with responsive web
+                    design and mobile app.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      Next.js
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      React Native
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      Stripe
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

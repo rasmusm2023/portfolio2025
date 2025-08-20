@@ -73,6 +73,7 @@ const CaseStudy = ({
     { id: "challenge", label: "The Challenge" },
     { id: "solution", label: "The Solution" },
     { id: "craft", label: "The Craft" },
+    { id: "design-explorations", label: "Design Explorations" },
     { id: "design-system", label: "Design Guide & Components" },
     { id: "process", label: "The Process" },
     { id: "role", label: "My Role" },
@@ -105,26 +106,34 @@ const CaseStudy = ({
   const insightsRef = useRef<HTMLElement>(null);
   const designSystemRef = useRef<HTMLElement>(null);
   const craftRef = useRef<HTMLElement>(null);
-  const resultsRef = useRef<HTMLElement>(null);
+  const designExplorationsRef = useRef<HTMLElement>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
   const processMorphRef = useRef<HTMLDivElement>(null);
   const { setActiveSection, activeSection } = useNavbar();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentDesignExplorationIndex, setCurrentDesignExplorationIndex] =
+    useState(0);
 
   const handleCaseStudiesClick = () => {
-    // Navigate to home page first
-    router.push("/");
-
-    // Set a flag in sessionStorage to trigger scroll after navigation
-    sessionStorage.setItem("scrollToCaseStudies", "true");
+    // Navigate to Work page instead of home
+    router.push("/work");
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % 2);
+    setCurrentImageIndex((prev) => (prev === 1 ? 0 : prev + 1));
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev - 1 + 2) % 2);
+    setCurrentImageIndex((prev) => (prev === 0 ? 1 : prev - 1));
+  };
+
+  const nextDesignExploration = () => {
+    setCurrentDesignExplorationIndex((prev) => (prev === 5 ? 0 : prev + 1));
+  };
+
+  const prevDesignExploration = () => {
+    setCurrentDesignExplorationIndex((prev) => (prev === 0 ? 5 : prev - 1));
   };
 
   const handleSectionClick = (sectionId: string) => {
@@ -144,6 +153,8 @@ const CaseStudy = ({
       solutionRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "craft") {
       craftRef.current?.scrollIntoView({ behavior: "smooth" });
+    } else if (sectionId === "design-explorations") {
+      designExplorationsRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "role") {
       roleRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (sectionId === "insights") {
@@ -353,6 +364,8 @@ const CaseStudy = ({
       const challengeTop = challengeRef.current?.offsetTop || 0;
       const solutionTop = solutionRef.current?.offsetTop || 0;
       const craftTop = craftRef.current?.offsetTop || 0;
+      const designExplorationsTop =
+        designExplorationsRef.current?.offsetTop || 0;
       const roleTop = roleRef.current?.offsetTop || 0;
       const insightsTop = insightsRef.current?.offsetTop || 0;
       const designSystemTop = designSystemRef.current?.offsetTop || 0;
@@ -372,6 +385,9 @@ const CaseStudy = ({
       const solutionBottom =
         solutionTop + (solutionRef.current?.offsetHeight || 0);
       const craftBottom = craftTop + (craftRef.current?.offsetHeight || 0);
+      const designExplorationsBottom =
+        designExplorationsTop +
+        (designExplorationsRef.current?.offsetHeight || 0);
       const roleBottom = roleTop + (roleRef.current?.offsetHeight || 0);
       const insightsBottom =
         insightsTop + (insightsRef.current?.offsetHeight || 0);
@@ -408,6 +424,11 @@ const CaseStudy = ({
         setActiveSection("solution");
       } else if (scrollCenter >= craftTop && scrollCenter < craftBottom) {
         setActiveSection("craft");
+      } else if (
+        scrollCenter >= designExplorationsTop &&
+        scrollCenter < designExplorationsBottom
+      ) {
+        setActiveSection("design-explorations");
       } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
         setActiveSection("role");
       } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
@@ -490,6 +511,21 @@ const CaseStudy = ({
 
   return (
     <>
+      <style jsx>{`
+        @keyframes gentle-bob {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        .video-bobbing {
+          animation: gentle-bob 3s ease-in-out infinite;
+        }
+      `}</style>
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
         {/* Header Section with Responsive Layout */}
         <section
@@ -644,6 +680,10 @@ const CaseStudy = ({
                     playsInline
                     controls={false}
                     autoPlay
+                    onEnded={(e) => {
+                      const video = e.target as HTMLVideoElement;
+                      video.parentElement?.classList.add("video-bobbing");
+                    }}
                   >
                     <source
                       src="/case-study-assets/emplojd/LANDING_PAGE_FINAL_8.webm"
@@ -1156,24 +1196,24 @@ const CaseStudy = ({
             </div>
           </div>
 
-          {/* Image Placeholder Below - Constrained Width with Navigation */}
+          {/* Image Placeholder Below - Full Image Display with Navigation */}
           <div className="mt-16">
             <div className="max-w-[1200px] mx-auto px-8">
-              <div className="w-full h-[800px] bg-white relative rounded-2xl overflow-hidden">
+              <div className="w-full bg-white relative rounded-2xl overflow-hidden">
                 {/* First Image - Wireframes */}
                 <img
-                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Wireframes.svg"
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Wireframes-2.svg"
                   alt="Emplojd wireframes showing user flow mapping and interface design"
-                  className={`w-full h-full object-cover transition-opacity duration-300 ${
+                  className={`w-full h-auto object-contain transition-opacity duration-300 ${
                     currentImageIndex === 0 ? "opacity-100" : "opacity-0"
                   }`}
                 />
 
-                {/* Second Image - Ideation Workshop */}
+                {/* Second Image - Mockups */}
                 <img
-                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Ideation Workshop-Crazy-8.svg"
-                  alt="Emplojd ideation workshop showing Crazy 8 sketching process and design exploration"
-                  className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-300 ${
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Mockups-2.svg"
+                  alt="Emplojd mockups showing design iterations and final interface concepts"
+                  className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
                     currentImageIndex === 1 ? "opacity-100" : "opacity-0"
                   }`}
                 />
@@ -1229,8 +1269,151 @@ const CaseStudy = ({
               <div className="mt-4 text-center">
                 <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
                   {currentImageIndex === 0
-                    ? "Image 1: Initial wireframes for sign in, job search, and cover letter generation."
-                    : "Image 2: Ideation workshop showing Crazy 8 sketching process and design exploration techniques."}
+                    ? "Image 1: Various wireframes showing user flow mapping and interface design iterations."
+                    : "Image 2: Design mockups showcasing final interface concepts and visual design decisions."}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Design Explorations Section */}
+        <section
+          ref={designExplorationsRef}
+          data-section="design-explorations"
+          className="py-16"
+        >
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  Design Explorations
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+              </div>
+              <div className="w-[600px]">
+                <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+                    During the design process, we explored several alternative
+                    concepts and features that ultimately didn't make it into
+                    the final prototype. These explorations, while not
+                    implemented, provided valuable insights and helped refine
+                    our understanding of user needs and technical constraints.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Image Placeholder with Navigation - Full Width */}
+            <div className="mt-16">
+              <div className="w-full bg-white relative rounded-2xl overflow-hidden">
+                {/* First Image - Other Color Themes */}
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Other Color Themes.svg"
+                  alt="Emplojd design exploration showing alternative color themes and visual directions"
+                  className={`w-full h-auto object-contain transition-opacity duration-300 ${
+                    currentDesignExplorationIndex === 0
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                />
+
+                {/* Placeholder for Design Exploration Images 2-6 */}
+                <div
+                  className={`w-full h-[600px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center absolute inset-0 transition-opacity duration-300 ${
+                    currentDesignExplorationIndex === 0
+                      ? "opacity-0"
+                      : "opacity-100"
+                  }`}
+                >
+                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                    [Design Exploration Image{" "}
+                    {currentDesignExplorationIndex + 1} Placeholder]
+                  </p>
+                </div>
+
+                {/* Navigation Arrows */}
+                <button
+                  onClick={prevDesignExploration}
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                >
+                  <svg
+                    className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button
+                  onClick={nextDesignExploration}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                >
+                  <svg
+                    className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+
+                {/* Image Counter */}
+                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2">
+                  <span className="text-white/90 text-sm font-medium">
+                    {currentDesignExplorationIndex + 1} of 6
+                  </span>
+                </div>
+              </div>
+
+              {/* Dynamic Title and Description - Full Width */}
+              <div className="mt-8 max-w-[600px]">
+                <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  {currentDesignExplorationIndex === 0 &&
+                    "Concept 1: Alternative Color Themes & Visual Directions"}
+                  {currentDesignExplorationIndex === 1 &&
+                    "Concept 2: Gamified Application Tracking"}
+                  {currentDesignExplorationIndex === 2 &&
+                    "Concept 3: Peer Review & Collaboration"}
+                  {currentDesignExplorationIndex === 3 &&
+                    "Concept 4: [Placeholder Title]"}
+                  {currentDesignExplorationIndex === 4 &&
+                    "Concept 5: [Placeholder Title]"}
+                  {currentDesignExplorationIndex === 5 &&
+                    "Concept 6: [Placeholder Title]"}
+                </h3>
+                <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                  {currentDesignExplorationIndex === 0 &&
+                    "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
+                  {currentDesignExplorationIndex === 1 &&
+                    "An idea was to gamify the job application tracking process, offering badges and progress bars for milestones like 'applications sent' or 'interviews scheduled.' While engaging, it added complexity that wasn't essential for the MVP."}
+                  {currentDesignExplorationIndex === 2 &&
+                    "We explored features allowing users to get peer feedback on their cover letters or resumes directly within the platform. This was a strong contender but required significant moderation and community features beyond our scope."}
+                  {currentDesignExplorationIndex === 3 &&
+                    "[Placeholder description for Concept 4]"}
+                  {currentDesignExplorationIndex === 4 &&
+                    "[Placeholder description for Concept 5]"}
+                  {currentDesignExplorationIndex === 5 &&
+                    "[Placeholder description for Concept 6]"}
                 </p>
               </div>
             </div>
@@ -1240,35 +1423,43 @@ const CaseStudy = ({
         {/* Kickoff Workshop Section */}
         <section ref={roleRef} data-section="role" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
-            {/* Section Title */}
-            <div className="w-[600px] mb-12">
-              <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                Kickoff Workshop
-              </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  Kickoff Workshop
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+              </div>
+              <div className="w-[600px]">
+                <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+                    At the start of the project, I facilitated a kickoff
+                    workshop to align the entire team around our vision and
+                    expectations for Emplojd. The session was designed to get to
+                    know each other, define what we wanted to achieve, and
+                    explore possible directions for the product.
+                  </p>
+
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    We began with a Mentimeter quiz to spark discussion, then
+                    moved into a Crazy 8 exercise to quickly capture individual
+                    ideas. After sharing and consolidating our thoughts, we
+                    identified a set of themes that would guide our design
+                    approach. These insights became the foundation for how we
+                    defined the product's goals and features:
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Content */}
             <div className="space-y-12">
-              {/* Introduction Text */}
-              <div className="max-w-[800px]">
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
-                  At the start of the project, I facilitated a kickoff workshop
-                  to align the entire team around our vision and expectations
-                  for Emplojd. The session was designed to get to know each
-                  other, define what we wanted to achieve, and explore possible
-                  directions for the product.
-                </p>
-
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                  We began with a Mentimeter quiz to spark discussion, then
-                  moved into a Crazy 8 exercise to quickly capture individual
-                  ideas. After sharing and consolidating our thoughts, we
-                  identified a set of themes that would guide our design
-                  approach:
-                </p>
-              </div>
-
               {/* Workshop Insights Cards - Full Width */}
               <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full">
                 {/* User Experience Card */}
@@ -1327,14 +1518,6 @@ const CaseStudy = ({
                   </p>
                 </div>
               </div>
-
-              {/* Closing Text */}
-              <div className="max-w-[800px]">
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
-                  These insights became the foundation for how we defined the
-                  product's goals and features.
-                </p>
-              </div>
             </div>
 
             {/* Crazy 8 Workshop Image */}
@@ -1342,9 +1525,18 @@ const CaseStudy = ({
               <div className="w-full h-[800px] bg-white relative rounded-2xl overflow-hidden">
                 <img
                   src="/case-study-assets/emplojd/Emplojd-The-Craft-Ideation Workshop-Crazy-8.svg"
-                  alt="Emplojd Crazy 8 ideation workshop showing design exploration and sketching process"
+                  alt="Emplojd Crazy 8 kickoff workshop showing the teams' ideas, thoughts and goals for the product"
                   className="w-full h-full object-cover"
                 />
+              </div>
+
+              {/* Image Caption - Similar to The Craft section */}
+              <div className="mt-4 text-center">
+                <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                  Slide from the Kickoff Workshop, specifically the Crazy 8
+                  exercise, showing the teams' ideas, thoughts and goals for the
+                  product
+                </p>
               </div>
             </div>
           </div>
@@ -1370,8 +1562,8 @@ const CaseStudy = ({
                 {/* Centered Summary Text */}
                 <div className="text-left mb-20">
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed max-w-4xl mx-auto">
-                    Through comprehensive user research, interviews, and data
-                    analysis, we uncovered key insights that shaped the
+                    Through market research, competitor analysis, user research
+                    and interviews, we uncovered key insights that shaped the
                     direction of our design decisions. Here are the most
                     significant findings from our research process.
                   </p>
@@ -1508,8 +1700,8 @@ const CaseStudy = ({
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Cover letter writing was identified as the biggest
-                          pain point
+                          Writing tailormade cover letters was identified as the
+                          biggest pain point
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
@@ -1573,7 +1765,7 @@ const CaseStudy = ({
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Job seekers wanted more personalized recommendations
+                          Job seekers wanted more personal cover letters
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
@@ -1778,76 +1970,46 @@ const CaseStudy = ({
                             </defs>
                           </svg>
                         </div>
-                        <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Users preferred gradual AI assistance over full
-                          automation
-                        </p>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_7_flower-2)">
-                              <mask
-                                id="cs_mask_7_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_7_flower-2)">
-                                <path
-                                  fill="#EF4444"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_7)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
-                            <defs>
-                              <linearGradient
-                                id="paint0_linear_748_4701_7"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
-                              >
-                                <stop stopColor="#EF4444"></stop>
-                                <stop offset="1" stopColor="#DC2626"></stop>
-                              </linearGradient>
-                              <clipPath id="cs_clip_7_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
-                            </defs>
-                          </svg>
+                        <div className="relative group">
+                          <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                            Users preferred{" "}
+                            <span
+                              className="group relative"
+                              data-tooltip="AI-creativity slider"
+                              style={{
+                                background:
+                                  "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                                textDecoration: "none",
+                                color: "inherit",
+                              }}
+                            >
+                              gradual AI assistance
+                            </span>{" "}
+                            over full automation
+                          </p>
+                          {/* Custom cursor tooltip for gradual AI assistance */}
+                          <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-96">
+                            <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-6 py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-sm leading-relaxed">
+                              <div className="mb-3">
+                                This insight led us to include an "Independence
+                                / AI-creativity" slider where users can control
+                                how much freedom the AI gets versus how strictly
+                                it should stick to the information provided by
+                                the user.
+                              </div>
+                              <div className="mb-3">
+                                <img
+                                  src="/case-study-assets/emplojd/Emplojd-Insights-Gradual-AI-Automation-Example.svg"
+                                  alt="AI-creativity slider example"
+                                  className="w-full h-auto rounded-lg"
+                                />
+                              </div>
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-neutral-100 dark:border-t-neutral-0"></div>
+                            </div>
+                          </div>
                         </div>
-                        <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Trust in AI recommendations increased with
-                          transparency
-                        </p>
                       </li>
+
                       <li className="flex items-start gap-3">
                         <div
                           className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"

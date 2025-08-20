@@ -161,6 +161,9 @@ const CustomCursor = () => {
       } else if (target.closest("[data-tooltip='View Reading List']")) {
         setHoverTarget("reading-card");
         setIsHovering(true);
+      } else if (target.closest("[data-tooltip='AI-creativity slider']")) {
+        setHoverTarget("tooltip");
+        setIsHovering(true);
       } else if (target.closest(".gallery-image")) {
         setHoverTarget("gallery-image");
         setIsHovering(true);
@@ -419,6 +422,22 @@ const CustomCursor = () => {
           border: "2px solid rgba(139, 92, 246, 0.6)",
           transform: "translate(-50%, -50%)",
         };
+      case "tooltip":
+        return {
+          ...baseStyle,
+          left: mousePosition.x, // Center perfectly
+          top: mousePosition.y, // Center perfectly
+          width: "84px",
+          height: "84px",
+          borderRadius: "50%",
+          backgroundColor: isDarkMode
+            ? "rgba(255, 255, 255, 0.3)"
+            : "rgba(35, 35, 35, 0.3)",
+          border: isDarkMode
+            ? "2px solid rgba(255, 255, 255, 0.8)"
+            : "2px solid rgba(35, 35, 35, 0.8)",
+          transform: "translate(-50%, -50%)",
+        };
       default:
         return {
           ...baseStyle,
@@ -482,6 +501,7 @@ const CustomCursor = () => {
           <span style={{ marginLeft: "4px" }}>CLOSE</span>
         </>
       )}
+
     </div>
   );
 };

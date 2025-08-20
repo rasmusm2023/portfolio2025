@@ -11,9 +11,13 @@ interface TraitCard {
 
 interface TraitsCarouselProps {
   traits: TraitCard[];
+  isDark: boolean;
 }
 
-export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
+export default function TraitsCarousel({
+  traits,
+  isDark,
+}: TraitsCarouselProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -71,7 +75,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
     e.preventDefault();
 
     const x = e.pageX - (carouselRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 0.5; // Reduced scroll speed multiplier for less sensitivity
+    const walk = (x - startX) * 1.2; // Increased scroll speed multiplier for faster dragging
     if (carouselRef.current) {
       carouselRef.current.scrollLeft = scrollLeft - walk;
     }
@@ -123,9 +127,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
             key={index}
             className="flex-shrink-0 w-80 border border-neutral-20/10 dark:border-neutral-100/10 rounded-2xl p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden shadow-lg"
             style={{
-              backgroundColor: document.documentElement.classList.contains(
-                "dark"
-              )
+              backgroundColor: isDark
                 ? "rgba(35, 35, 35, 0.5)"
                 : "rgba(248, 248, 248, 0.95)",
             }}
@@ -135,11 +137,11 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background: document.documentElement.classList.contains(
-                    "dark"
-                  )
-                    ? `linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url(${trait.image})`
-                    : `linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(255,255,255,0.95)), url(${trait.image})`,
+                  backgroundImage: `linear-gradient(to bottom, ${
+                    isDark
+                      ? "rgba(0,0,0,0.7), rgba(0,0,0,0.9)"
+                      : "rgba(255,255,255,0.9), rgba(255,255,255,0.95)"
+                  }), url(${trait.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -152,9 +154,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
-                  background: document.documentElement.classList.contains(
-                    "dark"
-                  )
+                  backgroundImage: isDark
                     ? "linear-gradient(to bottom, rgba(64,64,64,0.8), rgba(32,32,32,0.9))"
                     : "linear-gradient(to bottom, rgba(240,240,240,0.8), rgba(230,230,230,0.9))",
                   zIndex: -1,
@@ -165,7 +165,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
             <div
               className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 rounded-2xl"
               style={{
-                background: document.documentElement.classList.contains("dark")
+                backgroundImage: isDark
                   ? "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)"
                   : "radial-gradient(ellipse at top, rgba(139,92,246,0.15) 0%, transparent 70%)",
               }}
@@ -189,9 +189,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
                 <div
                   className="w-full h-full flex items-center justify-center"
                   style={{
-                    background: document.documentElement.classList.contains(
-                      "dark"
-                    )
+                    backgroundImage: isDark
                       ? "linear-gradient(to bottom right, rgb(64, 64, 64), rgb(32, 32, 32))"
                       : "linear-gradient(to bottom right, rgb(240, 240, 240), rgb(220, 220, 220))",
                   }}
@@ -208,9 +206,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
                 <h3
                   className="font-semibold text-base"
                   style={{
-                    color: document.documentElement.classList.contains("dark")
-                      ? "rgb(255, 255, 255)"
-                      : "#000000",
+                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
                   {trait.title}
@@ -219,9 +215,7 @@ export default function TraitsCarousel({ traits }: TraitsCarouselProps) {
               <p
                 className="text-sm leading-relaxed"
                 style={{
-                  color: document.documentElement.classList.contains("dark")
-                    ? "rgb(255, 255, 255)"
-                    : "#5D5E63",
+                  color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
                 dangerouslySetInnerHTML={{ __html: trait.description }}
               />

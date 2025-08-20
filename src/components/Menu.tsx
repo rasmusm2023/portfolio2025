@@ -65,7 +65,13 @@ const Menu = () => {
     setActiveSection(currentPath);
 
     // Move pill to active item
-    const activeItem = menuItems.find((item) => item.href === pathname);
+    let activeItem = menuItems.find((item) => item.href === pathname);
+
+    // If we're on a case study page, make "Work" active instead
+    if (!activeItem && pathname.startsWith("/case-studies/")) {
+      activeItem = menuItems.find((item) => item.href === "/work");
+    }
+
     if (activeItem) {
       // Skip animation on first load for better performance
       if (!isInitialized.current) {
@@ -87,7 +93,7 @@ const Menu = () => {
         movePill(activeItem.href);
       }
     } else {
-      // Hide pill when no active item (like on case study pages)
+      // Hide pill when no active item
       if (pillRef.current) {
         gsap.set(pillRef.current, {
           width: 0,
@@ -111,7 +117,17 @@ const Menu = () => {
           }}
         />
         {menuItems.map((item) => {
-          const isActive = item.href === pathname;
+          let isActive = item.href === pathname;
+
+          // If we're on a case study page, make "Work" appear active
+          if (
+            !isActive &&
+            pathname.startsWith("/case-studies/") &&
+            item.href === "/work"
+          ) {
+            isActive = true;
+          }
+
           return (
             <li key={item.href}>
               <Link
