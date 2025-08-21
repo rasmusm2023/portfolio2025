@@ -509,6 +509,79 @@ const CaseStudy = ({
     });
   }, []);
 
+  // Insights Section Spinning Icons Effect with GSAP
+  useEffect(() => {
+    // Select all SVG icon containers in the insights sections
+    const spinningIcons = document.querySelectorAll(".spinning-icon");
+
+    spinningIcons.forEach((icon) => {
+      gsap.to(icon, {
+        rotation: 360,
+        duration: 8, // Slower rotation (8 seconds per full rotation)
+        repeat: -1,
+        ease: "power2.inOut", // Smooth ease in/out instead of linear
+      });
+    });
+  }, []);
+
+  // Start video after page is fully loaded
+  useEffect(() => {
+    const handleLoad = () => {
+      const video = document.querySelector("video");
+      if (video) {
+        video.play().catch((error) => {
+          console.log("Video autoplay failed:", error);
+        });
+      }
+    };
+
+    // Check if page is already loaded
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      // Wait for page to fully load
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
+  }, []);
+
+  // Custom cursor ring effect
+  useEffect(() => {
+    const cursorRing = document.createElement("div");
+    cursorRing.className = "cursor-ring";
+    document.body.appendChild(cursorRing);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      cursorRing.style.left = e.clientX + "px";
+      cursorRing.style.top = e.clientY + "px";
+    };
+
+    const handleMouseEnter = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest(".cursor-pointer")) {
+        cursorRing.style.opacity = "1";
+        cursorRing.style.transform = "translate(-50%, -50%) scale(1.5)";
+      }
+    };
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest(".cursor-pointer")) {
+        cursorRing.style.opacity = "0";
+        cursorRing.style.transform = "translate(-50%, -50%) scale(1)";
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+      document.body.removeChild(cursorRing);
+    };
+  }, []);
+
   return (
     <>
       <style jsx>{`
@@ -524,6 +597,18 @@ const CaseStudy = ({
 
         .video-bobbing {
           animation: gentle-bob 3s ease-in-out infinite;
+        }
+
+        .cursor-ring {
+          position: fixed;
+          width: 20px;
+          height: 20px;
+          border: 2px solid #907eff;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 9999;
+          transition: all 0.1s ease;
+          transform: translate(-50%, -50%);
         }
       `}</style>
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
@@ -674,19 +759,33 @@ const CaseStudy = ({
                 <div className="relative w-full max-w-[900px] h-[600px] rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:scale-105">
                   {/* Single Video */}
                   <video
-                    className="absolute inset-0 w-full h-full object-contain"
+                    className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-1000"
                     muted
                     loop={false}
                     playsInline
                     controls={false}
-                    autoPlay
+                    autoPlay={false}
+                    onLoadedMetadata={(e) => {
+                      const video = e.target as HTMLVideoElement;
+                      video.playbackRate = 4.0;
+                    }}
+                    onCanPlay={(e) => {
+                      const video = e.target as HTMLVideoElement;
+                      video.playbackRate = 4.0;
+                    }}
+                    onPlay={(e) => {
+                      const video = e.target as HTMLVideoElement;
+                      video.playbackRate = 4.0;
+                      // Fade in the video when it starts playing
+                      video.style.opacity = "1";
+                    }}
                     onEnded={(e) => {
                       const video = e.target as HTMLVideoElement;
                       video.parentElement?.classList.add("video-bobbing");
                     }}
                   >
                     <source
-                      src="/case-study-assets/emplojd/LANDING_PAGE_FINAL_8.webm"
+                      src="/case-study-assets/emplojd/Emplojd-Landing-Page-Hero-Video.webm"
                       type="video/webm"
                     />
                   </video>
@@ -1011,7 +1110,7 @@ const CaseStudy = ({
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
                     Built with a{" "}
                     <span
-                      className="relative inline-block cursor-pointer group"
+                      className="relative inline-block group"
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
@@ -1024,7 +1123,7 @@ const CaseStudy = ({
                     , the platform shifts focus away from the recruiter and
                     towards the needs of the applicant.{" "}
                     <span
-                      className="relative inline-block cursor-pointer group"
+                      className="relative inline-block group"
                       style={{
                         background:
                           "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
@@ -1044,8 +1143,8 @@ const CaseStudy = ({
                       <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
                         <strong>Smart job discovery</strong> — integrates with
-                        job listing APIs and offers strong search functionality
-                        to quickly find relevant opportunities.
+                        job listing APIs and offers search functionality to
+                        quickly find relevant opportunities.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -1060,9 +1159,9 @@ const CaseStudy = ({
                     <li className="flex items-start gap-3">
                       <span className="text-green-400 font-bold mt-1">•</span>
                       <span>
-                        <strong>Respectful balance</strong> — ensures
-                        applications remain personal while avoiding generic
-                        overload for recruiters.
+                        <strong>Respectful balance</strong> — ensures cover
+                        letters remain personal while avoiding generic overload
+                        for recruiters.
                       </span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -1315,7 +1414,7 @@ const CaseStudy = ({
               <div className="w-full bg-white relative rounded-2xl overflow-hidden">
                 {/* First Image - Other Color Themes */}
                 <img
-                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Other Color Themes.svg"
+                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
                   alt="Emplojd design exploration showing alternative color themes and visual directions"
                   className={`w-full h-auto object-contain transition-opacity duration-300 ${
                     currentDesignExplorationIndex === 0
@@ -1324,10 +1423,22 @@ const CaseStudy = ({
                   }`}
                 />
 
-                {/* Placeholder for Design Exploration Images 2-6 */}
+                {/* Second Image - Page Layout for Saved Cover Letters */}
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
+                  alt="Emplojd design exploration showing page layout for saved cover letters and user management"
+                  className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
+                    currentDesignExplorationIndex === 1
+                      ? "opacity-100"
+                      : "opacity-0"
+                  }`}
+                />
+
+                {/* Placeholder for Design Exploration Images 3-6 */}
                 <div
                   className={`w-full h-[600px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center absolute inset-0 transition-opacity duration-300 ${
-                    currentDesignExplorationIndex === 0
+                    currentDesignExplorationIndex === 0 ||
+                    currentDesignExplorationIndex === 1
                       ? "opacity-0"
                       : "opacity-100"
                   }`}
@@ -1389,9 +1500,9 @@ const CaseStudy = ({
               <div className="mt-8 max-w-[600px]">
                 <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
                   {currentDesignExplorationIndex === 0 &&
-                    "Concept 1: Alternative Color Themes & Visual Directions"}
+                    "Alternative Color Themes & Visual Directions"}
                   {currentDesignExplorationIndex === 1 &&
-                    "Concept 2: Gamified Application Tracking"}
+                    "Page Layout for Saved Cover Letters"}
                   {currentDesignExplorationIndex === 2 &&
                     "Concept 3: Peer Review & Collaboration"}
                   {currentDesignExplorationIndex === 3 &&
@@ -1405,7 +1516,7 @@ const CaseStudy = ({
                   {currentDesignExplorationIndex === 0 &&
                     "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
                   {currentDesignExplorationIndex === 1 &&
-                    "An idea was to gamify the job application tracking process, offering badges and progress bars for milestones like 'applications sent' or 'interviews scheduled.' While engaging, it added complexity that wasn't essential for the MVP."}
+                    "We explored different page layouts for the overview of saved cover letters. In the end I decided to go with a later concept  than the one we initially had in mind. This design decision was made to maintain a consistent design language, accessibility and to keep the design simple and clean."}
                   {currentDesignExplorationIndex === 2 &&
                     "We explored features allowing users to get peer feedback on their cover letters or resumes directly within the platform. This was a strong contender but required significant moderation and community features beyond our scope."}
                   {currentDesignExplorationIndex === 3 &&
@@ -1463,22 +1574,22 @@ const CaseStudy = ({
               {/* Workshop Insights Cards - Full Width */}
               <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 w-full">
                 {/* User Experience Card */}
-                <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">
                     User Experience
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-800 dark:text-neutral-200 text-base leading-relaxed">
                     The platform should feel simple, modern, and stress-free,
                     with no learning curve.
                   </p>
                 </div>
 
                 {/* Personalisation Card */}
-                <div className="bg-gradient-to-br from-purple-500/10 to-purple-600/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">
                     Personalisation
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-800 dark:text-neutral-200 text-base leading-relaxed">
                     AI should assist the user while preserving their
                     individuality, avoiding anything that feels "generic" or
                     "robotic."
@@ -1486,33 +1597,33 @@ const CaseStudy = ({
                 </div>
 
                 {/* Value for Both Sides Card */}
-                <div className="bg-gradient-to-br from-green-500/10 to-green-600/10 backdrop-blur-sm border border-green-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-green-500/25 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">
                     Value for Both Sides
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-800 dark:text-neutral-200 text-base leading-relaxed">
                     The service must be useful to job seekers and recruiters,
                     ensuring quality applications that stand out.
                   </p>
                 </div>
 
                 {/* Accessibility & Inclusivity Card */}
-                <div className="bg-gradient-to-br from-orange-500/10 to-orange-600/10 backdrop-blur-sm border border-orange-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">
                     Accessibility & Inclusivity
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-800 dark:text-neutral-200 text-base leading-relaxed">
                     The product should be easy to use for everyone, including
                     those with less experience or language challenges.
                   </p>
                 </div>
 
                 {/* Efficiency Card */}
-                <div className="bg-gradient-to-br from-red-500/10 to-red-600/10 backdrop-blur-sm border border-red-500/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-red-500/25 transition-all duration-300">
-                  <h3 className="text-lg font-bold text-neutral-100 dark:text-neutral-0 mb-3">
+                <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+                  <h3 className="text-lg font-bold text-neutral-900 dark:text-white mb-3">
                     Efficiency
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-800 dark:text-neutral-200 text-base leading-relaxed">
                     The process should save time, reduce anxiety, and encourage
                     applicants to apply to more jobs with confidence.
                   </p>
@@ -1581,256 +1692,148 @@ const CaseStudy = ({
 
                     <ul className="space-y-6">
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_1_flower-2)">
-                              <mask
-                                id="cs_mask_1_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_1_flower-2)">
-                                <path
-                                  fill="#EAB308"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient1"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EAB308"></stop>
-                                <stop offset="1" stopColor="#CA8A04"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_1_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient1)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Users found the job application process overwhelming
-                          and time-consuming
+                          The job application process felt overwhelming and
+                          time-consuming
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div className="w-4 h-4 mt-1 flex-shrink-0 animate-spin">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_2_flower-2)">
-                              <mask
-                                id="cs_mask_2_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_2_flower-2)">
-                                <path
-                                  fill="#EAB308"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_2)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_2"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient2"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EAB308"></stop>
-                                <stop offset="1" stopColor="#CA8A04"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_2_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient2)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Writing tailormade cover letters was identified as the
-                          biggest pain point
+                          Writing tailored cover letters was the biggest pain
+                          point
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_3_flower-2)">
-                              <mask
-                                id="cs_mask_3_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_3_flower-2)">
-                                <path
-                                  fill="#EAB308"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_3)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_3"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient3"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EAB308"></stop>
-                                <stop offset="1" stopColor="#CA8A04"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_3_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient3)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Job seekers wanted more personal cover letters
+                          Existing alternatives felt too generic — applicants
+                          wanted more personal results
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_4_flower-2)">
-                              <mask
-                                id="cs_mask_4_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_4_flower-2)">
-                                <path
-                                  fill="#EAB308"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_4)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_4"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient4"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EAB308"></stop>
-                                <stop offset="1" stopColor="#CA8A04"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_4_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient4)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          Mobile usage was higher than expected during job
-                          searches
+                          Recruiters were skeptical of AI and disliked
+                          applications that felt robotic
+                        </p>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
+                            <defs>
+                              <linearGradient
+                                id="iconGradient5"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                              >
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
+                              </linearGradient>
+                            </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient5)"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                          Accessibility and ease of use were essential for a
+                          diverse range of job seekers
                         </p>
                       </li>
                     </ul>
@@ -1846,128 +1849,95 @@ const CaseStudy = ({
 
                     <ul className="space-y-6">
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_5_flower-2)">
-                              <mask
-                                id="cs_mask_5_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_5_flower-2)">
-                                <path
-                                  fill="#EF4444"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_5)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_5"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient6"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EF4444"></stop>
-                                <stop offset="1" stopColor="#DC2626"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_5_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient6)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                          AI-generated content needed human oversight for
-                          authenticity
+                          <span
+                            className="relative inline-block group"
+                            style={{
+                              background:
+                                "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                              textDecoration: "none",
+                              color: "inherit",
+                            }}
+                          >
+                            Saving profile data reduced friction and frustration
+                          </span>
                         </p>
                       </li>
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_6_flower-2)">
-                              <mask
-                                id="cs_mask_6_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_6_flower-2)">
-                                <path
-                                  fill="#EF4444"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_6)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_6"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient7"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EF4444"></stop>
-                                <stop offset="1" stopColor="#DC2626"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_6_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient7)"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                          Flexibility was key — users wanted to reuse
+                          information but still edit when needed
+                        </p>
+                      </li>
+
+                      <li className="flex items-start gap-3">
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
+                            <defs>
+                              <linearGradient
+                                id="iconGradient8"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                              >
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
+                              </linearGradient>
+                            </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient8)"
+                            />
                           </svg>
                         </div>
                         <div className="relative group">
@@ -2011,68 +1981,61 @@ const CaseStudy = ({
                       </li>
 
                       <li className="flex items-start gap-3">
-                        <div
-                          className="w-4 h-4 mt-1 flex-shrink-0 animate-spin"
-                          style={{
-                            animationDuration: "3s",
-                            animationTimingFunction: "ease-in-out",
-                          }}
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="16"
-                            height="16"
-                            className="w-full h-full"
-                          >
-                            <g clipPath="url(#cs_clip_8_flower-2)">
-                              <mask
-                                id="cs_mask_8_flower-2"
-                                style={{ maskType: "alpha" }}
-                                width="200"
-                                height="190"
-                                x="0"
-                                y="5"
-                                maskUnits="userSpaceOnUse"
-                              >
-                                <path
-                                  fill="#fff"
-                                  d="M106.086 101.973c125.219 40.51 75.067 109.249-2.324 3.183C181.153 211.222 100 237.478 100 106.372c0 131.106-81.146 104.85-3.762-1.216-77.384 106.066-127.543 37.327-2.324-3.183-125.219 40.51-125.219-44.478 0-3.94-125.219-40.517-75.06-109.257 2.324-3.184C18.854-11.224 100-37.48 100 93.633c0-131.113 81.153-104.857 3.762 1.216 77.391-106.073 127.543-37.333 2.324 3.183 125.219-40.516 125.219 44.451 0 3.941z"
-                                ></path>
-                              </mask>
-                              <g mask="url(#cs_mask_8_flower-2)">
-                                <path
-                                  fill="#EF4444"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                                <path
-                                  fill="url(#paint0_linear_748_4701_8)"
-                                  d="M200 0H0v200h200V0z"
-                                ></path>
-                              </g>
-                            </g>
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
                             <defs>
                               <linearGradient
-                                id="paint0_linear_748_4701_8"
-                                x1="158.5"
-                                x2="29"
-                                y1="12.5"
-                                y2="200"
-                                gradientUnits="userSpaceOnUse"
+                                id="iconGradient9"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
                               >
-                                <stop stopColor="#EF4444"></stop>
-                                <stop offset="1" stopColor="#DC2626"></stop>
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
                               </linearGradient>
-                              <clipPath id="cs_clip_8_flower-2">
-                                <path fill="#fff" d="M0 0H200V200H0z"></path>
-                              </clipPath>
                             </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient9)"
+                            />
                           </svg>
                         </div>
                         <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
                           Success metrics should focus on user confidence and
                           time saved
+                        </p>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <div className="w-4 h-4 mt-1 flex-shrink-0 spinning-icon">
+                          <svg viewBox="0 0 24 24" className="w-full h-full">
+                            <defs>
+                              <linearGradient
+                                id="iconGradient10"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                              >
+                                <stop offset="0%" stopColor="#907EFF" />
+                                <stop offset="100%" stopColor="#7c3aed" />
+                              </linearGradient>
+                            </defs>
+                            <ellipse
+                              cx="12"
+                              cy="12"
+                              rx="10"
+                              ry="10"
+                              fill="url(#iconGradient10)"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                          Trust and perceived quality mattered most for both
+                          applicants and recruiters
                         </p>
                       </li>
                     </ul>
@@ -2375,13 +2338,13 @@ const CaseStudy = ({
                 {/* Mockup Placeholder 1 */}
                 <div className="h-80 bg-neutral-30 dark:bg-neutral-70 rounded-lg flex items-center justify-center">
                   <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                    Mockup 1
+                    Mockup/Recording 1
                   </span>
                 </div>
                 {/* Mockup Placeholder 2 */}
                 <div className="h-80 bg-neutral-30 dark:bg-neutral-70 rounded-lg flex items-center justify-center">
                   <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                    Mockup 2
+                    Mockup/Recording 2
                   </span>
                 </div>
               </div>
@@ -2393,7 +2356,7 @@ const CaseStudy = ({
                 {/* Mockup Placeholder 3 */}
                 <div className="h-80 w-4/5 bg-neutral-40 dark:bg-neutral-60 rounded-lg flex items-center justify-center">
                   <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                    Mockup 3
+                    Mockup/Recording 3
                   </span>
                 </div>
               </div>
@@ -2401,19 +2364,27 @@ const CaseStudy = ({
           </div>
 
           {/* Full Width Mockup Section */}
-          <div className="w-full bg-neutral-10 dark:bg-neutral-90 p-8 h-[800px]">
-            <div className="grid grid-cols-2 gap-12 h-full items-center">
-              {/* Mockup Placeholder 4 */}
-              <div className="h-80 bg-neutral-20 dark:bg-neutral-80 rounded-lg flex items-center justify-center">
-                <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                  Mockup 4
-                </span>
+          <div className="w-full h-[800px]">
+            <div className="grid grid-cols-2 h-full">
+              {/* Left Side - Background Image */}
+              <div
+                className="relative bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage:
+                    "url('/case-study-assets/emplojd/Emplojd-Results-Shot-Sign-In-Create-Account.png')",
+                }}
+              >
+                {/* Optional overlay or content can go here */}
               </div>
-              {/* Mockup Placeholder 5 */}
-              <div className="h-80 bg-neutral-20 dark:bg-neutral-80 rounded-lg flex items-center justify-center">
-                <span className="text-neutral-60 dark:text-neutral-40 text-sm">
-                  Mockup 5
-                </span>
+              {/* Right Side - Background Image */}
+              <div
+                className="relative bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage:
+                    "url('/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png')",
+                }}
+              >
+                {/* Optional overlay or content can go here */}
               </div>
             </div>
           </div>
@@ -2440,49 +2411,7 @@ const CaseStudy = ({
               </div>
 
               {/* Case Studies Grid */}
-              <div className="grid grid-cols-3 gap-6">
-                {/* Emplojd Case Study */}
-                <Link
-                  href="/case-studies/emplojd"
-                  className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
-                >
-                  <div className="aspect-[3/2] bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                    <div className="absolute bottom-6 left-6 right-6">
-                      <h3 className="text-white font-bold text-xl mb-2 group-hover:text-purple-200 transition-colors">
-                        Emplojd
-                      </h3>
-                      <p className="text-white/90 text-xs leading-relaxed">
-                        AI-powered job search platform with personalized
-                        recommendations and cover letter generation
-                      </p>
-                    </div>
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </div>
-                        <span className="font-semibold text-sm">
-                          View Case Study
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-
+              <div className="grid grid-cols-2 gap-6">
                 {/* ZMartRest AI Case Study */}
                 <Link
                   href="/case-studies/zmartrest-ai"
