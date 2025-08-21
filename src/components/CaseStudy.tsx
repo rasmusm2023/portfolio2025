@@ -114,6 +114,10 @@ const CaseStudy = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentDesignExplorationIndex, setCurrentDesignExplorationIndex] =
     useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStartX, setDragStartX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   const handleCaseStudiesClick = () => {
     // Navigate to Work page instead of home
@@ -129,11 +133,51 @@ const CaseStudy = ({
   };
 
   const nextDesignExploration = () => {
-    setCurrentDesignExplorationIndex((prev) => (prev === 5 ? 0 : prev + 1));
+    // Animate text out with GSAP
+    if (textContainerRef.current) {
+      gsap.to(textContainerRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setCurrentDesignExplorationIndex((prev) =>
+            prev === 5 ? 0 : prev + 1
+          );
+          // Animate text in with GSAP
+          gsap.to(textContainerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+        },
+      });
+    }
   };
 
   const prevDesignExploration = () => {
-    setCurrentDesignExplorationIndex((prev) => (prev === 0 ? 5 : prev - 1));
+    // Animate text out with GSAP
+    if (textContainerRef.current) {
+      gsap.to(textContainerRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.4,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setCurrentDesignExplorationIndex((prev) =>
+            prev === 0 ? 5 : prev - 1
+          );
+          // Animate text in with GSAP
+          gsap.to(textContainerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+        },
+      });
+    }
   };
 
   const handleSectionClick = (sectionId: string) => {
@@ -579,6 +623,53 @@ const CaseStudy = ({
       document.removeEventListener("mouseenter", handleMouseEnter);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.body.removeChild(cursorRing);
+    };
+  }, []);
+
+  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
+    setIsDragging(true);
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    setDragStartX(clientX);
+    setDragOffset(0);
+  };
+
+  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!isDragging) return;
+
+    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
+    const offset = clientX - dragStartX;
+    setDragOffset(offset);
+  };
+
+  const handleDragEnd = () => {
+    if (!isDragging) return;
+
+    setIsDragging(false);
+
+    // Determine direction and threshold for navigation
+    if (Math.abs(dragOffset) > 100) {
+      if (dragOffset > 0) {
+        prevDesignExploration();
+      } else {
+        nextDesignExploration();
+      }
+    }
+
+    setDragOffset(0);
+  };
+
+  // Calculate drag percentage for preview effect
+  const dragPercentage =
+    Math.abs(dragOffset) /
+    (typeof window !== "undefined" ? window.innerWidth : 1200);
+  const showPreview = dragPercentage > 0.05; // Show preview after 5% drag
+
+  // Cleanup GSAP animations on unmount
+  useEffect(() => {
+    return () => {
+      if (textContainerRef.current) {
+        gsap.killTweensOf(textContainerRef.current);
+      }
     };
   }, []);
 
@@ -1411,48 +1502,125 @@ const CaseStudy = ({
 
             {/* Image Placeholder with Navigation - Full Width */}
             <div className="mt-16">
+              {/* Container with overflow hidden to clip images during drag */}
               <div className="w-full bg-white relative rounded-2xl overflow-hidden">
-                {/* First Image - Other Color Themes */}
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
-                  alt="Emplojd design exploration showing alternative color themes and visual directions"
-                  className={`w-full h-auto object-contain transition-opacity duration-300 ${
-                    currentDesignExplorationIndex === 0
-                      ? "opacity-100"
-                      : "opacity-0"
-                  }`}
-                />
-
-                {/* Second Image - Page Layout for Saved Cover Letters */}
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
-                  alt="Emplojd design exploration showing page layout for saved cover letters and user management"
-                  className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
-                    currentDesignExplorationIndex === 1
-                      ? "opacity-100"
-                      : "opacity-0"
-                  }`}
-                />
-
-                {/* Placeholder for Design Exploration Images 3-6 */}
+                {/* Inner container that moves during drag */}
                 <div
-                  className={`w-full h-[600px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center absolute inset-0 transition-opacity duration-300 ${
-                    currentDesignExplorationIndex === 0 ||
-                    currentDesignExplorationIndex === 1
-                      ? "opacity-0"
-                      : "opacity-100"
-                  }`}
+                  className="w-full relative cursor-grab active:cursor-grabbing select-none"
+                  onMouseDown={handleDragStart}
+                  onMouseMove={handleDragMove}
+                  onMouseUp={handleDragEnd}
+                  onMouseLeave={handleDragEnd}
+                  onTouchStart={handleDragStart}
+                  onTouchMove={handleDragMove}
+                  onTouchEnd={handleDragEnd}
+                  style={{
+                    transform: isDragging
+                      ? `translateX(${dragOffset}px)`
+                      : "translateX(0)",
+                    transition: isDragging ? "none" : "transform 0.3s ease-out",
+                  }}
                 >
-                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                    [Design Exploration Image{" "}
-                    {currentDesignExplorationIndex + 1} Placeholder]
-                  </p>
+                  {/* First Image - Other Color Themes */}
+                  <img
+                    src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
+                    alt="Emplojd design exploration showing alternative color themes and visual directions"
+                    className={`w-full h-auto object-contain transition-opacity duration-300 ${
+                      currentDesignExplorationIndex === 0
+                        ? "opacity-100"
+                        : currentDesignExplorationIndex === 5 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 1 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : "opacity-0"
+                    }`}
+                    draggable={false}
+                  />
+
+                  {/* Second Image - Page Layout for Saved Cover Letters */}
+                  <img
+                    src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
+                    alt="Emplojd design exploration showing page layout for saved cover letters and user management"
+                    className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
+                      currentDesignExplorationIndex === 1
+                        ? "opacity-100"
+                        : currentDesignExplorationIndex === 0 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 2 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : "opacity-0"
+                    }`}
+                    draggable={false}
+                  />
+
+                  {/* Placeholder for Design Exploration Images 3-6 */}
+                  <div
+                    className={`w-full h-[600px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center absolute inset-0 transition-opacity duration-300 ${
+                      currentDesignExplorationIndex === 0 ||
+                      currentDesignExplorationIndex === 1
+                        ? "opacity-0"
+                        : currentDesignExplorationIndex === 2 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 3 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 2
+                        ? "opacity-100"
+                        : currentDesignExplorationIndex === 3 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 4 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 3
+                        ? "opacity-100"
+                        : currentDesignExplorationIndex === 4 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 5 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 4
+                        ? "opacity-100"
+                        : currentDesignExplorationIndex === 5 &&
+                          showPreview &&
+                          dragOffset < 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 0 &&
+                          showPreview &&
+                          dragOffset > 0
+                        ? "opacity-20"
+                        : currentDesignExplorationIndex === 5
+                        ? "opacity-100"
+                        : "opacity-0"
+                    }`}
+                  >
+                    <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                      [Design Exploration Image{" "}
+                      {currentDesignExplorationIndex + 1} Placeholder]
+                    </p>
+                  </div>
                 </div>
 
                 {/* Navigation Arrows */}
                 <button
                   onClick={prevDesignExploration}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group z-10"
                 >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
@@ -1471,7 +1639,7 @@ const CaseStudy = ({
 
                 <button
                   onClick={nextDesignExploration}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group z-10"
                 >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
@@ -1489,43 +1657,57 @@ const CaseStudy = ({
                 </button>
 
                 {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2">
+                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2 z-10">
                   <span className="text-white/90 text-sm font-medium">
                     {currentDesignExplorationIndex + 1} of 6
                   </span>
                 </div>
+
+                {/* Drag Indicator */}
+                {isDragging && (
+                  <div className="absolute inset-0 bg-black/5 flex items-center justify-center pointer-events-none">
+                    <div className="bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-black/80">
+                      {dragOffset > 0 ? "← Previous" : "Next →"}
+                    </div>
+                  </div>
+                )}
               </div>
 
-              {/* Dynamic Title and Description - Full Width */}
-              <div className="mt-8 max-w-[600px]">
-                <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                  {currentDesignExplorationIndex === 0 &&
-                    "Alternative Color Themes & Visual Directions"}
-                  {currentDesignExplorationIndex === 1 &&
-                    "Page Layout for Saved Cover Letters"}
-                  {currentDesignExplorationIndex === 2 &&
-                    "Concept 3: Peer Review & Collaboration"}
-                  {currentDesignExplorationIndex === 3 &&
-                    "Concept 4: [Placeholder Title]"}
-                  {currentDesignExplorationIndex === 4 &&
-                    "Concept 5: [Placeholder Title]"}
-                  {currentDesignExplorationIndex === 5 &&
-                    "Concept 6: [Placeholder Title]"}
-                </h3>
-                <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                  {currentDesignExplorationIndex === 0 &&
-                    "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
-                  {currentDesignExplorationIndex === 1 &&
-                    "We explored different page layouts for the overview of saved cover letters. In the end I decided to go with a later concept  than the one we initially had in mind. This design decision was made to maintain a consistent design language, accessibility and to keep the design simple and clean."}
-                  {currentDesignExplorationIndex === 2 &&
-                    "We explored features allowing users to get peer feedback on their cover letters or resumes directly within the platform. This was a strong contender but required significant moderation and community features beyond our scope."}
-                  {currentDesignExplorationIndex === 3 &&
-                    "[Placeholder description for Concept 4]"}
-                  {currentDesignExplorationIndex === 4 &&
-                    "[Placeholder description for Concept 5]"}
-                  {currentDesignExplorationIndex === 5 &&
-                    "[Placeholder description for Concept 6]"}
-                </p>
+              {/* Dynamic Title and Description - Full Width with GSAP Animations */}
+              <div className="mt-8 max-w-[600px] relative overflow-hidden">
+                <div
+                  ref={textContainerRef}
+                  className="opacity-100 transform translate-y-0"
+                >
+                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    {currentDesignExplorationIndex === 0 &&
+                      "Alternative Color Themes & Visual Directions"}
+                    {currentDesignExplorationIndex === 1 &&
+                      "Page Layout for Saved Cover Letters"}
+                    {currentDesignExplorationIndex === 2 &&
+                      "Concept 3: Peer Review & Collaboration"}
+                    {currentDesignExplorationIndex === 3 &&
+                      "Concept 4: [Placeholder Title]"}
+                    {currentDesignExplorationIndex === 4 &&
+                      "Concept 5: [Placeholder Title]"}
+                    {currentDesignExplorationIndex === 5 &&
+                      "Concept 6: [Placeholder Title]"}
+                  </h3>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                    {currentDesignExplorationIndex === 0 &&
+                      "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
+                    {currentDesignExplorationIndex === 1 &&
+                      "We explored different page layouts for the overview of saved cover letters. In the end I decided to go with a later concept  than the one we initially had in mind. This design decision was made to maintain a consistent design language, accessibility and to keep the design simple and clean."}
+                    {currentDesignExplorationIndex === 2 &&
+                      "We explored features allowing users to get peer feedback on their cover letters or resumes directly within the platform. This was a strong contender but required significant moderation and community features beyond our scope."}
+                    {currentDesignExplorationIndex === 3 &&
+                      "[Placeholder description for Concept 4]"}
+                    {currentDesignExplorationIndex === 4 &&
+                      "[Placeholder description for Concept 5]"}
+                    {currentDesignExplorationIndex === 5 &&
+                      "[Placeholder description for Concept 6]"}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
