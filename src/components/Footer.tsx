@@ -391,7 +391,7 @@ const Footer = () => {
 
                   {/* Resume Button */}
                   <a
-                    href="/resume.pdf"
+                    href="https://drive.google.com/file/d/1FIODpbn55vPLMo3S6V_QNMaX6SojM7kr/view"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"

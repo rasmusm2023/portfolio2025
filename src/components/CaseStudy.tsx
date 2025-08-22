@@ -1283,60 +1283,119 @@ const CaseStudy = ({
               </div>
               <div className="w-[600px]">
                 <div className="mb-16">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    Design Approach & Methodology
-                  </h3>
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
-                    Mapped user flows to create a natural, low-friction journey.
-                    Built wireframes, tested, and iterated for clarity and
-                    usability. Developed a consistent design system to unify
-                    visuals and speed up production. Designed features to
-                    simplify job applications without sacrificing
-                    personalisation.
+                    This phase was about turning insights into tangible design
+                    work. I focused on building a clear and consistent
+                    foundation, creating flows, wireframes, and mockups that
+                    balanced usability with scalability. Each step aimed to keep
+                    the product simple, personal, and efficient, while enabling
+                    the team to move quickly under tight time constraints.
                   </p>
+                </div>
+              </div>
+            </div>
 
-                  <div className="space-y-8">
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
-                        User Experience Design
+            {/* Full-width boxes container */}
+            <div className="max-w-[1200px] mx-auto px-8">
+              <div className="grid grid-cols-1 gap-6">
+                {/* User Flows Box */}
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                  <div className="flex items-center gap-6">
+                    <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Ellipse_8.svg"
+                        alt="User Flows Icon"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                        User Flows for System Thinking
                       </h3>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                        Created intuitive user flows that guide job seekers
-                        through the application process seamlessly, reducing
-                        cognitive load and improving completion rates.
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+                        I started by mapping out the complete user journey from
+                        initial profile creation to final application
+                        submission. This helped identify potential friction
+                        points and ensured the system architecture supported a
+                        smooth, logical flow. The flows became a shared language
+                        between design and development teams, making it easier
+                        to spot technical challenges early and plan solutions
+                        collaboratively.
                       </p>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
-                        Design System & Components
+                {/* Wireframes Box */}
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                  <div className="flex items-center gap-6">
+                    <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Rectangle_2.svg"
+                        alt="Wireframes Icon"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                        Wireframes to Kickstart Development
                       </h3>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                        Established a lightweight design system with reusable
-                        components, ensuring visual consistency and accelerating
-                        development across the platform.
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+                        I created wireframes to quickly establish structure and
+                        functionality, giving the team a shared blueprint to
+                        work from. These early layouts allowed developers to
+                        start building sooner while design continued in
+                        parallel, keeping momentum under tight deadlines.
                       </p>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
-                        Iterative Testing
+                {/* Mockups Box */}
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                  <div className="flex items-center gap-6">
+                    <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Polygon_7.svg"
+                        alt="Mockups Icon"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                        Mockups & Prototyping
                       </h3>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                        Conducted multiple rounds of user testing and iteration,
-                        refining the interface based on real user feedback to
-                        optimize usability and satisfaction.
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+                        High-fidelity mockups and interactive prototypes brought
+                        the product to life, making it easier to test usability
+                        and communicate design decisions. These prototypes also
+                        served as a bridge between design and development,
+                        ensuring the vision was clear for everyone involved.
                       </p>
                     </div>
+                  </div>
+                </div>
 
-                    <div className="space-y-4">
-                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20">
-                        Personalization Balance
+                {/* Collaboration Box */}
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                  <div className="flex items-center gap-6">
+                    <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Moon_1.svg"
+                        alt="Collaboration Icon"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                        Collaboration with Developers
                       </h3>
-                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
-                        Carefully balanced automation with personal touch,
-                        ensuring AI-generated content maintains authenticity
-                        while streamlining the application process.
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+                        Close collaboration with developers was key throughout
+                        the project. By aligning on the design system and
+                        maintaining open communication, we ensured consistency
+                        between design and implementation, allowing both teams
+                        to move quickly and stay coordinated.
                       </p>
                     </div>
                   </div>
