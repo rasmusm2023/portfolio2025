@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Menu from "./Menu";
-import { LegoIcon } from "@phosphor-icons/react";
+import { LegoIcon, FileText } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
@@ -71,7 +71,10 @@ const Header = () => {
             <Menu />
           </div>
           <div className="flex items-center gap-4">
+            {/* Theme Toggle Button */}
             <ThemeToggle />
+
+            {/* LinkedIn Button */}
             <Link
               href="https://www.linkedin.com/in/rasmus-mattsson/"
               target="_blank"
@@ -86,6 +89,19 @@ const Header = () => {
               {/* Hover effect */}
               <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-neutral-100/5 to-neutral-0/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
             </Link>
+
+            {/* My Resume Button */}
+            <Link
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm inline-flex items-center justify-center gap-2 px-4 py-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-lg transition-all duration-200"
+            >
+              <FileText size={16} weight="regular" />
+              My resume
+            </Link>
+
+            {/* Playground Button */}
             <Link href="/fun" className="shimmer-button">
               <span className="text">
                 <LegoIcon

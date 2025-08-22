@@ -114,9 +114,6 @@ const CaseStudy = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentDesignExplorationIndex, setCurrentDesignExplorationIndex] =
     useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragStartX, setDragStartX] = useState(0);
-  const [dragOffset, setDragOffset] = useState(0);
   const textContainerRef = useRef<HTMLDivElement>(null);
 
   const handleCaseStudiesClick = () => {
@@ -625,44 +622,6 @@ const CaseStudy = ({
       document.body.removeChild(cursorRing);
     };
   }, []);
-
-  const handleDragStart = (e: React.MouseEvent | React.TouchEvent) => {
-    setIsDragging(true);
-    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-    setDragStartX(clientX);
-    setDragOffset(0);
-  };
-
-  const handleDragMove = (e: React.MouseEvent | React.TouchEvent) => {
-    if (!isDragging) return;
-
-    const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
-    const offset = clientX - dragStartX;
-    setDragOffset(offset);
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-
-    setIsDragging(false);
-
-    // Determine direction and threshold for navigation
-    if (Math.abs(dragOffset) > 100) {
-      if (dragOffset > 0) {
-        prevDesignExploration();
-      } else {
-        nextDesignExploration();
-      }
-    }
-
-    setDragOffset(0);
-  };
-
-  // Calculate drag percentage for preview effect
-  const dragPercentage =
-    Math.abs(dragOffset) /
-    (typeof window !== "undefined" ? window.innerWidth : 1200);
-  const showPreview = dragPercentage > 0.05; // Show preview after 5% drag
 
   // Cleanup GSAP animations on unmount
   useEffect(() => {
@@ -1490,11 +1449,12 @@ const CaseStudy = ({
               <div className="w-[600px]">
                 <div className="mb-16">
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
-                    During the design process, we explored several alternative
-                    concepts and features that ultimately didn't make it into
-                    the final prototype. These explorations, while not
-                    implemented, provided valuable insights and helped refine
-                    our understanding of user needs and technical constraints.
+                    During the design process, we explored several concepts and
+                    features some of which made it to the final design and some
+                    that ultimately didn't make it into the final prototype.
+                    These explorations, while not implemented, provided valuable
+                    insights and helped refine our understanding of user needs
+                    and technical constraints.
                   </p>
                 </div>
               </div>
@@ -1504,116 +1464,75 @@ const CaseStudy = ({
             <div className="mt-16">
               {/* Container with overflow hidden to clip images during drag */}
               <div className="w-full bg-white relative rounded-2xl overflow-hidden">
-                {/* Inner container that moves during drag */}
+                {/* Inner container that moves based on current index */}
                 <div
-                  className="w-full relative cursor-grab active:cursor-grabbing select-none"
-                  onMouseDown={handleDragStart}
-                  onMouseMove={handleDragMove}
-                  onMouseUp={handleDragEnd}
-                  onMouseLeave={handleDragEnd}
-                  onTouchStart={handleDragStart}
-                  onTouchMove={handleDragMove}
-                  onTouchEnd={handleDragEnd}
+                  className="w-full relative min-h-[987px] flex"
                   style={{
-                    transform: isDragging
-                      ? `translateX(${dragOffset}px)`
-                      : "translateX(0)",
-                    transition: isDragging ? "none" : "transform 0.3s ease-out",
+                    transform: `translateX(${
+                      -currentDesignExplorationIndex * 100
+                    }%)`,
+                    transition: "transform 0.3s ease-out",
                   }}
                 >
-                  {/* First Image - Other Color Themes */}
-                  <img
-                    src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
-                    alt="Emplojd design exploration showing alternative color themes and visual directions"
-                    className={`w-full h-auto object-contain transition-opacity duration-300 ${
-                      currentDesignExplorationIndex === 0
-                        ? "opacity-100"
-                        : currentDesignExplorationIndex === 5 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 1 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : "opacity-0"
-                    }`}
-                    draggable={false}
-                  />
+                  {/* Image 1 - Other Color Themes */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <img
+                      src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
+                      alt="Emplojd design exploration showing alternative color themes and visual directions"
+                      className="w-auto h-auto max-w-full object-contain"
+                      draggable={false}
+                    />
+                  </div>
 
-                  {/* Second Image - Page Layout for Saved Cover Letters */}
-                  <img
-                    src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
-                    alt="Emplojd design exploration showing page layout for saved cover letters and user management"
-                    className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
-                      currentDesignExplorationIndex === 1
-                        ? "opacity-100"
-                        : currentDesignExplorationIndex === 0 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 2 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : "opacity-0"
-                    }`}
-                    draggable={false}
-                  />
+                  {/* Image 2 - Page Layout for Saved Cover Letters */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <img
+                      src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
+                      alt="Emplojd design exploration showing page layout for saved cover letters and user management"
+                      className="w-auto h-auto max-w-full object-contain"
+                      draggable={false}
+                    />
+                  </div>
 
-                  {/* Placeholder for Design Exploration Images 3-6 */}
-                  <div
-                    className={`w-full h-[600px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center absolute inset-0 transition-opacity duration-300 ${
-                      currentDesignExplorationIndex === 0 ||
-                      currentDesignExplorationIndex === 1
-                        ? "opacity-0"
-                        : currentDesignExplorationIndex === 2 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 3 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 2
-                        ? "opacity-100"
-                        : currentDesignExplorationIndex === 3 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 4 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 3
-                        ? "opacity-100"
-                        : currentDesignExplorationIndex === 4 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 5 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 4
-                        ? "opacity-100"
-                        : currentDesignExplorationIndex === 5 &&
-                          showPreview &&
-                          dragOffset < 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 0 &&
-                          showPreview &&
-                          dragOffset > 0
-                        ? "opacity-20"
-                        : currentDesignExplorationIndex === 5
-                        ? "opacity-100"
-                        : "opacity-0"
-                    }`}
-                  >
-                    <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                      [Design Exploration Image{" "}
-                      {currentDesignExplorationIndex + 1} Placeholder]
-                    </p>
+                  {/* Image 3 - Peer Review & Collaboration */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
+                      <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                        [Design Exploration Image 3: Peer Review &
+                        Collaboration]
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Image 4 - Placeholder */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
+                      <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                        [Design Exploration Image 4: Placeholder]
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Image 5 - Placeholder */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
+                      <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                        [Design Exploration Image 5: Placeholder]
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Image 6 - Placeholder */}
+                  <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
+                    <div
+                      className={`w-full h-full bg-neutral-100 dark:text-neutral-800 flex items-center justify-center transition-all duration-300 ${
+                        true ? "opacity-100" : "opacity-100"
+                      }`}
+                    >
+                      <p className="text-neutral-60 dark:text-neutral-40 text-lg">
+                        [Design Exploration Image 6: Placeholder]
+                      </p>
+                    </div>
                   </div>
                 </div>
 
@@ -1656,21 +1575,29 @@ const CaseStudy = ({
                   </svg>
                 </button>
 
-                {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2 z-10">
-                  <span className="text-white/90 text-sm font-medium">
-                    {currentDesignExplorationIndex + 1} of 6
-                  </span>
-                </div>
-
-                {/* Drag Indicator */}
-                {isDragging && (
-                  <div className="absolute inset-0 bg-black/5 flex items-center justify-center pointer-events-none">
-                    <div className="bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 text-sm font-medium text-black/80">
-                      {dragOffset > 0 ? "← Previous" : "Next →"}
+                {/* Visual Progress Indicator */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2 z-10">
+                  <div className="flex items-center gap-2">
+                    {/* Progress dots */}
+                    <div className="flex gap-1.5">
+                      {[0, 1, 2, 3, 4, 5].map((index) => (
+                        <div
+                          key={index}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                            index === currentDesignExplorationIndex
+                              ? "bg-white scale-125"
+                              : "bg-white/40"
+                          }`}
+                        />
+                      ))}
                     </div>
+                    {/* Current position indicator */}
+                    <div className="w-px h-4 bg-white/30 mx-1" />
+                    <span className="text-white/90 text-xs font-medium">
+                      {currentDesignExplorationIndex + 1}/6
+                    </span>
                   </div>
-                )}
+                </div>
               </div>
 
               {/* Dynamic Title and Description - Full Width with GSAP Animations */}
@@ -2461,52 +2388,43 @@ const CaseStudy = ({
 
         {/* Results Section */}
         <section ref={resultsRef} data-section="results" className="py-16">
-          <div className="flex">
-            {/* Left margin - 10% */}
-            <div className="w-[10%]"></div>
-
-            {/* Main content - 80% */}
-            <div className="w-[80%] px-6">
-              {/* Section Title */}
-              <div className="flex justify-start max-w-[1200px] mx-auto px-8 mb-8">
-                <div className="w-[600px]">
-                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
-                    Results
-                  </h2>
-                  <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
-                </div>
-              </div>
-
-              {/* Video Showcase Box */}
-              <div className="w-full h-[800px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg
-                      className="w-10 h-10 text-purple-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl font-medium mb-2">
-                    Live Website / Prototype Video
-                  </p>
-                  <p className="text-neutral-60 dark:text-neutral-40 text-base">
-                    Showcase of the final product in action
-                  </p>
-                </div>
+          <div className="max-w-[1200px] mx-auto px-8">
+            {/* Section Title */}
+            <div className="flex justify-start mb-8">
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
+                  Results
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
               </div>
             </div>
 
-            {/* Right margin - 10% */}
-            <div className="w-[10%]"></div>
+            {/* Video Showcase Box */}
+            <div className="w-full h-[800px] bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-2xl flex items-center justify-center mb-16">
+              <div className="text-center">
+                <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-6 mx-auto">
+                  <svg
+                    className="w-10 h-10 text-purple-500"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <p className="text-neutral-80 dark:text-neutral-20 text-xl font-medium mb-2">
+                  Live Website / Prototype Video
+                </p>
+                <p className="text-neutral-60 dark:text-neutral-40 text-base">
+                  Showcase of the final product in action
+                </p>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2645,11 +2563,10 @@ const CaseStudy = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-white font-bold text-xl mb-2 group-hover:text-pink-200 transition-colors">
-                        Noted App
+                        Fokus
                       </h3>
                       <p className="text-white/90 text-xs leading-relaxed">
-                        Smart note-taking app with AI-powered organization and
-                        search capabilities
+                        Fokus description
                       </p>
                     </div>
                     {/* Hover overlay */}
