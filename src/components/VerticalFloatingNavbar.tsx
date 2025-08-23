@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useNavbar } from "@/contexts/NavbarContext";
+import { gsap } from "gsap";
 
 interface Section {
   id: string;
@@ -18,33 +19,16 @@ const VerticalFloatingNavbar = () => {
   const pathname = usePathname();
   const [isCaseStudyPage, setIsCaseStudyPage] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [delayedY, setDelayedY] = useState(0);
   const [activeGroup, setActiveGroup] = useState("discovery");
+  const [viewportCenter, setViewportCenter] = useState(0);
   const { onSectionClick } = useNavbar();
+  const navbarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsCaseStudyPage(pathname?.startsWith("/case-studies/") || false);
   }, [pathname]);
 
-  // Set initial position to center of viewport
-  useEffect(() => {
-    if (!isCaseStudyPage) return;
-
-    const setInitialPosition = () => {
-      const viewportHeight = window.innerHeight;
-      const centerY = viewportHeight / 2;
-      setDelayedY(centerY);
-    };
-
-    setInitialPosition();
-    window.addEventListener("resize", setInitialPosition);
-
-    return () => {
-      window.removeEventListener("resize", setInitialPosition);
-    };
-  }, [isCaseStudyPage]);
-
-  // Follow scroll with delayed movement effect, update progress, and update active group
+  // Update scroll progress and active group on scroll
   useEffect(() => {
     if (!isCaseStudyPage) return;
 
@@ -58,17 +42,26 @@ const VerticalFloatingNavbar = () => {
       animationFrameId = requestAnimationFrame(() => {
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
-        const centerY = viewportHeight / 2;
+
+        // Calculate viewport center position
+        const centerY = scrollY + viewportHeight / 2;
+        setViewportCenter(centerY);
 
         // Update scroll progress
         const docHeight =
           document.documentElement.scrollHeight - viewportHeight;
         const scrollPercent = (scrollY / docHeight) * 100;
-        setScrollProgress(Math.min(scrollPercent, 100));
+        const clampedProgress = Math.min(scrollPercent, 100);
 
-        // Add delayed movement effect - the navbar moves slightly slower than scroll
-        // This creates the interesting "floating" effect
-        setDelayedY(centerY + scrollY * 0.3);
+        console.log("Scroll progress:", {
+          scrollY,
+          docHeight,
+          scrollPercent,
+          clampedProgress,
+          viewportCenter: centerY,
+        });
+
+        setScrollProgress(clampedProgress);
 
         // Update active group based on scroll position
         const newActiveGroup = getActiveGroup();
@@ -139,8 +132,9 @@ const VerticalFloatingNavbar = () => {
       designExplorationsEl?.getBoundingClientRect().top + window.scrollY || 0;
     const designSystemTop =
       designSystemEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const processTop = processEl?.getBoundingClientRect().top + window.scrollY;
-    const roleTop = roleEl?.getBoundingClientRect().top + window.scrollY;
+    const processTop =
+      processEl?.getBoundingClientRect().top + window.scrollY || 0;
+    const roleTop = roleEl?.getBoundingClientRect().top + window.scrollY || 0;
     const insightsTop = insightsEl.getBoundingClientRect().top + window.scrollY;
     const resultsTop =
       resultsEl?.getBoundingClientRect().top + window.scrollY || 0;
@@ -161,8 +155,9 @@ const VerticalFloatingNavbar = () => {
         (designExplorationsEl as HTMLElement)?.offsetHeight || 0;
     const designSystemBottom =
       designSystemTop + (designSystemEl as HTMLElement)?.offsetHeight || 0;
-    const processBottom = processTop + (processEl as HTMLElement).offsetHeight;
-    const roleBottom = roleTop + (roleEl as HTMLElement).offsetHeight;
+    const processBottom =
+      processTop + (processEl as HTMLElement)?.offsetHeight || 0;
+    const roleBottom = roleTop + (roleEl as HTMLElement)?.offsetHeight || 0;
     const insightsBottom =
       insightsTop + (insightsEl as HTMLElement).offsetHeight;
     const resultsBottom =
@@ -221,9 +216,10 @@ const VerticalFloatingNavbar = () => {
 
   return (
     <div
+      ref={navbarRef}
       className="fixed left-8 z-[9999] flex flex-row items-center"
       style={{
-        top: `${delayedY}px`,
+        top: `${viewportCenter}px`,
         transform: "translateY(-50%)",
       }}
     >
@@ -234,7 +230,7 @@ const VerticalFloatingNavbar = () => {
           style={{ height: "80vh" }}
         >
           <div
-            className="w-full rounded-full transition-all duration-300 ease-out"
+            className="w-full rounded-full transition-all duration-300 ease-out absolute top-0"
             style={{
               height: `${scrollProgress}%`,
               background:
