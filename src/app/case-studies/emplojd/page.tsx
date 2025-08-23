@@ -2,11 +2,18 @@
 
 import CaseStudy from "@/components/CaseStudy";
 import CustomCursor from "@/components/CustomCursor";
+import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
 
 export default function EmplojdCaseStudy() {
   return (
     <>
       <CustomCursor />
+      {/* TODO: FIX REQUIRED - VerticalFloatingNavbar has issues:
+          - Progress bar not updating on scroll
+          - Component movement constrained/not following full page scroll
+          - Active menu highlighting not working properly
+          - TypeScript linter errors */}
+      <VerticalFloatingNavbar />
       <CaseStudy
         title="Emplojd"
         subtitle="Enhancing job applications without compromising authenticity."

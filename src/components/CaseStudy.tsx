@@ -9,12 +9,14 @@ import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
 import Footer from "@/components/Footer";
+import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 interface Section {
   id: string;
   label: string;
+  sections?: string[];
 }
 
 interface CaseStudyProps {
@@ -67,18 +69,27 @@ const CaseStudy = ({
   link,
   linkText,
   sections = [
-    { id: "summary", label: "Summary" },
-    { id: "about", label: "About" },
-    { id: "business-objective", label: "Business Objective" },
-    { id: "challenge", label: "The Challenge" },
-    { id: "solution", label: "The Solution" },
-    { id: "craft", label: "The Craft" },
-    { id: "design-explorations", label: "Design Explorations" },
-    { id: "design-system", label: "Design Guide & Components" },
-    { id: "process", label: "The Process" },
-    { id: "role", label: "My Role" },
-    { id: "insights", label: "Insights" },
-    { id: "results", label: "Results" },
+    {
+      id: "discovery",
+      label: "Discovery",
+      sections: ["summary", "about", "business-objective"],
+    },
+    {
+      id: "research-strategy",
+      label: "Research & Strategy",
+      sections: ["challenge", "solution"],
+    },
+    {
+      id: "design-craft",
+      label: "Design & Craft",
+      sections: ["craft", "design-explorations", "design-system"],
+    },
+    {
+      id: "process-workshop",
+      label: "Process & Workshop",
+      sections: ["process", "role"],
+    },
+    { id: "outcomes", label: "Outcomes", sections: ["insights", "results"] },
   ],
   buttonText = "Live prototype",
   roleText = "Lead Product Designer: worked on strategy, research, facilitating ideation workshops, prototyping, testing, and delivery.",
@@ -178,32 +189,28 @@ const CaseStudy = ({
   };
 
   const handleSectionClick = (sectionId: string) => {
-    setActiveSection(sectionId);
-    // Scroll to section
-    if (sectionId === "summary") {
-      summaryRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "about") {
-      aboutRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "business-objective") {
-      businessObjectiveRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "process") {
-      processRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "challenge") {
-      challengeRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "solution") {
-      solutionRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "craft") {
-      craftRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "design-explorations") {
-      designExplorationsRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "role") {
-      roleRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "insights") {
-      insightsRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "design-system") {
-      designSystemRef.current?.scrollIntoView({ behavior: "smooth" });
-    } else if (sectionId === "results") {
-      resultsRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Find the section group and scroll to the first section in that group
+    const sectionGroup = sections.find((section) => section.id === sectionId);
+    if (
+      sectionGroup &&
+      sectionGroup.sections &&
+      sectionGroup.sections.length > 0
+    ) {
+      const firstSectionId = sectionGroup.sections[0];
+      setActiveSection(firstSectionId);
+
+      // Scroll to the first section in the group
+      if (firstSectionId === "summary") {
+        summaryRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "challenge") {
+        challengeRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "craft") {
+        craftRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "process") {
+        processRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "insights") {
+        insightsRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -445,42 +452,54 @@ const CaseStudy = ({
       // Determine which section is currently in view
       const scrollCenter = scrollY + windowHeight / 2;
 
+      // Find which section group should be active based on current scroll position
+      let activeSectionId = "summary";
+
       if (scrollCenter < summaryBottom) {
-        setActiveSection("summary");
+        activeSectionId = "summary";
       } else if (scrollCenter >= aboutTop && scrollCenter < aboutBottom) {
-        setActiveSection("about");
+        activeSectionId = "about";
       } else if (
         scrollCenter >= businessObjectiveTop &&
         scrollCenter < businessObjectiveBottom
       ) {
-        setActiveSection("business-objective");
+        activeSectionId = "business-objective";
       } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
-        setActiveSection("process");
+        activeSectionId = "process";
       } else if (
         scrollCenter >= challengeTop &&
         scrollCenter < challengeBottom
       ) {
-        setActiveSection("challenge");
+        activeSectionId = "challenge";
       } else if (scrollCenter >= solutionTop && scrollCenter < solutionBottom) {
-        setActiveSection("solution");
+        activeSectionId = "solution";
       } else if (scrollCenter >= craftTop && scrollCenter < craftBottom) {
-        setActiveSection("craft");
+        activeSectionId = "craft";
       } else if (
         scrollCenter >= designExplorationsTop &&
         scrollCenter < designExplorationsBottom
       ) {
-        setActiveSection("design-explorations");
+        activeSectionId = "design-explorations";
       } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
-        setActiveSection("role");
+        activeSectionId = "role";
       } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
-        setActiveSection("insights");
+        activeSectionId = "insights";
       } else if (
         scrollCenter >= designSystemTop &&
         scrollCenter < designSystemBottom
       ) {
-        setActiveSection("design-system");
+        activeSectionId = "design-system";
       } else if (scrollCenter >= resultsTop && scrollCenter < resultsBottom) {
-        setActiveSection("results");
+        activeSectionId = "results";
+      }
+
+      // Find which group this section belongs to and set the active group
+      const activeGroup = sections.find(
+        (group) => group.sections && group.sections.includes(activeSectionId)
+      );
+
+      if (activeGroup) {
+        setActiveSection(activeGroup.id);
       }
       // Removed fallback to summary - will keep previous section active
     };
@@ -634,6 +653,12 @@ const CaseStudy = ({
 
   return (
     <>
+      {/* TODO: FIX REQUIRED - VerticalFloatingNavbar has issues:
+          - Progress bar not updating on scroll
+          - Component movement constrained/not following full page scroll
+          - Active menu highlighting not working properly
+          - TypeScript linter errors */}
+      <VerticalFloatingNavbar />
       <style jsx>{`
         @keyframes gentle-bob {
           0%,
@@ -781,7 +806,7 @@ const CaseStudy = ({
           <div className="absolute top-24 left-[calc(50%+200px)] right-0 z-10">
             {/* Title */}
             <h1
-              className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className} mb-4 text-left`}
+              className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className} mt-8 mb-8 text-left`}
             >
               {subtitle}
             </h1>
@@ -1296,16 +1321,20 @@ const CaseStudy = ({
             </div>
 
             {/* Full-width boxes container */}
-            <div className="max-w-[1200px] mx-auto px-8">
+            <div className="max-w-[1200px] mx-auto">
               <div className="grid grid-cols-1 gap-6">
                 {/* User Flows Box */}
-                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
                   <div className="flex items-center gap-6">
                     <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                       <img
                         src="/icons/MorphingShapes/CS_Ellipse_8.svg"
                         alt="User Flows Icon"
-                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
                       />
                     </div>
                     <div className="flex-1">
@@ -1327,13 +1356,17 @@ const CaseStudy = ({
                 </div>
 
                 {/* Wireframes Box */}
-                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
                   <div className="flex items-center gap-6">
                     <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                       <img
                         src="/icons/MorphingShapes/CS_Rectangle_2.svg"
                         alt="Wireframes Icon"
-                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
                       />
                     </div>
                     <div className="flex-1">
@@ -1352,13 +1385,17 @@ const CaseStudy = ({
                 </div>
 
                 {/* Mockups Box */}
-                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
                   <div className="flex items-center gap-6">
                     <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                       <img
                         src="/icons/MorphingShapes/CS_Polygon_7.svg"
                         alt="Mockups Icon"
-                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
                       />
                     </div>
                     <div className="flex-1">
@@ -1366,9 +1403,9 @@ const CaseStudy = ({
                         Mockups & Prototyping
                       </h3>
                       <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
-                        High-fidelity mockups and interactive prototypes brought
-                        the product to life, making it easier to test usability
-                        and communicate design decisions. These prototypes also
+                        Low-fidelity mockups and prototypes brought the product
+                        to life, making it easier to test usability and
+                        communicate design decisions. These prototypes also
                         served as a bridge between design and development,
                         ensuring the vision was clear for everyone involved.
                       </p>
@@ -1377,13 +1414,17 @@ const CaseStudy = ({
                 </div>
 
                 {/* Collaboration Box */}
-                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-gradient-to-br hover:from-blue-500/20 hover:to-purple-600/20 hover:border-neutral-100/40 dark:hover:border-neutral-80/40 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-neutral-500/10">
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
                   <div className="flex items-center gap-6">
                     <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                       <img
                         src="/icons/MorphingShapes/CS_Moon_1.svg"
                         alt="Collaboration Icon"
-                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
                       />
                     </div>
                     <div className="flex-1">

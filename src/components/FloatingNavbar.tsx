@@ -40,13 +40,11 @@ const FloatingNavbar = () => {
   }, [isCaseStudyPage]);
 
   const sections = [
-    { id: "summary", label: "Summary" },
-    { id: "process", label: "Process" },
-    { id: "challenge", label: "challenge" },
-    { id: "role", label: "My role" },
-    { id: "insights", label: "Insights" },
-    { id: "design-system", label: "Design System" },
-    { id: "results", label: "Results" },
+    { id: "discovery", label: "Discovery" },
+    { id: "research-strategy", label: "Research & Strategy" },
+    { id: "design-craft", label: "Design & Craft" },
+    { id: "process-workshop", label: "Process & Workshop" },
+    { id: "outcomes", label: "Outcomes" },
   ];
 
   // Don't render if not on a case study page
@@ -59,21 +57,9 @@ const FloatingNavbar = () => {
       onSectionClick(sectionId);
     }
 
-    // Scroll to section with offset
-    const sectionElement = document.querySelector(
-      `[data-section="${sectionId}"]`
-    );
-    if (sectionElement) {
-      const elementTop =
-        sectionElement.getBoundingClientRect().top + window.scrollY;
-      const offset = 120; // Offset to account for header
-      const targetPosition = elementTop - offset;
-
-      window.scrollTo({
-        top: targetPosition,
-        behavior: "smooth",
-      });
-    }
+    // For grouped sections, we need to find the first section in the group
+    // and scroll to it. The CaseStudy component will handle the actual scrolling.
+    // We just need to trigger the navigation through the context.
   };
 
   return (
