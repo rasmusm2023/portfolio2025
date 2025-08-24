@@ -10,7 +10,6 @@ import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
 import Footer from "@/components/Footer";
 import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
-import { createPortal } from "react-dom";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -81,20 +80,16 @@ const CaseStudy = ({
       sections: ["challenge", "solution"],
     },
     {
-      id: "design-craft",
-      label: "Design & Craft",
+      id: "design",
+      label: "Design",
       sections: ["craft", "design-explorations", "design-system"],
     },
     {
-      id: "process-workshop",
-      label: "Process & Workshop",
-      sections: ["process", "workshop"],
+      id: "approach",
+      label: "Approach",
+      sections: ["process", "insights"],
     },
-    {
-      id: "outcomes",
-      label: "Outcomes",
-      sections: ["insights", "results"],
-    },
+    { id: "outcomes", label: "Outcomes", sections: ["insights", "results"] },
   ],
   buttonText = "Live prototype",
   roleText = "Lead Product Designer: worked on strategy, research, facilitating ideation workshops, prototyping, testing, and delivery.",
@@ -193,8 +188,31 @@ const CaseStudy = ({
     }
   };
 
-  // Note: handleSectionClick is now handled by VerticalFloatingNavbar component
-  // This function was removed to prevent conflicts with the vertical navbar's scroll logic
+  const handleSectionClick = (sectionId: string) => {
+    // Find the section group and scroll to the first section in that group
+    const sectionGroup = sections.find((section) => section.id === sectionId);
+    if (
+      sectionGroup &&
+      sectionGroup.sections &&
+      sectionGroup.sections.length > 0
+    ) {
+      const firstSectionId = sectionGroup.sections[0];
+      setActiveSection(firstSectionId);
+
+      // Scroll to the first section in the group
+      if (firstSectionId === "summary") {
+        summaryRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "challenge") {
+        challengeRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "craft") {
+        craftRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "process") {
+        processRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "insights") {
+        insightsRef.current?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   // GSAP Morphing Effect
   useEffect(() => {
@@ -635,7 +653,12 @@ const CaseStudy = ({
 
   return (
     <>
-      {/* VerticalFloatingNavbar is now rendered directly to body for fixed overlay positioning */}
+      {/* TODO: FIX REQUIRED - VerticalFloatingNavbar has issues:
+          - Progress bar not updating on scroll
+          - Component movement constrained/not following full page scroll
+          - Active menu highlighting not working properly
+          - TypeScript linter errors */}
+      <VerticalFloatingNavbar />
       <style jsx>{`
         @keyframes gentle-bob {
           0%,
@@ -867,14 +890,14 @@ const CaseStudy = ({
                 <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent mb-8"></div>
               </div>
               <div className="w-[600px]">
-                <div className="mb-12">
+                <div className="mb-12 space-y-6">
                   <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%]">
                     Emplojd is an AI-powered SaaS platform designed to make job
                     applications smarter and more personal. The platform
                     recommends relevant job listings and also writes tailored
                     cover letters using AI.
                   </p>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%] mt-4">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%]">
                     My role focused extensively on leading and managing the
                     UX/UI design process, ensuring the platform is not only
                     functional but also provides an intuitive and enjoyable user
@@ -887,7 +910,11 @@ const CaseStudy = ({
         </section>
 
         {/* About Section */}
-        <section ref={aboutRef} data-section="about" className="py-16">
+        <section
+          ref={aboutRef}
+          data-section="about"
+          className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+        >
           <div className="max-w-[1200px] mx-auto px-8">
             {/* About Box */}
             <div
@@ -953,7 +980,7 @@ const CaseStudy = ({
                 </p>
 
                 {/* Logo Box */}
-                <div className="w-full h-32 mt-6 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center px-6">
+                <div className="w-full h-32 mt-6 bg-neutral-3 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center px-6">
                   {appIconPath && (
                     <img
                       src={appIconPath}
@@ -992,7 +1019,7 @@ const CaseStudy = ({
         <section
           ref={businessObjectiveRef}
           data-section="business-objective"
-          className="py-16"
+          className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
         >
           <div className="max-w-[1200px] mx-auto px-8">
             <div
@@ -1025,7 +1052,11 @@ const CaseStudy = ({
         </section>
 
         {/* The challenge Section with Centered Layout */}
-        <section ref={challengeRef} data-section="challenge" className="py-16">
+        <section
+          ref={challengeRef}
+          data-section="challenge"
+          className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+        >
           <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
@@ -1142,7 +1173,11 @@ const CaseStudy = ({
         </section>
 
         {/* The Solution Section */}
-        <section ref={solutionRef} data-section="solution" className="py-16">
+        <section
+          ref={solutionRef}
+          data-section="solution"
+          className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+        >
           <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
@@ -1477,7 +1512,7 @@ const CaseStudy = ({
                 {/* Navigation Arrows */}
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group z-10"
                 >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
@@ -1496,7 +1531,7 @@ const CaseStudy = ({
 
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full flex items-center justify-center hover:bg-black/60 transition-all duration-200 group z-10"
                 >
                   <svg
                     className="w-6 h-6 text-white group-hover:text-white/90 transition-colors"
@@ -1513,11 +1548,29 @@ const CaseStudy = ({
                   </svg>
                 </button>
 
-                {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2">
-                  <span className="text-white/90 text-sm font-medium">
-                    {currentImageIndex + 1} of 2
-                  </span>
+                {/* Visual Progress Indicator */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/40 backdrop-blur-sm border border-black/50 rounded-full px-4 py-2 z-10">
+                  <div className="flex items-center gap-2">
+                    {/* Progress dots */}
+                    <div className="flex gap-1.5">
+                      {[0, 1].map((index) => (
+                        <button
+                          key={index}
+                          onClick={() => setCurrentImageIndex(index)}
+                          className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer hover:scale-110 ${
+                            index === currentImageIndex
+                              ? "bg-white scale-125"
+                              : "bg-white/40 hover:bg-white/60"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    {/* Current position indicator */}
+                    <div className="w-px h-4 bg-white/30 mx-1" />
+                    <span className="text-white/90 text-xs font-medium">
+                      {currentImageIndex + 1}/2
+                    </span>
+                  </div>
                 </div>
               </div>
 
@@ -1688,12 +1741,15 @@ const CaseStudy = ({
                     {/* Progress dots */}
                     <div className="flex gap-1.5">
                       {[0, 1, 2, 3, 4, 5].map((index) => (
-                        <div
+                        <button
                           key={index}
-                          className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          onClick={() =>
+                            setCurrentDesignExplorationIndex(index)
+                          }
+                          className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer hover:scale-110 ${
                             index === currentDesignExplorationIndex
                               ? "bg-white scale-125"
-                              : "bg-white/40"
+                              : "bg-white/40 hover:bg-white/60"
                           }`}
                         />
                       ))}
@@ -1747,7 +1803,7 @@ const CaseStudy = ({
           </div>
         </section>
 
-        {/* Design Guide / Design System Section - CORRECT LOCATION */}
+        {/* Design Guide / Design System Section */}
         <section
           ref={designSystemRef}
           data-section="design-system"
@@ -2493,6 +2549,71 @@ const CaseStudy = ({
           </div>
         </section>
 
+        {/* Challenges & Learnings Section */}
+        <section data-section="challenges-learnings" className="py-16">
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  Challenges & Learnings
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+              </div>
+              <div className="w-[600px]">
+                <div className="mb-16">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    Every project comes with hurdles, and Emplojd was no
+                    exception. These challenges not only shaped the product but
+                    also provided valuable lessons that strengthened both the
+                    process and the outcome.
+                  </p>
+                </div>
+
+                {/* Challenges & Learnings List */}
+                <div className="space-y-6">
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
+                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                      Working under tight deadlines taught us the value of a
+                      lightweight design system to enable faster iteration.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
+                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                      Balancing automation and personalization highlighted the
+                      need for AI to enhance, not replace, human voice.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
+                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                      Team members coming from different backgrounds showed how
+                      early alignment workshops reduce friction later.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
+                    <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+                      Designing for both job seekers and recruiters reminded us
+                      that trust and perceived authenticity are non-negotiable.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Results Section */}
         <section ref={resultsRef} data-section="results" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
@@ -2716,10 +2837,6 @@ const CaseStudy = ({
           </div>
         </div>
       </div>
-
-      {/* Render VerticalFloatingNavbar as a portal to body */}
-      {typeof document !== "undefined" &&
-        createPortal(<VerticalFloatingNavbar />, document.body)}
     </>
   );
 };

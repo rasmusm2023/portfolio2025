@@ -42,7 +42,7 @@ const FloatingNavbar = () => {
   const sections = [
     { id: "discovery", label: "Discovery" },
     { id: "research-strategy", label: "Research & Strategy" },
-    { id: "design-craft", label: "Design & Craft" },
+    { id: "design-craft", label: "Design" },
     { id: "process-workshop", label: "Process & Workshop" },
     { id: "outcomes", label: "Outcomes" },
   ];

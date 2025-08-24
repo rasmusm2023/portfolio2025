@@ -18,7 +18,7 @@ const VerticalFloatingNavbar = () => {
   const pathname = usePathname();
   const [isCaseStudyPage, setIsCaseStudyPage] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [activeGroup, setActiveGroup] = useState("discovery");
+  const [activeGroup, setActiveGroup] = useState("overview");
   const [isVisible, setIsVisible] = useState(true);
   const { onSectionClick } = useNavbar();
   const navbarRef = useRef<HTMLDivElement>(null);
@@ -109,22 +109,19 @@ const VerticalFloatingNavbar = () => {
   }, [isCaseStudyPage]);
 
   const sections = [
-    { id: "discovery", label: "Discovery" },
-    { id: "research-strategy", label: "Research & Strategy" },
-    { id: "design-craft", label: "Design & Craft" },
-    { id: "process-workshop", label: "Process & Workshop" },
+    { id: "overview", label: "Overview" },
+    { id: "context", label: "Context" },
+    { id: "design", label: "Design" },
+    { id: "approach", label: "Approach" },
+    { id: "insights", label: "Insights" },
     { id: "outcomes", label: "Outcomes" },
   ];
 
   // Helper function to determine which group should be active based on scroll position
   const getActiveGroup = () => {
-    if (!isCaseStudyPage) return "discovery";
+    if (!isCaseStudyPage) return "overview";
 
-    const scrollY = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const scrollCenter = scrollY + windowHeight / 2;
-
-    // Get all section elements
+    // Get all section elements directly
     const summaryEl = document.querySelector('[data-section="summary"]');
     const aboutEl = document.querySelector('[data-section="about"]');
     const businessObjectiveEl = document.querySelector(
@@ -139,101 +136,52 @@ const VerticalFloatingNavbar = () => {
     const designSystemEl = document.querySelector(
       '[data-section="design-system"]'
     );
-
     const processEl = document.querySelector('[data-section="process"]');
     const workshopEl = document.querySelector('[data-section="workshop"]');
     const insightsEl = document.querySelector('[data-section="insights"]');
+    const challengesLearningsEl = document.querySelector(
+      '[data-section="challenges-learnings"]'
+    );
     const resultsEl = document.querySelector('[data-section="results"]');
 
     if (!summaryEl || !aboutEl || !challengeEl || !craftEl || !insightsEl) {
-      return "discovery";
+      return "overview";
     }
 
-    const summaryTop = summaryEl.getBoundingClientRect().top + window.scrollY;
-    const aboutTop = aboutEl.getBoundingClientRect().top + window.scrollY;
-    const businessObjectiveTop =
-      businessObjectiveEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const challengeTop =
-      challengeEl.getBoundingClientRect().top + window.scrollY;
-    const solutionTop =
-      solutionEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const craftTop = craftEl.getBoundingClientRect().top + window.scrollY;
-    const designExplorationsTop =
-      designExplorationsEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const designSystemTop =
-      designSystemEl?.getBoundingClientRect().top + window.scrollY || 0;
+    // Check which section is currently visible in the viewport
+    const sections = [
+      { element: summaryEl, group: "overview" },
+      { element: aboutEl, group: "context" },
+      { element: businessObjectiveEl, group: "context" },
+      { element: challengeEl, group: "context" },
+      { element: solutionEl, group: "context" },
+      { element: craftEl, group: "design" },
+      { element: designExplorationsEl, group: "design" },
+      { element: designSystemEl, group: "design" },
+      { element: processEl, group: "approach" },
+      { element: workshopEl, group: "approach" },
+      { element: insightsEl, group: "insights" },
+      { element: challengesLearningsEl, group: "insights" },
+      { element: resultsEl, group: "outcomes" },
+    ].filter((section) => section.element);
 
-    const processTop =
-      processEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const workshopTop =
-      workshopEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const insightsTop = insightsEl.getBoundingClientRect().top + window.scrollY;
-    const resultsTop =
-      resultsEl?.getBoundingClientRect().top + window.scrollY || 0;
+    // Find the most recent section that is visible
+    for (let i = sections.length - 1; i >= 0; i--) {
+      const section = sections[i];
+      if (!section.element) continue;
 
-    // Calculate section boundaries
-    const summaryBottom = summaryTop + (summaryEl as HTMLElement).offsetHeight;
-    const aboutBottom = aboutTop + (aboutEl as HTMLElement).offsetHeight;
-    const businessObjectiveBottom =
-      businessObjectiveTop +
-        (businessObjectiveEl as HTMLElement)?.offsetHeight || 0;
-    const challengeBottom =
-      challengeTop + (challengeEl as HTMLElement).offsetHeight;
-    const solutionBottom =
-      solutionTop + (solutionEl as HTMLElement)?.offsetHeight || 0;
-    const craftBottom = craftTop + (craftEl as HTMLElement).offsetHeight;
-    const designExplorationsBottom =
-      designExplorationsTop +
-        (designExplorationsEl as HTMLElement)?.offsetHeight || 0;
-    const designSystemBottom =
-      designSystemTop + (designSystemEl as HTMLElement)?.offsetHeight || 0;
+      const element = section.element as HTMLElement;
+      const rect = element.getBoundingClientRect();
 
-    const processBottom =
-      processTop + (processEl as HTMLElement)?.offsetHeight || 0;
-    const workshopBottom =
-      workshopTop + (workshopEl as HTMLElement)?.offsetHeight || 0;
-    const insightsBottom =
-      insightsTop + (insightsEl as HTMLElement).offsetHeight;
-    const resultsBottom =
-      resultsTop + (resultsEl as HTMLElement)?.offsetHeight || 0;
-
-    // Determine which section is currently in view
-    if (scrollCenter < summaryBottom) {
-      return "discovery";
-    } else if (scrollCenter >= aboutTop && scrollCenter < aboutBottom) {
-      return "discovery";
-    } else if (
-      scrollCenter >= businessObjectiveTop &&
-      scrollCenter < businessObjectiveBottom
-    ) {
-      return "discovery";
-    } else if (scrollCenter >= challengeTop && scrollCenter < challengeBottom) {
-      return "research-strategy";
-    } else if (scrollCenter >= solutionTop && scrollCenter < solutionBottom) {
-      return "research-strategy";
-    } else if (scrollCenter >= craftTop && scrollCenter < craftBottom) {
-      return "design-craft";
-    } else if (
-      scrollCenter >= designExplorationsTop &&
-      scrollCenter < designExplorationsBottom
-    ) {
-      return "design-craft";
-    } else if (
-      scrollCenter >= designSystemTop &&
-      scrollCenter < designSystemBottom
-    ) {
-      return "design-craft";
-    } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
-      return "process-workshop";
-    } else if (scrollCenter >= workshopTop && scrollCenter < workshopBottom) {
-      return "process-workshop";
-    } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
-      return "outcomes";
-    } else if (scrollCenter >= resultsTop && scrollCenter < resultsBottom) {
-      return "outcomes";
+      // Check if the section is visible in the viewport
+      // Visible means: top is above viewport bottom AND bottom is below viewport top
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        return section.group;
+      }
     }
 
-    return "discovery";
+    // Fallback: if no sections are visible, return overview
+    return "overview";
   };
 
   // Don't render if not on a case study page
@@ -242,29 +190,39 @@ const VerticalFloatingNavbar = () => {
   }
 
   const handleSectionClick = (sectionId: string) => {
+    // Immediately set the active group for immediate visual feedback
+    setActiveGroup(sectionId);
+
     // Update active section
     if (onSectionClick) {
       onSectionClick(sectionId);
     }
 
-    // Scroll to the appropriate section based on the phase
+    // Scroll to the appropriate section based on the navigation group
     let targetSection: string | null = null;
 
     switch (sectionId) {
-      case "discovery":
-        targetSection = "summary";
+      case "overview":
+        // Scroll to top for overview
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+        return;
+      case "context":
+        targetSection = "about";
         break;
-      case "research-strategy":
-        targetSection = "challenge";
-        break;
-      case "design-craft":
+      case "design":
         targetSection = "craft";
         break;
-      case "process-workshop":
+      case "approach":
         targetSection = "process";
         break;
-      case "outcomes":
+      case "insights":
         targetSection = "insights";
+        break;
+      case "outcomes":
+        targetSection = "results";
         break;
       default:
         targetSection = "summary";
@@ -280,8 +238,8 @@ const VerticalFloatingNavbar = () => {
         const targetRect = targetElement.getBoundingClientRect();
         const targetTop = targetRect.top + window.scrollY;
 
-        // Simple offset to ensure the clicked menu item gets activated
-        const offset = 32; // Minimal offset to trigger active state without overshooting
+        // Consistent offset for all sections to ensure proper activation
+        const offset = 100; // Increased offset to ensure the section is properly visible
 
         // Smooth scroll to the target position
         window.scrollTo({
