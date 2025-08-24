@@ -10,6 +10,7 @@ import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
 import Footer from "@/components/Footer";
 import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
+import { createPortal } from "react-dom";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -87,9 +88,13 @@ const CaseStudy = ({
     {
       id: "process-workshop",
       label: "Process & Workshop",
-      sections: ["process", "role"],
+      sections: ["process", "workshop"],
     },
-    { id: "outcomes", label: "Outcomes", sections: ["insights", "results"] },
+    {
+      id: "outcomes",
+      label: "Outcomes",
+      sections: ["insights", "results"],
+    },
   ],
   buttonText = "Live prototype",
   roleText = "Lead Product Designer: worked on strategy, research, facilitating ideation workshops, prototyping, testing, and delivery.",
@@ -188,31 +193,8 @@ const CaseStudy = ({
     }
   };
 
-  const handleSectionClick = (sectionId: string) => {
-    // Find the section group and scroll to the first section in that group
-    const sectionGroup = sections.find((section) => section.id === sectionId);
-    if (
-      sectionGroup &&
-      sectionGroup.sections &&
-      sectionGroup.sections.length > 0
-    ) {
-      const firstSectionId = sectionGroup.sections[0];
-      setActiveSection(firstSectionId);
-
-      // Scroll to the first section in the group
-      if (firstSectionId === "summary") {
-        summaryRef.current?.scrollIntoView({ behavior: "smooth" });
-      } else if (firstSectionId === "challenge") {
-        challengeRef.current?.scrollIntoView({ behavior: "smooth" });
-      } else if (firstSectionId === "craft") {
-        craftRef.current?.scrollIntoView({ behavior: "smooth" });
-      } else if (firstSectionId === "process") {
-        processRef.current?.scrollIntoView({ behavior: "smooth" });
-      } else if (firstSectionId === "insights") {
-        insightsRef.current?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
+  // Note: handleSectionClick is now handled by VerticalFloatingNavbar component
+  // This function was removed to prevent conflicts with the vertical navbar's scroll logic
 
   // GSAP Morphing Effect
   useEffect(() => {
@@ -653,12 +635,7 @@ const CaseStudy = ({
 
   return (
     <>
-      {/* TODO: FIX REQUIRED - VerticalFloatingNavbar has issues:
-          - Progress bar not updating on scroll
-          - Component movement constrained/not following full page scroll
-          - Active menu highlighting not working properly
-          - TypeScript linter errors */}
-      <VerticalFloatingNavbar />
+      {/* VerticalFloatingNavbar is now rendered directly to body for fixed overlay positioning */}
       <style jsx>{`
         @keyframes gentle-bob {
           0%,
@@ -1413,6 +1390,36 @@ const CaseStudy = ({
                   </div>
                 </div>
 
+                {/* Iterative Testing & User Feedback Box */}
+                <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
+                  <div className="flex items-center gap-6">
+                    <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Star_1.svg"
+                        alt="Iterative Testing Icon"
+                        className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                        Iterative Testing & User Feedback
+                      </h3>
+                      <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+                        Most testing was done within the team, where we
+                        continuously refined designs and prototypes throughout
+                        development. In addition, we conducted two rounds of
+                        user testing at different stages of the product, helping
+                        us validate key flows and uncover improvements to
+                        usability and clarity.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Collaboration Box */}
                 <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
                   <div className="flex items-center gap-6">
@@ -1740,8 +1747,239 @@ const CaseStudy = ({
           </div>
         </section>
 
+        {/* Design Guide / Design System Section - CORRECT LOCATION */}
+        <section
+          ref={designSystemRef}
+          data-section="design-system"
+          className="py-16 bg-neutral-10 dark:bg-neutral-90"
+        >
+          <div className="max-w-[1200px] mx-auto px-8">
+            {/* Section Title */}
+            <div className="w-[600px] mb-8">
+              <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                Design Guide & Components
+              </h2>
+              <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+            </div>
+
+            {/* Infinite Scroll Design System Showcase */}
+            <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden relative">
+              <div className="infinite-scroll-container h-full relative">
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
+                  alt="Emplojd Design System Components"
+                  className="design-system-svg w-full h-auto absolute top-0 left-0"
+                  onError={(e) => {
+                    console.error("SVG failed to load:", e);
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                  onLoad={(e) => {
+                    console.log("SVG loaded successfully:", e);
+                    const target = e.target as HTMLImageElement;
+                    console.log(
+                      "Image dimensions:",
+                      target.offsetWidth,
+                      "x",
+                      target.offsetHeight
+                    );
+                  }}
+                />
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
+                  alt="Emplojd Design System Components"
+                  className="design-system-svg w-full h-auto absolute top-0 left-0"
+                  onError={(e) => {
+                    console.error("SVG failed to load:", e);
+                    const target = e.target as HTMLImageElement;
+                    target.style.display = "none";
+                  }}
+                  onLoad={(e) => {
+                    console.log("SVG loaded successfully:", e);
+                    const target = e.target as HTMLImageElement;
+                    console.log(
+                      "Image dimensions:",
+                      target.offsetWidth,
+                      "x",
+                      target.offsetHeight
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Process Section */}
+        <section
+          ref={processRef}
+          data-section="process"
+          className="py-16 bg-neutral-3 dark:bg-neutral-90"
+        >
+          <div className="max-w-[1200px] mx-auto px-8">
+            <div
+              className="flex justify-center gap-12"
+              style={{
+                paddingTop: "calc(40vmax / 10)",
+                paddingBottom: "calc(40vmax / 10)",
+              }}
+            >
+              <div className="w-[600px]">
+                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                  The Process
+                </h2>
+                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+
+                {/* Morphing SVG Container */}
+                <div
+                  ref={processMorphRef}
+                  className="mt-8 flex items-center justify-center"
+                >
+                  <svg
+                    width="400"
+                    height="400"
+                    viewBox="0 0 200 200"
+                    className="morphing-shape"
+                  >
+                    <path
+                      d="M100 20 C 140 20, 180 60, 180 100 C 180 140, 140 180, 100 180 C 60 180, 20 140, 20 100 C 20 60, 60 20, 100 20 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                    <defs>
+                      <linearGradient
+                        id="gradient1"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          style={{
+                            stopColor: "#8B5CF6",
+                            stopOpacity: 0.3,
+                          }}
+                        />
+                        <stop
+                          offset="100%"
+                          style={{
+                            stopColor: "#EC4899",
+                            stopOpacity: 0.3,
+                          }}
+                        />
+                      </linearGradient>
+                      <linearGradient
+                        id="gradient2"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          style={{
+                            stopColor: "#8B5CF6",
+                            stopOpacity: 0.8,
+                          }}
+                        />
+                        <stop
+                          offset="100%"
+                          style={{
+                            stopColor: "#EC4899",
+                            stopOpacity: 0.8,
+                          }}
+                        />
+                      </linearGradient>
+                    </defs>
+                  </svg>
+
+                  {/* Hidden shapes for morphing */}
+                  <svg
+                    width="400"
+                    height="400"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 L 180 100 L 100 180 L 20 100 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+
+                  <svg
+                    width="400"
+                    height="400"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 L 160 40 L 180 100 L 160 160 L 100 180 L 40 160 L 20 100 L 40 40 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+
+                  <svg
+                    width="400"
+                    height="400"
+                    viewBox="0 0 200 200"
+                    style={{ display: "none" }}
+                  >
+                    <path
+                      d="M100 20 C 120 20, 140 30, 150 50 C 160 70, 160 90, 150 110 C 140 130, 120 140, 100 140 C 80 140, 60 130, 50 110 C 40 90, 40 70, 50 50 C 60 30, 80 20, 100 20 Z"
+                      fill="url(#gradient1)"
+                      stroke="url(#gradient2)"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div className="w-[600px]">
+                <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                  {processSteps ? (
+                    processSteps.map((step, index) => (
+                      <li key={index} className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))
+                  ) : (
+                    <>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Research & Discovery</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Design & Prototyping</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="text-purple-400 font-bold mt-1">
+                          •
+                        </span>
+                        <span>Testing & Iteration</span>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Kickoff Workshop Section */}
-        <section ref={roleRef} data-section="role" className="py-16">
+        <section ref={roleRef} data-section="workshop" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
             <div
               className="flex justify-center gap-12"
@@ -2255,237 +2493,6 @@ const CaseStudy = ({
           </div>
         </section>
 
-        {/* Design Guide / Design System Section */}
-        <section
-          ref={designSystemRef}
-          data-section="design-system"
-          className="py-16 bg-neutral-10 dark:bg-neutral-90"
-        >
-          <div className="max-w-[1200px] mx-auto px-8">
-            {/* Section Title */}
-            <div className="w-[600px] mb-8">
-              <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                Design Guide & Components
-              </h2>
-              <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
-            </div>
-
-            {/* Infinite Scroll Design System Showcase */}
-            <div className="w-full h-[800px] bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden relative">
-              <div className="infinite-scroll-container h-full relative">
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
-                  alt="Emplojd Design System Components"
-                  className="design-system-svg w-full h-auto absolute top-0 left-0"
-                  onError={(e) => {
-                    console.error("SVG failed to load:", e);
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                  }}
-                  onLoad={(e) => {
-                    console.log("SVG loaded successfully:", e);
-                    const target = e.target as HTMLImageElement;
-                    console.log(
-                      "Image dimensions:",
-                      target.offsetWidth,
-                      "x",
-                      target.offsetHeight
-                    );
-                  }}
-                />
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design-Guide-Components.svg"
-                  alt="Emplojd Design System Components"
-                  className="design-system-svg w-full h-auto absolute top-0 left-0"
-                  onError={(e) => {
-                    console.error("SVG failed to load:", e);
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                  }}
-                  onLoad={(e) => {
-                    console.log("SVG loaded successfully:", e);
-                    const target = e.target as HTMLImageElement;
-                    console.log(
-                      "Image dimensions:",
-                      target.offsetWidth,
-                      "x",
-                      target.offsetHeight
-                    );
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* The Process Section */}
-        <section
-          ref={processRef}
-          data-section="process"
-          className="py-16 bg-neutral-3 dark:bg-neutral-90"
-        >
-          <div className="max-w-[1200px] mx-auto px-8">
-            <div
-              className="flex justify-center gap-12"
-              style={{
-                paddingTop: "calc(40vmax / 10)",
-                paddingBottom: "calc(40vmax / 10)",
-              }}
-            >
-              <div className="w-[600px]">
-                <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                  The Process
-                </h2>
-                <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
-
-                {/* Morphing SVG Container */}
-                <div
-                  ref={processMorphRef}
-                  className="mt-8 flex items-center justify-center"
-                >
-                  <svg
-                    width="400"
-                    height="400"
-                    viewBox="0 0 200 200"
-                    className="morphing-shape"
-                  >
-                    <path
-                      d="M100 20 C 140 20, 180 60, 180 100 C 180 140, 140 180, 100 180 C 60 180, 20 140, 20 100 C 20 60, 60 20, 100 20 Z"
-                      fill="url(#gradient1)"
-                      stroke="url(#gradient2)"
-                      strokeWidth="2"
-                    />
-                    <defs>
-                      <linearGradient
-                        id="gradient1"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          style={{
-                            stopColor: "#8B5CF6",
-                            stopOpacity: 0.3,
-                          }}
-                        />
-                        <stop
-                          offset="100%"
-                          style={{
-                            stopColor: "#EC4899",
-                            stopOpacity: 0.3,
-                          }}
-                        />
-                      </linearGradient>
-                      <linearGradient
-                        id="gradient2"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="100%"
-                      >
-                        <stop
-                          offset="0%"
-                          style={{
-                            stopColor: "#8B5CF6",
-                            stopOpacity: 0.8,
-                          }}
-                        />
-                        <stop
-                          offset="100%"
-                          style={{
-                            stopColor: "#EC4899",
-                            stopOpacity: 0.8,
-                          }}
-                        />
-                      </linearGradient>
-                    </defs>
-                  </svg>
-
-                  {/* Hidden shapes for morphing */}
-                  <svg
-                    width="400"
-                    height="400"
-                    viewBox="0 0 200 200"
-                    style={{ display: "none" }}
-                  >
-                    <path
-                      d="M100 20 L 180 100 L 100 180 L 20 100 Z"
-                      fill="url(#gradient1)"
-                      stroke="url(#gradient2)"
-                      strokeWidth="2"
-                    />
-                  </svg>
-
-                  <svg
-                    width="400"
-                    height="400"
-                    viewBox="0 0 200 200"
-                    style={{ display: "none" }}
-                  >
-                    <path
-                      d="M100 20 L 160 40 L 180 100 L 160 160 L 100 180 L 40 160 L 20 100 L 40 40 Z"
-                      fill="url(#gradient1)"
-                      stroke="url(#gradient2)"
-                      strokeWidth="2"
-                    />
-                  </svg>
-
-                  <svg
-                    width="400"
-                    height="400"
-                    viewBox="0 0 200 200"
-                    style={{ display: "none" }}
-                  >
-                    <path
-                      d="M100 20 C 120 20, 140 30, 150 50 C 160 70, 160 90, 150 110 C 140 130, 120 140, 100 140 C 80 140, 60 130, 50 110 C 40 90, 40 70, 50 50 C 60 30, 80 20, 100 20 Z"
-                      fill="url(#gradient1)"
-                      stroke="url(#gradient2)"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="w-[600px]">
-                <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
-                  {processSteps ? (
-                    processSteps.map((step, index) => (
-                      <li key={index} className="flex items-start gap-3">
-                        <span className="text-purple-400 font-bold mt-1">
-                          •
-                        </span>
-                        <span>{step}</span>
-                      </li>
-                    ))
-                  ) : (
-                    <>
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-400 font-bold mt-1">
-                          •
-                        </span>
-                        <span>Research & Discovery</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-400 font-bold mt-1">
-                          •
-                        </span>
-                        <span>Design & Prototyping</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <span className="text-purple-400 font-bold mt-1">
-                          •
-                        </span>
-                        <span>Testing & Iteration</span>
-                      </li>
-                    </>
-                  )}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Results Section */}
         <section ref={resultsRef} data-section="results" className="py-16">
           <div className="max-w-[1200px] mx-auto px-8">
@@ -2709,6 +2716,10 @@ const CaseStudy = ({
           </div>
         </div>
       </div>
+
+      {/* Render VerticalFloatingNavbar as a portal to body */}
+      {typeof document !== "undefined" &&
+        createPortal(<VerticalFloatingNavbar />, document.body)}
     </>
   );
 };

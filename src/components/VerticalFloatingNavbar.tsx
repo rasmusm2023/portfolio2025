@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useNavbar } from "@/contexts/NavbarContext";
-import { gsap } from "gsap";
 
 interface Section {
   id: string;
@@ -20,13 +19,34 @@ const VerticalFloatingNavbar = () => {
   const [isCaseStudyPage, setIsCaseStudyPage] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeGroup, setActiveGroup] = useState("discovery");
-  const [viewportCenter, setViewportCenter] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
   const { onSectionClick } = useNavbar();
   const navbarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setIsCaseStudyPage(pathname?.startsWith("/case-studies/") || false);
   }, [pathname]);
+
+  // Append navbar directly to body to avoid parent container issues
+  useEffect(() => {
+    if (!isCaseStudyPage) return;
+
+    const navbarElement = navbarRef.current;
+    if (navbarElement && document.body) {
+      // Remove from current parent if it exists
+      if (navbarElement.parentElement) {
+        navbarElement.parentElement.removeChild(navbarElement);
+      }
+      // Append directly to body
+      document.body.appendChild(navbarElement);
+    }
+
+    return () => {
+      if (navbarElement && navbarElement.parentElement) {
+        navbarElement.parentElement.removeChild(navbarElement);
+      }
+    };
+  }, [isCaseStudyPage]);
 
   // Update scroll progress and active group on scroll
   useEffect(() => {
@@ -43,9 +63,8 @@ const VerticalFloatingNavbar = () => {
         const scrollY = window.scrollY;
         const viewportHeight = window.innerHeight;
 
-        // Calculate viewport center position
-        const centerY = scrollY + viewportHeight / 2;
-        setViewportCenter(centerY);
+        // Calculate scroll progress for the progress bar
+        // Navbar position is now fixed and doesn't change
 
         // Update scroll progress
         const docHeight =
@@ -58,7 +77,6 @@ const VerticalFloatingNavbar = () => {
           docHeight,
           scrollPercent,
           clampedProgress,
-          viewportCenter: centerY,
         });
 
         setScrollProgress(clampedProgress);
@@ -66,6 +84,17 @@ const VerticalFloatingNavbar = () => {
         // Update active group based on scroll position
         const newActiveGroup = getActiveGroup();
         setActiveGroup(newActiveGroup);
+
+        // Check if we should hide the navbar (past the Results section)
+        const resultsSection = document.querySelector(
+          '[data-section="results"]'
+        );
+        if (resultsSection) {
+          const resultsBottom =
+            resultsSection.getBoundingClientRect().bottom + window.scrollY;
+          const shouldHide = scrollY > resultsBottom - window.innerHeight;
+          setIsVisible(!shouldHide);
+        }
       });
     };
 
@@ -110,8 +139,9 @@ const VerticalFloatingNavbar = () => {
     const designSystemEl = document.querySelector(
       '[data-section="design-system"]'
     );
+
     const processEl = document.querySelector('[data-section="process"]');
-    const roleEl = document.querySelector('[data-section="role"]');
+    const workshopEl = document.querySelector('[data-section="workshop"]');
     const insightsEl = document.querySelector('[data-section="insights"]');
     const resultsEl = document.querySelector('[data-section="results"]');
 
@@ -132,9 +162,11 @@ const VerticalFloatingNavbar = () => {
       designExplorationsEl?.getBoundingClientRect().top + window.scrollY || 0;
     const designSystemTop =
       designSystemEl?.getBoundingClientRect().top + window.scrollY || 0;
+
     const processTop =
       processEl?.getBoundingClientRect().top + window.scrollY || 0;
-    const roleTop = roleEl?.getBoundingClientRect().top + window.scrollY || 0;
+    const workshopTop =
+      workshopEl?.getBoundingClientRect().top + window.scrollY || 0;
     const insightsTop = insightsEl.getBoundingClientRect().top + window.scrollY;
     const resultsTop =
       resultsEl?.getBoundingClientRect().top + window.scrollY || 0;
@@ -155,9 +187,11 @@ const VerticalFloatingNavbar = () => {
         (designExplorationsEl as HTMLElement)?.offsetHeight || 0;
     const designSystemBottom =
       designSystemTop + (designSystemEl as HTMLElement)?.offsetHeight || 0;
+
     const processBottom =
       processTop + (processEl as HTMLElement)?.offsetHeight || 0;
-    const roleBottom = roleTop + (roleEl as HTMLElement)?.offsetHeight || 0;
+    const workshopBottom =
+      workshopTop + (workshopEl as HTMLElement)?.offsetHeight || 0;
     const insightsBottom =
       insightsTop + (insightsEl as HTMLElement).offsetHeight;
     const resultsBottom =
@@ -191,7 +225,7 @@ const VerticalFloatingNavbar = () => {
       return "design-craft";
     } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
       return "process-workshop";
-    } else if (scrollCenter >= roleTop && scrollCenter < roleBottom) {
+    } else if (scrollCenter >= workshopTop && scrollCenter < workshopBottom) {
       return "process-workshop";
     } else if (scrollCenter >= insightsTop && scrollCenter < insightsBottom) {
       return "outcomes";
@@ -212,41 +246,88 @@ const VerticalFloatingNavbar = () => {
     if (onSectionClick) {
       onSectionClick(sectionId);
     }
+
+    // Scroll to the appropriate section based on the phase
+    let targetSection: string | null = null;
+
+    switch (sectionId) {
+      case "discovery":
+        targetSection = "summary";
+        break;
+      case "research-strategy":
+        targetSection = "challenge";
+        break;
+      case "design-craft":
+        targetSection = "craft";
+        break;
+      case "process-workshop":
+        targetSection = "process";
+        break;
+      case "outcomes":
+        targetSection = "insights";
+        break;
+      default:
+        targetSection = "summary";
+    }
+
+    // Find and scroll to the target section
+    if (targetSection) {
+      const targetElement = document.querySelector(
+        `[data-section="${targetSection}"]`
+      );
+      if (targetElement) {
+        // Get the target position
+        const targetRect = targetElement.getBoundingClientRect();
+        const targetTop = targetRect.top + window.scrollY;
+
+        // Simple offset to ensure the clicked menu item gets activated
+        const offset = 32; // Minimal offset to trigger active state without overshooting
+
+        // Smooth scroll to the target position
+        window.scrollTo({
+          top: targetTop - offset,
+          behavior: "smooth",
+        });
+      }
+    }
   };
 
   return (
     <div
       ref={navbarRef}
-      className="fixed left-8 z-[9999] flex flex-row items-center"
+      className="fixed top-1/2 z-[1000] flex items-center w-18 transition-opacity duration-500"
       style={{
-        top: `${viewportCenter}px`,
         transform: "translateY(-50%)",
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? "auto" : "none",
       }}
     >
       {/* Progress Bar - Vertical */}
       <div className="relative">
         <div
-          className="w-1 bg-neutral-20 dark:bg-neutral-80 rounded-full overflow-hidden"
-          style={{ height: "80vh" }}
+          className="w-4 bg-neutral-10/40 dark:bg-neutral-90/40 rounded-full overflow-hidden"
+          style={{
+            height: `${sections.length * 48 + (sections.length - 1) * 24}px`,
+          }}
         >
           <div
             className="w-full rounded-full transition-all duration-300 ease-out absolute top-0"
             style={{
               height: `${scrollProgress}%`,
               background:
-                "linear-gradient(to bottom, #8B5CF6, #907EFF, #10B981)",
+                "linear-gradient(to bottom, #3B82F6, #8B5CF6, #A855F7)",
             }}
           />
         </div>
       </div>
 
       {/* Navigation Items - Vertical Stack */}
-      <div className="flex flex-col gap-6 ml-8">
+      <div className="flex flex-col gap-8 ml-8">
         {sections.map((section, index) => (
           <button
             key={section.id}
             onClick={() => handleSectionClick(section.id)}
-            className={`font-bold text-2xl uppercase transition-all duration-200 relative text-left whitespace-nowrap ${
+            className={`font-bold text-2xl capitalize transition-all duration-200 relative text-left whitespace-nowrap ${
               activeGroup === section.id
                 ? "text-purple-600 dark:text-purple-400"
                 : "text-neutral-30 dark:text-neutral-70 hover:text-neutral-70 dark:hover:text-neutral-30"

@@ -119,7 +119,7 @@ export default function EmplojdCaseStudy() {
         processSteps={[
           "Market Research",
           "Competitor Analysis",
-          "Ideation Workshop",
+          "Kickoff Workshop",
           "Flowcharts",
           "Wireframes",
           "Moderated and Unmoderated User Testing",

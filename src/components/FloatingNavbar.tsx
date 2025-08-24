@@ -47,8 +47,8 @@ const FloatingNavbar = () => {
     { id: "outcomes", label: "Outcomes" },
   ];
 
-  // Don't render if not on a case study page
-  if (!isCaseStudyPage) {
+  // Don't render if not on a case study page OR if we're on a case study page (to hide it)
+  if (!isCaseStudyPage || isCaseStudyPage) {
     return null;
   }
   const handleSectionClick = (sectionId: string) => {
