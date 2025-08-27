@@ -126,6 +126,7 @@ const CaseStudy = ({
   const [currentDesignExplorationIndex, setCurrentDesignExplorationIndex] =
     useState(0);
   const textContainerRef = useRef<HTMLDivElement>(null);
+  const craftTextContainerRef = useRef<HTMLDivElement>(null);
 
   const handleCaseStudiesClick = () => {
     // Navigate to Work page instead of home
@@ -133,11 +134,51 @@ const CaseStudy = ({
   };
 
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev === 1 ? 0 : prev + 1));
+    // Animate text out with GSAP
+    if (craftTextContainerRef.current) {
+      gsap.to(craftTextContainerRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setCurrentImageIndex((prev) => (prev === 2 ? 0 : prev + 1));
+          // Animate text in with GSAP
+          gsap.to(craftTextContainerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        },
+      });
+    } else {
+      setCurrentImageIndex((prev) => (prev === 2 ? 0 : prev + 1));
+    }
   };
 
   const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? 1 : prev - 1));
+    // Animate text out with GSAP
+    if (craftTextContainerRef.current) {
+      gsap.to(craftTextContainerRef.current, {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        ease: "power2.inOut",
+        onComplete: () => {
+          setCurrentImageIndex((prev) => (prev === 0 ? 2 : prev - 1));
+          // Animate text in with GSAP
+          gsap.to(craftTextContainerRef.current, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        },
+      });
+    } else {
+      setCurrentImageIndex((prev) => (prev === 0 ? 2 : prev - 1));
+    }
   };
 
   const nextDesignExploration = () => {
@@ -146,7 +187,7 @@ const CaseStudy = ({
       gsap.to(textContainerRef.current, {
         opacity: 0,
         y: -20,
-        duration: 0.4,
+        duration: 0.3,
         ease: "power2.inOut",
         onComplete: () => {
           setCurrentDesignExplorationIndex((prev) =>
@@ -156,7 +197,7 @@ const CaseStudy = ({
           gsap.to(textContainerRef.current, {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.4,
             ease: "power2.out",
           });
         },
@@ -170,7 +211,7 @@ const CaseStudy = ({
       gsap.to(textContainerRef.current, {
         opacity: 0,
         y: -20,
-        duration: 0.4,
+        duration: 0.3,
         ease: "power2.inOut",
         onComplete: () => {
           setCurrentDesignExplorationIndex((prev) =>
@@ -180,7 +221,7 @@ const CaseStudy = ({
           gsap.to(textContainerRef.current, {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.4,
             ease: "power2.out",
           });
         },
@@ -647,6 +688,9 @@ const CaseStudy = ({
     return () => {
       if (textContainerRef.current) {
         gsap.killTweensOf(textContainerRef.current);
+      }
+      if (craftTextContainerRef.current) {
+        gsap.killTweensOf(craftTextContainerRef.current);
       }
     };
   }, []);
@@ -1493,7 +1537,7 @@ const CaseStudy = ({
               <div className="w-full bg-white relative rounded-2xl overflow-hidden">
                 {/* First Image - Wireframes */}
                 <img
-                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Wireframes-2.svg"
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Wireframes.svg"
                   alt="Emplojd wireframes showing user flow mapping and interface design"
                   className={`w-full h-auto object-contain transition-opacity duration-300 ${
                     currentImageIndex === 0 ? "opacity-100" : "opacity-0"
@@ -1502,10 +1546,19 @@ const CaseStudy = ({
 
                 {/* Second Image - Mockups */}
                 <img
-                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Mockups-2.svg"
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-Various-Mockups.svg"
                   alt="Emplojd mockups showing design iterations and final interface concepts"
                   className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
                     currentImageIndex === 1 ? "opacity-100" : "opacity-0"
+                  }`}
+                />
+
+                {/* Third Image - From Swiping to Searching */}
+                <img
+                  src="/case-study-assets/emplojd/Emplojd-The-Craft-From-Swiping-To-Searching.svg"
+                  alt="Emplojd design exploration showing the evolution from swiping to searching interface patterns"
+                  className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
+                    currentImageIndex === 2 ? "opacity-100" : "opacity-0"
                   }`}
                 />
 
@@ -1553,7 +1606,7 @@ const CaseStudy = ({
                   <div className="flex items-center gap-2">
                     {/* Progress dots */}
                     <div className="flex gap-1.5">
-                      {[0, 1].map((index) => (
+                      {[0, 1, 2].map((index) => (
                         <button
                           key={index}
                           onClick={() => setCurrentImageIndex(index)}
@@ -1568,7 +1621,7 @@ const CaseStudy = ({
                     {/* Current position indicator */}
                     <div className="w-px h-4 bg-white/30 mx-1" />
                     <span className="text-white/90 text-xs font-medium">
-                      {currentImageIndex + 1}/2
+                      {currentImageIndex + 1}/3
                     </span>
                   </div>
                 </div>
@@ -1576,11 +1629,18 @@ const CaseStudy = ({
 
               {/* Image Caption - Updates based on current image */}
               <div className="mt-4 text-center">
-                <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
-                  {currentImageIndex === 0
-                    ? "Image 1: Various wireframes showing user flow mapping and interface design iterations."
-                    : "Image 2: Design mockups showcasing final interface concepts and visual design decisions."}
-                </p>
+                <div
+                  ref={craftTextContainerRef}
+                  className="opacity-100 transform translate-y-0"
+                >
+                  <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                    {currentImageIndex === 0
+                      ? "Image 1: Various wireframes showing user flow mapping and interface design iterations."
+                      : currentImageIndex === 1
+                      ? "Image 2: Design mockups showcasing final interface concepts and visual design decisions."
+                      : "Image 3: User testing results that led to key insights and fundamental product decisions, including the shift from swiping to searching interface patterns."}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -1612,9 +1672,9 @@ const CaseStudy = ({
                     During the design process, we explored several concepts and
                     features some of which made it to the final design and some
                     that ultimately didn't make it into the final prototype.
-                    These explorations, while not implemented, provided valuable
-                    insights and helped refine our understanding of user needs
-                    and technical constraints.
+                    These explorations, while not all implemented, provided
+                    valuable insights and helped refine our understanding of
+                    direction, user needs and technical constraints.
                   </p>
                 </div>
               </div>
@@ -2740,7 +2800,7 @@ const CaseStudy = ({
 
               {/* Case Studies Grid */}
               <div className="grid grid-cols-2 gap-6">
-                {/* ZMartRest AI Case Study */}
+                {/* Zmartrest AI Case Study */}
                 <Link
                   href="/case-studies/zmartrest-ai"
                   className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
@@ -2749,7 +2809,7 @@ const CaseStudy = ({
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                     <div className="absolute bottom-6 left-6 right-6">
                       <h3 className="text-white font-bold text-xl mb-2 group-hover:text-orange-200 transition-colors">
-                        ZMartRest AI
+                        Zmartrest AI
                       </h3>
                       <p className="text-white/90 text-xs leading-relaxed">
                         AI-powered restaurant management system with intelligent

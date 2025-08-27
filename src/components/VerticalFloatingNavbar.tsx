@@ -263,13 +263,15 @@ const VerticalFloatingNavbar = () => {
       {/* Progress Bar - Vertical */}
       <div className="relative">
         <div
-          className="w-4 bg-neutral-10/40 dark:bg-neutral-90/40 rounded-full overflow-hidden"
+          className="w-2 overflow-hidden"
           style={{
-            height: `${sections.length * 48 + (sections.length - 1) * 24}px`,
+            height: "calc(100vh - 192px)", // Full viewport height minus header (96px)
+            background:
+              "linear-gradient(to bottom, rgba(148, 163, 184, 0.4), rgba(148, 163, 184, 0.1), rgba(148, 163, 184, 0))",
           }}
         >
           <div
-            className="w-full rounded-full transition-all duration-300 ease-out absolute top-0"
+            className="w-full transition-all duration-300 ease-out absolute top-0"
             style={{
               height: `${scrollProgress}%`,
               background:
