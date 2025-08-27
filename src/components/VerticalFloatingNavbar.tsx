@@ -72,13 +72,6 @@ const VerticalFloatingNavbar = () => {
         const scrollPercent = (scrollY / docHeight) * 100;
         const clampedProgress = Math.min(scrollPercent, 100);
 
-        console.log("Scroll progress:", {
-          scrollY,
-          docHeight,
-          scrollPercent,
-          clampedProgress,
-        });
-
         setScrollProgress(clampedProgress);
 
         // Update active group based on scroll position

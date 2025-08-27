@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { MagnifyingGlass, X } from "@phosphor-icons/react";
+import { MagnifyingGlass, X, Play, Pause } from "@phosphor-icons/react";
 import gsap from "gsap";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 
@@ -13,11 +13,36 @@ const CustomCursor = () => {
   const [lastClientPosition, setLastClientPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoverTarget, setHoverTarget] = useState<string | null>(null);
+  const [prototypeVideoState, setPrototypeVideoState] =
+    useState<string>("playing");
   const [backgroundColor, setBackgroundColor] = useState(
     "rgba(255, 255, 255, 0.8)"
   );
   const mousePositionRef = useRef({ x: 0, y: 0 });
   const lastClientPositionRef = useRef({ x: 0, y: 0 });
+
+  // Function to update prototype video state
+  const updatePrototypeVideoState = () => {
+    const activePrototype = document.querySelector(
+      "[data-tooltip='prototype-active']"
+    );
+    if (activePrototype) {
+      const video = activePrototype.querySelector("video");
+      if (video) {
+        const isPlaying = !video.paused;
+        const newState = isPlaying ? "playing" : "paused";
+        console.log("Video state check:", {
+          isPlaying,
+          newState,
+          current: prototypeVideoState,
+        });
+        if (newState !== prototypeVideoState) {
+          console.log("Setting new video state:", newState);
+          setPrototypeVideoState(newState);
+        }
+      }
+    }
+  };
 
   const getColorAtPosition = (x: number, y: number) => {
     try {
@@ -73,6 +98,82 @@ const CustomCursor = () => {
   };
 
   useEffect(() => {
+    // Set up MutationObserver to watch for video state changes
+    const observer = new MutationObserver((mutations) => {
+      console.log("MutationObserver detected changes:", mutations);
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "data-video-state"
+        ) {
+          console.log("Video state attribute changed:", mutation);
+          updatePrototypeVideoState();
+        }
+      });
+    });
+
+    // Start observing the document for attribute changes
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["data-video-state"],
+      subtree: true,
+    });
+
+    // Periodic check as fallback to ensure video state stays in sync
+    const periodicCheck = setInterval(() => {
+      if (hoverTarget === "prototype-active") {
+        updatePrototypeVideoState();
+      }
+    }, 100); // Check every 100ms when hovering over prototype
+
+    // Set up video event listeners for all videos in the document
+    const setupVideoListeners = () => {
+      const videos = document.querySelectorAll("video");
+      videos.forEach((video) => {
+        const handlePlay = () => {
+          console.log("Video play event detected");
+          if (hoverTarget === "prototype-active") {
+            updatePrototypeVideoState();
+          }
+        };
+        const handlePause = () => {
+          console.log("Video pause event detected");
+          if (hoverTarget === "prototype-active") {
+            updatePrototypeVideoState();
+          }
+        };
+
+        video.addEventListener("play", handlePlay);
+        video.addEventListener("pause", handlePause);
+
+        // Store listeners for cleanup
+        video._customCursorListeners = { handlePlay, handlePause };
+      });
+    };
+
+    // Initial setup
+    setupVideoListeners();
+
+    // Watch for new videos being added to the DOM
+    const videoObserver = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            const element = node as Element;
+            if (element.tagName === "VIDEO") {
+              console.log("New video detected, setting up listeners");
+              setupVideoListeners();
+            }
+          }
+        });
+      });
+    });
+
+    videoObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
     const updateMousePosition = (e: MouseEvent) => {
       const newClientPos = { x: e.clientX, y: e.clientY };
 
@@ -146,7 +247,12 @@ const CustomCursor = () => {
       const target = e.target as HTMLElement;
 
       // Check for different hover targets
-      if (target.closest(".project-showcase-card")) {
+      if (target.closest("[data-tooltip='prototype-active']")) {
+        setHoverTarget("prototype-active");
+        setIsHovering(true);
+        updatePrototypeVideoState(); // Update video state when hovering
+        console.log("Hovering over prototype-active, updating video state");
+      } else if (target.closest(".project-showcase-card")) {
         setHoverTarget("project-card");
         setIsHovering(true);
       } else if (
@@ -243,6 +349,25 @@ const CustomCursor = () => {
       if (continuousUpdateId) {
         cancelAnimationFrame(continuousUpdateId);
       }
+      observer.disconnect();
+      clearInterval(periodicCheck);
+      videoObserver.disconnect();
+
+      // Clean up video event listeners
+      const videos = document.querySelectorAll("video");
+      videos.forEach((video) => {
+        if (video._customCursorListeners) {
+          video.removeEventListener(
+            "play",
+            video._customCursorListeners.handlePlay
+          );
+          video.removeEventListener(
+            "pause",
+            video._customCursorListeners.handlePause
+          );
+          delete video._customCursorListeners;
+        }
+      });
     };
   }, [hoverTarget]);
 
@@ -262,6 +387,25 @@ const CustomCursor = () => {
     };
 
     switch (hoverTarget) {
+      case "prototype-active":
+        return {
+          ...baseStyle,
+          left: mousePosition.x + 80, // More offset to the right
+          top: mousePosition.y + 20, // Offset like default cursor
+          width: "120px", // Same size as other cursor pills
+          height: "36px", // Same height as other cursor pills
+          borderRadius: "18px", // Same as other cursor pills
+          backgroundColor: "rgb(35, 35, 35)", // Always dark
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: "rgb(255, 255, 255)", // Always white text
+          fontSize: "12px", // Same as other cursor pills
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+          transition: "all 0.3s ease-out", // Same timing as TRAITS carousel pill
+        };
       case "project-card":
         return {
           ...baseStyle,
@@ -438,6 +582,7 @@ const CustomCursor = () => {
             : "2px solid rgba(35, 35, 35, 0.8)",
           transform: "translate(-50%, -50%)",
         };
+
       default:
         return {
           ...baseStyle,
@@ -456,6 +601,18 @@ const CustomCursor = () => {
 
   return (
     <div style={cursorStyle} className="custom-cursor">
+      {hoverTarget === "prototype-active" &&
+        (prototypeVideoState === "playing" ? (
+          <>
+            <Pause size={16} style={{ marginRight: "4px" }} />
+            <span style={{ marginLeft: "4px" }}>PAUSE</span>
+          </>
+        ) : (
+          <>
+            <Play size={16} style={{ marginRight: "4px" }} />
+            <span style={{ marginLeft: "4px" }}>PLAY</span>
+          </>
+        ))}
       {hoverTarget === "project-card" && "VIEW CASE"}
       {hoverTarget === "traits-card" && (
         <>
@@ -501,7 +658,6 @@ const CustomCursor = () => {
           <span style={{ marginLeft: "4px" }}>CLOSE</span>
         </>
       )}
-
     </div>
   );
 };
