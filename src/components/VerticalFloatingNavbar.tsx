@@ -27,23 +27,35 @@ const VerticalFloatingNavbar = () => {
     setIsCaseStudyPage(pathname?.startsWith("/case-studies/") || false);
   }, [pathname]);
 
-  // Append navbar directly to body to avoid parent container issues
+  // Use portal to render navbar at body level
   useEffect(() => {
     if (!isCaseStudyPage) return;
 
     const navbarElement = navbarRef.current;
     if (navbarElement && document.body) {
-      // Remove from current parent if it exists
-      if (navbarElement.parentElement) {
-        navbarElement.parentElement.removeChild(navbarElement);
+      // Only append if not already in body
+      if (navbarElement.parentElement !== document.body) {
+        // Remove from current parent if it exists
+        if (navbarElement.parentElement) {
+          try {
+            navbarElement.parentElement.removeChild(navbarElement);
+          } catch (error) {
+            // Element might have already been removed
+          }
+        }
+        // Append directly to body
+        document.body.appendChild(navbarElement);
       }
-      // Append directly to body
-      document.body.appendChild(navbarElement);
     }
 
     return () => {
       if (navbarElement && navbarElement.parentElement) {
-        navbarElement.parentElement.removeChild(navbarElement);
+        try {
+          navbarElement.parentElement.removeChild(navbarElement);
+        } catch (error) {
+          // Element might have already been removed or moved
+          console.log("Navbar cleanup: Element already removed");
+        }
       }
     };
   }, [isCaseStudyPage]);
