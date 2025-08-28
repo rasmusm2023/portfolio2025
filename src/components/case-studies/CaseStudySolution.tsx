@@ -6,7 +6,7 @@ interface CaseStudySolutionProps {
 
 const CaseStudySolution: React.FC<CaseStudySolutionProps> = ({ solution }) => {
   return (
-    <section className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section">
+    <section className="py-16 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-8">
         <div
           className="flex justify-center gap-12"

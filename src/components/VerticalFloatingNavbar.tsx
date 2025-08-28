@@ -258,7 +258,7 @@ const VerticalFloatingNavbar = () => {
   return (
     <div
       ref={navbarRef}
-      className="fixed top-1/2 z-[1000] flex items-center w-18 transition-opacity duration-500"
+      className="hidden 2xl:flex fixed top-1/2 z-[1000] items-center w-18 transition-opacity duration-500"
       style={{
         transform: "translateY(-50%)",
         opacity: isVisible ? 1 : 0,

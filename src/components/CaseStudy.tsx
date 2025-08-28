@@ -838,8 +838,30 @@ const CaseStudy = ({
             }
           }
 
+          @keyframes radiate {
+            0% {
+              box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
+                0 0 40px rgba(144, 126, 255, 0.3),
+                0 0 60px rgba(144, 126, 255, 0.1);
+            }
+            50% {
+              box-shadow: 0 0 30px rgba(144, 126, 255, 0.7),
+                0 0 60px rgba(144, 126, 255, 0.5),
+                0 0 90px rgba(144, 126, 255, 0.3);
+            }
+            100% {
+              box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
+                0 0 40px rgba(144, 126, 255, 0.3),
+                0 0 60px rgba(144, 126, 255, 0.1);
+            }
+          }
+
           .video-bobbing {
             animation: gentle-bob 3s ease-in-out infinite;
+          }
+
+          .radiating-purple-box {
+            animation: radiate 3s ease-in-out infinite;
           }
 
           .cursor-ring {
@@ -884,15 +906,16 @@ const CaseStudy = ({
           <section
             ref={summaryRef}
             data-section="summary"
-            className="pt-40 pb-16 relative"
+            className="pt-20 sm:pt-32 md:pt-40 pb-8 sm:pb-12 md:pb-16 relative"
           >
-            {/* Left Container - Fixed position, starts at same place as section titles */}
-            <div className="max-w-[1200px] mx-auto px-8">
-              <div className="flex items-start gap-0">
+            {/* Main Container - Responsive layout */}
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
+              {/* Back Button and Project Name - Side by side on all screens */}
+              <div className="flex flex-row items-start gap-0 mb-8 sm:mb-0">
                 {/* Back Arrow + Case Studies Rectangle */}
                 <button
                   onClick={handleCaseStudiesClick}
-                  className="flex items-center gap-3 px-4 py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-l-lg hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full"
+                  className="flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg sm:rounded-l-lg sm:rounded-r-none hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full w-40 sm:w-auto justify-start"
                 >
                   <ArrowLeft
                     size={16}
@@ -904,13 +927,13 @@ const CaseStudy = ({
                 </button>
 
                 {/* Project Name Rectangle */}
-                <div className="px-4 py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 border-l-0 rounded-r-lg flex items-center h-full relative">
+                <div className="px-3 sm:px-4 py-2 sm:py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 sm:border-l-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg flex items-center h-full relative w-40 sm:w-auto justify-start">
                   <span className="text-neutral-0 dark:text-neutral-100 font-bold text-xs uppercase relative z-10">
                     {title.split(" ").slice(0, 3).join(" ")}
                   </span>
                   {/* Active pill shadow effect */}
                   <div
-                    className="absolute inset-0 rounded-r-lg -z-10"
+                    className="absolute inset-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg -z-10"
                     style={{
                       boxShadow: `0 0 12px ${
                         typeof document !== "undefined" &&
@@ -923,57 +946,64 @@ const CaseStudy = ({
                 </div>
               </div>
 
-              {/* Project Title */}
-              <h1 className="text-6xl lg:text-7xl xl:text-8xl font-black text-neutral-80 dark:text-neutral-20 mb-8 mt-16">
+              {/* Project Title - Responsive sizing */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-neutral-80 dark:text-neutral-20 mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px]">
                 {title}
               </h1>
 
-              {/* Bento Boxes and Button Layout */}
-              <div className="mt-12 max-w-[640px]">
+              {/* Subtitle - Moved here from right side */}
+              <h2
+                className={`text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-neutral-60 dark:text-neutral-40 leading-tight tracking-tight ${hanken.className} mb-8 sm:mb-12 text-left max-w-full lg:max-w-[640px]`}
+              >
+                {subtitle}
+              </h2>
+
+              {/* Bento Boxes and Button Layout - Responsive grid */}
+              <div className="mt-8 sm:mt-12 max-w-full lg:max-w-[640px]">
                 {/* Box 1 - Role (Full width) */}
-                <div className="w-full p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg mb-6 min-h-[80px] flex flex-col justify-center">
+                <div className="w-full p-3 sm:p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg mb-4 sm:mb-6 min-h-[70px] sm:min-h-[80px] flex flex-col justify-center">
                   <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                     Role
                   </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                     {roleText}
                   </p>
                 </div>
 
-                {/* Grid Layout with proper spacing */}
-                <div className="grid grid-cols-2 gap-4">
-                  {/* Company Box - top left */}
-                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
+                {/* Grid Layout - Always 2 columns for Type and Year */}
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  {/* Company Box */}
+                  <div className="p-3 sm:p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[70px] sm:min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       {companyOrType}
                     </h3>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                       {companyOrType === "Type"
                         ? "School project"
                         : companyText}
                     </p>
                   </div>
 
-                  {/* Year Box - top right */}
-                  <div className="p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
+                  {/* Year Box */}
+                  <div className="p-3 sm:p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[70px] sm:min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Year
                     </h3>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                       {yearText}
                     </p>
                   </div>
 
-                  {/* Team Box - bottom, spans full width */}
-                  <div className="col-span-2 p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[80px] flex flex-col justify-center">
+                  {/* Team Box - Full width on all screens */}
+                  <div className="col-span-2 p-3 sm:p-4 bg-neutral-3 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg min-h-[70px] sm:min-h-[80px] flex flex-col justify-center">
                     <h3 className="text-neutral-80 dark:text-neutral-0 font-black text-sm mb-2">
                       Team
                     </h3>
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-8 gap-y-2">
                       {teamRoles.map((role, index) => (
                         <p
                           key={index}
-                          className="text-neutral-80 dark:text-neutral-20 text-base leading-relaxed"
+                          className="text-neutral-80 dark:text-neutral-20 text-sm sm:text-base leading-relaxed"
                         >
                           {role}
                         </p>
@@ -982,51 +1012,88 @@ const CaseStudy = ({
                   </div>
                 </div>
 
-                {/* Live Prototype Button - spans same width as grid */}
+                {/* Live Prototype Button */}
                 <button
                   ref={morphRef}
-                  className="w-full mt-4 flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
+                  className="w-full mt-4 flex items-center justify-center gap-3 px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-[#907EFF] to-[#7c3aed] text-white font-bold text-base sm:text-lg rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   {/* Status Dot */}
                   <div className="w-3 h-3 bg-gray-400 rounded-full relative flex-shrink-0"></div>
 
-                  <span className="whitespace-nowrap">
+                  <span className="whitespace-nowrap text-sm sm:text-base">
                     Sorry, Emplojd is no longer live 🙁
                   </span>
                 </button>
               </div>
             </div>
 
-            {/* Title and Purple Box Container - positioned together */}
-            <div className="absolute top-24 left-[calc(50%+200px)] right-0 z-10">
-              {/* Title */}
-              <h1
-                className={`text-3xl lg:text-4xl xl:text-5xl font-bold text-neutral-100 dark:text-neutral-0 leading-tight tracking-tight ${hanken.className} mt-8 mb-8 text-left`}
-              >
-                {subtitle}
-              </h1>
-
-              {/* Purple box that starts after title and extends to right edge */}
-              <div className="w-full h-[860px] bg-[#907EFF] flex flex-col p-8">
-                {/* Glass-styled technology pills at the top */}
+            {/* Purple Box Container - Responsive positioning */}
+            <div className="mt-8 sm:mt-12 lg:absolute lg:top-24 lg:left-[calc(50%+150px)] lg:right-0 lg:z-10">
+              {/* Purple box - Responsive sizing with radiating effect */}
+              <div className="w-full h-[600px] sm:h-[600px] lg:h-[860px] bg-[#907EFF] flex flex-col p-4 sm:p-6 lg:p-8 rounded-none lg:rounded-tl-2xl lg:rounded-bl-2xl radiating-purple-box">
+                {/* Glass-styled technology pills - Responsive layout */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1.5 bg-white/10 dark:bg-black/10 backdrop-blur-md border border-white/20 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-sm font-medium rounded-full flex items-center gap-2"
-                    >
-                      {tech === "Live" && (
-                        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      )}
-                      {tech}
-                    </span>
-                  ))}
+                  {/* On 2xl+ screens (≥1500px): Show all pills */}
+                  <div className="hidden 2xl:flex flex-wrap gap-2">
+                    {technologies.map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 sm:px-3 py-1 sm:py-1.5 bg-white/25 dark:bg-black/10 backdrop-blur-md border border-white/40 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-xs sm:text-sm font-medium rounded-full flex items-center gap-1 sm:gap-2 shadow-sm"
+                      >
+                        {tech === "Live" && (
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        )}
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* On smaller screens (<1500px): Show first 8 pills + +X pill */}
+                  <div className="2xl:hidden flex flex-wrap gap-2">
+                    {/* Show first 8 pills */}
+                    {technologies.slice(0, 8).map((tech, index) => (
+                      <span
+                        key={index}
+                        className="px-2 sm:px-3 py-1 sm:py-1.5 bg-white/25 dark:bg-black/10 backdrop-blur-md border border-white/40 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-xs sm:text-sm font-medium rounded-full flex items-center gap-1 sm:gap-2 shadow-sm"
+                      >
+                        {tech === "Live" && (
+                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                        )}
+                        {tech}
+                      </span>
+                    ))}
+
+                    {/* +X pill if there are more than 8 technologies */}
+                    {technologies.length > 8 && (
+                      <div className="group relative">
+                        <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-white/25 dark:bg-black/10 backdrop-blur-md border border-white/40 dark:border-black/20 text-neutral-100 dark:text-neutral-0 text-xs sm:text-sm font-medium rounded-full flex items-center gap-1 sm:gap-2 shadow-sm cursor-pointer">
+                          +{technologies.length - 8} more
+                        </span>
+
+                        {/* Tooltip with hidden pills */}
+                        <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-64">
+                          <div className="bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 px-4 py-3 rounded-lg shadow-lg border border-neutral-800 dark:border-neutral-200 text-sm">
+                            <div className="font-medium mb-2 text-center">
+                              Additional Technologies
+                            </div>
+                            <div className="space-y-2">
+                              {technologies.slice(8).map((tech, index) => (
+                                <div key={index + 8} className="text-center">
+                                  {tech}
+                                </div>
+                              ))}
+                            </div>
+                            <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-neutral-0 dark:border-b-neutral-100"></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
-                {/* Video Container */}
+                {/* Video Container - Responsive sizing */}
                 <div className="flex-1 flex items-center justify-center relative">
-                  {/* Rounded Container for Videos */}
-                  <div className="relative w-full max-w-[900px] h-[600px] rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:scale-105">
+                  <div className="relative w-full max-w-full lg:max-w-[900px] h-[470px] sm:h-[500px] lg:h-[600px] rounded-xl lg:rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:scale-105">
                     {/* Single Video */}
                     <video
                       className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-1000"
@@ -1111,35 +1178,35 @@ const CaseStudy = ({
               </div>
             </div>
 
-            {/* Spacer to ensure proper spacing below purple box */}
-            <div className="h-[100px]"></div>
+            {/* Spacer - Responsive height */}
+            <div className="h-[100px] sm:h-[150px] lg:h-[200px]"></div>
           </section>
 
           {/* Summary Section */}
-          <section className="pt-32 pb-16 fade-in-section">
-            <div className="max-w-[1200px] mx-auto px-8">
+          <section className="pt-24 sm:pt-32 md:pt-40 pb-8 sm:pb-12 md:pb-16 fade-in-section">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
               <div
-                className="flex justify-center gap-12"
+                className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12"
                 style={{
-                  paddingTop: "calc(40vmax / 10)",
-                  paddingBottom: "calc(40vmax / 10)",
+                  paddingTop: "calc(20vmax / 10)",
+                  paddingBottom: "calc(20vmax / 10)",
                 }}
               >
-                <div className="w-[600px]">
-                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                <div className="w-full lg:w-[600px]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-center lg:text-left">
                     Summary
                   </h2>
-                  <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent mb-8"></div>
+                  <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent mb-6 sm:mb-8"></div>
                 </div>
-                <div className="w-[600px]">
-                  <div className="mb-12 space-y-6">
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%]">
+                <div className="w-full lg:w-[600px]">
+                  <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-center lg:text-left">
                       Emplojd is an AI-powered SaaS platform designed to make
                       job applications smarter and more personal. The platform
                       recommends relevant job listings and also writes tailored
                       cover letters using AI.
                     </p>
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-[150%]">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-center lg:text-left">
                       My role focused extensively on leading and managing the
                       UX/UI design process, ensuring the platform is not only
                       functional but also provides an intuitive and enjoyable
@@ -1155,29 +1222,29 @@ const CaseStudy = ({
           <section
             ref={aboutRef}
             data-section="about"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
+            className="py-12 sm:py-16 fade-in-section"
           >
-            <div className="max-w-[1200px] mx-auto px-8">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
               {/* About Box */}
               <div
-                className="flex justify-center gap-12"
+                className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12"
                 style={{
-                  paddingTop: "calc(40vmax / 10)",
-                  paddingBottom: "calc(40vmax / 10)",
+                  paddingTop: "calc(20vmax / 10)",
+                  paddingBottom: "calc(20vmax / 10)",
                 }}
               >
-                <div className="w-[600px]">
-                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                <div className="w-full lg:w-[600px]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-center lg:text-left">
                     About
                   </h2>
                   <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
                 </div>
-                <div className="w-[600px]">
+                <div className="w-full lg:w-[600px]">
                   {aboutText ? (
                     aboutText
                   ) : (
                     <div className="relative">
-                      <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+                      <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed mb-4 sm:mb-6 text-center lg:text-left">
                         Emplojd was born out of the frustration many feel with
                         repetitive and time-consuming job applications. Created
                         during the{" "}
@@ -1200,8 +1267,8 @@ const CaseStudy = ({
                         process.
                       </p>
                       {/* Custom cursor tooltip - moved outside p element */}
-                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-96">
-                        <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-6 py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-sm leading-relaxed">
+                      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-80 sm:w-96">
+                        <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm leading-relaxed">
                           <div className="mb-3">
                             Chas Academy's annual, cross-program student project
                             where first-year students team up across disciplines
@@ -1217,18 +1284,18 @@ const CaseStudy = ({
                       </div>
                     </div>
                   )}
-                  <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed text-center lg:text-left">
                     I led the UX/UI work to make sure the experience felt
                     personal, efficient, and genuinely helpful for job seekers.
                   </p>
 
                   {/* Logo Box */}
-                  <div className="w-full h-32 mt-6 bg-neutral-3 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center px-6">
+                  <div className="w-full h-24 sm:h-32 mt-4 sm:mt-6 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg flex items-center px-4 sm:px-6">
                     {appIconPath && (
                       <img
                         src={appIconPath}
                         alt="App Icon"
-                        className="h-20 w-20 object-contain"
+                        className="h-16 w-16 sm:h-20 sm:w-20 object-contain"
                       />
                     )}
                     <div className="flex-1 flex justify-center">
@@ -1236,19 +1303,19 @@ const CaseStudy = ({
                         <img
                           src={logotypeBlackPath}
                           alt="Logotype"
-                          className="h-10 object-contain dark:hidden"
+                          className="h-8 sm:h-10 object-contain dark:hidden"
                         />
                       )}
                       {logotypeBlackPath && logotypeWhitePath && (
                         <img
                           src={logotypeWhitePath}
                           alt="Logotype"
-                          className="h-10 object-contain hidden dark:block"
+                          className="h-8 sm:h-10 object-contain hidden dark:block"
                         />
                       )}
                     </div>
                     {!appIconPath && !logotypeBlackPath && (
-                      <span className="text-neutral-60 dark:text-neutral-40 text-sm">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-xs sm:text-sm">
                         Logo placeholder
                       </span>
                     )}
@@ -1262,27 +1329,29 @@ const CaseStudy = ({
           <section
             ref={businessObjectiveRef}
             data-section="business-objective"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
+            className="py-12 sm:py-16 fade-in-section"
           >
-            <div className="max-w-[1200px] mx-auto px-8">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
               <div
-                className="flex justify-center gap-12"
+                className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12"
                 style={{
-                  paddingTop: "calc(40vmax / 10)",
-                  paddingBottom: "calc(40vmax / 10)",
+                  paddingTop: "calc(20vmax / 10)",
+                  paddingBottom: "calc(20vmax / 10)",
                 }}
               >
-                <div className="w-[600px]">
-                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                <div className="w-full lg:w-[600px]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-center lg:text-left">
                     Business Objective
                   </h2>
                   <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
                 </div>
-                <div className="w-[600px]">
+                <div className="w-full lg:w-[600px]">
                   {businessObjectivesText ? (
-                    <div>{businessObjectivesText}</div>
+                    <div className="text-center lg:text-left">
+                      {businessObjectivesText}
+                    </div>
                   ) : (
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed text-center lg:text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -1298,26 +1367,26 @@ const CaseStudy = ({
           <section
             ref={challengeRef}
             data-section="challenge"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
+            className="py-12 sm:py-16 fade-in-section"
           >
-            <div className="max-w-[1200px] mx-auto px-8">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
               <div
-                className="flex justify-center gap-12"
+                className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12"
                 style={{
-                  paddingTop: "calc(40vmax / 10)",
-                  paddingBottom: "calc(40vmax / 10)",
+                  paddingTop: "calc(20vmax / 10)",
+                  paddingBottom: "calc(20vmax / 10)",
                 }}
               >
-                <div className="w-[600px]">
-                  <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                <div className="w-full lg:w-[600px]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-center lg:text-left">
                     The Challenge
                   </h2>
                   <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
                 </div>
-                <div className="w-[600px]">
+                <div className="w-full lg:w-[600px]">
                   {/* Main Challenge Statement */}
-                  <div className="mb-16 space-y-6">
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                  <div className="mb-12 sm:mb-16 space-y-4 sm:space-y-6">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed text-center lg:text-left">
                       We had eight weeks, a small cross-disciplinary team, and
                       the broad theme of "AI" to work with. In that time, we
                       needed to design and deliver a functional, interactive
@@ -1325,7 +1394,7 @@ const CaseStudy = ({
                       showcase.
                     </p>
 
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed text-center lg:text-left">
                       The job-search market is already crowded, yet most
                       platforms still demand time-consuming, repetitive
                       application processes. Job seekers risk losing
@@ -1333,7 +1402,7 @@ const CaseStudy = ({
                       lose time reviewing generic, low-quality submissions.
                     </p>
 
-                    <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                    <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed text-center lg:text-left">
                       Our challenge was to create a solution that used AI
                       meaningfully,{" "}
                       <span
@@ -1351,11 +1420,11 @@ const CaseStudy = ({
                   </div>
 
                   {/* Additional Context */}
-                  <div className="bg-gradient-to-r from-purple-500/10 to-purple-700/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-10">
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
+                  <div className="bg-gradient-to-r from-purple-500/10 to-purple-700/10 backdrop-blur-sm border border-purple-500/20 rounded-2xl p-6 sm:p-8 md:p-10">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl sm:text-2xl mb-4 sm:mb-6 text-center lg:text-left">
                       Context & Background
                     </h3>
-                    <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <ul className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed space-y-3 sm:space-y-4">
                       <li className="flex items-start gap-3">
                         <span className="text-purple-400 font-bold mt-1">
                           •
@@ -1387,11 +1456,11 @@ const CaseStudy = ({
                   </div>
 
                   {/* Goals */}
-                  <div className="bg-gradient-to-r from-blue-500/10 to-blue-700/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-10 mt-8">
-                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-2xl mb-6">
+                  <div className="bg-gradient-to-r from-blue-500/10 to-blue-700/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-6 sm:p-8 md:p-10 mt-6 sm:mt-8">
+                    <h3 className="text-neutral-100 dark:text-neutral-0 font-bold text-xl sm:text-2xl mb-4 sm:mb-6 text-center lg:text-left">
                       Goals
                     </h3>
-                    <ul className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed space-y-4">
+                    <ul className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-relaxed space-y-3 sm:space-y-4">
                       <li className="flex items-start gap-3">
                         <span className="text-blue-400 font-bold mt-1">•</span>
                         <span>
@@ -1426,9 +1495,9 @@ const CaseStudy = ({
           <section
             ref={solutionRef}
             data-section="solution"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
+            className="py-12 sm:py-16 fade-in-section"
           >
-            <div className="max-w-[1200px] mx-auto px-8">
+            <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
               <div
                 className="flex justify-center gap-12"
                 style={{
@@ -2037,7 +2106,7 @@ const CaseStudy = ({
                 </div>
 
                 {/* Dynamic Title and Description - Full Width with GSAP Animations */}
-                <div className="mt-8 max-w-[600px] relative overflow-hidden">
+                <div className="mt-16 max-w-[600px] relative overflow-hidden">
                   <div
                     ref={textContainerRef}
                     className="opacity-100 transform translate-y-0"

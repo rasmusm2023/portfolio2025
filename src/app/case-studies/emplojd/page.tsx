@@ -51,7 +51,7 @@ export default function EmplojdCaseStudy() {
               - TypeScript linter errors */}
           <VerticalFloatingNavbar />
           <CaseStudy
-            title="Emplojd"
+            title="EMPLOJD"
             subtitle="Enhancing job applications without compromising authenticity."
             description="Designed and developed a comprehensive HR management platform that streamlines employee onboarding, performance tracking, and workplace communication. The platform features an intuitive dashboard for both HR professionals and employees, with advanced analytics and automation capabilities."
             duration="8 months"

@@ -13,34 +13,72 @@ export const useSmoothScroll = () => {
   const isInitialized = useRef(false);
 
   useEffect(() => {
-    // Only initialize once across the entire app
-    if (globalSmoother || isInitialized.current) {
-      return;
+    // Check if device is mobile/tablet
+    const isMobileOrTablet = () => {
+      // Check for touch capability and screen size
+      const hasTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+      const isSmallScreen = window.innerWidth < 1024; // lg breakpoint
+      return hasTouch && isSmallScreen;
+    };
+
+    // Handle resize and orientation changes
+    const handleResize = () => {
+      const isMobile = isMobileOrTablet();
+
+      if (isMobile && globalSmoother) {
+        // Kill ScrollSmoother on mobile/tablet
+        console.log("Switching to mobile/tablet - killing smooth scroll");
+        globalSmoother.kill();
+        globalSmoother = null;
+        document.documentElement.classList.remove("has-scroll-smooth");
+        isInitialized.current = false;
+      } else if (!isMobile && !globalSmoother && !isInitialized.current) {
+        // Initialize ScrollSmoother on desktop
+        console.log("Switching to desktop - initializing smooth scroll");
+        initializeSmoother();
+      }
+    };
+
+    // Initialize ScrollSmoother function
+    const initializeSmoother = () => {
+      if (globalSmoother || isInitialized.current) {
+        return;
+      }
+
+      console.log("Desktop detected - initializing smooth scroll...");
+
+      // Create smooth scrolling only for desktop
+      globalSmoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        smooth: 1,
+        effects: false,
+        normalizeScroll: true,
+        smoothTouch: 0, // Disable touch smoothing
+        ease: "power2.out",
+        speed: 1,
+      });
+
+      // Add smooth class to html
+      document.documentElement.classList.add("has-scroll-smooth");
+      isInitialized.current = true;
+    };
+
+    // Initial setup
+    if (isMobileOrTablet()) {
+      console.log("Mobile/tablet detected - using native scrolling");
+    } else {
+      initializeSmoother();
     }
 
-    console.log("Initializing smooth scroll...");
+    // Add resize listener
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
 
-    // Create smooth scrolling
-    globalSmoother = ScrollSmoother.create({
-      wrapper: "#smooth-wrapper",
-      content: "#smooth-content",
-      smooth: 1,
-      effects: false,
-      normalizeScroll: true,
-      smoothTouch: 0.05,
-      ease: "power2.out",
-      speed: 1,
-    });
-
-    // Add smooth class to html
-    document.documentElement.classList.add("has-scroll-smooth");
-
-    isInitialized.current = true;
-
-    // Cleanup only when component unmounts (but keep the smoother alive)
+    // Cleanup
     return () => {
-      // Don't kill the smoother on component unmount
-      // It will be reused across page navigations
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 

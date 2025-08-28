@@ -32,11 +32,11 @@ export default function ClientLayout({
     // Scroll to top on page navigation
     const scrollToTop = () => {
       const smoother = ScrollSmoother.get();
-      if (smoother) {
-        // Use smooth scrolling if available
+      if (smoother && window.innerWidth >= 1024) {
+        // Use smooth scrolling only on desktop
         smoother.scrollTo(0);
       } else {
-        // Fallback to regular scroll
+        // Use native smooth scroll for mobile/tablet
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     };
