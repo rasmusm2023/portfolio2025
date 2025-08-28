@@ -102,7 +102,7 @@ export default function EmplojdCaseStudy() {
             companyText="School project"
             roleText="Lead UX/UI Designer: worked on strategy, research, facilitating workshops, prototyping, dev collaboration and delivery."
             teamRoles={[
-              "01 Lead UX/UI Designer",
+              "01 Lead UX/UI Designer (me)",
               "01 UX Designer",
               "04 Backend developers",
               "03 Frontend developers",

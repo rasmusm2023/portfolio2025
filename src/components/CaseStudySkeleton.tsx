@@ -52,8 +52,8 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
           </div>
 
           {/* Title Skeleton */}
-          <div className="mt-16 mb-8">
-            <div className="w-3/4 h-20 bg-neutral-200 dark:bg-neutral-600 rounded-lg"></div>
+          <div className="mt-16 mb-8 max-w-[640px]">
+            <div className="w-full h-20 bg-neutral-200 dark:bg-neutral-600 rounded-lg"></div>
           </div>
 
           {/* Bento Boxes Skeleton */}

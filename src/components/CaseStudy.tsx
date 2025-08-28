@@ -10,7 +10,10 @@ import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
 import Footer from "@/components/Footer";
 import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
-
+import {
+  CaseStudyOtherStudies,
+  CaseStudyMockups,
+} from "@/components/case-studies";
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 interface Section {
@@ -740,6 +743,35 @@ const CaseStudy = ({
     };
   }, []);
 
+  // Fade-in animation on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in-visible");
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px",
+      }
+    );
+
+    // Observe all fade-in sections
+    const fadeInSections = document.querySelectorAll(".fade-in-section");
+    fadeInSections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      fadeInSections.forEach((section) => {
+        observer.unobserve(section);
+      });
+    };
+  }, []);
+
   // Intersection Observer for prototype section visibility
   useEffect(() => {
     const prototypeSection = document.querySelector('[data-section="results"]');
@@ -833,6 +865,18 @@ const CaseStudy = ({
             transition: all 0.2s ease;
             transform: translate(-50%, -50%);
             background: rgba(144, 126, 255, 0.3);
+          }
+
+          /* Fade-in animation classes */
+          .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+          }
+
+          .fade-in-section.fade-in-visible {
+            opacity: 1;
+            transform: translateY(0);
           }
         `}</style>
         <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
@@ -1072,7 +1116,7 @@ const CaseStudy = ({
           </section>
 
           {/* Summary Section */}
-          <section className="pt-32 pb-16">
+          <section className="pt-32 pb-16 fade-in-section">
             <div className="max-w-[1200px] mx-auto px-8">
               <div
                 className="flex justify-center gap-12"
@@ -1111,7 +1155,7 @@ const CaseStudy = ({
           <section
             ref={aboutRef}
             data-section="about"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               {/* About Box */}
@@ -1218,7 +1262,7 @@ const CaseStudy = ({
           <section
             ref={businessObjectiveRef}
             data-section="business-objective"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
@@ -1254,7 +1298,7 @@ const CaseStudy = ({
           <section
             ref={challengeRef}
             data-section="challenge"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
@@ -1382,7 +1426,7 @@ const CaseStudy = ({
           <section
             ref={solutionRef}
             data-section="solution"
-            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80"
+            className="py-16 bg-neutral-10/80 dark:bg-neutral-90/80 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
@@ -1509,7 +1553,11 @@ const CaseStudy = ({
           </section>
 
           {/* The Craft Section */}
-          <section ref={craftRef} data-section="craft" className="py-16">
+          <section
+            ref={craftRef}
+            data-section="craft"
+            className="py-16 fade-in-section"
+          >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
                 className="flex justify-center gap-12"
@@ -1814,7 +1862,7 @@ const CaseStudy = ({
           <section
             ref={designExplorationsRef}
             data-section="design-explorations"
-            className="py-16"
+            className="py-16 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
@@ -2032,7 +2080,7 @@ const CaseStudy = ({
           <section
             ref={designSystemRef}
             data-section="design-system"
-            className="py-16 bg-neutral-10 dark:bg-neutral-90"
+            className="py-16 bg-neutral-10 dark:bg-neutral-90 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               {/* Section Title */}
@@ -2095,7 +2143,7 @@ const CaseStudy = ({
           <section
             ref={processRef}
             data-section="process"
-            className="py-16 bg-neutral-3 dark:bg-neutral-90"
+            className="py-16 bg-neutral-3 dark:bg-neutral-90 fade-in-section"
           >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
@@ -2260,7 +2308,11 @@ const CaseStudy = ({
           </section>
 
           {/* Kickoff Workshop Section */}
-          <section ref={roleRef} data-section="workshop" className="py-16">
+          <section
+            ref={roleRef}
+            data-section="workshop"
+            className="py-16 fade-in-section"
+          >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
                 className="flex justify-center gap-12"
@@ -2383,7 +2435,11 @@ const CaseStudy = ({
           </section>
 
           {/* Insights Section */}
-          <section ref={insightsRef} data-section="insights" className="py-16">
+          <section
+            ref={insightsRef}
+            data-section="insights"
+            className="py-16 fade-in-section"
+          >
             <div className="max-w-[1200px] mx-auto px-8">
               <div
                 className="flex justify-center gap-12"
@@ -2843,7 +2899,11 @@ const CaseStudy = ({
           </section>
 
           {/* Results Section */}
-          <section ref={resultsRef} data-section="results" className="py-16">
+          <section
+            ref={resultsRef}
+            data-section="results"
+            className="py-16 fade-in-section"
+          >
             <div className="max-w-[1200px] mx-auto px-8">
               {/* Section Title */}
               <div className="flex justify-start mb-8">
@@ -3038,142 +3098,10 @@ const CaseStudy = ({
           </section>
 
           {/* Mockup Section - Full Width */}
-          <section className="w-full">
-            {/* Full-width bottom section */}
-            <div
-              className="w-full grid grid-cols-2"
-              style={{ aspectRatio: "2/1" }}
-            >
-              {/* Left Background - Sign-in */}
-              <div className="bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden">
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Results-Shot-Sign-In-Create-Account.png"
-                  alt="Emplojd sign-in interface mockup"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              {/* Right Background - Job Search Results */}
-              <div className="bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden">
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png"
-                  alt="Emplojd job search results interface mockup"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-          </section>
+          <CaseStudyMockups />
 
           {/* Other Case Studies Section */}
-          <section className="py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90">
-            <div className="flex">
-              {/* Left margin - 10% */}
-              <div className="w-[10%]"></div>
-
-              {/* Main content - 80% */}
-              <div className="w-[80%] px-8">
-                {/* Section Title */}
-                <div className="text-center mb-12">
-                  <h2 className="text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-4">
-                    Explore More Case Studies
-                  </h2>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed max-w-2xl mx-auto">
-                    Discover more of my design work and see how I approach
-                    different challenges across various industries and project
-                    types.
-                  </p>
-                </div>
-
-                {/* Case Studies Grid */}
-                <div className="grid grid-cols-2 gap-6">
-                  {/* Zmartrest AI Case Study */}
-                  <Link
-                    href="/case-studies/zmartrest-ai"
-                    className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
-                  >
-                    <div className="aspect-[3/2] bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <h3 className="text-white font-bold text-xl mb-2 group-hover:text-orange-200 transition-colors">
-                          Zmartrest AI
-                        </h3>
-                        <p className="text-white/90 text-xs leading-relaxed">
-                          AI-powered restaurant management system with
-                          intelligent inventory and ordering
-                        </p>
-                      </div>
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                              />
-                            </svg>
-                          </div>
-                          <span className="font-semibold text-sm">
-                            View Case Study
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-
-                  {/* Noted App Case Study */}
-                  <Link
-                    href="/case-studies/noted-app"
-                    className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
-                  >
-                    <div className="aspect-[3/2] bg-gradient-to-br from-purple-500 to-pink-600 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                      <div className="absolute bottom-6 left-6 right-6">
-                        <h3 className="text-white font-bold text-xl mb-2 group-hover:text-pink-200 transition-colors">
-                          Fokus
-                        </h3>
-                        <p className="text-white/90 text-xs leading-relaxed">
-                          Fokus description
-                        </p>
-                      </div>
-                      {/* Hover overlay */}
-                      <div className="absolute inset-0 bg-pink-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="text-white text-center">
-                          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mb-2 mx-auto group-hover:scale-110 transition-transform">
-                            <svg
-                              className="w-5 h-5"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                              />
-                            </svg>
-                          </div>
-                          <span className="font-semibold text-sm">
-                            View Case Study
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-
-              {/* Right margin - 10% */}
-              <div className="w-[10%]"></div>
-            </div>
-          </section>
+          <CaseStudyOtherStudies />
 
           {/* Footer Section */}
           <div className="pt-16 pb-16">
