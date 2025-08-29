@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { HandTap } from "@phosphor-icons/react";
 
 const Results: React.FC = () => {
   const [currentPrototypeIndex, setCurrentPrototypeIndex] = useState(0);
@@ -153,6 +154,27 @@ const Results: React.FC = () => {
               Results
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
+          </div>
+        </div>
+
+        {/* Mobile Swipe Hint and Prototype Titles - ABOVE prototypes, under title */}
+        <div className="block sm:hidden mb-6">
+          {/* Click Hint */}
+          <div className="text-center mb-4">
+            <div className="flex items-center justify-center gap-2 text-neutral-60 dark:text-neutral-40 text-sm">
+              <HandTap className="w-4 h-4" />
+              <span>Click prototypes to pause or swap</span>
+            </div>
+          </div>
+
+          {/* Prototype Titles - Mobile Only */}
+          <div className="text-center sm:hidden">
+            <h3 className="text-lg font-semibold text-neutral-80 dark:text-neutral-20 mb-2">
+              {prototypeTitles[currentPrototypeIndex]}
+            </h3>
+            <p className="text-sm text-neutral-60 dark:text-neutral-40">
+              {currentPrototypeIndex + 1} of {prototypeTitles.length}
+            </p>
           </div>
         </div>
 
@@ -333,39 +355,6 @@ const Results: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Mobile Swipe Hint and Prototype Titles */}
-        <div className="block sm:hidden">
-          {/* Click Hint */}
-          <div className="text-center mb-6">
-            <div className="flex items-center justify-center gap-2 text-neutral-60 dark:text-neutral-40 text-sm">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
-                />
-              </svg>
-              <span>Click between prototypes</span>
-            </div>
-          </div>
-
-          {/* Prototype Titles - Mobile Only */}
-          <div className="text-center">
-            <h3 className="text-lg font-semibold text-neutral-80 dark:text-neutral-20 mb-2">
-              {prototypeTitles[currentPrototypeIndex]}
-            </h3>
-            <p className="text-sm text-neutral-60 dark:text-neutral-40">
-              {currentPrototypeIndex + 1} of {prototypeTitles.length}
-            </p>
           </div>
         </div>
 

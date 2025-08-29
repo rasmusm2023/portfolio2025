@@ -896,11 +896,13 @@ const CaseStudy = ({
 
           {/* Results Section */}
           <Results />
+        </div>
 
-          {/* Mockup Section - Full Width */}
-          <Mockups />
+        {/* Mockup Section - Full Width (Outside main container) */}
+        <Mockups />
 
-          {/* Other Case Studies Section */}
+        {/* Other Case Studies Section */}
+        <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
           <OtherStudies />
 
           {/* Footer Section */}
