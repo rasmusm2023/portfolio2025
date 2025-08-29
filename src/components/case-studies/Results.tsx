@@ -8,6 +8,13 @@ const Results: React.FC = () => {
     useState(true);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
+  // Prototype titles
+  const prototypeTitles = [
+    "Cover Letter Generation Flow",
+    "Saved Cover Letters Flow",
+    "User Profile States",
+  ];
+
   // Prototype showcase handling functions
   const handlePrototypeClick = (clickedIndex: number) => {
     const leftPosition = prototypePositions[0];
@@ -34,11 +41,11 @@ const Results: React.FC = () => {
     const rightPosition = prototypePositions[2];
 
     if (prototypeIndex === leftPosition) {
-      return "left-1/2 transform -translate-x-[400px] -translate-y-6 z-20";
+      return "left-1/2 transform -translate-x-[120px] sm:-translate-x-[140px] md:-translate-x-[160px] lg:-translate-x-[400px] xl:-translate-x-[400px] -translate-y-6 z-20";
     } else if (prototypeIndex === middlePosition) {
       return "left-1/2 transform -translate-x-1/2 translate-y-6 z-10";
     } else {
-      return "left-1/2 transform translate-x-[52px] translate-y-12 z-5";
+      return "left-1/2 transform translate-x-[20px] sm:translate-x-[30px] md:translate-x-[40px] lg:translate-x-[52px] xl:translate-x-[52px] translate-y-12 z-5";
     }
   };
 
@@ -134,10 +141,13 @@ const Results: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 fade-in-section">
+    <section
+      data-section="results"
+      className="py-12 sm:py-12 md:py-16 fade-in-section"
+    >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Title */}
-        <div className="flex justify-start mb-8">
+        <div className="flex justify-start mb-8 sm:mb-12">
           <div className="w-full lg:w-[600px]">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
               Results
@@ -147,9 +157,9 @@ const Results: React.FC = () => {
         </div>
 
         {/* Interactive Prototype Showcase */}
-        <div className="w-full h-[400px] sm:h-[600px] md:h-[800px] lg:h-[987px] relative rounded-2xl overflow-hidden mb-12 sm:mb-16">
-          {/* SVG Background Slides */}
-          <div className="absolute inset-0 w-full h-full">
+        <div className="w-full h-[500px] sm:h-[500px] md:h-[600px] lg:h-[800px] xl:h-[987px] relative rounded-2xl overflow-hidden mb-8 sm:mb-12 lg:mb-16">
+          {/* SVG Background Slides - Hidden on mobile */}
+          <div className="absolute inset-0 w-full h-full hidden sm:block">
             {/* First Background - Cover Letter Generation Flow */}
             <div
               className={`absolute inset-0 w-full h-full transition-opacity duration-500 ${
@@ -159,7 +169,7 @@ const Results: React.FC = () => {
               <img
                 src="/case-study-assets/emplojd/Emplojd-Results-Cover-Letter-Generation-Flow.svg"
                 alt="Cover Letter Generation Flow"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -172,7 +182,7 @@ const Results: React.FC = () => {
               <img
                 src="/case-study-assets/emplojd/Emplojd-Results-Saved-Cover-Letters-Flow.svg"
                 alt="Saved Cover Letters Flow"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
 
@@ -185,7 +195,7 @@ const Results: React.FC = () => {
               <img
                 src="/case-study-assets/emplojd/Emplojd-Results-User-Profile-States.svg"
                 alt="User Profile States"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
@@ -206,11 +216,11 @@ const Results: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[180px] sm:w-[200px] md:w-[220px] lg:w-[320px] xl:w-[320px] h-[360px] sm:h-[400px] md:h-[440px] lg:h-[710px] xl:h-[710px] bg-neutral-900 rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[32px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   0
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[0] = el;
@@ -230,7 +240,7 @@ const Results: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 0 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
@@ -250,11 +260,11 @@ const Results: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[180px] sm:w-[200px] md:w-[220px] lg:w-[320px] xl:w-[320px] h-[360px] sm:h-[400px] md:h-[440px] lg:h-[710px] xl:h-[710px] bg-neutral-900 rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[32px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   1
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[1] = el;
@@ -274,7 +284,7 @@ const Results: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 1 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
@@ -282,7 +292,7 @@ const Results: React.FC = () => {
 
             {/* Prototype Box 3 */}
             <div
-              className={`absolute transition-all duration-500 cursor-pointer prototype-box cursor-pointer ${getPrototypePosition(
+              className={`absolute transition-all duration-500 cursor-pointer cursor-pointer ${getPrototypePosition(
                 2
               )}`}
               onClick={() => handlePrototypeClick(2)}
@@ -294,11 +304,11 @@ const Results: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[180px] sm:w-[200px] md:w-[220px] lg:w-[320px] xl:w-[320px] h-[360px] sm:h-[400px] md:h-[440px] lg:h-[710px] xl:h-[710px] bg-neutral-900 rounded-[20px] sm:rounded-[22px] md:rounded-[24px] lg:rounded-[32px] xl:rounded-[32px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   2
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[2] = el;
@@ -318,12 +328,55 @@ const Results: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 2 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[18px] sm:rounded-[20px] md:rounded-[22px] lg:rounded-[30px] xl:rounded-[30px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Mobile Swipe Hint and Prototype Titles */}
+        <div className="block sm:hidden">
+          {/* Click Hint */}
+          <div className="text-center mb-6">
+            <div className="flex items-center justify-center gap-2 text-neutral-60 dark:text-neutral-40 text-sm">
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                />
+              </svg>
+              <span>Click between prototypes</span>
+            </div>
+          </div>
+
+          {/* Prototype Titles - Mobile Only */}
+          <div className="text-center">
+            <h3 className="text-lg font-semibold text-neutral-80 dark:text-neutral-20 mb-2">
+              {prototypeTitles[currentPrototypeIndex]}
+            </h3>
+            <p className="text-sm text-neutral-60 dark:text-neutral-40">
+              {currentPrototypeIndex + 1} of {prototypeTitles.length}
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop Prototype Titles - Hidden on Mobile */}
+        <div className="hidden sm:block text-center mt-8">
+          <h3 className="text-xl font-semibold text-neutral-80 dark:text-neutral-20 mb-2">
+            {prototypeTitles[currentPrototypeIndex]}
+          </h3>
+          <p className="text-sm text-neutral-60 dark:text-neutral-40">
+            {currentPrototypeIndex + 1} of {prototypeTitles.length}
+          </p>
         </div>
       </div>
     </section>

@@ -8,7 +8,10 @@ const BusinessObjective: React.FC<BusinessObjectiveProps> = ({
   businessObjectivesText,
 }) => {
   return (
-    <section className="py-12 sm:py-12 md:py-16 fade-in-section">
+    <section
+      data-section="business-objective"
+      className="py-12 sm:py-12 md:py-16 fade-in-section"
+    >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
           <div className="w-full lg:w-[600px]">
@@ -18,16 +21,15 @@ const BusinessObjective: React.FC<BusinessObjectiveProps> = ({
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
           </div>
           <div className="w-full lg:w-[600px]">
-            {businessObjectivesText ? (
-              <div className="text-left">{businessObjectivesText}</div>
-            ) : (
-              <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
-              </p>
-            )}
+            <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+              {businessObjectivesText || (
+                <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
+                  The business objective was to create a platform that
+                  simplifies the job application process while maintaining the
+                  personal touch that recruiters value.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>

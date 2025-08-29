@@ -37,7 +37,10 @@ const About: React.FC<AboutProps> = ({
   }, []);
 
   return (
-    <section className="py-12 sm:py-12 md:py-16 fade-in-section">
+    <section
+      data-section="about"
+      className="py-12 sm:py-12 md:py-12 fade-in-section"
+    >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
           <div className="w-full lg:w-[600px]">
