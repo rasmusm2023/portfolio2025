@@ -1,10 +1,10 @@
 import React from "react";
 
-interface CaseStudyBusinessObjectiveProps {
+interface BusinessObjectiveProps {
   businessObjectivesText?: React.ReactNode;
 }
 
-const CaseStudyBusinessObjective: React.FC<CaseStudyBusinessObjectiveProps> = ({
+const BusinessObjective: React.FC<BusinessObjectiveProps> = ({
   businessObjectivesText,
 }) => {
   return (
@@ -35,4 +35,4 @@ const CaseStudyBusinessObjective: React.FC<CaseStudyBusinessObjectiveProps> = ({
   );
 };
 
-export default CaseStudyBusinessObjective;
+export default BusinessObjective;

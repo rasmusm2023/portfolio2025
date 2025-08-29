@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
-const CaseStudyDesignExplorations: React.FC = () => {
+const DesignExplorations: React.FC = () => {
   const [currentDesignExplorationIndex, setCurrentDesignExplorationIndex] =
     useState(0);
   const textContainerRef = useRef<HTMLDivElement>(null);
@@ -274,4 +274,4 @@ const CaseStudyDesignExplorations: React.FC = () => {
   );
 };
 
-export default CaseStudyDesignExplorations;
+export default DesignExplorations;

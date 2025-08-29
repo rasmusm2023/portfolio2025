@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-const CaseStudyResults: React.FC = () => {
+const Results: React.FC = () => {
   const [currentPrototypeIndex, setCurrentPrototypeIndex] = useState(0);
   const [prototypePositions, setPrototypePositions] = useState([0, 1, 2]); // [left, middle, right]
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
@@ -330,4 +330,4 @@ const CaseStudyResults: React.FC = () => {
   );
 };
 
-export default CaseStudyResults;
+export default Results;

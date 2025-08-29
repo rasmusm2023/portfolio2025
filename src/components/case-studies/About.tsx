@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
-interface CaseStudyAboutProps {
+interface AboutProps {
   aboutText?: React.ReactNode;
   appIconPath?: string;
   logotypeBlackPath?: string;
   logotypeWhitePath?: string;
 }
 
-const CaseStudyAbout: React.FC<CaseStudyAboutProps> = ({
+const About: React.FC<AboutProps> = ({
   aboutText,
   appIconPath,
   logotypeBlackPath,
@@ -175,4 +175,4 @@ const CaseStudyAbout: React.FC<CaseStudyAboutProps> = ({
   );
 };
 
-export default CaseStudyAbout;
+export default About;

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
 
-const CaseStudyInsights: React.FC = () => {
+const Insights: React.FC = () => {
   // Insights Section Spinning Icons Effect with GSAP
   useEffect(() => {
     // Select all SVG icon containers in the insights sections
@@ -405,4 +405,4 @@ const CaseStudyInsights: React.FC = () => {
   );
 };
 
-export default CaseStudyInsights;
+export default Insights;

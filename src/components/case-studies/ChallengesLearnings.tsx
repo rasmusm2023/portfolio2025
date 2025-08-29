@@ -1,6 +1,6 @@
 import React from "react";
 
-const CaseStudyChallengesLearnings: React.FC = () => {
+const ChallengesLearnings: React.FC = () => {
   return (
     <section data-section="challenges-learnings" className="py-16">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -62,4 +62,4 @@ const CaseStudyChallengesLearnings: React.FC = () => {
   );
 };
 
-export default CaseStudyChallengesLearnings;
+export default ChallengesLearnings;

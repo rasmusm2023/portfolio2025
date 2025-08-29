@@ -1,12 +1,10 @@
 import React from "react";
 
-interface CaseStudyChallengeProps {
+interface ChallengeProps {
   challenge: string;
 }
 
-const CaseStudyChallenge: React.FC<CaseStudyChallengeProps> = ({
-  challenge,
-}) => {
+const Challenge: React.FC<ChallengeProps> = ({ challenge }) => {
   return (
     <section className="py-6 sm:py-8 md:py-16 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -120,4 +118,4 @@ const CaseStudyChallenge: React.FC<CaseStudyChallengeProps> = ({
   );
 };
 
-export default CaseStudyChallenge;
+export default Challenge;

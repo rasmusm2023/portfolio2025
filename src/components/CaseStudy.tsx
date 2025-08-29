@@ -11,22 +11,22 @@ import { useNavbar } from "@/contexts/NavbarContext";
 import Footer from "@/components/Footer";
 import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
 import {
-  CaseStudyHeader,
-  CaseStudySummary,
-  CaseStudyAbout,
-  CaseStudyBusinessObjective,
-  CaseStudyChallenge,
-  CaseStudySolution,
-  CaseStudyCraft,
-  CaseStudyDesignExplorations,
-  CaseStudyDesignSystem,
-  CaseStudyProcess,
-  CaseStudyWorkshop,
-  CaseStudyInsights,
-  CaseStudyChallengesLearnings,
-  CaseStudyResults,
-  CaseStudyMockups,
-  CaseStudyOtherStudies,
+  Hero,
+  Summary,
+  About,
+  BusinessObjective,
+  Challenge,
+  Solution,
+  Craft,
+  DesignExplorations,
+  DesignSystem,
+  Process,
+  Workshop,
+  Insights,
+  ChallengesLearnings,
+  Results,
+  Mockups,
+  OtherStudies,
 } from "@/components/case-studies";
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -838,9 +838,9 @@ const CaseStudy = ({
           }
         `}</style>
         <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
-          {/* Header Section with Responsive Layout */}
-          {/* Header Section with Responsive Layout */}
-          <CaseStudyHeader
+          {/* Hero Section with Responsive Layout */}
+          {/* Hero Section with Responsive Layout */}
+          <Hero
             title={title}
             subtitle={subtitle}
             roleText={roleText}
@@ -854,10 +854,10 @@ const CaseStudy = ({
           />
 
           {/* Summary Section */}
-          <CaseStudySummary description="Emplojd is an AI-powered SaaS platform designed to make job applications smarter and more personal. The platform recommends relevant job listings and also writes tailored cover letters using AI." />
+          <Summary description="Emplojd is an AI-powered SaaS platform designed to make job applications smarter and more personal. The platform recommends relevant job listings and also writes tailored cover letters using AI." />
 
           {/* About Section */}
-          <CaseStudyAbout
+          <About
             aboutText={aboutText}
             appIconPath={appIconPath}
             logotypeBlackPath={logotypeBlackPath}
@@ -865,45 +865,43 @@ const CaseStudy = ({
           />
 
           {/* Business Objective Section */}
-          <CaseStudyBusinessObjective
-            businessObjectivesText={businessObjectivesText}
-          />
+          <BusinessObjective businessObjectivesText={businessObjectivesText} />
 
           {/* The challenge Section with Centered Layout */}
-          <CaseStudyChallenge challenge="AI-powered job application platform" />
+          <Challenge challenge="AI-powered job application platform" />
 
           {/* The Solution Section */}
-          <CaseStudySolution solution="AI-powered job application platform" />
+          <Solution solution="AI-powered job application platform" />
 
           {/* The Craft Section */}
-          <CaseStudyCraft />
+          <Craft />
 
           {/* Design Explorations Section */}
-          <CaseStudyDesignExplorations />
+          <DesignExplorations />
 
           {/* Design Guide / Design System Section */}
-          <CaseStudyDesignSystem />
+          <DesignSystem />
 
           {/* The Process Section */}
-          <CaseStudyProcess processSteps={processSteps} />
+          <Process processSteps={processSteps} />
 
           {/* Kickoff Workshop Section */}
-          <CaseStudyWorkshop />
+          <Workshop />
 
           {/* Insights Section */}
-          <CaseStudyInsights />
+          <Insights />
 
           {/* Challenges & Learnings Section */}
-          <CaseStudyChallengesLearnings />
+          <ChallengesLearnings />
 
           {/* Results Section */}
-          <CaseStudyResults />
+          <Results />
 
           {/* Mockup Section - Full Width */}
-          <CaseStudyMockups />
+          <Mockups />
 
           {/* Other Case Studies Section */}
-          <CaseStudyOtherStudies />
+          <OtherStudies />
 
           {/* Footer Section */}
           <div className="pt-16 pb-16">

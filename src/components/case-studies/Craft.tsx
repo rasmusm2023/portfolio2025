@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
-interface CaseStudyCraftProps {
+interface CraftProps {
   // Add any props if needed
 }
 
-const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
+const Craft: React.FC<CraftProps> = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const craftTextContainerRef = useRef<HTMLDivElement>(null);
 
@@ -425,4 +425,4 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
   );
 };
 
-export default CaseStudyCraft;
+export default Craft;

@@ -1,10 +1,10 @@
 import React from "react";
 
-interface CaseStudySolutionProps {
+interface SolutionProps {
   solution: string;
 }
 
-const CaseStudySolution: React.FC<CaseStudySolutionProps> = ({ solution }) => {
+const Solution: React.FC<SolutionProps> = ({ solution }) => {
   return (
     <section className="py-12 sm:py-16 md:py-16 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -124,4 +124,4 @@ const CaseStudySolution: React.FC<CaseStudySolutionProps> = ({ solution }) => {
   );
 };
 
-export default CaseStudySolution;
+export default Solution;

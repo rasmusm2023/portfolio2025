@@ -1,10 +1,10 @@
 import React from "react";
 
-interface CaseStudySummaryProps {
+interface SummaryProps {
   description: string;
 }
 
-const CaseStudySummary: React.FC<CaseStudySummaryProps> = ({ description }) => {
+const Summary: React.FC<SummaryProps> = ({ description }) => {
   return (
     <section className="py-6 sm:py-8 md:py-16 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -33,4 +33,4 @@ const CaseStudySummary: React.FC<CaseStudySummaryProps> = ({ description }) => {
   );
 };
 
-export default CaseStudySummary;
+export default Summary;

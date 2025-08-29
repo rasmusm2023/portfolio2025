@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const CaseStudyOtherStudies: React.FC = () => {
+const OtherStudies: React.FC = () => {
   return (
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -106,4 +106,4 @@ const CaseStudyOtherStudies: React.FC = () => {
   );
 };
 
-export default CaseStudyOtherStudies;
+export default OtherStudies;

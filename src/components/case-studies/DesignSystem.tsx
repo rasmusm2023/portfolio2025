@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const CaseStudyDesignSystem: React.FC = () => {
+const DesignSystem: React.FC = () => {
   const designSystemRef = useRef<HTMLElement>(null);
 
   // Design System Infinite Scroll Effect
@@ -152,4 +152,4 @@ const CaseStudyDesignSystem: React.FC = () => {
   );
 };
 
-export default CaseStudyDesignSystem;
+export default DesignSystem;

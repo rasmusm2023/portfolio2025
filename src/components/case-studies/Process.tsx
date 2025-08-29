@@ -1,13 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 
-interface CaseStudyProcessProps {
+interface ProcessProps {
   processSteps?: string[];
 }
 
-const CaseStudyProcess: React.FC<CaseStudyProcessProps> = ({
-  processSteps,
-}) => {
+const Process: React.FC<ProcessProps> = ({ processSteps }) => {
   const processMorphRef = useRef<HTMLDivElement>(null);
 
   // Process Section Morphing Effect
@@ -200,4 +198,4 @@ const CaseStudyProcess: React.FC<CaseStudyProcessProps> = ({
   );
 };
 
-export default CaseStudyProcess;
+export default Process;

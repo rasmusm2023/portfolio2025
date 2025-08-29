@@ -1,6 +1,6 @@
 import React from "react";
 
-const CaseStudyMockups: React.FC = () => {
+const Mockups: React.FC = () => {
   return (
     <section className="w-full">
       {/* Full-width bottom section */}
@@ -29,4 +29,4 @@ const CaseStudyMockups: React.FC = () => {
   );
 };
 
-export default CaseStudyMockups;
+export default Mockups;

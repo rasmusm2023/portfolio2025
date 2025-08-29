@@ -1,6 +1,6 @@
 import React from "react";
 
-const CaseStudyWorkshop: React.FC = () => {
+const Workshop: React.FC = () => {
   return (
     <section className="py-16 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
@@ -118,4 +118,4 @@ const CaseStudyWorkshop: React.FC = () => {
   );
 };
 
-export default CaseStudyWorkshop;
+export default Workshop;

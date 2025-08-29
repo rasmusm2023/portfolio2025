@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
-interface CaseStudyHeaderProps {
+interface HeroProps {
   title: string;
   subtitle: string;
   roleText: string;
@@ -18,7 +18,7 @@ interface CaseStudyHeaderProps {
   linkText: string;
 }
 
-const CaseStudyHeader: React.FC<CaseStudyHeaderProps> = ({
+const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
   roleText,
@@ -374,4 +374,4 @@ const CaseStudyHeader: React.FC<CaseStudyHeaderProps> = ({
   );
 };
 
-export default CaseStudyHeader;
+export default Hero;
