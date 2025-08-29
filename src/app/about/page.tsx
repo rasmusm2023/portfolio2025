@@ -808,7 +808,7 @@ export default function AboutPage() {
                       Why This Portfolio?
                     </h2>
                     <Image
-                      src="/assets/icons/Gold3D/3dicons-star-dynamic-premium.png"
+                      src="/icons/3dicons-star-dynamic-premium.png"
                       alt="Why This Portfolio"
                       width={80}
                       height={80}

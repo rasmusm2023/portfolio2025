@@ -1442,3 +1442,38 @@ button .morphing-container {
   position: relative;
   z-index: 2;
 }
+
+/* Radiating purple box effect */
+@keyframes radiate {
+  0% {
+    box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
+      0 0 40px rgba(144, 126, 255, 0.3), 0 0 60px rgba(144, 126, 255, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(144, 126, 255, 0.7),
+      0 0 60px rgba(144, 126, 255, 0.5), 0 0 90px rgba(144, 126, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
+      0 0 40px rgba(144, 126, 255, 0.3), 0 0 60px rgba(144, 126, 255, 0.1);
+  }
+}
+
+.radiating-purple-box {
+  animation: radiate 3s ease-in-out infinite;
+}
+
+/* Video bobbing animation for hero videos */
+@keyframes gentle-bob {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.video-bobbing {
+  animation: gentle-bob 3s ease-in-out infinite;
+}

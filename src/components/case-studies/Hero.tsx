@@ -135,7 +135,7 @@ const Hero: React.FC<HeroProps> = ({
           {/* Back Arrow + Case Studies Rectangle */}
           <button
             onClick={handleCaseStudiesClick}
-            className="flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-lg sm:rounded-l-lg sm:rounded-r-none hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full w-40 sm:w-auto justify-start"
+            className="flex items-center gap-3 px-3 sm:px-4 py-2 sm:py-3 bg-neutral-10 dark:bg-neutral-90 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 rounded-l-lg hover:bg-neutral-20 dark:hover:bg-neutral-80 transition-all duration-200 group h-full w-40 sm:w-auto justify-start"
           >
             <ArrowLeft
               size={16}
@@ -167,7 +167,19 @@ const Hero: React.FC<HeroProps> = ({
         </div>
 
         {/* Project Title */}
-        <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black text-neutral-80 dark:text-neutral-20 mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px]">
+        <h1
+          className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px]"
+          style={{
+            background:
+              typeof document !== "undefined" &&
+              document.documentElement.classList.contains("dark")
+                ? "linear-gradient(to top, #a855f7, #d4d4d8, #e4e4e7)"
+                : "linear-gradient(to top, #9333ea, #71717a, #52525b)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+          }}
+        >
           {title}
         </h1>
 
@@ -248,7 +260,7 @@ const Hero: React.FC<HeroProps> = ({
       {/* Purple Box Container - Responsive positioning */}
       <div className="mt-8 sm:mt-12 lg:absolute lg:top-24 lg:left-[calc(50%+150px)] lg:right-0 lg:z-10">
         {/* Purple box - Responsive sizing with radiating effect */}
-        <div className="w-full h-[600px] sm:h-[600px] lg:h-[860px] bg-[#907EFF] flex flex-col p-4 sm:p-6 lg:p-8 rounded-none lg:rounded-tl-2xl lg:rounded-bl-2xl">
+        <div className="w-full h-[600px] sm:h-[600px] lg:h-[860px] bg-[#907EFF] flex flex-col p-4 sm:p-6 lg:p-8 rounded-none lg:rounded-tl-2xl lg:rounded-bl-2xl radiating-purple-box">
           {/* Glass-styled technology pills - Responsive layout */}
           <div className="flex flex-wrap gap-2 mb-4">
             {/* On 2xl+ screens (≥1500px): Show all pills */}
@@ -311,10 +323,10 @@ const Hero: React.FC<HeroProps> = ({
 
           {/* Video Container - Responsive sizing */}
           <div className="flex-1 flex items-center justify-center relative">
-            <div className="relative w-full max-w-full lg:max-w-[900px] h-[470px] sm:h-[500px] lg:h-[600px] rounded-xl lg:rounded-2xl overflow-hidden transition-all duration-500 ease-out hover:scale-105">
+            <div className="relative w-full max-w-full lg:max-w-[900px] h-[470px] sm:h-[500px] lg:h-[600px] rounded-xl lg:rounded-2xl overflow-hidden transition-all duration-500 ease-out">
               {/* Single Video */}
               <video
-                className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-1000"
+                className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-1000 video-bobbing"
                 muted
                 loop={false}
                 playsInline
@@ -355,7 +367,7 @@ const Hero: React.FC<HeroProps> = ({
                 }}
                 onEnded={(e) => {
                   const video = e.target as HTMLVideoElement;
-                  video.parentElement?.classList.add("video-bobbing");
+                  // Video ended - could add any end-of-video logic here if needed
                 }}
               >
                 <source

@@ -6,7 +6,7 @@ const OtherStudies: React.FC = () => {
     <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90 fade-in-section">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Title */}
-        <div className="text-center mb-8 sm:mb-10 md:mb-12">
+        <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl font-black text-neutral-100 dark:text-neutral-0 mb-3 sm:mb-4">
             Explore More Case Studies
           </h2>
@@ -17,7 +17,7 @@ const OtherStudies: React.FC = () => {
         </div>
 
         {/* Case Studies Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:gap-8 xl:gap-10 gap-4 sm:gap-6">
           {/* Zmartrest AI Case Study */}
           <Link
             href="/case-studies/zmartrest-ai"
@@ -69,10 +69,11 @@ const OtherStudies: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
                 <h3 className="text-white font-bold text-lg sm:text-xl mb-2 group-hover:text-pink-200 transition-colors">
-                  Fokus
+                  Noted App
                 </h3>
                 <p className="text-white/90 text-xs leading-relaxed">
-                  Fokus description
+                  AI-powered note-taking app with intelligent organization and
+                  search
                 </p>
               </div>
               {/* Hover overlay */}

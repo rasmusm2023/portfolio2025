@@ -158,7 +158,7 @@ const Footer = () => {
   return (
     <>
       {/* Contact Section with Noise Background */}
-      <section className="py-16 relative">
+      <section className="py-12 sm:py-14 md:py-16 relative">
         {/* Animated gradient border */}
         <div className="absolute inset-0 rounded-[2.5rem] p-[1px] overflow-hidden">
           <div
@@ -175,18 +175,18 @@ const Footer = () => {
 
         {/* Noise background overlay */}
         <div
-          className="absolute inset-0 opacity-[0.16] pointer-events-none rounded-[2.5rem] overflow-hidden px-12 sm:px-16 md:px-24 lg:px-40"
+          className="absolute inset-0 opacity-[0.16] pointer-events-none rounded-[2.5rem] overflow-hidden px-4 sm:px-8 md:px-12 lg:px-24 xl:px-40"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             backgroundSize: "256px 256px",
           }}
         />
-        <div className="text-left w-full max-w-[1600px] mx-auto px-16 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="text-left w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             {/* Contact Form - Redesigned */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-5xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 font-hanken">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-3 sm:space-y-4">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 font-hanken">
                   Let's have a chat 💬
                 </h3>
                 <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
@@ -195,7 +195,7 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-6">
+              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-4 sm:p-6">
                 <form
                   action="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
                   method="post"
@@ -246,9 +246,9 @@ const Footer = () => {
             </div>
 
             {/* Contact Information - Redesigned */}
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <h3 className="text-5xl font-bold text-neutral-70 dark:text-neutral-50 mb-4 font-hanken">
+            <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-3 sm:space-y-4">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-70 dark:text-neutral-50 mb-4 font-hanken">
                   Get in touch
                 </h3>
                 <p className="text-neutral-60 text-base font-normal leading-relaxed tracking-wide">
@@ -256,35 +256,37 @@ const Footer = () => {
                 </p>
               </div>
 
-              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-6">
-                <div className="space-y-6">
-                  <div className="flex items-center gap-4 p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
-                      <Envelope
-                        size={24}
-                        weight="regular"
-                        className="text-white"
-                      />
+              <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-4 sm:p-6">
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 xl:gap-4 p-4 xl:p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
+                    <div className="flex items-center gap-3 xl:gap-4">
+                      <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                        <Envelope
+                          size={20}
+                          weight="regular"
+                          className="text-white xl:w-6 xl:h-6"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
+                          Email
+                        </h4>
+                        <a
+                          href="mailto:hello@rasmusmattsson.com"
+                          className={`transition-colors duration-200 text-base cursor-pointer hover:opacity-90 ${
+                            emailCopied
+                              ? "text-green-500"
+                              : "text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0"
+                          }`}
+                        >
+                          hello@rasmusmattsson.com
+                        </a>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
-                        Email
-                      </h4>
-                      <a
-                        href="mailto:hello@rasmusmattsson.com"
-                        className={`transition-colors duration-200 text-base cursor-pointer hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </a>
-                    </div>
-                    <div className="flex gap-2">
+                    <div className="flex justify-start xl:justify-end w-full xl:w-auto">
                       <button
                         onClick={handleCopyEmail}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                        className={`w-full xl:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center justify-center xl:justify-start gap-2 ${
                           emailCopied
                             ? "bg-green-500 text-neutral-0 shadow-lg"
                             : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
@@ -296,32 +298,34 @@ const Footer = () => {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
-                      <FontAwesomeIcon
-                        icon={faLinkedinIn}
-                        className="w-6 h-6 text-white"
-                      />
+                  <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 xl:gap-4 p-4 xl:p-6 rounded-xl hover:border-purple-500/20 transition-all duration-200">
+                    <div className="flex items-center gap-3 xl:gap-4">
+                      <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                        <FontAwesomeIcon
+                          icon={faLinkedinIn}
+                          className="w-5 h-5 xl:w-6 xl:h-6 text-white"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
+                          LinkedIn
+                        </h4>
+                        <a
+                          href="https://linkedin.com/in/rasmus-mattsson"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base"
+                        >
+                          linkedin.com/in/rasmus-mattsson
+                        </a>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-neutral-100 dark:text-neutral-10 font-semibold mb-1 text-lg">
-                        LinkedIn
-                      </h4>
+                    <div className="flex justify-start xl:justify-end w-full xl:w-auto">
                       <a
                         href="https://linkedin.com/in/rasmus-mattsson"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base"
-                      >
-                        linkedin.com/in/rasmus-mattsson
-                      </a>
-                    </div>
-                    <div className="flex gap-2">
-                      <a
-                        href="https://linkedin.com/in/rasmus-mattsson"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                        className="w-full xl:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center justify-center xl:justify-start gap-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
                       >
                         <User size={16} weight="regular" />
                         See profile
@@ -334,8 +338,8 @@ const Footer = () => {
           </div>
 
           {/* Footer Content - Inside Noise Background */}
-          <div className="mt-8 pt-4 border-t border-neutral-20/10 dark:border-neutral-100/10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="mt-6 sm:mt-8 pt-4 border-t border-neutral-20/10 dark:border-neutral-100/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
               {/* Brand Section */}
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -354,9 +358,22 @@ const Footer = () => {
 
               {/* Links & Resume */}
               <div className="flex flex-col justify-end h-full">
-                <div className="flex items-center justify-between">
-                  {/* Social Links */}
-                  <div className="flex gap-12">
+                <div className="flex flex-col xl:flex-row xl:items-center gap-4 xl:gap-0 xl:justify-between">
+                  {/* Resume Button - Above social links on mobile/tablet */}
+                  <div className="flex justify-start xl:justify-end order-1 xl:order-2 w-full xl:w-auto">
+                    <a
+                      href="https://drive.google.com/file/d/1FIODpbn55vPLMo3S6V_QNMaX6SojM7kr/view"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full xl:w-auto text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
+                    >
+                      <FileText size={16} weight="regular" />
+                      My resume
+                    </a>
+                  </div>
+
+                  {/* Social Links - Below resume button on mobile/tablet */}
+                  <div className="flex gap-6 xl:gap-8 2xl:gap-12 order-2 xl:order-1">
                     <a
                       href="https://dribbble.com/rasmusmattsson"
                       target="_blank"
@@ -388,17 +405,6 @@ const Footer = () => {
                       GitHub
                     </a>
                   </div>
-
-                  {/* Resume Button */}
-                  <a
-                    href="https://drive.google.com/file/d/1FIODpbn55vPLMo3S6V_QNMaX6SojM7kr/view"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
-                  >
-                    <FileText size={16} weight="regular" />
-                    My resume
-                  </a>
                 </div>
               </div>
             </div>
