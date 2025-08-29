@@ -112,7 +112,7 @@ export default function EmplojdCaseStudy() {
             logotypeBlackPath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-Black.svg"
             logotypeWhitePath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-White.svg"
             aboutText={
-              <div className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-6">
+              <div className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] mb-6">
                 <div>
                   Emplojd was born out of the frustration many feel with
                   repetitive and time-consuming job applications. Created during
@@ -173,7 +173,7 @@ export default function EmplojdCaseStudy() {
             ]}
             businessObjectivesText={
               <div className="space-y-6">
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%]">
                   Emplojd was created during the Chas Challenge to simplify the
                   job application process and encourage users to apply to more
                   positions without added stress.{" "}
@@ -188,12 +188,12 @@ export default function EmplojdCaseStudy() {
                     by recruiters.
                   </span>
                 </p>
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%]">
                   This approach aims to increase the average number of
                   applications submitted, improving job seekers' chances without
                   compromising quality or individuality.
                 </p>
-                <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed">
+                <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%]">
                   The potential gains include higher user engagement and a
                   stronger foundation for growth in the competitive job market.
                   This project demonstrates how combining thoughtful design with

@@ -67,24 +67,18 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
   }, []);
 
   return (
-    <section className="py-16 fade-in-section">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div
-          className="flex justify-center gap-12"
-          style={{
-            paddingTop: "calc(40vmax / 10)",
-            paddingBottom: "calc(40vmax / 10)",
-          }}
-        >
-          <div className="w-[600px]">
-            <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+    <section className="py-12 sm:py-16 md:py-16 fade-in-section">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
+        <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
+          <div className="w-full lg:w-[600px]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
               The Craft
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
           </div>
-          <div className="w-[600px]">
-            <div className="mb-16">
-              <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+          <div className="w-full lg:w-[600px]">
+            <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+              <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 This phase was about turning insights into tangible design work.
                 I focused on building a clear and consistent foundation,
                 creating flows, wireframes, and mockups that balanced usability
@@ -101,23 +95,25 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
           <div className="grid grid-cols-1 gap-6">
             {/* User Flows Box */}
             <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
-                  <img
-                    src="/icons/MorphingShapes/CS_Ellipse_8.svg"
-                    alt="User Flows Icon"
-                    className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
-                    style={{
-                      transition:
-                        "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
-                    }}
-                  />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
-                    User Flows for System Thinking
-                  </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-1 order-2 sm:order-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-4 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                      User Flows for System Thinking
+                    </h3>
+                    <div className="flex-shrink-0 w-16 h-16 sm:hidden bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Ellipse_8.svg"
+                        alt="User Flows Icon"
+                        className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
                     I started by mapping out the complete user journey from
                     initial profile creation to final application submission.
                     This helped identify potential friction points and ensured
@@ -127,28 +123,41 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
                     challenges early and plan solutions collaboratively.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Wireframes Box */}
-            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                <div className="hidden sm:flex flex-shrink-0 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                   <img
-                    src="/icons/MorphingShapes/CS_Rectangle_2.svg"
-                    alt="Wireframes Icon"
-                    className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                    src="/icons/MorphingShapes/CS_Ellipse_8.svg"
+                    alt="User Flows Icon"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
                     style={{
                       transition:
                         "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                     }}
                   />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
-                    Wireframes to Kickstart Development
-                  </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+              </div>
+            </div>
+
+            {/* Wireframes Box */}
+            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-1 order-2 sm:order-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-4 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                      Wireframes to Kickstart Development
+                    </h3>
+                    <div className="flex-shrink-0 w-16 h-16 sm:hidden bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Rectangle_2.svg"
+                        alt="Wireframes Icon"
+                        className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
                     I created wireframes to quickly establish structure and
                     functionality, giving the team a shared blueprint to work
                     from. These early layouts allowed developers to start
@@ -156,28 +165,41 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
                     momentum under tight deadlines.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Mockups Box */}
-            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                <div className="hidden sm:flex flex-shrink-0 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                   <img
-                    src="/icons/MorphingShapes/CS_Polygon_7.svg"
-                    alt="Mockups Icon"
-                    className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                    src="/icons/MorphingShapes/CS_Rectangle_2.svg"
+                    alt="Wireframes Icon"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
                     style={{
                       transition:
                         "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                     }}
                   />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
-                    Mockups & Prototyping
-                  </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+              </div>
+            </div>
+
+            {/* Mockups Box */}
+            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-1 order-2 sm:order-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-4 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                      Mockups & Prototyping
+                    </h3>
+                    <div className="flex-shrink-0 w-16 h-16 sm:hidden bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Polygon_7.svg"
+                        alt="Mockups Icon"
+                        className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
                     Low-fidelity mockups and prototypes brought the product to
                     life, making it easier to test usability and communicate
                     design decisions. These prototypes also served as a bridge
@@ -185,28 +207,41 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
                     clear for everyone involved.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Iterative Testing & User Feedback Box */}
-            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                <div className="hidden sm:flex flex-shrink-0 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                   <img
-                    src="/icons/MorphingShapes/CS_Star_1.svg"
-                    alt="Iterative Testing Icon"
-                    className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                    src="/icons/MorphingShapes/CS_Polygon_7.svg"
+                    alt="Mockups Icon"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
                     style={{
                       transition:
                         "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                     }}
                   />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
-                    Iterative Testing & User Feedback
-                  </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+              </div>
+            </div>
+
+            {/* Iterative Testing & User Feedback Box */}
+            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-1 order-2 sm:order-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-4 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                      Iterative Testing & User Feedback
+                    </h3>
+                    <div className="flex-shrink-0 w-16 h-16 sm:hidden bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Star_1.svg"
+                        alt="Iterative Testing Icon"
+                        className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
                     Most testing was done within the team, where we continuously
                     refined designs and prototypes throughout development. In
                     addition, we conducted two rounds of user testing at
@@ -214,34 +249,58 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
                     flows and uncover improvements to usability and clarity.
                   </p>
                 </div>
-              </div>
-            </div>
-
-            {/* Collaboration Box */}
-            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
-              <div className="flex items-center gap-6">
-                <div className="flex-shrink-0 w-40 h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                <div className="hidden sm:flex flex-shrink-0 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
                   <img
-                    src="/icons/MorphingShapes/CS_Moon_1.svg"
-                    alt="Collaboration Icon"
-                    className="w-24 h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                    src="/icons/MorphingShapes/CS_Star_1.svg"
+                    alt="Iterative Testing Icon"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
                     style={{
                       transition:
                         "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
                     }}
                   />
                 </div>
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
-                    Collaboration with Developers
-                  </h3>
-                  <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
+              </div>
+            </div>
+
+            {/* Collaboration Box */}
+            <div className="group relative p-8 bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-100/20 dark:border-neutral-90/20 rounded-2xl hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-all duration-500 ease-in-out hover:shadow-lg hover:shadow-purple-500/20">
+              <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+                <div className="flex-1 order-2 sm:order-1">
+                  <div className="flex items-center justify-between sm:justify-start gap-4 mb-4">
+                    <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-all duration-500 ease-in-out">
+                      Collaboration with Developers
+                    </h3>
+                    <div className="flex-shrink-0 w-16 h-16 sm:hidden bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl flex items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                      <img
+                        src="/icons/MorphingShapes/CS_Moon_1.svg"
+                        alt="Collaboration Icon"
+                        className="w-12 h-12 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                        style={{
+                          transition:
+                            "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] group-hover:text-neutral-90 dark:group-hover:text-neutral-10 transition-all duration-500 ease-in-out">
                     Close collaboration with developers was key throughout the
                     project. By aligning on the design system and maintaining
                     open communication, we ensured consistency between design
                     and implementation, allowing both teams to move quickly and
                     stay coordinated.
                   </p>
+                </div>
+                <div className="hidden sm:flex flex-shrink-0 w-24 h-24 md:w-32 md:h-32 lg:w-40 lg:h-40 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-2xl items-center justify-center group-hover:from-blue-500/30 group-hover:to-purple-600/30 transition-all duration-500 ease-in-out">
+                  <img
+                    src="/icons/MorphingShapes/CS_Moon_1.svg"
+                    alt="Collaboration Icon"
+                    className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 opacity-80 group-hover:opacity-100 transition-all duration-500 ease-in-out group-hover:rotate-180"
+                    style={{
+                      transition:
+                        "all 1s cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -250,8 +309,8 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
       </div>
 
       {/* Image Placeholder Below - Full Image Display with Navigation */}
-      <div className="mt-16">
-        <div className="max-w-[1200px] mx-auto px-8">
+      <div className="mt-8 sm:mt-12 lg:mt-16">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="w-full bg-white relative rounded-2xl overflow-hidden">
             {/* First Image - Wireframes */}
             <img
@@ -351,7 +410,7 @@ const CaseStudyCraft: React.FC<CaseStudyCraftProps> = () => {
               ref={craftTextContainerRef}
               className="opacity-100 transform translate-y-0"
             >
-              <p className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+              <p className="text-neutral-60 dark:text-neutral-40 text-xs sm:text-sm font-medium text-left">
                 {currentImageIndex === 0
                   ? "Image 1: Various wireframes showing user flow mapping and interface design iterations."
                   : currentImageIndex === 1

@@ -4,7 +4,10 @@ const CaseStudyMockups: React.FC = () => {
   return (
     <section className="w-full">
       {/* Full-width bottom section */}
-      <div className="w-full grid grid-cols-2" style={{ aspectRatio: "2/1" }}>
+      <div
+        className="w-full grid grid-cols-1 sm:grid-cols-2"
+        style={{ aspectRatio: "2/1" }}
+      >
         {/* Left Background - Sign-in */}
         <div className="bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden">
           <img

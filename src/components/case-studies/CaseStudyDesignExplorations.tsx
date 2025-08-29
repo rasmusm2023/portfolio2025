@@ -64,24 +64,18 @@ const CaseStudyDesignExplorations: React.FC = () => {
   }, []);
 
   return (
-    <section className="py-16 fade-in-section">
-      <div className="max-w-[1200px] mx-auto px-8">
-        <div
-          className="flex justify-center gap-12"
-          style={{
-            paddingTop: "calc(40vmax / 10)",
-            paddingBottom: "calc(40vmax / 10)",
-          }}
-        >
-          <div className="w-[600px]">
-            <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+    <section className="py-12 sm:py-16 md:py-16 fade-in-section">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
+        <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
+          <div className="w-full lg:w-[600px]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
               Design Explorations
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
           </div>
-          <div className="w-[600px]">
-            <div className="mb-16">
-              <p className="text-neutral-80 dark:text-neutral-20 text-xl leading-relaxed mb-8">
+          <div className="w-full lg:w-[600px]">
+            <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
+              <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 During the design process, we explored several concepts and
                 features some of which made it to the final design and some that
                 ultimately didn't make it into the final prototype. These
@@ -94,78 +88,83 @@ const CaseStudyDesignExplorations: React.FC = () => {
         </div>
 
         {/* Image Placeholder with Navigation - Full Width */}
-        <div className="mt-16">
+        <div className="mt-8 sm:mt-12 lg:mt-16">
           {/* Container with overflow hidden to clip images during drag */}
           <div className="w-full bg-white relative rounded-2xl overflow-hidden">
-            {/* Inner container that moves based on current index */}
+            {/* First Image - Other Color Themes */}
+            <img
+              src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
+              alt="Emplojd design exploration showing alternative color themes and visual directions"
+              className={`w-full h-auto object-contain transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 0
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+              draggable={false}
+            />
+
+            {/* Second Image - Page Layout for Saved Cover Letters */}
+            <img
+              src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
+              alt="Emplojd design exploration showing page layout for saved cover letters and user management"
+              className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 1
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+              draggable={false}
+            />
+
+            {/* Third Image - Peer Review & Collaboration */}
             <div
-              className="w-full relative min-h-[987px] flex"
-              style={{
-                transform: `translateX(${
-                  -currentDesignExplorationIndex * 100
-                }%)`,
-                transition: "transform 0.3s ease-out",
-              }}
+              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 2
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
             >
-              {/* Image 1 - Other Color Themes */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Alternative-Color-Themes.svg"
-                  alt="Emplojd design exploration showing alternative color themes and visual directions"
-                  className="w-auto h-auto max-w-full object-contain"
-                  draggable={false}
-                />
-              </div>
+              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
+                [Design Exploration Image 3: Peer Review & Collaboration]
+              </p>
+            </div>
 
-              {/* Image 2 - Page Layout for Saved Cover Letters */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <img
-                  src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Cover-Letters.svg"
-                  alt="Emplojd design exploration showing page layout for saved cover letters and user management"
-                  className="w-auto h-auto max-w-full object-contain"
-                  draggable={false}
-                />
-              </div>
+            {/* Fourth Image - Placeholder */}
+            <div
+              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 3
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+            >
+              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
+                [Design Exploration Image 4: Placeholder]
+              </p>
+            </div>
 
-              {/* Image 3 - Peer Review & Collaboration */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
-                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                    [Design Exploration Image 3: Peer Review & Collaboration]
-                  </p>
-                </div>
-              </div>
+            {/* Fifth Image - Placeholder */}
+            <div
+              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 4
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+            >
+              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
+                [Design Exploration Image 5: Placeholder]
+              </p>
+            </div>
 
-              {/* Image 4 - Placeholder */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
-                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                    [Design Exploration Image 4: Placeholder]
-                  </p>
-                </div>
-              </div>
-
-              {/* Image 5 - Placeholder */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <div className="w-full h-[987px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg">
-                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                    [Design Exploration Image 5: Placeholder]
-                  </p>
-                </div>
-              </div>
-
-              {/* Image 6 - Placeholder */}
-              <div className="w-full h-[987px] flex-shrink-0 flex items-center justify-center">
-                <div
-                  className={`w-full h-full bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center transition-all duration-300 ${
-                    true ? "opacity-100" : "opacity-100"
-                  }`}
-                >
-                  <p className="text-neutral-60 dark:text-neutral-40 text-lg">
-                    [Design Exploration Image 6: Placeholder]
-                  </p>
-                </div>
-              </div>
+            {/* Sixth Image - Placeholder */}
+            <div
+              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
+                currentDesignExplorationIndex === 5
+                  ? "opacity-100"
+                  : "opacity-0"
+              }`}
+            >
+              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
+                [Design Exploration Image 6: Placeholder]
+              </p>
             </div>
 
             {/* Navigation Arrows */}
@@ -234,12 +233,12 @@ const CaseStudyDesignExplorations: React.FC = () => {
           </div>
 
           {/* Dynamic Title and Description - Full Width with GSAP Animations */}
-          <div className="mt-8 max-w-[600px] relative overflow-hidden">
+          <div className="mt-8 sm:mt-12 lg:mt-16 max-w-full lg:max-w-[600px] relative overflow-hidden">
             <div
               ref={textContainerRef}
               className="opacity-100 transform translate-y-0"
             >
-              <h3 className="text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
                 {currentDesignExplorationIndex === 0 &&
                   "Alternative Color Themes & Visual Directions"}
                 {currentDesignExplorationIndex === 1 &&
@@ -253,7 +252,7 @@ const CaseStudyDesignExplorations: React.FC = () => {
                 {currentDesignExplorationIndex === 5 &&
                   "Concept 6: [Placeholder Title]"}
               </h3>
-              <p className="text-neutral-80 dark:text-neutral-20 text-lg leading-relaxed">
+              <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 {currentDesignExplorationIndex === 0 &&
                   "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
                 {currentDesignExplorationIndex === 1 &&

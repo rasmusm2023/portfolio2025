@@ -121,7 +121,7 @@ const CaseStudyResults: React.FC = () => {
         });
       },
       {
-        threshold: 0.3, // Trigger when 30% of the section is visible
+        threshold: 0.3, // Trigger when 30% of section is visible
         rootMargin: "0px 0px -100px 0px", // Add some margin for better UX
       }
     );
@@ -135,11 +135,11 @@ const CaseStudyResults: React.FC = () => {
 
   return (
     <section className="py-16 fade-in-section">
-      <div className="max-w-[1200px] mx-auto px-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         {/* Section Title */}
         <div className="flex justify-start mb-8">
-          <div className="w-[600px]">
-            <h2 className="text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
+          <div className="w-full lg:w-[600px]">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
               Results
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
@@ -147,7 +147,7 @@ const CaseStudyResults: React.FC = () => {
         </div>
 
         {/* Interactive Prototype Showcase */}
-        <div className="w-full h-[987px] relative rounded-2xl overflow-hidden mb-16">
+        <div className="w-full h-[400px] sm:h-[600px] md:h-[800px] lg:h-[987px] relative rounded-2xl overflow-hidden mb-12 sm:mb-16">
           {/* SVG Background Slides */}
           <div className="absolute inset-0 w-full h-full">
             {/* First Background - Cover Letter Generation Flow */}
@@ -206,11 +206,11 @@ const CaseStudyResults: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[320px] h-[710px] bg-neutral-900 rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   0
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[0] = el;
@@ -230,7 +230,7 @@ const CaseStudyResults: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 0 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
@@ -250,11 +250,11 @@ const CaseStudyResults: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[320px] h-[710px] bg-neutral-900 rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   1
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[1] = el;
@@ -274,7 +274,7 @@ const CaseStudyResults: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 1 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
@@ -294,11 +294,11 @@ const CaseStudyResults: React.FC = () => {
               data-video-state={isVideoPlaying ? "playing" : "paused"}
             >
               <div
-                className={`w-[320px] h-[710px] bg-neutral-900 rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
+                className={`w-[280px] sm:w-[300px] md:w-[320px] h-[620px] sm:h-[670px] md:h-[710px] bg-neutral-900 rounded-[32px] sm:rounded-[36px] md:rounded-[38px] border-2 transition-all duration-500 ${getPrototypeStyling(
                   2
                 )}`}
               >
-                <div className="w-full h-full bg-neutral-800 rounded-[36px] overflow-hidden relative">
+                <div className="w-full h-full bg-neutral-800 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] overflow-hidden relative">
                   <video
                     ref={(el) => {
                       videoRefs.current[2] = el;
@@ -318,7 +318,7 @@ const CaseStudyResults: React.FC = () => {
                   </video>
                   {/* Dark overlay for non-active prototypes */}
                   {prototypePositions[0] !== 2 && (
-                    <div className="absolute inset-0 bg-black/50 rounded-[36px] pointer-events-none"></div>
+                    <div className="absolute inset-0 bg-black/50 rounded-[30px] sm:rounded-[34px] md:rounded-[36px] pointer-events-none"></div>
                   )}
                 </div>
               </div>
