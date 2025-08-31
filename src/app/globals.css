@@ -1477,3 +1477,20 @@ button .morphing-container {
 .video-bobbing {
   animation: gentle-bob 3s ease-in-out infinite;
 }
+
+/* Gradient text classes for case study titles */
+.gradient-text-light {
+  background: linear-gradient(to top, #1e293b, #475569, #64748b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.gradient-text-dark {
+  background: linear-gradient(to top, #10b981, #059669, #047857);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}

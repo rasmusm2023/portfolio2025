@@ -168,17 +168,12 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Project Title */}
         <h1
-          className="text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px]"
-          style={{
-            background:
-              typeof document !== "undefined" &&
-              document.documentElement.classList.contains("dark")
-                ? "linear-gradient(to top, #a855f7, #d4d4d8, #e4e4e7)"
-                : "linear-gradient(to top, #9333ea, #71717a, #52525b)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}
+          className={`text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px] ${
+            typeof document !== "undefined" &&
+            document.documentElement.classList.contains("dark")
+              ? "gradient-text-dark"
+              : "gradient-text-light"
+          }`}
         >
           {title}
         </h1>
