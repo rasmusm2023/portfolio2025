@@ -112,27 +112,24 @@ export default function Home() {
         {/* Main Content */}
         <main>
           {/* Introduction Section */}
-          <section id="home" className="h-[80vh] relative">
+          <section
+            id="home"
+            className="min-h-screen relative flex items-center"
+          >
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(139, 92, 246, 0.6)", // Purple primary
                 secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
               }}
             />
-            <div
-              className="absolute inset-0 flex items-center justify-between w-full max-w-[1600px] mx-auto px-8"
-              style={{ height: "100vh", width: "100%" }}
-            >
-              {/* CTA Button - positioned to align with bento box right edge */}
-              <div
-                className="absolute bottom-1/4"
-                style={{ right: "calc(50% - 800px + 2rem)" }}
-              >
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
+              {/* CTA Button - Responsive positioning */}
+              <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 z-20">
                 <button
                   onClick={() => {
                     const element = document.getElementById("case-studies");
                     if (element) {
-                      const offset = 300; // Increased offset to show part of the hero section
+                      const offset = 300;
                       const elementPosition =
                         element.getBoundingClientRect().top;
                       const offsetPosition =
@@ -144,11 +141,11 @@ export default function Home() {
                       });
                     }
                   }}
-                  className="shimmer-button-green w-fit"
+                  className="shimmer-button-green w-fit text-sm sm:text-base"
                 >
                   <span className="text">
                     <svg
-                      className="w-5 h-5"
+                      className="w-4 h-4 sm:w-5 sm:h-5"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -160,45 +157,64 @@ export default function Home() {
                         d="M19 14l-7 7m0 0l-7-7m7 7V3"
                       />
                     </svg>
-                    <span>View selected works</span>
+                    <span className="hidden sm:inline">
+                      View selected works
+                    </span>
+                    <span className="sm:hidden">View works</span>
                   </span>
                   <span className="shimmer"></span>
                 </button>
               </div>
 
-              <div className="text-left w-full flex flex-col justify-center h-full">
-                {/* Hero content centered */}
-                <div className="flex items-center w-full">
-                  <div className="w-full">
-                    <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
+              <div className="text-left w-full flex flex-col justify-center min-h-screen py-16 sm:py-20 lg:py-24">
+                {/* Hero content - Responsive layout */}
+                <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
+                  <div className="w-full lg:flex-1">
+                    {/* Main title - Responsive typography */}
+                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
                       <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                         UX/UI Designer{" "}
                       </span>
-                      <span className="inline-block text-[10rem] font-extrabold tracking-tight leading-[1] font-hanken text-[#8B5CF6]">
+                      <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[1] font-hanken text-[#8B5CF6]">
                         &
                       </span>
                     </h1>
-                    <div className="flex justify-between items-start mt-16 w-full max-w-full mx-auto">
-                      <div className="flex-1 max-w-[64rem]">
+
+                    {/* Hero statement - Responsive layout */}
+                    <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 w-full">
+                      <div className="flex-1 max-w-full lg:max-w-[64rem]">
                         <div className="hero-statement">
-                          <div className="statement-line">
-                            <span className="word">I</span>
-                            <span className="word">create</span>
+                          {/* First line */}
+                          <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
+                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              I
+                            </span>
+                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              create
+                            </span>
                             <span className="word highlight">
-                              <span className="highlight-text">digital</span>
+                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                                digital
+                              </span>
                               <span className="highlight-bg"></span>
                             </span>
                             <span className="word highlight">
-                              <span className="highlight-text">products</span>
+                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                                products
+                              </span>
                               <span className="highlight-bg"></span>
                             </span>
-                            <span className="morphing-icon" ref={morphRef}>
+                            <span
+                              className="morphing-icon hidden sm:block"
+                              ref={morphRef}
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 200 200"
-                                width="400"
-                                height="400"
+                                width="60"
+                                height="60"
+                                className="sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-32 xl:h-32"
                               >
                                 {/* Main morphing path */}
                                 <path
@@ -330,21 +346,29 @@ export default function Home() {
                               </svg>
                             </span>
                           </div>
-                          <div className="statement-line">
-                            <span className="word">and</span>
-                            <span className="word">make</span>
+                          {/* Second line */}
+                          <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
+                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              and
+                            </span>
+                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              make
+                            </span>
                             <span className="word highlight">
-                              <span className="highlight-text">
+                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
                                 experiences
                               </span>
                               <span className="highlight-bg"></span>
                             </span>
-                            <span className="word">happen.</span>
+                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              happen.
+                            </span>
                           </div>
                         </div>
                       </div>
-                      <div className="ml-8">
-                        <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken tracking-wide">
+                      {/* Low-code Developer text - Responsive positioning */}
+                      <div className="w-full lg:w-auto lg:ml-8 mt-6 lg:mt-0">
+                        <span className="text-neutral-60 dark:text-neutral-40 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium font-hanken tracking-wide">
                           Low-code Developer
                         </span>
                       </div>

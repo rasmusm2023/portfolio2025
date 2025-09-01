@@ -59,9 +59,9 @@ const BentoBoxRest = () => {
   };
 
   return (
-    <section className="py-16 relative">
-      <div className="text-left w-full max-w-[1600px] mx-auto px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
+    <section className="py-8 sm:py-12 md:py-16 relative">
+      <div className="text-left w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-6 sm:gap-8 md:gap-12 auto-rows-[280px] sm:auto-rows-[300px] md:auto-rows-[320px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
             className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
