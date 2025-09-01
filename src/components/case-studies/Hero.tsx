@@ -149,13 +149,13 @@ const Hero: React.FC<HeroProps> = ({
           </button>
 
           {/* Project Name Rectangle */}
-          <div className="px-3 sm:px-4 py-2 sm:py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 sm:border-l-0 rounded-r-lg lg:rounded-lg sm:rounded-l-none lg:rounded-r-lg flex items-center h-full relative w-auto justify-start">
+          <div className="px-3 sm:px-4 py-2 sm:py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 sm:border-l-0 rounded-r-lg flex items-center h-full relative w-auto justify-start">
             <span className="text-neutral-0 dark:text-neutral-100 font-bold text-xs uppercase relative z-10">
               {title.split(" ").slice(0, 3).join(" ")}
             </span>
             {/* Active pill shadow effect */}
             <div
-              className="absolute inset-0 rounded-r-lg lg:rounded-lg sm:rounded-l-none lg:rounded-r-lg -z-10"
+              className="absolute inset-0 rounded-r-lg -z-10"
               style={{
                 boxShadow: `0 0 12px ${
                   typeof document !== "undefined" &&

@@ -75,6 +75,18 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, []);
 
+  // Component unmount cleanup
+  useEffect(() => {
+    return () => {
+      // Ensure all GSAP animations are killed on unmount
+      gsap.killTweensOf("*");
+      // Reset body styles
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+      document.body.classList.remove("mobile-menu-open");
+    };
+  }, []);
+
   // Disable scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -96,28 +108,34 @@ const Header = () => {
 
   // GSAP animations for menu toggle
   useEffect(() => {
-    if (
-      !menuToggleRef.current ||
-      !menuTextRef.current ||
-      !hamburgerRef.current ||
-      !xIconRef.current
-    )
-      return;
+    try {
+      // Store refs in variables to avoid null checks during cleanup
+      const menuToggle = menuToggleRef.current;
+      const menuText = menuTextRef.current;
+      const hamburger = hamburgerRef.current;
+      const xIcon = xIconRef.current;
 
-    const tl = gsap.timeline({ paused: true });
+      if (!menuToggle || !menuText || !hamburger || !xIcon) return;
 
-    // Text animation
-    tl.to(menuTextRef.current, {
-      duration: 0.2,
-      opacity: 0,
-      y: -10,
-      ease: "power2.inOut",
-    })
-      .set(menuTextRef.current, {
-        innerHTML: isMobileMenuOpen ? "CLOSE" : "MENU",
-      })
-      .to(
-        menuTextRef.current,
+      // Kill any existing animations first
+      gsap.killTweensOf([hamburger, xIcon, menuText]);
+
+      const tl = gsap.timeline({ paused: true });
+
+      // Text animation with safer DOM manipulation
+      tl.to(menuText, {
+        duration: 0.2,
+        opacity: 0,
+        y: -10,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Only update innerHTML if element still exists
+          if (menuText && menuText.parentNode) {
+            menuText.innerHTML = isMobileMenuOpen ? "CLOSE" : "MENU";
+          }
+        },
+      }).to(
+        menuText,
         {
           duration: 0.2,
           opacity: 1,
@@ -127,45 +145,68 @@ const Header = () => {
         "-=0.1"
       );
 
-    // Icon morphing animation
-    if (isMobileMenuOpen) {
-      // Morph to X
-      gsap.to(hamburgerRef.current, {
-        duration: 0.3,
-        opacity: 0,
-        scale: 0.8,
-        rotation: 90,
-        ease: "power2.inOut",
-      });
-      gsap.to(xIconRef.current, {
-        duration: 0.3,
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        ease: "power2.out",
-        delay: 0.15,
-      });
-    } else {
-      // Morph back to hamburger
-      gsap.to(xIconRef.current, {
-        duration: 0.3,
-        opacity: 0,
-        scale: 0.8,
-        rotation: -90,
-        ease: "power2.inOut",
-      });
-      gsap.to(hamburgerRef.current, {
-        duration: 0.3,
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        ease: "power2.out",
-        delay: 0.15,
-      });
-    }
+      // Icon morphing animation with null checks
+      if (isMobileMenuOpen) {
+        // Morph to X
+        if (hamburger && hamburger.parentNode) {
+          gsap.to(hamburger, {
+            duration: 0.3,
+            opacity: 0,
+            scale: 0.8,
+            rotation: 90,
+            ease: "power2.inOut",
+          });
+        }
+        if (xIcon && xIcon.parentNode) {
+          gsap.to(xIcon, {
+            duration: 0.3,
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            ease: "power2.out",
+            delay: 0.15,
+          });
+        }
+      } else {
+        // Morph back to hamburger
+        if (xIcon && xIcon.parentNode) {
+          gsap.to(xIcon, {
+            duration: 0.3,
+            opacity: 0,
+            scale: 0.8,
+            rotation: -90,
+            ease: "power2.inOut",
+          });
+        }
+        if (hamburger && hamburger.parentNode) {
+          gsap.to(hamburger, {
+            duration: 0.3,
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            ease: "power2.out",
+            delay: 0.15,
+          });
+        }
+      }
 
-    // Play text animation
-    tl.play();
+      // Play text animation
+      tl.play();
+
+      // Cleanup function
+      return () => {
+        try {
+          if (tl) tl.kill();
+          if (hamburger) gsap.killTweensOf(hamburger);
+          if (xIcon) gsap.killTweensOf(xIcon);
+          if (menuText) gsap.killTweensOf(menuText);
+        } catch (error) {
+          console.warn("Error during GSAP cleanup:", error);
+        }
+      };
+    } catch (error) {
+      console.warn("Error during GSAP animation setup:", error);
+    }
   }, [isMobileMenuOpen]);
 
   const handleMenuItemClick = (menuItem: string) => {
@@ -179,6 +220,16 @@ const Header = () => {
   };
 
   const handleMenuToggle = () => {
+    // Kill any existing animations before toggling
+    try {
+      gsap.killTweensOf([
+        hamburgerRef.current,
+        xIconRef.current,
+        menuTextRef.current,
+      ]);
+    } catch (error) {
+      console.warn("Error killing GSAP animations:", error);
+    }
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
@@ -307,7 +358,7 @@ const Header = () => {
 
       {/* Mobile Menu Full Screen */}
       <div
-        className={`lg:hidden fixed top-16 sm:top-20 lg:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
+        className={`mobile-menu lg:hidden fixed top-16 sm:top-20 lg:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible translate-y-4"

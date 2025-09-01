@@ -647,11 +647,51 @@ const CaseStudy = ({
   // Cleanup GSAP animations on unmount
   useEffect(() => {
     return () => {
+      // Kill all GSAP animations to prevent DOM manipulation conflicts
+      gsap.killTweensOf("*");
+
+      // Specific cleanup for refs
       if (textContainerRef.current) {
         gsap.killTweensOf(textContainerRef.current);
       }
       if (craftTextContainerRef.current) {
         gsap.killTweensOf(craftTextContainerRef.current);
+      }
+      if (summaryRef.current) {
+        gsap.killTweensOf(summaryRef.current);
+      }
+      if (aboutRef.current) {
+        gsap.killTweensOf(aboutRef.current);
+      }
+      if (businessObjectiveRef.current) {
+        gsap.killTweensOf(businessObjectiveRef.current);
+      }
+      if (processRef.current) {
+        gsap.killTweensOf(processRef.current);
+      }
+      if (challengeRef.current) {
+        gsap.killTweensOf(challengeRef.current);
+      }
+      if (solutionRef.current) {
+        gsap.killTweensOf(solutionRef.current);
+      }
+      if (roleRef.current) {
+        gsap.killTweensOf(roleRef.current);
+      }
+      if (insightsRef.current) {
+        gsap.killTweensOf(insightsRef.current);
+      }
+      if (craftRef.current) {
+        gsap.killTweensOf(craftRef.current);
+      }
+      if (designExplorationsRef.current) {
+        gsap.killTweensOf(designExplorationsRef.current);
+      }
+      if (resultsRef.current) {
+        gsap.killTweensOf(resultsRef.current);
+      }
+      if (processMorphRef.current) {
+        gsap.killTweensOf(processMorphRef.current);
       }
     };
   }, []);

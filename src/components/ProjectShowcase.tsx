@@ -18,40 +18,6 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: "noted",
-    title: "Enhancing job applicants without sacrificing authenticity",
-    keywords: ["UX/UI Design", "Mobile App", "User Research", "Prototyping"],
-    image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop&crop=center",
-    alt: "Emplojd",
-    link: "/case-studies/noted-app",
-  },
-  {
-    id: "zmartrest",
-    title: "75% reduction in decision-making time with AI-powered insights",
-    keywords: [
-      "AI/ML",
-      "Dashboard Design",
-      "Data Visualization",
-      "User Experience",
-    ],
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop&crop=center",
-    alt: "Zmartrest AI Dashboard",
-    link: "/case-studies/zmartrest-ai",
-    isGif: true,
-  },
-  {
-    id: "fokus",
-    title: "65% increase in user productivity through focused design",
-    keywords: ["Mobile App", "Productivity", "User Interface", "App Design"],
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=600&fit=crop&crop=center",
-    alt: "Fokus Mobile App",
-    link: "/case-studies/fokus",
-    isGif: true,
-  },
-  {
     id: "emplojd",
     title: "Enhancing job applications without compromising authenticity.",
     keywords: ["SaaS Platform", "AI-powered", "Web Design", "UX/UI Design"],
