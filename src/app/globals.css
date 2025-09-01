@@ -1480,7 +1480,7 @@ button .morphing-container {
 
 /* Gradient text classes for case study titles */
 .gradient-text-light {
-  background: linear-gradient(to top, #1e293b, #475569, #64748b);
+  background: linear-gradient(to bottom, #8b5cf6, #4f4f4f, #232323);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -1488,9 +1488,26 @@ button .morphing-container {
 }
 
 .gradient-text-dark {
-  background: linear-gradient(to top, #10b981, #059669, #047857);
+  background: linear-gradient(to bottom, #8b5cf6, #e2e8f0, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   display: inline-block;
+}
+
+/* Mobile menu scroll disable */
+body.mobile-menu-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Mobile header background */
+.mobile-header-bg {
+  background-color: #ffffff;
+}
+
+.dark .mobile-header-bg {
+  background-color: #232323;
 }

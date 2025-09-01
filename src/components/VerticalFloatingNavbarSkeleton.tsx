@@ -24,7 +24,7 @@ const VerticalFloatingNavbarSkeleton = ({
 
   return (
     <div
-      className="fixed top-1/2 z-[1000] flex items-center w-18 transition-opacity duration-500 animate-pulse"
+      className="fixed top-1/2 z-[1000] flex items-center w-18 transition-opacity duration-500 animate-pulse hidden lg:flex"
       style={{
         transform: "translateY(-50%)",
       }}
@@ -51,26 +51,26 @@ const VerticalFloatingNavbarSkeleton = ({
         </div>
       </div>
 
-             {/* Navigation Items Skeleton - Vertical Stack */}
-       <div className="flex flex-col gap-8 ml-8">
-         {/* Overview Skeleton */}
-         <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-         
-         {/* Context Skeleton */}
-         <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-         
-         {/* Design Skeleton */}
-         <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-         
-         {/* Approach Skeleton */}
-         <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-         
-         {/* Insights Skeleton */}
-         <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-         
-         {/* Outcomes Skeleton */}
-         <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
-       </div>
+      {/* Navigation Items Skeleton - Vertical Stack */}
+      <div className="flex flex-col gap-8 ml-8">
+        {/* Overview Skeleton */}
+        <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+
+        {/* Context Skeleton */}
+        <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+
+        {/* Design Skeleton */}
+        <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+
+        {/* Approach Skeleton */}
+        <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+
+        {/* Insights Skeleton */}
+        <div className="w-20 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+
+        {/* Outcomes Skeleton */}
+        <div className="w-24 h-8 bg-neutral-200 dark:bg-neutral-600 rounded animate-pulse"></div>
+      </div>
     </div>
   );
 };

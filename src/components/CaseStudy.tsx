@@ -906,7 +906,7 @@ const CaseStudy = ({
           <OtherStudies />
 
           {/* Footer Section */}
-          <div className="pt-16 pb-16">
+          <div className="pt-16 pb-16 pr-4 pl-4">
             <div className="container mx-auto">
               <Footer />
             </div>

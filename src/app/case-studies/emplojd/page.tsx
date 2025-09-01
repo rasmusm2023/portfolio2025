@@ -44,11 +44,6 @@ export default function EmplojdCaseStudy() {
         </>
       ) : (
         <>
-          {/* TODO: FIX REQUIRED - VerticalFloatingNavbar has issues:
-              - Progress bar not updating on scroll
-              - Component movement constrained/not following full page scroll
-              - Active menu highlighting not working properly
-              - TypeScript linter errors */}
           <VerticalFloatingNavbar />
           <CaseStudy
             title="EMPLOJD"

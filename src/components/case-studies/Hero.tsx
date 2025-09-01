@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { ArrowLeft } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
 import { gsap } from "gsap";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -32,6 +33,7 @@ const Hero: React.FC<HeroProps> = ({
 }) => {
   const morphRef = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const { isDark } = useTheme();
 
   const handleCaseStudiesClick = () => {
     // Navigate to Work page instead of home
@@ -131,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({
     <section className="pt-20 sm:pt-32 md:pt-40 pb-8 sm:pb-12 md:pb-16 relative">
       {/* Left Container - Fixed position, starts at same place as section titles */}
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
-        <div className="flex items-start gap-0 mb-8 sm:mb-0">
+        <div className="flex items-start gap-0 mb-4 sm:mb-0">
           {/* Back Arrow + Case Studies Rectangle */}
           <button
             onClick={handleCaseStudiesClick}
@@ -147,13 +149,13 @@ const Hero: React.FC<HeroProps> = ({
           </button>
 
           {/* Project Name Rectangle */}
-          <div className="px-3 sm:px-4 py-2 sm:py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 sm:border-l-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg flex items-center h-full relative w-auto justify-start">
+          <div className="px-3 sm:px-4 py-2 sm:py-3 bg-neutral-90 dark:bg-neutral-0 backdrop-blur-sm border border-neutral-100/10 dark:border-neutral-90/10 sm:border-l-0 rounded-r-lg lg:rounded-lg sm:rounded-l-none lg:rounded-r-lg flex items-center h-full relative w-auto justify-start">
             <span className="text-neutral-0 dark:text-neutral-100 font-bold text-xs uppercase relative z-10">
               {title.split(" ").slice(0, 3).join(" ")}
             </span>
             {/* Active pill shadow effect */}
             <div
-              className="absolute inset-0 rounded-lg sm:rounded-l-none sm:rounded-r-lg -z-10"
+              className="absolute inset-0 rounded-r-lg lg:rounded-lg sm:rounded-l-none lg:rounded-r-lg -z-10"
               style={{
                 boxShadow: `0 0 12px ${
                   typeof document !== "undefined" &&
@@ -168,11 +170,8 @@ const Hero: React.FC<HeroProps> = ({
 
         {/* Project Title */}
         <h1
-          className={`text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 sm:mb-6 mt-8 sm:mt-16 leading-tight max-w-full lg:max-w-[640px] ${
-            typeof document !== "undefined" &&
-            document.documentElement.classList.contains("dark")
-              ? "gradient-text-dark"
-              : "gradient-text-light"
+          className={`text-5xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-black mb-4 sm:mb-6 mt-4 sm:mt-16 leading-tight max-w-full lg:max-w-[640px] ${
+            isDark ? "gradient-text-dark" : "gradient-text-light"
           }`}
         >
           {title}
