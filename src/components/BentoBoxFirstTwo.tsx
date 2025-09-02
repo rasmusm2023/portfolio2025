@@ -135,10 +135,11 @@ const BentoBoxFirstTwo = () => {
                     color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
-                  My toolkit include
+                  <span className="block lg:hidden">My toolkit</span>
+                  <span className="hidden lg:block">My toolkit include</span>
                 </h2>
                 <p
-                  className="text-sm sm:text-base md:text-lg font-hanken"
+                  className="hidden lg:block text-sm sm:text-base md:text-lg font-hanken"
                   style={{
                     color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                   }}

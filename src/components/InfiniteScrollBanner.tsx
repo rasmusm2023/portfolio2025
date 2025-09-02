@@ -194,7 +194,7 @@ const InfiniteScrollBanner = () => {
               className="flex flex-col items-center gap-3 group cursor-pointer flex-shrink-0"
             >
               <div
-                className={`w-20 h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
+                className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
               >
                 <img
                   src={tool.icon.src}
@@ -203,7 +203,7 @@ const InfiniteScrollBanner = () => {
                 />
               </div>
               <span
-                className={`text-xs font-medium text-neutral-60 transition-colors ${
+                className={`text-xs sm:text-xs lg:text-xs font-medium text-neutral-60 transition-colors ${
                   isDark
                     ? "group-hover:text-neutral-0"
                     : "group-hover:text-neutral-90"
@@ -223,7 +223,7 @@ const InfiniteScrollBanner = () => {
               className="flex flex-col items-center gap-3 group cursor-pointer flex-shrink-0"
             >
               <div
-                className={`w-20 h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
+                className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
               >
                 <img
                   src={tool.icon.src}
@@ -232,7 +232,7 @@ const InfiniteScrollBanner = () => {
                 />
               </div>
               <span
-                className={`text-xs font-medium text-neutral-60 transition-colors ${
+                className={`text-xs sm:text-xs lg:text-xs font-medium text-neutral-60 transition-colors ${
                   isDark
                     ? "group-hover:text-neutral-0"
                     : "group-hover:text-neutral-90"

@@ -80,10 +80,10 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                   }}
                   className="text-left cursor-pointer"
                 >
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl uppercase font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
                     Selected works
                   </h2>
-                  <div className="absolute -bottom-4 left-0 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#8B5CF6] to-transparent opacity-50" />
+                  <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent" />
                 </button>
               </div>
             </div>
@@ -95,7 +95,7 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <Link
               key={project.id}
               href={project.link}
-              className="group project-showcase-card block w-full h-32 sm:h-40 md:h-48 bg-neutral-0 dark:bg-neutral-100 overflow-hidden relative"
+              className="group project-showcase-card block w-full h-60 sm:h-68 md:h-76 lg:h-48 bg-neutral-0 dark:bg-neutral-100 overflow-hidden relative"
               onMouseMove={handleMouseMove}
               onMouseEnter={() => handleMouseEnter(project.id)}
               onMouseLeave={handleMouseLeave}
@@ -103,21 +103,21 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
               {/* Growing purple background from center */}
               <div className="absolute inset-0 bg-neutral-0 dark:bg-neutral-100" />
               <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-0 group-hover:scale-y-100 origin-center"
+                className="absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-100 lg:scale-y-0 lg:group-hover:scale-y-100 origin-center"
                 style={{
                   background: isDark
                     ? "linear-gradient(to bottom, #4C1D95, #6D28D9, #8B5CF6)"
                     : "linear-gradient(to bottom, rgba(139, 92, 246, 0.2), rgba(168, 85, 247, 0.25), rgba(196, 181, 253, 0.3))",
                 }}
               />
-              <div className="flex items-center justify-between h-full py-4 sm:py-6 md:py-8 relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8">
+              <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between h-full py-8 sm:py-10 md:py-12 lg:py-4 xl:py-6 2xl:py-8 relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 gap-4 lg:gap-0">
                 {/* Left side - Project info */}
-                <div className="flex flex-col justify-center">
-                  <div className="text-xs sm:text-sm font-black text-neutral-60 dark:text-neutral-40 group-hover:text-neutral-100 dark:group-hover:text-neutral-3 tracking-wider mb-1 transition-colors duration-500 ease-in-out">
+                <div className="flex flex-col justify-center flex-1 pr-6 lg:pr-0">
+                  <div className="text-xs sm:text-sm font-black text-neutral-100 dark:text-neutral-3 lg:text-neutral-60 lg:dark:text-neutral-40 lg:group-hover:text-neutral-100 lg:dark:group-hover:text-neutral-3 tracking-wider mb-1 transition-colors duration-500 ease-in-out">
                     {project.id.toUpperCase()}
                   </div>
                   <h3
-                    className="text-lg sm:text-xl md:text-2xl font-bold text-neutral-100 dark:text-neutral-0 transition-colors duration-500 ease-in-out font-hanken"
+                    className="text-lg sm:text-xl md:text-2xl font-bold transition-colors duration-500 ease-in-out font-hanken"
                     style={{
                       color: isDark
                         ? hoveredProject === project.id
@@ -130,14 +130,14 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                   >
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-1 sm:gap-2 mt-2 sm:mt-3">
+                  <div className="flex flex-col lg:flex-row lg:items-center gap-1 lg:gap-1 sm:gap-2 mt-2 sm:mt-3">
                     {project.keywords.map((keyword, index) => (
                       <div key={index} className="flex items-center">
-                        <span className="text-sm sm:text-base md:text-lg text-neutral-70 dark:text-neutral-60 group-hover:text-neutral-100 dark:group-hover:text-neutral-20 font-medium transition-colors duration-500 ease-in-out">
+                        <span className="text-sm sm:text-base md:text-lg text-neutral-100 dark:text-neutral-20 lg:text-neutral-70 lg:dark:text-neutral-60 lg:group-hover:text-neutral-100 lg:dark:group-hover:text-neutral-20 font-medium transition-colors duration-500 ease-in-out">
                           {keyword}
                         </span>
                         {index < project.keywords.length - 1 && (
-                          <span className="text-neutral-50 dark:text-neutral-40 group-hover:text-neutral-100 dark:group-hover:text-neutral-20 mx-1 sm:mx-2 transition-colors duration-500 ease-in-out">
+                          <span className="hidden lg:block text-neutral-50 dark:text-neutral-40 group-hover:text-neutral-100 dark:group-hover:text-neutral-20 mx-1 sm:mx-2 transition-colors duration-500 ease-in-out">
                             |
                           </span>
                         )}
@@ -146,8 +146,8 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                   </div>
                 </div>
 
-                {/* Right side - Project image */}
-                <div className="relative h-24 w-32 sm:h-32 sm:w-48 md:h-40 md:w-64 overflow-hidden bg-neutral-20 dark:bg-neutral-80 rounded-xl sm:rounded-2xl">
+                {/* Bottom right - Project image positioned in bottom right corner */}
+                <div className="absolute bottom-4 right-4 lg:relative lg:bottom-auto lg:right-auto h-24 w-28 sm:h-28 sm:w-36 md:h-32 md:w-40 lg:h-40 lg:w-64 overflow-hidden bg-neutral-20 dark:bg-neutral-80 rounded-lg sm:rounded-xl lg:rounded-2xl lg:self-center">
                   <Image
                     src={project.image}
                     alt={project.alt}
@@ -156,7 +156,7 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                     className="w-full h-full object-cover"
                   />
                   {/* Overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-neutral-100/10 dark:bg-neutral-100/10 group-hover:bg-neutral-100/20 dark:group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
+                  <div className="absolute inset-0 bg-neutral-100/10 dark:bg-neutral-100/10 lg:group-hover:bg-neutral-100/20 lg:dark:group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
                   {/* GIF indicator */}
                   {project.isGif && (
                     <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-0 dark:text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">

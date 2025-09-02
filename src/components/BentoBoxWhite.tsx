@@ -288,9 +288,10 @@ const BentoBoxWhite = () => {
             <div className="flex items-center justify-between mb-2 p-8">
               <div className="flex items-baseline gap-2">
                 <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
-                  My toolkit include
+                  <span className="block lg:hidden">My toolkit</span>
+                  <span className="hidden lg:block">My toolkit include</span>
                 </h2>
-                <p className="text-lg text-neutral-50 font-hanken">
+                <p className="hidden lg:block text-lg text-neutral-50 font-hanken">
                   but is not limited to:
                 </p>
               </div>

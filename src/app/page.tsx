@@ -171,14 +171,21 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
                   <div className="w-full lg:flex-1">
                     {/* Main title - Responsive typography */}
-                    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
+                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
                       <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                         UX/UI Designer{" "}
                       </span>
-                      <span className="inline-block text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[1] font-hanken text-[#8B5CF6]">
+                      <span className="inline-block text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[1] font-hanken text-[#8B5CF6]">
                         &
                       </span>
                     </h1>
+
+                    {/* Low-code Developer text - Mobile/tablet positioning */}
+                    <div className="block lg:hidden mb-6">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
+                        Low-code Developer
+                      </span>
+                    </div>
 
                     {/* Hero statement - Responsive layout */}
                     <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 w-full">
@@ -186,20 +193,20 @@ export default function Home() {
                         <div className="hero-statement">
                           {/* First line */}
                           <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
-                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                               I
                             </span>
-                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                               create
                             </span>
                             <span className="word highlight">
-                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                                 digital
                               </span>
                               <span className="highlight-bg"></span>
                             </span>
                             <span className="word highlight">
-                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                                 products
                               </span>
                               <span className="highlight-bg"></span>
@@ -348,27 +355,27 @@ export default function Home() {
                           </div>
                           {/* Second line */}
                           <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
-                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                               and
                             </span>
-                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                               make
                             </span>
                             <span className="word highlight">
-                              <span className="highlight-text text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                                 experiences
                               </span>
                               <span className="highlight-bg"></span>
                             </span>
-                            <span className="word text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl">
+                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
                               happen.
                             </span>
                           </div>
                         </div>
                       </div>
-                      {/* Low-code Developer text - Responsive positioning */}
-                      <div className="w-full lg:w-auto lg:ml-8 mt-6 lg:mt-0">
-                        <span className="text-neutral-60 dark:text-neutral-40 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium font-hanken tracking-wide">
+                      {/* Low-code Developer text - Desktop positioning */}
+                      <div className="hidden lg:block w-auto lg:ml-8 mt-0">
+                        <span className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-5xl font-medium font-hanken tracking-wide">
                           Low-code Developer
                         </span>
                       </div>

@@ -1079,6 +1079,8 @@ body {
   flex-wrap: wrap;
   gap: 0.5rem; /* gap-2 */
   margin-bottom: 0.5rem; /* mb-2 */
+  align-items: baseline;
+  line-height: 1;
 }
 
 @media (min-width: 640px) {
@@ -1129,12 +1131,12 @@ body {
 
 .highlight-bg {
   position: absolute;
-  top: -4px;
-  left: -12px;
-  right: -12px;
-  bottom: -4px;
+  top: 0px;
+  left: -8px;
+  right: -8px;
+  bottom: 0px;
   background: #8b5cf6;
-  border-radius: 12px;
+  border-radius: 8px;
   opacity: 0.12;
   z-index: 1;
   transform: scale(0.95);
@@ -1162,6 +1164,8 @@ body {
   position: relative;
   animation: spin-morph 6s ease-in-out infinite;
   transition: animation-play-state 0.3s ease;
+  vertical-align: middle;
+  line-height: 1;
 }
 
 /* Responsive morphing icon sizes */
