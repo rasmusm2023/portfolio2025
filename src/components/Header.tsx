@@ -7,12 +7,14 @@ import { Hanken_Grotesk } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState, useRef } from "react";
+import { usePathname } from "next/navigation";
 import ThemeToggle from "./ThemeToggle";
 import { gsap } from "gsap";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 const Header = () => {
+  const pathname = usePathname();
   const [showBackground, setShowBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
@@ -234,17 +236,17 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[60] h-16 sm:h-20 lg:h-24">
+    <header className="fixed top-0 left-0 right-0 z-[60] h-16 sm:h-20 xl:h-24">
       {/* Background Layer */}
       <div
-        className={`absolute inset-0 transition-all duration-1000 mobile-header-bg lg:bg-transparent ${
-          showBackground ? "lg:bg-white/80 lg:dark:bg-neutral-100/80" : ""
+        className={`absolute inset-0 transition-all duration-1000 mobile-header-bg xl:bg-transparent ${
+          showBackground ? "xl:bg-white/80 xl:dark:bg-neutral-100/80" : ""
         }`}
       />
 
       {/* Content Layer */}
       <div
-        className={`relative z-10 px-4 sm:px-6 lg:px-12 h-full ${hanken.className}`}
+        className={`relative z-10 px-4 sm:px-6 xl:px-12 h-full ${hanken.className}`}
       >
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
@@ -255,22 +257,22 @@ const Header = () => {
             <img
               src="/rm-logo-portfolio-white.svg"
               alt="Logo"
-              className="h-6 sm:h-7 lg:h-8 dark:block hidden"
+              className="h-6 sm:h-7 xl:h-8 dark:block hidden"
             />
             <img
               src="/rm-logo-portfolio-dark.svg"
               alt="Logo"
-              className="h-6 sm:h-7 lg:h-8 block dark:hidden"
+              className="h-6 sm:h-7 xl:h-8 block dark:hidden"
             />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden lg:block absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden xl:block absolute left-1/2 transform -translate-x-1/2">
             <Menu />
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-4">
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -315,7 +317,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex lg:hidden items-center gap-2">
+          <div className="flex xl:hidden items-center gap-2">
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -358,7 +360,7 @@ const Header = () => {
 
       {/* Mobile Menu Full Screen */}
       <div
-        className={`mobile-menu lg:hidden fixed top-16 sm:top-20 lg:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
+        className={`mobile-menu xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible translate-y-4"
@@ -374,7 +376,9 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Home"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : "text-neutral-100 dark:text-neutral-0 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Home")}
                 >
@@ -387,7 +391,10 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Work"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : "text-neutral-100 dark:text-neutral-0 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/work" ||
+                        pathname.startsWith("/case-studies/")
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Work")}
                 >
@@ -400,7 +407,9 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Design Gallery"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : "text-neutral-100 dark:text-neutral-0 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/design-gallery"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Design Gallery")}
                 >
@@ -413,7 +422,9 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "About"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : "text-neutral-100 dark:text-neutral-0 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/about"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("About")}
                 >
@@ -426,7 +437,9 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Contact"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : "text-neutral-100 dark:text-neutral-0 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/contact"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Contact")}
                 >

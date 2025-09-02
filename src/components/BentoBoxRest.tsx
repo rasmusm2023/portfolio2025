@@ -817,7 +817,7 @@ const BentoBoxRest = () => {
 
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
@@ -848,13 +848,13 @@ const BentoBoxRest = () => {
                 alt="Currently Working On"
                 width={80}
                 height={80}
-                className="animate-pulse-subtle"
+                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 animate-pulse-subtle"
               />
             </div>
 
-            <div className="flex-1 flex gap-4">
+            <div className="flex-1 flex flex-col lg:flex-row gap-4">
               {/* Dog-sitting App Card */}
-              <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
+              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
                 <img
                   src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=600&fit=crop&crop=center"
                   alt="Dog-sitting App Preview"
@@ -884,7 +884,7 @@ const BentoBoxRest = () => {
               </div>
 
               {/* E-commerce Website & App Card */}
-              <div className="flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20">
+              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
                 <img
                   src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center"
                   alt="E-commerce Website & App Preview"

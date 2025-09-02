@@ -139,13 +139,13 @@ const Menu = () => {
                   duration-200
                   font-bold
                   text-sm
-                  lg:text-base
+                  xl:text-base
                   tracking-wide
                   px-4
                   sm:px-6
-                  lg:px-8
+                  xl:px-8
                   py-3
-                  lg:py-4
+                  xl:py-4
                   rounded-full
                   ${
                     isActive

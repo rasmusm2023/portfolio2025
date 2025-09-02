@@ -375,7 +375,7 @@ export default function Home() {
                       </div>
                       {/* Low-code Developer text - Desktop positioning */}
                       <div className="hidden lg:block w-auto lg:ml-8 mt-0">
-                        <span className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-5xl font-medium font-hanken tracking-wide">
+                        <span className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-4xl 2xl:text-6xl font-medium font-hanken tracking-wide">
                           Low-code Developer
                         </span>
                       </div>
@@ -398,7 +398,7 @@ export default function Home() {
 
         {/* Footer Section */}
         <div className="pt-16 pb-16">
-          <div className="container mx-auto">
+          <div className="container mx-auto pr-4 pl-4 lg:pr-0 lg:pl-0">
             <Footer />
           </div>
         </div>
