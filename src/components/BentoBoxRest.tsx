@@ -695,7 +695,7 @@ const BentoBoxRest = () => {
 
           {/* Experience - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
             style={{
               transform: `scale(${getBoxScale("experience")})`,
               backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
@@ -715,7 +715,7 @@ const BentoBoxRest = () => {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-baseline gap-2">
                 <h2
-                  className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                  className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                   style={{
                     color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
@@ -723,7 +723,7 @@ const BentoBoxRest = () => {
                   Experience
                 </h2>
                 <p
-                  className="text-lg font-hanken"
+                  className="hidden lg:block text-lg font-hanken"
                   style={{
                     color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
@@ -736,17 +736,19 @@ const BentoBoxRest = () => {
                 alt="Experience"
                 width={80}
                 height={80}
-                className="animate-pulse-subtle"
+                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 animate-pulse-subtle"
               />
             </div>
             <div className="flex-1 flex flex-col justify-center">
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-4xl font-bold">5</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
+                      5
+                    </span>
                   </div>
                   <span
-                    className={`text-xl ${
+                    className={`text-base sm:text-lg lg:text-xl ${
                       isDark ? "text-neutral-40" : "text-neutral-100"
                     }`}
                   >
@@ -754,11 +756,13 @@ const BentoBoxRest = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-4xl font-bold">4</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
+                      4
+                    </span>
                   </div>
                   <span
-                    className={`text-xl ${
+                    className={`text-base sm:text-lg lg:text-xl ${
                       isDark ? "text-neutral-40" : "text-neutral-100"
                     }`}
                   >
@@ -766,11 +770,13 @@ const BentoBoxRest = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-4xl font-bold">2</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
+                      2
+                    </span>
                   </div>
                   <span
-                    className={`text-xl ${
+                    className={`text-base sm:text-lg lg:text-xl ${
                       isDark ? "text-neutral-40" : "text-neutral-100"
                     }`}
                   >
@@ -778,11 +784,13 @@ const BentoBoxRest = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-4xl font-bold">20</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
+                      20
+                    </span>
                   </div>
                   <span
-                    className={`text-xl ${
+                    className={`text-base sm:text-lg lg:text-xl ${
                       isDark ? "text-neutral-40" : "text-neutral-100"
                     }`}
                   >
@@ -790,11 +798,13 @@ const BentoBoxRest = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-4 py-2 w-20 h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-4xl font-bold">1</span>
+                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
+                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
+                      1
+                    </span>
                   </div>
                   <span
-                    className={`text-xl ${
+                    className={`text-base sm:text-lg lg:text-xl ${
                       isDark ? "text-neutral-40" : "text-neutral-100"
                     }`}
                   >
