@@ -190,8 +190,8 @@ export default function ContactPage() {
               }}
             />
 
-            {/* Desktop Layout */}
-            <div className="hidden lg:block h-[80vh] relative">
+            {/* Large Desktop Layout (xl and above) */}
+            <div className="hidden xl:block h-[80vh] relative">
               <div
                 className="absolute inset-0 flex items-center justify-between w-full max-w-[1600px]"
                 style={{ height: "100vh" }}
@@ -393,6 +393,190 @@ export default function ContactPage() {
               </div>
             </div>
 
+            {/* Medium Desktop Layout (lg to xl) - Stacked */}
+            <div className="hidden lg:block xl:hidden min-h-screen px-8 pt-24 pb-8">
+              {/* Hero Section */}
+              <div className="flex flex-col justify-center mb-12">
+                <h1 className="text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.6] mb-8">
+                  <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
+                    Contact
+                  </span>
+                </h1>
+
+                <div className="flex flex-col gap-6 mb-12">
+                  <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
+                    I'm always excited to discuss new opportunities and
+                    possibilities.
+                  </p>
+                  <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
+                    Whether you have a specific role in mind or just want to
+                    discuss how I can contribute, let's start a conversation.
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div className="mb-12">
+                <div className="flex items-center space-x-8">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                        />
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
+                        Location
+                      </h3>
+                      <p className="text-neutral-60 dark:text-neutral-60 text-lg">
+                        Stockholm, Sweden
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
+                      <svg
+                        className="w-6 h-6 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        />
+                      </svg>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
+                        Response Time
+                      </h3>
+                      <p className="text-neutral-60 dark:text-neutral-60 text-lg">
+                        Within 24 hours
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Form */}
+              <div className="max-w-2xl mx-auto">
+                <div className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
+                  <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
+                    Let's have a chat 💬
+                  </h2>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <FloatingLabelInput
+                      id="name-lg"
+                      name="name"
+                      type="text"
+                      placeholder="Name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                    />
+
+                    <FloatingLabelInput
+                      id="email-lg"
+                      name="email"
+                      type="email"
+                      placeholder="Email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                    />
+
+                    <FloatingLabelInput
+                      id="subject-lg"
+                      name="subject"
+                      type="text"
+                      placeholder="Subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                    />
+
+                    <FloatingLabelInput
+                      id="message-lg"
+                      name="message"
+                      placeholder="Message"
+                      required
+                      rows={4}
+                      isTextarea
+                      value={formData.message}
+                      onChange={handleChange}
+                    />
+
+                    <button
+                      type="submit"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+                    >
+                      Send message
+                    </button>
+
+                    {/* OR Divider */}
+                    <div className="flex items-center justify-center space-x-4 my-6">
+                      <div className="flex-1 h-px bg-neutral-60/30"></div>
+                      <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
+                        OR
+                      </span>
+                      <div className="flex-1 h-px bg-neutral-60/30"></div>
+                    </div>
+
+                    {/* Email Alternative */}
+                    <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                      <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
+                        Prefer to email directly?
+                      </p>
+                      <div className="flex items-center justify-center gap-4">
+                        <span
+                          className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                            emailCopied
+                              ? "text-green-500"
+                              : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
+                          }`}
+                          onClick={handleCopyEmail}
+                        >
+                          hello@rasmusmattsson.com
+                        </span>
+                        <button
+                          type="button"
+                          onClick={handleCopyEmail}
+                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                            emailCopied
+                              ? "bg-green-500 text-neutral-3 shadow-lg"
+                              : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                          }`}
+                        >
+                          <Copy size={16} weight="regular" />
+                          {emailCopied ? "Copied!" : "Copy email"}
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
             {/* Mobile/Tablet Layout */}
             <div className="lg:hidden flex flex-col min-h-screen px-4 sm:px-6 pt-24 sm:pt-28 pb-8 sm:pb-12">
               {/* Hero Section */}
@@ -417,7 +601,7 @@ export default function ContactPage() {
 
               {/* Contact Information */}
               <div className="mb-8 sm:mb-12">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-8">
+                <div className="flex flex-row items-center space-x-4 sm:space-x-8">
                   <div className="flex items-center space-x-3 sm:space-x-4">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
                       <svg
@@ -441,10 +625,10 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
+                      <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
                         Location
                       </h3>
-                      <p className="text-neutral-60 dark:text-neutral-60 text-base sm:text-lg">
+                      <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
                         Stockholm, Sweden
                       </p>
                     </div>
@@ -467,10 +651,10 @@ export default function ContactPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="text-base sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
+                      <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
                         Response Time
                       </h3>
-                      <p className="text-neutral-60 dark:text-neutral-60 text-base sm:text-lg">
+                      <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
                         Within 24 hours
                       </p>
                     </div>

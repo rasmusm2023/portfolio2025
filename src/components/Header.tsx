@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Menu from "./Menu";
-import { LegoIcon, FileText, List, X } from "@phosphor-icons/react";
+import { LegoIcon, FileText, List, X, Equals } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
@@ -64,11 +64,11 @@ const Header = () => {
     };
 
     if (isMobileMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("click", handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("click", handleClickOutside);
     };
   }, [isMobileMenuOpen]);
 
@@ -267,12 +267,12 @@ const Header = () => {
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden xl:block absolute left-1/2 transform -translate-x-1/2">
+          <div className="hidden 2xl:block absolute left-1/2 transform -translate-x-1/2">
             <Menu />
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden xl:flex items-center gap-4">
+          <div className="hidden 2xl:flex items-center gap-4">
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -317,7 +317,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex xl:hidden items-center gap-2">
+          <div className="flex 2xl:hidden items-center gap-2">
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -325,22 +325,17 @@ const Header = () => {
             <button
               onClick={handleMenuToggle}
               ref={menuToggleRef}
-              className="mobile-menu-toggle relative flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-200 hover:bg-neutral-100/10 dark:hover:bg-neutral-0/10"
+              className="mobile-menu-toggle text-sm inline-flex items-center justify-center gap-2 px-4 py-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-lg transition-all duration-200"
             >
-              <span
-                ref={menuTextRef}
-                className="text-sm font-semibold text-neutral-40 transition-all duration-300 ease-in-out"
-              >
-                {isMobileMenuOpen ? "CLOSE" : "MENU"}
-              </span>
-              <div className="relative w-5 h-5">
+              <div className="relative w-4 h-4">
                 <div
                   ref={hamburgerRef}
                   className="absolute inset-0 transition-all duration-300 ease-in-out"
                 >
-                  <List
-                    size={20}
-                    className="text-neutral-40 absolute inset-0 transition-all duration-300 ease-in-out"
+                  <Equals
+                    size={16}
+                    weight="regular"
+                    className="absolute inset-0 transition-all duration-300 ease-in-out"
                   />
                 </div>
                 <div
@@ -348,11 +343,18 @@ const Header = () => {
                   className="absolute inset-0 transition-all duration-300 ease-in-out"
                 >
                   <X
-                    size={20}
-                    className="text-neutral-40 absolute inset-0 transition-all duration-300 ease-in-out"
+                    size={16}
+                    weight="regular"
+                    className="absolute inset-0 transition-all duration-300 ease-in-out"
                   />
                 </div>
               </div>
+              <span
+                ref={menuTextRef}
+                className="transition-all duration-300 ease-in-out"
+              >
+                {isMobileMenuOpen ? "CLOSE" : "MENU"}
+              </span>
             </button>
           </div>
         </div>
@@ -360,7 +362,7 @@ const Header = () => {
 
       {/* Mobile Menu Full Screen */}
       <div
-        className={`mobile-menu xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
+        className={`mobile-menu 2xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible translate-y-4"
