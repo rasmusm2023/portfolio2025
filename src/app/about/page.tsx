@@ -3,6 +3,7 @@
 import AnimatedBlob from "@/components/AnimatedBlob";
 import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
 import TraitsCarousel from "@/components/TraitsCarousel";
+import FilmsCarousel from "@/components/FilmsCarousel";
 import CustomCursor from "@/components/CustomCursor";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
 
@@ -485,7 +486,7 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
               }}
             />
             <div
-              className="w-28 h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover"
+              className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover"
               style={{
                 backgroundColor: isDark
                   ? "rgb(35, 35, 35)"
@@ -496,8 +497,8 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
                 src={song.albumCover}
                 alt={`${song.title} by ${song.artist}`}
                 className="w-full h-full object-cover"
-                width={112}
-                height={112}
+                width={96}
+                height={96}
               />
               {/* Radial blue shine effect */}
               <div
@@ -511,7 +512,7 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
             </div>
             <div className="mt-2 text-center">
               <p
-                className="text-sm font-medium truncate max-w-28"
+                className="text-xs sm:text-sm font-medium truncate max-w-24 sm:max-w-24 md:max-w-28"
                 style={{
                   color: isDark ? "rgb(255, 255, 255)" : "#000000",
                 }}
@@ -519,7 +520,7 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
                 {song.title}
               </p>
               <p
-                className="text-sm truncate max-w-28"
+                className="text-xs sm:text-sm truncate max-w-24 sm:max-w-24 md:max-w-28"
                 style={{
                   color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
@@ -553,31 +554,28 @@ export default function AboutPage() {
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
-          <section className="h-[80vh] relative">
+          <section className="min-h-screen relative flex items-center">
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(139, 92, 246, 0.6)", // Purple primary
                 secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
               }}
             />
-            <div
-              className="absolute inset-0 flex items-center justify-start w-full max-w-[1600px]"
-              style={{ height: "100vh" }}
-            >
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
               <div className="text-left w-full">
-                <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
+                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
                   <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
                 </h1>
-                <div className="flex justify-between items-start mt-16">
-                  <div className="flex-1 max-w-[48rem]">
-                    <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">
+                  <div className="flex-1 max-w-full lg:max-w-[48rem]">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide">
                       I am a passionate designer and developer with a love for
                       creating beautiful, functional experiences that make a
                       difference.
                     </p>
-                    <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-loose tracking-wide mt-8">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg lg:text-xl font-semibold leading-loose tracking-wide mt-6 sm:mt-8">
                       — with an{" "}
                       <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">eye</span>{" "}
                       for{" "}
@@ -603,8 +601,8 @@ export default function AboutPage() {
                       .
                     </p>
                   </div>
-                  <div className="ml-8">
-                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken tracking-wide">
+                  <div className="lg:ml-8 mt-4 lg:mt-0">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-3xl sm:text-4xl lg:text-5xl font-medium font-hanken tracking-wide">
                       My Story
                     </span>
                   </div>
@@ -614,12 +612,12 @@ export default function AboutPage() {
           </section>
 
           {/* Bento Box Layout */}
-          <section className="py-16 relative">
-            <div className="text-left w-full max-w-[1600px] mx-auto relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-12 auto-rows-[320px]">
+          <section className="py-8 sm:py-12 lg:py-16 relative">
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-3 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("traits")})`,
                     backgroundColor: isDark
@@ -640,7 +638,7 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
-                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
@@ -650,9 +648,9 @@ export default function AboutPage() {
                     <Image
                       src="/icons/3dicons-puzzle-dynamic-premium.png"
                       alt="Traits"
-                      width={80}
-                      height={80}
-                      className="animate-pulse-subtle"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                     />
                   </div>
                   <div className="mt-8">
@@ -725,7 +723,7 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("about")})`,
                     backgroundColor: isDark
@@ -746,7 +744,7 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
-                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
@@ -756,17 +754,16 @@ export default function AboutPage() {
                     <Image
                       src="/icons/3dicons-bulb-dynamic-premium.png"
                       alt="About Me"
-                      width={80}
-                      height={80}
-                      className="animate-pulse-subtle"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                     />
                   </div>
-                  <div className="mt-6">
+                  <div className="mt-4 sm:mt-6">
                     <p
-                      className="leading-relaxed"
+                      className="leading-relaxed text-sm sm:text-base lg:text-lg"
                       style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
-                        fontSize: "18px",
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
                       A passionate designer and developer with a love for
@@ -779,7 +776,7 @@ export default function AboutPage() {
 
                 {/* Why This Portfolio - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("portfolio")})`,
                     backgroundColor: isDark
@@ -800,7 +797,7 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
-                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
@@ -810,20 +807,19 @@ export default function AboutPage() {
                     <Image
                       src="/icons/3dicons-star-dynamic-premium.png"
                       alt="Why This Portfolio"
-                      width={80}
-                      height={80}
-                      className="animate-pulse-subtle"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                     />
                   </div>
-                  <div className="mt-6">
+                  <div className="mt-4 sm:mt-6">
                     <p
-                      className="leading-relaxed"
+                      className="leading-relaxed text-sm sm:text-base lg:text-lg"
                       style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
-                        fontSize: "18px",
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      This portfolio is more than a showcase — it’s a personal
+                      This portfolio is more than a showcase — it's a personal
                       space that evolves over time. Case studies are kept
                       lightweight to be easily digested, while also giving room
                       for reflection and a closer connection to who I am as a
@@ -834,7 +830,7 @@ export default function AboutPage() {
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("time")})`,
                     backgroundColor: isDark
@@ -855,7 +851,7 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
-                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
@@ -865,16 +861,16 @@ export default function AboutPage() {
                     <Image
                       src="/icons/3dicons-clock-dynamic-premium.png"
                       alt="My Time"
-                      width={80}
-                      height={80}
-                      className="animate-pulse-subtle"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                     />
                   </div>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
-                        <div className="text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
+                        <div className="text-4xl sm:text-5xl lg:text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
                         {/* Animated dots */}
@@ -972,7 +968,7 @@ export default function AboutPage() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("books")})`,
                     backgroundColor: isDark
@@ -992,9 +988,9 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <div className="flex items-baseline gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                       <h2
-                        className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                        className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                         style={{
                           color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
@@ -1002,9 +998,9 @@ export default function AboutPage() {
                         Books
                       </h2>
                       <p
-                        className="text-lg font-hanken"
+                        className="text-sm sm:text-base lg:text-lg font-hanken"
                         style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
+                          color: isDark ? "#A7A7A7" : "#5D5E63",
                         }}
                       >
                         I'm currently reading or listening to
@@ -1019,39 +1015,38 @@ export default function AboutPage() {
                       <Image
                         src="/icons/3dicons-notebook-dynamic-premium.png"
                         alt="Books"
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={60}
+                        className="sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                       />
                     </a>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                      <BookCard
-                        title="Hjärnstark : hur motion och träning stärker din hjärna"
-                        author="Anders Hansen"
-                        coverImage={HjarnstarkCover}
-                        amazonUrl="https://www.amazon.com/Hjärnstark-hur-motion-träning-stärker/dp/9175031234"
-                        currentPage={127}
-                        totalPages={280}
-                        isDark={isDark}
-                      />
-                      <BookCard
-                        title="Mikael Persbrandt : så som jag minns det"
-                        author="Mikael Persbrandt"
-                        coverImage={MikaelPersbrandtCover}
-                        amazonUrl="https://www.amazon.com/Mikael-Persbrandt-så-minns-det/dp/9175031234"
-                        currentPage={431}
-                        totalPages={431}
-                        isFinished={true}
-                        isDark={isDark}
-                      />
-                    </div>
+                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    <BookCard
+                      title="Hjärnstark : hur motion och träning stärker din hjärna"
+                      author="Anders Hansen"
+                      coverImage={HjarnstarkCover}
+                      amazonUrl="https://www.amazon.com/Hjärnstark-hur-motion-träning-stärker/dp/9175031234"
+                      currentPage={127}
+                      totalPages={280}
+                      isDark={isDark}
+                    />
+                    <BookCard
+                      title="Mikael Persbrandt : så som jag minns det"
+                      author="Mikael Persbrandt"
+                      coverImage={MikaelPersbrandtCover}
+                      amazonUrl="https://www.amazon.com/Mikael-Persbrandt-så-minns-det/dp/9175031234"
+                      currentPage={431}
+                      totalPages={431}
+                      isFinished={true}
+                      isDark={isDark}
+                    />
                   </div>
                 </div>
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="col-span-1 md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("films")})`,
                     backgroundColor: isDark
@@ -1072,7 +1067,7 @@ export default function AboutPage() {
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
                     <h2
-                      className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
@@ -1082,12 +1077,59 @@ export default function AboutPage() {
                     <Image
                       src="/icons/3dicons-video-cam-dynamic-premium.png"
                       alt="Favourite Films"
-                      width={80}
-                      height={80}
-                      className="animate-pulse-subtle"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                     />
                   </div>
-                  <div className="flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
+                  {/* Mobile/Tablet Carousel */}
+                  <div className="lg:hidden">
+                    <FilmsCarousel
+                      isDark={isDark}
+                      films={[
+                        {
+                          title: "The Equalizer",
+                          year: "2014",
+                          director: "Antoine Fuqua",
+                          coverImage: TheEqualizerCover,
+                          imdbUrl:
+                            "https://www.imdb.com/title/tt0455944/?ref_=mv_close",
+                        },
+                        {
+                          title: "The Equalizer 2",
+                          year: "2018",
+                          director: "Antoine Fuqua",
+                          coverImage: TheEqualizer2Cover,
+                          imdbUrl:
+                            "https://www.imdb.com/title/tt0455944/?ref_=mv_close",
+                        },
+                        {
+                          title: "The Beekeeper",
+                          year: "2024",
+                          director: "David Ayer",
+                          coverImage: TheBeekeeperCover,
+                          imdbUrl: "https://www.imdb.com/title/tt15314262/",
+                        },
+                        {
+                          title: "The Dark Knight",
+                          year: "2008",
+                          director: "Christopher Nolan",
+                          coverImage: TheDarkKnightCover,
+                          imdbUrl: "https://www.imdb.com/title/tt0468569/",
+                        },
+                        {
+                          title: "Arrival",
+                          year: "2016",
+                          director: "Denis Villeneuve",
+                          coverImage: ArrivalCover,
+                          imdbUrl: "https://www.imdb.com/title/tt2543164/",
+                        },
+                      ]}
+                    />
+                  </div>
+
+                  {/* Desktop Static Display */}
+                  <div className="hidden lg:flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
                     <FilmCard
                       title="The Equalizer"
                       year="2014"
@@ -1128,7 +1170,7 @@ export default function AboutPage() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-3xl p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("music")})`,
                     backgroundColor: isDark
@@ -1148,9 +1190,9 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2">
-                    <div className="flex items-baseline gap-2">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                       <h2
-                        className="text-xl font-bold font-montserrat uppercase tracking-wider"
+                        className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                         style={{
                           color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
@@ -1158,9 +1200,9 @@ export default function AboutPage() {
                         Music
                       </h2>
                       <p
-                        className="text-lg font-hanken"
+                        className="text-sm sm:text-base lg:text-lg font-hanken"
                         style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
+                          color: isDark ? "#A7A7A7" : "#5D5E63",
                         }}
                       >
                         I'm currently listening to
@@ -1177,15 +1219,14 @@ export default function AboutPage() {
                       <Image
                         src="/icons/3dicons-headphone-dynamic-premium.png"
                         alt="Spotify"
-                        width={80}
-                        height={80}
+                        width={60}
+                        height={60}
+                        className="sm:w-16 sm:h-16 lg:w-20 lg:h-20"
                       />
                     </a>
                   </div>
-                  <div className="space-y-2">
-                    <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                      <FavoriteSongs isDark={isDark} />
-                    </div>
+                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                    <FavoriteSongs isDark={isDark} />
                   </div>
                 </div>
               </div>
@@ -1194,8 +1235,8 @@ export default function AboutPage() {
         </main>
 
         {/* Footer Section */}
-        <div className="pt-16 pb-16">
-          <div className="container mx-auto">
+        <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <Footer />
           </div>
         </div>

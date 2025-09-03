@@ -22,6 +22,7 @@ export default function TraitsCarousel({
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouching, setIsTouching] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
@@ -33,7 +34,7 @@ export default function TraitsCarousel({
     const scrollSpeed = isHovered ? 3 : 6; // Slower when hovered, but still moving
 
     const animate = () => {
-      if (carouselRef.current && !isDragging) {
+      if (carouselRef.current && !isDragging && !isTouching) {
         const container = carouselRef.current;
         const singleSetWidth = container.scrollWidth / 3; // Width of one complete set of traits
 
@@ -61,7 +62,7 @@ export default function TraitsCarousel({
         cancelAnimationFrame(animationRef.current);
       }
     };
-  }, [isHovered, isDragging]);
+  }, [isHovered, isDragging, isTouching]);
 
   // Mouse event handlers for drag functionality
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -86,6 +87,30 @@ export default function TraitsCarousel({
   };
 
   const handleMouseLeave = (e?: React.MouseEvent) => {
+    setIsDragging(false);
+  };
+
+  // Touch event handlers for mobile support
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsTouching(true);
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0));
+    setScrollLeft(carouselRef.current?.scrollLeft || 0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+
+    const x = e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0);
+    const walk = (x - startX) * 1.2;
+    if (carouselRef.current) {
+      carouselRef.current.scrollLeft = scrollLeft - walk;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsTouching(false);
     setIsDragging(false);
   };
 
@@ -118,6 +143,9 @@ export default function TraitsCarousel({
           setIsHovered(false);
           handleMouseLeave();
         }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         style={{ scrollBehavior: isDragging ? "auto" : "smooth" }}
         data-tooltip="Swipe"
         data-tooltip-icon="↔"
@@ -125,7 +153,7 @@ export default function TraitsCarousel({
         {infiniteTraits.map((trait, index) => (
           <div
             key={index}
-            className="flex-shrink-0 w-80 border border-neutral-20/10 dark:border-neutral-100/10 rounded-2xl p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden shadow-lg"
+            className="flex-shrink-0 w-64 sm:w-64 md:w-80 border border-neutral-20/10 dark:border-neutral-100/10 rounded-2xl p-5 sm:p-4 md:p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden shadow-lg"
             style={{
               backgroundColor: isDark
                 ? "rgba(35, 35, 35, 0.5)"
@@ -172,7 +200,7 @@ export default function TraitsCarousel({
             ></div>
 
             {/* Image Section */}
-            <div className="w-full h-56 mb-4 rounded-xl overflow-hidden">
+            <div className="w-full h-36 sm:h-40 md:h-56 mb-4 sm:mb-3 md:mb-4 rounded-xl overflow-hidden">
               {trait.image ? (
                 <img
                   src={trait.image}
@@ -194,17 +222,21 @@ export default function TraitsCarousel({
                       : "linear-gradient(to bottom right, rgb(240, 240, 240), rgb(220, 220, 220))",
                   }}
                 >
-                  <span className="text-6xl">{trait.emoji}</span>
+                  <span className="text-3xl sm:text-4xl md:text-6xl">
+                    {trait.emoji}
+                  </span>
                 </div>
               )}
             </div>
 
             {/* Content Section */}
-            <div className="space-y-3 relative z-10">
-              <div className="flex items-center gap-3">
-                <span className="text-2xl">{trait.emoji}</span>
+            <div className="space-y-3 sm:space-y-2 md:space-y-3 relative z-10">
+              <div className="flex items-center gap-3 sm:gap-2 md:gap-3">
+                <span className="text-2xl sm:text-xl md:text-2xl">
+                  {trait.emoji}
+                </span>
                 <h3
-                  className="font-semibold text-base"
+                  className="font-semibold text-base sm:text-sm md:text-base"
                   style={{
                     color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
@@ -213,7 +245,7 @@ export default function TraitsCarousel({
                 </h3>
               </div>
               <p
-                className="text-sm leading-relaxed"
+                className="text-sm sm:text-sm leading-relaxed"
                 style={{
                   color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
