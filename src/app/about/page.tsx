@@ -162,7 +162,7 @@ function BookCard({
       href={amazonUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex-shrink-0 w-80 h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group backdrop-blur-sm"
+      className="flex-shrink-0 w-full h-20 sm:w-64 sm:h-32 md:w-80 md:h-40 lg:w-56 lg:h-36 xl:w-72 xl:h-32 2xl:w-80 2xl:h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group backdrop-blur-sm"
       style={{
         backgroundColor: isDark
           ? "rgba(35, 35, 35, 0.5)"
@@ -171,7 +171,7 @@ function BookCard({
     >
       <div className="flex w-full h-full">
         {/* Book Cover */}
-        <div className="w-32 h-40 rounded-l-2xl overflow-hidden flex-shrink-0">
+        <div className="w-16 h-20 sm:w-24 sm:h-32 md:w-32 md:h-40 lg:w-20 lg:h-36 xl:w-28 xl:h-32 2xl:w-32 2xl:h-40 rounded-l-2xl overflow-hidden flex-shrink-0">
           {coverImage ? (
             <>
               <Image
@@ -227,10 +227,10 @@ function BookCard({
         </div>
 
         {/* Book Info */}
-        <div className="flex-1 p-4 flex flex-col justify-between">
-          <div className="space-y-2">
+        <div className="flex-1 p-2 sm:p-3 md:p-4 lg:p-3 xl:p-4 2xl:p-4 flex flex-col justify-between">
+          <div className="space-y-1 md:space-y-2 lg:space-y-1 2xl:space-y-2">
             <h3
-              className="font-semibold text-sm leading-tight"
+              className="font-semibold text-xs sm:text-xs md:text-sm lg:text-xs 2xl:text-sm leading-tight"
               style={{
                 color: isDark ? "rgb(255, 255, 255)" : "#000000",
               }}
@@ -238,7 +238,7 @@ function BookCard({
               {title}
             </h3>
             <p
-              className="text-xs"
+              className="text-xs sm:text-xs"
               style={{
                 color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
               }}
@@ -249,10 +249,10 @@ function BookCard({
 
           {/* Status */}
           {currentPage && totalPages && (
-            <div className="mt-auto space-y-2">
-              <div className="flex items-center gap-2">
+            <div className="mt-auto space-y-1 2xl:space-y-2">
+              <div className="flex items-center gap-1 2xl:gap-2">
                 <div
-                  className={`w-2 h-2 rounded-full ${
+                  className={`w-2 h-2 sm:w-1.5 sm:h-1.5 md:w-2 md:h-2 lg:w-1.5 lg:h-1.5 2xl:w-2 2xl:h-2 rounded-full ${
                     isFinished ? "bg-green-500" : "bg-blue-500 animate-pulse"
                   }`}
                 ></div>
@@ -270,7 +270,7 @@ function BookCard({
 
               {/* Progress Bar */}
               <div
-                className="w-full rounded-full h-1.5 overflow-hidden"
+                className="w-full rounded-full h-1.5 sm:h-1 md:h-1.5 lg:h-1 2xl:h-1.5 overflow-hidden"
                 style={{
                   backgroundColor: isDark
                     ? "rgba(255, 255, 255, 0.2)"
@@ -449,8 +449,8 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
   return (
     <>
       {songs.map((song, index) => (
-        <div key={index} className="flex-shrink-0">
-          <div className="relative">
+        <div key={index} className="flex-shrink-0 w-auto lg:w-full xl:w-auto">
+          <div className="relative lg:flex xl:block">
             <a
               href={song.spotifyUrl}
               target="_blank"
@@ -486,7 +486,7 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
               }}
             />
             <div
-              className="w-24 h-24 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover"
+              className="w-24 h-24 sm:w-28 sm:h-28 md:w-28 md:h-28 lg:w-14 lg:h-14 xl:w-20 xl:h-20 2xl:w-28 2xl:h-28 rounded-xl overflow-hidden border-2 border-transparent transition-all duration-200 relative album-cover flex-shrink-0"
               style={{
                 backgroundColor: isDark
                   ? "rgb(35, 35, 35)"
@@ -510,9 +510,9 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
                 }}
               ></div>
             </div>
-            <div className="mt-2 text-center">
+            <div className="mt-2 text-center lg:flex-1 lg:ml-3 lg:mt-0 lg:text-left xl:ml-0 xl:mt-2 xl:text-center">
               <p
-                className="text-xs sm:text-sm font-medium truncate max-w-24 sm:max-w-24 md:max-w-28"
+                className="text-sm sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-sm font-medium truncate max-w-24 sm:max-w-28 md:max-w-28 lg:max-w-none xl:max-w-20 2xl:max-w-28"
                 style={{
                   color: isDark ? "rgb(255, 255, 255)" : "#000000",
                 }}
@@ -520,9 +520,9 @@ function FavoriteSongs({ isDark }: { isDark: boolean }) {
                 {song.title}
               </p>
               <p
-                className="text-xs sm:text-sm truncate max-w-24 sm:max-w-24 md:max-w-28"
+                className="text-sm sm:text-sm md:text-sm lg:text-sm xl:text-sm 2xl:text-sm truncate max-w-24 sm:max-w-28 md:max-w-28 lg:max-w-none xl:max-w-20 2xl:max-w-28"
                 style={{
-                  color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
+                  color: isDark ? "rgb(91, 91, 91)" : "#5D5E63",
                 }}
               >
                 {song.artist}
@@ -563,7 +563,7 @@ export default function AboutPage() {
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
               <div className="text-left w-full">
-                <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
                   <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
@@ -602,7 +602,7 @@ export default function AboutPage() {
                     </p>
                   </div>
                   <div className="lg:ml-8 mt-4 lg:mt-0">
-                    <span className="text-neutral-60 dark:text-neutral-40 text-3xl sm:text-4xl lg:text-5xl font-medium font-hanken tracking-wide">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
                       My Story
                     </span>
                   </div>
@@ -614,10 +614,10 @@ export default function AboutPage() {
           {/* Bento Box Layout */}
           <section className="py-8 sm:py-12 lg:py-16 relative">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
                 {/* Personal Traits - Large section */}
                 <div
-                  className="md:col-span-3 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("traits")})`,
                     backgroundColor: isDark
@@ -650,7 +650,7 @@ export default function AboutPage() {
                       alt="Traits"
                       width={60}
                       height={60}
-                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
                   <div className="mt-8">
@@ -723,7 +723,7 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("about")})`,
                     backgroundColor: isDark
@@ -756,12 +756,12 @@ export default function AboutPage() {
                       alt="About Me"
                       width={60}
                       height={60}
-                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
                   <div className="mt-4 sm:mt-6">
                     <p
-                      className="leading-relaxed text-sm sm:text-base lg:text-lg"
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -776,7 +776,7 @@ export default function AboutPage() {
 
                 {/* Why This Portfolio - Medium section */}
                 <div
-                  className="md:col-span-3 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("portfolio")})`,
                     backgroundColor: isDark
@@ -809,12 +809,12 @@ export default function AboutPage() {
                       alt="Why This Portfolio"
                       width={60}
                       height={60}
-                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
                   <div className="mt-4 sm:mt-6">
                     <p
-                      className="leading-relaxed text-sm sm:text-base lg:text-lg"
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -830,7 +830,7 @@ export default function AboutPage() {
 
                 {/* Local Time - Small section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("time")})`,
                     backgroundColor: isDark
@@ -863,14 +863,14 @@ export default function AboutPage() {
                       alt="My Time"
                       width={60}
                       height={60}
-                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
                   <div className="space-y-3 sm:space-y-4">
                     {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
-                        <div className="text-4xl sm:text-5xl lg:text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
+                        <div className="text-3xl sm:text-4xl md:text-6xl lg:text-5xl 2xl:text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
                         {/* Animated dots */}
@@ -968,7 +968,7 @@ export default function AboutPage() {
 
                 {/* Currently Reading - Medium section */}
                 <div
-                  className="md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("books")})`,
                     backgroundColor: isDark
@@ -998,7 +998,7 @@ export default function AboutPage() {
                         Books
                       </h2>
                       <p
-                        className="text-sm sm:text-base lg:text-lg font-hanken"
+                        className="hidden 2xl:block text-sm sm:text-base lg:text-lg font-hanken"
                         style={{
                           color: isDark ? "#A7A7A7" : "#5D5E63",
                         }}
@@ -1017,11 +1017,11 @@ export default function AboutPage() {
                         alt="Books"
                         width={60}
                         height={60}
-                        className="sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                        className="w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                       />
                     </a>
                   </div>
-                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  <div className="flex flex-col sm:flex-row gap-4 sm:overflow-x-auto pb-2 scrollbar-hide">
                     <BookCard
                       title="Hjärnstark : hur motion och träning stärker din hjärna"
                       author="Anders Hansen"
@@ -1046,7 +1046,7 @@ export default function AboutPage() {
 
                 {/* Favourite Films - Large section */}
                 <div
-                  className="col-span-1 md:col-span-4 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="col-span-1 md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("films")})`,
                     backgroundColor: isDark
@@ -1079,11 +1079,11 @@ export default function AboutPage() {
                       alt="Favourite Films"
                       width={60}
                       height={60}
-                      className="animate-pulse-subtle sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
-                  {/* Mobile/Tablet Carousel */}
-                  <div className="lg:hidden">
+                  {/* Mobile/Tablet/2xl- Carousel */}
+                  <div className="2xl:hidden">
                     <FilmsCarousel
                       isDark={isDark}
                       films={[
@@ -1129,7 +1129,7 @@ export default function AboutPage() {
                   </div>
 
                   {/* Desktop Static Display */}
-                  <div className="hidden lg:flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
+                  <div className="hidden 2xl:flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
                     <FilmCard
                       title="The Equalizer"
                       year="2014"
@@ -1170,7 +1170,7 @@ export default function AboutPage() {
 
                 {/* Music - Medium section */}
                 <div
-                  className="md:col-span-2 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("music")})`,
                     backgroundColor: isDark
@@ -1200,7 +1200,7 @@ export default function AboutPage() {
                         Music
                       </h2>
                       <p
-                        className="text-sm sm:text-base lg:text-lg font-hanken"
+                        className="hidden 2xl:block text-sm sm:text-base lg:text-lg font-hanken"
                         style={{
                           color: isDark ? "#A7A7A7" : "#5D5E63",
                         }}
@@ -1221,11 +1221,11 @@ export default function AboutPage() {
                         alt="Spotify"
                         width={60}
                         height={60}
-                        className="sm:w-16 sm:h-16 lg:w-20 lg:h-20"
+                        className="w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                       />
                     </a>
                   </div>
-                  <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                  <div className="flex flex-row lg:flex-col xl:flex-row gap-4 overflow-x-auto lg:overflow-x-visible xl:overflow-x-auto pb-2 scrollbar-hide">
                     <FavoriteSongs isDark={isDark} />
                   </div>
                 </div>
