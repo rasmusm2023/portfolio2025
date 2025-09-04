@@ -115,11 +115,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -212,11 +220,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -299,11 +315,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -416,11 +440,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -513,11 +545,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">
@@ -610,11 +650,19 @@ const BentoBoxRest = () => {
                     className="w-full h-full"
                   />
                 </div>
+                {/* Noise background overlay */}
+                <div
+                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    backgroundSize: "256px 256px",
+                  }}
+                />
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-80/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-20/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
                   <div className="flex flex-col h-full">

@@ -175,7 +175,7 @@ const Footer = () => {
 
         {/* Noise background overlay */}
         <div
-          className="absolute inset-0 opacity-[0.16] pointer-events-none rounded-[2.5rem] overflow-hidden px-4 sm:px-8 md:px-12 lg:px-24 xl:px-40"
+          className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-[2.5rem] overflow-hidden px-4 sm:px-8 md:px-12 lg:px-24 xl:px-40"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             backgroundSize: "256px 256px",
