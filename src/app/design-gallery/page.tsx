@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomLightbox from "@/components/Lightbox";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { useTheme } from "@/contexts/ThemeContext";
+import { Pause } from "@phosphor-icons/react";
 
 // Sample gallery data - replace with your actual images
 const galleryImages = [
@@ -54,12 +55,118 @@ const galleryImages = [
     alt: "Mobile Design",
     title: "Travel App Design",
   },
+  {
+    src: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop",
+    alt: "UI Design",
+    title: "Modern UI Design",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&h=600&fit=crop",
+    alt: "App Design",
+    title: "Mobile App Design",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
+    alt: "Web Design",
+    title: "Creative Web Design",
+  },
 ];
+
+// Carousel component
+const MovingCarousel = ({
+  images,
+  direction,
+  speed,
+  isPaused,
+  onImageClick,
+}: {
+  images: typeof galleryImages;
+  direction: "left" | "right";
+  speed: number;
+  isPaused: boolean;
+  onImageClick: (index: number) => void;
+}) => {
+  const [position, setPosition] = useState(0);
+  const duplicatedImages = [...images, ...images]; // Duplicate for seamless loop
+
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setPosition((prev) => {
+        // Responsive image width calculation
+        const imageWidth = window.innerWidth < 640 ? 480 + 16 : 560 + 32; // width + margin
+        const maxPosition = images.length * imageWidth;
+        const newPosition = direction === "left" ? prev - speed : prev + speed;
+
+        if (direction === "left" && newPosition <= -maxPosition) {
+          return 0;
+        } else if (direction === "right" && newPosition >= 0) {
+          return -maxPosition;
+        }
+        return newPosition;
+      });
+    }, 16); // ~60fps
+
+    return () => clearInterval(interval);
+  }, [direction, speed, isPaused, images.length]);
+
+  // Reset position on window resize to prevent layout issues
+  useEffect(() => {
+    const handleResize = () => {
+      setPosition(0);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return (
+    <div className="relative overflow-hidden whitespace-nowrap py-4">
+      {/* Left fade gradient */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-neutral-0 dark:from-neutral-100 to-transparent z-10 pointer-events-none" />
+
+      {/* Right fade gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-neutral-0 dark:from-neutral-100 to-transparent z-10 pointer-events-none" />
+
+      <div
+        className="inline-flex transition-none"
+        style={{
+          transform: `translateX(${position}px)`,
+          transition: isPaused ? "none" : "none",
+        }}
+      >
+        {duplicatedImages.map((image, index) => (
+          <div
+            key={`${image.src}-${index}`}
+            className="inline-block w-[480px] sm:w-[560px] h-[320px] sm:h-[400px] mx-2 sm:mx-4 cursor-pointer group"
+            onClick={() => onImageClick(index % images.length)}
+          >
+            <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden border-2 border-neutral-80/40 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-purple-500/30 hover:scale-105 transition-all duration-300 gallery-image">
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-white text-sm sm:text-base font-medium truncate">
+                  {image.title}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default function DesignGalleryPage() {
   const { isDark } = useTheme();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
@@ -72,6 +179,14 @@ export default function DesignGalleryPage() {
 
   const navigateLightbox = (index: number) => {
     setCurrentImageIndex(index);
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
   return (
@@ -118,230 +233,44 @@ export default function DesignGalleryPage() {
             </div>
           </section>
 
-          {/* Bento Gallery Grid */}
-          <section className="py-16">
+          {/* Moving Gallery Carousels */}
+          <section
+            className="py-16"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <div className="text-left w-full max-w-[1600px]">
-              <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-8 auto-rows-[250px]">
-                {/* Large hero image - spans 4 columns */}
-                <div
-                  className="md:col-span-4 lg:col-span-5 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[0].src}
-                    alt={galleryImages[0].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(0)}
-                  />
-                </div>
+              {/* Hover instruction */}
+              <div className="flex justify-center items-center gap-2 mb-4">
+                <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
+                  HOVER TO PAUSE
+                </p>
+                <Pause
+                  size={14}
+                  className="text-neutral-50 dark:text-neutral-50 opacity-60"
+                />
+              </div>
 
-                {/* Tall vertical image - spans 2 rows */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[1].src}
-                    alt={galleryImages[1].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(1)}
-                  />
-                </div>
+              {/* First Carousel - Scrolls Left */}
+              <div className="mb-8 sm:mb-12">
+                <MovingCarousel
+                  images={galleryImages.slice(0, 6)}
+                  direction="left"
+                  speed={2.5}
+                  isPaused={isHovered}
+                  onImageClick={openLightbox}
+                />
+              </div>
 
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[2].src}
-                    alt={galleryImages[2].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(2)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[3].src}
-                    alt={galleryImages[3].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(3)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[4].src}
-                    alt={galleryImages[4].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(4)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[5].src}
-                    alt={galleryImages[5].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(5)}
-                  />
-                </div>
-
-                {/* Wide horizontal image - spans 3 columns */}
-                <div
-                  className="md:col-span-3 lg:col-span-4 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[6].src}
-                    alt={galleryImages[6].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(6)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[7].src}
-                    alt={galleryImages[7].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(7)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[8].src}
-                    alt={galleryImages[8].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(8)}
-                  />
-                </div>
-
-                {/* Tall vertical image - spans 2 rows */}
-                <div
-                  className="md:col-span-2 lg:col-span-3 md:row-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[0].src}
-                    alt={galleryImages[0].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(0)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[1].src}
-                    alt={galleryImages[1].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(1)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[2].src}
-                    alt={galleryImages[2].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(2)}
-                  />
-                </div>
-
-                {/* Medium square image */}
-                <div
-                  className="md:col-span-2 lg:col-span-2 group cursor-pointer overflow-hidden rounded-2xl border-2 border-neutral-80/40 hover:scale-[1.02] transition-transform duration-300 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.05)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] gallery-image"
-                  style={{
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                >
-                  <img
-                    src={galleryImages[3].src}
-                    alt={galleryImages[3].alt}
-                    className="w-full h-full object-cover"
-                    onClick={() => openLightbox(3)}
-                  />
-                </div>
+              {/* Second Carousel - Scrolls Right */}
+              <div className="mb-8 sm:mb-12">
+                <MovingCarousel
+                  images={galleryImages.slice(6, 12)}
+                  direction="right"
+                  speed={3}
+                  isPaused={isHovered}
+                  onImageClick={openLightbox}
+                />
               </div>
             </div>
           </section>
