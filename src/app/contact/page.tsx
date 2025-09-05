@@ -149,11 +149,41 @@ export default function ContactPage() {
     message: "",
   });
   const [emailCopied, setEmailCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+    setErrorMessage("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        const errorData = await response.json();
+        setSubmitStatus("error");
+        setErrorMessage(errorData.error || "Failed to send message");
+      }
+    } catch (error) {
+      setSubmitStatus("error");
+      setErrorMessage("Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -281,10 +311,29 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+                      disabled={isSubmitting}
+                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
-                      Send message
+                      {isSubmitting ? "Sending..." : "Send message"}
                     </button>
+
+                    {/* Success/Error Messages */}
+                    {submitStatus === "success" && (
+                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                          ✅ Message sent successfully! I'll get back to you
+                          within 24 hours.
+                        </p>
+                      </div>
+                    )}
+
+                    {submitStatus === "error" && (
+                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                          ❌ {errorMessage}
+                        </p>
+                      </div>
+                    )}
 
                     {/* OR Divider */}
                     <div className="flex items-center justify-center space-x-4 my-6">
@@ -528,10 +577,29 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+                      disabled={isSubmitting}
+                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
-                      Send message
+                      {isSubmitting ? "Sending..." : "Send message"}
                     </button>
+
+                    {/* Success/Error Messages */}
+                    {submitStatus === "success" && (
+                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                          ✅ Message sent successfully! I'll get back to you
+                          within 24 hours.
+                        </p>
+                      </div>
+                    )}
+
+                    {submitStatus === "error" && (
+                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                          ❌ {errorMessage}
+                        </p>
+                      </div>
+                    )}
 
                     {/* OR Divider */}
                     <div className="flex items-center justify-center space-x-4 my-6">
@@ -715,10 +783,29 @@ export default function ContactPage() {
 
                     <button
                       type="submit"
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50"
+                      disabled={isSubmitting}
+                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     >
-                      Send message
+                      {isSubmitting ? "Sending..." : "Send message"}
                     </button>
+
+                    {/* Success/Error Messages */}
+                    {submitStatus === "success" && (
+                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                          ✅ Message sent successfully! I'll get back to you
+                          within 24 hours.
+                        </p>
+                      </div>
+                    )}
+
+                    {submitStatus === "error" && (
+                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                          ❌ {errorMessage}
+                        </p>
+                      </div>
+                    )}
 
                     {/* OR Divider */}
                     <div className="flex items-center justify-center space-x-4 my-4 sm:my-6">

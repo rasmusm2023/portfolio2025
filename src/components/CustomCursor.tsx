@@ -255,6 +255,9 @@ const CustomCursor = () => {
       } else if (target.closest(".project-showcase-card")) {
         setHoverTarget("project-card");
         setIsHovering(true);
+      } else if (target.closest(".case-study-card")) {
+        setHoverTarget("case-study-card");
+        setIsHovering(true);
       } else if (
         target.closest(".group\\/card") &&
         target.closest("[data-tooltip='Swipe']")
@@ -412,6 +415,26 @@ const CustomCursor = () => {
           left: mousePosition.x + 80, // More offset to the right
           top: mousePosition.y + 20, // Offset like default cursor
           width: "120px",
+          height: "36px",
+          borderRadius: "18px",
+          backgroundColor: isDarkMode
+            ? "rgb(255, 255, 255)"
+            : "rgb(35, 35, 35)", // white in dark mode, dark in light mode
+          transform: "translate(-50%, -50%)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          color: isDarkMode ? "rgb(51, 51, 51)" : "rgb(255, 255, 255)", // black text in dark mode, white text in light mode
+          fontSize: "12px",
+          fontWeight: "bold",
+          letterSpacing: "0.5px",
+        };
+      case "case-study-card":
+        return {
+          ...baseStyle,
+          left: mousePosition.x + 80, // More offset to the right
+          top: mousePosition.y + 20, // Offset like default cursor
+          width: "100px",
           height: "36px",
           borderRadius: "18px",
           backgroundColor: isDarkMode
@@ -615,6 +638,7 @@ const CustomCursor = () => {
             </>
           ))}
         {hoverTarget === "project-card" && "VIEW CASE"}
+        {hoverTarget === "case-study-card" && "VIEW"}
         {hoverTarget === "traits-card" && (
           <>
             <span style={{ fontSize: "16px" }}>↔</span>

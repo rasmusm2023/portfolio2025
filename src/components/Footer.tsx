@@ -64,7 +64,84 @@ const Footer = () => {
                   </p>
                 </div>
 
-                <div className="bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-4 sm:p-6">
+                {/* Mobile: Simplified layout without card background */}
+                <div className="block sm:hidden space-y-4">
+                  {/* Email */}
+                  <div className="flex items-center gap-3 hover:bg-neutral-10/30 dark:hover:bg-neutral-90/30 transition-all duration-200">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                      <Envelope
+                        size={20}
+                        weight="regular"
+                        className="text-white"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <a
+                        href="mailto:hello@rasmusmattsson.com"
+                        className={`transition-colors duration-200 text-sm cursor-pointer hover:opacity-90 ${
+                          emailCopied
+                            ? "text-green-500"
+                            : "text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0"
+                        }`}
+                      >
+                        hello@rasmusmattsson.com
+                      </a>
+                    </div>
+                    <button
+                      onClick={handleCopyEmail}
+                      className={`px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1 ${
+                        emailCopied
+                          ? "bg-green-500 text-neutral-0 shadow-lg"
+                          : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                      }`}
+                    >
+                      <Copy size={14} weight="regular" />
+                      {emailCopied ? "Copied!" : "Copy"}
+                    </button>
+                  </div>
+
+                  {/* LinkedIn */}
+                  <div className="flex items-center gap-3 hover:bg-neutral-10/30 dark:hover:bg-neutral-90/30 transition-all duration-200">
+                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-violet-500 flex items-center justify-center">
+                      <FontAwesomeIcon
+                        icon={faLinkedinIn}
+                        className="w-5 h-5 text-white"
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <a
+                        href="https://linkedin.com/in/rasmus-mattsson"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-neutral-60 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-sm"
+                      >
+                        linkedin.com/in/rasmus-mattsson
+                      </a>
+                    </div>
+                    <a
+                      href="https://linkedin.com/in/rasmus-mattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-2 rounded-lg text-xs font-semibold transition-all duration-200 flex items-center gap-1 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                    >
+                      <User size={14} weight="regular" />
+                      View
+                    </a>
+                  </div>
+
+                  {/* Send me a message button */}
+                  <div className="pt-2">
+                    <a
+                      href="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
+                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-base rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50 flex items-center justify-center"
+                    >
+                      Send me a message
+                    </a>
+                  </div>
+                </div>
+
+                {/* Desktop: Original card layout */}
+                <div className="hidden sm:block bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-100/10 rounded-3xl p-4 sm:p-6">
                   <div className="space-y-4 sm:space-y-5">
                     <div className="flex flex-col 2xl:flex-row 2xl:items-center 2xl:justify-between gap-3 2xl:gap-4 p-3 2xl:p-4 rounded-xl hover:border-purple-500/20 transition-all duration-200">
                       <div className="flex items-center gap-3 2xl:gap-4">
