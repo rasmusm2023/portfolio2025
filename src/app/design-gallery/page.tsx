@@ -95,7 +95,19 @@ const MovingCarousel = ({
     const interval = setInterval(() => {
       setPosition((prev) => {
         // Responsive image width calculation
-        const imageWidth = window.innerWidth < 640 ? 480 + 16 : 560 + 32; // width + margin
+        let imageWidth;
+        if (window.innerWidth < 640) {
+          imageWidth = 280 + 16; // w-[280px] + mx-2
+        } else if (window.innerWidth < 768) {
+          imageWidth = 320 + 24; // w-[320px] + mx-3
+        } else if (window.innerWidth < 1024) {
+          imageWidth = 400 + 32; // w-[400px] + mx-4
+        } else if (window.innerWidth < 1280) {
+          imageWidth = 480 + 32; // w-[480px] + mx-4
+        } else {
+          imageWidth = 560 + 32; // w-[560px] + mx-4
+        }
+
         const maxPosition = images.length * imageWidth;
         const newPosition = direction === "left" ? prev - speed : prev + speed;
 
@@ -139,7 +151,7 @@ const MovingCarousel = ({
         {duplicatedImages.map((image, index) => (
           <div
             key={`${image.src}-${index}`}
-            className="inline-block w-[480px] sm:w-[560px] h-[320px] sm:h-[400px] mx-2 sm:mx-4 cursor-pointer group"
+            className="inline-block w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] xl:w-[560px] h-[200px] sm:h-[240px] md:h-[300px] lg:h-[320px] xl:h-[400px] mx-2 sm:mx-3 md:mx-4 cursor-pointer group"
             onClick={() => onImageClick(index % images.length)}
           >
             <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden border-2 border-neutral-80/40 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-purple-500/30 hover:scale-105 transition-all duration-300 gallery-image">
@@ -149,8 +161,8 @@ const MovingCarousel = ({
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-white text-sm sm:text-base font-medium truncate">
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-white text-xs sm:text-sm md:text-base font-medium truncate">
                   {image.title}
                 </p>
               </div>
@@ -197,34 +209,31 @@ export default function DesignGalleryPage() {
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
-          <section className="h-[80vh] relative">
+          <section className="min-h-screen relative flex items-center">
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(255, 181, 113, 0.6)", // Orange
                 secondary: "rgba(255, 217, 61, 0.4)", // Yellow
               }}
             />
-            <div
-              className="absolute inset-0 flex items-center justify-start w-full max-w-[1600px]"
-              style={{ height: "100vh" }}
-            >
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
               <div className="text-left w-full">
-                <h1 className="text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
                   <span className="[background-image:var(--gradient-hero-design-gallery)] dark:[background-image:var(--gradient-hero-design-gallery-dark)] bg-clip-text text-transparent font-hanken">
                     Design Gallery
                   </span>
                 </h1>
-                <div className="flex justify-between items-start mt-16">
-                  <div className="flex-1 max-w-[48rem]">
-                    <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">
+                  <div className="flex-1 max-w-full lg:max-w-[48rem]">
+                    <p className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide">
                       A collection of design work that doesn't fit into
                       traditional case studies — from branding and logos to
                       typography, print design, and experimental projects. These
                       go beyond just UX/UI work.
                     </p>
                   </div>
-                  <div className="ml-8">
-                    <span className="text-neutral-60 dark:text-neutral-40 text-5xl font-medium font-hanken tracking-wide">
+                  <div className="lg:ml-8 mt-4 lg:mt-0">
+                    <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
                       Miscellaneous
                     </span>
                   </div>
@@ -235,20 +244,45 @@ export default function DesignGalleryPage() {
 
           {/* Moving Gallery Carousels */}
           <section
-            className="py-16"
+            className="py-8 sm:py-12 lg:py-16"
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <div className="text-left w-full max-w-[1600px]">
-              {/* Hover instruction */}
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+              {/* Instruction text - responsive */}
               <div className="flex justify-center items-center gap-2 mb-4">
-                <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
-                  HOVER TO PAUSE
-                </p>
-                <Pause
-                  size={14}
-                  className="text-neutral-50 dark:text-neutral-50 opacity-60"
-                />
+                {/* Mobile/Tablet: TAP TO EXPAND */}
+                <div className="lg:hidden flex items-center gap-2">
+                  <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
+                    TAP TO EXPAND
+                  </p>
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    className="text-neutral-50 dark:text-neutral-50 opacity-60"
+                  >
+                    <path
+                      d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                {/* Desktop: HOVER TO PAUSE */}
+                <div className="hidden lg:flex items-center gap-2">
+                  <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
+                    HOVER TO PAUSE
+                  </p>
+                  <Pause
+                    size={14}
+                    className="text-neutral-50 dark:text-neutral-50 opacity-60"
+                  />
+                </div>
               </div>
 
               {/* First Carousel - Scrolls Left */}
@@ -277,8 +311,8 @@ export default function DesignGalleryPage() {
         </main>
 
         {/* Footer Section */}
-        <div className="pt-16 pb-16">
-          <div className="container mx-auto">
+        <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">
+          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <Footer />
           </div>
         </div>

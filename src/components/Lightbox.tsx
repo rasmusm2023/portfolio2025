@@ -66,24 +66,41 @@ const CustomLightbox = ({
       }
       .lightbox-title {
         position: absolute;
-        top: -60px;
+        top: -40px;
         left: 0;
         color: white;
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: 600;
         text-align: left;
         z-index: 10;
         text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        max-width: calc(100% - 60px);
+      }
+      @media (min-width: 640px) {
+        .lightbox-title {
+          top: -50px;
+          font-size: 1.25rem;
+          max-width: calc(100% - 80px);
+        }
+      }
+      @media (min-width: 1024px) {
+        .lightbox-title {
+          top: -60px;
+          font-size: 1.5rem;
+          max-width: calc(100% - 100px);
+        }
       }
       .lightbox-close-btn {
         position: absolute;
-        top: -60px;
-        right: 0;
+        top: auto;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
         background: rgba(255, 255, 255, 0.9);
         border: 2px solid rgba(255, 255, 255, 0.8);
         border-radius: 50%;
-        width: 48px;
-        height: 48px;
+        width: 36px;
+        height: 36px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -91,10 +108,34 @@ const CustomLightbox = ({
         transition: all 0.2s ease;
         z-index: 10;
       }
+      @media (min-width: 640px) {
+        .lightbox-close-btn {
+          bottom: -70px;
+          width: 42px;
+          height: 42px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .lightbox-close-btn {
+          position: absolute;
+          top: -60px;
+          right: 0;
+          left: auto;
+          bottom: auto;
+          transform: none;
+          width: 48px;
+          height: 48px;
+        }
+      }
       .lightbox-close-btn:hover {
         background: rgba(255, 255, 255, 1);
         border-color: rgba(255, 255, 255, 1);
-        transform: scale(1.1);
+        transform: translateX(-50%) scale(1.1);
+      }
+      @media (min-width: 1024px) {
+        .lightbox-close-btn:hover {
+          transform: scale(1.1);
+        }
       }
       .lightbox-close-btn::after {
         content: "Close";
@@ -141,8 +182,8 @@ const CustomLightbox = ({
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         background: rgba(255, 255, 255, 0.3);
         border: 2px solid rgba(255, 255, 255, 0.2);
         border-radius: 50%;
@@ -154,6 +195,18 @@ const CustomLightbox = ({
         z-index: 20;
         backdrop-filter: blur(8px);
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      }
+      @media (min-width: 640px) {
+        .lightbox-nav-arrow {
+          width: 50px;
+          height: 50px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .lightbox-nav-arrow {
+          width: 60px;
+          height: 60px;
+        }
       }
       .lightbox-nav-arrow:hover {
         background: rgba(255, 255, 255, 0.9);
@@ -169,20 +222,62 @@ const CustomLightbox = ({
         pointer-events: none;
       }
       .lightbox-nav-arrow.left {
-        left: -80px;
+        left: 20px;
+        top: auto;
+        bottom: -60px;
+        transform: none;
       }
       .lightbox-nav-arrow.right {
-        right: -80px;
+        right: 20px;
+        top: auto;
+        bottom: -60px;
+        transform: none;
+      }
+      @media (min-width: 640px) {
+        .lightbox-nav-arrow.left {
+          left: 30px;
+          bottom: -70px;
+        }
+        .lightbox-nav-arrow.right {
+          right: 30px;
+          bottom: -70px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .lightbox-nav-arrow.left {
+          left: -80px;
+          top: 50%;
+          bottom: auto;
+          transform: translateY(-50%);
+        }
+        .lightbox-nav-arrow.right {
+          right: -80px;
+          top: 50%;
+          bottom: auto;
+          transform: translateY(-50%);
+        }
       }
       .lightbox-image-container {
         position: relative;
-        margin: 0 100px;
+        margin: 0 20px 80px 20px;
         overflow: visible;
         background: rgba(0, 0, 0, 0.9);
-        border-radius: 16px;
+        border-radius: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      @media (min-width: 640px) {
+        .lightbox-image-container {
+          margin: 0 30px 90px 30px;
+          border-radius: 14px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .lightbox-image-container {
+          margin: 0 100px;
+          border-radius: 16px;
+        }
       }
     `;
     document.head.appendChild(style);
@@ -226,7 +321,11 @@ const CustomLightbox = ({
                 <div className="lightbox-image-container">
                   <div className="lightbox-title">{currentImage.title}</div>
                   <button className="lightbox-close-btn" onClick={onClose}>
-                    <X size={24} color="#333333" />
+                    <X
+                      size={18}
+                      color="#333333"
+                      className="sm:w-5 sm:h-5 lg:w-6 lg:h-6"
+                    />
                   </button>
                   {/* Navigation Arrows */}
                   <button
@@ -236,7 +335,11 @@ const CustomLightbox = ({
                     onClick={handlePrevious}
                     disabled={activeIndex === 0}
                   >
-                    <ChevronLeft size={24} color="#000000" />
+                    <ChevronLeft
+                      size={18}
+                      color="#000000"
+                      className="sm:w-5 sm:h-5 lg:w-6 lg:h-6"
+                    />
                   </button>
 
                   <button
@@ -246,7 +349,11 @@ const CustomLightbox = ({
                     onClick={handleNext}
                     disabled={activeIndex === images.length - 1}
                   >
-                    <ChevronRight size={24} color="#000000" />
+                    <ChevronRight
+                      size={18}
+                      color="#000000"
+                      className="sm:w-5 sm:h-5 lg:w-6 lg:h-6"
+                    />
                   </button>
 
                   <img
