@@ -23,6 +23,7 @@
     "nodemailer": "^7.0.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "resend": "^6.0.2",
     "swiper": "^11.2.10",
     "three": "^0.177.0",
     "yet-another-react-lightbox": "^3.24.0"

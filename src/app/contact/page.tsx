@@ -87,7 +87,7 @@ function FloatingLabelInput({
           onBlur={handleBlur}
           onChange={handleChange}
           style={{ height: `${textareaHeight}px` }}
-          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none"
+          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none overflow-y-auto"
           placeholder={placeholder}
         />
         <div
@@ -320,7 +320,7 @@ export default function ContactPage() {
                     {/* Success/Error Messages */}
                     {submitStatus === "success" && (
                       <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
                           ✅ Message sent successfully! I'll get back to you
                           within 24 hours.
                         </p>
@@ -329,7 +329,7 @@ export default function ContactPage() {
 
                     {submitStatus === "error" && (
                       <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
                           ❌ {errorMessage}
                         </p>
                       </div>
@@ -586,7 +586,7 @@ export default function ContactPage() {
                     {/* Success/Error Messages */}
                     {submitStatus === "success" && (
                       <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
                           ✅ Message sent successfully! I'll get back to you
                           within 24 hours.
                         </p>
@@ -595,7 +595,7 @@ export default function ContactPage() {
 
                     {submitStatus === "error" && (
                       <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
                           ❌ {errorMessage}
                         </p>
                       </div>
@@ -792,7 +792,7 @@ export default function ContactPage() {
                     {/* Success/Error Messages */}
                     {submitStatus === "success" && (
                       <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-medium text-center">
+                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
                           ✅ Message sent successfully! I'll get back to you
                           within 24 hours.
                         </p>
@@ -801,7 +801,7 @@ export default function ContactPage() {
 
                     {submitStatus === "error" && (
                       <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-medium text-center">
+                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
                           ❌ {errorMessage}
                         </p>
                       </div>

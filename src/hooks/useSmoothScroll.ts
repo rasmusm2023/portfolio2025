@@ -8,6 +8,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 // Global smoother instance to prevent multiple initializations
 let globalSmoother: any = null;
+let preventSmoothScrollOnFormElements: ((e: WheelEvent) => void) | null = null;
 
 export const useSmoothScroll = () => {
   const isInitialized = useRef(false);
@@ -57,6 +58,34 @@ export const useSmoothScroll = () => {
         smoothTouch: 0, // Disable touch smoothing
         ease: "power2.out",
         speed: 1,
+        ignoreMobileResize: true,
+      });
+
+      // Add event listeners to prevent ScrollSmoother from interfering with form elements
+      preventSmoothScrollOnFormElements = (e: WheelEvent) => {
+        const target = e.target as HTMLElement;
+        if (
+          target &&
+          (target.tagName === "TEXTAREA" ||
+            target.tagName === "INPUT" ||
+            target.tagName === "SELECT" ||
+            target.contentEditable === "true" ||
+            target.closest('textarea, input, select, [contenteditable="true"]'))
+        ) {
+          e.stopPropagation();
+          e.preventDefault();
+          // Allow the native scrolling to work
+          const textarea = target.tagName === "TEXTAREA" ? target : target.closest('textarea');
+          if (textarea) {
+            const scrollAmount = e.deltaY;
+            textarea.scrollTop += scrollAmount;
+          }
+        }
+      };
+
+      // Add wheel event listener to prevent ScrollSmoother interference
+      document.addEventListener("wheel", preventSmoothScrollOnFormElements, {
+        passive: false,
       });
 
       // Add smooth class to html
@@ -89,6 +118,14 @@ export const useSmoothScroll = () => {
         globalSmoother.kill();
         globalSmoother = null;
         document.documentElement.classList.remove("has-scroll-smooth");
+      }
+      // Remove wheel event listener
+      if (preventSmoothScrollOnFormElements) {
+        document.removeEventListener(
+          "wheel",
+          preventSmoothScrollOnFormElements
+        );
+        preventSmoothScrollOnFormElements = null;
       }
     };
   }, []);

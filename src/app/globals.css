@@ -302,6 +302,34 @@ body {
   }
 }
 
+/* Fix textarea scrolling when ScrollSmoother is active */
+textarea, input, select {
+  scroll-behavior: auto !important;
+}
+
+/* Ensure form elements can scroll normally */
+textarea {
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+}
+
+textarea::-webkit-scrollbar {
+  width: 6px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.3);
+  border-radius: 3px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 92, 246, 0.5);
+}
+
 #smooth-wrapper {
   width: 100%;
   min-height: 100%;
