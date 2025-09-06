@@ -611,11 +611,11 @@ export default function AboutPage() {
             <AnimatedBlob
               gradientColors={{
                 primary: isDark
-                  ? "rgba(34, 197, 94, 0.6)" // Green primary for dark mode
-                  : "rgba(34, 197, 94, 0.8)", // Slightly more opaque green for light mode
+                  ? "rgba(20, 184, 166, 0.6)" // Teal primary for dark mode
+                  : "rgba(20, 184, 166, 0.8)", // Slightly more opaque teal for light mode
                 secondary: isDark
-                  ? "rgba(20, 184, 166, 0.4)" // Teal secondary for dark mode
-                  : "rgba(20, 184, 166, 0.6)", // Slightly more opaque teal for light mode
+                  ? "rgba(16, 185, 129, 0.4)" // Emerald secondary for dark mode
+                  : "rgba(16, 185, 129, 0.6)", // Slightly more opaque emerald for light mode
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
@@ -640,25 +640,25 @@ export default function AboutPage() {
                     </p>
                     <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg lg:text-xl font-semibold leading-loose tracking-wide mt-6 sm:mt-8">
                       — with an{" "}
-                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">eye</span>{" "}
+                      <span className="bg-[#14b8a6]/20 px-0.5 py-0.5">eye</span>{" "}
                       for{" "}
-                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#14b8a6]/30 px-0.5 py-0.5">
                         detail
                       </span>
                       , a{" "}
-                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">
+                      <span className="bg-[#14b8a6]/20 px-0.5 py-0.5">
                         heart
                       </span>{" "}
                       for the{" "}
-                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#14b8a6]/30 px-0.5 py-0.5">
                         user
                       </span>
                       , and a{" "}
-                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">
+                      <span className="bg-[#14b8a6]/20 px-0.5 py-0.5">
                         drive
                       </span>
                       for the{" "}
-                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#14b8a6]/30 px-0.5 py-0.5">
                         business
                       </span>
                       .
@@ -789,7 +789,7 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("about")})`,
                     backgroundColor: isDark
@@ -832,64 +832,34 @@ export default function AboutPage() {
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      A passionate designer and developer with a love for
-                      creating beautiful, functional experiences that make a
-                      difference. I believe in the power of thoughtful design to
-                      solve real problems and create meaningful connections.
+                      Hi! I'm Rasmus, an introverted yet outgoing UX/UI and
+                      Product Designer with a love for creating beautiful,
+                      functional experiences that make a difference. I believe
+                      in the power of thoughtful design to solve real problems
+                      and create meaningful connections.
                     </p>
-                  </div>
-                </div>
-
-                {/* Why This Portfolio - Medium section */}
-                <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{
-                    transform: `scale(${getBoxScale("portfolio")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                  onMouseEnter={() => setHoveredBox("portfolio")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background: isDark
-                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
-                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between -mt-2">
-                    <h2
-                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
-                    >
-                      Why This Portfolio?
-                    </h2>
-                    <Image
-                      src="/icons/3dicons-star-dynamic-premium.png"
-                      alt="Why This Portfolio"
-                      width={60}
-                      height={60}
-                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
-                    />
-                  </div>
-                  <div className="mt-4 sm:mt-6">
                     <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      This portfolio is more than a showcase — it's a personal
-                      space that evolves over time. Case studies are kept
-                      lightweight to be easily digested, while also giving room
-                      for reflection and a closer connection to who I am as a
-                      person and designer.
+                      My background spans design systems, prototypes, and
+                      front-end development, blending creativity with structure.
+                      Whether it's simplifying dashboards, designing AI-driven
+                      tools like Emplojd, or crafting features that build user
+                      confidence, I aim to make digital experiences accessible
+                      and enjoyable.
+                    </p>
+                    <p
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      Outside of work, you'll often find me gaming, exploring
+                      new tech, or experimenting with side projects that fuel my
+                      curiosity and creativity.
                     </p>
                   </div>
                 </div>

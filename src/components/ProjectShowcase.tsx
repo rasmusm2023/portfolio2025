@@ -36,6 +36,9 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [lastHoveredProject, setLastHoveredProject] = useState<string | null>(
+    null
+  );
   const { isDark } = useTheme();
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -48,11 +51,13 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
   const handleMouseEnter = (projectId: string) => {
     setIsHovering(true);
     setHoveredProject(projectId);
+    setLastHoveredProject(projectId);
   };
 
   const handleMouseLeave = () => {
     setIsHovering(false);
     setHoveredProject(null);
+    // Keep lastHoveredProject unchanged to maintain images during fade-out
   };
 
   return (
@@ -184,12 +189,12 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "/case-study-assets/emplojd/EMPLOJD-Preview-1.svg"
                     : "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop&crop=center"
                 }
                 alt={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "Emplojd Preview 1"
                     : "Gallery image 1"
                 }
@@ -201,12 +206,12 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "/case-study-assets/emplojd/EMPLOJD-Preview-2.svg"
                     : "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=200&fit=crop&crop=center"
                 }
                 alt={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "Emplojd Preview 2"
                     : "Gallery image 2"
                 }
@@ -218,12 +223,12 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "/case-study-assets/emplojd/EMPLOJD-Preview-3.svg"
                     : "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop&crop=center"
                 }
                 alt={
-                  hoveredProject === "emplojd"
+                  lastHoveredProject === "emplojd"
                     ? "Emplojd Preview 3"
                     : "Gallery image 3"
                 }

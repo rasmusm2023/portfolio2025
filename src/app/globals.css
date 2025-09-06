@@ -4,128 +4,88 @@
 
 :root {
   /* Light mode gradients (neutral gray base) */
-  --gradient-hero-home: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ffb571 0%,
-    #ff8cf4 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-home-accent: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #00ff9d 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-home-orange: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ffb571 0%,
-    #ffb571 50%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-design-gallery: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #3b82f6 0%,
-    #06b6d4 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-about: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #22c55e 0%,
-    #14b8a6 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-about-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #22c55e 0%,
-    #14b8a6 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-contact: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #8b5cf6 0%,
-    #a855f7 36.01%,
-    #5a5a5a 82.09%
-  );
-  --gradient-hero-accent: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-heading-projects: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    rgba(237, 125, 255, 0.8) 0%,
-    rgba(108, 84, 255, 0.8) 36.01%,
-    rgba(79, 79, 79, 0.8) 82.09%
-  );
-  --gradient-heading-projects-pink: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    rgba(237, 125, 255, 0.8) 0%,
-    rgba(237, 125, 255, 0.6) 36.01%,
-    rgba(79, 79, 79, 0.8) 82.09%
-  );
-  --gradient-heading-projects-orange: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    rgba(255, 181, 113, 0.8) 0%,
-    rgba(255, 181, 113, 0.8) 50%,
-    rgba(79, 79, 79, 0.8) 82.09%
-  );
-  --gradient-home-who: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #4f4f4f 82.09%
-  );
-  --gradient-hero-work: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ef4444 0%,
-    #fb923c 36.01%,
-    #4f4f4f 82.09%
-  );
+  --gradient-hero-home: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ff8cf4 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-hero-home-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #00ff9d 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-hero-home-orange: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ffb571 50%,
+      #4f4f4f 82.09%);
+  --gradient-hero-design-gallery: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #3b82f6 0%,
+      #06b6d4 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-hero-about: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #14b8a6 0%,
+      #10b981 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-hero-about-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #14b8a6 0%,
+      #10b981 36.01%,
+      #fff 82.09%);
+  --gradient-hero-contact: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #8b5cf6 0%,
+      #a855f7 36.01%,
+      #5a5a5a 82.09%);
+  --gradient-hero-accent: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-heading-projects: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      rgba(237, 125, 255, 0.8) 0%,
+      rgba(108, 84, 255, 0.8) 36.01%,
+      rgba(79, 79, 79, 0.8) 82.09%);
+  --gradient-heading-projects-pink: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      rgba(237, 125, 255, 0.8) 0%,
+      rgba(237, 125, 255, 0.6) 36.01%,
+      rgba(79, 79, 79, 0.8) 82.09%);
+  --gradient-heading-projects-orange: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      rgba(255, 181, 113, 0.8) 0%,
+      rgba(255, 181, 113, 0.8) 50%,
+      rgba(79, 79, 79, 0.8) 82.09%);
+  --gradient-home-who: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #4f4f4f 82.09%);
+  --gradient-hero-work: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ef4444 0%,
+      #fb923c 36.01%,
+      #4f4f4f 82.09%);
 
   /* Dark mode gradients (white base) */
-  --gradient-hero-home-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ffb571 0%,
-    #ff8cf4 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-home-accent-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #00ff9d 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-contact-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #8b5cf6 0%,
-    #a855f7 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-accent-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #fff 82.09%
-  );
-  --gradient-home-who-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #00ff9d 0%,
-    #99ffd9 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-work-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #ef4444 0%,
-    #fb923c 36.01%,
-    #fff 82.09%
-  );
-  --gradient-hero-design-gallery-dark: radial-gradient(
-    55.95% 97.37% at 46.69% 2.63%,
-    #3b82f6 0%,
-    #06b6d4 36.01%,
-    #fff 82.09%
-  );
+  --gradient-hero-home-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ffb571 0%,
+      #ff8cf4 36.01%,
+      #fff 82.09%);
+  --gradient-hero-home-accent-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #00ff9d 36.01%,
+      #fff 82.09%);
+  --gradient-hero-contact-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #8b5cf6 0%,
+      #a855f7 36.01%,
+      #fff 82.09%);
+  --gradient-hero-accent-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
+  --gradient-home-who-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #00ff9d 0%,
+      #99ffd9 36.01%,
+      #fff 82.09%);
+  --gradient-hero-work-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #ef4444 0%,
+      #fb923c 36.01%,
+      #fff 82.09%);
+  --gradient-hero-design-gallery-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+      #3b82f6 0%,
+      #06b6d4 36.01%,
+      #fff 82.09%);
 
   /* Shimmer button variables */
   --shimmer-hue-1: 213deg;
@@ -139,39 +99,37 @@
   --shimmer-lit-3: 89%;
   --glow-hue: 222deg;
   --spring-duration: 1.33s;
-  --spring-easing: linear(
-    0,
-    0.002,
-    0.01 0.9%,
-    0.038 1.8%,
-    0.156,
-    0.312 5.8%,
-    0.789 11.1%,
-    1.015 14.2%,
-    1.096,
-    1.157,
-    1.199,
-    1.224 20.3%,
-    1.231,
-    1.231,
-    1.226,
-    1.214 24.6%,
-    1.176 26.9%,
-    1.057 32.6%,
-    1.007 35.5%,
-    0.984,
-    0.968,
-    0.956,
-    0.949 42%,
-    0.946 44.1%,
-    0.95 46.5%,
-    0.998 57.2%,
-    1.007,
-    1.011 63.3%,
-    1.012 68.3%,
-    0.998 84%,
-    1
-  );
+  --spring-easing: linear(0,
+      0.002,
+      0.01 0.9%,
+      0.038 1.8%,
+      0.156,
+      0.312 5.8%,
+      0.789 11.1%,
+      1.015 14.2%,
+      1.096,
+      1.157,
+      1.199,
+      1.224 20.3%,
+      1.231,
+      1.231,
+      1.226,
+      1.214 24.6%,
+      1.176 26.9%,
+      1.057 32.6%,
+      1.007 35.5%,
+      0.984,
+      0.968,
+      0.956,
+      0.949 42%,
+      0.946 44.1%,
+      0.95 46.5%,
+      0.998 57.2%,
+      1.007,
+      1.011 63.3%,
+      1.012 68.3%,
+      0.998 84%,
+      1);
   --mask: 0deg;
 }
 
@@ -402,6 +360,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 /* Work page hero background animations */
 @keyframes float-blob {
+
   0%,
   100% {
     transform: translate(0, 0) scale(1);
@@ -425,6 +384,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes color-transition {
+
   0%,
   20% {
     background: radial-gradient(circle, var(--color-1), transparent 70%);
@@ -498,6 +458,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-slow {
+
   0%,
   100% {
     opacity: 0.3;
@@ -511,6 +472,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-medium {
+
   0%,
   100% {
     opacity: 0.2;
@@ -627,6 +589,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-random {
+
   0%,
   100% {
     opacity: 0.4;
@@ -638,6 +601,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-blob {
+
   0%,
   100% {
     transform: scale(1);
@@ -677,6 +641,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-sequential {
+
   0%,
   50%,
   100% {
@@ -689,6 +654,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-subtle {
+
   0%,
   100% {
     opacity: 0.8;
@@ -700,6 +666,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes pulse-opacity {
+
   0%,
   100% {
     opacity: 1;
@@ -714,12 +681,10 @@ textarea::-webkit-scrollbar-thumb:hover {
   color: theme("colors.neutral.0");
   font-weight: 600;
   font-size: 1.2em;
-  background-image: linear-gradient(
-    315deg,
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)) 0%,
-    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)) 47%,
-    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)) 100%
-  );
+  background-image: linear-gradient(315deg,
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)) 0%,
+      hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)) 47%,
+      hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)) 100%);
   padding: 0.6em;
   position: relative;
   isolation: isolate;
@@ -741,12 +706,10 @@ textarea::-webkit-scrollbar-thumb:hover {
 .shimmer-button:not(.dark) {
   box-shadow: 0 4px 8px 2px rgba(139, 92, 246, 0.3),
     0 2px 4px 1px rgba(0, 0, 0, 0.1);
-  background-image: linear-gradient(
-    315deg,
-    #8b5cf6 0%,
-    #a855f7 47%,
-    #c084fc 100%
-  );
+  background-image: linear-gradient(315deg,
+      #8b5cf6 0%,
+      #a855f7 47%,
+      #c084fc 100%);
 }
 
 .dark .shimmer-button {
@@ -757,13 +720,11 @@ textarea::-webkit-scrollbar-thumb:hover {
   content: "";
   position: absolute;
   inset: -2px;
-  background: conic-gradient(
-    from var(--mask),
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)),
-    hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)),
-    hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)),
-    hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1))
-  );
+  background: conic-gradient(from var(--mask),
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)),
+      hsl(var(--shimmer-hue-2), var(--shimmer-sat-2), var(--shimmer-lit-2)),
+      hsl(var(--shimmer-hue-3), var(--shimmer-sat-3), var(--shimmer-lit-3)),
+      hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1)));
   border-radius: inherit;
   animation: spin 2.5s linear infinite;
   z-index: -2;
@@ -771,13 +732,11 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 /* Light mode shimmer effect */
 .shimmer-button:not(.dark)::before {
-  background: conic-gradient(
-    from var(--mask),
-    #8b5cf6,
-    #a855f7,
-    #c084fc,
-    #8b5cf6
-  );
+  background: conic-gradient(from var(--mask),
+      #8b5cf6,
+      #a855f7,
+      #c084fc,
+      #8b5cf6);
 }
 
 .shimmer-button::after {
@@ -838,18 +797,16 @@ textarea::-webkit-scrollbar-thumb:hover {
   border-radius: inherit;
   mix-blend-mode: plus-lighter;
   pointer-events: none;
-  mask-image: conic-gradient(
-    from var(--mask),
-    transparent 0%,
-    transparent 10%,
-    black 36%,
-    black 45%,
-    transparent 50%,
-    transparent 60%,
-    black 85%,
-    black 95%,
-    transparent 100%
-  );
+  mask-image: conic-gradient(from var(--mask),
+      transparent 0%,
+      transparent 10%,
+      black 36%,
+      black 45%,
+      transparent 50%,
+      transparent 60%,
+      black 85%,
+      black 95%,
+      transparent 100%);
   animation: spin 3s linear infinite both;
 }
 
@@ -888,11 +845,9 @@ textarea::-webkit-scrollbar-thumb:hover {
   color: theme("colors.neutral.0");
   font-weight: 600;
   font-size: 1.4em;
-  background: linear-gradient(
-    135deg,
-    rgba(139, 92, 246, 0.9),
-    rgba(168, 85, 247, 0.8)
-  );
+  background: linear-gradient(135deg,
+      rgba(139, 92, 246, 0.9),
+      rgba(168, 85, 247, 0.8));
   backdrop-filter: blur(10px);
   border: 1px solid rgba(139, 92, 246, 0.5);
   padding: 1em 1.5em;
@@ -922,13 +877,11 @@ textarea::-webkit-scrollbar-thumb:hover {
   content: "";
   position: absolute;
   inset: -2px;
-  background: conic-gradient(
-    from var(--mask),
-    rgba(255, 181, 113, 0.8),
-    rgba(255, 217, 61, 0.6),
-    rgba(255, 193, 7, 0.8),
-    rgba(255, 181, 113, 0.8)
-  );
+  background: conic-gradient(from var(--mask),
+      rgba(255, 181, 113, 0.8),
+      rgba(255, 217, 61, 0.6),
+      rgba(255, 193, 7, 0.8),
+      rgba(255, 181, 113, 0.8));
   border-radius: inherit;
   animation: none;
   z-index: -2;
@@ -937,13 +890,11 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 .dark .shimmer-button-green::before {
-  background: conic-gradient(
-    from var(--mask),
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.8),
-    rgba(255, 255, 255, 0.8)
-  );
+  background: conic-gradient(from var(--mask),
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.4),
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8));
 }
 
 .shimmer-button-green:hover::before {
@@ -1113,23 +1064,29 @@ textarea::-webkit-scrollbar-thumb:hover {
 .statement-line {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem; /* gap-2 */
-  margin-bottom: 0.5rem; /* mb-2 */
+  gap: 0.5rem;
+  /* gap-2 */
+  margin-bottom: 0.5rem;
+  /* mb-2 */
   align-items: baseline;
   line-height: 1;
 }
 
 @media (min-width: 640px) {
   .statement-line {
-    gap: 0.75rem; /* gap-3 */
-    margin-bottom: 0.75rem; /* mb-3 */
+    gap: 0.75rem;
+    /* gap-3 */
+    margin-bottom: 0.75rem;
+    /* mb-3 */
   }
 }
 
 @media (min-width: 1024px) {
   .statement-line {
-    gap: 1rem; /* gap-4 */
-    margin-bottom: 1rem; /* mb-4 */
+    gap: 1rem;
+    /* gap-4 */
+    margin-bottom: 1rem;
+    /* mb-4 */
   }
 }
 
@@ -1260,6 +1217,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes shimmer {
+
   0%,
   100% {
     background-position: 0% 50%;
@@ -1280,6 +1238,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes gradient-shift {
+
   0%,
   100% {
     background-position: 0% 50%;
@@ -1344,6 +1303,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes aurora-gradient {
+
   0%,
   100% {
     background-position: 0% 50%;
@@ -1465,6 +1425,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 @keyframes shake {
+
   0%,
   85%,
   100% {
@@ -1533,10 +1494,12 @@ button .morphing-container {
     box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
       0 0 40px rgba(144, 126, 255, 0.3), 0 0 60px rgba(144, 126, 255, 0.1);
   }
+
   50% {
     box-shadow: 0 0 30px rgba(144, 126, 255, 0.7),
       0 0 60px rgba(144, 126, 255, 0.5), 0 0 90px rgba(144, 126, 255, 0.3);
   }
+
   100% {
     box-shadow: 0 0 20px rgba(144, 126, 255, 0.5),
       0 0 40px rgba(144, 126, 255, 0.3), 0 0 60px rgba(144, 126, 255, 0.1);
@@ -1549,10 +1512,12 @@ button .morphing-container {
 
 /* Video bobbing animation for hero videos */
 @keyframes gentle-bob {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-8px);
   }
@@ -1601,6 +1566,7 @@ body.mobile-menu-open {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
