@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Copy, ArrowsOutCardinal } from "@phosphor-icons/react";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import CustomCursor from "@/components/CustomCursor";
+import { gsap } from "gsap";
 
 // Custom Floating Label Input Component
 function FloatingLabelInput({
@@ -155,6 +156,86 @@ export default function ContactPage() {
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Refs for entrance animations
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLDivElement>(null);
+  const chatCardRef = useRef<HTMLDivElement>(null);
+  const chatCardLgRef = useRef<HTMLDivElement>(null);
+  const chatCardMobileRef = useRef<HTMLDivElement>(null);
+  const contactInfoRef = useRef<HTMLDivElement>(null);
+  const contactInfoLgRef = useRef<HTMLDivElement>(null);
+  const contactInfoMobileRef = useRef<HTMLDivElement>(null);
+
+  // Hero entrance animation
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    // Set initial states
+    gsap.set(
+      [
+        titleRef.current,
+        descriptionRef.current,
+        chatCardRef.current,
+        chatCardLgRef.current,
+        chatCardMobileRef.current,
+        contactInfoRef.current,
+        contactInfoLgRef.current,
+        contactInfoMobileRef.current,
+      ],
+      {
+        opacity: 0,
+        y: 30,
+      }
+    );
+
+    // Animate elements in sequence
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out",
+    })
+      .to(
+        descriptionRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      )
+      .to(
+        [
+          contactInfoRef.current,
+          contactInfoLgRef.current,
+          contactInfoMobileRef.current,
+        ],
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.15"
+      )
+      .to(
+        [chatCardRef.current, chatCardLgRef.current, chatCardMobileRef.current],
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.1"
+      );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -212,7 +293,7 @@ export default function ContactPage() {
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
-          <section className="min-h-screen relative">
+          <section ref={heroRef} className="min-h-screen relative">
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(139, 92, 246, 0.6)", // Purple
@@ -230,13 +311,19 @@ export default function ContactPage() {
                   {/* Hero content centered */}
                   <div className="flex-1 flex items-center">
                     <div>
-                      <h1 className="text-9xl xl:text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0">
+                      <h1
+                        ref={titleRef}
+                        className="text-9xl xl:text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0"
+                      >
                         <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                           Contact
                         </span>
                       </h1>
                       <div className="flex flex-row justify-between items-start mt-16">
-                        <div className="flex-1 max-w-[48rem]">
+                        <div
+                          ref={descriptionRef}
+                          className="flex-1 max-w-[48rem]"
+                        >
                           <div className="flex flex-col gap-6">
                             <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
                               I'm always excited to discuss new opportunities
@@ -263,7 +350,10 @@ export default function ContactPage() {
                 className="absolute right-0 w-[32rem]"
                 style={{ top: "65%", transform: "translateY(-50%)" }}
               >
-                <div className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
+                <div
+                  ref={chatCardRef}
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5"
+                >
                   <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
                     Let's have a chat 💬
                   </h2>
@@ -380,7 +470,10 @@ export default function ContactPage() {
 
               {/* Contact Information positioned to align with email alternative */}
               <div className="absolute left-0 bottom-0">
-                <div className="flex items-center space-x-8">
+                <div
+                  ref={contactInfoRef}
+                  className="flex items-center space-x-8"
+                >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
                       <svg
@@ -466,7 +559,10 @@ export default function ContactPage() {
 
               {/* Contact Information */}
               <div className="mb-12">
-                <div className="flex items-center space-x-8">
+                <div
+                  ref={contactInfoLgRef}
+                  className="flex items-center space-x-8"
+                >
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
                       <svg
@@ -529,7 +625,10 @@ export default function ContactPage() {
 
               {/* Contact Form */}
               <div className="max-w-2xl mx-auto">
-                <div className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5">
+                <div
+                  ref={chatCardLgRef}
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5"
+                >
                   <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
                     Let's have a chat 💬
                   </h2>
@@ -669,7 +768,10 @@ export default function ContactPage() {
 
               {/* Contact Information */}
               <div className="mb-8 sm:mb-12">
-                <div className="flex flex-row items-center space-x-4 sm:space-x-8">
+                <div
+                  ref={contactInfoMobileRef}
+                  className="flex flex-row items-center space-x-4 sm:space-x-8"
+                >
                   <div className="flex items-center space-x-3 sm:space-x-4">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
                       <svg
@@ -732,7 +834,10 @@ export default function ContactPage() {
 
               {/* Contact Form */}
               <div className="mb-8 sm:mb-12">
-                <div className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-white/5">
+                <div
+                  ref={chatCardMobileRef}
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-white/5"
+                >
                   <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 sm:mb-6 font-hanken">
                     Let's have a chat 💬
                   </h2>

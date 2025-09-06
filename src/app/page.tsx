@@ -17,10 +17,18 @@ export default function Home() {
   const morphRef = useRef<HTMLSpanElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Refs for entrance animations
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const lowCodeRef = useRef<HTMLSpanElement>(null);
+  const statementRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLButtonElement>(null);
+  const morphIconRef = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
     gsap.registerPlugin(MorphSVGPlugin);
 
-    const morphIcon = morphRef.current;
+    const morphIcon = morphIconRef.current;
     if (!morphIcon) return;
 
     const morphPath = morphIcon.querySelector(".morph-path") as SVGPathElement;
@@ -30,14 +38,14 @@ export default function Home() {
 
     if (!morphPath || targets.length === 0) return;
 
-    // Create the morphing timeline
-    const morphTimeline = gsap.timeline({ repeat: -1, paused: isHovered });
+    // Create the morphing timeline - start paused
+    const morphTimeline = gsap.timeline({ repeat: -1, paused: true });
 
     // Add morphing animations for all 9 shapes
     targets.forEach((target, index) => {
       morphTimeline.to(morphPath, {
         morphSVG: target,
-        duration: 1.5,
+        duration: 3,
         ease: "power2.inOut",
       });
     });
@@ -45,12 +53,17 @@ export default function Home() {
     // Return to the first shape to complete the cycle
     morphTimeline.to(morphPath, {
       morphSVG: targets[0],
-      duration: 1.5,
+      duration: 3,
       ease: "power2.inOut",
     });
 
-    // Start the animation
-    morphTimeline.play();
+    // Start the morphing animation after entrance animation completes
+    const startMorphing = () => {
+      morphTimeline.play();
+    };
+
+    // Start morphing after entrance animation (approximately 2.2s total)
+    const morphTimer = setTimeout(startMorphing, 2500);
 
     // Pause/resume on hover
     const handleMouseEnter = () => {
@@ -67,11 +80,89 @@ export default function Home() {
     morphIcon.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
+      clearTimeout(morphTimer);
       morphIcon.removeEventListener("mouseenter", handleMouseEnter);
       morphIcon.removeEventListener("mouseleave", handleMouseLeave);
       morphTimeline.kill();
     };
   }, [isHovered]);
+
+  // Hero entrance animation
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    // Set initial states
+    gsap.set(
+      [
+        titleRef.current,
+        lowCodeRef.current,
+        statementRef.current,
+        ctaRef.current,
+      ],
+      {
+        opacity: 0,
+        y: 30,
+      }
+    );
+
+    // Set morphing icon initial state with scale
+    gsap.set(morphIconRef.current, {
+      opacity: 0,
+      scale: 0.3,
+    });
+
+    // Animate elements in sequence
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out",
+    })
+      .to(
+        lowCodeRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      )
+      .to(
+        statementRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.15"
+      )
+      .to(
+        morphIconRef.current,
+        {
+          opacity: 1,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        },
+        "-=0.1"
+      )
+      .to(
+        ctaRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power3.out",
+        },
+        "-=0.05"
+      );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
 
   // Handle scrolling to case studies section when coming from case study page
   useEffect(() => {
@@ -113,6 +204,7 @@ export default function Home() {
         <main>
           {/* Introduction Section */}
           <section
+            ref={heroRef}
             id="home"
             className="min-h-screen relative flex items-center"
           >
@@ -126,6 +218,7 @@ export default function Home() {
               {/* CTA Button - Responsive positioning */}
               <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 z-20">
                 <button
+                  ref={ctaRef}
                   onClick={() => {
                     const element = document.getElementById("case-studies");
                     if (element) {
@@ -171,7 +264,10 @@ export default function Home() {
                 <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
                   <div className="w-full lg:flex-1">
                     {/* Main title - Responsive typography */}
-                    <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
+                    <h1
+                      ref={titleRef}
+                      className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
+                    >
                       <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                         UX/UI Designer{" "}
                       </span>
@@ -182,7 +278,10 @@ export default function Home() {
 
                     {/* Low-code Developer text - Mobile/tablet positioning */}
                     <div className="block lg:hidden mb-6">
-                      <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
+                      <span
+                        ref={lowCodeRef}
+                        className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                      >
                         Low-code Developer
                       </span>
                     </div>
@@ -190,7 +289,7 @@ export default function Home() {
                     {/* Hero statement - Responsive layout */}
                     <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 w-full">
                       <div className="flex-1 max-w-full lg:max-w-[64rem]">
-                        <div className="hero-statement">
+                        <div ref={statementRef} className="hero-statement">
                           {/* First line */}
                           <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
                             <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
@@ -213,7 +312,7 @@ export default function Home() {
                             </span>
                             <span
                               className="morphing-icon hidden sm:block"
-                              ref={morphRef}
+                              ref={morphIconRef}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -375,7 +474,10 @@ export default function Home() {
                       </div>
                       {/* Low-code Developer text - Desktop positioning */}
                       <div className="hidden lg:block w-auto lg:ml-8 mt-0">
-                        <span className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-4xl 2xl:text-6xl font-medium font-hanken tracking-wide">
+                        <span
+                          ref={lowCodeRef}
+                          className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-4xl 2xl:text-6xl font-medium font-hanken tracking-wide"
+                        >
                           Low-code Developer
                         </span>
                       </div>

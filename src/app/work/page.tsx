@@ -6,16 +6,70 @@ import Footer from "@/components/Footer";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 export default function WorkPage() {
+  // Refs for entrance animations
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const subtitleRef = useRef<HTMLSpanElement>(null);
+
+  // Hero entrance animation
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    // Set initial states
+    gsap.set([titleRef.current, descriptionRef.current, subtitleRef.current], {
+      opacity: 0,
+      y: 30,
+    });
+
+    // Animate elements in sequence
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out",
+    })
+      .to(
+        descriptionRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      )
+      .to(
+        subtitleRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.15"
+      );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   return (
     <>
       <CustomCursor />
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
         {/* Hero Section */}
-        <section className="min-h-screen relative flex items-center">
+        <section
+          ref={heroRef}
+          className="min-h-screen relative flex items-center"
+        >
           <AnimatedBlob
             gradientColors={{
               primary: "rgba(139, 92, 246, 0.6)", // Purple primary
@@ -24,20 +78,29 @@ export default function WorkPage() {
           />
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
             <div className="text-left w-full">
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
+              <h1
+                ref={titleRef}
+                className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
+              >
                 <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                   Selected works
                 </span>
               </h1>
               <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">
                 <div className="flex-1 max-w-full lg:max-w-[48rem]">
-                  <p className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide">
+                  <p
+                    ref={descriptionRef}
+                    className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
+                  >
                     Projects that quickly show how I solve problems and make
                     great user experiences happen.
                   </p>
                 </div>
                 <div className="lg:ml-8 mt-4 lg:mt-0">
-                  <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
+                  <span
+                    ref={subtitleRef}
+                    className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                  >
                     Case Studies
                   </span>
                 </div>
@@ -67,7 +130,7 @@ export default function WorkPage() {
                   {/* Image */}
                   <div className="aspect-[4/5] sm:aspect-[3/4] lg:aspect-[3/4] overflow-hidden relative">
                     <img
-                      src="/case-study-assets/emplojd/Emplojd-Case-Image-3.jpg"
+                      src="/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png"
                       alt="Emplojd HR Platform"
                       className="w-full h-3/4 group-hover:h-full object-cover transform transition-all duration-500 ease-out group-hover:scale-110 absolute top-0 left-0"
                     />

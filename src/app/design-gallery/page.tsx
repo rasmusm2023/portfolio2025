@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import CustomLightbox from "@/components/Lightbox";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Pause } from "@phosphor-icons/react";
+import { gsap } from "gsap";
 
 // Sample gallery data - replace with your actual images
 const galleryImages = [
@@ -180,6 +181,55 @@ export default function DesignGalleryPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Refs for entrance animations
+  const heroRef = useRef<HTMLElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const subtitleRef = useRef<HTMLSpanElement>(null);
+
+  // Hero entrance animation
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.1 });
+
+    // Set initial states
+    gsap.set([titleRef.current, descriptionRef.current, subtitleRef.current], {
+      opacity: 0,
+      y: 30,
+    });
+
+    // Animate elements in sequence
+    tl.to(titleRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out",
+    })
+      .to(
+        descriptionRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.2"
+      )
+      .to(
+        subtitleRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power3.out",
+        },
+        "-=0.15"
+      );
+
+    return () => {
+      tl.kill();
+    };
+  }, []);
+
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
     setLightboxOpen(true);
@@ -209,7 +259,10 @@ export default function DesignGalleryPage() {
       <div className="relative z-10">
         <main className="container mx-auto">
           {/* Hero Section */}
-          <section className="min-h-screen relative flex items-center">
+          <section
+            ref={heroRef}
+            className="min-h-screen relative flex items-center"
+          >
             <AnimatedBlob
               gradientColors={{
                 primary: "rgba(255, 181, 113, 0.6)", // Orange
@@ -218,14 +271,20 @@ export default function DesignGalleryPage() {
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
               <div className="text-left w-full">
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8">
+                <h1
+                  ref={titleRef}
+                  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
+                >
                   <span className="[background-image:var(--gradient-hero-design-gallery)] dark:[background-image:var(--gradient-hero-design-gallery-dark)] bg-clip-text text-transparent font-hanken">
                     Design Gallery
                   </span>
                 </h1>
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">
                   <div className="flex-1 max-w-full lg:max-w-[48rem]">
-                    <p className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide">
+                    <p
+                      ref={descriptionRef}
+                      className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
+                    >
                       A collection of design work that doesn't fit into
                       traditional case studies — from branding and logos to
                       typography, print design, and experimental projects. These
@@ -233,7 +292,10 @@ export default function DesignGalleryPage() {
                     </p>
                   </div>
                   <div className="lg:ml-8 mt-4 lg:mt-0">
-                    <span className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide">
+                    <span
+                      ref={subtitleRef}
+                      className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                    >
                       Miscellaneous
                     </span>
                   </div>

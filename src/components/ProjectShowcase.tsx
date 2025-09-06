@@ -22,7 +22,7 @@ const projects: Project[] = [
     title: "Enhancing job applications without compromising authenticity.",
     keywords: ["SaaS Platform", "AI-powered", "Web Design", "UX/UI Design"],
     image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&crop=center",
+      "/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png",
     alt: "Emplojd HR Platform",
     link: "/case-studies/emplojd",
   },
@@ -185,11 +185,15 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "zmartrest"
-                    ? "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=200&h=200&fit=crop&crop=center"
+                  hoveredProject === "emplojd"
+                    ? "/case-study-assets/emplojd/EMPLOJD-Preview-1.svg"
                     : "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=200&h=200&fit=crop&crop=center"
                 }
-                alt="Gallery image 1"
+                alt={
+                  hoveredProject === "emplojd"
+                    ? "Emplojd Preview 1"
+                    : "Gallery image 1"
+                }
                 width={200}
                 height={200}
                 className="w-full h-full object-cover transition-all duration-150 ease-out"
@@ -198,11 +202,15 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "zmartrest"
-                    ? "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?w=200&h=200&fit=crop&crop=center"
+                  hoveredProject === "emplojd"
+                    ? "/case-study-assets/emplojd/EMPLOJD-Preview-2.svg"
                     : "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=200&h=200&fit=crop&crop=center"
                 }
-                alt="Gallery image 2"
+                alt={
+                  hoveredProject === "emplojd"
+                    ? "Emplojd Preview 2"
+                    : "Gallery image 2"
+                }
                 width={200}
                 height={200}
                 className="w-full h-full object-cover transition-all duration-150 ease-out"
@@ -211,11 +219,15 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
             <div className="w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-lg overflow-hidden bg-neutral-20 dark:bg-neutral-80">
               <Image
                 src={
-                  hoveredProject === "zmartrest"
-                    ? "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=200&h=200&fit=crop&crop=center"
+                  hoveredProject === "emplojd"
+                    ? "/case-study-assets/emplojd/EMPLOJD-Preview-3.svg"
                     : "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=200&h=200&fit=crop&crop=center"
                 }
-                alt="Gallery image 3"
+                alt={
+                  hoveredProject === "emplojd"
+                    ? "Emplojd Preview 3"
+                    : "Gallery image 3"
+                }
                 width={200}
                 height={200}
                 className="w-full h-full object-cover transition-all duration-150 ease-out"
