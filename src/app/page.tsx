@@ -476,7 +476,7 @@ export default function Home() {
                       <div className="hidden lg:block w-auto lg:ml-8 mt-0">
                         <span
                           ref={lowCodeRef}
-                          className="text-neutral-60 dark:text-neutral-40 text-4xl xl:text-4xl 2xl:text-6xl font-medium font-hanken tracking-wide"
+                          className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
                         >
                           Low-code Developer
                         </span>

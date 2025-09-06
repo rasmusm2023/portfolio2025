@@ -352,119 +352,129 @@ export default function ContactPage() {
               >
                 <div
                   ref={chatCardRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5"
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
-                  <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                    Let's have a chat 💬
-                  </h2>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <FloatingLabelInput
-                      id="name"
-                      name="name"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
+                  {/* Noise background overlay */}
+                  <div
+                    className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                      backgroundSize: "256px 256px",
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
+                      Let's have a chat 💬
+                    </h2>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <FloatingLabelInput
+                        id="name"
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      placeholder="Subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="subject"
+                        name="subject"
+                        type="text"
+                        placeholder="Subject"
+                        required
+                        value={formData.subject}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="message"
-                      name="message"
-                      placeholder="Message"
-                      required
-                      rows={4}
-                      isTextarea
-                      value={formData.message}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="message"
+                        name="message"
+                        placeholder="Message"
+                        required
+                        rows={8}
+                        isTextarea
+                        value={formData.message}
+                        onChange={handleChange}
+                      />
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                    >
-                      {isSubmitting ? "Sending..." : "Send message"}
-                    </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                      >
+                        {isSubmitting ? "Sending..." : "Send message"}
+                      </button>
 
-                    {/* Success/Error Messages */}
-                    {submitStatus === "success" && (
-                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                          ✅ Message sent successfully! I'll get back to you
-                          within 24 hours.
-                        </p>
-                      </div>
-                    )}
+                      {/* Success/Error Messages */}
+                      {submitStatus === "success" && (
+                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
+                            ✅ Message sent successfully! I'll get back to you
+                            within 24 hours.
+                          </p>
+                        </div>
+                      )}
 
-                    {submitStatus === "error" && (
-                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                          ❌ {errorMessage}
-                        </p>
-                      </div>
-                    )}
+                      {submitStatus === "error" && (
+                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
+                            ❌ {errorMessage}
+                          </p>
+                        </div>
+                      )}
 
-                    {/* OR Divider */}
-                    <div className="flex items-center justify-center space-x-4 my-6">
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                      <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                        OR
-                      </span>
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    </div>
-
-                    {/* Email Alternative */}
-                    <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
-                      <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
-                        Prefer to email directly?
-                      </p>
-                      <div className="flex items-center justify-center gap-4">
-                        <span
-                          className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
-                            emailCopied
-                              ? "text-green-500"
-                              : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                          }`}
-                          onClick={handleCopyEmail}
-                        >
-                          hello@rasmusmattsson.com
+                      {/* OR Divider */}
+                      <div className="flex items-center justify-center space-x-4 my-6">
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
+                        <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
+                          OR
                         </span>
-                        <button
-                          type="button"
-                          onClick={handleCopyEmail}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                            emailCopied
-                              ? "bg-green-500 text-neutral-3 shadow-lg"
-                              : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                          }`}
-                        >
-                          <Copy size={16} weight="regular" />
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </button>
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
                       </div>
-                    </div>
-                  </form>
+
+                      {/* Email Alternative */}
+                      <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                        <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
+                          Prefer to email directly?
+                        </p>
+                        <div className="flex items-center justify-center gap-4">
+                          <span
+                            className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                              emailCopied
+                                ? "text-green-500"
+                                : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
+                            }`}
+                            onClick={handleCopyEmail}
+                          >
+                            hello@rasmusmattsson.com
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleCopyEmail}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                              emailCopied
+                                ? "bg-green-500 text-neutral-3 shadow-lg"
+                                : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                            }`}
+                          >
+                            <Copy size={16} weight="regular" />
+                            {emailCopied ? "Copied!" : "Copy email"}
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
 
@@ -627,119 +637,129 @@ export default function ContactPage() {
               <div className="max-w-2xl mx-auto">
                 <div
                   ref={chatCardLgRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-2xl shadow-white/5"
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
-                  <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                    Let's have a chat 💬
-                  </h2>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <FloatingLabelInput
-                      id="name-lg"
-                      name="name"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
+                  {/* Noise background overlay */}
+                  <div
+                    className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                      backgroundSize: "256px 256px",
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
+                      Let's have a chat 💬
+                    </h2>
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <FloatingLabelInput
+                        id="name-lg"
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="email-lg"
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="email-lg"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="subject-lg"
-                      name="subject"
-                      type="text"
-                      placeholder="Subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="subject-lg"
+                        name="subject"
+                        type="text"
+                        placeholder="Subject"
+                        required
+                        value={formData.subject}
+                        onChange={handleChange}
+                      />
 
-                    <FloatingLabelInput
-                      id="message-lg"
-                      name="message"
-                      placeholder="Message"
-                      required
-                      rows={4}
-                      isTextarea
-                      value={formData.message}
-                      onChange={handleChange}
-                    />
+                      <FloatingLabelInput
+                        id="message-lg"
+                        name="message"
+                        placeholder="Message"
+                        required
+                        rows={8}
+                        isTextarea
+                        value={formData.message}
+                        onChange={handleChange}
+                      />
 
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                    >
-                      {isSubmitting ? "Sending..." : "Send message"}
-                    </button>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                      >
+                        {isSubmitting ? "Sending..." : "Send message"}
+                      </button>
 
-                    {/* Success/Error Messages */}
-                    {submitStatus === "success" && (
-                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                          ✅ Message sent successfully! I'll get back to you
-                          within 24 hours.
-                        </p>
-                      </div>
-                    )}
+                      {/* Success/Error Messages */}
+                      {submitStatus === "success" && (
+                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
+                            ✅ Message sent successfully! I'll get back to you
+                            within 24 hours.
+                          </p>
+                        </div>
+                      )}
 
-                    {submitStatus === "error" && (
-                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                          ❌ {errorMessage}
-                        </p>
-                      </div>
-                    )}
+                      {submitStatus === "error" && (
+                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
+                            ❌ {errorMessage}
+                          </p>
+                        </div>
+                      )}
 
-                    {/* OR Divider */}
-                    <div className="flex items-center justify-center space-x-4 my-6">
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                      <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                        OR
-                      </span>
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    </div>
-
-                    {/* Email Alternative */}
-                    <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
-                      <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
-                        Prefer to email directly?
-                      </p>
-                      <div className="flex items-center justify-center gap-4">
-                        <span
-                          className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
-                            emailCopied
-                              ? "text-green-500"
-                              : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                          }`}
-                          onClick={handleCopyEmail}
-                        >
-                          hello@rasmusmattsson.com
+                      {/* OR Divider */}
+                      <div className="flex items-center justify-center space-x-4 my-6">
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
+                        <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
+                          OR
                         </span>
-                        <button
-                          type="button"
-                          onClick={handleCopyEmail}
-                          className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                            emailCopied
-                              ? "bg-green-500 text-neutral-3 shadow-lg"
-                              : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                          }`}
-                        >
-                          <Copy size={16} weight="regular" />
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </button>
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
                       </div>
-                    </div>
-                  </form>
+
+                      {/* Email Alternative */}
+                      <div className="text-center space-y-4 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                        <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
+                          Prefer to email directly?
+                        </p>
+                        <div className="flex items-center justify-center gap-4">
+                          <span
+                            className={`font-bold text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                              emailCopied
+                                ? "text-green-500"
+                                : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
+                            }`}
+                            onClick={handleCopyEmail}
+                          >
+                            hello@rasmusmattsson.com
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleCopyEmail}
+                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                              emailCopied
+                                ? "bg-green-500 text-neutral-3 shadow-lg"
+                                : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                            }`}
+                          >
+                            <Copy size={16} weight="regular" />
+                            {emailCopied ? "Copied!" : "Copy email"}
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -836,126 +856,136 @@ export default function ContactPage() {
               <div className="mb-8 sm:mb-12">
                 <div
                   ref={chatCardMobileRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-white/5"
+                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
-                  <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 sm:mb-6 font-hanken">
-                    Let's have a chat 💬
-                  </h2>
-                  <form
-                    onSubmit={handleSubmit}
-                    className="space-y-4 sm:space-y-6"
-                  >
-                    <FloatingLabelInput
-                      id="name-mobile"
-                      name="name"
-                      type="text"
-                      placeholder="Name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                    />
-
-                    <FloatingLabelInput
-                      id="email-mobile"
-                      name="email"
-                      type="email"
-                      placeholder="Email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                    />
-
-                    <FloatingLabelInput
-                      id="subject-mobile"
-                      name="subject"
-                      type="text"
-                      placeholder="Subject"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                    />
-
-                    <FloatingLabelInput
-                      id="message-mobile"
-                      name="message"
-                      placeholder="Message"
-                      required
-                      rows={4}
-                      isTextarea
-                      value={formData.message}
-                      onChange={handleChange}
-                    />
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  {/* Noise background overlay */}
+                  <div
+                    className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                      backgroundSize: "256px 256px",
+                    }}
+                  />
+                  <div className="relative z-10">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 sm:mb-6 font-hanken">
+                      Let's have a chat 💬
+                    </h2>
+                    <form
+                      onSubmit={handleSubmit}
+                      className="space-y-4 sm:space-y-6"
                     >
-                      {isSubmitting ? "Sending..." : "Send message"}
-                    </button>
+                      <FloatingLabelInput
+                        id="name-mobile"
+                        name="name"
+                        type="text"
+                        placeholder="Name"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
 
-                    {/* Success/Error Messages */}
-                    {submitStatus === "success" && (
-                      <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                        <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                          ✅ Message sent successfully! I'll get back to you
-                          within 24 hours.
-                        </p>
-                      </div>
-                    )}
+                      <FloatingLabelInput
+                        id="email-mobile"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
 
-                    {submitStatus === "error" && (
-                      <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                        <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                          ❌ {errorMessage}
-                        </p>
-                      </div>
-                    )}
+                      <FloatingLabelInput
+                        id="subject-mobile"
+                        name="subject"
+                        type="text"
+                        placeholder="Subject"
+                        required
+                        value={formData.subject}
+                        onChange={handleChange}
+                      />
 
-                    {/* OR Divider */}
-                    <div className="flex items-center justify-center space-x-4 my-4 sm:my-6">
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                      <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                        OR
-                      </span>
-                      <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    </div>
+                      <FloatingLabelInput
+                        id="message-mobile"
+                        name="message"
+                        placeholder="Message"
+                        required
+                        rows={8}
+                        isTextarea
+                        value={formData.message}
+                        onChange={handleChange}
+                      />
 
-                    {/* Email Alternative */}
-                    <div className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
-                      <p className="text-neutral-70 dark:text-neutral-30 text-sm sm:text-base font-medium">
-                        Prefer to email directly?
-                      </p>
-                      <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                        <span
-                          className={`font-bold text-base sm:text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
-                            emailCopied
-                              ? "text-green-500"
-                              : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                          }`}
-                          onClick={handleCopyEmail}
-                        >
-                          hello@rasmusmattsson.com
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                      >
+                        {isSubmitting ? "Sending..." : "Send message"}
+                      </button>
+
+                      {/* Success/Error Messages */}
+                      {submitStatus === "success" && (
+                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
+                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
+                            ✅ Message sent successfully! I'll get back to you
+                            within 24 hours.
+                          </p>
+                        </div>
+                      )}
+
+                      {submitStatus === "error" && (
+                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
+                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
+                            ❌ {errorMessage}
+                          </p>
+                        </div>
+                      )}
+
+                      {/* OR Divider */}
+                      <div className="flex items-center justify-center space-x-4 my-4 sm:my-6">
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
+                        <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
+                          OR
                         </span>
-                        <button
-                          type="button"
-                          onClick={handleCopyEmail}
-                          className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                            emailCopied
-                              ? "bg-green-500 text-neutral-3 shadow-lg"
-                              : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                          }`}
-                        >
-                          <Copy
-                            size={14}
-                            weight="regular"
-                            className="sm:w-4 sm:h-4"
-                          />
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </button>
+                        <div className="flex-1 h-px bg-neutral-60/30"></div>
                       </div>
-                    </div>
-                  </form>
+
+                      {/* Email Alternative */}
+                      <div className="text-center space-y-3 sm:space-y-4 p-4 sm:p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                        <p className="text-neutral-70 dark:text-neutral-30 text-sm sm:text-base font-medium">
+                          Prefer to email directly?
+                        </p>
+                        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+                          <span
+                            className={`font-bold text-base sm:text-lg transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                              emailCopied
+                                ? "text-green-500"
+                                : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
+                            }`}
+                            onClick={handleCopyEmail}
+                          >
+                            hello@rasmusmattsson.com
+                          </span>
+                          <button
+                            type="button"
+                            onClick={handleCopyEmail}
+                            className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
+                              emailCopied
+                                ? "bg-green-500 text-neutral-3 shadow-lg"
+                                : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
+                            }`}
+                          >
+                            <Copy
+                              size={14}
+                              weight="regular"
+                              className="sm:w-4 sm:h-4"
+                            />
+                            {emailCopied ? "Copied!" : "Copy email"}
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>

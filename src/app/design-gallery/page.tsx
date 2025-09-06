@@ -265,8 +265,8 @@ export default function DesignGalleryPage() {
           >
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(255, 181, 113, 0.6)", // Orange
-                secondary: "rgba(255, 217, 61, 0.4)", // Yellow
+                primary: "rgba(59, 130, 246, 0.6)", // Blue
+                secondary: "rgba(6, 182, 212, 0.4)", // Cyan
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">

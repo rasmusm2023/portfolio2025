@@ -610,8 +610,12 @@ export default function AboutPage() {
           >
             <AnimatedBlob
               gradientColors={{
-                primary: "rgba(139, 92, 246, 0.6)", // Purple primary
-                secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
+                primary: isDark
+                  ? "rgba(34, 197, 94, 0.6)" // Green primary for dark mode
+                  : "rgba(34, 197, 94, 0.8)", // Slightly more opaque green for light mode
+                secondary: isDark
+                  ? "rgba(20, 184, 166, 0.4)" // Teal secondary for dark mode
+                  : "rgba(20, 184, 166, 0.6)", // Slightly more opaque teal for light mode
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
@@ -620,7 +624,7 @@ export default function AboutPage() {
                   ref={titleRef}
                   className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                 >
-                  <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
+                  <span className="[background-image:var(--gradient-hero-about)] dark:[background-image:var(--gradient-hero-about-dark)] bg-clip-text text-transparent font-hanken">
                     About
                   </span>
                 </h1>
@@ -636,25 +640,25 @@ export default function AboutPage() {
                     </p>
                     <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg lg:text-xl font-semibold leading-loose tracking-wide mt-6 sm:mt-8">
                       — with an{" "}
-                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">eye</span>{" "}
+                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">eye</span>{" "}
                       for{" "}
-                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
                         detail
                       </span>
                       , a{" "}
-                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">
+                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">
                         heart
                       </span>{" "}
                       for the{" "}
-                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
                         user
                       </span>
                       , and a{" "}
-                      <span className="bg-[#8B5CF6]/20 px-0.5 py-0.5">
+                      <span className="bg-[#22c55e]/20 px-0.5 py-0.5">
                         drive
                       </span>
                       for the{" "}
-                      <span className="border-2 border-dashed border-[#8B5CF6]/30 px-0.5 py-0.5">
+                      <span className="border-2 border-dashed border-[#22c55e]/30 px-0.5 py-0.5">
                         business
                       </span>
                       .

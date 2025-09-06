@@ -8,10 +8,13 @@ import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 export default function WorkPage() {
+  const { isDark } = useTheme();
+
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -72,8 +75,12 @@ export default function WorkPage() {
         >
           <AnimatedBlob
             gradientColors={{
-              primary: "rgba(139, 92, 246, 0.6)", // Purple primary
-              secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
+              primary: isDark
+                ? "rgba(239, 68, 68, 0.6)" // Red primary for dark mode
+                : "rgba(239, 68, 68, 0.8)", // Slightly more opaque red for light mode
+              secondary: isDark
+                ? "rgba(251, 146, 60, 0.4)" // Orange secondary for dark mode
+                : "rgba(251, 146, 60, 0.6)", // Slightly more opaque orange for light mode
             }}
           />
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
@@ -82,7 +89,7 @@ export default function WorkPage() {
                 ref={titleRef}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
               >
-                <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
+                <span className="[background-image:var(--gradient-hero-work)] dark:[background-image:var(--gradient-hero-work-dark)] bg-clip-text text-transparent font-hanken">
                   Selected works
                 </span>
               </h1>
@@ -215,6 +222,12 @@ export default function WorkPage() {
               {/* Noted Case Study - Password Protected */}
               <Link href="/case-studies/noted" className="group cursor-pointer">
                 <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
+                  {/* Coming Soon Badge */}
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      COMING SOON
+                    </span>
+                  </div>
                   {/* Noise background overlay */}
                   <div
                     className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
@@ -313,6 +326,12 @@ export default function WorkPage() {
                 className="group cursor-pointer"
               >
                 <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
+                  {/* Coming Soon Badge */}
+                  <div className="absolute top-4 right-4 z-20">
+                    <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                      COMING SOON
+                    </span>
+                  </div>
                   {/* Noise background overlay */}
                   <div
                     className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"

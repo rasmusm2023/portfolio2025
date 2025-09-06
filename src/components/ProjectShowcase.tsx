@@ -155,8 +155,7 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                     height={160}
                     className="w-full h-full object-cover"
                   />
-                  {/* Overlay for better text contrast */}
-                  <div className="absolute inset-0 bg-neutral-100/10 dark:bg-neutral-100/10 lg:group-hover:bg-neutral-100/20 lg:dark:group-hover:bg-neutral-100/20 transition-colors duration-500 ease-in-out" />
+
                   {/* GIF indicator */}
                   {project.isGif && (
                     <div className="absolute top-2 right-2 bg-[#8B5CF6] text-neutral-0 dark:text-neutral-100 text-xs font-bold px-1.5 py-0.5 rounded">
