@@ -16,7 +16,7 @@ const DesignExplorations: React.FC = () => {
         ease: "power2.inOut",
         onComplete: () => {
           setCurrentDesignExplorationIndex((prev) =>
-            prev === 5 ? 0 : prev + 1
+            prev === 2 ? 0 : prev + 1
           );
           // Animate text in with GSAP
           gsap.to(textContainerRef.current, {
@@ -40,7 +40,7 @@ const DesignExplorations: React.FC = () => {
         ease: "power2.inOut",
         onComplete: () => {
           setCurrentDesignExplorationIndex((prev) =>
-            prev === 0 ? 5 : prev - 1
+            prev === 0 ? 2 : prev - 1
           );
           // Animate text in with GSAP
           gsap.to(textContainerRef.current, {
@@ -118,57 +118,17 @@ const DesignExplorations: React.FC = () => {
               draggable={false}
             />
 
-            {/* Third Image - Peer Review & Collaboration */}
-            <div
-              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
+            {/* Third Image - Page Layout for Saved Jobs */}
+            <img
+              src="/case-study-assets/emplojd/Emplojd-Design Explorations-Page-Layout-For-Saved-Jobs.svg"
+              alt="Emplojd design exploration showing page layout for saved jobs and job management interface"
+              className={`w-full h-auto object-contain absolute inset-0 transition-opacity duration-300 ${
                 currentDesignExplorationIndex === 2
                   ? "opacity-100"
                   : "opacity-0"
               }`}
-            >
-              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
-                [Design Exploration Image 3: Peer Review & Collaboration]
-              </p>
-            </div>
-
-            {/* Fourth Image - Placeholder */}
-            <div
-              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
-                currentDesignExplorationIndex === 3
-                  ? "opacity-100"
-                  : "opacity-0"
-              }`}
-            >
-              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
-                [Design Exploration Image 4: Placeholder]
-              </p>
-            </div>
-
-            {/* Fifth Image - Placeholder */}
-            <div
-              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
-                currentDesignExplorationIndex === 4
-                  ? "opacity-100"
-                  : "opacity-0"
-              }`}
-            >
-              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
-                [Design Exploration Image 5: Placeholder]
-              </p>
-            </div>
-
-            {/* Sixth Image - Placeholder */}
-            <div
-              className={`w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[494px] bg-neutral-100 dark:bg-neutral-800 flex items-center justify-center rounded-lg absolute inset-0 transition-opacity duration-300 ${
-                currentDesignExplorationIndex === 5
-                  ? "opacity-100"
-                  : "opacity-0"
-              }`}
-            >
-              <p className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg text-center px-4">
-                [Design Exploration Image 6: Placeholder]
-              </p>
-            </div>
+              draggable={false}
+            />
 
             {/* Navigation Arrows */}
             <button
@@ -214,7 +174,7 @@ const DesignExplorations: React.FC = () => {
               <div className="flex items-center gap-2">
                 {/* Progress dots */}
                 <div className="flex gap-1.5">
-                  {[0, 1, 2, 3, 4, 5].map((index) => (
+                  {[0, 1, 2].map((index) => (
                     <button
                       key={index}
                       onClick={() => setCurrentDesignExplorationIndex(index)}
@@ -229,7 +189,7 @@ const DesignExplorations: React.FC = () => {
                 {/* Current position indicator */}
                 <div className="w-px h-4 bg-white/30 mx-1" />
                 <span className="text-white/90 text-xs font-medium">
-                  {currentDesignExplorationIndex + 1}/6
+                  {currentDesignExplorationIndex + 1}/3
                 </span>
               </div>
             </div>
@@ -247,13 +207,7 @@ const DesignExplorations: React.FC = () => {
                 {currentDesignExplorationIndex === 1 &&
                   "Page Layout for Saved Cover Letters"}
                 {currentDesignExplorationIndex === 2 &&
-                  "Concept 3: Peer Review & Collaboration"}
-                {currentDesignExplorationIndex === 3 &&
-                  "Concept 4: [Placeholder Title]"}
-                {currentDesignExplorationIndex === 4 &&
-                  "Concept 5: [Placeholder Title]"}
-                {currentDesignExplorationIndex === 5 &&
-                  "Concept 6: [Placeholder Title]"}
+                  "Page Layout for Saved Jobs"}
               </h3>
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 {currentDesignExplorationIndex === 0 &&
@@ -261,13 +215,7 @@ const DesignExplorations: React.FC = () => {
                 {currentDesignExplorationIndex === 1 &&
                   "We explored different page layouts for the overview of saved cover letters. In the end I decided to go with a later concept  than the one we initially had in mind. This design decision was made to maintain a consistent design language, accessibility and to keep the design simple and clean."}
                 {currentDesignExplorationIndex === 2 &&
-                  "We explored features allowing users to get peer feedback on their cover letters or resumes directly within the platform. This was a strong contender but required significant moderation and community features beyond our scope."}
-                {currentDesignExplorationIndex === 3 &&
-                  "[Placeholder description for Concept 4]"}
-                {currentDesignExplorationIndex === 4 &&
-                  "[Placeholder description for Concept 5]"}
-                {currentDesignExplorationIndex === 5 &&
-                  "[Placeholder description for Concept 6]"}
+                  "We explored different approaches for organizing and displaying saved job listings. This exploration focused on creating an intuitive interface that allows users to easily manage their job applications while maintaining visual consistency with the rest of the platform. The final design prioritizes clarity and quick access to essential job information."}
               </p>
             </div>
           </div>

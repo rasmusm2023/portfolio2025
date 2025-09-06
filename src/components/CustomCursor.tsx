@@ -342,35 +342,51 @@ const CustomCursor = () => {
     document.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("mouseover", handleMouseEnter);
-      document.removeEventListener("mouseout", handleMouseLeave);
-      if (scrollAnimationId) {
-        cancelAnimationFrame(scrollAnimationId);
-      }
-      if (continuousUpdateId) {
-        cancelAnimationFrame(continuousUpdateId);
-      }
-      observer.disconnect();
-      clearInterval(periodicCheck);
-      videoObserver.disconnect();
+      try {
+        window.removeEventListener("mousemove", updateMousePosition);
+        window.removeEventListener("scroll", handleScroll);
+        document.removeEventListener("mouseover", handleMouseEnter);
+        document.removeEventListener("mouseout", handleMouseLeave);
 
-      // Clean up video event listeners
-      const videos = document.querySelectorAll("video");
-      videos.forEach((video) => {
-        if (video._customCursorListeners) {
-          video.removeEventListener(
-            "play",
-            video._customCursorListeners.handlePlay
-          );
-          video.removeEventListener(
-            "pause",
-            video._customCursorListeners.handlePause
-          );
-          delete video._customCursorListeners;
+        if (scrollAnimationId) {
+          cancelAnimationFrame(scrollAnimationId);
         }
-      });
+        if (continuousUpdateId) {
+          cancelAnimationFrame(continuousUpdateId);
+        }
+
+        if (observer) {
+          observer.disconnect();
+        }
+        if (periodicCheck) {
+          clearInterval(periodicCheck);
+        }
+        if (videoObserver) {
+          videoObserver.disconnect();
+        }
+
+        // Clean up video event listeners with error handling
+        try {
+          const videos = document.querySelectorAll("video");
+          videos.forEach((video) => {
+            if (video._customCursorListeners) {
+              video.removeEventListener(
+                "play",
+                video._customCursorListeners.handlePlay
+              );
+              video.removeEventListener(
+                "pause",
+                video._customCursorListeners.handlePause
+              );
+              delete video._customCursorListeners;
+            }
+          });
+        } catch (error) {
+          console.warn("Error cleaning up video listeners:", error);
+        }
+      } catch (error) {
+        console.warn("Error during CustomCursor cleanup:", error);
+      }
     };
   }, [hoverTarget]);
 

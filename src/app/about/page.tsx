@@ -2,7 +2,7 @@
 
 import AnimatedBlob from "@/components/AnimatedBlob";
 import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
-import TraitsCarousel from "@/components/TraitsCarousel";
+import IdentityCarousel from "@/components/IdentityCarousel";
 import FilmsCarousel from "@/components/FilmsCarousel";
 import CustomCursor from "@/components/CustomCursor";
 import RadialGradientBorder from "@/components/RadialGradientBorder";
@@ -614,17 +614,17 @@ export default function AboutPage() {
           {/* Bento Box Layout */}
           <section className="py-8 sm:py-12 lg:py-16 relative">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
-                {/* Personal Traits - Large section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
+                {/* Personal Identity - Large section */}
                 <div
                   className="md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
-                    transform: `scale(${getBoxScale("traits")})`,
+                    transform: `scale(${getBoxScale("identity")})`,
                     backgroundColor: isDark
                       ? "rgba(35, 35, 35, 0.5)"
                       : "#ffffff",
                   }}
-                  onMouseEnter={() => setHoveredBox("traits")}
+                  onMouseEnter={() => setHoveredBox("identity")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
                   {/* Radial shine effect */}
@@ -643,20 +643,20 @@ export default function AboutPage() {
                         color: isDark ? "rgb(255, 255, 255)" : "#000000",
                       }}
                     >
-                      Traits
+                      Identity
                     </h2>
                     <Image
                       src="/icons/3dicons-puzzle-dynamic-premium.png"
-                      alt="Traits"
+                      alt="Identity"
                       width={60}
                       height={60}
                       className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
                   <div className="mt-8">
-                    <TraitsCarousel
+                    <IdentityCarousel
                       isDark={isDark}
-                      traits={[
+                      identity={[
                         {
                           title: "Home Cook",
                           description:
@@ -723,7 +723,7 @@ export default function AboutPage() {
 
                 {/* About Me - Medium section */}
                 <div
-                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("about")})`,
                     backgroundColor: isDark
@@ -776,7 +776,7 @@ export default function AboutPage() {
 
                 {/* Why This Portfolio - Medium section */}
                 <div
-                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("portfolio")})`,
                     backgroundColor: isDark
@@ -828,7 +828,9 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Local Time - Small section */}
+                {/* HIDDEN BENTO BOXES - PRESERVED FOR FUTURE USE */}
+                {/* 
+                Local Time - Small section
                 <div
                   className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
@@ -840,7 +842,6 @@ export default function AboutPage() {
                   onMouseEnter={() => setHoveredBox("time")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
@@ -867,13 +868,11 @@ export default function AboutPage() {
                     />
                   </div>
                   <div className="space-y-3 sm:space-y-4">
-                    {/* Time Display */}
                     <div className="text-center">
                       <div className="relative">
                         <div className="text-3xl sm:text-4xl md:text-6xl lg:text-5xl 2xl:text-6xl font-audiowide font-bold text-[#fbbf24] mb-2 tracking-wider">
                           <LiveClock />
                         </div>
-                        {/* Animated dots */}
                         <div className="flex justify-center gap-1 mb-2">
                           <div className="w-2 h-2 bg-[#fbbf24] rounded-full animate-pulse"></div>
                           <div
@@ -887,8 +886,6 @@ export default function AboutPage() {
                         </div>
                       </div>
                     </div>
-
-                    {/* Calendar Style Date */}
                     <div className="text-center">
                       <div
                         className="w-full backdrop-blur-sm border rounded-2xl p-3 shadow-lg"
@@ -966,7 +963,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Currently Reading - Medium section */}
+                Currently Reading - Medium section
                 <div
                   className="md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
@@ -978,7 +975,6 @@ export default function AboutPage() {
                   onMouseEnter={() => setHoveredBox("books")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
@@ -1044,7 +1040,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Favourite Films - Large section */}
+                Favourite Films - Large section
                 <div
                   className="col-span-1 md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
@@ -1056,7 +1052,6 @@ export default function AboutPage() {
                   onMouseEnter={() => setHoveredBox("films")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
@@ -1082,7 +1077,6 @@ export default function AboutPage() {
                       className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
-                  {/* Mobile/Tablet/2xl- Carousel */}
                   <div className="2xl:hidden">
                     <FilmsCarousel
                       isDark={isDark}
@@ -1127,8 +1121,6 @@ export default function AboutPage() {
                       ]}
                     />
                   </div>
-
-                  {/* Desktop Static Display */}
                   <div className="hidden 2xl:flex gap-4 overflow-x-auto overflow-y-visible pb-4 scrollbar-hide min-h-[176px] items-start">
                     <FilmCard
                       title="The Equalizer"
@@ -1168,7 +1160,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                {/* Music - Medium section */}
+                Music - Medium section
                 <div
                   className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
@@ -1180,7 +1172,6 @@ export default function AboutPage() {
                   onMouseEnter={() => setHoveredBox("music")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
-                  {/* Radial shine effect */}
                   <div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
                     style={{
@@ -1229,6 +1220,7 @@ export default function AboutPage() {
                     <FavoriteSongs isDark={isDark} />
                   </div>
                 </div>
+                */}
               </div>
             </div>
           </section>

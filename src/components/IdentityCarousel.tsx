@@ -2,22 +2,22 @@
 
 import { useState, useRef, useEffect } from "react";
 
-interface TraitCard {
+interface IdentityCard {
   title: string;
   description: string;
   emoji: string;
   image?: string;
 }
 
-interface TraitsCarouselProps {
-  traits: TraitCard[];
+interface IdentityCarouselProps {
+  identity: IdentityCard[];
   isDark: boolean;
 }
 
-export default function TraitsCarousel({
-  traits,
+export default function IdentityCarousel({
+  identity,
   isDark,
-}: TraitsCarouselProps) {
+}: IdentityCarouselProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
@@ -26,8 +26,8 @@ export default function TraitsCarousel({
   const carouselRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
 
-  // Create infinite carousel by duplicating traits
-  const infiniteTraits = [...traits, ...traits, ...traits]; // Triple the array for seamless looping
+  // Create infinite carousel by duplicating identity
+  const infiniteIdentity = [...identity, ...identity, ...identity]; // Triple the array for seamless looping
 
   // Auto-scroll animation with infinite loop
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function TraitsCarousel({
     const animate = () => {
       if (carouselRef.current && !isDragging && !isTouching) {
         const container = carouselRef.current;
-        const singleSetWidth = container.scrollWidth / 3; // Width of one complete set of traits
+        const singleSetWidth = container.scrollWidth / 3; // Width of one complete set of identity
 
         if (container.scrollLeft >= singleSetWidth * 2) {
           // Reset to middle set when reaching the end
@@ -150,7 +150,7 @@ export default function TraitsCarousel({
         data-tooltip="Swipe"
         data-tooltip-icon="↔"
       >
-        {infiniteTraits.map((trait, index) => (
+        {infiniteIdentity.map((identityItem, index) => (
           <div
             key={index}
             className="flex-shrink-0 w-64 sm:w-64 md:w-80 border border-neutral-20/10 dark:border-neutral-100/10 rounded-2xl p-5 sm:p-4 md:p-6 hover:border-[#8B5CF6] transition-all duration-300 cursor-pointer relative z-10 group/card overflow-hidden shadow-lg"
@@ -161,7 +161,7 @@ export default function TraitsCarousel({
             }}
           >
             {/* Blurred Background Layer */}
-            {trait.image && (
+            {identityItem.image && (
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
@@ -169,7 +169,7 @@ export default function TraitsCarousel({
                     isDark
                       ? "rgba(0,0,0,0.7), rgba(0,0,0,0.9)"
                       : "rgba(255,255,255,0.9), rgba(255,255,255,0.95)"
-                  }), url(${trait.image})`,
+                  }), url(${identityItem.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   backgroundRepeat: "no-repeat",
@@ -178,7 +178,7 @@ export default function TraitsCarousel({
                 }}
               />
             )}
-            {!trait.image && (
+            {!identityItem.image && (
               <div
                 className="absolute inset-0 rounded-2xl"
                 style={{
@@ -201,14 +201,14 @@ export default function TraitsCarousel({
 
             {/* Image Section */}
             <div className="w-full h-36 sm:h-40 md:h-56 mb-4 sm:mb-3 md:mb-4 rounded-xl overflow-hidden">
-              {trait.image ? (
+              {identityItem.image ? (
                 <img
-                  src={trait.image}
-                  alt={trait.title}
+                  src={identityItem.image}
+                  alt={identityItem.title}
                   className="w-full h-full object-cover"
                   style={{
                     objectPosition:
-                      trait.title === "Formula 1 Enthusiast"
+                      identityItem.title === "Formula 1 Enthusiast"
                         ? "bottom right"
                         : "center",
                   }}
@@ -223,7 +223,7 @@ export default function TraitsCarousel({
                   }}
                 >
                   <span className="text-3xl sm:text-4xl md:text-6xl">
-                    {trait.emoji}
+                    {identityItem.emoji}
                   </span>
                 </div>
               )}
@@ -233,7 +233,7 @@ export default function TraitsCarousel({
             <div className="space-y-3 sm:space-y-2 md:space-y-3 relative z-10">
               <div className="flex items-center gap-3 sm:gap-2 md:gap-3">
                 <span className="text-2xl sm:text-xl md:text-2xl">
-                  {trait.emoji}
+                  {identityItem.emoji}
                 </span>
                 <h3
                   className="font-semibold text-base sm:text-sm md:text-base"
@@ -241,7 +241,7 @@ export default function TraitsCarousel({
                     color: isDark ? "rgb(255, 255, 255)" : "#000000",
                   }}
                 >
-                  {trait.title}
+                  {identityItem.title}
                 </h3>
               </div>
               <p
@@ -249,7 +249,7 @@ export default function TraitsCarousel({
                 style={{
                   color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
-                dangerouslySetInnerHTML={{ __html: trait.description }}
+                dangerouslySetInnerHTML={{ __html: identityItem.description }}
               />
             </div>
           </div>

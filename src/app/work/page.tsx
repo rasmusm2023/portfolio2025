@@ -149,8 +149,8 @@ export default function WorkPage() {
                 </div>
               </Link>
 
-              {/* Placeholder Case Study 1 */}
-              <Link href="/work-in-progress" className="group cursor-pointer">
+              {/* Noted Case Study - Password Protected */}
+              <Link href="/case-studies/noted" className="group cursor-pointer">
                 <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
                   {/* Noise background overlay */}
                   <div
@@ -183,20 +183,15 @@ export default function WorkPage() {
 
                   {/* Content */}
                   <div className="p-4 sm:p-6 pb-6 sm:pb-8 mt-auto mb-12 sm:mb-16 lg:mb-12">
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                      <span className="text-xs font-semibold text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-0 dark:bg-neutral-100 px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-neutral-20 dark:border-neutral-80 uppercase tracking-wider">
-                        Coming Soon
-                      </span>
-                    </div>
                     <div className="mb-3 sm:mb-4 flex flex-wrap gap-2">
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
                         2024
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        Product Designer
+                        Lead Product Designer
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        Mobile App
+                        Personal Project
                       </span>
                     </div>
                     <h3 className="text-xl sm:text-2xl xl:text-3xl font-bold text-neutral-80 dark:text-neutral-30 mb-2 sm:mb-3 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-colors">
@@ -204,7 +199,7 @@ export default function WorkPage() {
                     </h3>
                     <div className="flex items-end justify-between gap-3 sm:gap-4">
                       <p className="text-sm sm:text-base xl:text-lg text-neutral-60 dark:text-neutral-40 leading-relaxed flex-1 max-w-[calc(100%-4rem)]">
-                        Revolutionary design solution for modern challenges
+                        AI-powered note-taking app with intelligent features
                       </p>
                       <div className="w-12 h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center group-hover:scale-110 flex-shrink-0">
                         <svg
@@ -228,29 +223,32 @@ export default function WorkPage() {
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-neutral-100/10 via-neutral-100/5 to-neutral-100/10 dark:from-neutral-0/10 dark:via-neutral-0/5 dark:to-neutral-0/10 backdrop-blur-sm border-t border-neutral-100/20 dark:border-neutral-0/20 overflow-hidden h-8 sm:h-12 flex items-center">
                     <div className="flex animate-scroll">
                       <div className="flex space-x-4 whitespace-nowrap text-neutral-100/60 dark:text-neutral-0/60 text-xs font-bold uppercase tracking-wider">
-                        <span>Innovation</span>
+                        <span>AI-Powered</span>
                         <span>•</span>
-                        <span>Design System</span>
+                        <span>Note-Taking</span>
                         <span>•</span>
-                        <span>User Research</span>
+                        <span>Mobile App</span>
                         <span>•</span>
-                        <span>Prototyping</span>
+                        <span>UX/UI Design</span>
                         <span>•</span>
-                        <span>Innovation</span>
+                        <span>AI-Powered</span>
                         <span>•</span>
-                        <span>Design System</span>
+                        <span>Note-Taking</span>
                         <span>•</span>
-                        <span>User Research</span>
+                        <span>Mobile App</span>
                         <span>•</span>
-                        <span>Prototyping</span>
+                        <span>UX/UI Design</span>
                       </div>
                     </div>
                   </div>
                 </div>
               </Link>
 
-              {/* Placeholder Case Study 2 */}
-              <Link href="/work-in-progress" className="group cursor-pointer">
+              {/* Zmartrest AI Case Study - Password Protected */}
+              <Link
+                href="/case-studies/zmartrest-ai"
+                className="group cursor-pointer"
+              >
                 <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
                   {/* Noise background overlay */}
                   <div
@@ -283,17 +281,12 @@ export default function WorkPage() {
 
                   {/* Content */}
                   <div className="p-4 sm:p-6 pb-6 sm:pb-8 mt-auto mb-12 sm:mb-16 lg:mb-12">
-                    <div className="absolute top-3 sm:top-4 right-3 sm:right-4">
-                      <span className="text-xs font-semibold text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-0 dark:bg-neutral-100 px-3 sm:px-4 py-1 sm:py-2 rounded-full border border-neutral-20 dark:border-neutral-80 uppercase tracking-wider">
-                        Coming Soon
-                      </span>
-                    </div>
                     <div className="mb-3 sm:mb-4 flex flex-wrap gap-2">
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
                         2024
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        UX Researcher
+                        UX/UI Designer & Product Manager
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
                         Web Application
@@ -304,7 +297,8 @@ export default function WorkPage() {
                     </h3>
                     <div className="flex items-end justify-between gap-3 sm:gap-4">
                       <p className="text-sm sm:text-base xl:text-lg text-neutral-60 dark:text-neutral-40 leading-relaxed flex-1 max-w-[calc(100%-4rem)]">
-                        Innovative approach to user experience design
+                        AI-powered platform for intelligent decision making and
+                        data analysis
                       </p>
                       <div className="w-12 h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center group-hover:scale-110 flex-shrink-0">
                         <svg
@@ -328,21 +322,21 @@ export default function WorkPage() {
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-neutral-100/10 via-neutral-100/5 to-neutral-100/10 dark:from-neutral-0/10 dark:via-neutral-0/5 dark:to-neutral-0/10 backdrop-blur-sm border-t border-neutral-100/20 dark:border-neutral-0/20 overflow-hidden h-8 sm:h-12 flex items-center">
                     <div className="flex animate-scroll">
                       <div className="flex space-x-4 whitespace-nowrap text-neutral-100/60 dark:text-neutral-0/60 text-xs font-bold uppercase tracking-wider">
-                        <span>UX Strategy</span>
+                        <span>AI Platform</span>
                         <span>•</span>
-                        <span>Mobile Design</span>
+                        <span>Data Visualization</span>
                         <span>•</span>
-                        <span>Accessibility</span>
+                        <span>Machine Learning</span>
                         <span>•</span>
-                        <span>Performance</span>
+                        <span>Enterprise UX</span>
                         <span>•</span>
-                        <span>UX Strategy</span>
+                        <span>AI Platform</span>
                         <span>•</span>
-                        <span>Mobile Design</span>
+                        <span>Data Visualization</span>
                         <span>•</span>
-                        <span>Accessibility</span>
+                        <span>Machine Learning</span>
                         <span>•</span>
-                        <span>Performance</span>
+                        <span>Enterprise UX</span>
                       </div>
                     </div>
                   </div>

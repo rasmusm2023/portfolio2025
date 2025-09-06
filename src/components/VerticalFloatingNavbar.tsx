@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { createPortal } from "react-dom";
 import { useNavbar } from "@/contexts/NavbarContext";
 
 interface Section {
@@ -27,38 +28,13 @@ const VerticalFloatingNavbar = () => {
     setIsCaseStudyPage(pathname?.startsWith("/case-studies/") || false);
   }, [pathname]);
 
-  // Use portal to render navbar at body level
+  // State for portal mounting
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
-    if (!isCaseStudyPage) return;
-
-    const navbarElement = navbarRef.current;
-    if (navbarElement && document.body) {
-      // Only append if not already in body
-      if (navbarElement.parentElement !== document.body) {
-        // Remove from current parent if it exists
-        if (navbarElement.parentElement) {
-          try {
-            navbarElement.parentElement.removeChild(navbarElement);
-          } catch (error) {
-            // Element might have already been removed
-          }
-        }
-        // Append directly to body
-        document.body.appendChild(navbarElement);
-      }
-    }
-
-    return () => {
-      if (navbarElement && navbarElement.parentElement) {
-        try {
-          navbarElement.parentElement.removeChild(navbarElement);
-        } catch (error) {
-          // Element might have already been removed or moved
-          console.log("Navbar cleanup: Element already removed");
-        }
-      }
-    };
-  }, [isCaseStudyPage]);
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   // Update scroll progress and active group on scroll
   useEffect(() => {
@@ -189,8 +165,8 @@ const VerticalFloatingNavbar = () => {
     return "overview";
   };
 
-  // Don't render if not on a case study page
-  if (!isCaseStudyPage) {
+  // Don't render if not on a case study page or not mounted
+  if (!isCaseStudyPage || !mounted) {
     return null;
   }
 
@@ -255,7 +231,7 @@ const VerticalFloatingNavbar = () => {
     }
   };
 
-  return (
+  return createPortal(
     <div
       ref={navbarRef}
       className="hidden 2xl:flex fixed top-1/2 z-[1000] items-center w-18 transition-opacity duration-500"
@@ -302,7 +278,8 @@ const VerticalFloatingNavbar = () => {
           </button>
         ))}
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

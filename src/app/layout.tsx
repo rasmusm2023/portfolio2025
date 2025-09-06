@@ -8,7 +8,9 @@ import PerformanceOptimizer from "@/components/PerformanceOptimizer";
 import PerformanceMonitor from "@/components/PerformanceMonitor";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { NavbarProvider } from "@/contexts/NavbarContext";
+import { CaseStudyProvider } from "@/contexts/CaseStudyContext";
 import FloatingNavbar from "@/components/FloatingNavbar";
+import ErrorBoundary from "@/components/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
@@ -44,20 +46,27 @@ export default function RootLayout({
       <body
         className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300`}
       >
-        <ThemeProvider>
-          <NavbarProvider>
-            <PerformanceOptimizer />
-            <PerformanceMonitor />
-            <Header />
-            {/* <CustomCursor /> */}
-            <div id="smooth-wrapper" className="fixed inset-0 overflow-hidden">
-              <div id="smooth-content" className="relative">
-                <ClientLayout>{children}</ClientLayout>
-              </div>
-            </div>
-            <FloatingNavbar />
-          </NavbarProvider>
-        </ThemeProvider>
+        <ErrorBoundary>
+          <ThemeProvider>
+            <NavbarProvider>
+              <CaseStudyProvider>
+                <PerformanceOptimizer />
+                <PerformanceMonitor />
+                <Header />
+                {/* <CustomCursor /> */}
+                <div
+                  id="smooth-wrapper"
+                  className="fixed inset-0 overflow-hidden"
+                >
+                  <div id="smooth-content" className="relative">
+                    <ClientLayout>{children}</ClientLayout>
+                  </div>
+                </div>
+                <FloatingNavbar />
+              </CaseStudyProvider>
+            </NavbarProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

@@ -33,12 +33,55 @@ const Hero: React.FC<HeroProps> = ({
 }) => {
   const morphRef = useRef<HTMLButtonElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isVideoLoading, setIsVideoLoading] = useState(true);
+  const [videoError, setVideoError] = useState(false);
+  const [hasVideoPlayed, setHasVideoPlayed] = useState(false);
   const { isDark } = useTheme();
 
   const handleCaseStudiesClick = () => {
     // Navigate to Work page instead of home
     window.location.href = "/work";
   };
+
+  // Loading Animation Component
+  const LoadingAnimation = () => (
+    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900 dark:to-purple-800 rounded-xl lg:rounded-2xl">
+      <div className="flex flex-col items-center gap-4">
+        {/* Spinning loader */}
+        <div className="relative">
+          <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+          <div
+            className="absolute inset-0 w-12 h-12 border-4 border-transparent border-t-purple-400 rounded-full animate-spin"
+            style={{ animationDirection: "reverse", animationDuration: "0.8s" }}
+          ></div>
+        </div>
+
+        {/* Loading text */}
+        <div className="text-center">
+          <p className="text-white/90 text-sm font-medium mb-1">
+            Loading video
+          </p>
+          <p className="text-white/70 text-xs">Please wait...</p>
+        </div>
+
+        {/* Progress dots */}
+        <div className="flex gap-1">
+          <div
+            className="w-2 h-2 bg-white/60 rounded-full animate-pulse"
+            style={{ animationDelay: "0s" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-white/60 rounded-full animate-pulse"
+            style={{ animationDelay: "0.2s" }}
+          ></div>
+          <div
+            className="w-2 h-2 bg-white/60 rounded-full animate-pulse"
+            style={{ animationDelay: "0.4s" }}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
 
   // GSAP Morphing Effect
   useEffect(() => {
@@ -104,6 +147,35 @@ const Hero: React.FC<HeroProps> = ({
       morphContainer.removeEventListener("mouseenter", handleMouseEnter);
       morphContainer.removeEventListener("mouseleave", handleMouseLeave);
       morphTimeline.kill();
+    };
+  }, []);
+
+  // Video control effect to prevent looping
+  useEffect(() => {
+    const video = document.querySelector("video");
+    if (!video) return;
+
+    const handleTimeUpdate = () => {
+      // If video is near the end, pause it to prevent looping
+      if (video.currentTime >= video.duration - 0.1) {
+        video.pause();
+        video.currentTime = video.duration;
+      }
+    };
+
+    const handleSeeked = () => {
+      // If video is seeked to the end, pause it
+      if (video.currentTime >= video.duration - 0.1) {
+        video.pause();
+      }
+    };
+
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("seeked", handleSeeked);
+
+    return () => {
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("seeked", handleSeeked);
     };
   }, []);
 
@@ -318,6 +390,38 @@ const Hero: React.FC<HeroProps> = ({
           {/* Video Container - Responsive sizing */}
           <div className="flex-1 flex items-center justify-center relative">
             <div className="relative w-full max-w-full lg:max-w-[900px] h-[470px] sm:h-[500px] lg:h-[600px] rounded-xl lg:rounded-2xl overflow-hidden transition-all duration-500 ease-out">
+              {/* Loading Animation */}
+              {isVideoLoading && !videoError && <LoadingAnimation />}
+
+              {/* Error State */}
+              {videoError && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 rounded-xl lg:rounded-2xl">
+                  <div className="text-center">
+                    <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                      <svg
+                        className="w-6 h-6 text-red-500"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+                        />
+                      </svg>
+                    </div>
+                    <p className="text-white/90 text-sm font-medium mb-1">
+                      Video failed to load
+                    </p>
+                    <p className="text-white/70 text-xs">
+                      Please refresh the page
+                    </p>
+                  </div>
+                </div>
+              )}
+
               {/* Single Video */}
               <video
                 className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-1000 video-bobbing"
@@ -326,6 +430,11 @@ const Hero: React.FC<HeroProps> = ({
                 playsInline
                 controls={false}
                 autoPlay={true}
+                preload="metadata"
+                onLoadStart={() => {
+                  setIsVideoLoading(true);
+                  setVideoError(false);
+                }}
                 onLoadedMetadata={(e) => {
                   const video = e.target as HTMLVideoElement;
                   video.playbackRate = 4.0;
@@ -333,12 +442,14 @@ const Hero: React.FC<HeroProps> = ({
                 onCanPlay={(e) => {
                   const video = e.target as HTMLVideoElement;
                   video.playbackRate = 4.0;
-                  // Try to play immediately when ready
-                  if (video.paused) {
+                  // Only try to play if video hasn't played yet
+                  if (video.paused && !hasVideoPlayed) {
                     video.play().catch(() => {
                       // If autoplay fails, play on first user interaction
                       const playOnInteraction = () => {
-                        video.play();
+                        if (!hasVideoPlayed) {
+                          video.play();
+                        }
                         document.removeEventListener(
                           "click",
                           playOnInteraction
@@ -358,10 +469,19 @@ const Hero: React.FC<HeroProps> = ({
                   video.playbackRate = 4.0;
                   // Fade in the video when it starts playing
                   video.style.opacity = "1";
+                  setIsVideoLoading(false);
+                  setHasVideoPlayed(true);
+                }}
+                onError={() => {
+                  setVideoError(true);
+                  setIsVideoLoading(false);
                 }}
                 onEnded={(e) => {
                   const video = e.target as HTMLVideoElement;
-                  // Video ended - could add any end-of-video logic here if needed
+                  // Video ended - ensure it stays at the end and doesn't restart
+                  video.currentTime = video.duration;
+                  // Remove autoplay to prevent restart
+                  video.removeAttribute("autoplay");
                 }}
               >
                 <source
