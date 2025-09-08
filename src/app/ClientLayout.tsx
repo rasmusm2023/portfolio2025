@@ -4,11 +4,9 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 // Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function ClientLayout({
   children,
@@ -19,9 +17,6 @@ export default function ClientLayout({
   const contentRef = useRef<HTMLDivElement>(null);
   const isFirstLoad = useRef(true);
 
-  // Initialize smooth scrolling
-  useSmoothScroll();
-
   useEffect(() => {
     // Skip animation on first load for better performance
     if (isFirstLoad.current) {
@@ -29,16 +24,9 @@ export default function ClientLayout({
       return;
     }
 
-    // Scroll to top on page navigation
+    // Scroll to top on page navigation with smooth behavior
     const scrollToTop = () => {
-      const smoother = ScrollSmoother.get();
-      if (smoother && window.innerWidth >= 1024) {
-        // Use smooth scrolling only on desktop
-        smoother.scrollTo(0);
-      } else {
-        // Use native smooth scroll for mobile/tablet
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // Scroll to top immediately when pathname changes

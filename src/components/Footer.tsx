@@ -243,9 +243,16 @@ const Footer = () => {
                       Rasmus Mattsson
                     </span>
                   </div>
-                  <p className="text-neutral-60 text-sm lg:text-base leading-relaxed max-w-md font-medium">
-                    UX/UI Designer & Low-code Developer crafting digital
-                    experiences that bridge creativity with technology.
+                  <p className="text-neutral-60 text-xs lg:text-sm leading-relaxed max-w-md font-medium">
+                    I design & develop digital solutions with a passion for
+                    creating experiences that stand out and make a difference.
+                  </p>
+                  <p className="text-neutral-60 text-xs lg:text-sm leading-relaxed max-w-md font-medium mt-2">
+                    I specialize in UX/UI design and frontend development using
+                    tools like Cursor and Framer to get the job done. Whether
+                    you call it low-code, vibe coding, or something else
+                    entirely, I enjoy tackling the full journey from concept to
+                    completion.
                   </p>
                 </div>
 

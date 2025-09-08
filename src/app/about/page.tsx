@@ -634,9 +634,9 @@ export default function AboutPage() {
                       ref={descriptionRef}
                       className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                     >
-                      I am a passionate designer and developer with a love for
-                      creating beautiful, functional experiences that make a
-                      difference.
+                      I am a passionate digital designer and low-code developer
+                      with a love for creating beautiful, functional experiences
+                      that make a difference.
                     </p>
                     <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg lg:text-xl font-semibold leading-loose tracking-wide mt-6 sm:mt-8">
                       — with an{" "}
@@ -681,9 +681,149 @@ export default function AboutPage() {
           <section className="py-8 sm:py-12 lg:py-16 relative">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
-                {/* Personal Identity - Large section */}
+                {/* About Me - Copy 1 - 50% width */}
                 <div
-                  className="md:col-span-1 lg:col-span-5 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("about1")})`,
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
+                  }}
+                  onMouseEnter={() => setHoveredBox("about1")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between -mt-2">
+                    <h2
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                      }}
+                    >
+                      RASMUS.TXT
+                    </h2>
+                    <Image
+                      src="/icons/3dicons-boy-dynamic-premium.png"
+                      alt="Rasmus"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                    />
+                  </div>
+                  <div className="mt-4 sm:mt-6">
+                    <p
+                      className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      I'm a happy Swedish guy who loves good food, great music,
+                      gaming, designing, brainstorming, and spending quality
+                      time with my family, friends, and girlfriend. I design &
+                      develop digital solutions with a passion for creating
+                      experiences that stand out and make a difference.
+                    </p>
+                    <p
+                      className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      I specialize in UX/UI design and frontend development
+                      using tools like Cursor and Framer to get the job done.
+                      Whether you call it low-code, vibe coding, or something
+                      else entirely, I enjoy tackling the full journey from
+                      concept to completion.
+                    </p>
+                  </div>
+                </div>
+
+                {/* About Me - Copy 2 - 50% width */}
+                <div
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  style={{
+                    transform: `scale(${getBoxScale("about2")})`,
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
+                  }}
+                  onMouseEnter={() => setHoveredBox("about2")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                    }}
+                  ></div>
+                  <div className="flex items-center justify-between -mt-2">
+                    <h2
+                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
+                      style={{
+                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                      }}
+                    >
+                      BACKGROUND
+                    </h2>
+                    <Image
+                      src="/icons/3dicons-bulb-dynamic-premium.png"
+                      alt="About Me"
+                      width={60}
+                      height={60}
+                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                    />
+                  </div>
+                  <div className="mt-4 sm:mt-6">
+                    <p
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      I believe in the power of thoughtful design to solve real
+                      problems and create meaningful experiences.
+                    </p>
+                    <p
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      My background spans design systems, prototypes, and
+                      front-end development, blending creativity with structure.
+                      Whether it's simplifying dashboards, designing AI-driven
+                      tools like Emplojd, or crafting features that build user
+                      confidence, I aim to make digital experiences accessible
+                      and enjoyable.
+                    </p>
+                    <p
+                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                      style={{
+                        color: isDark ? "#A7A7A7" : "#5D5E63",
+                      }}
+                    >
+                      Outside of work, you'll often find me gaming, exploring
+                      new tech, or experimenting with side projects that fuel my
+                      curiosity and creativity.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Personal Identity - Full width section */}
+                <div
+                  className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
                   style={{
                     transform: `scale(${getBoxScale("identity")})`,
                     backgroundColor: isDark
@@ -782,85 +922,16 @@ export default function AboutPage() {
                           emoji: "🏎️",
                           image: Formula1Image.src,
                         },
+                        {
+                          title: "Avid Gamer",
+                          description:
+                            "I love gaming and exploring virtual worlds. From strategy games to action RPGs, gaming fuels my creativity and problem-solving skills.",
+                          emoji: "🎮",
+                          image:
+                            "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=400&fit=crop&crop=center",
+                        },
                       ]}
                     />
-                  </div>
-                </div>
-
-                {/* About Me - Medium section */}
-                <div
-                  className="md:col-span-1 lg:col-span-3 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
-                  style={{
-                    transform: `scale(${getBoxScale("about")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
-                  }}
-                  onMouseEnter={() => setHoveredBox("about")}
-                  onMouseLeave={() => setHoveredBox(null)}
-                >
-                  {/* Radial shine effect */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                    style={{
-                      background: isDark
-                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
-                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
-                    }}
-                  ></div>
-                  <div className="flex items-center justify-between -mt-2">
-                    <h2
-                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
-                    >
-                      Who am I?
-                    </h2>
-                    <Image
-                      src="/icons/3dicons-bulb-dynamic-premium.png"
-                      alt="About Me"
-                      width={60}
-                      height={60}
-                      className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
-                    />
-                  </div>
-                  <div className="mt-4 sm:mt-6">
-                    <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
-                      style={{
-                        color: isDark ? "#A7A7A7" : "#5D5E63",
-                      }}
-                    >
-                      Hi! I'm Rasmus, an introverted yet outgoing UX/UI and
-                      Product Designer with a love for creating beautiful,
-                      functional experiences that make a difference. I believe
-                      in the power of thoughtful design to solve real problems
-                      and create meaningful connections.
-                    </p>
-                    <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
-                      style={{
-                        color: isDark ? "#A7A7A7" : "#5D5E63",
-                      }}
-                    >
-                      My background spans design systems, prototypes, and
-                      front-end development, blending creativity with structure.
-                      Whether it's simplifying dashboards, designing AI-driven
-                      tools like Emplojd, or crafting features that build user
-                      confidence, I aim to make digital experiences accessible
-                      and enjoyable.
-                    </p>
-                    <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
-                      style={{
-                        color: isDark ? "#A7A7A7" : "#5D5E63",
-                      }}
-                    >
-                      Outside of work, you'll often find me gaming, exploring
-                      new tech, or experimenting with side projects that fuel my
-                      curiosity and creativity.
-                    </p>
                   </div>
                 </div>
 

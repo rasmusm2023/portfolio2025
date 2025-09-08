@@ -1,25 +1,39 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { MagnifyingGlass, X, Play, Pause } from "@phosphor-icons/react";
 import gsap from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollSmoother);
+// Extend HTMLVideoElement to include custom properties
+declare global {
+  interface HTMLVideoElement {
+    _customCursorListeners?: {
+      handlePlay: () => void;
+      handlePause: () => void;
+    };
+  }
+
+  interface Window {
+    _customCursorGlobalListener?: boolean;
+  }
+}
+
+// Simple approach - no global state
 
 const CustomCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [lastClientPosition, setLastClientPosition] = useState({ x: 0, y: 0 });
+  const pathname = usePathname();
   const [isHovering, setIsHovering] = useState(false);
   const [hoverTarget, setHoverTarget] = useState<string | null>(null);
   const [prototypeVideoState, setPrototypeVideoState] =
     useState<string>("playing");
   const [backgroundColor, setBackgroundColor] = useState(
-    "rgba(255, 255, 255, 0.8)"
+    "rgba(139, 92, 246, 0.8)"
   );
-  const mousePositionRef = useRef({ x: 0, y: 0 });
-  const lastClientPositionRef = useRef({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const cursorInnerRef = useRef<HTMLDivElement>(null);
+  const mousePosition = useRef({ x: 0, y: 0 });
+  const isVisible = useRef(false);
 
   // Function to update prototype video state
   const updatePrototypeVideoState = () => {
@@ -97,201 +111,107 @@ const CustomCursor = () => {
     }
   };
 
+  // Reset cursor state when pathname changes (route navigation)
   useEffect(() => {
-    // Set up MutationObserver to watch for video state changes
-    const observer = new MutationObserver((mutations) => {
-      console.log("MutationObserver detected changes:", mutations);
-      mutations.forEach((mutation) => {
-        if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "data-video-state"
-        ) {
-          console.log("Video state attribute changed:", mutation);
-          updatePrototypeVideoState();
-        }
-      });
+    setIsHovering(false);
+    setHoverTarget(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!cursorRef.current) return;
+
+    // GSAP mouse tracking - much more reliable
+    const cursor = cursorRef.current;
+
+    // Set initial position
+    gsap.set(cursor, {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+      opacity: 0,
     });
 
-    // Start observing the document for attribute changes
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["data-video-state"],
-      subtree: true,
-    });
+    // Mouse move handler
+    const handleMouseMove = (e: MouseEvent) => {
+      // Use page coordinates to include scroll offset
+      mousePosition.current = { x: e.pageX, y: e.pageY };
+      isVisible.current = true;
 
-    // Periodic check as fallback to ensure video state stays in sync
-    const periodicCheck = setInterval(() => {
-      if (hoverTarget === "prototype-active") {
-        updatePrototypeVideoState();
-      }
-    }, 100); // Check every 100ms when hovering over prototype
-
-    // Set up video event listeners for all videos in the document
-    const setupVideoListeners = () => {
-      const videos = document.querySelectorAll("video");
-      videos.forEach((video) => {
-        const handlePlay = () => {
-          console.log("Video play event detected");
-          if (hoverTarget === "prototype-active") {
-            updatePrototypeVideoState();
-          }
-        };
-        const handlePause = () => {
-          console.log("Video pause event detected");
-          if (hoverTarget === "prototype-active") {
-            updatePrototypeVideoState();
-          }
-        };
-
-        video.addEventListener("play", handlePlay);
-        video.addEventListener("pause", handlePause);
-
-        // Store listeners for cleanup
-        video._customCursorListeners = { handlePlay, handlePause };
-      });
-    };
-
-    // Initial setup
-    setupVideoListeners();
-
-    // Watch for new videos being added to the DOM
-    const videoObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node.nodeType === Node.ELEMENT_NODE) {
-            const element = node as Element;
-            if (element.tagName === "VIDEO") {
-              console.log("New video detected, setting up listeners");
-              setupVideoListeners();
-            }
-          }
-        });
-      });
-    });
-
-    videoObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
-
-    const updateMousePosition = (e: MouseEvent) => {
-      const newClientPos = { x: e.clientX, y: e.clientY };
-
-      // Get the ScrollSmoother instance (only available on desktop)
-      const smoother = ScrollSmoother.get();
-
-      let newPagePos;
-      if (smoother && window.innerWidth >= 1024) {
-        // Use the smooth scroll position only on desktop
-        const smoothScrollY = smoother.scrollTop();
-        newPagePos = {
-          x: e.clientX,
-          y: e.clientY + smoothScrollY,
-        };
-      } else {
-        // Use native scroll position for mobile/tablet
-        newPagePos = { x: e.pageX, y: e.pageY };
-      }
-
-      setLastClientPosition(newClientPos);
-      setMousePosition(newPagePos);
-      lastClientPositionRef.current = newClientPos;
-      mousePositionRef.current = newPagePos;
-
-      // Update background color based on what's beneath the cursor
+      // Update background color (still use clientX/Y for element detection)
       if (!hoverTarget) {
         const newColor = getColorAtPosition(e.clientX, e.clientY);
         setBackgroundColor(newColor);
       }
     };
 
-    const updatePositionOnScroll = () => {
-      // Get the ScrollSmoother instance (only available on desktop)
-      const smoother = ScrollSmoother.get();
+    // GSAP animation for smooth cursor following
+    const updateCursor = () => {
+      if (isVisible.current && cursor) {
+        // Different offsets based on hover target
+        let offsetX = 20;
+        let offsetY = 20;
 
-      if (smoother && window.innerWidth >= 1024) {
-        // Use the smooth scroll position only on desktop
-        const smoothScrollY = smoother.scrollTop();
-        const newPagePos = {
-          x: lastClientPositionRef.current.x,
-          y: lastClientPositionRef.current.y + smoothScrollY,
-        };
-        setMousePosition(newPagePos);
-        mousePositionRef.current = newPagePos;
-      } else {
-        // Use native scroll position for mobile/tablet
-        const newPagePos = {
-          x: lastClientPositionRef.current.x + window.scrollX,
-          y: lastClientPositionRef.current.y + window.scrollY,
-        };
-        setMousePosition(newPagePos);
-        mousePositionRef.current = newPagePos;
+        if (hoverTarget && hoverTarget.includes("card")) {
+          offsetX = 80;
+        }
+
+        gsap.to(cursor, {
+          x: mousePosition.current.x + offsetX,
+          y: mousePosition.current.y + offsetY,
+          opacity: 1,
+          duration: 0.1,
+          ease: "power2.out",
+        });
       }
     };
 
-    // Continuous update function for smooth cursor following during scroll
-    const continuousUpdate = () => {
-      const smoother = ScrollSmoother.get();
-      if (smoother && window.innerWidth >= 1024) {
-        const smoothScrollY = smoother.scrollTop();
-        const newPagePos = {
-          x: lastClientPositionRef.current.x,
-          y: lastClientPositionRef.current.y + smoothScrollY,
-        };
-        setMousePosition(newPagePos);
-        mousePositionRef.current = newPagePos;
+    // Start the animation loop
+    const animationId = gsap.ticker.add(updateCursor);
+
+    // Add event listeners
+    window.addEventListener("mousemove", handleMouseMove);
+
+    // Handle scroll to update cursor position
+    const handleScroll = () => {
+      // Update cursor position based on current scroll
+      if (isVisible.current && cursor) {
+        // Different offsets based on hover target
+        let offsetX = 20;
+        let offsetY = 20;
+
+        if (hoverTarget && hoverTarget.includes("card")) {
+          offsetX = 80;
+        }
+
+        gsap.to(cursor, {
+          x: mousePosition.current.x + offsetX,
+          y: mousePosition.current.y + offsetY,
+          duration: 0.1,
+          ease: "power2.out",
+        });
       }
     };
 
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    // Hover detection
     const handleMouseEnter = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
 
-      // Check for different hover targets
       if (target.closest("[data-tooltip='prototype-active']")) {
         setHoverTarget("prototype-active");
         setIsHovering(true);
-        updatePrototypeVideoState(); // Update video state when hovering
-        console.log("Hovering over prototype-active, updating video state");
+        updatePrototypeVideoState();
       } else if (target.closest(".project-showcase-card")) {
         setHoverTarget("project-card");
         setIsHovering(true);
       } else if (target.closest(".case-study-card")) {
         setHoverTarget("case-study-card");
         setIsHovering(true);
-      } else if (
-        target.closest(".group\\/card") &&
-        target.closest("[data-tooltip='Swipe']")
-      ) {
-        setHoverTarget("traits-card");
-        setIsHovering(true);
-      } else if (target.closest("[data-tooltip='Open My Spotify']")) {
-        setHoverTarget("spotify-card");
-        setIsHovering(true);
-      } else if (target.closest("[data-tooltip='View Reading List']")) {
-        setHoverTarget("reading-card");
-        setIsHovering(true);
-      } else if (target.closest("[data-tooltip='AI-creativity slider']")) {
-        setHoverTarget("tooltip");
-        setIsHovering(true);
-      } else if (target.closest(".gallery-image")) {
-        setHoverTarget("gallery-image");
-        setIsHovering(true);
-      } else if (
-        target.closest(".lightbox-backdrop") &&
-        !target.closest(".lightbox-image-container") &&
-        !target.closest(".lightbox-close-btn")
-      ) {
-        setHoverTarget("lightbox-close");
-        setIsHovering(true);
       } else if (target.closest("button")) {
         setHoverTarget("button");
         setIsHovering(true);
       } else if (target.closest("a")) {
         setHoverTarget("link");
-        setIsHovering(true);
-      } else if (target.closest("button") || target.closest("a")) {
-        // Only show large circle for actual interactive elements
-        setHoverTarget("card");
         setIsHovering(true);
       } else {
         setHoverTarget(null);
@@ -304,89 +224,18 @@ const CustomCursor = () => {
       setHoverTarget(null);
     };
 
-    let scrollAnimationId: number | null = null;
-    let isScrolling = false;
-    let continuousUpdateId: number | null = null;
-
-    const handleScroll = () => {
-      if (!isScrolling) {
-        isScrolling = true;
-
-        // Start continuous updates during scroll
-        const startContinuousUpdate = () => {
-          continuousUpdate();
-          continuousUpdateId = requestAnimationFrame(startContinuousUpdate);
-        };
-        startContinuousUpdate();
-      }
-
-      if (scrollAnimationId) {
-        cancelAnimationFrame(scrollAnimationId);
-      }
-
-      scrollAnimationId = requestAnimationFrame(() => {
-        updatePositionOnScroll();
-        isScrolling = false;
-
-        // Stop continuous updates after scroll ends
-        if (continuousUpdateId) {
-          cancelAnimationFrame(continuousUpdateId);
-          continuousUpdateId = null;
-        }
-      });
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    window.addEventListener("scroll", handleScroll, { passive: true });
     document.addEventListener("mouseover", handleMouseEnter);
     document.addEventListener("mouseout", handleMouseLeave);
 
     return () => {
-      try {
-        window.removeEventListener("mousemove", updateMousePosition);
-        window.removeEventListener("scroll", handleScroll);
-        document.removeEventListener("mouseover", handleMouseEnter);
-        document.removeEventListener("mouseout", handleMouseLeave);
+      // Clean up GSAP animation
+      gsap.ticker.remove(animationId);
 
-        if (scrollAnimationId) {
-          cancelAnimationFrame(scrollAnimationId);
-        }
-        if (continuousUpdateId) {
-          cancelAnimationFrame(continuousUpdateId);
-        }
-
-        if (observer) {
-          observer.disconnect();
-        }
-        if (periodicCheck) {
-          clearInterval(periodicCheck);
-        }
-        if (videoObserver) {
-          videoObserver.disconnect();
-        }
-
-        // Clean up video event listeners with error handling
-        try {
-          const videos = document.querySelectorAll("video");
-          videos.forEach((video) => {
-            if (video._customCursorListeners) {
-              video.removeEventListener(
-                "play",
-                video._customCursorListeners.handlePlay
-              );
-              video.removeEventListener(
-                "pause",
-                video._customCursorListeners.handlePause
-              );
-              delete video._customCursorListeners;
-            }
-          });
-        } catch (error) {
-          console.warn("Error cleaning up video listeners:", error);
-        }
-      } catch (error) {
-        console.warn("Error during CustomCursor cleanup:", error);
-      }
+      // Clean up event listeners
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("mouseover", handleMouseEnter);
+      document.removeEventListener("mouseout", handleMouseLeave);
     };
   }, [hoverTarget]);
 
@@ -398,19 +247,19 @@ const CustomCursor = () => {
 
     const baseStyle = {
       position: "fixed" as const,
-      left: mousePosition.x + 20, // Offset from actual cursor
-      top: mousePosition.y + 20, // Offset from actual cursor
+      left: 0, // Offset from actual cursor
+      top: 0, // Offset from actual cursor
       pointerEvents: "none" as const,
       zIndex: 99999,
-      transition: "all 0.1s ease-out",
+      transform: "translate(-50%, -50%)", // Center the cursor
     };
 
     switch (hoverTarget) {
       case "prototype-active":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "120px", // Same size as other cursor pills
           height: "36px", // Same height as other cursor pills
           borderRadius: "18px", // Same as other cursor pills
@@ -428,8 +277,8 @@ const CustomCursor = () => {
       case "project-card":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "120px",
           height: "36px",
           borderRadius: "18px",
@@ -448,8 +297,8 @@ const CustomCursor = () => {
       case "case-study-card":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "100px",
           height: "36px",
           borderRadius: "18px",
@@ -468,8 +317,8 @@ const CustomCursor = () => {
       case "traits-card":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "120px",
           height: "36px",
           borderRadius: "18px",
@@ -488,8 +337,8 @@ const CustomCursor = () => {
       case "spotify-card":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "160px",
           height: "36px",
           borderRadius: "18px",
@@ -508,8 +357,8 @@ const CustomCursor = () => {
       case "reading-card":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "160px",
           height: "36px",
           borderRadius: "18px",
@@ -528,8 +377,8 @@ const CustomCursor = () => {
       case "gallery-image":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "140px",
           height: "36px",
           borderRadius: "18px",
@@ -548,8 +397,8 @@ const CustomCursor = () => {
       case "lightbox-close":
         return {
           ...baseStyle,
-          left: mousePosition.x + 80, // More offset to the right
-          top: mousePosition.y + 20, // Offset like default cursor
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "140px",
           height: "36px",
           borderRadius: "18px",
@@ -568,8 +417,8 @@ const CustomCursor = () => {
       case "button":
         return {
           ...baseStyle,
-          left: mousePosition.x, // Center perfectly
-          top: mousePosition.y, // Center perfectly
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "84px",
           height: "84px",
           borderRadius: "50%",
@@ -580,8 +429,8 @@ const CustomCursor = () => {
       case "link":
         return {
           ...baseStyle,
-          left: mousePosition.x, // Center perfectly
-          top: mousePosition.y, // Center perfectly
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "84px",
           height: "84px",
           borderRadius: "50%",
@@ -596,8 +445,8 @@ const CustomCursor = () => {
       case "card":
         return {
           ...baseStyle,
-          left: mousePosition.x, // Center perfectly
-          top: mousePosition.y, // Center perfectly
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "84px",
           height: "84px",
           borderRadius: "50%",
@@ -608,8 +457,8 @@ const CustomCursor = () => {
       case "tooltip":
         return {
           ...baseStyle,
-          left: mousePosition.x, // Center perfectly
-          top: mousePosition.y, // Center perfectly
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "84px",
           height: "84px",
           borderRadius: "50%",
@@ -625,12 +474,12 @@ const CustomCursor = () => {
       default:
         return {
           ...baseStyle,
+          left: 0, // GSAP handles positioning
+          top: 0, // GSAP handles positioning
           width: "12px",
           height: "12px",
           borderRadius: "50%",
-          backgroundColor: isDarkMode
-            ? backgroundColor
-            : "rgba(35, 35, 35, 0.8)", // Dark color in light mode
+          backgroundColor: backgroundColor,
           transform: "translate(-50%, -50%)",
         };
     }
@@ -640,7 +489,7 @@ const CustomCursor = () => {
 
   return (
     <div className="hidden lg:block">
-      <div style={cursorStyle} className="custom-cursor">
+      <div ref={cursorRef} style={cursorStyle} className="custom-cursor">
         {hoverTarget === "prototype-active" &&
           (prototypeVideoState === "playing" ? (
             <>

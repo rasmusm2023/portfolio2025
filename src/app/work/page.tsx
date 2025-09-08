@@ -99,8 +99,9 @@ export default function WorkPage() {
                     ref={descriptionRef}
                     className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                   >
-                    Projects that quickly show how I solve problems and make
-                    great user experiences happen.
+                    This is a selection of projects to showcase my design
+                    process. Moving from clear problem statements to meaningful
+                    solutions with a focus on process, impact and learnings.
                   </p>
                 </div>
                 <div className="lg:ml-8 mt-4 lg:mt-0">

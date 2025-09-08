@@ -54,14 +54,7 @@ export default function RootLayout({
                 <PerformanceMonitor />
                 <Header />
                 {/* <CustomCursor /> */}
-                <div
-                  id="smooth-wrapper"
-                  className="fixed inset-0 overflow-hidden"
-                >
-                  <div id="smooth-content" className="relative">
-                    <ClientLayout>{children}</ClientLayout>
-                  </div>
-                </div>
+                <ClientLayout>{children}</ClientLayout>
                 <FloatingNavbar />
               </CaseStudyProvider>
             </NavbarProvider>
