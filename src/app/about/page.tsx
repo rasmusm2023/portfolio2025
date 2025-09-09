@@ -634,9 +634,9 @@ export default function AboutPage() {
                       ref={descriptionRef}
                       className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                     >
-                      I am a passionate digital designer and low-code developer
-                      with a love for creating beautiful, functional experiences
-                      that make a difference.
+                      I am a digital designer and low-code developer with a
+                      passion for creating beautiful, seamless experiences that
+                      make a difference.
                     </p>
                     <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg lg:text-xl font-semibold leading-loose tracking-wide mt-6 sm:mt-8">
                       — with an{" "}
@@ -683,7 +683,7 @@ export default function AboutPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
                 {/* About Me - Copy 1 - 50% width */}
                 <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about1")})`,
                     backgroundColor: isDark
@@ -702,7 +702,7 @@ export default function AboutPage() {
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between -mt-2">
+                  <div className="flex items-center justify-between -mt-2 relative z-10">
                     <h2
                       className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
@@ -719,18 +719,19 @@ export default function AboutPage() {
                       className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
-                  <div className="mt-4 sm:mt-6">
+                  <div className="mt-4 sm:mt-6 relative z-10">
                     <p
                       className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      I'm a happy Swedish guy who loves good food, great music,
-                      gaming, designing, brainstorming, and spending quality
-                      time with my family, friends, and girlfriend. I design &
-                      develop digital solutions with a passion for creating
-                      experiences that stand out and make a difference.
+                      I'm a jubilant guy who appreciates tasty food, good music,
+                      cozy gaming, designing, brainstorming, and spending
+                      quality time with my family, friends, and girlfriend. I
+                      design & develop digital solutions with a passion for
+                      creating experiences that are seamless and make a
+                      difference.
                     </p>
                     <p
                       className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
@@ -739,17 +740,17 @@ export default function AboutPage() {
                       }}
                     >
                       I specialize in UX/UI design and frontend development
-                      using tools like Cursor and Framer to get the job done.
+                      using tools like Figma and Cursor to get the job done.
                       Whether you call it low-code, vibe coding, or something
                       else entirely, I enjoy tackling the full journey from
-                      concept to completion.
+                      concept to finished product.
                     </p>
                   </div>
                 </div>
 
                 {/* About Me - Copy 2 - 50% width */}
                 <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about2")})`,
                     backgroundColor: isDark
@@ -768,7 +769,7 @@ export default function AboutPage() {
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between -mt-2">
+                  <div className="flex items-center justify-between -mt-2 relative z-10">
                     <h2
                       className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
@@ -778,14 +779,14 @@ export default function AboutPage() {
                       BACKGROUND
                     </h2>
                     <Image
-                      src="/icons/3dicons-bulb-dynamic-premium.png"
+                      src="/icons/3dicons-notebook-dynamic-premium.png"
                       alt="About Me"
                       width={60}
                       height={60}
                       className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
-                  <div className="mt-4 sm:mt-6">
+                  <div className="mt-4 sm:mt-6 relative z-10">
                     <p
                       className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
                       style={{
@@ -823,7 +824,7 @@ export default function AboutPage() {
 
                 {/* Personal Identity - Full width section */}
                 <div
-                  className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group [background-size:20px_20px] [background-image:radial-gradient(rgba(0,0,0,0.15)_1px,transparent_1px)] dark:[background-image:radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)]"
+                  className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("identity")})`,
                     backgroundColor: isDark
@@ -842,7 +843,7 @@ export default function AboutPage() {
                         : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
                     }}
                   ></div>
-                  <div className="flex items-center justify-between -mt-2">
+                  <div className="flex items-center justify-between -mt-2 relative z-10">
                     <h2
                       className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
                       style={{
@@ -859,7 +860,7 @@ export default function AboutPage() {
                       className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
                     />
                   </div>
-                  <div className="mt-8">
+                  <div className="mt-8 relative z-10">
                     <IdentityCarousel
                       isDark={isDark}
                       identity={[

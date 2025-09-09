@@ -245,14 +245,15 @@ const Footer = () => {
                   </div>
                   <p className="text-neutral-60 text-xs lg:text-sm leading-relaxed max-w-md font-medium">
                     I design & develop digital solutions with a passion for
-                    creating experiences that stand out and make a difference.
+                    creating experiences that are seamless and make a
+                    difference.
                   </p>
                   <p className="text-neutral-60 text-xs lg:text-sm leading-relaxed max-w-md font-medium mt-2">
                     I specialize in UX/UI design and frontend development using
-                    tools like Cursor and Framer to get the job done. Whether
-                    you call it low-code, vibe coding, or something else
-                    entirely, I enjoy tackling the full journey from concept to
-                    completion.
+                    tools like Figma and Cursor to get the job done. Whether you
+                    call it low-code, vibe coding, or something else entirely, I
+                    enjoy tackling the full journey from concept to finished
+                    product.
                   </p>
                 </div>
 
@@ -260,7 +261,7 @@ const Footer = () => {
                   {/* Resume Button - Above social links on mobile/tablet */}
                   <div className="flex justify-start xl:justify-end order-1 xl:order-2 w-full xl:w-auto">
                     <a
-                      href="https://drive.google.com/file/d/1FIODpbn55vPLMo3S6V_QNMaX6SojM7kr/view"
+                      href="https://drive.google.com/file/d/1nBqJfxCTopTvxbCOF55PYTeBauGoKaBB/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full xl:w-auto text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
