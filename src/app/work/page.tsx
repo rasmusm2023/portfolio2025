@@ -4,6 +4,7 @@ import CustomCursor from "@/components/CustomCursor";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import Footer from "@/components/Footer";
 import AnimatedBlob from "@/components/AnimatedBlob";
+import CircularScrollText from "@/components/CircularScrollText";
 import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
 import { useEffect, useRef } from "react";
@@ -20,16 +21,25 @@ export default function WorkPage() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLSpanElement>(null);
+  const circularTextRef = useRef<HTMLDivElement>(null);
 
   // Hero entrance animation
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.1 });
 
     // Set initial states
-    gsap.set([titleRef.current, descriptionRef.current, subtitleRef.current], {
-      opacity: 0,
-      y: 30,
-    });
+    gsap.set(
+      [
+        titleRef.current,
+        descriptionRef.current,
+        subtitleRef.current,
+        circularTextRef.current,
+      ],
+      {
+        opacity: 0,
+        y: 30,
+      }
+    );
 
     // Animate elements in sequence
     tl.to(titleRef.current, {
@@ -57,6 +67,16 @@ export default function WorkPage() {
           ease: "power3.out",
         },
         "-=0.15"
+      )
+      .to(
+        circularTextRef.current,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power3.out",
+        },
+        "-=0.1"
       );
 
     return () => {
@@ -83,7 +103,24 @@ export default function WorkPage() {
                 : "rgba(251, 146, 60, 0.6)", // Slightly more opaque orange for light mode
             }}
           />
+
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
+            {/* Circular Scroll Text - Aligned with Case Studies text right edge */}
+            <div
+              ref={circularTextRef}
+              className="absolute top-[560px] right-16 lg:right-16 lg:ml-8 z-20 transition-opacity duration-500"
+            >
+              <CircularScrollText
+                text="SCROLL DOWN TO EXPLORE MORE"
+                repetitions={4}
+                textColor="#fb923c"
+                fontSize="12px"
+                radius={88}
+                animationDuration={12}
+                letterSpacing="0.2em"
+                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
             <div className="text-left w-full">
               <h1
                 ref={titleRef}
@@ -118,7 +155,7 @@ export default function WorkPage() {
         </section>
 
         {/* Case Studies Cards Section */}
-        <section className="py-8 sm:py-12 lg:py-16">
+        <section className="pt-[200px] pb-8 sm:pb-12 lg:pb-16">
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 sm:gap-12">
               {/* Emplojd Case Study */}

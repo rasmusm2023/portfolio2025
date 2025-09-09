@@ -150,7 +150,10 @@ const CustomCursor = () => {
         let offsetX = 20;
         let offsetY = 20;
 
-        if (hoverTarget && hoverTarget.includes("card")) {
+        if (
+          hoverTarget &&
+          (hoverTarget.includes("card") || hoverTarget === "gallery-image")
+        ) {
           offsetX = 80;
         }
 
@@ -178,7 +181,10 @@ const CustomCursor = () => {
         let offsetX = 20;
         let offsetY = 20;
 
-        if (hoverTarget && hoverTarget.includes("card")) {
+        if (
+          hoverTarget &&
+          (hoverTarget.includes("card") || hoverTarget === "gallery-image")
+        ) {
           offsetX = 80;
         }
 
@@ -212,6 +218,9 @@ const CustomCursor = () => {
         setIsHovering(true);
       } else if (target.closest("a")) {
         setHoverTarget("link");
+        setIsHovering(true);
+      } else if (target.closest(".gallery-image")) {
+        setHoverTarget("gallery-image");
         setIsHovering(true);
       } else {
         setHoverTarget(null);
@@ -379,7 +388,7 @@ const CustomCursor = () => {
           ...baseStyle,
           left: 0, // GSAP handles positioning
           top: 0, // GSAP handles positioning
-          width: "140px",
+          width: "100px",
           height: "36px",
           borderRadius: "18px",
           backgroundColor: isDarkMode

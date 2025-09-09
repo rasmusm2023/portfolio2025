@@ -322,7 +322,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: glow 3s ease-in-out infinite;
 }
 
-@keyframes spin {
+@keyframes mask-rotate {
   0% {
     --mask: 0deg;
   }
@@ -697,7 +697,7 @@ textarea::-webkit-scrollbar-thumb:hover {
     hsl(var(--shimmer-hue-1), var(--shimmer-sat-1), var(--shimmer-lit-1))
   );
   border-radius: inherit;
-  animation: spin 2.5s linear infinite;
+  animation: mask-rotate 2.5s linear infinite;
   z-index: -2;
 }
 
@@ -782,7 +782,7 @@ textarea::-webkit-scrollbar-thumb:hover {
     black 95%,
     transparent 100%
   );
-  animation: spin 3s linear infinite both;
+  animation: mask-rotate 3s linear infinite both;
 }
 
 .shimmer::before,
@@ -879,7 +879,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 }
 
 .shimmer-button-green:hover::before {
-  animation: spin 2.5s linear infinite;
+  animation: mask-rotate 2.5s linear infinite;
   opacity: 1;
 }
 
@@ -1568,4 +1568,23 @@ body.mobile-menu-open {
   background-size: 600px 600px;
   background-position: 0 0;
   background-repeat: repeat;
+}
+
+/* Circular scroll text animation */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.circular-scroll-text {
+  position: relative;
+  display: inline-block;
+}
+
+.circular-scroll-text svg {
+  display: block;
 }
