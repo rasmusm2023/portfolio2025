@@ -240,9 +240,9 @@ const BentoBox = () => {
             </div>
             <div className="space-y-4">
               <p className="text-neutral-10 text-lg font-bold leading-relaxed">
-                👋 Hi, I'm Rasmus Mattsson — a UX/UI Designer and Low-code
-                Developer based in Stockholm, Sweden. I love creating digital
-                experiences that bridge creativity with technology.
+                👋 Hi, I'm Rasmus Mattsson, a digital designer and low-code
+                developer with a passion for creating beautiful, seamless
+                experiences that make a difference.
               </p>
             </div>
           </div>

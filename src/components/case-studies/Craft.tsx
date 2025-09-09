@@ -82,12 +82,28 @@ const Craft: React.FC<CraftProps> = () => {
           <div className="w-full lg:w-[600px]">
             <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-                This phase was about turning insights into tangible design work.
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  This phase was about turning insights into tangible design
+                  work.
+                </span>{" "}
                 I focused on building a clear and consistent foundation,
                 creating flows, wireframes, and mockups that balanced usability
-                with scalability. Each step aimed to keep the product simple,
-                personal, and efficient, while enabling the team to move quickly
-                under tight time constraints.
+                with scalability.{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  Each step aimed to keep the product simple, personal, and
+                  efficient, while enabling the team to move quickly under tight
+                  time constraints.
+                </span>
               </p>
             </div>
           </div>

@@ -152,14 +152,14 @@ export default function NotedCaseStudy() {
       "Design system development",
       "Prototype testing and iteration",
     ],
-    link: "https://noted-app.com",
+    link: "https://noted-beta.netlify.app/",
     linkText: "Live prototype",
     buttonText: "Live prototype" as const,
     roleText:
       "Lead Product Designer: worked on user research, wireframing, prototyping, and design system development.",
     companyOrType: "Type" as const,
-    companyText: "Personal Project",
-    yearText: "2024",
+    companyText: "Passion project",
+    yearText: "2025",
     teamRoles: [
       "01 Lead Product Designer",
       "01 Frontend Developer",

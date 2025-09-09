@@ -23,9 +23,16 @@ const Challenge: React.FC<ChallengeProps> = ({ challenge }) => {
             <div className="mb-12 sm:mb-16 space-y-4 sm:space-y-6">
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 We had eight weeks, a small cross-disciplinary team, and the
-                broad theme of "AI" to work with. In that time, we needed to
-                design and deliver a functional, interactive prototype that
-                could stand out at the Chas Challenge showcase.
+                broad theme of "AI" to work with. In that time, we needed to{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  design and deliver a functional, interactive prototype
+                </span>{" "}
+                that could stand out at the Chas Challenge showcase.
               </p>
 
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
@@ -42,14 +49,21 @@ const Challenge: React.FC<ChallengeProps> = ({ challenge }) => {
                 <span
                   style={{
                     background:
-                      "linear-gradient(180deg, rgba(144, 126, 255, 0.3) 0%, rgba(144, 126, 255, 0.3) 100%)",
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
                   }}
                 >
                   reducing friction for applicants without sacrificing the
-                  personal touch recruiters value. All within tight time and
-                  resource limits
+                  personal touch
+                </span>{" "}
+                recruiters value.{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  All within tight time and resource limits.
                 </span>
-                .
               </p>
             </div>
 

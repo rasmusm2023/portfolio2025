@@ -166,7 +166,7 @@ export default function WorkPage() {
                         Lead UX/UI Designer
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        School project
+                        School Project
                       </span>
                     </div>
                     <h3 className="text-xl sm:text-2xl xl:text-3xl font-bold text-neutral-80 dark:text-neutral-30 mb-2 sm:mb-3 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-colors">
@@ -253,7 +253,7 @@ export default function WorkPage() {
                       }}
                     >
                       <span className="text-base font-semibold text-purple-500 dark:text-purple-400 uppercase tracking-wider relative z-10">
-                        Mobile App
+                        Web & SaaS Application
                       </span>
                     </div>
                   </div>
@@ -262,13 +262,13 @@ export default function WorkPage() {
                   <div className="p-4 sm:p-6 pb-6 sm:pb-8 mt-auto mb-12 sm:mb-16 lg:mb-12">
                     <div className="mb-3 sm:mb-4 flex flex-wrap gap-2">
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        2024
+                        2025
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        Lead Product Designer
+                        Designer & Developer
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        Personal Project
+                        Solo Project
                       </span>
                     </div>
                     <h3 className="text-xl sm:text-2xl xl:text-3xl font-bold text-neutral-80 dark:text-neutral-30 mb-2 sm:mb-3 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-colors">
@@ -276,7 +276,8 @@ export default function WorkPage() {
                     </h3>
                     <div className="flex items-end justify-between gap-3 sm:gap-4">
                       <p className="text-sm sm:text-base xl:text-lg text-neutral-60 dark:text-neutral-40 leading-relaxed flex-1 max-w-[calc(100%-4rem)]">
-                        AI-powered note-taking app with intelligent features
+                        Insert fancy and long description here, make sure it
+                        covers 2 lines.
                       </p>
                       <div className="w-12 h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center group-hover:scale-110 flex-shrink-0">
                         <svg
@@ -357,7 +358,7 @@ export default function WorkPage() {
                       }}
                     >
                       <span className="text-base font-semibold text-purple-500 dark:text-purple-400 uppercase tracking-wider relative z-10">
-                        Web Application
+                        Mobile App & Web Portal
                       </span>
                     </div>
                   </div>
@@ -366,13 +367,13 @@ export default function WorkPage() {
                   <div className="p-4 sm:p-6 pb-6 sm:pb-8 mt-auto mb-12 sm:mb-16 lg:mb-12">
                     <div className="mb-3 sm:mb-4 flex flex-wrap gap-2">
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        2024
+                        2025
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        UX/UI Designer & Product Manager
+                        Product Designer
                       </span>
                       <span className="text-xs sm:text-sm xl:text-base font-medium text-neutral-100/60 dark:text-neutral-0/60 bg-neutral-100/5 dark:bg-neutral-0/5 px-2 sm:px-3 py-1 rounded-full">
-                        Web Application
+                        Internship Project
                       </span>
                     </div>
                     <h3 className="text-xl sm:text-2xl xl:text-3xl font-bold text-neutral-80 dark:text-neutral-30 mb-2 sm:mb-3 group-hover:text-neutral-100 dark:group-hover:text-neutral-0 transition-colors">
@@ -380,8 +381,8 @@ export default function WorkPage() {
                     </h3>
                     <div className="flex items-end justify-between gap-3 sm:gap-4">
                       <p className="text-sm sm:text-base xl:text-lg text-neutral-60 dark:text-neutral-40 leading-relaxed flex-1 max-w-[calc(100%-4rem)]">
-                        AI-powered platform for intelligent decision making and
-                        data analysis
+                        Insert fancy and long description here, make sure it
+                        covers 2 lines.
                       </p>
                       <div className="w-12 h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 transition-all duration-300 flex items-center justify-center group-hover:scale-110 flex-shrink-0">
                         <svg
@@ -411,7 +412,7 @@ export default function WorkPage() {
                         <span>•</span>
                         <span>Machine Learning</span>
                         <span>•</span>
-                        <span>Enterprise UX</span>
+                        <span>Startup UX/UI</span>
                         <span>•</span>
                         <span>AI Platform</span>
                         <span>•</span>
@@ -419,7 +420,11 @@ export default function WorkPage() {
                         <span>•</span>
                         <span>Machine Learning</span>
                         <span>•</span>
-                        <span>Enterprise UX</span>
+                        <span>User Journey</span>
+                        <span>•</span>
+                        <span>Connected wearables</span>
+                        <span>•</span>
+                        <span>Sensor data</span>
                       </div>
                     </div>
                   </div>

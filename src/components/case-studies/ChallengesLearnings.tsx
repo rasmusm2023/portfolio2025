@@ -37,16 +37,30 @@ const ChallengesLearnings: React.FC = () => {
               <div className="flex items-start gap-3">
                 <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
                 <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg leading-[150%] text-left">
-                  Balancing automation and personalization highlighted the need
-                  for AI to enhance, not replace, human voice.
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                    }}
+                  >
+                    Balancing automation and personalization highlighted the
+                    need for AI to enhance, not replace, human voice.
+                  </span>
                 </p>
               </div>
 
               <div className="flex items-start gap-3">
                 <div className="w-4 h-4 mt-1 flex-shrink-0 bg-purple-400 rounded-full"></div>
                 <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg leading-[150%] text-left">
-                  Team members coming from different backgrounds showed how
-                  early alignment workshops reduce friction later.
+                  Team members coming from different backgrounds showed how{" "}
+                  <span
+                    style={{
+                      background:
+                        "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                    }}
+                  >
+                    early alignment workshops reduce friction later.
+                  </span>
                 </p>
               </div>
 

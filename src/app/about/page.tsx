@@ -793,8 +793,38 @@ export default function AboutPage() {
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      I believe in the power of thoughtful design to solve real
-                      problems and create meaningful experiences.
+                      I've designed across{" "}
+                      <span
+                        style={{
+                          background:
+                            "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        }}
+                      >
+                        multiple industries
+                      </span>
+                      , including health-tech, travel, retail, and AI. Gaining{" "}
+                      <span
+                        style={{
+                          background:
+                            "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        }}
+                      >
+                        experience at startups, medium-sized businesses, and
+                        larger enterprises.
+                      </span>{" "}
+                      Each one broadening my{" "}
+                      <span
+                        style={{
+                          background:
+                            "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        }}
+                      >
+                        experience of how design can work and be thought about
+                        differently.
+                      </span>{" "}
+                      This mix has taught me how to adapt quickly, balance
+                      creativity with structure, and design solutions that
+                      scale.
                     </p>
                     <p
                       className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
@@ -802,12 +832,13 @@ export default function AboutPage() {
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      My background spans design systems, prototypes, and
-                      front-end development, blending creativity with structure.
-                      Whether it's simplifying dashboards, designing AI-driven
-                      tools like Emplojd, or crafting features that build user
-                      confidence, I aim to make digital experiences accessible
-                      and enjoyable.
+                      My background spans UX/UI design, research, frontend
+                      development, all the way to how to connect, understand and
+                      support a customer or user on a micro level. Whether I'm
+                      crafting dashboards, shaping brand experiences, or
+                      experimenting with side projects, I always aim to create
+                      digital products that are clear, accessible, and
+                      impactful.
                     </p>
                     <p
                       className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
@@ -815,9 +846,29 @@ export default function AboutPage() {
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      Outside of work, you'll often find me gaming, exploring
-                      new tech, or experimenting with side projects that fuel my
-                      curiosity and creativity.
+                      Most recently, I've spent{" "}
+                      <span
+                        style={{
+                          background:
+                            "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        }}
+                      >
+                        two years at Chas Academy in Stockholm, specializing in
+                        UX/UI design and frontend development.
+                      </span>{" "}
+                      This gave me the space to dive deep into design thinking,
+                      accessibility, research methodologies, conducting user
+                      interviews, and design systems while also{" "}
+                      <span
+                        style={{
+                          background:
+                            "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        }}
+                      >
+                        building real-world projects from concept to launch.
+                      </span>{" "}
+                      It's where I combined creativity with learning the
+                      technical know-how to get the job done.
                     </p>
                   </div>
                 </div>

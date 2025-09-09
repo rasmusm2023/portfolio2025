@@ -136,8 +136,16 @@ const About: React.FC<AboutProps> = ({
               </div>
             )}
             <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-              I led the UX/UI work to make sure the experience felt personal,
-              efficient, and genuinely helpful for job seekers.
+              <span
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                }}
+              >
+                I led the UX/UI work to make sure the experience felt personal,
+                efficient, and genuinely helpful
+              </span>{" "}
+              for job seekers.
             </p>
 
             {/* Logo Box */}

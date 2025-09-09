@@ -79,8 +79,16 @@ const DesignExplorations: React.FC = () => {
           <div className="w-full lg:w-[600px]">
             <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-                During the design process, we explored several concepts and
-                features some of which made it to the final design and some that
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  During the design process, we explored several concepts and
+                  features
+                </span>{" "}
+                some of which made it to the final design and some that
                 ultimately didn't make it into the final prototype. These
                 explorations, while not all implemented, provided valuable
                 insights and helped refine our understanding of direction, user
@@ -212,10 +220,41 @@ const DesignExplorations: React.FC = () => {
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
                 {currentDesignExplorationIndex === 0 &&
                   "We explored various color palettes and visual styles to find the right emotional tone for the platform. As part of our learning journey, we experimented with gradients as a primary design component to understand their impact on modern UI design. We ultimately chose to continue with the gradients as a primary component throughout the entire design, both for their modern, contemporary look but also as an opportunity to learn how to effectively implement gradients throughout the entire design."}
-                {currentDesignExplorationIndex === 1 &&
-                  "We explored different page layouts for the overview of saved cover letters. In the end I decided to go with a later concept  than the one we initially had in mind. This design decision was made to maintain a consistent design language, accessibility and to keep the design simple and clean."}
-                {currentDesignExplorationIndex === 2 &&
-                  "We explored different approaches for organizing and displaying saved job listings. This exploration focused on creating an intuitive interface that allows users to easily manage their job applications while maintaining visual consistency with the rest of the platform. The final design prioritizes clarity and quick access to essential job information."}
+                {currentDesignExplorationIndex === 1 && (
+                  <>
+                    We explored different page layouts for the overview of saved
+                    cover letters. In the end I decided to go with a later
+                    concept than the one we initially had in mind.{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      This design decision was made to maintain a consistent
+                      design language, accessibility and to keep the design
+                      simple and clean.
+                    </span>
+                  </>
+                )}
+                {currentDesignExplorationIndex === 2 && (
+                  <>
+                    We explored different approaches for organizing and
+                    displaying saved job listings. This exploration focused on
+                    creating an intuitive interface that allows users to easily
+                    manage their job applications while maintaining visual
+                    consistency with the rest of the platform.{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      The final design prioritizes clarity and quick access to
+                      essential job information.
+                    </span>
+                  </>
+                )}
               </p>
             </div>
           </div>

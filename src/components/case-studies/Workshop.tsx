@@ -17,9 +17,17 @@ const Workshop: React.FC = () => {
           <div className="w-full lg:w-[600px]">
             <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
               <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-                At the start of the project, I facilitated a kickoff workshop to
-                align the entire team around our vision and expectations for
-                Emplojd. The session was designed to get to know each other,
+                At the start of the project,{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  I facilitated a kickoff workshop to align the entire team
+                  around our vision and expectations
+                </span>{" "}
+                for Emplojd. The session was designed to get to know each other,
                 define what we wanted to achieve, and explore possible
                 directions for the product.
               </p>
@@ -28,9 +36,16 @@ const Workshop: React.FC = () => {
                 We began with a Mentimeter quiz to spark discussion, then moved
                 into a Crazy 8 exercise to quickly capture individual ideas.
                 After sharing and consolidating our thoughts, we identified a
-                set of themes that would guide our design approach. These
-                insights became the foundation for how we defined the product's
-                goals and features:
+                set of themes that would guide our design approach.{" "}
+                <span
+                  style={{
+                    background:
+                      "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                  }}
+                >
+                  These insights became the foundation
+                </span>{" "}
+                for how we defined the product's goals and features:
               </p>
             </div>
           </div>

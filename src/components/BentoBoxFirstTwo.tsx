@@ -99,9 +99,9 @@ const BentoBoxFirstTwo = () => {
                   color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                 }}
               >
-                👋 Hi, I'm Rasmus Mattsson — a UX/UI Designer and Low-code
-                Developer based in Stockholm, Sweden. I love creating digital
-                experiences that bridge creativity with technology.
+                👋 Hi, I'm Rasmus Mattsson, a digital designer and low-code
+                developer with a passion for creating beautiful, seamless
+                experiences that make a difference.
               </p>
             </div>
           </div>
