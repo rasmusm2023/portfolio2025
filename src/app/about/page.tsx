@@ -23,6 +23,8 @@ import NightOwlImage from "@/images/8bit/nightowl.jpg";
 import AnimalsImage from "@/images/8bit/animals.jpg";
 import Formula1Image from "@/images/8bit/formula1.jpg";
 import StockholmImage from "@/images/8bit/stockholm.jpg";
+import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
+import NightOwlCornerImage from "@/images/corners/night-owl1.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -1002,7 +1004,7 @@ export default function AboutPage() {
                           description:
                             "I'm most productive and creative during the late hours when the world is quiet.",
                           emoji: "🦉",
-                          image: NightOwlImage.src,
+                          image: NightOwlCornerImage.src,
                         },
                         {
                           title: "Formula 1 Enthusiast",
@@ -1016,8 +1018,7 @@ export default function AboutPage() {
                           description:
                             "I love gaming and exploring virtual worlds. From strategy games to action RPGs, gaming fuels my creativity and problem-solving skills.",
                           emoji: "🎮",
-                          image:
-                            "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=400&fit=crop&crop=center",
+                          image: AvidGamerImage.src,
                         },
                       ]}
                     />

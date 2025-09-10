@@ -200,17 +200,14 @@ export default function IdentityCarousel({
             ></div>
 
             {/* Image Section */}
-            <div className="w-full h-36 sm:h-40 md:h-56 mb-4 sm:mb-3 md:mb-4 rounded-xl overflow-hidden">
+            <div className="w-full aspect-square mb-4 sm:mb-3 md:mb-4 rounded-xl overflow-hidden">
               {identityItem.image ? (
                 <img
                   src={identityItem.image}
                   alt={identityItem.title}
                   className="w-full h-full object-cover"
                   style={{
-                    objectPosition:
-                      identityItem.title === "Formula 1 Enthusiast"
-                        ? "bottom right"
-                        : "center",
+                    objectPosition: "center",
                   }}
                 />
               ) : (
