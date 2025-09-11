@@ -25,6 +25,7 @@ import Formula1Image from "@/images/8bit/formula1.jpg";
 import StockholmImage from "@/images/8bit/stockholm.jpg";
 import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
 import NightOwlCornerImage from "@/images/corners/night-owl1.png";
+import HomeCookImage from "@/images/corners/home-cook.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -990,10 +991,9 @@ export default function AboutPage() {
                         {
                           title: "Home Cook",
                           description:
-                            "I cook a lot and love experimenting with new recipes. Food is my creative outlet outside of design.",
+                            "I cook a lot and love experimenting with new recipes. Food is one of my creative outlets outside of design.",
                           emoji: "👨‍🍳",
-                          image:
-                            "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&crop=center",
+                          image: HomeCookImage.src,
                         },
                         {
                           title: "Tech Explorer",
