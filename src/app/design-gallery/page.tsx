@@ -179,6 +179,7 @@ const MovingCarousel = ({
 export default function DesignGalleryPage() {
   const { isDark } = useTheme();
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -188,9 +189,20 @@ export default function DesignGalleryPage() {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLSpanElement>(null);
   const circularTextRef = useRef<HTMLDivElement>(null);
+  const titleElementRef = useRef<HTMLHeadingElement>(null);
 
   // Hero entrance animation
   useEffect(() => {
+    // Check if all refs are available
+    if (
+      !titleRef.current ||
+      !descriptionRef.current ||
+      !subtitleRef.current ||
+      !circularTextRef.current
+    ) {
+      return;
+    }
+
     const tl = gsap.timeline({ delay: 0.1 });
 
     // Set initial states
@@ -250,6 +262,24 @@ export default function DesignGalleryPage() {
     };
   }, []);
 
+  // Scroll effect for circular text visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (titleElementRef.current) {
+        const rect = titleElementRef.current.getBoundingClientRect();
+        const isVisible = rect.bottom > 0 && rect.top < window.innerHeight; // Visible when any part of the title is in the viewport
+        setIsCircularTextVisible(isVisible);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
     setLightboxOpen(true);
@@ -281,7 +311,7 @@ export default function DesignGalleryPage() {
           {/* Hero Section */}
           <section
             ref={heroRef}
-            className="min-h-screen relative flex items-center"
+            className="h-screen relative flex items-center"
           >
             <AnimatedBlob
               gradientColors={{
@@ -289,26 +319,29 @@ export default function DesignGalleryPage() {
                 secondary: "rgba(6, 182, 212, 0.4)", // Cyan
               }}
             />
+            {/* Circular Scroll Text - Positioned at bottom right of viewport */}
+            <div
+              ref={circularTextRef}
+              className={`absolute bottom-8 right-32 sm:right-36 md:right-40 lg:right-44 xl:right-48 z-20 transition-opacity duration-500 hidden lg:block ${
+                isCircularTextVisible ? "opacity-80" : "opacity-0"
+              }`}
+            >
+              <CircularScrollText
+                text="SCROLL DOWN TO EXPLORE MORE"
+                repetitions={4}
+                textColor="#06b6d4"
+                fontSize="12px"
+                radius={88}
+                animationDuration={12}
+                letterSpacing="0.2em"
+                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+              />
+            </div>
+
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
-              {/* Circular Scroll Text - Aligned with Miscellaneous text right edge */}
-              <div
-                ref={circularTextRef}
-                className="absolute top-[560px] right-16 lg:right-16 lg:ml-8 z-20 transition-opacity duration-500"
-              >
-                <CircularScrollText
-                  text="SCROLL DOWN TO EXPLORE MORE"
-                  repetitions={4}
-                  textColor="#06b6d4"
-                  fontSize="12px"
-                  radius={88}
-                  animationDuration={12}
-                  letterSpacing="0.2em"
-                  className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-                />
-              </div>
               <div className="text-left w-full">
                 <h1
-                  ref={titleRef}
+                  ref={titleElementRef}
                   className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                 >
                   <span className="[background-image:var(--gradient-hero-design-gallery)] dark:[background-image:var(--gradient-hero-design-gallery-dark)] bg-clip-text text-transparent font-hanken">

@@ -7,7 +7,7 @@ import AnimatedBlob from "@/components/AnimatedBlob";
 import CircularScrollText from "@/components/CircularScrollText";
 import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -15,6 +15,7 @@ const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
 export default function WorkPage() {
   const { isDark } = useTheme();
+  const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
 
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
@@ -22,9 +23,20 @@ export default function WorkPage() {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLSpanElement>(null);
   const circularTextRef = useRef<HTMLDivElement>(null);
+  const titleElementRef = useRef<HTMLHeadingElement>(null);
 
   // Hero entrance animation
   useEffect(() => {
+    // Check if all refs are available
+    if (
+      !titleRef.current ||
+      !descriptionRef.current ||
+      !subtitleRef.current ||
+      !circularTextRef.current
+    ) {
+      return;
+    }
+
     const tl = gsap.timeline({ delay: 0.1 });
 
     // Set initial states
@@ -84,15 +96,30 @@ export default function WorkPage() {
     };
   }, []);
 
+  // Scroll effect for circular text visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (titleElementRef.current) {
+        const rect = titleElementRef.current.getBoundingClientRect();
+        const isVisible = rect.bottom > 0 && rect.top < window.innerHeight; // Visible when any part of the title is in the viewport
+        setIsCircularTextVisible(isVisible);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial state
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <CustomCursor />
       <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
         {/* Hero Section */}
-        <section
-          ref={heroRef}
-          className="min-h-screen relative flex items-center"
-        >
+        <section ref={heroRef} className="h-screen relative flex items-center">
           <AnimatedBlob
             gradientColors={{
               primary: isDark
@@ -104,26 +131,29 @@ export default function WorkPage() {
             }}
           />
 
+          {/* Circular Scroll Text - Positioned at bottom right of viewport */}
+          <div
+            ref={circularTextRef}
+            className={`absolute bottom-8 right-32 sm:right-36 md:right-40 lg:right-44 xl:right-48 z-20 transition-opacity duration-500 hidden lg:block ${
+              isCircularTextVisible ? "opacity-80" : "opacity-0"
+            }`}
+          >
+            <CircularScrollText
+              text="SCROLL DOWN TO EXPLORE MORE"
+              repetitions={4}
+              textColor="#fb923c"
+              fontSize="12px"
+              radius={88}
+              animationDuration={12}
+              letterSpacing="0.2em"
+              className="opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
+
           <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
-            {/* Circular Scroll Text - Aligned with Case Studies text right edge */}
-            <div
-              ref={circularTextRef}
-              className="absolute top-[560px] right-16 lg:right-16 lg:ml-8 z-20 transition-opacity duration-500"
-            >
-              <CircularScrollText
-                text="SCROLL DOWN TO EXPLORE MORE"
-                repetitions={4}
-                textColor="#fb923c"
-                fontSize="12px"
-                radius={88}
-                animationDuration={12}
-                letterSpacing="0.2em"
-                className="opacity-80 hover:opacity-100 transition-opacity duration-300"
-              />
-            </div>
             <div className="text-left w-full">
               <h1
-                ref={titleRef}
+                ref={titleElementRef}
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
               >
                 <span className="[background-image:var(--gradient-hero-work)] dark:[background-image:var(--gradient-hero-work-dark)] bg-clip-text text-transparent font-hanken">
