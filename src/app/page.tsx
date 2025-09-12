@@ -18,6 +18,8 @@ export default function Home() {
   const { isDark } = useTheme();
   const morphRef = useRef<HTMLSpanElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isClient, setIsClient] = useState(false);
 
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
@@ -158,6 +160,25 @@ export default function Home() {
     };
   }, []);
 
+  // Set client-side flag and mouse tracking for morphing icon tilt effect
+  useEffect(() => {
+    setIsClient(true);
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+      console.log("Mouse position:", { x: e.clientX, y: e.clientY });
+    };
+
+    // Set initial mouse position to center of screen
+    setMousePosition({
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    });
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   // Handle scrolling to case studies section when coming from case study page
   useEffect(() => {
     const shouldScrollToCaseStudies = sessionStorage.getItem(
@@ -211,47 +232,6 @@ export default function Home() {
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
-              {/* CTA Button - Bottom right positioning */}
-              <div className="absolute bottom-2 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 z-20">
-                <button
-                  ref={ctaRef}
-                  onClick={() => {
-                    const element = document.getElementById("case-studies");
-                    if (element) {
-                      const offset = 20;
-                      const elementPosition =
-                        element.getBoundingClientRect().top;
-                      const offsetPosition =
-                        elementPosition + window.pageYOffset - offset;
-
-                      window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth",
-                      });
-                    }
-                  }}
-                  className="shimmer-button-green w-fit text-sm sm:text-base"
-                >
-                  <span className="text">
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                      />
-                    </svg>
-                    <span className="hidden sm:inline">View Projects</span>
-                    <span className="sm:hidden">View Projects</span>
-                  </span>
-                  <span className="shimmer"></span>
-                </button>
-              </div>
               <div className="text-left w-full flex flex-col justify-start h-full -mt-32 sm:-mt-40 lg:-mt-48">
                 {/* Hero content - Responsive layout */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
@@ -260,8 +240,43 @@ export default function Home() {
                     <div className="relative w-full">
                       {/* Morphing SVG Icon - Positioned at horizontal center with gap below title */}
                       <span
-                        className="morphing-icon absolute left-2/5 -translate-x-1/2 top-full mt-8 flex-shrink-0"
+                        className="morphing-icon absolute left-2/5 -translate-x-1/2 top-full mt-8 flex-shrink-0 transition-transform duration-300 ease-out pointer-events-auto z-20"
                         ref={morphIconRef}
+                        style={{
+                          transform: `translateX(-50%) translateY(0) rotateX(${
+                            isClient && typeof window !== "undefined"
+                              ? (mousePosition.y - window.innerHeight / 2) * 0.1
+                              : 0
+                          }deg) rotateY(${
+                            isClient && typeof window !== "undefined"
+                              ? (mousePosition.x - window.innerWidth / 2) * 0.1
+                              : 0
+                          }deg)`,
+                        }}
+                        onMouseEnter={() => {
+                          const rotateX =
+                            isClient && typeof window !== "undefined"
+                              ? (mousePosition.y - window.innerHeight / 2) * 0.1
+                              : 0;
+                          const rotateY =
+                            isClient && typeof window !== "undefined"
+                              ? (mousePosition.x - window.innerWidth / 2) * 0.1
+                              : 0;
+                          console.log("Transform values:", {
+                            rotateX,
+                            rotateY,
+                            isClient,
+                            mousePosition,
+                          });
+                        }}
+                        onMouseMove={() => {
+                          console.log(
+                            "SVG mouse move, isClient:",
+                            isClient,
+                            "mousePosition:",
+                            mousePosition
+                          );
+                        }}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

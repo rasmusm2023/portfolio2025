@@ -946,6 +946,39 @@ export default function AboutPage() {
                   </div>
                 </div>
 
+                {/* Carousel Bento Box - Full width */}
+                <div
+                  className="md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
+                  style={{
+                    transform: `scale(${getBoxScale("carousel")})`,
+                    backgroundColor: isDark
+                      ? "rgba(35, 35, 35, 0.5)"
+                      : "#ffffff",
+                  }}
+                  onMouseEnter={() => setHoveredBox("carousel")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                    style={{
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                    }}
+                  ></div>
+
+                  {/* Carousel centered within the bento box */}
+                  <div className="flex items-center justify-center h-full relative z-10 w-full">
+                    <div
+                      className="w-full scale-75 sm:scale-85 md:scale-95 relative overflow-hidden"
+                      style={{ maxWidth: "100%" }}
+                    >
+                      <InfiniteScrollBanner className="w-full" />
+                    </div>
+                  </div>
+                </div>
+
                 {/* Personal Identity - Full width section */}
                 <div
                   className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"

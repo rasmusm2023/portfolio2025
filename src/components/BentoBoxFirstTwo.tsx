@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
 import RasmusImage from "@/images/rasmus.jpg";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const BentoBoxFirstTwo = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
   const { isDark } = useTheme();
+  const ctaRef = useRef<HTMLButtonElement>(null);
 
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
@@ -101,21 +101,56 @@ const BentoBoxFirstTwo = () => {
                 </div>
                 <div className="flex-1">
                   <p
-                    className="text-3xl sm:text-4xl md:text-5xl font-regular leading-tight"
+                    className="text-3xl sm:text-4xl md:text-5xl font-regular leading-tight font-instrument-serif"
                     style={{
                       color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                     }}
                   >
-                    Hi, I'm Rasmus Mattsson.
+                    Hi — I'm Rasmus Mattsson.
                   </p>
                 </div>
               </div>
 
-              {/* Right side - Toolkit icons (40%) */}
-              <div className="w-[40%] flex items-center justify-center overflow-hidden">
-                <div className="scale-75 sm:scale-85 md:scale-95">
-                  <InfiniteScrollBanner className="w-full" />
-                </div>
+              {/* Right side - CTA Button (40%) */}
+              <div className="w-[40%] flex items-center justify-end">
+                <button
+                  ref={ctaRef}
+                  onClick={() => {
+                    const element = document.getElementById("case-studies");
+                    if (element) {
+                      const offset = 20;
+                      const elementPosition =
+                        element.getBoundingClientRect().top;
+                      const offsetPosition =
+                        elementPosition + window.pageYOffset - offset;
+
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="shimmer-button-green w-fit text-sm sm:text-base"
+                >
+                  <span className="text">
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
+                    <span className="hidden sm:inline">View Projects</span>
+                    <span className="sm:hidden">View Projects</span>
+                  </span>
+                  <span className="shimmer"></span>
+                </button>
               </div>
             </div>
           </div>

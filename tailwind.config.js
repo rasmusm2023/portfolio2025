@@ -13,6 +13,7 @@ module.exports = {
         hanken: ["var(--font-hanken-grotesk)", "sans-serif"],
         orbitron: ["var(--font-orbitron)", "monospace"],
         audiowide: ["var(--font-audiowide)", "cursive"],
+        "instrument-serif": ["var(--font-instrument-serif)", "serif"],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

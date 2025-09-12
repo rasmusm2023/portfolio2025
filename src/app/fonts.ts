@@ -3,6 +3,7 @@ import {
   Orbitron,
   Audiowide,
   Montserrat,
+  Instrument_Serif,
 } from "next/font/google";
 
 export const hankenGrotesk = Hanken_Grotesk({
@@ -25,8 +26,15 @@ export const audiowide = Audiowide({
 });
 
 export const montserrat = Montserrat({
-  subsets: ["latin"],
   weight: ["700"],
+  subsets: ["latin"],
   variable: "--font-montserrat",
+  display: "swap",
+});
+
+export const instrumentSerif = Instrument_Serif({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-instrument-serif",
   display: "swap",
 });
