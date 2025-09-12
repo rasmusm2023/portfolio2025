@@ -722,9 +722,18 @@ export default function AboutPage() {
                   <div className="lg:ml-8 mt-4 lg:mt-0">
                     <span
                       ref={subtitleRef}
-                      className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                      className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
                     >
-                      My Story
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        My Story
+                      </span>
                     </span>
                   </div>
                 </div>
@@ -758,13 +767,17 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2 relative z-10">
-                    <h2
-                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
-                    >
-                      RASMUS.TXT
+                    <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        RASMUS.TXT
+                      </span>
                     </h2>
                     <Image
                       src="/icons/3dicons-boy-dynamic-premium.png"
@@ -825,13 +838,17 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2 relative z-10">
-                    <h2
-                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
-                    >
-                      BACKGROUND
+                    <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        BACKGROUND
+                      </span>
                     </h2>
                     <Image
                       src="/icons/3dicons-notebook-dynamic-premium.png"
@@ -951,13 +968,17 @@ export default function AboutPage() {
                     }}
                   ></div>
                   <div className="flex items-center justify-between -mt-2 relative z-10">
-                    <h2
-                      className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
-                    >
-                      Identity
+                    <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Identity
+                      </span>
                     </h2>
                     <Image
                       src="/icons/3dicons-puzzle-dynamic-premium.png"
@@ -1066,11 +1087,17 @@ export default function AboutPage() {
                   <div className="flex items-center justify-between -mt-2">
                     <h2
                       className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
                     >
-                      My Time
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        My Time
+                      </span>
                     </h2>
                     <Image
                       src="/icons/3dicons-clock-dynamic-premium.png"
@@ -1200,11 +1227,17 @@ export default function AboutPage() {
                     <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                       <h2
                         className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                        style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                        }}
                       >
-                        Books
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage: isDark
+                              ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                              : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                          }}
+                        >
+                          Books
+                        </span>
                       </h2>
                       <p
                         className="hidden 2xl:block text-sm sm:text-base lg:text-lg font-hanken"
@@ -1276,11 +1309,17 @@ export default function AboutPage() {
                   <div className="flex items-center justify-between -mt-2">
                     <h2
                       className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                      style={{
-                        color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                      }}
                     >
-                      Favourite Films
+                      <span
+                        className="bg-clip-text text-transparent"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Favourite Films
+                      </span>
                     </h2>
                     <Image
                       src="/icons/3dicons-video-cam-dynamic-premium.png"
@@ -1397,11 +1436,17 @@ export default function AboutPage() {
                     <div className="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-2">
                       <h2
                         className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                        style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                        }}
                       >
-                        Music
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage: isDark
+                              ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                              : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                          }}
+                        >
+                          Music
+                        </span>
                       </h2>
                       <p
                         className="hidden 2xl:block text-sm sm:text-base lg:text-lg font-hanken"

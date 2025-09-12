@@ -252,8 +252,8 @@ const CustomCursor = () => {
         height: 36,
         borderRadius: "18px",
         backgroundColor: isDark
-          ? "rgba(255, 255, 255, 0.9)"
-          : "rgba(35, 35, 35, 0.9)",
+          ? "rgba(255, 255, 255, 1)"
+          : "rgba(35, 35, 35, 1)",
         border: "none",
         scale: 1,
         boxShadow: isDark

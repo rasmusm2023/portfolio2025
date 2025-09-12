@@ -661,7 +661,7 @@ const BentoBox = () => {
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-baseline gap-2">
                 <h2 className="text-xl font-bold text-neutral-30 font-montserrat uppercase tracking-wider">
-                  Experience
+                  Track Record
                 </h2>
                 <p className="text-lg text-neutral-50 font-hanken">
                   employments & studies

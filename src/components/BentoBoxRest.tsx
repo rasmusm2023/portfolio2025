@@ -82,13 +82,17 @@ const BentoBoxRest = () => {
               }}
             ></div>
             <div className="flex items-center justify-between mb-8">
-              <h2
-                className="text-xl font-bold font-montserrat uppercase tracking-wider"
-                style={{
-                  color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                }}
-              >
-                Expertise{" "}
+              <h2 className="text-xl font-bold font-montserrat uppercase tracking-wider">
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: isDark
+                      ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                      : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                  }}
+                >
+                  Expertise{" "}
+                </span>
               </h2>
               <Image
                 src="/icons/3dicons-flash-dynamic-premium.png"
@@ -872,13 +876,17 @@ const BentoBoxRest = () => {
             ></div>
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-baseline gap-2">
-                <h2
-                  className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider"
-                  style={{
-                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                  }}
-                >
-                  Experience
+                <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                  <span
+                    className="bg-clip-text text-transparent"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    Track Record
+                  </span>
                 </h2>
                 <p
                   className="hidden lg:block text-lg font-hanken"
@@ -993,13 +1001,17 @@ const BentoBoxRest = () => {
               }}
             ></div>
             <div className="flex items-center justify-between mb-6">
-              <h2
-                className="text-xl font-bold font-montserrat uppercase tracking-wider"
-                style={{
-                  color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                }}
-              >
-                Currently working on
+              <h2 className="text-xl font-bold font-montserrat uppercase tracking-wider">
+                <span
+                  className="bg-clip-text text-transparent"
+                  style={{
+                    backgroundImage: isDark
+                      ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                      : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                  }}
+                >
+                  Currently working on
+                </span>
               </h2>
               <Image
                 src="/icons/3dicons-rocket-dynamic-premium.png"

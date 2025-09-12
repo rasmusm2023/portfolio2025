@@ -12,8 +12,10 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export default function Home() {
+  const { isDark } = useTheme();
   const morphRef = useRef<HTMLSpanElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -216,7 +218,7 @@ export default function Home() {
                   onClick={() => {
                     const element = document.getElementById("case-studies");
                     if (element) {
-                      const offset = 300;
+                      const offset = 20;
                       const elementPosition =
                         element.getBoundingClientRect().top;
                       const offsetPosition =
@@ -271,9 +273,18 @@ export default function Home() {
                     <div className="block lg:hidden mb-6">
                       <span
                         ref={lowCodeRef}
-                        className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                        className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
                       >
-                        Low-code Developer
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage: isDark
+                              ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                              : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                          }}
+                        >
+                          Low-code Developer
+                        </span>
                       </span>
                     </div>
 
@@ -467,9 +478,18 @@ export default function Home() {
                       <div className="hidden lg:block w-auto lg:ml-8 mt-0">
                         <span
                           ref={lowCodeRef}
-                          className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                          className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
                         >
-                          Low-code Developer
+                          <span
+                            className="bg-clip-text text-transparent"
+                            style={{
+                              backgroundImage: isDark
+                                ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                                : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                            }}
+                          >
+                            Low-code Developer
+                          </span>
                         </span>
                       </div>
                     </div>
@@ -489,6 +509,251 @@ export default function Home() {
         <div id="case-studies" className="pt-16">
           <CaseStudiesShowcase />
         </div>
+
+        {/* Experience Section */}
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex items-center gap-4">
+                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                  02
+                </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                  <span
+                    className="bg-clip-text text-transparent font-hanken"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    Experience
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            {/* Experience Timeline */}
+            <div className="space-y-12">
+              {/* Experience Entry 1 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    AUG 23, 2024
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    UX Designer, Capanna Verde
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
+                    Revamped the digital presence of a newly opened gelato kiosk
+                    in Stockholm, enhancing customer engagement. Leveraging
+                    their logo and brand colors, I designed an intuitive website
+                    that allowed customers to easily find the kiosk, contact
+                    them, and explore their offerings. My creative approach in
+                    showcasing the business led to increased visibility and
+                    accessibility, helping to establish the kiosk as a go-to
+                    spot in the city.
+                  </p>
+                </div>
+                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Experience Entry 2 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    JUL 15, 2024
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    UX Designer, Verno
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
+                    Developed a sleek, modern website for a high-end cleaning
+                    service company that aimed to attract customers through a
+                    streamlined offer submission process. By aligning with the
+                    client's luxurious and refined aesthetic, I created a clean,
+                    sophisticated interface where users could easily submit
+                    service requests. My attention to detail and focus on the
+                    client's vision resulted in a website that elevated the
+                    brand, reinforcing its premium positioning and improving
+                    customer engagement.
+                  </p>
+                </div>
+                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Experience Entry 3 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    JAN, 2022 - SEP, 2023
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    UX Designer, Genesis
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
+                    Thrived in a fast-paced environment at Genesis, designing
+                    intuitive and user-centric products. Successfully
+                    streamlined complex functionalities and implemented
+                    innovative features, contributing to a 46% increase in user
+                    engagement. I thrived on working across diverse teams,
+                    successfully integrating user feedback and diverse
+                    perspectives into innovative design solutions.
+                  </p>
+                </div>
+                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Experience Entry 4 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    FEB 16, 2024
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    UX Designer, Renast
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
+                    Created a website for a small cleaning company that
+                    previously had no online presence, with the goal of
+                    improving their competitiveness and customer satisfaction.
+                    Despite the limited resources preventing an online booking
+                    system, I focused on presenting clear, accessible
+                    information about their services to attract potential
+                    clients. By designing a user-friendly and visually appealing
+                    website, I helped the company enhance its visibility, making
+                    it easier for customers to connect with them and learn more
+                    about their offerings, ultimately boosting interest in their
+                    services.
+                  </p>
+                </div>
+                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Experience Entry 5 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    FEB, 2020 - JAN, 2022
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
+                    UX Designer, Renast
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
+                    I championed a user-centric approach to product design. By
+                    spearheading collaborative efforts to streamline playlists
+                    and discovery features, I contributed to a 25% increase in
+                    user engagement with personalized recommendations. My
+                    ability to translate music passion into intuitive design
+                    solutions, while fostering open communication and
+                    inclusivity within the design team.
+                  </p>
+                </div>
+                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Rest of Bento Boxes */}
         <BentoBoxRest />

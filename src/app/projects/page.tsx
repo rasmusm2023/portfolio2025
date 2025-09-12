@@ -163,9 +163,18 @@ export default function ProjectsPage() {
                     <div className="lg:ml-8 mt-4 lg:mt-0">
                       <span
                         ref={subtitleRef}
-                        className="text-neutral-60 dark:text-neutral-40 text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
+                        className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
                       >
-                        Case Studies
+                        <span
+                          className="bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage: isDark
+                              ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                              : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                          }}
+                        >
+                          Case Studies
+                        </span>
                       </span>
                     </div>
                   </div>
