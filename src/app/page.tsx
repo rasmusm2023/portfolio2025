@@ -4,7 +4,6 @@ import VantaBackground from "@/components/VantaBackground";
 import AnimatedBlob from "@/components/AnimatedBlob";
 import BentoBoxFirstTwo from "@/components/BentoBoxFirstTwo";
 import BentoBoxRest from "@/components/BentoBoxRest";
-import ProjectShowcase from "@/components/ProjectShowcase";
 import CaseStudiesShowcase from "@/components/CaseStudiesShowcase";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
@@ -486,13 +485,8 @@ export default function Home() {
           </section>
         </main>
 
-        {/* Project Showcase Section - Full Width */}
-        <div className="pt-32">
-          <ProjectShowcase />
-        </div>
-
         {/* Case Studies Showcase Section */}
-        <div className="pt-16">
+        <div id="case-studies" className="pt-16">
           <CaseStudiesShowcase />
         </div>
 
