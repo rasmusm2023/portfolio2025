@@ -14,7 +14,7 @@ const Projects = () => {
           <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[100%] h-[2px] bg-gradient-to-r from-transparent via-[#ffb571] to-transparent opacity-50" />
         </div>
         <div className="grid grid-cols-2 gap-12">
-          {/* First Work Box */}
+          {/* First Project Box */}
           <CircularTooltip>
             <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
               {/* Project background image */}
@@ -49,7 +49,7 @@ const Projects = () => {
             </div>
           </CircularTooltip>
 
-          {/* Second Work Box */}
+          {/* Second Project Box */}
           <CircularTooltip>
             <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
               {/* Project background image */}
@@ -85,7 +85,7 @@ const Projects = () => {
             </div>
           </CircularTooltip>
 
-          {/* Third Work Box */}
+          {/* Third Project Box */}
           <CircularTooltip>
             <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
               {/* Project background image */}
@@ -121,7 +121,7 @@ const Projects = () => {
             </div>
           </CircularTooltip>
 
-          {/* Fourth Work Box */}
+          {/* Fourth Project Box */}
           <CircularTooltip>
             <div className="group relative rounded-3xl overflow-hidden bg-neutral-90 aspect-[4/3] hover:scale-105 transition-transform duration-300 cursor-pointer border-2 border-transparent hover:border-[#ffb571]/60">
               {/* Project background image */}

@@ -21,7 +21,7 @@ const Menu = () => {
   const menuItems = useMemo<MenuItem[]>(
     () => [
       { label: "Home", href: "/" },
-      { label: "Work", href: "/work" },
+      { label: "Projects", href: "/projects" },
       { label: "Design Gallery", href: "/design-gallery" },
       { label: "About", href: "/about" },
       { label: "Contact", href: "/contact" },
@@ -67,9 +67,9 @@ const Menu = () => {
     // Move pill to active item
     let activeItem = menuItems.find((item) => item.href === pathname);
 
-    // If we're on a case study page, make "Work" active instead
+    // If we're on a case study page, make "Projects" active instead
     if (!activeItem && pathname.startsWith("/case-studies/")) {
-      activeItem = menuItems.find((item) => item.href === "/work");
+      activeItem = menuItems.find((item) => item.href === "/projects");
     }
 
     if (activeItem) {
@@ -119,11 +119,11 @@ const Menu = () => {
         {menuItems.map((item) => {
           let isActive = item.href === pathname;
 
-          // If we're on a case study page, make "Work" appear active
+          // If we're on a case study page, make "Projects" appear active
           if (
             !isActive &&
             pathname.startsWith("/case-studies/") &&
-            item.href === "/work"
+            item.href === "/projects"
           ) {
             isActive = true;
           }

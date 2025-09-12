@@ -36,8 +36,8 @@ const Hero: React.FC<HeroProps> = ({
   const { isDark } = useTheme();
 
   const handleCaseStudiesClick = () => {
-    // Navigate to Work page instead of home
-    window.location.href = "/work";
+    // Navigate to Projects page instead of home
+    window.location.href = "/projects";
   };
 
   // GSAP Morphing Effect

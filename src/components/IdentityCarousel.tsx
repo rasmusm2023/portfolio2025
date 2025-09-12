@@ -168,7 +168,7 @@ export default function IdentityCarousel({
                   backgroundImage: `linear-gradient(to bottom, ${
                     isDark
                       ? "rgba(0,0,0,0.7), rgba(0,0,0,0.9)"
-                      : "rgba(255,255,255,0.9), rgba(255,255,255,0.95)"
+                      : "rgba(255,255,255,0.8), rgba(255,255,255,0.85)"
                   }), url(${identityItem.image})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",

@@ -24,6 +24,7 @@ export default function Home() {
   const statementRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLButtonElement>(null);
   const morphIconRef = useRef<HTMLSpanElement>(null);
+  const animatedBlobRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(MorphSVGPlugin);
@@ -89,15 +90,28 @@ export default function Home() {
 
   // Hero entrance animation
   useEffect(() => {
+    // Check if all refs are available
+    if (
+      !titleRef.current ||
+      !lowCodeRef.current ||
+      !statementRef.current ||
+      !ctaRef.current ||
+      !morphIconRef.current ||
+      !animatedBlobRef.current
+    ) {
+      return;
+    }
+
     const tl = gsap.timeline({ delay: 0.1 });
 
-    // Set initial states
+    // Set initial states - start completely hidden
     gsap.set(
       [
         titleRef.current,
         lowCodeRef.current,
         statementRef.current,
         ctaRef.current,
+        animatedBlobRef.current,
       ],
       {
         opacity: 0,
@@ -111,53 +125,31 @@ export default function Home() {
       scale: 0.3,
     });
 
-    // Animate elements in sequence
-    tl.to(titleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: "power3.out",
-    })
-      .to(
+    // Animate all elements together for smoother experience
+    tl.to(
+      [
+        titleRef.current,
         lowCodeRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-        },
-        "-=0.2"
-      )
-      .to(
         statementRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-        },
-        "-=0.15"
-      )
-      .to(
-        morphIconRef.current,
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-        },
-        "-=0.1"
-      )
-      .to(
         ctaRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.3,
-          ease: "power3.out",
-        },
-        "-=0.05"
-      );
+        animatedBlobRef.current,
+      ],
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      }
+    ).to(
+      morphIconRef.current,
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: "back.out(1.7)",
+      },
+      "-=0.1"
+    );
 
     return () => {
       tl.kill();
@@ -209,6 +201,7 @@ export default function Home() {
             className="min-h-screen relative flex items-center"
           >
             <AnimatedBlob
+              ref={animatedBlobRef}
               gradientColors={{
                 primary: "rgba(139, 92, 246, 0.6)", // Purple primary
                 secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
@@ -250,10 +243,8 @@ export default function Home() {
                         d="M19 14l-7 7m0 0l-7-7m7 7V3"
                       />
                     </svg>
-                    <span className="hidden sm:inline">
-                      View selected works
-                    </span>
-                    <span className="sm:hidden">View works</span>
+                    <span className="hidden sm:inline">View Projects</span>
+                    <span className="sm:hidden">View Projects</span>
                   </span>
                   <span className="shimmer"></span>
                 </button>

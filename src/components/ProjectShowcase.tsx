@@ -91,7 +91,7 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
                   className="text-left cursor-pointer"
                 >
                   <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold [background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken pb-2">
-                    Selected works
+                    Projects
                   </h2>
                   <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent" />
                 </button>
@@ -113,7 +113,7 @@ const ProjectShowcase = ({ showTitle = true }: ProjectShowcaseProps) => {
               {/* Growing purple background from center */}
               <div className="absolute inset-0 bg-neutral-0 dark:bg-neutral-100" />
               <div
-                className="absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-100 lg:scale-y-0 lg:group-hover:scale-y-100 origin-center"
+                className="case-banner-bg absolute inset-0 opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-all duration-300 ease-in-out scale-y-100 lg:scale-y-0 lg:group-hover:scale-y-100 origin-center"
                 style={{
                   background: isDark
                     ? "linear-gradient(to bottom, #4C1D95, #6D28D9, #8B5CF6)"

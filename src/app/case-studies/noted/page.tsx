@@ -22,7 +22,7 @@ const PasswordProtection = ({
     setError("");
 
     // Simulate password check (replace with actual password)
-    if (password === "noted2024") {
+    if (password === "noted2025") {
       onPasswordCorrect();
     } else {
       setError("Incorrect password. Please try again.");
@@ -33,21 +33,21 @@ const PasswordProtection = ({
 
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 flex items-center justify-center px-4">
-      <div className="max-w-md w-full">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-2">
+      <div className="max-w-2xl w-full">
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold text-neutral-100 dark:text-neutral-0 mb-4">
             Noted Case Study
           </h1>
-          <p className="text-neutral-60 dark:text-neutral-40">
+          <p className="text-xl md:text-2xl text-neutral-60 dark:text-neutral-40">
             Enter the password to access this case study
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-8">
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-neutral-80 dark:text-neutral-20 mb-2"
+              className="block text-lg font-medium text-neutral-80 dark:text-neutral-20 mb-4"
             >
               Password
             </label>
@@ -56,31 +56,31 @@ const PasswordProtection = ({
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-3 border border-neutral-20 dark:border-neutral-80 rounded-lg bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               placeholder="Enter password"
               required
             />
           </div>
 
           {error && (
-            <div className="text-red-500 text-sm text-center">{error}</div>
+            <div className="text-red-500 text-lg text-center">{error}</div>
           )}
 
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold text-lg py-5 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50"
           >
             {isLoading ? "Checking..." : "Access Case Study"}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
+        <div className="mt-8 text-center">
           <button
             onClick={() => window.history.back()}
-            className="text-neutral-60 dark:text-neutral-40 hover:text-neutral-80 dark:hover:text-neutral-20 transition-colors duration-200"
+            className="text-lg text-neutral-60 dark:text-neutral-40 hover:text-neutral-80 dark:hover:text-neutral-20 transition-colors duration-200"
           >
-            ← Back to Work
+            ← Back to Projects
           </button>
         </div>
       </div>
@@ -123,7 +123,7 @@ export default function NotedCaseStudy() {
 
   // Noted case study data (placeholder content for now)
   const notedCaseStudyData = {
-    title: "Noted",
+    title: "NOTED",
     subtitle: "AI-Powered Note-Taking Application",
     description:
       "A modern note-taking app that uses AI to help users organize, search, and enhance their notes with intelligent features.",

@@ -66,7 +66,7 @@ const InfiniteScrollBanner = () => {
       // Create the infinite scroll animation
       animationRef.current = gsap.timeline({ repeat: -1 }).to(scrollContainer, {
         x: -contentWidth,
-        duration: 20,
+        duration: 12,
         ease: "none",
       });
     };

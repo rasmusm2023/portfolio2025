@@ -164,10 +164,10 @@ export default function WorkInProgressPage() {
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <button
-                        onClick={() => router.push("/work")}
+                        onClick={() => router.push("/projects")}
                         className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors duration-300"
                       >
-                        Back to Work
+                        Back to Projects
                       </button>
                       <button
                         onClick={handleLogout}

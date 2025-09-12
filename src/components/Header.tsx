@@ -304,7 +304,7 @@ const Header = () => {
             </Link>
 
             {/* Playground Button */}
-            <Link href="/fun" className="shimmer-button">
+            <Link href="/playground" className="shimmer-button">
               <span className="text">
                 <LegoIcon
                   weight="fill"
@@ -389,18 +389,18 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/work"
+                  href="/projects"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
-                    clickedMenuItem === "Work"
+                    clickedMenuItem === "Projects"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/work" ||
+                      : pathname === "/projects" ||
                         pathname.startsWith("/case-studies/")
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
-                  onClick={() => handleMenuItemClick("Work")}
+                  onClick={() => handleMenuItemClick("Projects")}
                 >
-                  Work
+                  Projects
                 </Link>
               </li>
               <li>
@@ -486,7 +486,7 @@ const Header = () => {
 
             {/* Playground Button */}
             <Link
-              href="/fun"
+              href="/playground"
               className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >

@@ -212,7 +212,10 @@
 /* Custom cursor styles */
 .custom-cursor {
   pointer-events: none;
-  z-index: 9999;
+  z-index: 999999 !important;
+  isolation: isolate;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* Hide scrollbar while maintaining scroll functionality */
@@ -332,7 +335,7 @@ textarea::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/* Work page hero background animations */
+/* Projects page hero background animations */
 @keyframes float-blob {
   0%,
   100% {

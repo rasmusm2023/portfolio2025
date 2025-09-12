@@ -153,8 +153,8 @@ const CaseStudy = ({
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const handleCaseStudiesClick = () => {
-    // Navigate to Work page instead of home
-    router.push("/work");
+    // Navigate to Projects page instead of home
+    router.push("/projects");
   };
 
   const nextImage = () => {

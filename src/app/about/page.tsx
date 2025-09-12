@@ -551,6 +551,7 @@ export default function AboutPage() {
   const descriptionRef = useRef<HTMLParagraphElement>(null);
   const subtitleRef = useRef<HTMLSpanElement>(null);
   const circularTextRef = useRef<HTMLDivElement>(null);
+  const animatedBlobRef = useRef<HTMLDivElement>(null);
   const titleElementRef = useRef<HTMLHeadingElement>(null);
 
   // Hero entrance animation
@@ -560,20 +561,22 @@ export default function AboutPage() {
       !titleRef.current ||
       !descriptionRef.current ||
       !subtitleRef.current ||
-      !circularTextRef.current
+      !circularTextRef.current ||
+      !animatedBlobRef.current
     ) {
       return;
     }
 
     const tl = gsap.timeline({ delay: 0.1 });
 
-    // Set initial states
+    // Set initial states - start completely hidden
     gsap.set(
       [
         titleRef.current,
         descriptionRef.current,
         subtitleRef.current,
         circularTextRef.current,
+        animatedBlobRef.current,
       ],
       {
         opacity: 0,
@@ -581,43 +584,22 @@ export default function AboutPage() {
       }
     );
 
-    // Animate elements in sequence
-    tl.to(titleRef.current, {
-      opacity: 1,
-      y: 0,
-      duration: 0.5,
-      ease: "power3.out",
-    })
-      .to(
+    // Animate all elements together for smoother experience
+    tl.to(
+      [
+        animatedBlobRef.current,
+        titleRef.current,
         descriptionRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-        },
-        "-=0.2"
-      )
-      .to(
         subtitleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power3.out",
-        },
-        "-=0.15"
-      )
-      .to(
         circularTextRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power3.out",
-        },
-        "-=0.1"
-      );
+      ],
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power3.out",
+      }
+    );
 
     return () => {
       tl.kill();
@@ -662,6 +644,7 @@ export default function AboutPage() {
             className="h-screen relative flex items-center"
           >
             <AnimatedBlob
+              ref={animatedBlobRef}
               gradientColors={{
                 primary: isDark
                   ? "rgba(20, 184, 166, 0.6)" // Teal primary for dark mode
@@ -693,7 +676,7 @@ export default function AboutPage() {
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
               <div className="text-left w-full">
                 <h1
-                  ref={titleElementRef}
+                  ref={titleRef}
                   className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                 >
                   <span className="[background-image:var(--gradient-hero-about)] dark:[background-image:var(--gradient-hero-about-dark)] bg-clip-text text-transparent font-hanken">
