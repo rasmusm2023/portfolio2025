@@ -282,7 +282,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
       {/* Custom Cursor */}
       <CustomCursor />
 
@@ -349,7 +349,7 @@ export default function ContactPage() {
               >
                 <div
                   ref={chatCardRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
+                  className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
                   {/* Noise background overlay */}
                   <div
@@ -634,7 +634,7 @@ export default function ContactPage() {
               <div className="max-w-2xl mx-auto">
                 <div
                   ref={chatCardLgRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
+                  className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
                   {/* Noise background overlay */}
                   <div
@@ -853,7 +853,7 @@ export default function ContactPage() {
               <div className="mb-8 sm:mb-12">
                 <div
                   ref={chatCardMobileRef}
-                  className="bg-neutral-10/50 dark:bg-neutral-100 backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
+                  className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
                 >
                   {/* Noise background overlay */}
                   <div

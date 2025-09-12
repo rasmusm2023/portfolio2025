@@ -864,7 +864,7 @@ const CaseStudy = ({
             transform: translateY(0);
           }
         `}</style>
-        <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
+        <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative">
           {/* Hero Section with Responsive Layout */}
           {/* Hero Section with Responsive Layout */}
           <Hero
@@ -929,7 +929,7 @@ const CaseStudy = ({
         <Mockups />
 
         {/* Other Case Studies Section */}
-        <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative">
+        <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative">
           <OtherStudies />
 
           {/* Footer Section */}

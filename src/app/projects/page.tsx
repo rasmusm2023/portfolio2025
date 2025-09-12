@@ -99,7 +99,7 @@ export default function ProjectsPage() {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+      <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
         <div className="relative z-10">
           <main className="container mx-auto">
             {/* Hero Section */}
@@ -182,7 +182,7 @@ export default function ProjectsPage() {
                     href="/case-studies/emplojd"
                     className="group cursor-pointer"
                   >
-                    <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] flex flex-col relative">
+                    <div className="case-study-card bg-neutral-3 dark:bg-[#060608] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] flex flex-col relative">
                       {/* Noise background overlay */}
                       <div
                         className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
@@ -281,7 +281,7 @@ export default function ProjectsPage() {
                     href="/case-studies/noted"
                     className="group cursor-pointer"
                   >
-                    <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
+                    <div className="case-study-card bg-neutral-3 dark:bg-[#060608] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
                       {/* Coming Soon Badge */}
                       <div className="absolute top-4 right-4 z-20">
                         <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
@@ -386,7 +386,7 @@ export default function ProjectsPage() {
                     href="/case-studies/zmartrest-ai"
                     className="group cursor-pointer"
                   >
-                    <div className="case-study-card bg-neutral-3 dark:bg-neutral-100 rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
+                    <div className="case-study-card bg-neutral-3 dark:bg-[#060608] rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 border border-neutral-100/10 dark:border-neutral-90/10 h-[500px] sm:h-[650px] lg:h-[750px] xl:h-[850px] relative flex flex-col">
                       {/* Coming Soon Badge */}
                       <div className="absolute top-4 right-4 z-20">
                         <span className="bg-gradient-to-r from-purple-500 to-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">

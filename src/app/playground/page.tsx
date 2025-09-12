@@ -36,7 +36,7 @@ const PasswordProtection = ({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] flex items-center justify-center px-4">
       <div className="max-w-2xl w-full">
         <div className="text-center mb-12">
           <div className="mb-6">
@@ -67,7 +67,7 @@ const PasswordProtection = ({
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-[#060608] text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               placeholder="Enter password"
               required
             />
@@ -124,7 +124,7 @@ export default function PlaygroundPage() {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+      <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
         {/* Hero Section */}
         <section className="h-[80vh] relative">
           <AnimatedBlob
@@ -149,7 +149,7 @@ export default function PlaygroundPage() {
                 </p>
 
                 <div className="max-w-3xl mx-auto">
-                  <div className="bg-neutral-10 dark:bg-neutral-90 rounded-2xl p-8 border border-neutral-20 dark:border-neutral-80">
+                  <div className="bg-neutral-10 dark:bg-[#060608] rounded-2xl p-8 border border-neutral-20 dark:border-neutral-80">
                     <div className="flex items-center justify-center mb-6">
                       <Wrench size={48} className="text-purple-500 mr-4" />
                       <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0">

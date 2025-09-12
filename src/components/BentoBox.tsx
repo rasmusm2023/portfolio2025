@@ -278,7 +278,7 @@ const BentoBox = () => {
             </div>
 
             {/* GSAP-powered Infinite Scroll Banner */}
-            <InfiniteScrollBanner />
+            <InfiniteScrollBanner className="" />
           </div>
 
           {/* Expertise with Dotted Background - Large section */}

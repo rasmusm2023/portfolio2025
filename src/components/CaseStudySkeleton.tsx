@@ -21,7 +21,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
   if (!isVisible) return null;
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 relative animate-pulse">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative animate-pulse">
       {/* Loading Progress Bar */}
       <div className="fixed top-0 left-0 w-full h-1 bg-neutral-200 dark:bg-neutral-600 z-50">
         <div
@@ -119,7 +119,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
                 <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
               </div>
               {/* Logo Box Skeleton */}
-              <div className="w-full h-24 sm:h-32 mt-4 sm:mt-6 bg-neutral-3 dark:bg-neutral-100 rounded-lg flex items-center px-4 sm:px-6"></div>
+              <div className="w-full h-24 sm:h-32 mt-4 sm:mt-6 bg-neutral-3 dark:bg-[#060608] rounded-lg flex items-center px-4 sm:px-6"></div>
             </div>
           </div>
         </div>
@@ -289,8 +289,8 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
       {/* Mockup Section Skeleton */}
       <section className="w-full">
         <div className="w-full grid grid-cols-2" style={{ aspectRatio: "2/1" }}>
-          <div className="bg-neutral-0 dark:bg-neutral-100"></div>
-          <div className="bg-neutral-0 dark:bg-neutral-100"></div>
+          <div className="bg-neutral-0 dark:bg-[#060608]"></div>
+          <div className="bg-neutral-0 dark:bg-[#060608]"></div>
         </div>
       </section>
 

@@ -24,7 +24,7 @@ export default function WorkPage() {
   return (
     <>
       <CustomCursor />
-      <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+      <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
         {/* Hero Section */}
         <section className="h-[80vh] relative">
           <AnimatedBlob
@@ -46,7 +46,7 @@ export default function WorkPage() {
                 </p>
 
                 <div className="max-w-2xl mx-auto">
-                  <div className="bg-neutral-10 dark:bg-neutral-90 rounded-2xl p-8 border border-neutral-20 dark:border-neutral-80">
+                  <div className="bg-neutral-10 dark:bg-[#060608] rounded-2xl p-8 border border-neutral-20 dark:border-neutral-80">
                     <h2 className="text-2xl font-bold text-neutral-100 dark:text-neutral-0 mb-4">
                       Portfolio Overview
                     </h2>

@@ -27,7 +27,7 @@ import ReactIconLight from "@/logos/inner-square-logos-light-svg/react.svg";
 import StitchIconLight from "@/logos/inner-square-logos-light-svg/stitch.svg";
 import NotionIconLight from "@/logos/inner-square-logos-light-svg/notion.svg";
 
-const InfiniteScrollBanner = () => {
+const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
   const { isDark } = useTheme();
   const bannerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<gsap.core.Timeline | null>(null);
@@ -64,11 +64,16 @@ const InfiniteScrollBanner = () => {
       }
 
       // Create the infinite scroll animation
-      animationRef.current = gsap.timeline({ repeat: -1 }).to(scrollContainer, {
-        x: -contentWidth,
-        duration: 12,
-        ease: "none",
-      });
+      animationRef.current = gsap
+        .timeline({ repeat: -1 })
+        .to(scrollContainer, {
+          x: -contentWidth,
+          duration: 12,
+          ease: "none",
+        })
+        .set(scrollContainer, {
+          x: 0,
+        });
     };
 
     // Initialize animation immediately
@@ -184,7 +189,30 @@ const InfiniteScrollBanner = () => {
   ];
 
   return (
-    <div className="relative overflow-hidden py-8" ref={bannerRef}>
+    <div
+      className={`relative overflow-hidden py-8 ${className}`}
+      ref={bannerRef}
+    >
+      {/* Left edge blur overlay */}
+      <div
+        className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 md:w-16 z-10 pointer-events-none"
+        style={{
+          background: isDark
+            ? "linear-gradient(to right, rgba(35, 35, 35, 0.9), transparent)"
+            : "linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent)",
+        }}
+      />
+
+      {/* Right edge blur overlay */}
+      <div
+        className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 md:w-16 z-10 pointer-events-none"
+        style={{
+          background: isDark
+            ? "linear-gradient(to left, rgba(35, 35, 35, 0.9), transparent)"
+            : "linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent)",
+        }}
+      />
+
       <div className="scroll-container flex gap-8">
         {/* Original content */}
         <div className="original-content flex gap-8 flex-shrink-0">

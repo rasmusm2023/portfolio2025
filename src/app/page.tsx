@@ -5,6 +5,7 @@ import AnimatedBlob from "@/components/AnimatedBlob";
 import BentoBoxFirstTwo from "@/components/BentoBoxFirstTwo";
 import BentoBoxRest from "@/components/BentoBoxRest";
 import ProjectShowcase from "@/components/ProjectShowcase";
+import CaseStudiesShowcase from "@/components/CaseStudiesShowcase";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { gradients, colors } from "@/styles/colors";
@@ -183,11 +184,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
       {/* Custom Cursor */}
       <CustomCursor />
 
       {/* Background */}
+      <div className="absolute inset-0 -z-10 bg-neutral-0 dark:bg-[#060608]" />
       <VantaBackground />
 
       {/* Content Container */}
@@ -198,7 +200,7 @@ export default function Home() {
           <section
             ref={heroRef}
             id="home"
-            className="min-h-screen relative flex items-center"
+            className="h-screen relative flex items-center"
           >
             <AnimatedBlob
               ref={animatedBlobRef}
@@ -208,8 +210,8 @@ export default function Home() {
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
-              {/* CTA Button - Responsive positioning */}
-              <div className="absolute bottom-8 sm:bottom-12 md:bottom-16 lg:bottom-20 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 z-20">
+              {/* CTA Button - Bottom right positioning */}
+              <div className="absolute bottom-8 right-4 sm:right-6 md:right-8 lg:right-12 xl:right-16 z-20">
                 <button
                   ref={ctaRef}
                   onClick={() => {
@@ -249,8 +251,7 @@ export default function Home() {
                   <span className="shimmer"></span>
                 </button>
               </div>
-
-              <div className="text-left w-full flex flex-col justify-center min-h-screen py-16 sm:py-20 lg:py-24">
+              <div className="text-left w-full flex flex-col justify-center h-full py-16 sm:py-20 lg:py-24">
                 {/* Hero content - Responsive layout */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
                   <div className="w-full lg:flex-1">
@@ -477,14 +478,23 @@ export default function Home() {
                 </div>
               </div>
             </div>
+
+            {/* Bento Box - Positioned just below CTA button within hero section */}
+            <div className="absolute bottom-8 left-0 right-0 z-10 transform translate-y-10">
+              <BentoBoxFirstTwo />
+            </div>
           </section>
         </main>
 
-        {/* First Two Bento Boxes */}
-        <BentoBoxFirstTwo />
-
         {/* Project Showcase Section - Full Width */}
-        <ProjectShowcase />
+        <div className="pt-32">
+          <ProjectShowcase />
+        </div>
+
+        {/* Case Studies Showcase Section */}
+        <div className="pt-16">
+          <CaseStudiesShowcase />
+        </div>
 
         {/* Rest of Bento Boxes */}
         <BentoBoxRest />

@@ -32,7 +32,7 @@ const PasswordProtection = ({
   };
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] flex items-center justify-center px-4">
       <div className="max-w-2xl w-full">
         <div className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-bold text-neutral-100 dark:text-neutral-0 mb-4">
@@ -56,7 +56,7 @@ const PasswordProtection = ({
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-[#060608] text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
               placeholder="Enter password"
               required
             />

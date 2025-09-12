@@ -296,7 +296,7 @@ const Hero: React.FC<HeroProps> = ({
 
                   {/* Tooltip with hidden pills */}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-64">
-                    <div className="bg-neutral-0 dark:bg-neutral-100 text-neutral-100 dark:text-neutral-0 px-4 py-3 rounded-lg shadow-lg border border-neutral-800 dark:border-neutral-200 text-sm">
+                    <div className="bg-neutral-0 dark:bg-[#060608] text-neutral-100 dark:text-neutral-0 px-4 py-3 rounded-lg shadow-lg border border-neutral-800 dark:border-neutral-200 text-sm">
                       <div className="font-medium mb-2 text-center">
                         Additional Technologies
                       </div>

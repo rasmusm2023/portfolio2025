@@ -21,7 +21,7 @@ const OtherStudies: React.FC = () => {
           {/* Zmartrest AI Case Study */}
           <Link
             href="/case-studies/zmartrest-ai"
-            className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+            className="group relative overflow-hidden bg-neutral-0 dark:bg-[#060608] rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
           >
             <div className="aspect-[3/2] bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -63,7 +63,7 @@ const OtherStudies: React.FC = () => {
           {/* Noted App Case Study */}
           <Link
             href="/case-studies/noted-app"
-            className="group relative overflow-hidden bg-neutral-0 dark:bg-neutral-100 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
+            className="group relative overflow-hidden bg-neutral-0 dark:bg-[#060608] rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
           >
             <div className="aspect-[3/2] bg-gradient-to-br from-purple-500 to-pink-600 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

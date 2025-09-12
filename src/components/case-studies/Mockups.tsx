@@ -8,7 +8,7 @@ const Mockups: React.FC = () => {
         {/* Mobile: Vertical stacking, each image 100% width */}
         <div className="grid grid-cols-1 sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
           {/* Sign-in Interface - Full width on mobile */}
-          <div className="w-full bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden">
+          <div className="w-full bg-neutral-0 dark:bg-[#060608] relative overflow-hidden">
             <img
               src="/case-study-assets/emplojd/Emplojd-Results-Shot-Sign-In-Create-Account.png"
               alt="Emplojd sign-in interface mockup"
@@ -17,7 +17,7 @@ const Mockups: React.FC = () => {
           </div>
 
           {/* Job Search Results - Full width on mobile */}
-          <div className="w-full bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden">
+          <div className="w-full bg-neutral-0 dark:bg-[#060608] relative overflow-hidden">
             <img
               src="/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png"
               alt="Emplojd job search results interface mockup"
@@ -32,7 +32,7 @@ const Mockups: React.FC = () => {
           style={{ aspectRatio: "2/1" }}
         >
           {/* Left Background - Sign-in */}
-          <div className="bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden rounded-lg">
+          <div className="bg-neutral-0 dark:bg-[#060608] relative overflow-hidden rounded-lg">
             <img
               src="/case-study-assets/emplojd/Emplojd-Results-Shot-Sign-In-Create-Account.png"
               alt="Emplojd sign-in interface mockup"
@@ -41,7 +41,7 @@ const Mockups: React.FC = () => {
           </div>
 
           {/* Right Background - Job Search Results */}
-          <div className="bg-neutral-0 dark:bg-neutral-100 relative overflow-hidden rounded-lg">
+          <div className="bg-neutral-0 dark:bg-[#060608] relative overflow-hidden rounded-lg">
             <img
               src="/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png"
               alt="Emplojd job search results interface mockup"

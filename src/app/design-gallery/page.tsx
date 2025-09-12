@@ -284,7 +284,7 @@ export default function DesignGalleryPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300">
+    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
       {/* Custom Cursor */}
       <CustomCursor />
 

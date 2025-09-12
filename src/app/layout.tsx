@@ -44,7 +44,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-0 dark:bg-neutral-100 transition-colors duration-300`}
+        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
       >
         <ErrorBoundary>
           <ThemeProvider>

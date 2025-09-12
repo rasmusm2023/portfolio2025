@@ -240,7 +240,7 @@ const Header = () => {
       {/* Background Layer */}
       <div
         className={`absolute inset-0 transition-all duration-1000 mobile-header-bg xl:bg-transparent ${
-          showBackground ? "xl:bg-white/80 xl:dark:bg-neutral-100/80" : ""
+          showBackground ? "xl:bg-white/80 xl:dark:bg-[#060608]/80" : ""
         }`}
       />
 
@@ -362,7 +362,7 @@ const Header = () => {
 
       {/* Mobile Menu Full Screen */}
       <div
-        className={`mobile-menu 2xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-neutral-100 z-50 transition-all duration-300 ease-in-out ${
+        className={`mobile-menu 2xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-[#060608] z-50 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible translate-y-4"
@@ -458,7 +458,7 @@ const Header = () => {
               href="https://www.linkedin.com/in/rasmus-mattsson/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-xl bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/20 dark:border-neutral-80/20 text-neutral-100 dark:text-neutral-0 hover:bg-neutral-20/50 dark:hover:bg-neutral-80/50 transition-all duration-200"
+              className="flex items-center gap-3 p-4 rounded-xl bg-neutral-10/50 dark:bg-[#060608]/50 backdrop-blur-sm border border-neutral-20/20 dark:border-neutral-80/20 text-neutral-100 dark:text-neutral-0 hover:bg-neutral-20/50 dark:hover:bg-neutral-80/50 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <FontAwesomeIcon
@@ -473,7 +473,7 @@ const Header = () => {
               href="https://drive.google.com/file/d/1nBqJfxCTopTvxbCOF55PYTeBauGoKaBB/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 p-4 rounded-xl bg-neutral-10/50 dark:bg-neutral-90/50 backdrop-blur-sm border border-neutral-20/20 dark:border-neutral-80/20 text-neutral-100 dark:text-neutral-0 hover:bg-neutral-20/50 dark:hover:bg-neutral-80/50 transition-all duration-200"
+              className="flex items-center gap-3 p-4 rounded-xl bg-neutral-10/50 dark:bg-[#060608]/50 backdrop-blur-sm border border-neutral-20/20 dark:border-neutral-80/20 text-neutral-100 dark:text-neutral-0 hover:bg-neutral-20/50 dark:hover:bg-neutral-80/50 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <FileText

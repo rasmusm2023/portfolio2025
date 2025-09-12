@@ -37,7 +37,7 @@ const Footer = () => {
               animation: "gradient-shift 4s ease-in-out infinite",
             }}
           />
-          <div className="absolute inset-[1px] rounded-[2.5rem] bg-neutral-0 dark:bg-neutral-100"></div>
+          <div className="absolute inset-[1px] rounded-[2.5rem] bg-neutral-0 dark:bg-[#060608]"></div>
         </div>
 
         {/* Noise background overlay */}
