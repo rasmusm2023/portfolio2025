@@ -310,7 +310,7 @@ export default function ContactPage() {
                     <div>
                       <h1
                         ref={titleRef}
-                        className="text-9xl xl:text-[10rem] font-extrabold tracking-tight leading-[0.6] mb-0"
+                        className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                       >
                         <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
                           Contact

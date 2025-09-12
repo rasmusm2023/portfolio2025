@@ -677,7 +677,7 @@ export default function AboutPage() {
               <div className="text-left w-full">
                 <h1
                   ref={titleRef}
-                  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[10rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
+                  className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                 >
                   <span className="[background-image:var(--gradient-hero-about)] dark:[background-image:var(--gradient-hero-about-dark)] bg-clip-text text-transparent font-hanken">
                     About
