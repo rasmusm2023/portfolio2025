@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
-import RasmusImage from "@/images/rasmus.jpg";
+import RasmusImage from "@/images/test-profile-image.png";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const BentoBoxFirstTwo = () => {
@@ -41,14 +41,14 @@ const BentoBoxFirstTwo = () => {
             {/* Introduction and Toolkit - 60/40 layout */}
             <div className="flex items-center gap-6 sm:gap-8 md:gap-12 h-full">
               {/* Left side - Introduction (60%) */}
-              <div className="w-[60%] flex items-start gap-3 sm:gap-4">
+              <div className="w-[60%] flex items-start gap-6 sm:gap-8">
                 {/* Profile image with animated border */}
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden flex-shrink-0 relative">
                   <Image
                     src={RasmusImage.src}
                     alt="Rasmus Mattsson"
                     className="w-full h-full object-cover object-top"
-                    style={{ objectPosition: "center 30%" }}
+                    style={{ objectPosition: "center 20%" }}
                     width={56}
                     height={56}
                   />

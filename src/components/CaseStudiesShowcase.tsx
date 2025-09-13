@@ -29,7 +29,7 @@ const caseStudies: CaseStudy[] = [
     description: "Enhancing job applications without compromising authenticity",
     subtitle: "— Cover Letter Generator AI SaaS Platform",
     image:
-      "/case-study-assets/emplojd/Emplojd-Results-Shot-Menu-Search-Job-Search-Results.png",
+      "/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.svg",
     alt: "Emplojd SaaS Platform Case Study",
     link: "/case-studies/emplojd",
     isActive: true,
