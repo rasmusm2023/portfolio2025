@@ -1,14 +1,26 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import RasmusImage from "@/images/test-profile-image.png";
 import { useTheme } from "@/contexts/ThemeContext";
 
 const BentoBoxFirstTwo = () => {
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const { isDark } = useTheme();
   const ctaRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
 
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
@@ -39,11 +51,11 @@ const BentoBoxFirstTwo = () => {
             ></div>
 
             {/* Introduction and Toolkit - 60/40 layout */}
-            <div className="flex items-center gap-6 sm:gap-8 md:gap-12 h-full">
+            <div className="flex items-center xl:items-center gap-3 min-[450px]:gap-6 sm:gap-8 md:gap-12 h-full">
               {/* Left side - Introduction (60%) */}
-              <div className="w-[60%] flex items-start gap-6 sm:gap-8">
+              <div className="w-[60%] flex items-center xl:items-start gap-3 min-[450px]:gap-6 sm:gap-8">
                 {/* Profile image with animated border */}
-                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden flex-shrink-0 relative">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden flex-shrink-0 relative">
                   <Image
                     src={RasmusImage.src}
                     alt="Rasmus Mattsson"
@@ -54,7 +66,7 @@ const BentoBoxFirstTwo = () => {
                   />
                   {/* Animated border - positioned outside the image */}
                   <svg
-                    className="absolute -inset-0.5 w-17 h-17"
+                    className="absolute -inset-0.5 w-11 h-11 sm:w-17 sm:h-17"
                     viewBox="0 0 68 68"
                     style={{ transform: "rotate(-90deg)" }}
                   >
@@ -101,7 +113,7 @@ const BentoBoxFirstTwo = () => {
                 </div>
                 <div className="flex-1">
                   <p
-                    className="text-3xl sm:text-4xl md:text-5xl font-regular leading-tight font-instrument-serif"
+                    className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-regular leading-tight font-instrument-serif"
                     style={{
                       color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                     }}
@@ -130,11 +142,15 @@ const BentoBoxFirstTwo = () => {
                       });
                     }
                   }}
-                  className="shimmer-button-green w-fit text-sm sm:text-base"
+                  className="shimmer-button-green w-fit"
+                  style={{
+                    fontSize: isMobile ? "0.875rem" : "1rem", // 14px for mobile, 16px for desktop
+                    padding: isMobile ? "0.5rem 1rem" : "0.75rem 1.5rem", // px-4 py-2 for mobile, px-6 py-3 for desktop
+                  }}
                 >
                   <span className="text">
                     <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      className="w-4 h-4 hidden min-[450px]:inline"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -143,11 +159,13 @@ const BentoBoxFirstTwo = () => {
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         strokeWidth={2}
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                    <span className="hidden sm:inline">View Projects</span>
-                    <span className="sm:hidden">View Projects</span>
+                    <span className="hidden min-[450px]:inline">
+                      View Projects
+                    </span>
+                    <span className="min-[450px]:hidden">Projects</span>
                   </span>
                   <span className="shimmer"></span>
                 </button>

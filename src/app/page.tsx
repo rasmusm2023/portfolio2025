@@ -287,9 +287,9 @@ export default function Home() {
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 200 200"
-                            width="60"
-                            height="60"
-                            className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 xl:w-28 xl:h-28"
+                            width="40"
+                            height="40"
+                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16"
                           >
                             {/* Main morphing path */}
                             <path
@@ -436,23 +436,25 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Low-code Developer text - Mobile/tablet positioning */}
-                    <div className="block lg:hidden mb-6 -mt-24 sm:-mt-32 lg:-mt-40">
-                      <span
-                        ref={lowCodeRef}
-                        className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
-                      >
+                    {/* Low-code Developer text - Responsive positioning */}
+                    <div className="mb-6 -mt-24 sm:-mt-32 lg:-mt-40">
+                      <div className="flex justify-start md:justify-end">
                         <span
-                          className="bg-clip-text text-transparent"
-                          style={{
-                            backgroundImage: isDark
-                              ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                              : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                          }}
+                          ref={lowCodeRef}
+                          className="text-2xl xl:text-3xl font-medium font-hanken tracking-wide"
                         >
-                          & Low-code Developer
+                          <span
+                            className="bg-clip-text text-transparent"
+                            style={{
+                              backgroundImage: isDark
+                                ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                                : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                            }}
+                          >
+                            & Low-code Developer
+                          </span>
                         </span>
-                      </span>
+                      </div>
                     </div>
 
                     {/* Hero statement - Responsive layout */}
@@ -499,24 +501,6 @@ export default function Home() {
                             </span>
                           </div>
                         </div>
-                      </div>
-                      {/* Low-code Developer text - Desktop positioning */}
-                      <div className="hidden lg:block w-auto lg:ml-8 -mt-24 sm:-mt-32 lg:-mt-40">
-                        <span
-                          ref={lowCodeRef}
-                          className="text-2xl sm:text-3xl md:text-4xl font-medium font-hanken tracking-wide"
-                        >
-                          <span
-                            className="bg-clip-text text-transparent"
-                            style={{
-                              backgroundImage: isDark
-                                ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                                : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                            }}
-                          >
-                            & Low-code Developer
-                          </span>
-                        </span>
                       </div>
                     </div>
                   </div>

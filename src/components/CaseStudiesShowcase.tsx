@@ -98,8 +98,8 @@ const CaseStudiesShowcase = ({
     const button = buttonRefs.current[caseId];
     if (button) {
       gsap.to(button, {
-        width: 80, // Even wider pill shape
-        borderRadius: 40, // Pill shape
+        width: 64, // Even wider pill shape
+        borderRadius: 32, // Pill shape
         duration: 0.3,
         ease: "power2.out",
       });
@@ -113,8 +113,8 @@ const CaseStudiesShowcase = ({
     Object.values(buttonRefs.current).forEach((button) => {
       if (button) {
         gsap.to(button, {
-          width: 48, // Original width (w-12 = 48px)
-          borderRadius: 24, // Original circle shape
+          width: 40, // Original width (w-10 = 40px)
+          borderRadius: 20, // Original circle shape
           duration: 0.3,
           ease: "power2.out",
         });
@@ -147,11 +147,11 @@ const CaseStudiesShowcase = ({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
           {caseStudies.map((caseStudy, index) => (
             <div
               key={caseStudy.id}
-              className="group relative transition-all duration-300 overflow-hidden cursor-pointer h-[800px] rounded-[3rem] case-study-card"
+              className="group relative transition-all duration-300 overflow-hidden cursor-pointer h-[600px] sm:h-[700px] md:h-[750px] lg:h-[800px] rounded-[3rem] case-study-card"
               onMouseEnter={() => handleMouseEnter(caseStudy.id)}
               onMouseLeave={handleMouseLeave}
               data-cursor-target="case-study"
@@ -171,11 +171,11 @@ const CaseStudiesShowcase = ({
               <div className="py-4">
                 {/* Project title and arrow */}
                 <div className="flex items-center justify-between mb-0.5">
-                  <div className="flex items-center gap-2">
-                    <h3 className="text-neutral-60 dark:text-neutral-40 text-2xl font-semibold font-hanken">
+                  <div className="flex items-center gap-1 sm:gap-2">
+                    <h3 className="text-neutral-60 dark:text-neutral-40 text-lg sm:text-xl md:text-2xl font-semibold font-hanken">
                       {caseStudy.title}
                     </h3>
-                    <span className="text-neutral-500 dark:text-neutral-600 text-lg font-medium">
+                    <span className="text-neutral-500 dark:text-neutral-600 text-sm sm:text-base md:text-lg font-medium">
                       {caseStudy.subtitle}
                     </span>
                   </div>
@@ -183,10 +183,10 @@ const CaseStudiesShowcase = ({
                     ref={(el) => {
                       buttonRefs.current[caseStudy.id] = el;
                     }}
-                    className="w-12 h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
                   >
                     <svg
-                      className="w-5 h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                      className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -202,7 +202,7 @@ const CaseStudiesShowcase = ({
                 </div>
 
                 {/* Tags */}
-                <div className="text-neutral-400 dark:text-neutral-600 text-base font-medium tracking-wide">
+                <div className="text-neutral-400 dark:text-neutral-600 text-sm sm:text-base font-medium tracking-wide">
                   {caseStudy.category}
                 </div>
               </div>

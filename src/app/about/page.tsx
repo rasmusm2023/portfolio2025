@@ -26,6 +26,7 @@ import StockholmImage from "@/images/8bit/stockholm.jpg";
 import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
 import NightOwlCornerImage from "@/images/corners/night-owl1.png";
 import HomeCookImage from "@/images/corners/home-cook.png";
+import AnimalLoverImage from "@/images/corners/animal-lover.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -1060,7 +1061,7 @@ export default function AboutPage() {
                           description:
                             "I love animals - I have had both cats and dogs as pets.",
                           emoji: "🐶",
-                          image: AnimalsImage.src,
+                          image: AnimalLoverImage.src,
                         },
                         {
                           title: "From Mellbystrand, Sweden",
