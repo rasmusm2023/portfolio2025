@@ -22,7 +22,7 @@ import MellbystrandImage from "@/images/8bit/mellbystrand.jpg";
 import NightOwlImage from "@/images/8bit/nightowl.jpg";
 import AnimalsImage from "@/images/8bit/animals.jpg";
 import Formula1Image from "@/images/8bit/formula1.jpg";
-import StockholmImage from "@/images/8bit/stockholm.jpg";
+import StockholmImage from "@/images/corners/stockholm-local.png";
 import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
 import NightOwlCornerImage from "@/images/corners/night-owl1.png";
 import HomeCookImage from "@/images/corners/home-cook.png";
@@ -170,9 +170,7 @@ function BookCard({
       rel="noopener noreferrer"
       className="flex-shrink-0 w-full h-20 sm:w-64 sm:h-32 md:w-80 md:h-40 lg:w-56 lg:h-36 xl:w-72 xl:h-32 2xl:w-80 2xl:h-40 rounded-2xl overflow-hidden border-2 border-transparent hover:border-[#8B5CF6] transition-colors duration-200 cursor-pointer group backdrop-blur-sm"
       style={{
-        backgroundColor: isDark
-          ? "rgba(35, 35, 35, 0.5)"
-          : "rgba(255, 255, 255, 0.95)",
+        backgroundColor: isDark ? "#060608" : "rgba(255, 255, 255, 0.95)",
       }}
     >
       <div className="flex w-full h-full">
@@ -201,7 +199,7 @@ function BookCard({
               className="w-full h-full backdrop-blur-sm border rounded-l-2xl p-4"
               style={{
                 backgroundColor: isDark
-                  ? "rgba(35, 35, 35, 0.5)"
+                  ? "#060608"
                   : "rgba(255, 255, 255, 0.9)",
                 borderColor: isDark
                   ? "rgba(255, 255, 255, 0.1)"
@@ -751,9 +749,7 @@ export default function AboutPage() {
                   className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about1")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("about1")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -822,9 +818,7 @@ export default function AboutPage() {
                   className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about2")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("about2")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -952,9 +946,7 @@ export default function AboutPage() {
                   className="md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
                   style={{
                     transform: `scale(${getBoxScale("carousel")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("carousel")}
                   onMouseLeave={() => setHoveredBox(null)}
@@ -985,9 +977,7 @@ export default function AboutPage() {
                   className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("identity")})`,
-                    backgroundColor: isDark
-                      ? "rgba(35, 35, 35, 0.5)"
-                      : "#ffffff",
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
                   }}
                   onMouseEnter={() => setHoveredBox("identity")}
                   onMouseLeave={() => setHoveredBox(null)}

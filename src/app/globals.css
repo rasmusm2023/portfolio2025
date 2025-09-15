@@ -557,7 +557,7 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 @keyframes spin-border {
   0% {
-    stroke-dashoffset: 188.5;
+    stroke-dashoffset: 201;
   }
 
   100% {

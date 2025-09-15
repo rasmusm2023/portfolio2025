@@ -67,7 +67,7 @@ const BentoBoxRest = () => {
             className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl px-4 py-8 lg:px-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-6 md:row-span-5 lg:row-span-2 topography-bg"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
-              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "#060608" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("skills-dotted")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -130,7 +130,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -255,7 +255,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -380,7 +380,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -505,7 +505,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -630,7 +630,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -755,7 +755,7 @@ const BentoBoxRest = () => {
                 <div
                   className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
                     isDark
-                      ? "bg-neutral-90/50 lg:group-hover/card:bg-transparent"
+                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
                   }`}
                 >
@@ -860,7 +860,7 @@ const BentoBoxRest = () => {
             className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 topography-bg"
             style={{
               transform: `scale(${getBoxScale("experience")})`,
-              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "#060608" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -972,7 +972,7 @@ const BentoBoxRest = () => {
             className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 topography-bg"
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
-              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "#060608" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}

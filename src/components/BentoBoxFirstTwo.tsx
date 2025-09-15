@@ -35,7 +35,7 @@ const BentoBoxFirstTwo = () => {
             className="border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 flex flex-col relative group hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 topography-bg"
             style={{
               transform: `scale(${getBoxScale("combined")})`,
-              backgroundColor: isDark ? "rgba(35, 35, 35, 0.5)" : "#ffffff",
+              backgroundColor: isDark ? "#060608" : "#ffffff",
             }}
             onMouseEnter={() => setHoveredBox("combined")}
             onMouseLeave={() => setHoveredBox(null)}
@@ -55,61 +55,15 @@ const BentoBoxFirstTwo = () => {
               {/* Left side - Introduction (60%) */}
               <div className="w-[60%] flex items-center xl:items-start gap-3 min-[450px]:gap-6 sm:gap-8">
                 {/* Profile image with animated border */}
-                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden flex-shrink-0 relative">
+                <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full flex-shrink-0 relative">
                   <Image
                     src={RasmusImage.src}
                     alt="Rasmus Mattsson"
-                    className="w-full h-full object-cover object-top"
+                    className="w-full h-full object-cover object-top rounded-full"
                     style={{ objectPosition: "center 20%" }}
                     width={56}
                     height={56}
                   />
-                  {/* Animated border - positioned outside the image */}
-                  <svg
-                    className="absolute -inset-0.5 w-11 h-11 sm:w-17 sm:h-17"
-                    viewBox="0 0 68 68"
-                    style={{ transform: "rotate(-90deg)" }}
-                  >
-                    <defs>
-                      <linearGradient
-                        id="borderGradient"
-                        x1="0%"
-                        y1="0%"
-                        x2="100%"
-                        y2="0%"
-                      >
-                        <stop offset="0%" stopColor="#8B5CF6" stopOpacity="1" />
-                        <stop
-                          offset="30%"
-                          stopColor="#8B5CF6"
-                          stopOpacity="0.7"
-                        />
-                        <stop
-                          offset="60%"
-                          stopColor="#8B5CF6"
-                          stopOpacity="0.3"
-                        />
-                        <stop
-                          offset="100%"
-                          stopColor="#8B5CF6"
-                          stopOpacity="0"
-                        />
-                      </linearGradient>
-                    </defs>
-                    <circle
-                      cx="34"
-                      cy="34"
-                      r="32"
-                      fill="none"
-                      stroke="url(#borderGradient)"
-                      strokeWidth="4"
-                      strokeDasharray="201"
-                      strokeDashoffset="201"
-                      style={{
-                        animation: "spin-border 5s linear infinite",
-                      }}
-                    />
-                  </svg>
                 </div>
                 <div className="flex-1">
                   <p

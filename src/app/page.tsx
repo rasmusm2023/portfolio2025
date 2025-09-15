@@ -231,7 +231,7 @@ export default function Home() {
                 secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
               }}
             />
-            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative">
               <div className="text-left w-full flex flex-col justify-start h-full -mt-32 sm:-mt-40 lg:-mt-48">
                 {/* Hero content - Responsive layout */}
                 <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
@@ -289,7 +289,7 @@ export default function Home() {
                             viewBox="0 0 200 200"
                             width="40"
                             height="40"
-                            className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16"
+                            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14"
                           >
                             {/* Main morphing path */}
                             <path
@@ -555,15 +555,12 @@ export default function Home() {
                     Product Designer, Zmartrest AI
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    As an intern at Zmartrest AI, I contributed to the design of
-                    a cutting-edge leadership tool that functions as a pulse
-                    monitor for workplace performance. Working on the platform
-                    that captures team performance data through biodata and
-                    conversations, I helped create intuitive interfaces for
-                    AI-powered coaching and KPI visualization. My role involved
-                    designing user experiences that make complex performance
-                    insights accessible to leaders at all levels, from team
-                    managers to board executives.
+                    Spearheaded new app features and data visualizations to
+                    tackle usability pain points. Engineered a streak mechanic
+                    that boosted daily activity, while mapping user journeys and
+                    shaping a leader portal MVP that drove a 68% increase in
+                    engagement by transforming insights into actionable
+                    guidance.
                   </p>
                 </div>
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
@@ -615,14 +612,11 @@ export default function Home() {
                     UX/UI Designer, Xbrandify
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    As an intern at Xbrandify, I worked on the platform that
-                    builds customer journeys through branded experiences and
-                    community building. I contributed to designing interfaces
-                    for event management, branded travel clubs, and community
-                    features that help brands turn inspiration into measurable
-                    growth. My work focused on creating user experiences that
-                    engage audiences in ways they love while proving ROI and
-                    building lasting loyalty through experiential marketing.
+                    Thrived in a fast-paced travel startup, crafting tailored
+                    landing pages and demo sites that reflected diverse customer
+                    brands. Initiated the company’s first style guide to unify
+                    design efforts, while energizing sales and investor outreach
+                    through impactful pitch decks, logos, and social campaigns.
                   </p>
                 </div>
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
@@ -674,13 +668,11 @@ export default function Home() {
                     Product Designer & Developer, Noted
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Led the design and development of Noted, a comprehensive
-                    note-taking and productivity platform. I handled both the
-                    user experience design and frontend development, creating an
-                    intuitive interface that helps users organize their thoughts
-                    and boost productivity. The project involved full-stack
-                    development skills combined with user-centered design
-                    principles to deliver a seamless digital experience.
+                    Championed a solo passion project by conceiving, designing,
+                    and coding a productivity web app. Empowered individuals to
+                    streamline tasks and capture ideas seamlessly across desktop
+                    and mobile. Forged a scalable design system that balanced
+                    simplicity, flexibility, and daily usability.
                   </p>
                 </div>
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
@@ -732,15 +724,11 @@ export default function Home() {
                     UX/UI Designer, Fokus
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Collaborated with a team of UX/UI designers on the Fokus
-                    project, where our primary focus was conducting
-                    comprehensive user research and analysis. We implemented a
-                    thorough research methodology that included user interviews,
-                    usability testing, and competitive analysis to inform our
-                    design decisions. Our meticulous approach to understanding
-                    user needs and pain points resulted in data-driven design
-                    solutions that significantly improved user experience and
-                    engagement metrics.
+                    Drove a collaborative design process to develop a study-tech
+                    app prototype. Defined goals and KPIs, mapped user journeys,
+                    and facilitated workshops on ethics and ideation. Iterative
+                    usability testing refined the final solution, supported by
+                    empathy mapping, flowcharts, and structured outcomes.
                   </p>
                 </div>
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
