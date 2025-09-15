@@ -265,13 +265,6 @@ const Footer = () => {
                     creating experiences that are seamless and make a
                     difference.
                   </p>
-                  <p className="text-neutral-60 text-xs lg:text-sm leading-relaxed max-w-md font-medium mt-2">
-                    I specialize in UX/UI design and frontend development using
-                    tools like Figma and Cursor to get the job done. Whether you
-                    call it low-code, vibe coding, or something else entirely, I
-                    enjoy tackling the full journey from concept to finished
-                    product.
-                  </p>
                 </div>
 
                 <div className="flex flex-col xl:flex-row xl:items-center gap-6 xl:gap-0 xl:justify-between">

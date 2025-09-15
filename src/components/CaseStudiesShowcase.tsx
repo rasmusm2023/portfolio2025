@@ -86,12 +86,16 @@ const CaseStudiesShowcase = ({
   const handleMouseEnter = (caseId: string) => {
     setHoveredCase(caseId);
 
-    // GSAP morphing animation
+    // GSAP morphing animation - responsive pill shape
     const button = buttonRefs.current[caseId];
     if (button) {
+      // Get current button height to maintain aspect ratio
+      const currentHeight = button.offsetHeight;
+      const pillWidth = currentHeight * 1.4; // 1.4:1 aspect ratio for pill shape
+
       gsap.to(button, {
-        width: 64, // Even wider pill shape
-        borderRadius: 32, // Pill shape
+        width: pillWidth,
+        borderRadius: currentHeight / 2, // Half of height for pill shape
         duration: 0.3,
         ease: "power2.out",
       });
@@ -101,12 +105,14 @@ const CaseStudiesShowcase = ({
   const handleMouseLeave = () => {
     setHoveredCase(null);
 
-    // Reset all buttons to original state
+    // Reset all buttons to original state - responsive circle shape
     Object.values(buttonRefs.current).forEach((button) => {
       if (button) {
+        const currentHeight = button.offsetHeight;
+
         gsap.to(button, {
-          width: 56, // Original width (w-14 = 56px)
-          borderRadius: 28, // Original circle shape
+          width: currentHeight, // Square shape (width = height)
+          borderRadius: currentHeight / 2, // Perfect circle
           duration: 0.3,
           ease: "power2.out",
         });
@@ -139,11 +145,11 @@ const CaseStudiesShowcase = ({
           </div>
         )}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
           {filteredCaseStudies.map((caseStudy, index) => (
             <div
               key={caseStudy.id}
-              className="group relative transition-all duration-300 overflow-hidden cursor-pointer h-[600px] sm:h-[700px] md:h-[750px] lg:h-[800px] rounded-[3rem] case-study-card"
+              className="group relative transition-all duration-300 overflow-hidden cursor-pointer rounded-[3rem] case-study-card"
               onMouseEnter={() => handleMouseEnter(caseStudy.id)}
               onMouseLeave={handleMouseLeave}
               data-cursor-target="case-study"
@@ -209,14 +215,14 @@ const CaseStudiesShowcase = ({
               </div>
 
               {/* Content container below image */}
-              <div className="py-4">
+              <div className="py-4 sm:py-6 pb-8 sm:pb-10 md:pb-12">
                 {/* Project title and arrow */}
-                <div className="flex items-center justify-between mb-0.5">
+                <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1 sm:gap-2">
-                    <h3 className="text-neutral-60 dark:text-neutral-40 text-lg sm:text-xl md:text-2xl font-semibold font-hanken">
+                    <h3 className="text-neutral-60 dark:text-neutral-40 text-base sm:text-lg md:text-xl font-semibold font-hanken">
                       {caseStudy.title}
                     </h3>
-                    <span className="text-neutral-500 dark:text-neutral-600 text-sm sm:text-base md:text-lg font-medium">
+                    <span className="text-neutral-500 dark:text-neutral-600 text-xs sm:text-sm md:text-base font-medium">
                       {caseStudy.subtitle}
                     </span>
                   </div>
@@ -224,10 +230,10 @@ const CaseStudiesShowcase = ({
                     ref={(el) => {
                       buttonRefs.current[caseStudy.id] = el;
                     }}
-                    className="w-14 h-12 sm:w-16 sm:h-14 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
                   >
                     <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                      className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -243,7 +249,7 @@ const CaseStudiesShowcase = ({
                 </div>
 
                 {/* Tags */}
-                <div className="text-neutral-400 dark:text-neutral-600 text-sm sm:text-base font-medium tracking-wide">
+                <div className="text-neutral-400 dark:text-neutral-600 text-xs sm:text-sm font-medium tracking-wide">
                   {caseStudy.category}
                 </div>
               </div>
