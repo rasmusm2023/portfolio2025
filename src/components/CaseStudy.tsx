@@ -66,6 +66,7 @@ interface CaseStudyProps {
   aboutText?: React.ReactNode;
   processSteps?: string[];
   businessObjectivesText?: React.ReactNode;
+  excludeIds?: string[];
 }
 
 const CaseStudy = ({
@@ -120,6 +121,7 @@ const CaseStudy = ({
   aboutText,
   processSteps,
   businessObjectivesText,
+  excludeIds = [],
 }: CaseStudyProps) => {
   const router = useRouter();
   const morphRef = useRef<HTMLButtonElement>(null);
@@ -930,7 +932,7 @@ const CaseStudy = ({
 
         {/* Other Case Studies Section */}
         <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative">
-          <OtherStudies />
+          <OtherStudies excludeIds={excludeIds} />
 
           {/* Footer Section */}
           <div className="pt-16 pb-16 pr-4 pl-4">

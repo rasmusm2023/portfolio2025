@@ -197,6 +197,7 @@ export default function EmplojdCaseStudy() {
                 </p>
               </div>
             }
+            excludeIds={["emplojd"]}
           />
         </>
       )}

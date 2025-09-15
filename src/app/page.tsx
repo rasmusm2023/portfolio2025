@@ -430,7 +430,7 @@ export default function Home() {
                           className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-32 sm:mb-40 lg:mb-48 text-left sm:text-center w-full"
                         >
                           <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                            Experience Designer
+                            Product Designer
                           </span>
                         </h1>
                       </div>
@@ -546,7 +546,7 @@ export default function Home() {
             {/* Experience Timeline */}
             <div className="space-y-12">
               {/* Experience Entry 1 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
                     JAN, 2025 - MAY, 2025
@@ -566,26 +566,30 @@ export default function Home() {
                     managers to board executives.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Company Logo */}
-                  <div className="flex items-center justify-center bg-[#060608] rounded-lg p-4">
+                  <div className="w-48 h-48 flex items-center justify-center">
                     <Image
-                      src="/logos/Experience/zmartrest-ai-logo.webp"
+                      src={
+                        isDark
+                          ? "/logos/Experience/zmartrest-logo-dark-mode.svg"
+                          : "/logos/Experience/zmartrest-logo-light-mode.svg"
+                      }
                       alt="Zmartrest AI Logo"
-                      width={180}
-                      height={180}
-                      className="object-contain"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <a
                     href="https://www.zmartrest.ai/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -602,7 +606,7 @@ export default function Home() {
               </div>
 
               {/* Experience Entry 2 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
                     NOV, 2024 - JAN, 2025
@@ -621,26 +625,30 @@ export default function Home() {
                     building lasting loyalty through experiential marketing.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Company Logo */}
-                  <div className="flex items-center justify-center bg-white rounded-lg p-4">
+                  <div className="w-48 h-48 flex items-center justify-center">
                     <Image
-                      src="/logos/Experience/xbrandify-logo.avif"
+                      src={
+                        isDark
+                          ? "/logos/Experience/xbrandify-logo-dark-mode.svg"
+                          : "/logos/Experience/xbrandify-logo-light-mode.svg"
+                      }
                       alt="Xbrandify Logo"
-                      width={180}
-                      height={180}
-                      className="object-contain"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <a
                     href="https://www.yourbrandtravel.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -657,7 +665,7 @@ export default function Home() {
               </div>
 
               {/* Experience Entry 3 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
                     MAY, 2025
@@ -675,22 +683,30 @@ export default function Home() {
                     principles to deliver a seamless digital experience.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Company Logo */}
-                  <div className="w-16 h-16 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center">
-                    <span className="text-xs font-semibold text-neutral-60 dark:text-neutral-40 text-center px-2">
-                      Noted
-                    </span>
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <Image
+                      src={
+                        isDark
+                          ? "/logos/Experience/noted-logo-dark-mode.svg"
+                          : "/logos/Experience/noted-logo-light-mode.svg"
+                      }
+                      alt="Noted Logo"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
                   <a
                     href="https://noted-beta.netlify.app/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -707,7 +723,7 @@ export default function Home() {
               </div>
 
               {/* Experience Entry 4 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
                     SEP, 2024 - NOV, 2024
@@ -727,24 +743,28 @@ export default function Home() {
                     engagement metrics.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Company Logo */}
-                  <div className="flex items-center justify-center">
+                  <div className="w-48 h-48 flex items-center justify-center">
                     <Image
-                      src="/logos/Experience/fokus-logo.svg"
+                      src={
+                        isDark
+                          ? "/logos/Experience/fokus-logo-dark-mode.svg"
+                          : "/logos/Experience/fokus-logo-light-mode.svg"
+                      }
                       alt="Fokus Logo"
-                      width={180}
-                      height={180}
-                      className="object-contain"
+                      width={192}
+                      height={192}
+                      className="w-full h-full object-contain"
                     />
                   </div>
                   <a
                     href="#"
-                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
                     <svg
-                      className="w-4 h-4 ml-2"
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

@@ -141,6 +141,18 @@ export default function ProjectsPage() {
 
               <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
                 <div className="text-left w-full">
+                  {/* Main Projects Title */}
+                  <div className="mb-8 sm:mb-12 lg:mb-16">
+                    <h1
+                      ref={titleRef}
+                      className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold font-hanken leading-none"
+                    >
+                      <span className="[background-image:var(--gradient-hero-projects)] dark:[background-image:var(--gradient-hero-projects-dark)] bg-clip-text text-transparent font-hanken">
+                        Projects
+                      </span>
+                    </h1>
+                  </div>
+
                   <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">
                     <div className="flex-1 max-w-full lg:max-w-[48rem]">
                       <p
@@ -177,7 +189,7 @@ export default function ProjectsPage() {
 
             {/* Case Studies Cards Section */}
             <div className="pt-[200px] pb-8 sm:pb-12 lg:pb-16">
-              <CaseStudiesShowcase />
+              <CaseStudiesShowcase showTitle={false} />
             </div>
 
             {/* Call to Action */}

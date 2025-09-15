@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { gsap } from "gsap";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Insights: React.FC = () => {
+  const { isDark } = useTheme();
   // Insights Section Spinning Icons Effect with GSAP
   useEffect(() => {
     // Select all SVG icon containers in the insights sections
@@ -25,8 +27,17 @@ const Insights: React.FC = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
         <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
           <div className="w-full lg:w-[600px]">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
-              Insights
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-left font-instrument-serif">
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: isDark
+                    ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                    : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                }}
+              >
+                Insights
+              </span>
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
           </div>

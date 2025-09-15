@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { HandTap } from "@phosphor-icons/react";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Results: React.FC = () => {
+  const { isDark } = useTheme();
   const [currentPrototypeIndex, setCurrentPrototypeIndex] = useState(0);
   const [prototypePositions, setPrototypePositions] = useState([0, 1, 2]); // [left, middle, right]
   const [isVideoPlaying, setIsVideoPlaying] = useState(true);
@@ -150,8 +152,17 @@ const Results: React.FC = () => {
         {/* Section Title */}
         <div className="flex justify-start mb-8 sm:mb-12">
           <div className="w-full lg:w-[600px]">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 text-left">
-              Results
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-left font-instrument-serif">
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage: isDark
+                    ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                    : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                }}
+              >
+                Results
+              </span>
             </h2>
             <div className="w-full h-0.5 bg-gradient-to-r from-neutral-80 dark:from-neutral-20 to-transparent"></div>
           </div>

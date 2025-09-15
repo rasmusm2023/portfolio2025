@@ -456,9 +456,6 @@ const CustomCursor = () => {
                       ↔
                     </span>
                   )}
-                  {config.icon === "eye" && (
-                    <Eyes size={20} style={{ marginRight: "6px" }} />
-                  )}
                   <span>{config.text || "VIEW"}</span>
                 </>
               )}

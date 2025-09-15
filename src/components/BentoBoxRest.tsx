@@ -952,20 +952,6 @@ const BentoBoxRest = () => {
                 <div className="flex items-center gap-4">
                   <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
                     <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
-                      20
-                    </span>
-                  </div>
-                  <span
-                    className={`text-base sm:text-lg lg:text-xl ${
-                      isDark ? "text-neutral-40" : "text-neutral-100"
-                    }`}
-                  >
-                    Completed projects
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
                       1
                     </span>
                   </div>

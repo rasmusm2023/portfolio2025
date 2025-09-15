@@ -42,8 +42,7 @@ const caseStudies: CaseStudy[] = [
     category: "Web Design / UX / UI / Development / Mobile Design",
     description: "Revolutionary note-taking experience",
     subtitle: "— Task Management SaaS Website",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&crop=center",
+    image: "/case-study-assets/noted/Projects-Case-Card-Thumbnail-Noted.webp",
     alt: "Noted App",
     link: "/case-studies/noted",
     isActive: false,
@@ -57,7 +56,7 @@ const caseStudies: CaseStudy[] = [
     description: "Intelligent restaurant management system",
     subtitle: "— Health-Tech App For A Sustainable Worklife",
     image:
-      "/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Zmartrest-AI-1.webp",
+      "/case-study-assets/zmartrest-ai/Projects-Case-Card-Thumbnail-Zmartrest-AI.webp",
     alt: "Zmartrest AI Platform",
     link: "/case-studies/zmartrest-ai",
     isActive: false,
@@ -68,14 +67,21 @@ const caseStudies: CaseStudy[] = [
 
 interface CaseStudiesShowcaseProps {
   showTitle?: boolean;
+  excludeIds?: string[];
 }
 
 const CaseStudiesShowcase = ({
   showTitle = true,
+  excludeIds = [],
 }: CaseStudiesShowcaseProps) => {
   const [hoveredCase, setHoveredCase] = useState<string | null>(null);
   const { isDark } = useTheme();
   const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  // Filter case studies to exclude specified IDs
+  const filteredCaseStudies = caseStudies.filter(
+    (caseStudy) => !excludeIds.includes(caseStudy.id)
+  );
 
   const handleMouseEnter = (caseId: string) => {
     setHoveredCase(caseId);
@@ -134,7 +140,7 @@ const CaseStudiesShowcase = ({
         )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 lg:gap-16">
-          {caseStudies.map((caseStudy, index) => (
+          {filteredCaseStudies.map((caseStudy, index) => (
             <div
               key={caseStudy.id}
               className="group relative transition-all duration-300 overflow-hidden cursor-pointer h-[600px] sm:h-[700px] md:h-[750px] lg:h-[800px] rounded-[3rem] case-study-card"
