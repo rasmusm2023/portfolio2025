@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const OtherStudies: React.FC = () => {
   return (
@@ -23,7 +24,13 @@ const OtherStudies: React.FC = () => {
             href="/case-studies/zmartrest-ai"
             className="group relative overflow-hidden bg-neutral-0 dark:bg-[#060608] rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1"
           >
-            <div className="aspect-[3/2] bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
+            <div className="aspect-[3/2] relative overflow-hidden">
+              <Image
+                src="/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Zmartrest-AI-1.webp"
+                alt="Zmartrest AI Platform"
+                fill
+                className="object-cover"
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
               <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
                 <h3 className="text-white font-bold text-lg sm:text-xl mb-2 group-hover:text-orange-200 transition-colors">

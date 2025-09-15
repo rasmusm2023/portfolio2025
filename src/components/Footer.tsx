@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Copy, FileText, Envelope, User } from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +15,7 @@ import { colors } from "@/styles/colors";
 const Footer = () => {
   const [emailCopied, setEmailCopied] = useState(false);
   const currentYear = new Date().getFullYear();
+  const router = useRouter();
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("hello@rasmusmattsson.com");
@@ -20,6 +23,20 @@ const Footer = () => {
     setTimeout(() => {
       setEmailCopied(false);
     }, 5000);
+  };
+
+  const handleSendMessage = () => {
+    router.push("/contact");
+    // Focus on the first Name input field after navigation
+    setTimeout(() => {
+      const nameInput =
+        document.getElementById("name") ||
+        document.getElementById("name-lg") ||
+        document.getElementById("name-mobile");
+      if (nameInput) {
+        nameInput.focus();
+      }
+    }, 100);
   };
 
   return (
@@ -220,12 +237,12 @@ const Footer = () => {
 
                     {/* Send me a message button */}
                     <div className="pt-1">
-                      <a
-                        href="mailto:hello@rasmusmattsson.com?subject=Project Inquiry from Portfolio"
+                      <button
+                        onClick={handleSendMessage}
                         className="w-full px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-10 font-semibold text-base lg:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500/50 flex items-center justify-center"
                       >
                         Send me a message
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>

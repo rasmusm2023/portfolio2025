@@ -360,8 +360,10 @@ const CustomLightbox = ({
                     src={slide.src}
                     alt={slide.alt}
                     style={{
-                      width: "100%",
-                      height: "100%",
+                      maxWidth: "70vw",
+                      maxHeight: "60vh",
+                      width: "auto",
+                      height: "auto",
                       objectFit: "contain",
                       borderRadius: "16px",
                     }}

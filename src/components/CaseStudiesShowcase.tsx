@@ -29,7 +29,7 @@ const caseStudies: CaseStudy[] = [
     description: "Enhancing job applications without compromising authenticity",
     subtitle: "— Cover Letter Generator AI SaaS Platform",
     image:
-      "/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.svg",
+      "/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.webp",
     alt: "Emplojd SaaS Platform Case Study",
     link: "/case-studies/emplojd",
     isActive: true,
@@ -39,9 +39,9 @@ const caseStudies: CaseStudy[] = [
   {
     id: "noted",
     title: "Noted",
-    category: "Mobile App / Design / UX",
+    category: "Web Design / UX / UI / Development / Mobile Design",
     description: "Revolutionary note-taking experience",
-    subtitle: "— Task Management Website",
+    subtitle: "— Task Management SaaS Website",
     image:
       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=400&fit=crop&crop=center",
     alt: "Noted App",
@@ -53,30 +53,16 @@ const caseStudies: CaseStudy[] = [
   {
     id: "zmartrest-ai",
     title: "Zmartrest AI",
-    category: "AI Platform / Web Design",
+    category: "AI / ML / App Design / New Features / UX Research / UI Design",
     description: "Intelligent restaurant management system",
-    subtitle: "— AI Platform",
+    subtitle: "— Health-Tech App For A Sustainable Worklife",
     image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=400&fit=crop&crop=center",
+      "/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Zmartrest-AI-1.webp",
     alt: "Zmartrest AI Platform",
     link: "/case-studies/zmartrest-ai",
     isActive: false,
     isPasswordProtected: true,
     isPlaceholder: false,
-  },
-  {
-    id: "coming-soon",
-    title: "Coming Soon",
-    category: "TBA / Design / Development",
-    description: "Exciting new project in development",
-    subtitle: "— TBA",
-    image:
-      "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=440&fit=crop&crop=center",
-    alt: "Coming Soon Project",
-    link: "#",
-    isActive: false,
-    isPasswordProtected: false,
-    isPlaceholder: true,
   },
 ];
 
@@ -113,8 +99,8 @@ const CaseStudiesShowcase = ({
     Object.values(buttonRefs.current).forEach((button) => {
       if (button) {
         gsap.to(button, {
-          width: 40, // Original width (w-10 = 40px)
-          borderRadius: 20, // Original circle shape
+          width: 56, // Original width (w-14 = 56px)
+          borderRadius: 28, // Original circle shape
           duration: 0.3,
           ease: "power2.out",
         });
@@ -157,14 +143,63 @@ const CaseStudiesShowcase = ({
               data-cursor-target="case-study"
             >
               {/* Large image with very rounded corners */}
-              <div className="w-full aspect-square overflow-hidden rounded-[3rem]">
+              <div className="w-full aspect-square overflow-hidden rounded-[3rem] relative">
                 <Image
                   src={caseStudy.image}
                   alt={caseStudy.alt}
                   width={400}
                   height={400}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover"
                 />
+                {/* Coming Soon pill for specific case studies */}
+                {(caseStudy.id === "zmartrest-ai" ||
+                  caseStudy.id === "noted") && (
+                  <div className="absolute top-4 right-4 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg">
+                    Coming Soon
+                  </div>
+                )}
+                {/* Tags at bottom of image */}
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+                  {caseStudy.id === "emplojd" && (
+                    <>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        2024
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        Lead UX/UI Designer
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        School Project
+                      </span>
+                    </>
+                  )}
+                  {caseStudy.id === "noted" && (
+                    <>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        2025
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        Designer & Developer
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        Solo Project
+                      </span>
+                    </>
+                  )}
+                  {caseStudy.id === "zmartrest-ai" && (
+                    <>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        2025
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        Product Designer
+                      </span>
+                      <span className="text-xs font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                        Internship Project
+                      </span>
+                    </>
+                  )}
+                </div>
               </div>
 
               {/* Content container below image */}
@@ -183,7 +218,7 @@ const CaseStudiesShowcase = ({
                     ref={(el) => {
                       buttonRefs.current[caseStudy.id] = el;
                     }}
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                    className="w-14 h-12 sm:w-16 sm:h-14 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
                   >
                     <svg
                       className="w-4 h-4 sm:w-5 sm:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"

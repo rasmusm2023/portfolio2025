@@ -10,67 +10,65 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { Pause } from "@phosphor-icons/react";
 import { gsap } from "gsap";
 
-// Sample gallery data - replace with your actual images
+// Gallery data - organized by carousel
 const galleryImages = [
+  // First carousel - Mobile app images
   {
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
-    alt: "UI Design Mockup",
-    title: "E-commerce Dashboard Design",
+    src: "/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
+    alt: "App Design For A Money Transfer And Payment App",
+    title: "App Design For A Money Transfer And Payment App",
   },
   {
-    src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop",
-    alt: "Mobile App Interface",
-    title: "Mobile Banking App Interface",
+    src: "/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
+    alt: "MVP Design For A Study App To Counteract Procrastination And Stress",
+    title:
+      "MVP Design For A Study App To Counteract Procrastination And Stress",
   },
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop",
-    alt: "Data Visualization",
-    title: "Analytics Dashboard",
+    src: "/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
+    alt: "Color Theme Explorations For An AI Cover Letter Generator App",
+    title: "Color Theme Explorations For An AI Cover Letter Generator App",
   },
   {
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    alt: "Web Design",
-    title: "Corporate Website Design",
+    src: "/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
+    alt: "Mockup For An AI Cover Letter Generator App",
+    title: "Mockup For An AI Cover Letter Generator App",
+  },
+  // Second carousel - Other design work
+  {
+    src: "/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
+    alt: "Persona Visualisation For A Money Transfer And Payment App",
+    title: "Persona Visualisation For A Money Transfer And Payment App",
   },
   {
-    src: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=800&fit=crop",
-    alt: "App Screens",
-    title: "Fitness App Screens",
+    src: "/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
+    alt: "Brochure Design For Cybersecurity Company",
+    title: "Brochure Design For Cybersecurity Company",
   },
   {
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop",
-    alt: "Dashboard Design",
-    title: "Admin Panel Design",
+    src: "/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
+    alt: "Brochure Design Mockups For Cybersecurity Company",
+    title: "Brochure Design Mockups For Cybersecurity Company",
   },
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=800&fit=crop",
-    alt: "Brand Identity",
-    title: "Brand Identity Design",
+    src: "/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
+    alt: "Landing Page MVP Exploration For a Creative Web Design Agency",
+    title: "Landing Page MVP Exploration For a Creative Web Design Agency",
   },
   {
-    src: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
-    alt: "Landing Page",
-    title: "SaaS Landing Page",
+    src: "/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
+    alt: "Landing Page MVP Exploration For a Cybersecurity Website",
+    title: "Landing Page MVP Exploration For a Cybersecurity Website",
   },
   {
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
-    alt: "Mobile Design",
-    title: "Travel App Design",
+    src: "/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
+    alt: "Figma Remake Design For Game Launcher",
+    title: "Figma Remake Design For Game Launcher",
   },
   {
-    src: "https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?w=800&h=600&fit=crop",
-    alt: "UI Design",
-    title: "Modern UI Design",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=800&h=600&fit=crop",
-    alt: "App Design",
-    title: "Mobile App Design",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=600&fit=crop",
-    alt: "Web Design",
-    title: "Creative Web Design",
+    src: "/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
+    alt: "Website Design For Computer And PC Parts E-Commerce",
+    title: "Website Design For Computer And PC Parts E-Commerce",
   },
 ];
 
@@ -81,12 +79,14 @@ const MovingCarousel = ({
   speed,
   isPaused,
   onImageClick,
+  startIndex = 0,
 }: {
   images: typeof galleryImages;
   direction: "left" | "right";
   speed: number;
   isPaused: boolean;
   onImageClick: (index: number) => void;
+  startIndex?: number;
 }) => {
   const [position, setPosition] = useState(0);
   const duplicatedImages = [...images, ...images]; // Duplicate for seamless loop
@@ -154,7 +154,7 @@ const MovingCarousel = ({
           <div
             key={`${image.src}-${index}`}
             className="inline-block w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] xl:w-[560px] h-[200px] sm:h-[240px] md:h-[300px] lg:h-[320px] xl:h-[400px] mx-2 sm:mx-3 md:mx-4 cursor-pointer group"
-            onClick={() => onImageClick(index % images.length)}
+            onClick={() => onImageClick(startIndex + (index % images.length))}
           >
             <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden border-2 border-neutral-80/40 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-purple-500/30 hover:scale-105 transition-all duration-300 gallery-image">
               <img
@@ -408,25 +408,27 @@ export default function DesignGalleryPage() {
                 </div>
               </div>
 
-              {/* First Carousel - Scrolls Left */}
+              {/* First Carousel - Mobile App Images - Scrolls Left */}
               <div className="mb-8 sm:mb-12">
                 <MovingCarousel
-                  images={galleryImages.slice(0, 6)}
+                  images={galleryImages.slice(0, 4)}
                   direction="left"
                   speed={2.5}
                   isPaused={isHovered}
                   onImageClick={openLightbox}
+                  startIndex={0}
                 />
               </div>
 
-              {/* Second Carousel - Scrolls Right */}
+              {/* Second Carousel - Other Design Work - Scrolls Right */}
               <div className="mb-8 sm:mb-12">
                 <MovingCarousel
-                  images={galleryImages.slice(6, 12)}
+                  images={galleryImages.slice(4, 10)}
                   direction="right"
                   speed={3}
                   isPaused={isHovered}
                   onImageClick={openLightbox}
+                  startIndex={4}
                 />
               </div>
             </div>

@@ -549,25 +549,38 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    AUG 23, 2024
+                    JAN, 2025 - MAY, 2025
                   </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    UX Designer, Capanna Verde
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    Product Designer, Zmartrest AI
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
-                    Revamped the digital presence of a newly opened gelato kiosk
-                    in Stockholm, enhancing customer engagement. Leveraging
-                    their logo and brand colors, I designed an intuitive website
-                    that allowed customers to easily find the kiosk, contact
-                    them, and explore their offerings. My creative approach in
-                    showcasing the business led to increased visibility and
-                    accessibility, helping to establish the kiosk as a go-to
-                    spot in the city.
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    As an intern at Zmartrest AI, I contributed to the design of
+                    a cutting-edge leadership tool that functions as a pulse
+                    monitor for workplace performance. Working on the platform
+                    that captures team performance data through biodata and
+                    conversations, I helped create intuitive interfaces for
+                    AI-powered coaching and KPI visualization. My role involved
+                    designing user experiences that make complex performance
+                    insights accessible to leaders at all levels, from team
+                    managers to board executives.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                  {/* Company Logo */}
+                  <div className="flex items-center justify-center bg-[#060608] rounded-lg p-4">
+                    <Image
+                      src="/logos/Experience/zmartrest-ai-logo.webp"
+                      alt="Zmartrest AI Logo"
+                      width={180}
+                      height={180}
+                      className="object-contain"
+                    />
+                  </div>
                   <a
-                    href="#"
+                    href="https://www.zmartrest.ai/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
@@ -592,26 +605,37 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    JUL 15, 2024
+                    NOV, 2024 - JAN, 2025
                   </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    UX Designer, Verno
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    UX/UI Designer, Xbrandify
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
-                    Developed a sleek, modern website for a high-end cleaning
-                    service company that aimed to attract customers through a
-                    streamlined offer submission process. By aligning with the
-                    client's luxurious and refined aesthetic, I created a clean,
-                    sophisticated interface where users could easily submit
-                    service requests. My attention to detail and focus on the
-                    client's vision resulted in a website that elevated the
-                    brand, reinforcing its premium positioning and improving
-                    customer engagement.
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    As an intern at Xbrandify, I worked on the platform that
+                    builds customer journeys through branded experiences and
+                    community building. I contributed to designing interfaces
+                    for event management, branded travel clubs, and community
+                    features that help brands turn inspiration into measurable
+                    growth. My work focused on creating user experiences that
+                    engage audiences in ways they love while proving ROI and
+                    building lasting loyalty through experiential marketing.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                  {/* Company Logo */}
+                  <div className="flex items-center justify-center bg-white rounded-lg p-4">
+                    <Image
+                      src="/logos/Experience/xbrandify-logo.avif"
+                      alt="Xbrandify Logo"
+                      width={180}
+                      height={180}
+                      className="object-contain"
+                    />
+                  </div>
                   <a
-                    href="#"
+                    href="https://www.yourbrandtravel.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
@@ -636,24 +660,32 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    JAN, 2022 - SEP, 2023
+                    MAY, 2025
                   </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    UX Designer, Genesis
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    Product Designer & Developer, Noted
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
-                    Thrived in a fast-paced environment at Genesis, designing
-                    intuitive and user-centric products. Successfully
-                    streamlined complex functionalities and implemented
-                    innovative features, contributing to a 46% increase in user
-                    engagement. I thrived on working across diverse teams,
-                    successfully integrating user feedback and diverse
-                    perspectives into innovative design solutions.
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Led the design and development of Noted, a comprehensive
+                    note-taking and productivity platform. I handled both the
+                    user experience design and frontend development, creating an
+                    intuitive interface that helps users organize their thoughts
+                    and boost productivity. The project involved full-stack
+                    development skills combined with user-centered design
+                    principles to deliver a seamless digital experience.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center">
+                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                  {/* Company Logo */}
+                  <div className="w-16 h-16 bg-neutral-100 dark:bg-neutral-800 rounded-lg flex items-center justify-center">
+                    <span className="text-xs font-semibold text-neutral-60 dark:text-neutral-40 text-center px-2">
+                      Noted
+                    </span>
+                  </div>
                   <a
-                    href="#"
+                    href="https://noted-beta.netlify.app/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
                   >
                     Visit Website
@@ -678,68 +710,34 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
                 <div className="flex-1">
                   <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    FEB 16, 2024
+                    SEP, 2024 - NOV, 2024
                   </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    UX Designer, Renast
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    UX/UI Designer, Fokus
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
-                    Created a website for a small cleaning company that
-                    previously had no online presence, with the goal of
-                    improving their competitiveness and customer satisfaction.
-                    Despite the limited resources preventing an online booking
-                    system, I focused on presenting clear, accessible
-                    information about their services to attract potential
-                    clients. By designing a user-friendly and visually appealing
-                    website, I helped the company enhance its visibility, making
-                    it easier for customers to connect with them and learn more
-                    about their offerings, ultimately boosting interest in their
-                    services.
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Collaborated with a team of UX/UI designers on the Fokus
+                    project, where our primary focus was conducting
+                    comprehensive user research and analysis. We implemented a
+                    thorough research methodology that included user interviews,
+                    usability testing, and competitive analysis to inform our
+                    design decisions. Our meticulous approach to understanding
+                    user needs and pain points resulted in data-driven design
+                    solutions that significantly improved user experience and
+                    engagement metrics.
                   </p>
                 </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center">
-                  <a
-                    href="#"
-                    className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 ml-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-
-              {/* Experience Entry 5 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    FEB, 2020 - JAN, 2022
+                <div className="lg:ml-8 flex-shrink-0 flex items-center gap-6">
+                  {/* Company Logo */}
+                  <div className="flex items-center justify-center">
+                    <Image
+                      src="/logos/Experience/fokus-logo.svg"
+                      alt="Fokus Logo"
+                      width={180}
+                      height={180}
+                      className="object-contain"
+                    />
                   </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4">
-                    UX Designer, Renast
-                  </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed">
-                    I championed a user-centric approach to product design. By
-                    spearheading collaborative efforts to streamline playlists
-                    and discovery features, I contributed to a 25% increase in
-                    user engagement with personalized recommendations. My
-                    ability to translate music passion into intuitive design
-                    solutions, while fostering open communication and
-                    inclusivity within the design team.
-                  </p>
-                </div>
-                <div className="lg:ml-8 flex-shrink-0 flex items-center">
                   <a
                     href="#"
                     className="inline-flex items-center px-6 py-3 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
