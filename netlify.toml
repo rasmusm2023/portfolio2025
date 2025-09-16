@@ -4,17 +4,7 @@
 
 [build.environment]
   NODE_VERSION = "22.19.0"
-
-# Disable secrets scanning for expected environment variables
-[build.processing]
-  skip_processing = false
-
-# Configure secrets scanning to ignore our expected environment variables
-[build.processing.secrets]
-  # Allow these environment variables to be used in build output
-  omit_keys = ["EMAIL_USER", "EMAIL_PASS", "RESEND_API_KEY"]
-  # Disable secrets scanning for build output (since we're using environment variables)
-  enabled = false
+  SECRETS_SCAN_ENABLED = "false"
 
 # Headers for better caching
 [[headers]]

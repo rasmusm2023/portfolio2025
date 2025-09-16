@@ -5,6 +5,14 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
+    // Validate environment variables
+    if (!process.env.EMAIL_USER) {
+      return NextResponse.json(
+        { error: "Email configuration not found" },
+        { status: 500 }
+      );
+    }
+
     const { name, email, subject, message } = await request.json();
 
     // Validate required fields
@@ -26,7 +34,7 @@ export async function POST(request: NextRequest) {
     try {
       const { data, error } = await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>", // This will be replaced with your domain
-        to: [process.env.EMAIL_USER || "ux.rasmusmattsson@gmail.com"], // Use environment variable
+        to: [process.env.EMAIL_USER], // Use environment variable
         replyTo: email,
         subject: `💬 Conversation: ${subject}`,
         html: `
