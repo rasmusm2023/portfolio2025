@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "500px",
+      },
       fontFamily: {
         sans: ["var(--font-nunito-sans)"],
         hanken: ["var(--font-hanken-grotesk)", "sans-serif"],

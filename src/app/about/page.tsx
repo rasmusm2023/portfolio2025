@@ -27,6 +27,8 @@ import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
 import NightOwlCornerImage from "@/images/corners/night-owl1.png";
 import HomeCookImage from "@/images/corners/home-cook.png";
 import AnimalLoverImage from "@/images/corners/animal-lover.png";
+import DesignThinkerImage from "@/images/corners/design-thinker2.png";
+import InfjAImage from "@/images/corners/INFJ-A.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -743,10 +745,10 @@ export default function AboutPage() {
           {/* Bento Box Layout */}
           <section className="py-8 sm:py-12 lg:py-16 relative">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
+              <div className="grid grid-cols-1 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
                 {/* About Me - Copy 1 - 50% width */}
                 <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                  className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about1")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -786,20 +788,20 @@ export default function AboutPage() {
                   </div>
                   <div className="mt-4 sm:mt-6 relative z-10">
                     <p
-                      className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl"
+                      className="leading-relaxed text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
                     >
-                      I'm a jubilant guy who appreciates tasty food, good music,
-                      cozy gaming, designing, brainstorming, and spending
-                      quality time with my family, friends, and girlfriend. I
-                      design & develop digital solutions with a passion for
-                      creating experiences that are seamless and make a
-                      difference.
+                      I'm a happy easy-going guy who appreciates tasty food,
+                      good music, cozy gaming, designing, brainstorming, and
+                      spending quality time with my family, friends, and
+                      girlfriend. I design & develop digital solutions with a
+                      passion for creating experiences that are seamless and
+                      make a difference.
                     </p>
                     <p
-                      className="leading-relaxed text-2xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
+                      className="leading-relaxed text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -815,7 +817,7 @@ export default function AboutPage() {
 
                 {/* About Me - Copy 2 - 50% width */}
                 <div
-                  className="md:col-span-1 lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                  className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("about2")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -855,7 +857,7 @@ export default function AboutPage() {
                   </div>
                   <div className="mt-4 sm:mt-6 relative z-10">
                     <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
+                      className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -895,7 +897,7 @@ export default function AboutPage() {
                       scale.
                     </p>
                     <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                      className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -909,7 +911,7 @@ export default function AboutPage() {
                       impactful.
                     </p>
                     <p
-                      className="leading-relaxed text-base sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                      className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
                       style={{
                         color: isDark ? "#A7A7A7" : "#5D5E63",
                       }}
@@ -943,7 +945,7 @@ export default function AboutPage() {
 
                 {/* Carousel Bento Box - Full width */}
                 <div
-                  className="md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
+                  className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
                   style={{
                     transform: `scale(${getBoxScale("carousel")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -964,7 +966,7 @@ export default function AboutPage() {
                   {/* Carousel centered within the bento box */}
                   <div className="flex items-center justify-center h-full relative z-10 w-full">
                     <div
-                      className="w-full scale-75 sm:scale-85 md:scale-95 relative overflow-hidden"
+                      className="w-full scale-90 xs:scale-95 sm:scale-100 md:scale-95 relative overflow-hidden"
                       style={{ maxWidth: "100%" }}
                     >
                       <InfiniteScrollBanner className="w-full" />
@@ -974,7 +976,7 @@ export default function AboutPage() {
 
                 {/* Personal Identity - Full width section */}
                 <div
-                  className="col-span-1 md:col-span-2 lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                  className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
                   style={{
                     transform: `scale(${getBoxScale("identity")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -1034,10 +1036,9 @@ export default function AboutPage() {
                         {
                           title: "Design Thinker",
                           description:
-                            "I approach problems with empathy and user-centered design principles.",
+                            "I approach problems with empathy and user-centered design principles. I find myself thinking about design a lot even in everyday scenarios.",
                           emoji: "💭",
-                          image:
-                            "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=400&fit=crop&crop=center",
+                          image: DesignThinkerImage.src,
                         },
                         {
                           title: "Stockholm Local",
@@ -1080,6 +1081,21 @@ export default function AboutPage() {
                             "I love gaming and exploring virtual worlds. From strategy games to action RPGs, gaming fuels my creativity and problem-solving skills.",
                           emoji: "🎮",
                           image: AvidGamerImage.src,
+                        },
+                        {
+                          title: "Music & Festivals",
+                          description:
+                            "I used to produce my own electronic music and DJ sets. Now I enjoy discovering new artists and experiencing live music at festivals.",
+                          emoji: "🎵",
+                          image:
+                            "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center",
+                        },
+                        {
+                          title: "INFJ-A",
+                          description:
+                            "According to MBTI tests - I'm a slightly introverted, intuitive, and feeling individual with an assertive nature and vivid imagination.",
+                          emoji: "🧠",
+                          image: InfjAImage.src,
                         },
                       ]}
                     />

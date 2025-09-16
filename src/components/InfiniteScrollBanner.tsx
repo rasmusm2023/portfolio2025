@@ -198,7 +198,7 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
         className="absolute left-0 top-0 bottom-0 w-8 sm:w-12 md:w-16 z-10 pointer-events-none"
         style={{
           background: isDark
-            ? "linear-gradient(to right, rgba(35, 35, 35, 0.9), transparent)"
+            ? "linear-gradient(to right, rgba(6, 6, 8, 0.9), transparent)"
             : "linear-gradient(to right, rgba(255, 255, 255, 0.9), transparent)",
         }}
       />
@@ -208,7 +208,7 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
         className="absolute right-0 top-0 bottom-0 w-8 sm:w-12 md:w-16 z-10 pointer-events-none"
         style={{
           background: isDark
-            ? "linear-gradient(to left, rgba(35, 35, 35, 0.9), transparent)"
+            ? "linear-gradient(to left, rgba(6, 6, 8, 0.9), transparent)"
             : "linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent)",
         }}
       />
