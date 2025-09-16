@@ -18,6 +18,11 @@ export default function ProjectsPage() {
   const { isDark } = useTheme();
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
 
+  // Update page title
+  useEffect(() => {
+    document.title = "Projects — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);

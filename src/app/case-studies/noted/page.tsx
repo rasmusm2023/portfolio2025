@@ -94,6 +94,11 @@ export default function NotedCaseStudy() {
   const { setIsCaseStudyPage } = useCaseStudy();
   const router = useRouter();
 
+  // Update page title
+  useEffect(() => {
+    document.title = "Noted — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   useEffect(() => {
     // Set case study context
     setIsCaseStudyPage(true);

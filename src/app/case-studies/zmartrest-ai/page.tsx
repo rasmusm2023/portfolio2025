@@ -94,6 +94,12 @@ export default function ZmartrestAICaseStudy() {
   const { setIsCaseStudyPage } = useCaseStudy();
   const router = useRouter();
 
+  // Update page title
+  useEffect(() => {
+    document.title =
+      "Zmartrest AI — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   useEffect(() => {
     // Set case study context
     setIsCaseStudyPage(true);

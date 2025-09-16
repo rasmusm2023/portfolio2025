@@ -546,6 +546,11 @@ export default function AboutPage() {
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
   const { isDark } = useTheme();
 
+  // Update page title
+  useEffect(() => {
+    document.title = "About — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);

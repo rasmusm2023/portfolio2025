@@ -109,6 +109,12 @@ export default function PlaygroundPage() {
     setIsMounted(true);
   }, []);
 
+  // Update page title
+  useEffect(() => {
+    document.title =
+      "Playground — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   const handlePasswordCorrect = () => {
     setIsAuthenticated(true);
   };

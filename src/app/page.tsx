@@ -18,6 +18,11 @@ export default function Home() {
   const { isDark } = useTheme();
   const morphRef = useRef<HTMLSpanElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  // Update page title
+  useEffect(() => {
+    document.title = "Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isClient, setIsClient] = useState(false);
 

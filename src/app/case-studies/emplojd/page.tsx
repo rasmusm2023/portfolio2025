@@ -11,6 +11,11 @@ export default function EmplojdCaseStudy() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
 
+  // Update page title
+  useEffect(() => {
+    document.title = "Emplojd — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   useEffect(() => {
     // Simulate loading progress
     const progressInterval = setInterval(() => {

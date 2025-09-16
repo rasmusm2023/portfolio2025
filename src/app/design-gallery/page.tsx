@@ -183,6 +183,12 @@ export default function DesignGalleryPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
+  // Update page title
+  useEffect(() => {
+    document.title =
+      "Design Gallery — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);

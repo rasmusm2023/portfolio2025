@@ -156,6 +156,11 @@ export default function ContactPage() {
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Update page title
+  useEffect(() => {
+    document.title = "Contact — Rasmus Mattsson | Product Designer Portfolio";
+  }, []);
+
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
