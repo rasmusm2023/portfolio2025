@@ -1,6 +1,6 @@
 "use client";
 
-import CaseStudy from "@/components/CaseStudy";
+import CaseStudy from "@/components/case-studies/CaseStudy";
 import CustomCursor from "@/components/CustomCursor";
 
 export default function Portfolio2025CaseStudy() {

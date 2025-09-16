@@ -1,11 +1,11 @@
 "use client";
 
-import VantaBackground from "@/components/VantaBackground";
-import AnimatedBlob from "@/components/AnimatedBlob";
-import BentoBoxFirstTwo from "@/components/BentoBoxFirstTwo";
-import BentoBoxRest from "@/components/BentoBoxRest";
-import CaseStudiesShowcase from "@/components/CaseStudiesShowcase";
-import Footer from "@/components/Footer";
+import VantaBackground from "@/components/background/VantaBackground";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
+import BentoBoxFirstTwo from "@/components/ui/BentoBoxFirstTwo";
+import BentoBoxRest from "@/components/ui/BentoBoxRest";
+import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
+import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import { gradients, colors } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
@@ -552,7 +552,7 @@ export default function Home() {
                     JAN, 2025 - MAY, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer, Zmartrest AI
+                    Product Designer (Intern), Zmartrest AI
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Spearheaded new app features and data visualizations to
@@ -569,8 +569,8 @@ export default function Home() {
                     <Image
                       src={
                         isDark
-                          ? "/logos/Experience/zmartrest-logo-dark-mode.svg"
-                          : "/logos/Experience/zmartrest-logo-light-mode.svg"
+                          ? "/assets/logos/Experience/zmartrest-logo-dark-mode.svg"
+                          : "/assets/logos/Experience/zmartrest-logo-light-mode.svg"
                       }
                       alt="Zmartrest AI Logo"
                       width={192}
@@ -609,7 +609,7 @@ export default function Home() {
                     NOV, 2024 - JAN, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer, Xbrandify
+                    UX/UI Designer (Intern), Xbrandify
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Thrived in a fast-paced travel startup, crafting tailored
@@ -625,8 +625,8 @@ export default function Home() {
                     <Image
                       src={
                         isDark
-                          ? "/logos/Experience/xbrandify-logo-dark-mode.svg"
-                          : "/logos/Experience/xbrandify-logo-light-mode.svg"
+                          ? "/assets/logos/Experience/xbrandify-logo-dark-mode.svg"
+                          : "/assets/logos/Experience/xbrandify-logo-light-mode.svg"
                       }
                       alt="Xbrandify Logo"
                       width={192}
@@ -681,8 +681,8 @@ export default function Home() {
                     <Image
                       src={
                         isDark
-                          ? "/logos/Experience/noted-logo-dark-mode.svg"
-                          : "/logos/Experience/noted-logo-light-mode.svg"
+                          ? "/assets/logos/Experience/noted-logo-dark-mode.svg"
+                          : "/assets/logos/Experience/noted-logo-light-mode.svg"
                       }
                       alt="Noted Logo"
                       width={192}
@@ -737,8 +737,8 @@ export default function Home() {
                     <Image
                       src={
                         isDark
-                          ? "/logos/Experience/fokus-logo-dark-mode.svg"
-                          : "/logos/Experience/fokus-logo-light-mode.svg"
+                          ? "/assets/logos/Experience/fokus-logo-dark-mode.svg"
+                          : "/assets/logos/Experience/fokus-logo-light-mode.svg"
                       }
                       alt="Fokus Logo"
                       width={192}

@@ -1,11 +1,11 @@
 "use client";
 
 import CustomCursor from "@/components/CustomCursor";
-import ProjectShowcase from "@/components/ProjectShowcase";
-import CaseStudiesShowcase from "@/components/CaseStudiesShowcase";
-import Footer from "@/components/Footer";
-import AnimatedBlob from "@/components/AnimatedBlob";
-import CircularScrollText from "@/components/CircularScrollText";
+import ProjectShowcase from "@/components/pages/ProjectShowcase";
+import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
+import Footer from "@/components/layout/Footer";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
+import CircularScrollText from "@/components/ui/CircularScrollText";
 import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
 import { useEffect, useRef, useState } from "react";

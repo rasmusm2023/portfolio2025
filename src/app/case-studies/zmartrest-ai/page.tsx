@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import CaseStudy from "@/components/CaseStudy";
-import CaseStudySkeleton from "@/components/CaseStudySkeleton";
+import CaseStudy from "@/components/case-studies/CaseStudy";
+import CaseStudySkeleton from "@/components/case-studies/CaseStudySkeleton";
 import { useCaseStudy } from "@/contexts/CaseStudyContext";
 
 // Password protection component
@@ -177,9 +177,11 @@ export default function ZmartrestAICaseStudy() {
       "01 Frontend Developer",
       "01 Data Scientist",
     ],
-    appIconPath: "/case-study-assets/zmartrest/zmartrest-icon.svg",
-    logotypeBlackPath: "/case-study-assets/zmartrest/zmartrest-logo-black.svg",
-    logotypeWhitePath: "/case-study-assets/zmartrest/zmartrest-logo-white.svg",
+    appIconPath: "/assets/case-study-assets/zmartrest/zmartrest-icon.svg",
+    logotypeBlackPath:
+      "/assets/case-study-assets/zmartrest/zmartrest-logo-black.svg",
+    logotypeWhitePath:
+      "/assets/case-study-assets/zmartrest/zmartrest-logo-white.svg",
     aboutText: (
       <div className="space-y-4">
         <p>

@@ -9,14 +9,14 @@ import {
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 // import CustomCursor from "@/components/CustomCursor";
-import Header from "@/components/Header";
-import PerformanceOptimizer from "@/components/PerformanceOptimizer";
-import PerformanceMonitor from "@/components/PerformanceMonitor";
+import Header from "@/components/layout/Header";
+import PerformanceOptimizer from "@/components/performance/PerformanceOptimizer";
+import PerformanceMonitor from "@/components/performance/PerformanceMonitor";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { NavbarProvider } from "@/contexts/NavbarContext";
 import { CaseStudyProvider } from "@/contexts/CaseStudyContext";
-import FloatingNavbar from "@/components/FloatingNavbar";
-import ErrorBoundary from "@/components/ErrorBoundary";
+import FloatingNavbar from "@/components/layout/FloatingNavbar";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 export const metadata: Metadata = {
   title: "Rasmus Portfolio",
@@ -38,13 +38,13 @@ export default function RootLayout({
         {/* Preload critical resources */}
         <link
           rel="preload"
-          href="/rm-logo-portfolio-white.svg"
+          href="/assets/logos/rm/rm-logo-portfolio-white.svg"
           as="image"
           type="image/svg+xml"
         />
         <link
           rel="preload"
-          href="/rm-logo-portfolio-dark.svg"
+          href="/assets/logos/rm/rm-logo-portfolio-dark.svg"
           as="image"
           type="image/svg+xml"
         />

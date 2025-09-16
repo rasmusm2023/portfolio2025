@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Copy, ArrowsOutCardinal } from "@phosphor-icons/react";
-import AnimatedBlob from "@/components/AnimatedBlob";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import CustomCursor from "@/components/CustomCursor";
 import { gsap } from "gsap";
 

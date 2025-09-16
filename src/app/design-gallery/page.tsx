@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import CustomLightbox from "@/components/Lightbox";
-import AnimatedBlob from "@/components/AnimatedBlob";
-import Footer from "@/components/Footer";
+import CustomLightbox from "@/components/ui/Lightbox";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
+import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
-import CircularScrollText from "@/components/CircularScrollText";
+import CircularScrollText from "@/components/ui/CircularScrollText";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Pause } from "@phosphor-icons/react";
 import { gsap } from "gsap";
@@ -14,59 +14,59 @@ import { gsap } from "gsap";
 const galleryImages = [
   // First carousel - Mobile app images
   {
-    src: "/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
+    src: "/assets/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
     alt: "App Design For A Money Transfer And Payment App",
     title: "App Design For A Money Transfer And Payment App",
   },
   {
-    src: "/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
+    src: "/assets/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
     alt: "MVP Design For A Study App To Counteract Procrastination And Stress",
     title:
       "MVP Design For A Study App To Counteract Procrastination And Stress",
   },
   {
-    src: "/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
+    src: "/assets/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
     alt: "Color Theme Explorations For An AI Cover Letter Generator App",
     title: "Color Theme Explorations For An AI Cover Letter Generator App",
   },
   {
-    src: "/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
+    src: "/assets/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
     alt: "Mockup For An AI Cover Letter Generator App",
     title: "Mockup For An AI Cover Letter Generator App",
   },
   // Second carousel - Other design work
   {
-    src: "/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
+    src: "/assets/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
     alt: "Persona Visualisation For A Money Transfer And Payment App",
     title: "Persona Visualisation For A Money Transfer And Payment App",
   },
   {
-    src: "/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
+    src: "/assets/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
     alt: "Brochure Design For Cybersecurity Company",
     title: "Brochure Design For Cybersecurity Company",
   },
   {
-    src: "/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
+    src: "/assets/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
     alt: "Brochure Design Mockups For Cybersecurity Company",
     title: "Brochure Design Mockups For Cybersecurity Company",
   },
   {
-    src: "/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
+    src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
     alt: "Landing Page MVP Exploration For a Creative Web Design Agency",
     title: "Landing Page MVP Exploration For a Creative Web Design Agency",
   },
   {
-    src: "/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
+    src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
     alt: "Landing Page MVP Exploration For a Cybersecurity Website",
     title: "Landing Page MVP Exploration For a Cybersecurity Website",
   },
   {
-    src: "/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
+    src: "/assets/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
     alt: "Figma Remake Design For Game Launcher",
     title: "Figma Remake Design For Game Launcher",
   },
   {
-    src: "/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
+    src: "/assets/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
     alt: "Website Design For Computer And PC Parts E-Commerce",
     title: "Website Design For Computer And PC Parts E-Commerce",
   },
@@ -337,10 +337,9 @@ export default function DesignGalleryPage() {
                       ref={descriptionRef}
                       className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                     >
-                      A collection of design work that doesn't fit into
-                      traditional case studies — from branding and logos to
-                      typography, print design, and experimental projects. These
-                      go beyond just UX/UI work.
+                      A simple collection of various design work. From branding
+                      and logos to typography, print design, and experimental
+                      projects. These go beyond just UX/UI work.
                     </p>
                   </div>
                   <div className="lg:ml-8 mt-4 lg:mt-0">

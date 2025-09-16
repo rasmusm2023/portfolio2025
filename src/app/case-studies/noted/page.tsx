@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import CaseStudy from "@/components/CaseStudy";
-import CaseStudySkeleton from "@/components/CaseStudySkeleton";
+import CaseStudy from "@/components/case-studies/CaseStudy";
+import CaseStudySkeleton from "@/components/case-studies/CaseStudySkeleton";
 import { useCaseStudy } from "@/contexts/CaseStudyContext";
 
 // Password protection component
@@ -140,12 +140,12 @@ export default function NotedCaseStudy() {
       "85% user satisfaction rate",
     ],
     technologies: ["React", "TypeScript", "AI/ML", "Figma", "Framer"],
-    heroImage: "/case-study-assets/noted/noted-hero.jpg",
+    heroImage: "/assets/case-study-assets/noted/noted-hero.jpg",
     heroImageAlt: "Noted app interface showing clean note-taking interface",
     processImages: [
-      "/case-study-assets/noted/process-1.jpg",
-      "/case-study-assets/noted/process-2.jpg",
-      "/case-study-assets/noted/process-3.jpg",
+      "/assets/case-study-assets/noted/process-1.jpg",
+      "/assets/case-study-assets/noted/process-2.jpg",
+      "/assets/case-study-assets/noted/process-3.jpg",
     ],
     processImageAlts: [
       "User research and wireframing process",
@@ -165,9 +165,9 @@ export default function NotedCaseStudy() {
       "01 Frontend Developer",
       "01 AI Engineer",
     ],
-    appIconPath: "/case-study-assets/noted/noted-icon.svg",
-    logotypeBlackPath: "/case-study-assets/noted/noted-logo-black.svg",
-    logotypeWhitePath: "/case-study-assets/noted/noted-logo-white.svg",
+    appIconPath: "/assets/case-study-assets/noted/noted-icon.svg",
+    logotypeBlackPath: "/assets/case-study-assets/noted/noted-logo-black.svg",
+    logotypeWhitePath: "/assets/case-study-assets/noted/noted-logo-white.svg",
     aboutText: (
       <div className="space-y-4">
         <p>

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import CustomCursor from "@/components/CustomCursor";
-import Footer from "@/components/Footer";
-import AnimatedBlob from "@/components/AnimatedBlob";
+import Footer from "@/components/layout/Footer";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import { Hanken_Grotesk } from "next/font/google";
 import { Wrench, Lock, ArrowLeft } from "@phosphor-icons/react";
 

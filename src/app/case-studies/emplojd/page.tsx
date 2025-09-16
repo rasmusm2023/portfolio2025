@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CaseStudy from "@/components/CaseStudy";
-import CaseStudySkeleton from "@/components/CaseStudySkeleton";
+import CaseStudy from "@/components/case-studies/CaseStudy";
+import CaseStudySkeleton from "@/components/case-studies/CaseStudySkeleton";
 import CustomCursor from "@/components/CustomCursor";
-import VerticalFloatingNavbar from "@/components/VerticalFloatingNavbar";
-import VerticalFloatingNavbarSkeleton from "@/components/VerticalFloatingNavbarSkeleton";
+import VerticalFloatingNavbar from "@/components/layout/VerticalFloatingNavbar";
+import VerticalFloatingNavbarSkeleton from "@/components/layout/VerticalFloatingNavbarSkeleton";
 
 export default function EmplojdCaseStudy() {
   const [isLoading, setIsLoading] = useState(true);
@@ -103,9 +103,9 @@ export default function EmplojdCaseStudy() {
               "03 Frontend developers",
               "01 DevOps Engineer",
             ]}
-            appIconPath="/logos/CaseStudies/Emplojd/Emplojd-App-Icon.svg"
-            logotypeBlackPath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-Black.svg"
-            logotypeWhitePath="/logos/CaseStudies/Emplojd/Emplojd-Logotype-White.svg"
+            appIconPath="/assets/logos/CaseStudies/Emplojd/Emplojd-App-Icon.svg"
+            logotypeBlackPath="/assets/logos/CaseStudies/Emplojd/Emplojd-Logotype-Black.svg"
+            logotypeWhitePath="/assets/logos/CaseStudies/Emplojd/Emplojd-Logotype-White.svg"
             aboutText={
               <div className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] mb-6">
                 <div>

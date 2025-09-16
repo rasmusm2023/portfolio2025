@@ -1,10 +1,10 @@
 "use client";
 
-import AnimatedBlob from "@/components/AnimatedBlob";
-import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
-import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
+import HjarnstarkCover from "@/../public/assets/books/hjarnstark-anders-hansen.jpg";
+import MikaelPersbrandtCover from "@/../public/assets/books/mikael-persbrandt-book.jpg";
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 
 // Book Card Component (same as in main page)
 function BookCard({

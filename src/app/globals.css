@@ -1524,14 +1524,14 @@ body.mobile-menu-open {
   position: relative;
   z-index: 1;
   /* Add topography pattern directly to the main element */
-  background-image: url("/backgrounds/topography.svg");
+  background-image: url("/assets/backgrounds/topography.svg");
   background-size: 600px 600px;
   background-position: 0 0;
   background-repeat: repeat;
 }
 
 .dark .topography-bg {
-  background-image: url("/backgrounds/topography-dark.svg");
+  background-image: url("/assets/backgrounds/topography-dark.svg");
   background-size: 600px 600px;
   background-position: 0 0;
   background-repeat: repeat;

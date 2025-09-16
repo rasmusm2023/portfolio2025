@@ -1,38 +1,38 @@
 "use client";
 
-import AnimatedBlob from "@/components/AnimatedBlob";
-import InfiniteScrollBanner from "@/components/InfiniteScrollBanner";
-import IdentityCarousel from "@/components/IdentityCarousel";
-import FilmsCarousel from "@/components/FilmsCarousel";
+import AnimatedBlob from "@/components/ui/AnimatedBlob";
+import InfiniteScrollBanner from "@/components/pages/InfiniteScrollBanner";
+import IdentityCarousel from "@/components/pages/IdentityCarousel";
+import FilmsCarousel from "@/components/pages/FilmsCarousel";
 import CustomCursor from "@/components/CustomCursor";
-import RadialGradientBorder from "@/components/RadialGradientBorder";
-import CircularScrollText from "@/components/CircularScrollText";
+import RadialGradientBorder from "@/components/ui/RadialGradientBorder";
+import CircularScrollText from "@/components/ui/CircularScrollText";
 
-import TheEqualizerCover from "@/films/The-Equalizer.png";
-import TheEqualizer2Cover from "@/films/The-Equalizer-2.png";
-import TheBeekeeperCover from "@/films/the-beekeeper.png";
-import TheDarkKnightCover from "@/films/the-dark-knight.png";
-import ArrivalCover from "@/films/arrival.png";
-import RasmusImage from "@/images/rasmus.jpg";
-import HjarnstarkCover from "@/books/hjarnstark-anders-hansen.jpg";
-import MikaelPersbrandtCover from "@/books/mikael-persbrandt-book.jpg";
-import HideawayCover from "@/music/hideaway-hardwell-atmozfears.jpg";
-import MoUpFrontCover from "@/music/mo-up-front.jpg";
-import MellbystrandImage from "@/images/8bit/mellbystrand.jpg";
-import NightOwlImage from "@/images/8bit/nightowl.jpg";
-import AnimalsImage from "@/images/8bit/animals.jpg";
-import Formula1Image from "@/images/8bit/formula1.jpg";
-import StockholmImage from "@/images/corners/stockholm-local.png";
-import AvidGamerImage from "@/images/corners/avid-gamer.jpg";
-import NightOwlCornerImage from "@/images/corners/night-owl1.png";
-import HomeCookImage from "@/images/corners/home-cook.png";
-import AnimalLoverImage from "@/images/corners/animal-lover.png";
-import DesignThinkerImage from "@/images/corners/design-thinker2.png";
-import InfjAImage from "@/images/corners/INFJ-A.png";
+import TheEqualizerCover from "@/../public/assets/films/The-Equalizer.png";
+import TheEqualizer2Cover from "@/../public/assets/films/The-Equalizer-2.png";
+import TheBeekeeperCover from "@/../public/assets/films/the-beekeeper.png";
+import TheDarkKnightCover from "@/../public/assets/films/the-dark-knight.png";
+import ArrivalCover from "@/../public/assets/films/arrival.png";
+import RasmusImage from "@/../public/assets/images/rasmus.jpg";
+import HjarnstarkCover from "@/../public/assets/books/hjarnstark-anders-hansen.jpg";
+import MikaelPersbrandtCover from "@/../public/assets/books/mikael-persbrandt-book.jpg";
+import HideawayCover from "@/../public/assets/music/mo-up-front.jpg";
+import MoUpFrontCover from "@/../public/assets/music/mo-up-front.jpg";
+import MellbystrandImage from "@/../public/assets/images/8bit/mellbystrand.jpg";
+import NightOwlImage from "@/../public/assets/images/8bit/nightowl.jpg";
+import AnimalsImage from "@/../public/assets/images/8bit/animals.jpg";
+import Formula1Image from "@/../public/assets/images/8bit/formula1.jpg";
+import StockholmImage from "@/../public/assets/images/corners/stockholm-local.png";
+import AvidGamerImage from "@/../public/assets/images/corners/avid-gamer.jpg";
+import NightOwlCornerImage from "@/../public/assets/images/corners/night-owl1.png";
+import HomeCookImage from "@/../public/assets/images/corners/home-cook.png";
+import AnimalLoverImage from "@/../public/assets/images/corners/animal-lover.png";
+import DesignThinkerImage from "@/../public/assets/images/corners/design-thinker2.png";
+import InfjAImage from "@/../public/assets/images/corners/INFJ-A.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
-import Footer from "@/components/Footer";
+import Footer from "@/components/layout/Footer";
 import { gsap } from "gsap";
 
 // Live Clock Component
@@ -779,7 +779,7 @@ export default function AboutPage() {
                       </span>
                     </h2>
                     <Image
-                      src="/icons/3dicons-boy-dynamic-premium.png"
+                      src="/assets/icons/3dicons-boy-dynamic-premium.png"
                       alt="Rasmus"
                       width={60}
                       height={60}
@@ -848,7 +848,7 @@ export default function AboutPage() {
                       </span>
                     </h2>
                     <Image
-                      src="/icons/3dicons-notebook-dynamic-premium.png"
+                      src="/assets/icons/3dicons-notebook-dynamic-premium.png"
                       alt="About Me"
                       width={60}
                       height={60}
@@ -1007,7 +1007,7 @@ export default function AboutPage() {
                       </span>
                     </h2>
                     <Image
-                      src="/icons/3dicons-puzzle-dynamic-premium.png"
+                      src="/assets/icons/3dicons-puzzle-dynamic-premium.png"
                       alt="Identity"
                       width={60}
                       height={60}
@@ -1140,7 +1140,7 @@ export default function AboutPage() {
                       </span>
                     </h2>
                     <Image
-                      src="/icons/3dicons-clock-dynamic-premium.png"
+                      src="/assets/icons/3dicons-clock-dynamic-premium.png"
                       alt="My Time"
                       width={60}
                       height={60}
@@ -1295,7 +1295,7 @@ export default function AboutPage() {
                       data-tooltip-icon="→"
                     >
                       <Image
-                        src="/icons/3dicons-notebook-dynamic-premium.png"
+                        src="/assets/icons/3dicons-notebook-dynamic-premium.png"
                         alt="Books"
                         width={60}
                         height={60}
@@ -1362,7 +1362,7 @@ export default function AboutPage() {
                       </span>
                     </h2>
                     <Image
-                      src="/icons/3dicons-video-cam-dynamic-premium.png"
+                      src="/assets/icons/3dicons-video-cam-dynamic-premium.png"
                       alt="Favourite Films"
                       width={60}
                       height={60}
@@ -1506,7 +1506,7 @@ export default function AboutPage() {
                       data-tooltip-icon="↗"
                     >
                       <Image
-                        src="/icons/3dicons-headphone-dynamic-premium.png"
+                        src="/assets/icons/3dicons-headphone-dynamic-premium.png"
                         alt="Spotify"
                         width={60}
                         height={60}

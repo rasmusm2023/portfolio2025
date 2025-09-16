@@ -1,6 +1,6 @@
-import BentoBox from "@/components/BentoBox";
-import BentoBoxWhite from "@/components/BentoBoxWhite";
-import Footer from "@/components/Footer";
+import BentoBox from "@/components/ui/BentoBox";
+import BentoBoxWhite from "@/components/ui/BentoBoxWhite";
+import Footer from "@/components/layout/Footer";
 
 export default function ComparePage() {
   return (
