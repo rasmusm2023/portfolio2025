@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { createPortal } from "react-dom";
 import gsap from "gsap";
 import { Eyes, MagnifyingGlassPlus } from "@phosphor-icons/react";
+import { useTheme } from "@/contexts/ThemeContext";
 // Individual cursor components are now inlined for better morphing performance
 
 type CursorType = "circle" | "pill" | "video" | null;
@@ -18,8 +19,8 @@ interface CursorConfig {
 
 const CustomCursor = () => {
   const pathname = usePathname();
+  const { isDark } = useTheme();
   const [hoverTarget, setHoverTarget] = useState<string | null>(null);
-  const [isDark, setIsDark] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const mousePosition = useRef({ x: 0, y: 0 });
@@ -84,22 +85,6 @@ const CustomCursor = () => {
   useEffect(() => {
     setHoverTarget(null);
   }, [pathname]);
-
-  // Check dark mode
-  useEffect(() => {
-    const checkDarkMode = () => {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    };
-
-    checkDarkMode();
-    const observer = new MutationObserver(checkDarkMode);
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    return () => observer.disconnect();
-  }, []);
 
   // Mouse tracking effect - separate from cursor morphing
   useEffect(() => {

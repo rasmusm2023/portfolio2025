@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
+import { useTheme } from "@/contexts/ThemeContext";
 
 interface MenuItem {
   label: string;
@@ -13,6 +14,7 @@ interface MenuItem {
 
 const Menu = () => {
   const pathname = usePathname();
+  const { isDark } = useTheme();
   const pillRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const [activeSection, setActiveSection] = useState("home");
@@ -49,14 +51,9 @@ const Menu = () => {
 
   // Get the appropriate shadow color based on theme
   const getShadowColor = () => {
-    if (typeof document !== "undefined") {
-      const isDarkMode = document.documentElement.classList.contains("dark");
-      return isDarkMode
-        ? withOpacity(colors.neutral[0], 0.4)
-        : withOpacity(colors.neutral[100], 0.4);
-    }
-    // Default to light mode shadow during SSR
-    return withOpacity(colors.neutral[100], 0.4);
+    return isDark
+      ? withOpacity(colors.neutral[0], 0.4)
+      : withOpacity(colors.neutral[100], 0.4);
   };
 
   useEffect(() => {
@@ -111,8 +108,8 @@ const Menu = () => {
           className="absolute h-[calc(100%+4px)] bg-neutral-90 dark:bg-neutral-0 rounded-lg -z-10"
           style={{
             top: "-2px",
-            left: "0",
-            width: "0",
+            left: "0px",
+            width: "0px",
             boxShadow: `0 0 12px ${getShadowColor()}`,
           }}
         />

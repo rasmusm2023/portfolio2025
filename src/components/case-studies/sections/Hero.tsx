@@ -158,10 +158,7 @@ const Hero: React.FC<HeroProps> = ({
               className="absolute inset-0 rounded-r-lg -z-10"
               style={{
                 boxShadow: `0 0 12px ${
-                  typeof document !== "undefined" &&
-                  document.documentElement.classList.contains("dark")
-                    ? "rgba(255, 255, 255, 0.4)"
-                    : "rgba(0, 0, 0, 0.4)"
+                  isDark ? "rgba(255, 255, 255, 0.4)" : "rgba(0, 0, 0, 0.4)"
                 }`,
               }}
             />

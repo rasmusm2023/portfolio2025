@@ -33,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         {/* Preload critical resources */}
         <link
@@ -105,6 +105,28 @@ export default function RootLayout({
           rel="apple-touch-icon"
           href="/assets/favicons/rm-favicon-256x256.png"
           sizes="256x256"
+        />
+
+        {/* Prevent flash of unstyled content by setting theme immediately */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const theme = localStorage.getItem('theme');
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    // Default to dark mode for new visitors or if theme is not 'light'
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {
+                  // Default to dark mode if localStorage is not available
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
         />
       </head>
       <body

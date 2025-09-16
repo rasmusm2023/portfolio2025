@@ -8,6 +8,7 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   isDark: boolean;
+  isInitialized: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -25,19 +26,23 @@ interface ThemeProviderProps {
 }
 
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>("light");
+  const [theme, setTheme] = useState<Theme>("dark"); // Default to dark mode
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Check for saved theme preference or default to light
+    // Check for saved theme preference or default to dark
     const savedTheme = localStorage.getItem("theme") as Theme;
-    if (savedTheme) {
+    if (savedTheme && (savedTheme === "light" || savedTheme === "dark")) {
       setTheme(savedTheme);
     } else {
-      setTheme("light"); // Default to light mode
+      setTheme("dark"); // Default to dark mode for new visitors
     }
+    setIsInitialized(true);
   }, []);
 
   useEffect(() => {
+    if (!isInitialized) return;
+
     // Apply theme to document
     const root = document.documentElement;
     if (theme === "dark") {
@@ -46,9 +51,9 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
       root.classList.remove("dark");
     }
 
-    // Save theme preference
+    // Save theme preference to localStorage
     localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [theme, isInitialized]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -58,6 +63,7 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     theme,
     toggleTheme,
     isDark: theme === "dark",
+    isInitialized,
   };
 
   return (
