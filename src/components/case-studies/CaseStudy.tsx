@@ -367,7 +367,7 @@ const CaseStudy = ({
     ) as SVGPathElement;
 
     // Check if MorphSVGPlugin is available and we have the required elements
-    const hasMorphSVG = gsap.plugins.MorphSVGPlugin;
+    const hasMorphSVG = typeof MorphSVGPlugin !== 'undefined';
     const hasRequiredElements = morphPath && starPath && trianglePath;
 
     if (hasMorphSVG && hasRequiredElements) {
