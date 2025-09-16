@@ -346,7 +346,12 @@ const CaseStudy = ({
 
   // GSAP Morphing Effect
   useEffect(() => {
-    gsap.registerPlugin(MorphSVGPlugin);
+    // Safely register MorphSVGPlugin with error handling
+    try {
+      gsap.registerPlugin(MorphSVGPlugin);
+    } catch (error) {
+      console.warn("MorphSVGPlugin not available, falling back to scale animation");
+    }
 
     const morphContainer = morphRef.current;
     if (!morphContainer) return;
@@ -361,56 +366,95 @@ const CaseStudy = ({
       ".triangle-target"
     ) as SVGPathElement;
 
-    if (!morphPath || !starPath || !trianglePath) return;
+    // Check if MorphSVGPlugin is available and we have the required elements
+    const hasMorphSVG = gsap.plugins.MorphSVGPlugin;
+    const hasRequiredElements = morphPath && starPath && trianglePath;
 
-    // Set initial state to star
-    gsap.set(morphPath, { morphSVG: starPath });
+    if (hasMorphSVG && hasRequiredElements) {
+      // Use morphing animation
+      // Set initial state to star
+      gsap.set(morphPath, { morphSVG: starPath });
 
-    // Create morphing timeline - only on hover
-    const morphTimeline = gsap.timeline({ paused: true });
+      // Create morphing timeline - only on hover
+      const morphTimeline = gsap.timeline({ paused: true });
 
-    // Morph to triangle on hover
-    morphTimeline.to(morphPath, {
-      morphSVG: trianglePath,
-      duration: 0.6,
-      ease: "power2.inOut",
-    });
+      // Morph to triangle on hover
+      morphTimeline.to(morphPath, {
+        morphSVG: trianglePath,
+        duration: 0.6,
+        ease: "power2.inOut",
+      });
 
-    // Handle hover events
-    const handleMouseEnter = () => {
-      console.log("Button hover enter - morphing to triangle");
-      setIsHovered(true);
-      morphTimeline.play();
-      // Smooth gradient transition to different purple
-      gsap.to(morphContainer, {
+      // Handle hover events
+      const handleMouseEnter = () => {
+        console.log("Button hover enter - morphing to triangle");
+        setIsHovered(true);
+        morphTimeline.play();
+        // Smooth gradient transition to different purple
+        gsap.to(morphContainer, {
+          "--gradient-from": "#a855f7",
+          "--gradient-to": "#9333ea",
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      };
+
+      const handleMouseLeave = () => {
+        console.log("Button hover leave - morphing back to star");
+        setIsHovered(false);
+        morphTimeline.reverse();
+        // Smooth gradient transition back to original purple
+        gsap.to(morphContainer, {
+          "--gradient-from": "#907EFF",
+          "--gradient-to": "#7c3aed",
+          duration: 0.3,
+          ease: "power2.inOut",
+        });
+      };
+
+      morphContainer.addEventListener("mouseenter", handleMouseEnter);
+      morphContainer.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        morphContainer.removeEventListener("mouseenter", handleMouseEnter);
+        morphContainer.removeEventListener("mouseleave", handleMouseLeave);
+        morphTimeline.kill();
+      };
+    } else {
+      // Fallback to scale animation
+      const hoverTimeline = gsap.timeline({ paused: true });
+
+      // Scale and color change on hover
+      hoverTimeline.to(morphContainer, {
+        scale: 1.1,
         "--gradient-from": "#a855f7",
         "--gradient-to": "#9333ea",
         duration: 0.3,
         ease: "power2.inOut",
       });
-    };
 
-    const handleMouseLeave = () => {
-      console.log("Button hover leave - morphing back to star");
-      setIsHovered(false);
-      morphTimeline.reverse();
-      // Smooth gradient transition back to original purple
-      gsap.to(morphContainer, {
-        "--gradient-from": "#907EFF",
-        "--gradient-to": "#7c3aed",
-        duration: 0.3,
-        ease: "power2.inOut",
-      });
-    };
+      // Handle hover events
+      const handleMouseEnter = () => {
+        console.log("Button hover enter - scaling up");
+        setIsHovered(true);
+        hoverTimeline.play();
+      };
 
-    morphContainer.addEventListener("mouseenter", handleMouseEnter);
-    morphContainer.addEventListener("mouseleave", handleMouseLeave);
+      const handleMouseLeave = () => {
+        console.log("Button hover leave - scaling back");
+        setIsHovered(false);
+        hoverTimeline.reverse();
+      };
 
-    return () => {
-      morphContainer.removeEventListener("mouseenter", handleMouseEnter);
-      morphContainer.removeEventListener("mouseleave", handleMouseLeave);
-      morphTimeline.kill();
-    };
+      morphContainer.addEventListener("mouseenter", handleMouseEnter);
+      morphContainer.addEventListener("mouseleave", handleMouseLeave);
+
+      return () => {
+        morphContainer.removeEventListener("mouseenter", handleMouseEnter);
+        morphContainer.removeEventListener("mouseleave", handleMouseLeave);
+        hoverTimeline.kill();
+      };
+    }
   }, []);
 
   // Flower Icons Spinning Animation

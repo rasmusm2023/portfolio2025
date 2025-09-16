@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
     try {
       const { data, error } = await resend.emails.send({
         from: "Portfolio Contact <onboarding@resend.dev>", // This will be replaced with your domain
-        to: ["ux.rasmusmattsson@gmail.com"], // Send to your Gmail for testing
+        to: [process.env.EMAIL_USER || "ux.rasmusmattsson@gmail.com"], // Use environment variable
         replyTo: email,
         subject: `💬 Conversation: ${subject}`,
         html: `

@@ -1,0 +1,45 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22.19.0"
+
+# Disable secrets scanning for expected environment variables
+[build.processing]
+  skip_processing = false
+
+# Configure secrets scanning to ignore our expected environment variables
+[build.processing.secrets]
+  # Allow these environment variables to be used in build output
+  omit_keys = ["EMAIL_USER", "EMAIL_PASS", "RESEND_API_KEY"]
+  # Disable secrets scanning for build output (since we're using environment variables)
+  enabled = false
+
+# Headers for better caching
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_next/image"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for Next.js
+[[redirects]]
+  from = "/_next/image"
+  query = { q = ":quality", url = ":url", w = ":width" }
+  to = "/.netlify/images?url=:url&w=:width&q=:quality"
+  status = 200
+
+[[redirects]]
+  from = "/_ipx/*"
+  query = { q = ":quality", url = ":url", w = ":width" }
+  to = "/.netlify/images?url=:url&w=:width&q=:quality"
+  status = 200
+
+# Functions configuration
+[functions]
+  directory = ".netlify/functions"

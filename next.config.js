@@ -11,9 +11,7 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  images: {
-    unoptimized: true, // For static export if needed
-  },
+
   // Enable preloading for better navigation performance
   async headers() {
     return [
