@@ -2,7 +2,7 @@ import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface SummaryProps {
-  description: string;
+  description: string | string[];
 }
 
 const Summary: React.FC<SummaryProps> = ({ description }) => {
@@ -31,12 +31,20 @@ const Summary: React.FC<SummaryProps> = ({ description }) => {
           </div>
           <div className="w-full lg:w-[600px]">
             <div className="mb-8 sm:mb-12 space-y-4 sm:space-y-6">
-              <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
-                Emplojd is an AI-powered SaaS platform designed to make job
-                applications smarter and more personal. The platform recommends
-                relevant job listings and also writes tailored cover letters
-                using AI.
-              </p>
+              {Array.isArray(description) ? (
+                description.map((paragraph, index) => (
+                  <p
+                    key={index}
+                    className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left"
+                  >
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] text-left">
+                  {description}
+                </p>
+              )}
             </div>
           </div>
         </div>

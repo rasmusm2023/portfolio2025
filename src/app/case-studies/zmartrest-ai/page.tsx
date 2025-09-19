@@ -129,14 +129,16 @@ export default function ZmartrestAICaseStudy() {
 
   // Zmartrest AI case study data
   const zmartrestCaseStudyData = {
-    title: "Zmartrest AI",
+    title: "ZMARTREST AI",
     subtitle:
-      "AI-powered platform for intelligent decision making and data analysis",
-    description:
-      "Designed and developed an advanced AI platform that leverages machine learning to provide intelligent insights and automated decision-making capabilities. The platform features a sophisticated dashboard with real-time data visualization and predictive analytics.",
+      "Increasing app usage with new features and redesign of UI, while also clarifying insights for leaders through new portal.",
+    description: [
+      "Zmartrest is a Swedish HR-tech startup that uses an app, AI and sensor data to support sustainable performance and well-being at work.",
+      "My involvement as an intern was to design new features and redesign the app UI. Later on, we also wanted to improve the touchpoints with leaders through a new portal with increased clarity, insights and actions.",
+    ],
     duration: "6 months",
     teamSize: "5 people",
-    role: "UX/UI Designer & Product Manager",
+    role: "Product Designer",
     challenge:
       "Create an AI platform that makes complex machine learning algorithms accessible to non-technical users while providing powerful insights and automation capabilities. The interface needed to be intuitive yet powerful enough for advanced users.",
     solution:
@@ -148,13 +150,18 @@ export default function ZmartrestAICaseStudy() {
       "Enterprise client acquisition within 3 months",
     ],
     technologies: [
-      "React",
-      "TypeScript",
-      "Python",
-      "TensorFlow",
-      "D3.js",
       "Figma",
-      "AWS",
+      "Prototyping",
+      "User Journeys",
+      "Interviews",
+      "Concept/Feature Design",
+      "Cross-functional Collaboration",
+      "Stakeholder Meetings",
+      "Feauture Prioritization",
+      "Wireframing",
+      "Reworking UI",
+      "Miro",
+      "Gamification",
     ],
     heroImage:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=800&fit=crop&crop=center",
@@ -173,37 +180,41 @@ export default function ZmartrestAICaseStudy() {
     linkText: "View Live Platform",
     buttonText: "Live site" as const,
     roleText:
-      "UX/UI Designer & Product Manager: led the design strategy, user research, interface design, and product management for the AI platform.",
+      "Product Designer: responsible for the design and research of new features, the new UI, and the new portal for leaders.",
     companyOrType: "Type" as const,
-    companyText: "Enterprise Project",
-    yearText: "2024",
+    companyText: "Internship Project",
+    yearText: "2025",
     teamRoles: [
-      "01 UX/UI Designer & Product Manager",
-      "02 AI Engineers",
-      "01 Frontend Developer",
-      "01 Data Scientist",
+      "01 Product Designer (me)",
+      "01 AI/Data Engineer",
+      "01 Product Manager",
+      "01 Fullstack Developer",
     ],
-    appIconPath: "/assets/case-study-assets/zmartrest/zmartrest-icon.svg",
+    appIconPath:
+      "/assets/logos/CaseStudies/Zmartrest AI/zmartrest-ai-app-logo.webp",
     logotypeBlackPath:
-      "/assets/case-study-assets/zmartrest/zmartrest-logo-black.svg",
+      "/assets/logos/CaseStudies/Zmartrest AI/zmartrest-ai-logotype-black.webp",
     logotypeWhitePath:
-      "/assets/case-study-assets/zmartrest/zmartrest-logo-white.svg",
+      "/assets/logos/CaseStudies/Zmartrest AI/zmartrest-ai-logotype-white.webp",
     aboutText: (
-      <div className="space-y-4">
-        <p>
-          Zmartrest AI is an enterprise-grade AI platform designed to
-          democratize access to machine learning capabilities. The platform
-          enables non-technical users to leverage advanced AI models for data
-          analysis, predictive insights, and automated decision-making through
-          an intuitive, user-friendly interface.
-        </p>
-        <p>
-          The project focused on bridging the gap between complex AI algorithms
-          and practical business applications, making advanced analytics
-          accessible to teams across various industries. The design emphasizes
-          progressive disclosure, allowing users to start with simple features
-          and gradually access more sophisticated capabilities.
-        </p>
+      <div className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] mb-6">
+        <div className="space-y-4">
+          <p>
+            Zmartrest AI is an enterprise-grade AI platform designed to
+            democratize access to machine learning capabilities. The platform
+            enables non-technical users to leverage advanced AI models for data
+            analysis, predictive insights, and automated decision-making through
+            an intuitive, user-friendly interface.
+          </p>
+          <p>
+            The project focused on bridging the gap between complex AI
+            algorithms and practical business applications, making advanced
+            analytics accessible to teams across various industries. The design
+            emphasizes progressive disclosure, allowing users to start with
+            simple features and gradually access more sophisticated
+            capabilities.
+          </p>
+        </div>
       </div>
     ),
     processSteps: [
@@ -215,20 +226,22 @@ export default function ZmartrestAICaseStudy() {
       "Development & AI Integration",
     ],
     businessObjectivesText: (
-      <div className="space-y-4">
-        <p>
-          The primary objective was to create an AI platform that could serve
-          both technical and non-technical users, reducing the barrier to entry
-          for AI adoption in enterprise environments. The platform needed to
-          provide powerful insights while maintaining simplicity and ease of
-          use.
-        </p>
-        <p>
-          Key business goals included increasing AI adoption rates, reducing
-          time-to-insight for data analysis, and creating a scalable platform
-          that could serve multiple enterprise clients across different
-          industries.
-        </p>
+      <div className="text-neutral-80 dark:text-neutral-20 text-base sm:text-lg md:text-xl leading-[150%] mb-6">
+        <div className="space-y-4">
+          <p>
+            The primary objective was to create an AI platform that could serve
+            both technical and non-technical users, reducing the barrier to
+            entry for AI adoption in enterprise environments. The platform
+            needed to provide powerful insights while maintaining simplicity and
+            ease of use.
+          </p>
+          <p>
+            Key business goals included increasing AI adoption rates, reducing
+            time-to-insight for data analysis, and creating a scalable platform
+            that could serve multiple enterprise clients across different
+            industries.
+          </p>
+        </div>
       </div>
     ),
   };
