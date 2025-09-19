@@ -37,7 +37,7 @@ interface Section {
 interface CaseStudyProps {
   title: string;
   subtitle: string;
-  description: string;
+  description: string | string[];
   duration: string;
   teamSize: string;
   role: string;
@@ -350,7 +350,9 @@ const CaseStudy = ({
     try {
       gsap.registerPlugin(MorphSVGPlugin);
     } catch (error) {
-      console.warn("MorphSVGPlugin not available, falling back to scale animation");
+      console.warn(
+        "MorphSVGPlugin not available, falling back to scale animation"
+      );
     }
 
     const morphContainer = morphRef.current;
@@ -367,7 +369,7 @@ const CaseStudy = ({
     ) as SVGPathElement;
 
     // Check if MorphSVGPlugin is available and we have the required elements
-    const hasMorphSVG = typeof MorphSVGPlugin !== 'undefined';
+    const hasMorphSVG = typeof MorphSVGPlugin !== "undefined";
     const hasRequiredElements = morphPath && starPath && trianglePath;
 
     if (hasMorphSVG && hasRequiredElements) {
@@ -925,7 +927,7 @@ const CaseStudy = ({
           />
 
           {/* Summary Section */}
-          <Summary description="Emplojd is an AI-powered SaaS platform designed to make job applications smarter and more personal. The platform recommends relevant job listings and also writes tailored cover letters using AI." />
+          <Summary description={description} />
 
           {/* About Section */}
           <About

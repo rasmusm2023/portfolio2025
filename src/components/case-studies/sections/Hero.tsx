@@ -201,7 +201,7 @@ const Hero: React.FC<HeroProps> = ({
                 {companyOrType}
               </h3>
               <p className="text-neutral-80 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
-                {companyOrType === "Type" ? "School project" : companyText}
+                {companyText}
               </p>
             </div>
 

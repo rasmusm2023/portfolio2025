@@ -173,14 +173,14 @@ const About: React.FC<AboutProps> = ({
                   <img
                     src={logotypeBlackPath}
                     alt="Logotype"
-                    className="h-8 sm:h-10 object-contain dark:hidden"
+                    className="h-12 sm:h-16 object-contain dark:hidden"
                   />
                 )}
                 {logotypeBlackPath && logotypeWhitePath && (
                   <img
                     src={logotypeWhitePath}
                     alt="Logotype"
-                    className="h-8 sm:h-10 object-contain hidden dark:block"
+                    className="h-12 sm:h-16 object-contain hidden dark:block"
                   />
                 )}
               </div>

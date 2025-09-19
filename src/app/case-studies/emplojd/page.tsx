@@ -53,7 +53,7 @@ export default function EmplojdCaseStudy() {
           <CaseStudy
             title="EMPLOJD"
             subtitle="Enhancing job applications without compromising authenticity."
-            description="Designed and developed a comprehensive HR management platform that streamlines employee onboarding, performance tracking, and workplace communication. The platform features an intuitive dashboard for both HR professionals and employees, with advanced analytics and automation capabilities."
+            description="Emplojd is an AI-powered SaaS platform designed to make job applications smarter and more personal. The platform recommends relevant job listings and also writes tailored cover letters using AI."
             duration="8 months"
             teamSize="6 people"
             role="UX/UI Designer & Frontend Developer"
