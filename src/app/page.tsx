@@ -751,25 +751,6 @@ export default function Home() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="#"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
             </div>
