@@ -441,7 +441,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    {/* Low-code Developer text - Responsive positioning */}
+                    {/* Frontend Developer text - Responsive positioning */}
                     <div className="mb-6 -mt-24 sm:-mt-32 lg:-mt-40">
                       <div className="flex justify-start md:justify-end">
                         <span
@@ -456,7 +456,7 @@ export default function Home() {
                                 : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
                             }}
                           >
-                            & Low-code Developer
+                            & Frontend Developer
                           </span>
                         </span>
                       </div>
