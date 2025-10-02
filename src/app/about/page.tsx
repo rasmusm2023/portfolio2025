@@ -695,7 +695,7 @@ export default function AboutPage() {
                       ref={descriptionRef}
                       className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                     >
-                      I am a digital designer and low-code developer with a
+                      I am a digital designer and frontend developer with a
                       passion for creating beautiful, seamless experiences that
                       make a difference.
                     </p>
