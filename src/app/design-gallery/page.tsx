@@ -15,58 +15,87 @@ const galleryImages = [
   // First carousel - Mobile app images
   {
     src: "/assets/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
     alt: "App Design For A Money Transfer And Payment App",
     title: "App Design For A Money Transfer And Payment App",
   },
   {
     src: "/assets/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
     alt: "MVP Design For A Study App To Counteract Procrastination And Stress",
     title:
       "MVP Design For A Study App To Counteract Procrastination And Stress",
   },
   {
     src: "/assets/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
     alt: "Color Theme Explorations For An AI Cover Letter Generator App",
     title: "Color Theme Explorations For An AI Cover Letter Generator App",
   },
   {
     src: "/assets/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
     alt: "Mockup For An AI Cover Letter Generator App",
     title: "Mockup For An AI Cover Letter Generator App",
   },
   // Second carousel - Other design work
   {
+    src: "/assets/design-gallery-assets/UI for a Survival & Crafting Game.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/UI for a Survival & Crafting Game Screenshot Only.webp",
+    alt: "UI for a Survival & Crafting Game",
+    title: "UI for a Survival & Crafting Game",
+  },
+  {
     src: "/assets/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
     alt: "Persona Visualisation For A Money Transfer And Payment App",
     title: "Persona Visualisation For A Money Transfer And Payment App",
   },
   {
     src: "/assets/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
     alt: "Brochure Design For Cybersecurity Company",
     title: "Brochure Design For Cybersecurity Company",
   },
   {
     src: "/assets/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
     alt: "Brochure Design Mockups For Cybersecurity Company",
     title: "Brochure Design Mockups For Cybersecurity Company",
   },
   {
     src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
     alt: "Landing Page MVP Exploration For a Creative Web Design Agency",
     title: "Landing Page MVP Exploration For a Creative Web Design Agency",
   },
   {
     src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
     alt: "Landing Page MVP Exploration For a Cybersecurity Website",
     title: "Landing Page MVP Exploration For a Cybersecurity Website",
   },
   {
     src: "/assets/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
     alt: "Figma Remake Design For Game Launcher",
     title: "Figma Remake Design For Game Launcher",
   },
   {
     src: "/assets/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
     alt: "Website Design For Computer And PC Parts E-Commerce",
     title: "Website Design For Computer And PC Parts E-Commerce",
   },
@@ -428,7 +457,7 @@ export default function DesignGalleryPage() {
               {/* Second Carousel - Other Design Work - Scrolls Right */}
               <div className="mb-8 sm:mb-12">
                 <MovingCarousel
-                  images={galleryImages.slice(4, 10)}
+                  images={galleryImages.slice(4, 11)}
                   direction="right"
                   speed={3}
                   isPaused={isHovered}

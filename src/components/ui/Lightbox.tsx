@@ -10,6 +10,7 @@ interface LightboxProps {
   onClose: () => void;
   images: Array<{
     src: string;
+    lightboxSrc?: string;
     alt: string;
     title: string;
   }>;
@@ -28,7 +29,7 @@ const CustomLightbox = ({
 
   // Convert our image format to the library's format
   const slides = images.map((image) => ({
-    src: image.src,
+    src: image.lightboxSrc || image.src,
     alt: image.alt,
     title: image.title,
   }));
@@ -309,10 +310,11 @@ const CustomLightbox = ({
           buttonNext: () => null,
           buttonClose: () => null,
           slide: ({ slide, rect }) => {
-            // Find the current image by matching the src
+            // Find the current image by matching the src (check both src and lightboxSrc)
             const currentImage =
-              images.find((img) => img.src === slide.src) ||
-              images[activeIndex];
+              images.find(
+                (img) => (img.lightboxSrc || img.src) === slide.src
+              ) || images[activeIndex];
             return (
               <div
                 style={{ position: "relative" }}
