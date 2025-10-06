@@ -271,7 +271,7 @@ const Footer = () => {
                   {/* Resume Button - Above social links on mobile/tablet */}
                   <div className="flex justify-start xl:justify-end order-1 xl:order-2 w-full xl:w-auto">
                     <a
-                      href="https://drive.google.com/file/d/1nBqJfxCTopTvxbCOF55PYTeBauGoKaBB/view?usp=sharing"
+                      href="https://drive.google.com/file/d/1M6ZNOPVbQJS9gK_46T3-ceFOe_YIpMVg/view?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full xl:w-auto text-sm inline-flex items-center justify-center gap-2 px-6 py-3 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-xl transition-all duration-200"
