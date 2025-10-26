@@ -18,17 +18,16 @@ import HjarnstarkCover from "@/../public/assets/books/hjarnstark-anders-hansen.j
 import MikaelPersbrandtCover from "@/../public/assets/books/mikael-persbrandt-book.jpg";
 import HideawayCover from "@/../public/assets/music/mo-up-front.jpg";
 import MoUpFrontCover from "@/../public/assets/music/mo-up-front.jpg";
-import MellbystrandImage from "@/../public/assets/images/corners/mellbystrand.webp";
-import NightOwlImage from "@/../public/assets/images/8bit/nightowl.jpg";
-import AnimalsImage from "@/../public/assets/images/8bit/animals.jpg";
-import Formula1Image from "@/../public/assets/images/corners/formula-1.webp";
-import StockholmImage from "@/../public/assets/images/corners/stockholm-local.webp";
-import AvidGamerImage from "@/../public/assets/images/corners/avid-gamer.jpg";
-import NightOwlCornerImage from "@/../public/assets/images/corners/night-owl.webp";
-import HomeCookImage from "@/../public/assets/images/corners/home-cook.png";
-import AnimalLoverImage from "@/../public/assets/images/corners/animal-lover.webp";
-import DesignThinkerImage from "@/../public/assets/images/corners/design-thinker2.png";
-import InfjAImage from "@/../public/assets/images/corners/INFJ-A.png";
+import MellbystrandImage from "@/../public/assets/images/16bit/mellbystrand.webp";
+import NightOwlImage from "@/../public/assets/images/16bit/nightowl.webp";
+import Formula1Image from "@/../public/assets/images/16bit/formula-1-enthusiast.webp";
+import StockholmImage from "@/../public/assets/images/16bit/stockholm-local.webp";
+import AvidGamerImage from "@/../public/assets/images/16bit/avid-gamer.webp";
+import HomeCookImage from "@/../public/assets/images/16bit/home-cook.webp";
+import AnimalLoverImage from "@/../public/assets/images/16bit/animal-lover.webp";
+import DesignThinkerImage from "@/../public/assets/images/16bit/design-thinker.webp";
+import MusicFestivalsImage from "@/../public/assets/images/16bit/music-and-festivals.webp";
+import InfjAImage from "@/../public/assets/images/16bit/INFJ-A.png";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -757,7 +756,11 @@ export default function AboutPage() {
                   style={{
                     transform: `scale(${getBoxScale("about1")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
+                    userSelect: "none",
                   }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                   onMouseEnter={() => setHoveredBox("about1")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -826,7 +829,11 @@ export default function AboutPage() {
                   style={{
                     transform: `scale(${getBoxScale("about2")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
+                    userSelect: "none",
                   }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                   onMouseEnter={() => setHoveredBox("about2")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -954,7 +961,11 @@ export default function AboutPage() {
                   style={{
                     transform: `scale(${getBoxScale("carousel")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
+                    userSelect: "none",
                   }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                   onMouseEnter={() => setHoveredBox("carousel")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -985,7 +996,11 @@ export default function AboutPage() {
                   style={{
                     transform: `scale(${getBoxScale("identity")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
+                    userSelect: "none",
                   }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                   onMouseEnter={() => setHoveredBox("identity")}
                   onMouseLeave={() => setHoveredBox(null)}
                 >
@@ -1071,7 +1086,7 @@ export default function AboutPage() {
                           description:
                             "I'm most productive and creative during the late hours when the world is quiet.",
                           emoji: "🦉",
-                          image: NightOwlCornerImage.src,
+                          image: NightOwlImage.src,
                         },
                         {
                           title: "Formula 1 Enthusiast",
@@ -1092,8 +1107,7 @@ export default function AboutPage() {
                           description:
                             "I used to produce my own electronic music and DJ sets. Now I enjoy discovering new artists and experiencing live music at festivals.",
                           emoji: "🎵",
-                          image:
-                            "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center",
+                          image: MusicFestivalsImage.src,
                         },
                         {
                           title: "INFJ-A",

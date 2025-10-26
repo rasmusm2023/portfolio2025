@@ -3,29 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useTheme } from "@/contexts/ThemeContext";
-import FigmaIcon from "@/../public/assets/logos/inner-square-logos-svg/figma.svg";
-import MiroIcon from "@/../public/assets/logos/inner-square-logos-svg/miro.svg";
-import LovableIcon from "@/../public/assets/logos/inner-square-logos-svg/lovable.svg";
-import NextJsIcon from "@/../public/assets/logos/inner-square-logos-svg/nextjs.svg";
-import AdobeIcon from "@/../public/assets/logos/inner-square-logos-svg/adobe.svg";
-import FramerIcon from "@/../public/assets/logos/inner-square-logos-svg/framer.svg";
-import CursorIcon from "@/../public/assets/logos/inner-square-logos-svg/cursor.svg";
-import WixIcon from "@/../public/assets/logos/inner-square-logos-svg/wix.svg";
-import ReactIcon from "@/../public/assets/logos/inner-square-logos-svg/react.svg";
-import StitchIcon from "@/../public/assets/logos/inner-square-logos-svg/stitch.svg";
-import NotionIcon from "@/../public/assets/logos/inner-square-logos-svg/notion.svg";
-// Light mode icons
-import FigmaIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/figma.svg";
-import MiroIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/miro.svg";
-import LovableIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/lovable.svg";
-import NextJsIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/nextjs.svg";
-import AdobeIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/adobe.svg";
-import FramerIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/framer.svg";
-import CursorIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/cursor.svg";
-import WixIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/wix.svg";
-import ReactIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/react.svg";
-import StitchIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/stitch.svg";
-import NotionIconLight from "@/../public/assets/logos/inner-square-logos-light-svg/notion.svg";
 
 const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
   const { isDark } = useTheme();
@@ -133,57 +110,52 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
   const tools = [
     {
       name: "Figma",
-      icon: isDark ? FigmaIcon : FigmaIconLight,
+      icon: "/assets/logos/black-white-logos/Figma logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Framer",
-      icon: isDark ? FramerIcon : FramerIconLight,
+      icon: "/assets/logos/black-white-logos/Framer logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Adobe",
-      icon: isDark ? AdobeIcon : AdobeIconLight,
+      icon: "/assets/logos/black-white-logos/Adobe logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Miro",
-      icon: isDark ? MiroIcon : MiroIconLight,
+      icon: "/assets/logos/black-white-logos/Miro logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Lovable",
-      icon: isDark ? LovableIcon : LovableIconLight,
+      icon: "/assets/logos/black-white-logos/Lovable logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Wix",
-      icon: isDark ? WixIcon : WixIconLight,
+      icon: "/assets/logos/black-white-logos/Wix logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Next.js",
-      icon: isDark ? NextJsIcon : NextJsIconLight,
+      icon: "/assets/logos/black-white-logos/Nextjs logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "React",
-      icon: isDark ? ReactIcon : ReactIconLight,
+      icon: "/assets/logos/black-white-logos/React logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Cursor",
-      icon: isDark ? CursorIcon : CursorIconLight,
+      icon: "/assets/logos/black-white-logos/Cursor logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
     {
       name: "Google Stitch",
-      icon: isDark ? StitchIcon : StitchIconLight,
-      bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
-    },
-    {
-      name: "Notion",
-      icon: isDark ? NotionIcon : NotionIconLight,
+      icon: "/assets/logos/black-white-logos/Stitch logo.svg",
       bg: isDark ? "bg-neutral-90" : "bg-neutral-10",
     },
   ];
@@ -213,7 +185,10 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
         }}
       />
 
-      <div className="scroll-container flex gap-8">
+      <div
+        className="scroll-container flex gap-8"
+        style={{ userSelect: "none" }}
+      >
         {/* Original content */}
         <div className="original-content flex gap-8 flex-shrink-0">
           {tools.map((tool, index) => (
@@ -225,9 +200,12 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
                 className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
               >
                 <img
-                  src={tool.icon.src}
+                  src={tool.icon}
                   alt={tool.name}
                   className="w-full h-full object-contain"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
               </div>
               <span
@@ -236,6 +214,7 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
                     ? "group-hover:text-neutral-0"
                     : "group-hover:text-neutral-90"
                 }`}
+                style={{ userSelect: "none" }}
               >
                 {tool.name}
               </span>
@@ -254,9 +233,12 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
                 className={`w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 rounded-2xl ${tool.bg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2`}
               >
                 <img
-                  src={tool.icon.src}
+                  src={tool.icon}
                   alt={tool.name}
                   className="w-full h-full object-contain"
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
               </div>
               <span
@@ -265,6 +247,7 @@ const InfiniteScrollBanner = ({ className = "" }: { className?: string }) => {
                     ? "group-hover:text-neutral-0"
                     : "group-hover:text-neutral-90"
                 }`}
+                style={{ userSelect: "none" }}
               >
                 {tool.name}
               </span>
