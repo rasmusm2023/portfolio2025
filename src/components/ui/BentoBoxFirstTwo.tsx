@@ -36,7 +36,11 @@ const BentoBoxFirstTwo = () => {
             style={{
               transform: `scale(${getBoxScale("combined")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
+              userSelect: "none",
             }}
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             onMouseEnter={() => setHoveredBox("combined")}
             onMouseLeave={() => setHoveredBox(null)}
           >

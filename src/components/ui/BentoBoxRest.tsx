@@ -68,7 +68,11 @@ const BentoBoxRest = () => {
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
+              userSelect: "none",
             }}
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             onMouseEnter={() => setHoveredBox("skills-dotted")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -861,7 +865,11 @@ const BentoBoxRest = () => {
             style={{
               transform: `scale(${getBoxScale("experience")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
+              userSelect: "none",
             }}
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             onMouseEnter={() => setHoveredBox("experience")}
             onMouseLeave={() => setHoveredBox(null)}
           >
@@ -973,7 +981,11 @@ const BentoBoxRest = () => {
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
+              userSelect: "none",
             }}
+            draggable="false"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
             onMouseEnter={() => setHoveredBox("current-work")}
             onMouseLeave={() => setHoveredBox(null)}
           >

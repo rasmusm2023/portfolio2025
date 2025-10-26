@@ -135,6 +135,7 @@ export default function IdentityCarousel({
       <div
         ref={carouselRef}
         className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide cursor-grab active:cursor-grabbing select-none"
+        style={{ userSelect: "none" }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -158,6 +159,7 @@ export default function IdentityCarousel({
               backgroundColor: isDark
                 ? "rgba(35, 35, 35, 0.5)"
                 : "rgba(248, 248, 248, 0.95)",
+              userSelect: "none",
             }}
           >
             {/* Blurred Background Layer */}
@@ -209,6 +211,9 @@ export default function IdentityCarousel({
                   style={{
                     objectPosition: "center",
                   }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
                 />
               ) : (
                 <div
@@ -227,7 +232,10 @@ export default function IdentityCarousel({
             </div>
 
             {/* Content Section */}
-            <div className="space-y-3 sm:space-y-2 md:space-y-3 relative z-10">
+            <div
+              className="space-y-3 sm:space-y-2 md:space-y-3 relative z-10"
+              style={{ userSelect: "none" }}
+            >
               <div className="flex items-center gap-3 sm:gap-2 md:gap-3">
                 <span className="text-2xl sm:text-xl md:text-2xl">
                   {identityItem.emoji}
