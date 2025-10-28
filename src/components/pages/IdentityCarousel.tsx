@@ -135,7 +135,10 @@ export default function IdentityCarousel({
       <div
         ref={carouselRef}
         className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide cursor-grab active:cursor-grabbing select-none"
-        style={{ userSelect: "none" }}
+        style={{
+          userSelect: "none",
+          scrollBehavior: isDragging ? "auto" : "smooth",
+        }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -147,7 +150,6 @@ export default function IdentityCarousel({
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        style={{ scrollBehavior: isDragging ? "auto" : "smooth" }}
         data-tooltip="Swipe"
         data-tooltip-icon="↔"
       >
