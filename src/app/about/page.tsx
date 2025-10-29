@@ -29,6 +29,7 @@ import DesignThinkerImage from "@/../public/assets/images/16bit/design-thinker.w
 import MusicFestivalsImage from "@/../public/assets/images/16bit/music-and-festivals.webp";
 import InfjAImage from "@/../public/assets/images/16bit/INFJ-A.png";
 import TechExplorerImage from "@/../public/assets/images/16bit/tech-explorer.webp";
+import AiAdvocateImage from "@/../public/assets/images/16bit/AI-advocate.webp";
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 import Image from "next/image";
@@ -1058,8 +1059,7 @@ export default function AboutPage() {
                           description:
                             "I'm fascinated by AI and use it strategically to enhance my creative work. From code generation to ideation, AI helps me push the boundaries of what's possible.",
                           emoji: "🤖",
-                          image:
-                            "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=400&fit=crop&crop=center",
+                          image: AiAdvocateImage.src,
                         },
                         {
                           title: "Design Thinker",
