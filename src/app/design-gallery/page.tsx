@@ -7,210 +7,106 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import CircularScrollText from "@/components/ui/CircularScrollText";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Pause } from "@phosphor-icons/react";
 import { gsap } from "gsap";
+import ExpoSlider from "@/components/pages/ExpoSlider";
 
-// Gallery data - organized by carousel
-const galleryImages = [
-  // First carousel - Mobile app images
+// Gallery data - organized by category
+const appsAndWebsitesImages = [
   {
-    src: "/assets/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
+    src: "/assets/design-gallery-assets/App design for transfer & payments.webp",
     lightboxSrc:
-      "/assets/design-gallery-assets/App Design For A Money Transfer And Payment App.webp",
-    alt: "App Design For A Money Transfer And Payment App",
-    title: "App Design For A Money Transfer And Payment App",
+      "/assets/design-gallery-assets/App design for transfer & payments.webp",
+    alt: "App design for transfer & payments",
+    title: "App design for transfer & payments",
   },
   {
-    src: "/assets/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/MVP Design For A Study App To Counteract Procrastination And Stress.webp",
-    alt: "MVP Design For A Study App To Counteract Procrastination And Stress",
-    title:
-      "MVP Design For A Study App To Counteract Procrastination And Stress",
+    src: "/assets/design-gallery-assets/App design for students.webp",
+    lightboxSrc: "/assets/design-gallery-assets/App design for students.webp",
+    alt: "App design for students",
+    title: "App design for students",
   },
   {
-    src: "/assets/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
+    src: "/assets/design-gallery-assets/App explorations for AI app.webp",
     lightboxSrc:
-      "/assets/design-gallery-assets/Color Theme Explorations For An AI Cover Letter Generator App.webp",
-    alt: "Color Theme Explorations For An AI Cover Letter Generator App",
-    title: "Color Theme Explorations For An AI Cover Letter Generator App",
+      "/assets/design-gallery-assets/App explorations for AI app.webp",
+    alt: "App explorations for AI app",
+    title: "App explorations for AI app",
   },
   {
-    src: "/assets/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/Mockup For An AI Cover Letter Generator App.webp",
-    alt: "Mockup For An AI Cover Letter Generator App",
-    title: "Mockup For An AI Cover Letter Generator App",
-  },
-  // Second carousel - Other design work
-  {
-    src: "/assets/design-gallery-assets/UI for a Survival & Crafting Game.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/UI for a Survival & Crafting Game Screenshot Only.webp",
-    alt: "UI for a Survival & Crafting Game",
-    title: "UI for a Survival & Crafting Game",
+    src: "/assets/design-gallery-assets/App design for AI app.webp",
+    lightboxSrc: "/assets/design-gallery-assets/App design for AI app.webp",
+    alt: "App design for AI app",
+    title: "App design for AI app",
   },
   {
-    src: "/assets/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
+    src: "/assets/design-gallery-assets/Landing page for web agency.webp",
     lightboxSrc:
-      "/assets/design-gallery-assets/Persona Visualisation For A Money Transfer And Payment App.webp",
-    alt: "Persona Visualisation For A Money Transfer And Payment App",
-    title: "Persona Visualisation For A Money Transfer And Payment App",
+      "/assets/design-gallery-assets/Landing page for web agency.webp",
+    alt: "Landing page for web agency",
+    title: "Landing page for web agency",
   },
   {
-    src: "/assets/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
+    src: "/assets/design-gallery-assets/Landing page exploration for cybersecurity.webp",
     lightboxSrc:
-      "/assets/design-gallery-assets/Brochure Design For Cybersecurity Company.webp",
-    alt: "Brochure Design For Cybersecurity Company",
-    title: "Brochure Design For Cybersecurity Company",
+      "/assets/design-gallery-assets/Landing page exploration for cybersecurity.webp",
+    alt: "Landing page exploration for cybersecurity",
+    title: "Landing page exploration for cybersecurity",
   },
   {
-    src: "/assets/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
+    src: "/assets/design-gallery-assets/Website design for e-commerce.webp",
     lightboxSrc:
-      "/assets/design-gallery-assets/Brochure Design Mockups For Cybersecurity Company.webp",
-    alt: "Brochure Design Mockups For Cybersecurity Company",
-    title: "Brochure Design Mockups For Cybersecurity Company",
-  },
-  {
-    src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/Landing Page MVP Exploration For a Creative Web Design Agency.webp",
-    alt: "Landing Page MVP Exploration For a Creative Web Design Agency",
-    title: "Landing Page MVP Exploration For a Creative Web Design Agency",
-  },
-  {
-    src: "/assets/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/Landing Page MVP Exploration For a Cybersecurity Website.webp",
-    alt: "Landing Page MVP Exploration For a Cybersecurity Website",
-    title: "Landing Page MVP Exploration For a Cybersecurity Website",
-  },
-  {
-    src: "/assets/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/Figma Remake Design For Game Launcher.webp",
-    alt: "Figma Remake Design For Game Launcher",
-    title: "Figma Remake Design For Game Launcher",
-  },
-  {
-    src: "/assets/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
-    lightboxSrc:
-      "/assets/design-gallery-assets/Website Design For Computer And PC Parts E-Commerce.webp",
-    alt: "Website Design For Computer And PC Parts E-Commerce",
-    title: "Website Design For Computer And PC Parts E-Commerce",
+      "/assets/design-gallery-assets/Website design for e-commerce.webp",
+    alt: "Website design for e-commerce",
+    title: "Website design for e-commerce",
   },
 ];
 
-// Carousel component
-const MovingCarousel = ({
-  images,
-  direction,
-  speed,
-  isPaused,
-  onImageClick,
-  startIndex = 0,
-}: {
-  images: typeof galleryImages;
-  direction: "left" | "right";
-  speed: number;
-  isPaused: boolean;
-  onImageClick: (index: number) => void;
-  startIndex?: number;
-}) => {
-  const [position, setPosition] = useState(0);
-  const duplicatedImages = [...images, ...images]; // Duplicate for seamless loop
+const gamesImages = [
+  {
+    src: "/assets/design-gallery-assets/UI concept for survival & crafting game.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/UI concept for survival & crafting game.webp",
+    alt: "UI concept for survival & crafting game",
+    title: "UI concept for survival & crafting game",
+  },
+  {
+    src: "/assets/design-gallery-assets/Game launcher Figma recreation.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Game launcher Figma recreation.webp",
+    alt: "Game launcher Figma recreation",
+    title: "Game launcher Figma recreation",
+  },
+];
 
-  useEffect(() => {
-    if (isPaused) return;
+const printsImages = [
+  {
+    src: "/assets/design-gallery-assets/Z-Fold brochure design for cybersecurity firm.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Z-Fold brochure design for cybersecurity firm.webp",
+    alt: "Z-Fold brochure design for cybersecurity firm",
+    title: "Z-Fold brochure design for cybersecurity firm",
+  },
+  {
+    src: "/assets/design-gallery-assets/Z-Fold brochure design for cybersecurity firm-open.webp",
+    lightboxSrc:
+      "/assets/design-gallery-assets/Z-Fold brochure design for cybersecurity firm-open.webp",
+    alt: "Z-Fold brochure design for cybersecurity firm-open",
+    title: "Z-Fold brochure design for cybersecurity firm-open",
+  },
+];
 
-    const interval = setInterval(() => {
-      setPosition((prev) => {
-        // Responsive image width calculation
-        let imageWidth;
-        if (window.innerWidth < 640) {
-          imageWidth = 280 + 16; // w-[280px] + mx-2
-        } else if (window.innerWidth < 768) {
-          imageWidth = 320 + 24; // w-[320px] + mx-3
-        } else if (window.innerWidth < 1024) {
-          imageWidth = 400 + 32; // w-[400px] + mx-4
-        } else if (window.innerWidth < 1280) {
-          imageWidth = 480 + 32; // w-[480px] + mx-4
-        } else {
-          imageWidth = 560 + 32; // w-[560px] + mx-4
-        }
-
-        const maxPosition = images.length * imageWidth;
-        const newPosition = direction === "left" ? prev - speed : prev + speed;
-
-        if (direction === "left" && newPosition <= -maxPosition) {
-          return 0;
-        } else if (direction === "right" && newPosition >= 0) {
-          return -maxPosition;
-        }
-        return newPosition;
-      });
-    }, 16); // ~60fps
-
-    return () => clearInterval(interval);
-  }, [direction, speed, isPaused, images.length]);
-
-  // Reset position on window resize to prevent layout issues
-  useEffect(() => {
-    const handleResize = () => {
-      setPosition(0);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  return (
-    <div className="relative overflow-hidden whitespace-nowrap py-4">
-      {/* Left fade gradient */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-r from-neutral-0 dark:from-neutral-100 to-transparent z-10 pointer-events-none" />
-
-      {/* Right fade gradient */}
-      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-24 bg-gradient-to-l from-neutral-0 dark:from-neutral-100 to-transparent z-10 pointer-events-none" />
-
-      <div
-        className="inline-flex transition-none"
-        style={{
-          transform: `translateX(${position}px)`,
-          transition: isPaused ? "none" : "none",
-        }}
-      >
-        {duplicatedImages.map((image, index) => (
-          <div
-            key={`${image.src}-${index}`}
-            className="inline-block w-[280px] sm:w-[320px] md:w-[400px] lg:w-[480px] xl:w-[560px] h-[200px] sm:h-[240px] md:h-[300px] lg:h-[320px] xl:h-[400px] mx-2 sm:mx-3 md:mx-4 cursor-pointer group"
-            onClick={() => onImageClick(startIndex + (index % images.length))}
-          >
-            <div className="relative w-full h-full rounded-lg sm:rounded-xl overflow-hidden border-2 border-neutral-80/40 hover:border-purple-500/50 hover:shadow-[0_0_20px_rgba(139,92,246,0.3)] hover:shadow-purple-500/30 hover:scale-105 transition-all duration-300 gallery-image">
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-6 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-white text-xs sm:text-sm md:text-base font-medium truncate">
-                  {image.title}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+// Combined gallery images for lightbox
+const galleryImages = [
+  ...appsAndWebsitesImages,
+  ...gamesImages,
+  ...printsImages,
+];
 
 export default function DesignGalleryPage() {
   const { isDark } = useTheme();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   // Update page title
   useEffect(() => {
@@ -310,14 +206,6 @@ export default function DesignGalleryPage() {
     setCurrentImageIndex(index);
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] transition-colors duration-300">
       {/* Custom Cursor */}
@@ -399,71 +287,82 @@ export default function DesignGalleryPage() {
             </div>
           </section>
 
-          {/* Moving Gallery Carousels */}
-          <section
-            className="py-8 sm:py-12 lg:py-16"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
+          {/* Expo Sliders */}
+          <section className="py-8 sm:py-12 lg:py-16">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-              {/* Instruction text - responsive */}
-              <div className="flex justify-center items-center gap-2 mb-4">
-                {/* Mobile/Tablet: TAP TO EXPAND */}
-                <div className="lg:hidden flex items-center gap-2">
-                  <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
-                    TAP TO EXPAND
-                  </p>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    className="text-neutral-50 dark:text-neutral-50 opacity-60"
-                  >
-                    <path
-                      d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+              {/* Expo Slider - Apps & Websites */}
+              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+                <div className="mb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                      1
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                      <span
+                        className="bg-clip-text text-transparent font-hanken"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Apps & Websites
+                      </span>
+                    </h2>
+                  </div>
                 </div>
-
-                {/* Desktop: HOVER TO PAUSE */}
-                <div className="hidden lg:flex items-center gap-2">
-                  <p className="text-xs text-neutral-50 dark:text-neutral-50 font-bold opacity-60 tracking-wider">
-                    HOVER TO PAUSE
-                  </p>
-                  <Pause
-                    size={14}
-                    className="text-neutral-50 dark:text-neutral-50 opacity-60"
-                  />
-                </div>
-              </div>
-
-              {/* First Carousel - Mobile App Images - Scrolls Left */}
-              <div className="mb-8 sm:mb-12">
-                <MovingCarousel
-                  images={galleryImages.slice(0, 4)}
-                  direction="left"
-                  speed={2.5}
-                  isPaused={isHovered}
+                <ExpoSlider
+                  images={appsAndWebsitesImages}
                   onImageClick={openLightbox}
-                  startIndex={0}
                 />
               </div>
 
-              {/* Second Carousel - Other Design Work - Scrolls Right */}
-              <div className="mb-8 sm:mb-12">
-                <MovingCarousel
-                  images={galleryImages.slice(4, 11)}
-                  direction="right"
-                  speed={3}
-                  isPaused={isHovered}
-                  onImageClick={openLightbox}
-                  startIndex={4}
-                />
+              {/* Expo Slider - Games */}
+              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+                <div className="mb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                      2
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                      <span
+                        className="bg-clip-text text-transparent font-hanken"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Games
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+                <ExpoSlider images={gamesImages} onImageClick={openLightbox} />
+              </div>
+
+              {/* Expo Slider - Prints */}
+              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+                <div className="mb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                      3
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                      <span
+                        className="bg-clip-text text-transparent font-hanken"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Prints
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+                <ExpoSlider images={printsImages} onImageClick={openLightbox} />
               </div>
             </div>
           </section>
