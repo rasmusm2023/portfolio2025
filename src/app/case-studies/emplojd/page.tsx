@@ -56,7 +56,7 @@ export default function EmplojdCaseStudy() {
             description="Emplojd is an AI-powered SaaS platform designed to make job applications smarter and more personal. The platform recommends relevant job listings and also writes tailored cover letters using AI."
             duration="8 months"
             teamSize="6 people"
-            role="UX/UI Designer & Frontend Developer"
+            role="UX/UI Designer"
             challenge="Create an HR platform that serves both HR professionals and employees while maintaining simplicity and efficiency. The platform needed to handle complex workflows while providing a seamless user experience for all user types, with particular focus on reducing administrative burden and improving employee engagement."
             solution="Developed a role-based design system with personalized dashboards for different user types. Implemented comprehensive onboarding flows, performance tracking tools, and communication features. Used React with TypeScript and modern state management, with a focus on accessibility and mobile-first design principles."
             results={[
