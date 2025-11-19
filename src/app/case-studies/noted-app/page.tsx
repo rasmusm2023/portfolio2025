@@ -13,7 +13,7 @@ export default function NotedAppCaseStudy() {
         description="Designed and developed a modern note-taking application that prioritizes user experience and productivity. The app features a clean, minimalist interface with powerful organizational tools and seamless synchronization across devices."
         duration="4 months"
         teamSize="3 people"
-        role="UX/UI Designer & Frontend Developer"
+        role="Product Designer & Developer"
         challenge="Create a note-taking app that stands out in a crowded market while providing an intuitive and efficient user experience. The app needed to handle complex organizational needs while maintaining simplicity and speed."
         solution="Developed a user-centered design approach with extensive research and testing. Implemented a clean, card-based interface with smart categorization, search functionality, and real-time collaboration features. Used React Native for cross-platform compatibility."
         results={[
