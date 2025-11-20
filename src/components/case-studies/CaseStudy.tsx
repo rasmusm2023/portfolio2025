@@ -14,7 +14,9 @@ import Hero from "./sections/Hero";
 import Summary from "./sections/Summary";
 import About from "./sections/About";
 import BusinessObjective from "./sections/BusinessObjective";
+import Problem from "./sections/Problem";
 import Challenge from "./sections/Challenge";
+import GoalsAndConstraints from "./sections/GoalsAndConstraints";
 import Solution from "./sections/Solution";
 import Craft from "./sections/Craft";
 import DesignExplorations from "./sections/DesignExplorations";
@@ -37,7 +39,7 @@ interface Section {
 interface CaseStudyProps {
   title: string;
   subtitle: string;
-  description: string | string[];
+  description: string | string[] | React.ReactNode;
   duration: string;
   teamSize: string;
   role: string;
@@ -64,6 +66,7 @@ interface CaseStudyProps {
   aboutText?: React.ReactNode;
   processSteps?: string[];
   businessObjectivesText?: React.ReactNode;
+  problemText?: React.ReactNode;
   excludeIds?: string[];
 }
 
@@ -119,6 +122,7 @@ const CaseStudy = ({
   aboutText,
   processSteps,
   businessObjectivesText,
+  problemText,
   excludeIds = [],
 }: CaseStudyProps) => {
   const router = useRouter();
@@ -127,8 +131,10 @@ const CaseStudy = ({
   const summaryRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLElement>(null);
   const businessObjectiveRef = useRef<HTMLDivElement>(null);
+  const problemRef = useRef<HTMLElement>(null);
   const processRef = useRef<HTMLElement>(null);
   const challengeRef = useRef<HTMLElement>(null);
+  const goalsAndConstraintsRef = useRef<HTMLElement>(null);
   const solutionRef = useRef<HTMLElement>(null);
   const roleRef = useRef<HTMLElement>(null);
   const insightsRef = useRef<HTMLElement>(null);
@@ -334,6 +340,8 @@ const CaseStudy = ({
         summaryRef.current?.scrollIntoView({ behavior: "smooth" });
       } else if (firstSectionId === "challenge") {
         challengeRef.current?.scrollIntoView({ behavior: "smooth" });
+      } else if (firstSectionId === "goals-and-constraints") {
+        goalsAndConstraintsRef.current?.scrollIntoView({ behavior: "smooth" });
       } else if (firstSectionId === "craft") {
         craftRef.current?.scrollIntoView({ behavior: "smooth" });
       } else if (firstSectionId === "process") {
@@ -489,8 +497,10 @@ const CaseStudy = ({
       const summaryTop = summaryRef.current?.offsetTop || 0;
       const aboutTop = aboutRef.current?.offsetTop || 0;
       const businessObjectiveTop = businessObjectiveRef.current?.offsetTop || 0;
+      const problemTop = problemRef.current?.offsetTop || 0;
       const processTop = processRef.current?.offsetTop || 0;
       const challengeTop = challengeRef.current?.offsetTop || 0;
+      const goalsAndConstraintsTop = goalsAndConstraintsRef.current?.offsetTop || 0;
       const solutionTop = solutionRef.current?.offsetTop || 0;
       const craftTop = craftRef.current?.offsetTop || 0;
       const designExplorationsTop =
@@ -507,10 +517,14 @@ const CaseStudy = ({
       const businessObjectiveBottom =
         businessObjectiveTop +
         (businessObjectiveRef.current?.offsetHeight || 0);
+      const problemBottom =
+        problemTop + (problemRef.current?.offsetHeight || 0);
       const processBottom =
         processTop + (processRef.current?.offsetHeight || 0);
       const challengeBottom =
         challengeTop + (challengeRef.current?.offsetHeight || 0);
+      const goalsAndConstraintsBottom =
+        goalsAndConstraintsTop + (goalsAndConstraintsRef.current?.offsetHeight || 0);
       const solutionBottom =
         solutionTop + (solutionRef.current?.offsetHeight || 0);
       const craftBottom = craftTop + (craftRef.current?.offsetHeight || 0);
@@ -536,12 +550,22 @@ const CaseStudy = ({
       } else if (scrollCenter >= aboutTop && scrollCenter < aboutBottom) {
         activeSectionId = "about";
       } else if (
+        scrollCenter >= problemTop &&
+        scrollCenter < problemBottom
+      ) {
+        activeSectionId = "problem";
+      } else if (
         scrollCenter >= businessObjectiveTop &&
         scrollCenter < businessObjectiveBottom
       ) {
         activeSectionId = "business-objective";
       } else if (scrollCenter >= processTop && scrollCenter < processBottom) {
         activeSectionId = "process";
+      } else if (
+        scrollCenter >= goalsAndConstraintsTop &&
+        scrollCenter < goalsAndConstraintsBottom
+      ) {
+        activeSectionId = "goals-and-constraints";
       } else if (
         scrollCenter >= challengeTop &&
         scrollCenter < challengeBottom
@@ -704,8 +728,10 @@ const CaseStudy = ({
           summaryRef.current,
           aboutRef.current,
           businessObjectiveRef.current,
+          problemRef.current,
           processRef.current,
           challengeRef.current,
+          goalsAndConstraintsRef.current,
           solutionRef.current,
           roleRef.current,
           insightsRef.current,
@@ -929,19 +955,29 @@ const CaseStudy = ({
           {/* Summary Section */}
           <Summary description={description} />
 
-          {/* About Section */}
-          <About
-            aboutText={aboutText}
-            appIconPath={appIconPath}
-            logotypeBlackPath={logotypeBlackPath}
-            logotypeWhitePath={logotypeWhitePath}
-          />
+          {/* About Section - Only render if "about" is in sections */}
+          {sections.some(section => section.sections?.includes("about")) && (
+            <About
+              aboutText={aboutText}
+              appIconPath={appIconPath}
+              logotypeBlackPath={logotypeBlackPath}
+              logotypeWhitePath={logotypeWhitePath}
+            />
+          )}
 
-          {/* Business Objective Section */}
-          <BusinessObjective businessObjectivesText={businessObjectivesText} />
+          {/* Business Objective or Problem Section */}
+          {sections.some(section => section.sections?.includes("problem")) ? (
+            <Problem problemText={problemText} problemRef={problemRef} />
+          ) : sections.some(section => section.sections?.includes("business-objective")) ? (
+            <BusinessObjective businessObjectivesText={businessObjectivesText} />
+          ) : null}
 
-          {/* The challenge Section with Centered Layout */}
-          <Challenge challenge="AI-powered job application platform" />
+          {/* The challenge or Goals & Constraints Section */}
+          {sections.some(section => section.sections?.includes("goals-and-constraints")) ? (
+            <GoalsAndConstraints goalsAndConstraintsRef={goalsAndConstraintsRef} />
+          ) : sections.some(section => section.sections?.includes("challenge")) ? (
+            <Challenge challenge="AI-powered job application platform" />
+          ) : null}
 
           {/* The Solution Section */}
           <Solution solution="AI-powered job application platform" />
