@@ -4,6 +4,7 @@ import {
   Audiowide,
   Montserrat,
   Instrument_Serif,
+  Instrument_Sans,
 } from "next/font/google";
 
 export const hankenGrotesk = Hanken_Grotesk({
@@ -36,5 +37,11 @@ export const instrumentSerif = Instrument_Serif({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+export const instrumentSans = Instrument_Sans({
+  subsets: ["latin"],
+  variable: "--font-instrument-sans",
   display: "swap",
 });
