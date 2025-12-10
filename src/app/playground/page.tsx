@@ -177,10 +177,10 @@ export default function PlaygroundPage() {
                     </div>
                     <div className="flex justify-center">
                       <button
-                        onClick={() => router.push("/projects")}
+                        onClick={() => router.push("/")}
                         className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors duration-300"
                       >
-                        View Other Projects
+                        Back to Home
                       </button>
                     </div>
                   </div>

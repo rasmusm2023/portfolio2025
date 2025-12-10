@@ -6,12 +6,28 @@ import BentoBoxRest from "@/components/ui/BentoBoxRest";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
+import InfiniteScrollBanner from "@/components/pages/InfiniteScrollBanner";
+import IdentityCarousel from "@/components/pages/IdentityCarousel";
 import { gradients, colors } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useTheme } from "@/contexts/ThemeContext";
+
+// Import images for Identity Carousel
+import MellbystrandImage from "@/../public/assets/images/16bit/mellbystrand.webp";
+import NightOwlImage from "@/../public/assets/images/16bit/nightowl.webp";
+import Formula1Image from "@/../public/assets/images/16bit/formula-1-enthusiast.webp";
+import StockholmImage from "@/../public/assets/images/16bit/stockholm-local.webp";
+import AvidGamerImage from "@/../public/assets/images/16bit/avid-gamer.webp";
+import HomeCookImage from "@/../public/assets/images/16bit/home-cook.webp";
+import AnimalLoverImage from "@/../public/assets/images/16bit/animal-lover.webp";
+import DesignThinkerImage from "@/../public/assets/images/16bit/design-thinker.webp";
+import MusicFestivalsImage from "@/../public/assets/images/16bit/music-and-festivals.webp";
+import InfjAImage from "@/../public/assets/images/16bit/INFJ-A.png";
+import TechExplorerImage from "@/../public/assets/images/16bit/tech-explorer.webp";
+import AiAdvocateImage from "@/../public/assets/images/16bit/AI-advocate.webp";
 
 interface CaseStudy {
   id: string;
@@ -1047,6 +1063,409 @@ export default function HomeV2() {
 
         {/* Rest of Bento Boxes */}
         <BentoBoxRest />
+
+        {/* About Me Section */}
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex items-center gap-4">
+                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                  03
+                </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                  <span
+                    className="bg-clip-text text-transparent font-hanken"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    About me
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            {/* Bento Box Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
+              {/* About Me - Copy 1 - 50% width */}
+              <div
+                className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("about1")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("about1")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      RASMUS.TXT
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-boy-dynamic-premium.png"
+                    alt="Rasmus"
+                    width={60}
+                    height={60}
+                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                  />
+                </div>
+                <div className="mt-4 sm:mt-6 relative z-10">
+                  <p
+                    className="leading-relaxed text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I'm a happy easy-going guy who appreciates tasty food, good
+                    music, cozy gaming, designing, brainstorming, and spending
+                    quality time with my family, friends, and girlfriend. I
+                    design & develop digital solutions with a passion for
+                    creating experiences that are seamless and make a
+                    difference.
+                  </p>
+                  <p
+                    className="leading-relaxed text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I specialize in UX/UI design and frontend development using
+                    tools like Figma and Cursor to get the job done. Whether you
+                    call it low-code, vibe coding, or something else entirely, I
+                    enjoy tackling the full journey from concept to finished
+                    product.
+                  </p>
+                </div>
+              </div>
+
+              {/* About Me - Copy 2 - 50% width */}
+              <div
+                className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("about2")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("about2")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      BACKGROUND
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-notebook-dynamic-premium.png"
+                    alt="About Me"
+                    width={60}
+                    height={60}
+                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                  />
+                </div>
+                <div className="mt-4 sm:mt-6 relative z-10">
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I've designed across{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      multiple industries
+                    </span>
+                    , including health-tech, travel, retail, SaaS and AI.
+                    Gaining{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      experience at startups, medium-sized businesses, and
+                      larger enterprises.
+                    </span>{" "}
+                    Each one broadening my{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      experience of how design can work and be thought about
+                      differently.
+                    </span>{" "}
+                    This mix has taught me how to adapt quickly, balance
+                    creativity with structure, and design solutions that scale.
+                  </p>
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    My background spans UX/UI design, research, frontend
+                    development, all the way to how to connect, understand and
+                    support a customer or user on a micro level. Whether I'm
+                    crafting dashboards, shaping brand experiences, or
+                    experimenting with side projects, I always aim to create
+                    digital products that are clear, accessible, and impactful.
+                  </p>
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    Most recently, I've spent{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      two years at Chas Academy in Stockholm, specializing in
+                      UX/UI design and frontend development.
+                    </span>{" "}
+                    This gave me the space to dive deep into design thinking,
+                    accessibility, research methodologies, conducting user
+                    interviews, and design systems while also{" "}
+                    <span
+                      style={{
+                        background:
+                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                      }}
+                    >
+                      building real-world projects from concept to launch.
+                    </span>{" "}
+                    It's where I combined creativity with learning the technical
+                    know-how to get the job done.
+                  </p>
+                </div>
+              </div>
+
+              {/* Carousel Bento Box - Full width */}
+              <div
+                className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
+                style={{
+                  transform: `scale(${getBoxScale("carousel")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("carousel")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+
+                {/* Carousel centered within the bento box */}
+                <div className="flex items-center justify-center h-full relative z-10 w-full">
+                  <div
+                    className="w-full scale-90 xs:scale-95 sm:scale-100 md:scale-95 relative overflow-hidden"
+                    style={{ maxWidth: "100%" }}
+                  >
+                    <InfiniteScrollBanner className="w-full" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Personal Identity - Full width section */}
+              <div
+                className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("identity")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("identity")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      Identity
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-puzzle-dynamic-premium.png"
+                    alt="Identity"
+                    width={60}
+                    height={60}
+                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                  />
+                </div>
+                <div className="mt-8 relative z-10">
+                  <IdentityCarousel
+                    isDark={isDark}
+                    identity={[
+                      {
+                        title: "Home Cook",
+                        description:
+                          "I cook a lot and love experimenting with new recipes. Food is one of my creative outlets outside of design.",
+                        emoji: "👨‍🍳",
+                        image: HomeCookImage.src,
+                      },
+                      {
+                        title: "Tech Explorer",
+                        description:
+                          "Always curious about new technologies and how they can improve user experiences.",
+                        emoji: "🔬",
+                        image: TechExplorerImage.src,
+                      },
+                      {
+                        title: "AI Advocate",
+                        description:
+                          "I'm fascinated by AI and use it strategically to enhance my creative work. From code generation to ideation, AI helps me push the boundaries of what's possible.",
+                        emoji: "🤖",
+                        image: AiAdvocateImage.src,
+                      },
+                      {
+                        title: "Design Thinker",
+                        description:
+                          "I approach problems with empathy and user-centered design principles. I find myself thinking about design a lot even in everyday scenarios.",
+                        emoji: "💭",
+                        image: DesignThinkerImage.src,
+                      },
+                      {
+                        title: "Stockholm Local",
+                        description:
+                          "Living in one of the world's most design-forward cities inspires my work daily.",
+                        emoji: "🏙️",
+                        image: StockholmImage.src,
+                      },
+                      {
+                        title: "Animal Lover",
+                        description:
+                          "I love animals - I have had both cats and dogs as pets.",
+                        emoji: "🐶",
+                        image: AnimalLoverImage.src,
+                      },
+                      {
+                        title: "From Mellbystrand, Sweden",
+                        description:
+                          "Born in coastal Mellbystrand with its warm summers and quiet winters — shaped my appreciation for nature and serenity.",
+                        emoji: "🌅",
+                        image: MellbystrandImage.src,
+                      },
+                      {
+                        title: "Night Owl",
+                        description:
+                          "I'm most productive and creative during the late hours when the world is quiet.",
+                        emoji: "🦉",
+                        image: NightOwlImage.src,
+                      },
+                      {
+                        title: "Formula 1 Enthusiast",
+                        description:
+                          "Passionate about Formula 1 racing. My favorite team is Mercedes and driver is Lewis Hamilton. I love the engineering, strategy, and pure speed of the sport.",
+                        emoji: "🏎️",
+                        image: Formula1Image.src,
+                      },
+                      {
+                        title: "Avid Gamer",
+                        description:
+                          "I love gaming and exploring virtual worlds. From strategy games to action RPGs, gaming fuels my creativity and problem-solving skills.",
+                        emoji: "🎮",
+                        image: AvidGamerImage.src,
+                      },
+                      {
+                        title: "Music & Festivals",
+                        description:
+                          "I used to produce my own electronic music and DJ sets. Now I enjoy discovering new artists and experiencing live music at festivals.",
+                        emoji: "🎵",
+                        image: MusicFestivalsImage.src,
+                      },
+                      {
+                        title: "INFJ-A",
+                        description:
+                          "According to MBTI tests - I'm a slightly introverted, intuitive, and feeling individual with an assertive nature and vivid imagination.",
+                        emoji: "🧠",
+                        image: InfjAImage.src,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Footer Section */}
         <div className="pt-16 pb-16">
