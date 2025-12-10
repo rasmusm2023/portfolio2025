@@ -247,7 +247,7 @@ export default function HomeV2() {
                           I
                         </span>
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                          create
+                          design
                         </span>
                         <span className="word highlight">
                           <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
@@ -261,17 +261,17 @@ export default function HomeV2() {
                           </span>
                           <span className="highlight-bg"></span>
                         </span>
-                      </div>
-                      <div className="statement-line flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                          and
+                          that
                         </span>
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
                           make
                         </span>
+                      </div>
+                      <div className="statement-line flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
                         <span className="word highlight">
                           <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                            exceptional
+                            impactful
                           </span>
                           <span className="highlight-bg"></span>
                         </span>
@@ -292,7 +292,7 @@ export default function HomeV2() {
                 {/* Project Card 1 - Emplojd */}
                 {caseStudies[0] && (
                   <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer rounded-xl sm:rounded-2xl md:rounded-2xl case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-neutral-80/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
                     style={{
                       transform: `scale(${getBoxScale(
                         `project-${caseStudies[0].id}`
@@ -309,14 +309,17 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
                       <Image
                         src={caseStudies[0].image}
                         alt={caseStudies[0].alt}
                         width={400}
                         height={300}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
+                      <div className="absolute top-2 right-2 bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                        Case study
+                      </div>
                       {caseStudies[0].id === "emplojd" && (
                         <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
                           <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
@@ -378,7 +381,7 @@ export default function HomeV2() {
                 {/* Project Card 2 - Noted */}
                 {caseStudies[1] && (
                   <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer rounded-xl sm:rounded-2xl md:rounded-2xl case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-neutral-80/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
                     style={{
                       transform: `scale(${getBoxScale(
                         `project-${caseStudies[1].id}`
@@ -395,16 +398,16 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
                       <Image
                         src={caseStudies[1].image}
                         alt={caseStudies[1].alt}
                         width={400}
                         height={300}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
                       <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                        Coming Soon
+                        Coming soon
                       </div>
                       <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
                         <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
@@ -465,7 +468,7 @@ export default function HomeV2() {
                 {/* Project Card 3 - Zmartrest AI */}
                 {caseStudies[2] && (
                   <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer rounded-xl sm:rounded-2xl md:rounded-2xl case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-neutral-80/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
                     style={{
                       transform: `scale(${getBoxScale(
                         `project-${caseStudies[2].id}`
@@ -482,16 +485,16 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl md:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
                       <Image
                         src={caseStudies[2].image}
                         alt={caseStudies[2].alt}
                         width={400}
                         height={300}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
                       <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                        Coming Soon
+                        Coming soon
                       </div>
                       <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
                         <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
@@ -779,6 +782,263 @@ export default function HomeV2() {
                       className="w-full h-full object-contain"
                     />
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex items-center gap-4">
+                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                  02
+                </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                  <span
+                    className="bg-clip-text text-transparent font-hanken"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    Education
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            {/* Education Timeline */}
+            <div className="space-y-12">
+              {/* Education Entry 1 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    SEP, 2023 - JUNE, 2025
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    UX/UI Designer with Frontend – Diploma
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                    Chas Academy, Stockholm, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Specialized in UX/UI design and frontend development, diving
+                    deep into design thinking, accessibility, research
+                    methodologies, user interviews, and design systems. Built
+                    real-world projects from concept to launch, combining
+                    creativity with technical expertise.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Relevant Coursework: UX/UI design, Web design, Frontend
+                    development, Design systems, UX research, WCAG
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                        Chas Academy
+                      </span>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Education Entry 2 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    APR, 2025 - JUNE, 2025
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    Digital Accessibility and Inclusive Design – Diploma
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                    Axess Labs, Stockholm, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Focused on creating inclusive digital experiences through
+                    comprehensive understanding of accessibility principles,
+                    assistive technologies, and WCAG guidelines. Learned to
+                    conduct accessibility audits and design with diverse user
+                    needs in mind.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Relevant Coursework: Inclusive design principles, Assistive
+                    technology, Accessibility auditing, WCAG, Accessibility
+                    guidelines, User needs
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                        Axess Labs
+                      </span>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Education Entry 3 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    AUG, 2018 - JUNE, 2019
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    High School Engineer, IT
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                    Kattegattgymnasiet, Halmstad, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    A fourth technical year with a focus on IT. Completed 10
+                    weeks of internship at two different businesses and as a
+                    consultant for an actor, all in Stockholm. Gained hands-on
+                    experience in programming, web design, data storage,
+                    software management, economics, law, and Microsoft Office
+                    programs.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Skills: User-centered design, Web design, SEO, Frontend
+                    development, React.js, WordPress
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                        Kattegattgymnasiet
+                      </span>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              {/* Education Entry 4 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
+                    AUG, 2014 - JUNE, 2017
+                  </div>
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    High School Diploma, Technical Programme
+                  </h3>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                    Osbecksgymnasiet, Laholm, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Three technical years with courses including CAD, physics,
+                    web development, web server programming, entrepreneurship,
+                    construction, and arts & crafts. Built a strong foundation
+                    in technical skills and problem-solving.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Skills: CAD, Web development, programming, English, physics,
+                    entrepreneurship
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
+                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
+                        Osbecksgymnasiet
+                      </span>
+                    </div>
+                  </div>
+                  <a
+                    href="#"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
+                  >
+                    Visit Website
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>

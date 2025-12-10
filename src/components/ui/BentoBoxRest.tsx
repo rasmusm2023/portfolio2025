@@ -1021,6 +1021,42 @@ const BentoBoxRest = () => {
             </div>
 
             <div className="flex-1 flex flex-col lg:flex-row gap-4">
+              {/* Bookmarks Platform Card */}
+              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
+                <img
+                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center"
+                  alt="Bookmarks Platform Preview"
+                  className="w-full h-full object-cover"
+                />
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-sm"
+                  style={{
+                    maskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
+                  }}
+                ></div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
+                  <h3 className="text-lg font-semibold text-white">
+                    Bookmarks platform
+                  </h3>
+                  <p className="text-sm text-white/80">
+                    A space to save important links with a simple way of managing
+                    and accessing them.
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      TypeScript
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      Tailwind
+                    </span>
+                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
+                      Figma
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               {/* Dog-sitting App Card */}
               <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
                 <img
@@ -1028,7 +1064,13 @@ const BentoBoxRest = () => {
                   alt="Dog-sitting App Preview"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black/40"></div>
+                <div 
+                  className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-sm"
+                  style={{
+                    maskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
+                    WebkitMaskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
+                  }}
+                ></div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
                   <h3 className="text-lg font-semibold text-white">
                     Dog-sitting app
@@ -1046,36 +1088,6 @@ const BentoBoxRest = () => {
                     </span>
                     <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
                       Firebase
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* E-commerce Website & App Card */}
-              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
-                <img
-                  src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center"
-                  alt="E-commerce Website & App Preview"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
-                  <h3 className="text-lg font-semibold text-white">
-                    E-commerce website & app
-                  </h3>
-                  <p className="text-sm text-white/80">
-                    Building a modern e-commerce platform with responsive web
-                    design and mobile app.
-                  </p>
-                  <div className="flex flex-wrap gap-1">
-                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                      Next.js
-                    </span>
-                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                      React Native
-                    </span>
-                    <span className="px-2 py-1 bg-white/20 text-white text-xs rounded-full font-medium backdrop-blur-sm">
-                      Stripe
                     </span>
                   </div>
                 </div>
