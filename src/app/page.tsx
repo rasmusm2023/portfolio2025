@@ -557,7 +557,7 @@ export default function Home() {
                     JAN, 2025 - MAY, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer (Intern), Zmartrest AI
+                    Product Designer Intern, Zmartrest AI
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Spearheaded new app features and data visualizations to
@@ -614,7 +614,7 @@ export default function Home() {
                     NOV, 2024 - JAN, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer (Intern), Xbrandify
+                    UX/UI Designer Intern, Xbrandify
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Thrived in a fast-paced travel startup, crafting tailored

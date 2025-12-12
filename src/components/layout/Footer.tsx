@@ -278,14 +278,14 @@ const Footer = () => {
   };
 
   return (
-    <section className="py-12 sm:py-14 md:py-16 relative">
+    <section className="py-12 sm:py-14 md:py-16 pb-32 sm:pb-36 md:pb-40 lg:pb-48 xl:pb-56 relative">
       {/* Large Desktop Layout (xl and above) */}
       <div className="hidden xl:block min-h-[80vh] relative">
         <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between h-full min-h-[80vh]">
             <div className="text-left w-full flex flex-col justify-between h-full">
-              <div className="flex-1 flex items-center">
-                <div>
+              <div className="flex-1 flex items-start">
+                <div className="w-full">
                   <h1
                     ref={titleRef}
                     className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
@@ -294,19 +294,17 @@ const Footer = () => {
                       Contact
                     </span>
                   </h1>
-                  <div className="flex flex-row justify-between items-start mt-16">
-                    <div ref={descriptionRef} className="flex-1 max-w-[48rem]">
-                      <div className="flex flex-col gap-6">
-                        <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                          I'm always excited to discuss new opportunities and
-                          possibilities.
-                        </p>
-                        <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                          Whether you have a specific role in mind or just want
-                          to discuss how I can contribute, let's start a
-                          conversation.
-                        </p>
-                      </div>
+                  <div ref={descriptionRef} className="mt-16 max-w-[48rem]">
+                    <div className="flex flex-col gap-6">
+                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                        I'm always excited to discuss new opportunities and
+                        possibilities.
+                      </p>
+                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
+                        Whether you have a specific role in mind or just want to
+                        discuss how I can contribute, let's start a
+                        conversation.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -448,8 +446,8 @@ const Footer = () => {
           </div>
 
           {/* Contact Information positioned to align with email alternative */}
-          <div className="absolute left-0 bottom-0">
-            <div ref={contactInfoRef} className="flex flex-col space-y-10">
+          <div className="absolute left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 bottom-0">
+            <div ref={contactInfoRef} className="flex flex-col space-y-16">
               <div className="flex items-center space-x-8">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
@@ -570,7 +568,7 @@ const Footer = () => {
 
           {/* Contact Information */}
           <div className="mb-12">
-            <div ref={contactInfoLgRef} className="flex flex-col space-y-10">
+            <div ref={contactInfoLgRef} className="flex flex-col space-y-16">
               <div className="flex items-center space-x-8">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
@@ -823,7 +821,7 @@ const Footer = () => {
           <div className="mb-8 sm:mb-12">
             <div
               ref={contactInfoMobileRef}
-              className="flex flex-col space-y-10"
+              className="flex flex-col space-y-16"
             >
               <div className="flex flex-row items-center space-x-4 sm:space-x-8">
                 <div className="flex items-center space-x-3 sm:space-x-4">

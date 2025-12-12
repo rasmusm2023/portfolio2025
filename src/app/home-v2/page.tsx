@@ -604,7 +604,7 @@ export default function HomeV2() {
                     JAN, 2025 - MAY, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer (Intern), Zmartrest AI
+                    Product Designer Intern, Zmartrest AI
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Spearheaded new app features and data visualizations to
@@ -661,7 +661,7 @@ export default function HomeV2() {
                     NOV, 2024 - JAN, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer (Intern), Xbrandify
+                    UX/UI Designer Intern, Xbrandify
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Thrived in a fast-paced travel startup, crafting tailored
@@ -832,9 +832,6 @@ export default function HomeV2() {
               {/* Education Entry 1 */}
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    SEP, 2023 - JUNE, 2025
-                  </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     UX/UI Designer with Frontend – Diploma
                   </h3>
@@ -889,9 +886,6 @@ export default function HomeV2() {
               {/* Education Entry 2 */}
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    APR, 2025 - JUNE, 2025
-                  </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     Digital Accessibility and Inclusive Design – Diploma
                   </h3>
@@ -947,9 +941,6 @@ export default function HomeV2() {
               {/* Education Entry 3 */}
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    AUG, 2018 - JUNE, 2019
-                  </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     High School Engineer, IT
                   </h3>
@@ -1005,9 +996,6 @@ export default function HomeV2() {
               {/* Education Entry 4 */}
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
                 <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    AUG, 2014 - JUNE, 2017
-                  </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     High School Diploma, Technical Programme
                   </h3>
