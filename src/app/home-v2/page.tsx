@@ -88,6 +88,69 @@ const caseStudies: CaseStudy[] = [
   },
 ];
 
+// Color mapping for hollow pills - consistent colors for same text values (lighter shades)
+const pillColorMap: { [key: string]: string } = {
+  "UX/UI Design": "#a78bfa", // purple-400
+  Mobile: "#60a5fa", // blue-400
+  App: "#22d3ee", // cyan-400
+  "Mobile App": "#2dd4bf", // teal-400
+  "Product Design": "#818cf8", // indigo-400
+  Desktop: "#94a3b8", // slate-400
+  B2C: "#34d399", // emerald-400
+  B2B: "#fbbf24", // amber-400
+  SaaS: "#f472b6", // pink-400
+  "Project Lead": "#fb923c", // orange-400
+  "Design Lead": "#fb7185", // rose-400
+  Tablet: "#4ade80", // emerald-400
+  iOS: "#38bdf8", // sky-400
+  Startup: "#e879f9", // fuchsia-400
+  Android: "#a3e635", // lime-400
+};
+
+// Date pill component (liquid glass style)
+const DatePill = ({ year, isDark }: { year: string; isDark: boolean }) => {
+  return (
+    <span
+      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-full backdrop-blur-md border shadow-lg"
+      style={{
+        backgroundColor: isDark
+          ? "rgba(255, 255, 255, 0.15)"
+          : "rgba(0, 0, 0, 0.15)",
+        color: "#ffffff", // Always white text for better contrast
+        borderColor: isDark ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)",
+      }}
+    >
+      {year}
+    </span>
+  );
+};
+
+// Helper function to convert hex to rgba with opacity
+const hexToRgba = (hex: string, opacity: number): string => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+};
+
+// Hollow pill component (with colored border and text)
+const HollowPill = ({ text, isDark }: { text: string; isDark: boolean }) => {
+  const color = pillColorMap[text] || "#8b5cf6"; // default to purple if not found
+
+  return (
+    <span
+      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-full border backdrop-blur-sm shadow-md"
+      style={{
+        color: "#ffffff",
+        borderColor: color,
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+      }}
+    >
+      {text}
+    </span>
+  );
+};
+
 export default function HomeV2() {
   const { isDark } = useTheme();
   const [hoveredCase, setHoveredCase] = useState<string | null>(null);
@@ -338,15 +401,11 @@ export default function HomeV2() {
                       </div>
                       {caseStudies[0].id === "emplojd" && (
                         <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                          <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                            2024
-                          </span>
-                          <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                            Lead UX/UI Designer
-                          </span>
-                          <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                            School Project
-                          </span>
+                          <DatePill year="2024" isDark={isDark} />
+                          <HollowPill text="UX/UI Design" isDark={isDark} />
+                          <HollowPill text="Design Lead" isDark={isDark} />
+                          <HollowPill text="Mobile" isDark={isDark} />
+                          <HollowPill text="SaaS" isDark={isDark} />
                         </div>
                       )}
                     </div>
@@ -425,17 +484,14 @@ export default function HomeV2() {
                       <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
                         Coming soon
                       </div>
-                      <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          2025
-                        </span>
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          Designer & Developer
-                        </span>
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          Solo Project
-                        </span>
-                      </div>
+                      {caseStudies[1].id === "noted" && (
+                        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
+                          <DatePill year="2025" isDark={isDark} />
+                          <HollowPill text="Product Design" isDark={isDark} />
+                          <HollowPill text="Project Lead" isDark={isDark} />
+                          <HollowPill text="SaaS" isDark={isDark} />
+                        </div>
+                      )}
                     </div>
                     <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
                       <div className="flex items-center justify-between mb-1">
@@ -512,17 +568,14 @@ export default function HomeV2() {
                       <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
                         Coming soon
                       </div>
-                      <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          2025
-                        </span>
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          Product Designer
-                        </span>
-                        <span className="text-xs sm:text-sm font-medium text-white/90 bg-black/20 backdrop-blur-sm px-2 py-1 rounded-full">
-                          Internship Project
-                        </span>
-                      </div>
+                      {caseStudies[2].id === "zmartrest-ai" && (
+                        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
+                          <DatePill year="2025" isDark={isDark} />
+                          <HollowPill text="UX/UI Design" isDark={isDark} />
+                          <HollowPill text="Mobile App" isDark={isDark} />
+                          <HollowPill text="Startup" isDark={isDark} />
+                        </div>
+                      )}
                     </div>
                     <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
                       <div className="flex items-center justify-between mb-1">
@@ -630,27 +683,6 @@ export default function HomeV2() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://www.zmartrest.ai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -686,27 +718,6 @@ export default function HomeV2() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://www.yourbrandtravel.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -742,27 +753,6 @@ export default function HomeV2() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://noted-beta.netlify.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -859,27 +849,6 @@ export default function HomeV2() {
                       </span>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -914,27 +883,6 @@ export default function HomeV2() {
                       </span>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -969,27 +917,6 @@ export default function HomeV2() {
                       </span>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -1022,27 +949,6 @@ export default function HomeV2() {
                       </span>
                     </div>
                   </div>
-                  <a
-                    href="#"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
             </div>
