@@ -47,9 +47,9 @@ const caseStudies: CaseStudy[] = [
   {
     id: "emplojd",
     title: "Emplojd",
-    category: "AI-Powered / App Design / UX / UI",
+    category: "AI / Design lead / Design system / Workshop",
     description: "Enhancing job applications without compromising authenticity",
-    subtitle: "— Cover Letter Generator AI SaaS Platform",
+    subtitle: "— Enhancing job applications without compromising authenticity",
     image:
       "/assets/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.webp",
     alt: "Emplojd SaaS Platform Case Study",
@@ -375,7 +375,7 @@ export default function HomeV2() {
                       </div>
                       {caseStudies[0].id === "emplojd" && (
                         <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="UX/UI Design" isDark={isDark} />
+                          <HollowPill text="UX/UI design" isDark={isDark} />
                           <HollowPill text="Mobile" isDark={isDark} />
                           <HollowPill text="AI" isDark={isDark} />
                         </div>
@@ -463,9 +463,9 @@ export default function HomeV2() {
                       </div>
                       {caseStudies[1].id === "noted" && (
                         <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="Product Design" isDark={isDark} />
+                          <HollowPill text="Product design" isDark={isDark} />
                           <HollowPill text="Multiple devices" isDark={isDark} />
-                          <HollowPill text="Task Management" isDark={isDark} />
+                          <HollowPill text="Task management" isDark={isDark} />
                         </div>
                       )}
                     </div>
@@ -551,7 +551,7 @@ export default function HomeV2() {
                       </div>
                       {caseStudies[2].id === "zmartrest-ai" && (
                         <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="UX/UI Design" isDark={isDark} />
+                          <HollowPill text="UX/UI design" isDark={isDark} />
                           <HollowPill text="Mobile" isDark={isDark} />
                           <HollowPill text="Health-tech" isDark={isDark} />
                         </div>
