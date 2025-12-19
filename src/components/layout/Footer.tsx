@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Copy, ArrowsOutCardinal, FileText } from "@phosphor-icons/react";
+import {
+  Copy,
+  Check,
+  ArrowsOutCardinal,
+  FileText,
+} from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedinIn,
@@ -280,7 +285,7 @@ const Footer = () => {
     setEmailCopied(true);
     setTimeout(() => {
       setEmailCopied(false);
-    }, 5000);
+    }, 4000); // Brief green flash - 4 seconds
   };
 
   return (
@@ -341,33 +346,46 @@ const Footer = () => {
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Email Alternative - Prioritized at top */}
-                  <div className="text-center space-y-6 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
-                    <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
-                      Prefer to email directly?
-                    </p>
+                  <div
+                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
+                      emailCopied
+                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
+                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
+                    }`}
+                    onClick={handleCopyEmail}
+                  >
                     <div className="flex flex-col items-center justify-center gap-4">
                       <span
-                        className={`font-bold text-2xl transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
                           emailCopied
                             ? "text-green-500"
                             : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
                         }`}
-                        onClick={handleCopyEmail}
                       >
                         hello@rasmusmattsson.com
                       </span>
-                      <button
-                        type="button"
-                        onClick={handleCopyEmail}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                          emailCopied
-                            ? "bg-green-500 text-neutral-3 shadow-lg"
-                            : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                        }`}
-                      >
-                        <Copy size={16} weight="regular" />
-                        {emailCopied ? "Copied!" : "Copy email"}
-                      </button>
+                      <div className="flex items-center gap-3">
+                        {emailCopied ? (
+                          <Check
+                            size={24}
+                            weight="regular"
+                            className="text-green-500 transition-colors duration-500 ease-in-out"
+                          />
+                        ) : (
+                          <Copy
+                            size={24}
+                            weight="regular"
+                            className="text-white/50 transition-colors duration-500 ease-in-out"
+                          />
+                        )}
+                        <span
+                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
+                            emailCopied ? "text-green-500" : "text-white/50"
+                          }`}
+                        >
+                          {emailCopied ? "Copied!" : "Copy email"}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -447,7 +465,12 @@ const Footer = () => {
                           type="button"
                           onClick={() => {
                             setShowForm(false);
-                            setFormData({ name: "", email: "", subject: "", message: "" });
+                            setFormData({
+                              name: "",
+                              email: "",
+                              subject: "",
+                              message: "",
+                            });
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
@@ -718,33 +741,49 @@ const Footer = () => {
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   {/* Email Alternative - Prioritized at top */}
-                  <div className="text-center space-y-6 p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                  <div
+                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
+                      emailCopied
+                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
+                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
+                    }`}
+                    onClick={handleCopyEmail}
+                  >
                     <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
                       Prefer to email directly?
                     </p>
                     <div className="flex flex-col items-center justify-center gap-4">
                       <span
-                        className={`font-bold text-2xl transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
                           emailCopied
                             ? "text-green-500"
                             : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
                         }`}
-                        onClick={handleCopyEmail}
                       >
                         hello@rasmusmattsson.com
                       </span>
-                      <button
-                        type="button"
-                        onClick={handleCopyEmail}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                          emailCopied
-                            ? "bg-green-500 text-neutral-3 shadow-lg"
-                            : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                        }`}
-                      >
-                        <Copy size={16} weight="regular" />
-                        {emailCopied ? "Copied!" : "Copy email"}
-                      </button>
+                      <div className="flex items-center gap-3">
+                        {emailCopied ? (
+                          <Check
+                            size={24}
+                            weight="regular"
+                            className="text-green-500 transition-colors duration-500 ease-in-out"
+                          />
+                        ) : (
+                          <Copy
+                            size={24}
+                            weight="regular"
+                            className="text-white/50 transition-colors duration-500 ease-in-out"
+                          />
+                        )}
+                        <span
+                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
+                            emailCopied ? "text-green-500" : "text-white/50"
+                          }`}
+                        >
+                          {emailCopied ? "Copied!" : "Copy email"}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
@@ -824,7 +863,12 @@ const Footer = () => {
                           type="button"
                           onClick={() => {
                             setShowForm(false);
-                            setFormData({ name: "", email: "", subject: "", message: "" });
+                            setFormData({
+                              name: "",
+                              email: "",
+                              subject: "",
+                              message: "",
+                            });
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
@@ -1005,37 +1049,49 @@ const Footer = () => {
                   className="space-y-4 sm:space-y-6"
                 >
                   {/* Email Alternative - Prioritized at top */}
-                  <div className="text-center space-y-4 sm:space-y-6 p-4 sm:p-6 rounded-xl bg-gradient-to-r from-purple-500/10 to-violet-500/10 border border-purple-500/20">
+                  <div
+                    className={`text-center space-y-4 sm:space-y-6 p-4 sm:p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
+                      emailCopied
+                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
+                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
+                    }`}
+                    onClick={handleCopyEmail}
+                  >
                     <p className="text-neutral-70 dark:text-neutral-30 text-sm sm:text-base font-medium">
                       Prefer to email directly?
                     </p>
                     <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
                       <span
-                        className={`font-bold text-xl sm:text-2xl transition-colors duration-200 cursor-pointer hover:opacity-90 ${
+                        className={`font-bold text-xl sm:text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
                           emailCopied
                             ? "text-green-500"
                             : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
                         }`}
-                        onClick={handleCopyEmail}
                       >
                         hello@rasmusmattsson.com
                       </span>
-                      <button
-                        type="button"
-                        onClick={handleCopyEmail}
-                        className={`px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-2 ${
-                          emailCopied
-                            ? "bg-green-500 text-neutral-3 shadow-lg"
-                            : "bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40"
-                        }`}
-                      >
-                        <Copy
-                          size={14}
-                          weight="regular"
-                          className="sm:w-4 sm:h-4"
-                        />
-                        {emailCopied ? "Copied!" : "Copy email"}
-                      </button>
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        {emailCopied ? (
+                          <Check
+                            size={20}
+                            weight="regular"
+                            className="sm:w-6 sm:h-6 text-green-500 transition-colors duration-500 ease-in-out"
+                          />
+                        ) : (
+                          <Copy
+                            size={20}
+                            weight="regular"
+                            className="sm:w-6 sm:h-6 text-white/50 transition-colors duration-500 ease-in-out"
+                          />
+                        )}
+                        <span
+                          className={`text-base sm:text-lg font-semibold transition-colors duration-500 ease-in-out ${
+                            emailCopied ? "text-green-500" : "text-white/50"
+                          }`}
+                        >
+                          {emailCopied ? "Copied!" : "Copy email"}
+                        </span>
+                      </div>
                     </div>
                   </div>
 

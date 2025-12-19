@@ -8,7 +8,7 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import InfiniteScrollBanner from "@/components/pages/InfiniteScrollBanner";
 import IdentityCarousel from "@/components/pages/IdentityCarousel";
-import { gradients, colors } from "@/styles/colors";
+import { gradients, colors, withOpacity } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -88,34 +88,13 @@ const caseStudies: CaseStudy[] = [
   },
 ];
 
-// Color mapping for hollow pills - consistent colors for same text values (lighter shades)
-const pillColorMap: { [key: string]: string } = {
-  "UX/UI Design": "#a78bfa", // purple-400
-  Mobile: "#60a5fa", // blue-400
-  App: "#22d3ee", // cyan-400
-  "Mobile App": "#2dd4bf", // teal-400
-  "Product Design": "#818cf8", // indigo-400
-  Desktop: "#94a3b8", // slate-400
-  B2C: "#34d399", // emerald-400
-  B2B: "#fbbf24", // amber-400
-  SaaS: "#f472b6", // pink-400
-  "Project Lead": "#fb923c", // orange-400
-  "Design Lead": "#fb7185", // rose-400
-  Tablet: "#4ade80", // emerald-400
-  iOS: "#38bdf8", // sky-400
-  Startup: "#e879f9", // fuchsia-400
-  Android: "#a3e635", // lime-400
-};
-
 // Date pill component (liquid glass style)
 const DatePill = ({ year, isDark }: { year: string; isDark: boolean }) => {
   return (
     <span
       className="text-xs sm:text-sm font-bold px-2 py-1 rounded-full backdrop-blur-md border shadow-lg"
       style={{
-        backgroundColor: isDark
-          ? "rgba(255, 255, 255, 0.15)"
-          : "rgba(0, 0, 0, 0.15)",
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
         color: "#ffffff", // Always white text for better contrast
         borderColor: isDark ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)",
       }}
@@ -125,25 +104,15 @@ const DatePill = ({ year, isDark }: { year: string; isDark: boolean }) => {
   );
 };
 
-// Helper function to convert hex to rgba with opacity
-const hexToRgba = (hex: string, opacity: number): string => {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
-};
-
-// Hollow pill component (with colored border and text)
+// Hollow pill component (sharp rectangles with black and white)
 const HollowPill = ({ text, isDark }: { text: string; isDark: boolean }) => {
-  const color = pillColorMap[text] || "#8b5cf6"; // default to purple if not found
-
   return (
     <span
-      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-full border backdrop-blur-sm shadow-md"
+      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-md border"
       style={{
-        color: "#ffffff",
-        borderColor: color,
-        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        color: colors.neutral[0],
+        borderColor: withOpacity(colors.neutral[0], 0.25),
+        backgroundColor: colors.neutral[100],
       }}
     >
       {text}
@@ -396,16 +365,19 @@ export default function HomeV2() {
                         height={300}
                         className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
-                      <div className="absolute top-2 right-2 bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                        Case study
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[0].id === "emplojd" && (
+                          <DatePill year="2024" isDark={isDark} />
+                        )}
+                        <div className="bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Case study
+                        </div>
                       </div>
                       {caseStudies[0].id === "emplojd" && (
-                        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                          <DatePill year="2024" isDark={isDark} />
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                           <HollowPill text="UX/UI Design" isDark={isDark} />
-                          <HollowPill text="Design Lead" isDark={isDark} />
                           <HollowPill text="Mobile" isDark={isDark} />
-                          <HollowPill text="SaaS" isDark={isDark} />
+                          <HollowPill text="AI" isDark={isDark} />
                         </div>
                       )}
                     </div>
@@ -481,15 +453,19 @@ export default function HomeV2() {
                         height={300}
                         className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
-                      <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                        Coming soon
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[1].id === "noted" && (
+                          <DatePill year="2025" isDark={isDark} />
+                        )}
+                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Coming soon
+                        </div>
                       </div>
                       {caseStudies[1].id === "noted" && (
-                        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                          <DatePill year="2025" isDark={isDark} />
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                           <HollowPill text="Product Design" isDark={isDark} />
-                          <HollowPill text="Project Lead" isDark={isDark} />
-                          <HollowPill text="SaaS" isDark={isDark} />
+                          <HollowPill text="Multiple devices" isDark={isDark} />
+                          <HollowPill text="Task Management" isDark={isDark} />
                         </div>
                       )}
                     </div>
@@ -565,15 +541,19 @@ export default function HomeV2() {
                         height={300}
                         className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
                       />
-                      <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                        Coming soon
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[2].id === "zmartrest-ai" && (
+                          <DatePill year="2025" isDark={isDark} />
+                        )}
+                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Coming soon
+                        </div>
                       </div>
                       {caseStudies[2].id === "zmartrest-ai" && (
-                        <div className="absolute bottom-2 left-2 right-2 flex flex-wrap gap-1">
-                          <DatePill year="2025" isDark={isDark} />
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
                           <HollowPill text="UX/UI Design" isDark={isDark} />
-                          <HollowPill text="Mobile App" isDark={isDark} />
-                          <HollowPill text="Startup" isDark={isDark} />
+                          <HollowPill text="Mobile" isDark={isDark} />
+                          <HollowPill text="Health-tech" isDark={isDark} />
                         </div>
                       )}
                     </div>
