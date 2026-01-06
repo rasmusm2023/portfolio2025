@@ -64,7 +64,7 @@ const BentoBoxRest = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-6 sm:gap-8 md:gap-12 auto-rows-[280px] sm:auto-rows-[300px] md:auto-rows-[320px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
-            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl px-4 py-8 lg:px-8 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group row-span-6 md:row-span-5 lg:row-span-2 topography-bg"
+            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 h-[450px] sm:h-[500px] md:h-[550px] topography-bg"
             style={{
               transform: `scale(${getBoxScale("skills-dotted")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -85,7 +85,7 @@ const BentoBoxRest = () => {
                   : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
               }}
             ></div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-bold font-montserrat uppercase tracking-wider">
                 <span
                   className="bg-clip-text text-transparent"
@@ -95,143 +95,18 @@ const BentoBoxRest = () => {
                       : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
                   }}
                 >
-                  Expertise{" "}
+                  What I bring to the table{" "}
                 </span>
               </h2>
               <Image
                 src="/assets/icons/3dicons-flash-dynamic-premium.png"
-                alt="Expertise"
+                alt="What I bring to the table"
                 width={80}
                 height={80}
                 className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 animate-pulse-subtle"
               />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center -mt-4">
-              <div
-                className="group/card relative"
-                style={{ transform: getCardTransform("ux-research") }}
-                onMouseMove={(e) => handleCardMouseMove(e, "ux-research")}
-                onMouseLeave={() => handleCardMouseLeave("ux-research")}
-              >
-                <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
-                  <RadialGradientBorder
-                    variant="dash"
-                    shineColor={["#8B5CF6", "#A855F7"]}
-                    borderWidth={4}
-                    duration={3}
-                    size="md"
-                    className="w-full h-full"
-                  />
-                </div>
-                {/* Noise background overlay */}
-                <div
-                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                    backgroundSize: "256px 256px",
-                  }}
-                />
-                <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
-                    isDark
-                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
-                  }`}
-                >
-                  <div className="flex flex-col h-full">
-                    <div className="flex flex-col items-center text-center mb-4">
-                      <div className="relative mb-3">
-                        <Image
-                          src="/assets/icons/3dicons-zoom-dynamic-premium.png"
-                          alt="UX Research"
-                          width={56}
-                          height={56}
-                          className="lg:group-hover/card:scale-110 transition-all duration-300"
-                        />
-                        {/* Glow effect only on card hover */}
-                        <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                      <h3
-                        className="font-black text-xl tracking-wide transition-colors duration-200"
-                        style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                        }}
-                      >
-                        UX Research
-                      </h3>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Interviews
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Usability Tests
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Workshops
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Benchmarking
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Data/Metrics Analysis
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Survey Design
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               <div
                 className="group/card relative"
                 style={{ transform: getCardTransform("ui-design") }}
@@ -286,72 +161,38 @@ const BentoBoxRest = () => {
                       </h3>
                     </div>
                     <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Prototyping
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Design Systems
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Components
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Visual Design
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Accessibility
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Responsive
-                          </li>
-                        </ul>
-                      </div>
+                      <ul className="space-y-1.5 flex flex-col items-start">
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Design systems
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Rapid prototyping
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Wireframing
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -411,197 +252,38 @@ const BentoBoxRest = () => {
                       </h3>
                     </div>
                     <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            User Flows
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Information Architecture
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Wireframes
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Interaction Design
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Journey Maps
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Flowcharts
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                className="group/card relative"
-                style={{ transform: getCardTransform("development") }}
-                onMouseMove={(e) => handleCardMouseMove(e, "development")}
-                onMouseLeave={() => handleCardMouseLeave("development")}
-              >
-                <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
-                  <RadialGradientBorder
-                    variant="dash"
-                    shineColor={["#8B5CF6", "#A855F7"]}
-                    borderWidth={4}
-                    duration={3}
-                    size="md"
-                    className="w-full h-full"
-                  />
-                </div>
-                {/* Noise background overlay */}
-                <div
-                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                    backgroundSize: "256px 256px",
-                  }}
-                />
-                <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
-                    isDark
-                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
-                  }`}
-                >
-                  <div className="flex flex-col h-full">
-                    <div className="flex flex-col items-center text-center mb-4">
-                      <div className="relative mb-3">
-                        <Image
-                          src="/assets/icons/3dicons-computer-dynamic-premium.png"
-                          alt="Development"
-                          width={56}
-                          height={56}
-                          className="lg:group-hover/card:scale-110 transition-all duration-300"
-                        />
-                        {/* Glow effect only on card hover */}
-                        <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                      <h3
-                        className="font-black text-xl tracking-wide transition-colors duration-200"
-                        style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                        }}
-                      >
-                        Development
-                      </h3>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Frontend
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Cursor AI
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Framer
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Webflow & Wix
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Working Prototypes
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Low-Code Development
-                          </li>
-                        </ul>
-                      </div>
+                      <ul className="space-y-1.5 flex flex-col items-start">
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Research methods
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          User flows
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          UX Analytics
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -643,7 +325,7 @@ const BentoBoxRest = () => {
                       <div className="relative mb-3">
                         <Image
                           src="/assets/icons/3dicons-chart-dynamic-premium.png"
-                          alt="Product"
+                          alt="Product Strategy"
                           width={56}
                           height={56}
                           className="lg:group-hover/card:scale-110 transition-all duration-300"
@@ -657,205 +339,47 @@ const BentoBoxRest = () => {
                           color: isDark ? "rgb(255, 255, 255)" : "#000000",
                         }}
                       >
-                        Product
+                        Product Strategy
                       </h3>
                     </div>
                     <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Strategy
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Analytics
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Roadmaps
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Growth & Conversion
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Prioritization Methods
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Facilitation
-                          </li>
-                        </ul>
-                      </div>
+                      <ul className="space-y-1.5 flex flex-col items-start">
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Roadmaps
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Growth & Retention
+                        </li>
+                        <li
+                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                            isDark
+                              ? "lg:group-hover/card:text-neutral-3"
+                              : "lg:group-hover/card:text-neutral-90"
+                          }`}
+                        >
+                          <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                          Product Analytics
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div
-                className="group/card relative"
-                style={{ transform: getCardTransform("ai-automation") }}
-                onMouseMove={(e) => handleCardMouseMove(e, "ai-automation")}
-                onMouseLeave={() => handleCardMouseLeave("ai-automation")}
-              >
-                <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
-                  <RadialGradientBorder
-                    variant="dash"
-                    shineColor={["#8B5CF6", "#A855F7"]}
-                    borderWidth={4}
-                    duration={3}
-                    size="md"
-                    className="w-full h-full"
-                  />
-                </div>
-                {/* Noise background overlay */}
-                <div
-                  className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
-                  style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                    backgroundSize: "256px 256px",
-                  }}
-                />
-                <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
-                    isDark
-                      ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
-                      : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
-                  }`}
-                >
-                  <div className="flex flex-col h-full">
-                    <div className="flex flex-col items-center text-center mb-4">
-                      <div className="relative mb-3">
-                        <Image
-                          src="/assets/icons/3dicons-fire-dynamic-premium.png"
-                          alt="AI & Automation"
-                          width={56}
-                          height={56}
-                          className="lg:group-hover/card:scale-110 transition-all duration-300"
-                        />
-                        {/* Glow effect only on card hover */}
-                        <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
-                      </div>
-                      <h3
-                        className="font-black text-xl tracking-wide transition-colors duration-200"
-                        style={{
-                          color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                        }}
-                      >
-                        AI & Automation
-                      </h3>
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center">
-                      <div className="grid grid-cols-2 gap-x-4">
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            AI Workflows
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Fast Ideation
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Rapid Prototyping
-                          </li>
-                        </ul>
-                        <ul className="space-y-1.5">
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Content Generation
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            Automation
-                          </li>
-                          <li
-                            className={`text-neutral-60 text-sm text-left font-bold flex items-center gap-2 transition-colors duration-200 ${
-                              isDark
-                                ? "lg:group-hover/card:text-neutral-3"
-                                : "lg:group-hover/card:text-neutral-90"
-                            }`}
-                          >
-                            <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                            AI Assistants
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
