@@ -2,18 +2,18 @@
 
 import VantaBackground from "@/components/background/VantaBackground";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
-import BentoBoxRest from "@/components/ui/BentoBoxRest";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
-import InfiniteScrollBanner from "@/components/pages/InfiniteScrollBanner";
 import IdentityCarousel from "@/components/pages/IdentityCarousel";
+import RadialGradientBorder from "@/components/ui/RadialGradientBorder";
 import { gradients, colors, withOpacity } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useTheme } from "@/contexts/ThemeContext";
+import { MapPin } from "@phosphor-icons/react";
 
 // Import images for Identity Carousel
 import MellbystrandImage from "@/../public/assets/images/16bit/mellbystrand.webp";
@@ -124,6 +124,9 @@ export default function HomeV2() {
   const { isDark } = useTheme();
   const [hoveredCase, setHoveredCase] = useState<string | null>(null);
   const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const [cardTilts, setCardTilts] = useState<{
+    [key: string]: { x: number; y: number };
+  }>({});
   const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   // Update page title
@@ -171,6 +174,43 @@ export default function HomeV2() {
 
   const getBoxScale = (boxId: string) => {
     return hoveredBox === boxId ? 1.02 : 1;
+  };
+
+  const handleCardMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cardId: string
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const deltaX = mouseX - centerX;
+    const deltaY = mouseY - centerY;
+
+    // Calculate tilt angles (max 10 degrees for more subtle effect)
+    const tiltX = (deltaY / (rect.height / 2)) * -10;
+    const tiltY = (deltaX / (rect.width / 2)) * 10;
+
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: tiltX, y: tiltY },
+    }));
+  };
+
+  const handleCardMouseLeave = (cardId: string) => {
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: 0, y: 0 },
+    }));
+  };
+
+  const getCardTransform = (cardId: string) => {
+    const tilt = cardTilts[cardId] || { x: 0, y: 0 };
+    return `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`;
   };
 
   // Handle scrolling to case studies section when coming from case study page
@@ -270,22 +310,6 @@ export default function HomeV2() {
                           UX/UI Designer
                         </span>
                       </h1>
-
-                      {/* Subtitle */}
-                      <div className="mb-3 sm:mb-4">
-                        <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium font-hanken tracking-wide">
-                          <span
-                            className="bg-clip-text text-transparent"
-                            style={{
-                              backgroundImage: isDark
-                                ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                                : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                            }}
-                          >
-                            & Developer
-                          </span>
-                        </span>
-                      </div>
                     </div>
 
                     {/* Hero statement */}
@@ -297,17 +321,11 @@ export default function HomeV2() {
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
                           design
                         </span>
-                        <span className="word highlight">
-                          <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                            digital
-                          </span>
-                          <span className="highlight-bg"></span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          digital
                         </span>
-                        <span className="word highlight">
-                          <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                            products
-                          </span>
-                          <span className="highlight-bg"></span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          products
                         </span>
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
                           that
@@ -317,17 +335,11 @@ export default function HomeV2() {
                         </span>
                       </div>
                       <div className="statement-line flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
-                        <span className="word highlight">
-                          <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                            impactful
-                          </span>
-                          <span className="highlight-bg"></span>
+                        <span className="word text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-instrument-serif italic">
+                          impactful
                         </span>
-                        <span className="word highlight">
-                          <span className="highlight-text text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
-                            experiences
-                          </span>
-                          <span className="highlight-bg"></span>
+                        <span className="word text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-instrument-serif italic">
+                          experiences
                         </span>
                         <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
                           happen.
@@ -357,13 +369,13 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden relative">
                       <Image
                         src={caseStudies[0].image}
                         alt={caseStudies[0].alt}
                         width={400}
                         height={300}
-                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute top-2 right-2 flex items-center gap-2">
                         {caseStudies[0].id === "emplojd" && (
@@ -445,13 +457,13 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden relative">
                       <Image
                         src={caseStudies[1].image}
                         alt={caseStudies[1].alt}
                         width={400}
                         height={300}
-                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute top-2 right-2 flex items-center gap-2">
                         {caseStudies[1].id === "noted" && (
@@ -533,13 +545,13 @@ export default function HomeV2() {
                     }}
                     data-cursor-target="case-study"
                   >
-                    <div className="w-full flex-1 overflow-hidden rounded-xl sm:rounded-2xl relative">
+                    <div className="w-full flex-1 overflow-hidden relative">
                       <Image
                         src={caseStudies[2].image}
                         alt={caseStudies[2].alt}
                         width={400}
                         height={300}
-                        className="absolute inset-0 w-full h-full object-cover rounded-xl sm:rounded-2xl"
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                       <div className="absolute top-2 right-2 flex items-center gap-2">
                         {caseStudies[2].id === "zmartrest-ai" && (
@@ -805,7 +817,12 @@ export default function HomeV2() {
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     UX/UI Designer with Frontend – Diploma
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
+                    <MapPin
+                      size={16}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     Chas Academy, Stockholm, Sweden
                   </p>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
@@ -823,10 +840,14 @@ export default function HomeV2() {
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Institution Logo */}
                   <div className="w-48 h-48 flex items-center justify-center">
-                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
-                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
-                        Chas Academy
-                      </span>
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
+                      <Image
+                        src="/assets/logos/Education/chas-academy-emblem.png"
+                        alt="Chas Academy"
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                   </div>
                 </div>
@@ -838,7 +859,12 @@ export default function HomeV2() {
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
                     Digital Accessibility and Inclusive Design – Diploma
                   </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 mb-2">
+                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
+                    <MapPin
+                      size={16}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
                     Axess Labs, Stockholm, Sweden
                   </p>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
@@ -857,10 +883,14 @@ export default function HomeV2() {
                 <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
                   {/* Institution Logo */}
                   <div className="w-48 h-48 flex items-center justify-center">
-                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center">
-                      <span className="text-neutral-60 dark:text-neutral-40 text-sm font-medium">
-                        Axess Labs
-                      </span>
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
+                      <Image
+                        src="/assets/logos/Education/axesslab_social.png"
+                        alt="Axess Labs"
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                   </div>
                 </div>
@@ -869,11 +899,8 @@ export default function HomeV2() {
           </div>
         </section>
 
-        {/* Rest of Bento Boxes */}
-        <BentoBoxRest />
-
         {/* About Me Section */}
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
+        <section id="about-me" className="py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
             <div className="mb-12 sm:mb-16 md:mb-20">
               <div className="flex items-center gap-4">
@@ -892,6 +919,328 @@ export default function HomeV2() {
                     About me
                   </span>
                 </h2>
+              </div>
+            </div>
+
+            {/* What I Focus On - Full width section */}
+            <div className="mb-6 sm:mb-8 lg:mb-12">
+              <div
+                className="border-2 border-neutral-80/40 rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-1 topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("skills-dotted")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("skills-dotted")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      What I focus on{" "}
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-flash-dynamic-premium.png"
+                    alt="What I focus on"
+                    width={60}
+                    height={60}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
+                  />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("ux-design") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "ux-design")}
+                    onMouseLeave={() => handleCardMouseLeave("ux-design")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-bulb-dynamic-premium.png"
+                              alt="UX Design"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            UX Design
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Research synthesis and insights
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              User journeys and flows
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Usability and validation
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("ui-design") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "ui-design")}
+                    onMouseLeave={() => handleCardMouseLeave("ui-design")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-color-palette-dynamic-premium.png"
+                              alt="UI Design"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            UI Design
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Scalable design systems
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              High-fidelity prototyping
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Interaction and visual clarity
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("product") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "product")}
+                    onMouseLeave={() => handleCardMouseLeave("product")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-chart-dynamic-premium.png"
+                              alt="Product Strategy"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            Product Strategy
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Product discovery and prioritization
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Roadmaps tied to outcomes
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Growth, retention, and learning
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -938,7 +1287,7 @@ export default function HomeV2() {
                     alt="Rasmus"
                     width={60}
                     height={60}
-                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
                   />
                 </div>
                 <div className="mt-4 sm:mt-6 relative z-10">
@@ -951,9 +1300,8 @@ export default function HomeV2() {
                     I'm a happy easy-going guy who appreciates tasty food, good
                     music, cozy gaming, designing, brainstorming, and spending
                     quality time with my family, friends, and girlfriend. I
-                    design & develop digital solutions with a passion for
-                    creating experiences that are seamless and make a
-                    difference.
+                    design digital solutions with a passion for creating
+                    experiences that are seamless and make a difference.
                   </p>
                   <p
                     className="leading-relaxed text-lg xs:text-xl sm:text-2xl md:text-3xl lg:text-xl 2xl:text-3xl mt-4"
@@ -1011,7 +1359,7 @@ export default function HomeV2() {
                     alt="About Me"
                     width={60}
                     height={60}
-                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
                   />
                 </div>
                 <div className="mt-4 sm:mt-6 relative z-10">
@@ -1024,8 +1372,9 @@ export default function HomeV2() {
                     I've designed across{" "}
                     <span
                       style={{
-                        background:
-                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
                       }}
                     >
                       multiple industries
@@ -1034,8 +1383,9 @@ export default function HomeV2() {
                     Gaining{" "}
                     <span
                       style={{
-                        background:
-                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
                       }}
                     >
                       experience at startups, medium-sized businesses, and
@@ -1044,8 +1394,9 @@ export default function HomeV2() {
                     Each one broadening my{" "}
                     <span
                       style={{
-                        background:
-                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
                       }}
                     >
                       experience of how design can work and be thought about
@@ -1076,8 +1427,9 @@ export default function HomeV2() {
                     Most recently, I've spent{" "}
                     <span
                       style={{
-                        background:
-                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
                       }}
                     >
                       two years at Chas Academy in Stockholm, specializing in
@@ -1088,8 +1440,9 @@ export default function HomeV2() {
                     interviews, and design systems while also{" "}
                     <span
                       style={{
-                        background:
-                          "linear-gradient(180deg, transparent 10%, rgba(144, 126, 255, 0.3) 10%, rgba(144, 126, 255, 0.3) 95%, transparent 95%)",
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
                       }}
                     >
                       building real-world projects from concept to launch.
@@ -1097,41 +1450,6 @@ export default function HomeV2() {
                     It's where I combined creativity with learning the technical
                     know-how to get the job done.
                   </p>
-                </div>
-              </div>
-
-              {/* Carousel Bento Box - Full width */}
-              <div
-                className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-1 relative group topography-bg w-full overflow-hidden"
-                style={{
-                  transform: `scale(${getBoxScale("carousel")})`,
-                  backgroundColor: isDark ? "#060608" : "#ffffff",
-                  userSelect: "none",
-                }}
-                draggable="false"
-                onContextMenu={(e) => e.preventDefault()}
-                onDragStart={(e) => e.preventDefault()}
-                onMouseEnter={() => setHoveredBox("carousel")}
-                onMouseLeave={() => setHoveredBox(null)}
-              >
-                {/* Radial shine effect */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-                  style={{
-                    background: isDark
-                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
-                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
-                  }}
-                ></div>
-
-                {/* Carousel centered within the bento box */}
-                <div className="flex items-center justify-center h-full relative z-10 w-full">
-                  <div
-                    className="w-full scale-90 xs:scale-95 sm:scale-100 md:scale-95 relative overflow-hidden"
-                    style={{ maxWidth: "100%" }}
-                  >
-                    <InfiniteScrollBanner className="w-full" />
-                  </div>
                 </div>
               </div>
 
@@ -1176,7 +1494,7 @@ export default function HomeV2() {
                     alt="Identity"
                     width={60}
                     height={60}
-                    className="animate-pulse-subtle w-14 h-14 sm:w-14 sm:h-14 md:w-14 md:h-14 lg:w-16 lg:h-16 2xl:w-20 2xl:h-20"
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
                   />
                 </div>
                 <div className="mt-8 relative z-10">
@@ -1276,7 +1594,7 @@ export default function HomeV2() {
         </section>
 
         {/* Footer Section */}
-        <div className="pt-16 pb-16">
+        <div id="contact" className="pt-16 pb-16">
           <div className="container mx-auto pr-4 pl-4 lg:pr-0 lg:pl-0">
             <Footer />
           </div>

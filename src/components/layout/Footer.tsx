@@ -375,12 +375,12 @@ const Footer = () => {
                           <Copy
                             size={24}
                             weight="regular"
-                            className="text-white/50 transition-colors duration-500 ease-in-out"
+                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
                           />
                         )}
                         <span
                           className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-white/50"
+                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
                           }`}
                         >
                           {emailCopied ? "Copied!" : "Copy email"}
@@ -773,12 +773,12 @@ const Footer = () => {
                           <Copy
                             size={24}
                             weight="regular"
-                            className="text-white/50 transition-colors duration-500 ease-in-out"
+                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
                           />
                         )}
                         <span
                           className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-white/50"
+                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
                           }`}
                         >
                           {emailCopied ? "Copied!" : "Copy email"}
@@ -1081,12 +1081,12 @@ const Footer = () => {
                           <Copy
                             size={20}
                             weight="regular"
-                            className="sm:w-6 sm:h-6 text-white/50 transition-colors duration-500 ease-in-out"
+                            className="sm:w-6 sm:h-6 text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
                           />
                         )}
                         <span
                           className={`text-base sm:text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-white/50"
+                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
                           }`}
                         >
                           {emailCopied ? "Copied!" : "Copy email"}

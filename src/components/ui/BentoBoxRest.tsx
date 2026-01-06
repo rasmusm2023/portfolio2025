@@ -61,7 +61,7 @@ const BentoBoxRest = () => {
   return (
     <section className="py-8 sm:py-12 md:py-16 relative">
       <div className="text-left w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-6 sm:gap-8 md:gap-12 auto-rows-[280px] sm:auto-rows-[300px] md:auto-rows-[320px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-x-3 sm:gap-x-4 md:gap-x-5 gap-y-8 auto-rows-[225px] sm:auto-rows-[250px] md:auto-rows-[275px]">
           {/* Expertise with Dotted Background - Large section */}
           <div
             className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 h-[450px] sm:h-[500px] md:h-[550px] topography-bg"
@@ -95,12 +95,12 @@ const BentoBoxRest = () => {
                       : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
                   }}
                 >
-                  What I bring to the table{" "}
+                  What I focus on{" "}
                 </span>
               </h2>
               <Image
                 src="/assets/icons/3dicons-flash-dynamic-premium.png"
-                alt="What I bring to the table"
+                alt="What I focus on"
                 width={80}
                 height={80}
                 className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 animate-pulse-subtle"
@@ -132,7 +132,7 @@ const BentoBoxRest = () => {
                   }}
                 />
                 <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-80 lg:cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
@@ -163,34 +163,34 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <ul className="space-y-1.5 flex flex-col items-start">
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Design systems
+                          Scalable design systems
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Rapid prototyping
+                          High-fidelity prototyping
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Wireframing
+                          Interaction and visual clarity
                         </li>
                       </ul>
                     </div>
@@ -223,7 +223,7 @@ const BentoBoxRest = () => {
                   }}
                 />
                 <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-80 lg:cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
@@ -254,34 +254,34 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <ul className="space-y-1.5 flex flex-col items-start">
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Research methods
+                          Research synthesis and insights
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          User flows
+                          User journeys and flows
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          UX Analytics
+                          Usability and validation
                         </li>
                       </ul>
                     </div>
@@ -314,7 +314,7 @@ const BentoBoxRest = () => {
                   }}
                 />
                 <div
-                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-64 lg:cursor-pointer transition-all duration-300 ${
+                  className={`relative backdrop-blur-sm rounded-2xl p-6 h-80 lg:cursor-pointer transition-all duration-300 ${
                     isDark
                       ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
                       : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
@@ -345,34 +345,34 @@ const BentoBoxRest = () => {
                     <div className="flex-1 flex flex-col justify-center">
                       <ul className="space-y-1.5 flex flex-col items-start">
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Roadmaps
+                          Product discovery and prioritization
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Growth & Retention
+                          Roadmaps tied to outcomes
                         </li>
                         <li
-                          className={`text-neutral-60 text-sm font-bold flex items-center gap-2 transition-colors duration-200 ${
+                          className={`text-neutral-60 text-lg font-semibold flex items-center gap-2 transition-colors duration-200 ${
                             isDark
                               ? "lg:group-hover/card:text-neutral-3"
                               : "lg:group-hover/card:text-neutral-90"
                           }`}
                         >
                           <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
-                          Product Analytics
+                          Growth, retention, and learning
                         </li>
                       </ul>
                     </div>
@@ -383,125 +383,9 @@ const BentoBoxRest = () => {
             </div>
           </div>
 
-          {/* Experience - Medium section */}
-          <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 topography-bg"
-            style={{
-              transform: `scale(${getBoxScale("experience")})`,
-              backgroundColor: isDark ? "#060608" : "#ffffff",
-              userSelect: "none",
-            }}
-            draggable="false"
-            onContextMenu={(e) => e.preventDefault()}
-            onDragStart={(e) => e.preventDefault()}
-            onMouseEnter={() => setHoveredBox("experience")}
-            onMouseLeave={() => setHoveredBox(null)}
-          >
-            {/* Radial shine effect */}
-            <div
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
-              style={{
-                background: isDark
-                  ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
-                  : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
-              }}
-            ></div>
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-baseline gap-2">
-                <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
-                  <span
-                    className="bg-clip-text text-transparent"
-                    style={{
-                      backgroundImage: isDark
-                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                    }}
-                  >
-                    Track Record
-                  </span>
-                </h2>
-                <p
-                  className="hidden lg:block text-lg font-hanken"
-                  style={{
-                    color: isDark ? "rgb(255, 255, 255)" : "#000000",
-                  }}
-                >
-                  employments & studies
-                </p>
-              </div>
-              <Image
-                src="/assets/icons/3dicons-travel-dynamic-premium.png"
-                alt="Experience"
-                width={80}
-                height={80}
-                className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 animate-pulse-subtle"
-              />
-            </div>
-            <div className="flex-1 flex flex-col justify-center">
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
-                      5
-                    </span>
-                  </div>
-                  <span
-                    className={`text-base sm:text-lg lg:text-xl ${
-                      isDark ? "text-neutral-40" : "text-neutral-100"
-                    }`}
-                  >
-                    years within UX/UI Design
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
-                      4
-                    </span>
-                  </div>
-                  <span
-                    className={`text-base sm:text-lg lg:text-xl ${
-                      isDark ? "text-neutral-40" : "text-neutral-100"
-                    }`}
-                  >
-                    years within E-Commerce
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
-                      2
-                    </span>
-                  </div>
-                  <span
-                    className={`text-base sm:text-lg lg:text-xl ${
-                      isDark ? "text-neutral-40" : "text-neutral-100"
-                    }`}
-                  >
-                    years of Frontend Development
-                  </span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="bg-gradient-to-br from-purple-500 to-violet-600 backdrop-blur-sm border border-purple-400/30 rounded-xl px-3 py-2 w-16 h-12 sm:w-18 sm:h-14 lg:w-20 lg:h-16 flex items-center justify-center hover:scale-105 transition-transform duration-200 cursor-pointer shadow-lg">
-                    <span className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold">
-                      1
-                    </span>
-                  </div>
-                  <span
-                    className={`text-base sm:text-lg lg:text-xl ${
-                      isDark ? "text-neutral-40" : "text-neutral-100"
-                    }`}
-                  >
-                    year of SoMe & SEO work
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* Currently Working On - Medium section */}
           <div
-            className="md:col-span-3 lg:col-span-4 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 topography-bg"
+            className="md:col-span-6 lg:col-span-8 border-2 border-neutral-80/40 rounded-3xl px-4 py-6 lg:px-8 lg:py-8 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-2 topography-bg"
             style={{
               transform: `scale(${getBoxScale("current-work")})`,
               backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -544,13 +428,13 @@ const BentoBoxRest = () => {
               />
             </div>
 
-            <div className="flex-1 flex flex-col lg:flex-row gap-4">
+            <div className="flex-1 flex flex-col lg:flex-row gap-3">
               {/* Bookmarks Platform Card */}
-              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
+              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-80 lg:h-96">
                 <img
                   src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop&crop=center"
                   alt="Bookmarks Platform Preview"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div 
                   className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-sm"
@@ -559,11 +443,11 @@ const BentoBoxRest = () => {
                     WebkitMaskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
                   }}
                 ></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
-                  <h3 className="text-lg font-semibold text-white">
+                <div className="absolute bottom-0 left-0 right-0 p-3 space-y-1.5">
+                  <h3 className="text-base font-semibold text-white">
                     Bookmarks platform
                   </h3>
-                  <p className="text-sm text-white/80">
+                  <p className="text-xs text-white/80">
                     A space to save important links with a simple way of managing
                     and accessing them.
                   </p>
@@ -582,11 +466,11 @@ const BentoBoxRest = () => {
               </div>
 
               {/* Dog-sitting App Card */}
-              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-52 lg:h-auto">
+              <div className="flex-none lg:flex-1 relative rounded-2xl overflow-hidden bg-neutral-80/30 border border-neutral-100/20 h-80 lg:h-96">
                 <img
                   src="https://images.unsplash.com/photo-1552053831-71594a27632d?w=800&h=600&fit=crop&crop=center"
                   alt="Dog-sitting App Preview"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
                 <div 
                   className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-black/70 via-black/40 to-transparent backdrop-blur-sm"
@@ -595,11 +479,11 @@ const BentoBoxRest = () => {
                     WebkitMaskImage: 'linear-gradient(to top, black 0%, black 60%, transparent 100%)',
                   }}
                 ></div>
-                <div className="absolute bottom-0 left-0 right-0 p-4 space-y-2">
-                  <h3 className="text-lg font-semibold text-white">
+                <div className="absolute bottom-0 left-0 right-0 p-3 space-y-1.5">
+                  <h3 className="text-base font-semibold text-white">
                     Dog-sitting app
                   </h3>
-                  <p className="text-sm text-white/80">
+                  <p className="text-xs text-white/80">
                     Designing and developing a mobile booking platform for pet
                     care services.
                   </p>
