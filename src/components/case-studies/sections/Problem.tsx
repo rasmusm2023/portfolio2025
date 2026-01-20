@@ -3,7 +3,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 interface ProblemProps {
   problemText?: React.ReactNode;
-  problemRef?: React.RefObject<HTMLElement>;
+  problemRef?: React.RefObject<HTMLElement | null>;
 }
 
 const Problem: React.FC<ProblemProps> = ({
