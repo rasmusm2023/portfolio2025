@@ -52,7 +52,7 @@ export default function WorkPage() {
                     </h2>
                     <p className="text-neutral-80 dark:text-neutral-20 leading-relaxed mb-6">
                       This page showcases my work and projects. You can explore
-                      my case studies, design gallery, and other creative work.
+                      my case studies, archives, and other creative work.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <button

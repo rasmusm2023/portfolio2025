@@ -24,9 +24,9 @@ const Menu = () => {
   const menuItems = useMemo<MenuItem[]>(
     () => [
       { label: "Home", href: "/" },
-      { label: "About", href: "/home-v2#about-me" },
-      { label: "Contact", href: "/home-v2#contact" },
-      { label: "Design Gallery", href: "/design-gallery" },
+      { label: "About", href: "/#about-me" },
+      { label: "Contact", href: "/#contact" },
+      { label: "Archives", href: "/archives" },
     ],
     []
   );
@@ -58,7 +58,7 @@ const Menu = () => {
 
   // Scroll detection for sections on home-v2 page
   useEffect(() => {
-    if (pathname !== "/home-v2") {
+    if (pathname !== "/") {
       setActiveHash("");
       return;
     }
@@ -102,20 +102,20 @@ const Menu = () => {
     // Determine which menu item should be active
     let activeHref = "";
     
-    if (pathname === "/home-v2") {
+    if (pathname === "/") {
       if (activeHash === "about-me") {
-        activeHref = "/home-v2#about-me";
+        activeHref = "/#about-me";
       } else if (activeHash === "contact") {
-        activeHref = "/home-v2#contact";
+        activeHref = "/#contact";
       } else {
-        activeHref = "/"; // Default to Home when on home-v2 but not in a specific section
+        activeHref = "/"; // Default to Home when on home but not in a specific section
       }
     } else {
       activeHref = pathname;
     }
 
     // Move pill to active item
-    const activeItem = menuItems.find((item) => item.href === activeHref || (pathname === "/home-v2" && activeHash === "" && item.href === "/"));
+    const activeItem = menuItems.find((item) => item.href === activeHref || (pathname === "/" && activeHash === "" && item.href === "/"));
 
     if (activeItem) {
       // Skip animation on first load for better performance
@@ -164,13 +164,13 @@ const Menu = () => {
         {menuItems.map((item) => {
           // Determine if item is active based on pathname and active hash
           let isActive = false;
-          if (pathname === "/home-v2") {
-            if (activeHash === "about-me" && item.href === "/home-v2#about-me") {
+          if (pathname === "/") {
+            if (activeHash === "about-me" && item.href === "/#about-me") {
               isActive = true;
-            } else if (activeHash === "contact" && item.href === "/home-v2#contact") {
+            } else if (activeHash === "contact" && item.href === "/#contact") {
               isActive = true;
             } else if (activeHash === "" && item.href === "/") {
-              isActive = true; // Home is active when on home-v2 but not in a specific section
+              isActive = true; // Home is active when on home but not in a specific section
             }
           } else {
             isActive = item.href === pathname;
@@ -182,14 +182,14 @@ const Menu = () => {
               e.preventDefault();
               const hash = item.href.split("#")[1];
               
-              // If we're on the home-v2 page, scroll to the section
-              if (pathname === "/home-v2") {
+              // If we're on the home page, scroll to the section
+              if (pathname === "/") {
                 const element = document.getElementById(hash);
                 if (element) {
                   element.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               } else {
-                // If we're on a different page, navigate to home-v2 first, then scroll
+                // If we're on a different page, navigate to home first, then scroll
                 window.location.href = item.href;
               }
             }

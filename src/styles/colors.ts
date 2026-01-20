@@ -95,7 +95,7 @@ export const gradients = {
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #ffb571 0%, #ff8cf4 36.01%, #fff 82.09%)",
   "gradient-hero-accent":
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #00FF9D 0%, #99FFD9 36.01%, #fff 82.09%)",
-  "gradient-hero-design-gallery":
+  "gradient-hero-archives":
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #3b82f6 0%, #06b6d4 36.01%, #fff 82.09%)",
   "gradient-hero-about":
     "radial-gradient(55.95% 97.37% at 46.69% 2.63%, #dc2626 0%, #b91c1c 36.01%, #fff 82.09%)",

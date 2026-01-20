@@ -5,7 +5,7 @@ import { useEffect } from "react";
 const PerformanceOptimizer = () => {
   useEffect(() => {
     // Preload critical pages for faster navigation
-    const preloadPages = ["/design-gallery", "/playground"];
+    const preloadPages = ["/archives", "/playground"];
 
     // Preload pages when user hovers over menu items
     const preloadPage = (href: string) => {

@@ -80,7 +80,7 @@ const Header = () => {
 
   // Scroll detection for sections on home-v2 page
   useEffect(() => {
-    if (pathname !== "/home-v2") {
+    if (pathname !== "/") {
       setActiveHash("");
       return;
     }
@@ -417,7 +417,7 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Home"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/" || (pathname === "/home-v2" && activeHash === "")
+                      : pathname === "/" && activeHash === ""
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
@@ -428,11 +428,11 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/home-v2#about-me"
+                  href="/#about-me"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "About"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/home-v2" && activeHash === "about-me"
+                      : pathname === "/" && activeHash === "about-me"
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
@@ -441,8 +441,8 @@ const Header = () => {
                     handleMenuItemClick("About");
                     setIsMobileMenuOpen(false);
                     
-                    // If we're on the home-v2 page, scroll to the section
-                    if (pathname === "/home-v2") {
+                    // If we're on the home page, scroll to the section
+                    if (pathname === "/") {
                       setTimeout(() => {
                         const element = document.getElementById("about-me");
                         if (element) {
@@ -450,8 +450,8 @@ const Header = () => {
                         }
                       }, 100);
                     } else {
-                      // If we're on a different page, navigate to home-v2 first
-                      window.location.href = "/home-v2#about-me";
+                      // If we're on a different page, navigate to home first
+                      window.location.href = "/#about-me";
                     }
                   }}
                 >
@@ -460,11 +460,11 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/home-v2#contact"
+                  href="/#contact"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Contact"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/home-v2" && activeHash === "contact"
+                      : pathname === "/" && activeHash === "contact"
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
@@ -473,8 +473,8 @@ const Header = () => {
                     handleMenuItemClick("Contact");
                     setIsMobileMenuOpen(false);
                     
-                    // If we're on the home-v2 page, scroll to the section
-                    if (pathname === "/home-v2") {
+                    // If we're on the home page, scroll to the section
+                    if (pathname === "/") {
                       setTimeout(() => {
                         const element = document.getElementById("contact");
                         if (element) {
@@ -482,8 +482,8 @@ const Header = () => {
                         }
                       }, 100);
                     } else {
-                      // If we're on a different page, navigate to home-v2 first
-                      window.location.href = "/home-v2#contact";
+                      // If we're on a different page, navigate to home first
+                      window.location.href = "/#contact";
                     }
                   }}
                 >
@@ -492,17 +492,17 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/design-gallery"
+                  href="/archives"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
-                    clickedMenuItem === "Design Gallery"
+                    clickedMenuItem === "Archives"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/design-gallery"
+                      : pathname === "/archives"
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
-                  onClick={() => handleMenuItemClick("Design Gallery")}
+                  onClick={() => handleMenuItemClick("Archives")}
                 >
-                  Design Gallery
+                  Archives
                 </Link>
               </li>
             </ul>

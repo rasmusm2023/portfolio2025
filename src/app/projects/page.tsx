@@ -205,11 +205,11 @@ export default function ProjectsPage() {
                     Want to see what else I do?
                   </h2>
                   <p className="text-lg sm:text-xl text-neutral-50 dark:text-neutral-50 mb-8 sm:mb-12 leading-relaxed">
-                    Browse my design gallery to see more of my creative work and
+                    Browse my archives to see more of my creative work and
                     visual projects.
                   </p>
                   <div className="flex justify-center">
-                    <Link href="/design-gallery">
+                    <Link href="/archives">
                       <button className="px-8 sm:px-12 py-4 sm:py-6 bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 text-sm sm:text-base font-bold rounded-lg transition-all duration-500 ease-in-out flex items-center gap-2 sm:gap-3 relative overflow-hidden group">
                         <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                         <span className="relative z-10 flex items-center gap-2 sm:gap-3">
@@ -222,7 +222,7 @@ export default function ProjectsPage() {
                           >
                             <path d="M104,60H52A16,16,0,0,0,36,76v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V76A16,16,0,0,0,104,60Zm0,64H52V76h52v48Zm100-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V76A16,16,0,0,0,204,60Zm0,64H152V76h52v48Zm-100,32H52a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V172A16,16,0,0,0,104,156Zm0,64H52V172h52v48Zm100-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V172A16,16,0,0,0,204,156Zm0,64H152V172h52v48Z" />
                           </svg>
-                          Browse Design Gallery
+                          Browse Archives
                         </span>
                       </button>
                     </Link>
