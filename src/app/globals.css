@@ -16,7 +16,7 @@
       #ffb571 0%,
       #ffb571 50%,
       #4f4f4f 82.09%);
-  --gradient-hero-design-gallery: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+  --gradient-hero-archives: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #3b82f6 0%,
       #06b6d4 36.01%,
       #060608 82.09%);
@@ -82,7 +82,7 @@
       #ef4444 0%,
       #fb923c 36.01%,
       #fff 82.09%);
-  --gradient-hero-design-gallery-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
+  --gradient-hero-archives-dark: radial-gradient(55.95% 97.37% at 46.69% 2.63%,
       #3b82f6 0%,
       #06b6d4 36.01%,
       #fff 82.09%);

@@ -115,15 +115,15 @@ export default function RootLayout({
               (function() {
                 try {
                   const theme = localStorage.getItem('theme');
-                  if (theme === 'light') {
-                    document.documentElement.classList.remove('dark');
-                  } else {
-                    // Default to dark mode for new visitors or if theme is not 'light'
+                  if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
+                  } else {
+                    // Default to light mode for new visitors or if theme is not 'dark'
+                    document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {
-                  // Default to dark mode if localStorage is not available
-                  document.documentElement.classList.add('dark');
+                  // Default to light mode if localStorage is not available
+                  document.documentElement.classList.remove('dark');
                 }
               })();
             `,

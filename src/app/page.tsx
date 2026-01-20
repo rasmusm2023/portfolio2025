@@ -2,187 +2,216 @@
 
 import VantaBackground from "@/components/background/VantaBackground";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
-import BentoBoxFirstTwo from "@/components/ui/BentoBoxFirstTwo";
-import BentoBoxRest from "@/components/ui/BentoBoxRest";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
 import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
-import { gradients, colors } from "@/styles/colors";
+import IdentityCarousel from "@/components/pages/IdentityCarousel";
+import RadialGradientBorder from "@/components/ui/RadialGradientBorder";
+import { gradients, colors, withOpacity } from "@/styles/colors";
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { gsap } from "gsap";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useTheme } from "@/contexts/ThemeContext";
+import { MapPin } from "@phosphor-icons/react";
+
+// Import images for Identity Carousel
+import MellbystrandImage from "@/../public/assets/images/16bit/mellbystrand.webp";
+import NightOwlImage from "@/../public/assets/images/16bit/nightowl.webp";
+import Formula1Image from "@/../public/assets/images/16bit/formula-1-enthusiast.webp";
+import StockholmImage from "@/../public/assets/images/16bit/stockholm-local.webp";
+import AvidGamerImage from "@/../public/assets/images/16bit/avid-gamer.webp";
+import HomeCookImage from "@/../public/assets/images/16bit/home-cook.webp";
+import AnimalLoverImage from "@/../public/assets/images/16bit/animal-lover.webp";
+import DesignThinkerImage from "@/../public/assets/images/16bit/design-thinker.webp";
+import MusicFestivalsImage from "@/../public/assets/images/16bit/music-and-festivals.webp";
+import InfjAImage from "@/../public/assets/images/16bit/INFJ-A.png";
+import TechExplorerImage from "@/../public/assets/images/16bit/tech-explorer.webp";
+import AiAdvocateImage from "@/../public/assets/images/16bit/AI-advocate.webp";
+
+interface CaseStudy {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  subtitle: string;
+  image: string;
+  alt: string;
+  link: string;
+  isActive: boolean;
+  isPasswordProtected: boolean;
+  isPlaceholder: boolean;
+}
+
+const caseStudies: CaseStudy[] = [
+  {
+    id: "emplojd",
+    title: "Emplojd",
+    category: "AI / Design lead / Design system / Workshop",
+    description: "Enhancing job applications without compromising authenticity",
+    subtitle: "— Enhancing job applications without compromising authenticity",
+    image:
+      "/assets/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.webp",
+    alt: "Emplojd SaaS Platform Case Study",
+    link: "/case-studies/emplojd",
+    isActive: true,
+    isPasswordProtected: false,
+    isPlaceholder: false,
+  },
+  {
+    id: "noted",
+    title: "Noted",
+    category: "Web Design / UX / UI / Development / Mobile Design",
+    description: "Revolutionary note-taking experience",
+    subtitle: "— Task Management SaaS Website",
+    image:
+      "/assets/case-study-assets/noted/Projects-Case-Card-Thumbnail-Noted.webp",
+    alt: "Noted App",
+    link: "/case-studies/noted",
+    isActive: false,
+    isPasswordProtected: true,
+    isPlaceholder: false,
+  },
+  {
+    id: "zmartrest-ai",
+    title: "Zmartrest AI",
+    category: "AI / ML / App Design / New Features / UX Research / UI Design",
+    description: "Intelligent restaurant management system",
+    subtitle: "— Health-Tech App For A Sustainable Worklife",
+    image:
+      "/assets/case-study-assets/zmartrest-ai/Projects-Case-Card-Thumbnail-Zmartrest-AI.webp",
+    alt: "Zmartrest AI Platform",
+    link: "/case-studies/zmartrest-ai",
+    isActive: false,
+    isPasswordProtected: true,
+    isPlaceholder: false,
+  },
+];
+
+// Date pill component (liquid glass style)
+const DatePill = ({ year, isDark }: { year: string; isDark: boolean }) => {
+  return (
+    <span
+      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-full backdrop-blur-md border shadow-lg"
+      style={{
+        backgroundColor: "rgba(0, 0, 0, 0.5)",
+        color: "#ffffff", // Always white text for better contrast
+        borderColor: isDark ? "rgba(255, 255, 255, 0.3)" : "rgba(0, 0, 0, 0.3)",
+      }}
+    >
+      {year}
+    </span>
+  );
+};
+
+// Hollow pill component (sharp rectangles with black and white)
+const HollowPill = ({ text, isDark }: { text: string; isDark: boolean }) => {
+  return (
+    <span
+      className="text-xs sm:text-sm font-bold px-2 py-1 rounded-md border"
+      style={{
+        color: colors.neutral[0],
+        borderColor: withOpacity(colors.neutral[0], 0.25),
+        backgroundColor: colors.neutral[100],
+      }}
+    >
+      {text}
+    </span>
+  );
+};
 
 export default function Home() {
   const { isDark } = useTheme();
-  const morphRef = useRef<HTMLSpanElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredCase, setHoveredCase] = useState<string | null>(null);
+  const [hoveredBox, setHoveredBox] = useState<string | null>(null);
+  const [cardTilts, setCardTilts] = useState<{
+    [key: string]: { x: number; y: number };
+  }>({});
+  const buttonRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   // Update page title
   useEffect(() => {
     document.title = "Rasmus Mattsson | Product Designer Portfolio";
   }, []);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isClient, setIsClient] = useState(false);
 
   // Refs for entrance animations
   const heroRef = useRef<HTMLElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const lowCodeRef = useRef<HTMLSpanElement>(null);
-  const statementRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLButtonElement>(null);
-  const morphIconRef = useRef<HTMLSpanElement>(null);
   const animatedBlobRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    gsap.registerPlugin(MorphSVGPlugin);
+  const handleMouseEnter = (caseId: string) => {
+    setHoveredCase(caseId);
 
-    const morphIcon = morphIconRef.current;
-    if (!morphIcon) return;
+    // GSAP morphing animation - responsive pill shape
+    const button = buttonRefs.current[caseId];
+    if (button) {
+      const currentHeight = button.offsetHeight;
+      const pillWidth = currentHeight * 1.4;
 
-    const morphPath = morphIcon.querySelector(".morph-path") as SVGPathElement;
-    const targets = morphIcon.querySelectorAll(
-      ".morph-target"
-    ) as NodeListOf<SVGPathElement>;
-
-    if (!morphPath || targets.length === 0) return;
-
-    // Create the morphing timeline - start paused
-    const morphTimeline = gsap.timeline({ repeat: -1, paused: true });
-
-    // Add morphing animations for all 9 shapes
-    targets.forEach((target, index) => {
-      morphTimeline.to(morphPath, {
-        morphSVG: target,
-        duration: 3,
-        ease: "power2.inOut",
+      gsap.to(button, {
+        width: pillWidth,
+        borderRadius: currentHeight / 2,
+        duration: 0.3,
+        ease: "power2.out",
       });
-    });
-
-    // Return to the first shape to complete the cycle
-    morphTimeline.to(morphPath, {
-      morphSVG: targets[0],
-      duration: 3,
-      ease: "power2.inOut",
-    });
-
-    // Start the morphing animation after entrance animation completes
-    const startMorphing = () => {
-      morphTimeline.play();
-    };
-
-    // Start morphing after entrance animation (approximately 2.2s total)
-    const morphTimer = setTimeout(startMorphing, 2500);
-
-    // Pause/resume on hover
-    const handleMouseEnter = () => {
-      setIsHovered(true);
-      morphTimeline.pause();
-    };
-
-    const handleMouseLeave = () => {
-      setIsHovered(false);
-      morphTimeline.resume();
-    };
-
-    morphIcon.addEventListener("mouseenter", handleMouseEnter);
-    morphIcon.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      clearTimeout(morphTimer);
-      morphIcon.removeEventListener("mouseenter", handleMouseEnter);
-      morphIcon.removeEventListener("mouseleave", handleMouseLeave);
-      morphTimeline.kill();
-    };
-  }, [isHovered]);
-
-  // Hero entrance animation
-  useEffect(() => {
-    // Check if all refs are available
-    if (
-      !titleRef.current ||
-      !lowCodeRef.current ||
-      !statementRef.current ||
-      !ctaRef.current ||
-      !morphIconRef.current ||
-      !animatedBlobRef.current
-    ) {
-      return;
     }
+  };
 
-    const tl = gsap.timeline({ delay: 0.1 });
+  const handleMouseLeave = () => {
+    setHoveredCase(null);
 
-    // Set initial states - start completely hidden
-    gsap.set(
-      [
-        titleRef.current,
-        lowCodeRef.current,
-        statementRef.current,
-        ctaRef.current,
-        animatedBlobRef.current,
-      ],
-      {
-        opacity: 0,
-        y: 30,
+    Object.values(buttonRefs.current).forEach((button) => {
+      if (button) {
+        const currentHeight = button.offsetHeight;
+        gsap.to(button, {
+          width: currentHeight,
+          borderRadius: currentHeight / 2,
+          duration: 0.3,
+          ease: "power2.out",
+        });
       }
-    );
-
-    // Set morphing icon initial state with scale
-    gsap.set(morphIconRef.current, {
-      opacity: 0,
-      scale: 0.3,
     });
+  };
 
-    // Animate all elements together for smoother experience
-    tl.to(
-      [
-        titleRef.current,
-        lowCodeRef.current,
-        statementRef.current,
-        ctaRef.current,
-        animatedBlobRef.current,
-      ],
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      }
-    ).to(
-      morphIconRef.current,
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-      },
-      "-=0.1"
-    );
+  const getBoxScale = (boxId: string) => {
+    return hoveredBox === boxId ? 1.02 : 1;
+  };
 
-    return () => {
-      tl.kill();
-    };
-  }, []);
+  const handleCardMouseMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    cardId: string
+  ) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-  // Set client-side flag and mouse tracking for morphing icon tilt effect
-  useEffect(() => {
-    setIsClient(true);
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      console.log("Mouse position:", { x: e.clientX, y: e.clientY });
-    };
+    const deltaX = mouseX - centerX;
+    const deltaY = mouseY - centerY;
 
-    // Set initial mouse position to center of screen
-    setMousePosition({
-      x: window.innerWidth / 2,
-      y: window.innerHeight / 2,
-    });
+    // Calculate tilt angles (max 10 degrees for more subtle effect)
+    const tiltX = (deltaY / (rect.height / 2)) * -10;
+    const tiltY = (deltaX / (rect.width / 2)) * 10;
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: tiltX, y: tiltY },
+    }));
+  };
+
+  const handleCardMouseLeave = (cardId: string) => {
+    setCardTilts((prev) => ({
+      ...prev,
+      [cardId]: { x: 0, y: 0 },
+    }));
+  };
+
+  const getCardTransform = (cardId: string) => {
+    const tilt = cardTilts[cardId] || { x: 0, y: 0 };
+    return `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`;
+  };
 
   // Handle scrolling to case studies section when coming from case study page
   useEffect(() => {
@@ -223,307 +252,370 @@ export default function Home() {
       <div className="relative z-10">
         {/* Main Content */}
         <main>
-          {/* Introduction Section */}
+          {/* Hero Section with Project Cards */}
           <section
             ref={heroRef}
             id="home"
-            className="h-screen relative flex items-center"
+            className="min-h-screen relative flex items-center pt-24 sm:pt-28 md:pt-32 pb-2 sm:pb-3 md:pb-4"
           >
             <AnimatedBlob
               ref={animatedBlobRef}
               gradientColors={{
-                primary: "rgba(139, 92, 246, 0.6)", // Purple primary
-                secondary: "rgba(168, 85, 247, 0.4)", // Purple secondary
+                primary: "rgba(139, 92, 246, 0.6)",
+                secondary: "rgba(168, 85, 247, 0.4)",
               }}
             />
-            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative">
-              <div className="text-left w-full flex flex-col justify-start h-full -mt-32 sm:-mt-40 lg:-mt-48">
-                {/* Hero content - Responsive layout */}
-                <div className="flex flex-col lg:flex-row items-start lg:items-center w-full gap-8 lg:gap-12">
-                  <div className="w-full lg:flex-1">
-                    {/* Title Content Container - Easy to manage spacing */}
-                    <div className="mt-16 sm:mt-24 lg:mt-32">
-                      {/* Morphing SVG Icon - Positioned above title and horizontally centered */}
-                      <div className="flex justify-center mb-6 sm:mb-8">
-                        <span
-                          className="morphing-icon flex-shrink-0 transition-transform duration-300 ease-out pointer-events-auto z-20"
-                          ref={morphIconRef}
+            <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative z-10">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                {/* Text Card - Hero Content (Top Left) */}
+                <div
+                  className="border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group topography-bg h-[450px] sm:h-[500px] md:h-[550px]"
+                  style={{
+                    transform: `scale(${getBoxScale("hero-text")})`,
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
+                    userSelect: "none",
+                  }}
+                  draggable="false"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                  onMouseEnter={() => setHoveredBox("hero-text")}
+                  onMouseLeave={() => setHoveredBox(null)}
+                >
+                  {/* Radial shine effect */}
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl sm:rounded-2xl"
+                    style={{
+                      background: isDark
+                        ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                    }}
+                  ></div>
+
+                  <div className="flex-1 flex flex-col justify-between relative z-10 pb-4 sm:pb-5 md:pb-6">
+                    <div>
+                      {/* Name title */}
+                      <div className="mb-4 sm:mb-5 md:mb-6">
+                        <h2
+                          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-regular leading-tight font-instrument-serif text-neutral-80 dark:text-neutral-20"
                           style={{
-                            transform: `rotateX(${
-                              isClient && typeof window !== "undefined"
-                                ? (mousePosition.y - window.innerHeight / 2) *
-                                  0.1
-                                : 0
-                            }deg) rotateY(${
-                              isClient && typeof window !== "undefined"
-                                ? (mousePosition.x - window.innerWidth / 2) *
-                                  0.1
-                                : 0
-                            }deg)`,
-                          }}
-                          onMouseEnter={() => {
-                            const rotateX =
-                              isClient && typeof window !== "undefined"
-                                ? (mousePosition.y - window.innerHeight / 2) *
-                                  0.1
-                                : 0;
-                            const rotateY =
-                              isClient && typeof window !== "undefined"
-                                ? (mousePosition.x - window.innerWidth / 2) *
-                                  0.1
-                                : 0;
-                            console.log("Transform values:", {
-                              rotateX,
-                              rotateY,
-                              isClient,
-                              mousePosition,
-                            });
-                          }}
-                          onMouseMove={() => {
-                            console.log(
-                              "SVG mouse move, isClient:",
-                              isClient,
-                              "mousePosition:",
-                              mousePosition
-                            );
+                            color: isDark ? "rgb(255, 255, 255)" : "#5D5E63",
                           }}
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 200 200"
-                            width="40"
-                            height="40"
-                            className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14"
-                          >
-                            {/* Main morphing path */}
-                            <path
-                              d="M120 80L100 0 80 80 0 100l80 20 20 80 20-80 80-20-80-20z"
-                              fill="url(#purpleGradient)"
-                              className="morph-path"
-                            />
-
-                            {/* Hidden target paths for morphing - Scrambled Order */}
-                            {/* Misc 10 */}
-                            <path
-                              d="M136 0l-36 36L64 0H0v64l36 36-36 36v64h64l36-36 36 36h64v-64l-36-36 36-36V0h-64z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Star 4 */}
-                            <path
-                              d="M15.535 188.281c40.654-30.669 60.98-46.003 84.465-46.003 23.485 0 43.812 15.334 84.466 46.003L200 200l-11.719-15.534c-30.669-40.654-46.003-60.981-46.003-84.466 0-23.484 15.334-43.811 46.003-84.465L200 0l-15.534 11.72C143.812 42.388 123.485 57.722 100 57.722c-23.484 0-43.811-15.334-84.465-46.003L0 0l11.72 15.535C42.387 56.19 57.721 76.515 57.721 100c0 23.485-15.334 43.812-46.002 84.465L0 200l15.535-11.719z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Ellipse 8 */}
-                            <path
-                              d="M139 39c0 21.54-17.461 39-39 39-21.54 0-39-17.46-39-39S78.46 0 100 0c21.539 0 39 17.46 39 39zM139 161c0 21.539-17.461 39-39 39-21.54 0-39-17.461-39-39s17.46-39 39-39c21.539 0 39 17.461 39 39zM161 139c-21.539 0-39-17.461-39-39 0-21.54 17.461-39 39-39s39 17.46 39 39c0 21.539-17.461 39-39 39zM39 139c-21.54 0-39-17.461-39-39 0-21.54 17.46-39 39-39s39 17.46 39 39c0 21.539-17.46 39-39 39z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Flower 15 */}
-                            <path
-                              d="M193.481 31.456c13.436 23.267 5.44 52.966-17.886 66.43l-1.522.88c-15.647 9.031-25.278 25.67-25.278 43.672v2.001c0 26.82-21.845 48.561-48.793 48.561s-48.794-21.741-48.794-48.561v-1.998c0-18.002-9.631-34.642-25.278-43.674l-1.525-.88C1.079 84.423-6.917 54.723 6.519 31.456 20.031 8.058 50.078.046 73.534 13.586l1.205.695a50.559 50.559 0 0050.522 0l1.205-.696c23.456-13.54 53.503-5.527 67.015 17.87z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Moon 12 */}
-                            <path
-                              d="M100.503 101.907C107.74 125.692 129.849 143 156 143c15.184 0 29.006-5.835 39.345-15.385 1.138-1.051 3.017-.565 3.342.95A59.235 59.235 0 01200 141c0 32.585-26.415 59-59 59s-59-26.415-59-59c0-15.679 6.116-29.93 16.093-40.497C74.308 107.74 57 129.849 57 156c0 15.185 5.835 29.006 15.385 39.345 1.051 1.138.565 3.018-.95 3.343A59.236 59.236 0 0159 200c-32.585 0-59-26.415-59-59 0-32.584 26.415-59 59-59 15.68 0 29.93 6.117 40.497 16.093C92.26 74.308 70.15 57 43.999 57c-15.184 0-29.005 5.835-39.344 15.385-1.138 1.051-3.018.565-3.343-.95A59.234 59.234 0 010 59C0 26.415 26.415 0 59 0c32.584 0 59 26.415 59 59 0 15.68-6.117 29.93-16.093 40.497C125.692 92.26 143 70.151 143 44c0-15.185-5.835-29.006-15.385-39.345-1.051-1.138-.565-3.017.95-3.342A59.23 59.23 0 01141 0c32.585 0 59 26.415 59 59s-26.415 59-59 59c-15.68 0-29.93-6.116-40.497-16.093z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Rectangle 2 */}
-                            <path
-                              d="M32 32h136v136h-136z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Star 1 */}
-                            <path
-                              d="M200 100C200 44.772 155.228 0 100 0S0 44.772 0 100s44.772 100 100 100 100-44.772 100-100zm-85.203-14.798c8.22 8.22 20.701 9.967 45.664 13.462L170 100l-9.539 1.335c-24.963 3.495-37.444 5.242-45.664 13.462-8.219 8.22-9.967 20.701-13.462 45.664L100 170l-1.335-9.539c-3.495-24.963-5.243-37.444-13.462-45.664-8.22-8.22-20.701-9.967-45.664-13.462L30 100l9.539-1.336c24.963-3.495 37.444-5.242 45.664-13.462 8.22-8.22 9.967-20.7 13.462-45.663L100 30l1.335 9.538c3.495 24.963 5.243 37.445 13.462 45.664z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Ellipse 3 */}
-                            <path
-                              d="M200 30c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM200 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30zM151 100c0 28.167-22.833 51-51 51-28.166 0-51-22.833-51-51 0-28.166 22.834-51 51-51 28.167 0 51 22.834 51 51zM60 30c0 16.569-13.431 30-30 30C13.431 60 0 46.569 0 30 0 13.431 13.431 0 30 0c16.569 0 30 13.431 30 30zM60 170c0 16.569-13.431 30-30 30-16.569 0-30-13.431-30-30 0-16.569 13.431-30 30-30 16.569 0 30 13.431 30 30z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Moon 2 */}
-                            <path
-                              d="M186.048 180.392c4.775-4.775 8.458-10.548 10.839-16.989 2.381-6.441 3.413-13.425 3.038-20.553-.375-7.127-2.151-14.258-5.225-20.987-3.074-6.728-7.387-12.922-12.692-18.227-5.305-5.305-11.498-9.618-18.227-12.692-6.728-3.074-13.86-4.85-20.987-5.225-7.128-.375-14.112.658-20.553 3.039-6.441 2.38-12.214 6.064-16.989 10.838l80.796 80.796zM13.952 19.607C9.177 24.38 5.494 30.154 3.113 36.596.733 43.035-.3 50.02.075 57.148c.375 7.127 2.15 14.26 5.225 20.988 3.074 6.728 7.387 12.922 12.692 18.227 5.305 5.305 11.498 9.618 18.227 12.692 6.728 3.074 13.86 4.849 20.987 5.224 7.128.375 14.111-.657 20.553-3.038 6.441-2.381 12.214-6.064 16.989-10.839L13.952 19.607zM19.608 186.048c4.774 4.774 10.547 8.457 16.988 10.838 6.442 2.381 13.426 3.414 20.553 3.038 7.127-.375 14.259-2.15 20.987-5.224 6.729-3.074 12.922-7.387 18.228-12.692 5.305-5.305 9.617-11.499 12.692-18.227 3.074-6.729 4.849-13.86 5.224-20.988.375-7.127-.657-14.111-3.038-20.552-2.381-6.442-6.064-12.214-10.839-16.989l-80.795 80.796zM180.39 13.952c-4.774-4.775-10.547-8.458-16.988-10.839C156.96.733 149.977-.3 142.849.075c-7.127.375-14.259 2.15-20.987 5.225-6.729 3.074-12.922 7.387-18.228 12.692-5.305 5.305-9.618 11.498-12.692 18.227-3.074 6.728-4.85 13.86-5.224 20.987-.375 7.128.657 14.112 3.038 20.553 2.381 6.441 6.064 12.214 10.839 16.989l80.795-80.796z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Polygon 7 */}
-                            <path
-                              d="M86.449 3.601a27.296 27.296 0 0127.102 0l63.805 36.514C185.796 44.945 191 53.9 191 63.594v72.812c0 9.694-5.204 18.649-13.644 23.479l-63.805 36.514a27.3 27.3 0 01-27.102 0l-63.805-36.514C14.204 155.055 9 146.1 9 136.406V63.594c0-9.694 5.204-18.649 13.644-23.48L86.45 3.602z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Ellipse 10 */}
-                            <path
-                              d="M100 200c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100zm55-151a4 4 0 00-4-4H49a4 4 0 00-4 4v102a4 4 0 004 4h102a4 4 0 004-4V49z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Moon 5 */}
-                            <path
-                              d="M50 102a75 75 0 00150 0H50zM0 98a75 75 0 11150 0H0z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Ellipse 12 */}
-                            <path
-                              d="M100 150c27.614 0 50-22.386 50-50s-22.386-50-50-50-50 22.386-50 50 22.386 50 50 50zm0 50c55.228 0 100-44.772 100-100S155.228 0 100 0 0 44.772 0 100s44.772 100 100 100z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Misc 5 */}
-                            <path
-                              d="M145 8c30.376 0 55 25 55 60 0 70-75 110-100 125C75 178 0 138 0 68 0 33 25 8 55 8c18.6 0 35 10 45 20 10-10 26.4-20 45-20z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Star 6 (current) */}
-                            <path
-                              d="M120 80L100 0 80 80 0 100l80 20 20 80 20-80 80-20-80-20z"
-                              fill="none"
-                              className="morph-target"
-                            />
-
-                            {/* Gradient definition */}
-                            <defs>
-                              <linearGradient
-                                id="purpleGradient"
-                                x1="0%"
-                                y1="0%"
-                                x2="100%"
-                                y2="100%"
-                              >
-                                <stop offset="0%" stopColor="#8B5CF6" />
-                                <stop offset="50%" stopColor="#A855F7" />
-                                <stop offset="100%" stopColor="#C084FC" />
-                              </linearGradient>
-                            </defs>
-                          </svg>
+                          Rasmus Mattsson
+                        </h2>
+                      </div>
+                      {/* Main title */}
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-tight mb-3 sm:mb-4">
+                        <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
+                          UX/UI Designer
                         </span>
-                      </div>
-
-                      {/* Main title - Responsive typography */}
-                      <div className="relative w-full">
-                        {/* Title */}
-                        <h1
-                          ref={titleRef}
-                          className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-32 sm:mb-40 lg:mb-48 text-left sm:text-center w-full"
-                        >
-                          <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                            Product Designer
-                          </span>
-                        </h1>
-                      </div>
+                      </h1>
                     </div>
 
-                    {/* UX/UI Designer text - Responsive positioning */}
-                    <div className="mb-6 -mt-24 sm:-mt-32 lg:-mt-40">
-                      <div className="flex justify-start md:justify-end">
-                        <span
-                          ref={lowCodeRef}
-                          className="text-2xl xl:text-3xl font-medium font-hanken tracking-wide"
-                        >
-                          <span
-                            className="bg-clip-text text-transparent"
-                            style={{
-                              backgroundImage: isDark
-                                ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                                : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                            }}
-                          >
-                            UX/UI Designer
-                          </span>
+                    {/* Hero statement */}
+                    <div className="hero-statement mt-auto">
+                      <div className="statement-line flex flex-wrap gap-1 sm:gap-1.5 md:gap-2 mb-2 sm:mb-2.5 md:mb-3">
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          I
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          design
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          digital
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          products
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          that
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          make
                         </span>
                       </div>
-                    </div>
-
-                    {/* Hero statement - Responsive layout */}
-                    <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mt-8 sm:mt-12 lg:mt-16 w-full">
-                      <div className="flex-1 max-w-full lg:max-w-[64rem]">
-                        <div ref={statementRef} className="hero-statement">
-                          {/* First line */}
-                          <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4 mb-2 sm:mb-3 lg:mb-4">
-                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                              I
-                            </span>
-                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                              create
-                            </span>
-                            <span className="word highlight">
-                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                                digital
-                              </span>
-                              <span className="highlight-bg"></span>
-                            </span>
-                            <span className="word highlight">
-                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                                products
-                              </span>
-                              <span className="highlight-bg"></span>
-                            </span>
-                          </div>
-                          {/* Second line */}
-                          <div className="statement-line flex flex-wrap gap-2 sm:gap-3 lg:gap-4">
-                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                              and
-                            </span>
-                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                              make
-                            </span>
-                            <span className="word highlight">
-                              <span className="highlight-text text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                                experiences
-                              </span>
-                              <span className="highlight-bg"></span>
-                            </span>
-                            <span className="word text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-5xl">
-                              happen.
-                            </span>
-                          </div>
-                        </div>
+                      <div className="statement-line flex flex-wrap gap-1 sm:gap-1.5 md:gap-2">
+                        <span className="word text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-instrument-serif italic">
+                          impactful
+                        </span>
+                        <span className="word text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-instrument-serif italic">
+                          experiences
+                        </span>
+                        <span className="word text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl">
+                          happen.
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Bento Box - Positioned just below CTA button within hero section */}
-            <div className="absolute bottom-8 left-0 right-0 z-10 transform translate-y-10">
-              <BentoBoxFirstTwo />
+                {/* Project Card 1 - Emplojd */}
+                {caseStudies[0] && (
+                  <div
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    style={{
+                      transform: `scale(${getBoxScale(
+                        `project-${caseStudies[0].id}`
+                      )})`,
+                      backgroundColor: isDark ? "#060608" : "#ffffff",
+                    }}
+                    onMouseEnter={() => {
+                      handleMouseEnter(caseStudies[0].id);
+                      setHoveredBox(`project-${caseStudies[0].id}`);
+                    }}
+                    onMouseLeave={() => {
+                      handleMouseLeave();
+                      setHoveredBox(null);
+                    }}
+                    data-cursor-target="case-study"
+                  >
+                    <div className="w-full flex-1 overflow-hidden relative">
+                      <Image
+                        src={caseStudies[0].image}
+                        alt={caseStudies[0].alt}
+                        width={400}
+                        height={300}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[0].id === "emplojd" && (
+                          <DatePill year="2024" isDark={isDark} />
+                        )}
+                        <div className="bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Case study
+                        </div>
+                      </div>
+                      {caseStudies[0].id === "emplojd" && (
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                          <HollowPill text="UX/UI design" isDark={isDark} />
+                          <HollowPill text="Mobile" isDark={isDark} />
+                          <HollowPill text="AI" isDark={isDark} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-1">
+                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                            {caseStudies[0].title}
+                          </h3>
+                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                            {caseStudies[0].subtitle}
+                          </span>
+                        </div>
+                        <div
+                          ref={(el) => {
+                            buttonRefs.current[caseStudies[0].id] = el;
+                          }}
+                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                        >
+                          <svg
+                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                        {caseStudies[0].category}
+                      </div>
+                    </div>
+                    <Link
+                      href={caseStudies[0].link}
+                      className="absolute inset-0 z-20"
+                      aria-label={`View ${caseStudies[0].title} case study`}
+                      data-cursor-target="case-study"
+                    />
+                  </div>
+                )}
+
+                {/* Project Card 2 - Noted */}
+                {caseStudies[1] && (
+                  <div
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    style={{
+                      transform: `scale(${getBoxScale(
+                        `project-${caseStudies[1].id}`
+                      )})`,
+                      backgroundColor: isDark ? "#060608" : "#ffffff",
+                    }}
+                    onMouseEnter={() => {
+                      handleMouseEnter(caseStudies[1].id);
+                      setHoveredBox(`project-${caseStudies[1].id}`);
+                    }}
+                    onMouseLeave={() => {
+                      handleMouseLeave();
+                      setHoveredBox(null);
+                    }}
+                    data-cursor-target="case-study"
+                  >
+                    <div className="w-full flex-1 overflow-hidden relative">
+                      <Image
+                        src={caseStudies[1].image}
+                        alt={caseStudies[1].alt}
+                        width={400}
+                        height={300}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[1].id === "noted" && (
+                          <DatePill year="2025" isDark={isDark} />
+                        )}
+                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Coming soon
+                        </div>
+                      </div>
+                      {caseStudies[1].id === "noted" && (
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                          <HollowPill text="Product design" isDark={isDark} />
+                          <HollowPill text="Multiple devices" isDark={isDark} />
+                          <HollowPill text="Task management" isDark={isDark} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-1">
+                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                            {caseStudies[1].title}
+                          </h3>
+                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                            {caseStudies[1].subtitle}
+                          </span>
+                        </div>
+                        <div
+                          ref={(el) => {
+                            buttonRefs.current[caseStudies[1].id] = el;
+                          }}
+                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                        >
+                          <svg
+                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                        {caseStudies[1].category}
+                      </div>
+                    </div>
+                    <Link
+                      href={caseStudies[1].link}
+                      className="absolute inset-0 z-20"
+                      aria-label={`View ${caseStudies[1].title} case study`}
+                      data-cursor-target="case-study"
+                    />
+                  </div>
+                )}
+
+                {/* Project Card 3 - Zmartrest AI */}
+                {caseStudies[2] && (
+                  <div
+                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                    style={{
+                      transform: `scale(${getBoxScale(
+                        `project-${caseStudies[2].id}`
+                      )})`,
+                      backgroundColor: isDark ? "#060608" : "#ffffff",
+                    }}
+                    onMouseEnter={() => {
+                      handleMouseEnter(caseStudies[2].id);
+                      setHoveredBox(`project-${caseStudies[2].id}`);
+                    }}
+                    onMouseLeave={() => {
+                      handleMouseLeave();
+                      setHoveredBox(null);
+                    }}
+                    data-cursor-target="case-study"
+                  >
+                    <div className="w-full flex-1 overflow-hidden relative">
+                      <Image
+                        src={caseStudies[2].image}
+                        alt={caseStudies[2].alt}
+                        width={400}
+                        height={300}
+                        className="absolute inset-0 w-full h-full object-cover"
+                      />
+                      <div className="absolute top-2 right-2 flex items-center gap-2">
+                        {caseStudies[2].id === "zmartrest-ai" && (
+                          <DatePill year="2025" isDark={isDark} />
+                        )}
+                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                          Coming soon
+                        </div>
+                      </div>
+                      {caseStudies[2].id === "zmartrest-ai" && (
+                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                          <HollowPill text="UX/UI design" isDark={isDark} />
+                          <HollowPill text="Mobile" isDark={isDark} />
+                          <HollowPill text="Health-tech" isDark={isDark} />
+                        </div>
+                      )}
+                    </div>
+                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-1">
+                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                            {caseStudies[2].title}
+                          </h3>
+                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                            {caseStudies[2].subtitle}
+                          </span>
+                        </div>
+                        <div
+                          ref={(el) => {
+                            buttonRefs.current[caseStudies[2].id] = el;
+                          }}
+                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                        >
+                          <svg
+                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                        {caseStudies[2].category}
+                      </div>
+                    </div>
+                    <Link
+                      href={caseStudies[2].link}
+                      className="absolute inset-0 z-20"
+                      aria-label={`View ${caseStudies[2].title} case study`}
+                      data-cursor-target="case-study"
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           </section>
         </main>
-
-        {/* Case Studies Showcase Section */}
-        <div id="case-studies" className="pt-16">
-          <CaseStudiesShowcase />
-        </div>
 
         {/* Experience Section */}
         <section className="py-16 sm:py-20 md:py-24 lg:py-32">
@@ -531,7 +623,7 @@ export default function Home() {
             <div className="mb-12 sm:mb-16 md:mb-20">
               <div className="flex items-center gap-4">
                 <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
-                  02
+                  01
                 </span>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
                   <span
@@ -557,7 +649,7 @@ export default function Home() {
                     JAN, 2025 - MAY, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer (Intern), Zmartrest AI
+                    Product Designer Intern, Zmartrest AI
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Spearheaded new app features and data visualizations to
@@ -583,27 +675,6 @@ export default function Home() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://www.zmartrest.ai/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -614,12 +685,12 @@ export default function Home() {
                     NOV, 2024 - JAN, 2025
                   </div>
                   <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer (Intern), Xbrandify
+                    UX/UI Designer Intern, Xbrandify
                   </h3>
                   <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
                     Thrived in a fast-paced travel startup, crafting tailored
                     landing pages and demo sites that reflected diverse customer
-                    brands. Initiated the company’s first style guide to unify
+                    brands. Initiated the company's first style guide to unify
                     design efforts, while energizing sales and investor outreach
                     through impactful pitch decks, logos, and social campaigns.
                   </p>
@@ -639,27 +710,6 @@ export default function Home() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://www.yourbrandtravel.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -695,27 +745,6 @@ export default function Home() {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <a
-                    href="https://noted-beta.netlify.app/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-neutral-100 dark:border-neutral-0 text-neutral-100 dark:text-neutral-0 font-semibold text-base sm:text-lg rounded-full hover:bg-neutral-100 dark:hover:bg-neutral-0 hover:text-neutral-0 dark:hover:text-neutral-100 transition-all duration-200"
-                  >
-                    Visit Website
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5 ml-2 sm:ml-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
-                    </svg>
-                  </a>
                 </div>
               </div>
 
@@ -757,11 +786,811 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Rest of Bento Boxes */}
-        <BentoBoxRest />
+        {/* Education Section */}
+        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex items-center gap-4">
+                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                  02
+                </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                  <span
+                    className="bg-clip-text text-transparent font-hanken"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    Education
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            {/* Education Timeline */}
+            <div className="space-y-12">
+              {/* Education Entry 1 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    UX/UI Designer with Frontend – Diploma
+                  </h3>
+                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
+                    <MapPin
+                      size={16}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
+                    Chas Academy, Stockholm, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Specialized in UX/UI design and frontend development, diving
+                    deep into design thinking, accessibility, research
+                    methodologies, user interviews, and design systems. Built
+                    real-world projects from concept to launch, combining
+                    creativity with technical expertise.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Relevant Coursework: UX/UI design, Web design, Frontend
+                    development, Design systems, UX research, WCAG
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
+                      <Image
+                        src="/assets/logos/Education/chas-academy-emblem.png"
+                        alt="Chas Academy"
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Education Entry 2 */}
+              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
+                <div className="flex-1">
+                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
+                    Digital Accessibility and Inclusive Design – Diploma
+                  </h3>
+                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
+                    <MapPin
+                      size={16}
+                      weight="regular"
+                      className="flex-shrink-0"
+                    />
+                    Axess Labs, Stockholm, Sweden
+                  </p>
+                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
+                    Focused on creating inclusive digital experiences through
+                    comprehensive understanding of accessibility principles,
+                    assistive technologies, and WCAG guidelines. Learned to
+                    conduct accessibility audits and design with diverse user
+                    needs in mind.
+                  </p>
+                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
+                    Relevant Coursework: Inclusive design principles, Assistive
+                    technology, Accessibility auditing, WCAG, Accessibility
+                    guidelines, User needs
+                  </p>
+                </div>
+                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
+                  {/* Institution Logo */}
+                  <div className="w-48 h-48 flex items-center justify-center">
+                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
+                      <Image
+                        src="/assets/logos/Education/axesslab_social.png"
+                        alt="Axess Labs"
+                        width={192}
+                        height={192}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About Me Section */}
+        <section id="about-me" className="py-16 sm:py-20 md:py-24 lg:py-32">
+          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+            <div className="mb-12 sm:mb-16 md:mb-20">
+              <div className="flex items-center gap-4">
+                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                  03
+                </span>
+                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                  <span
+                    className="bg-clip-text text-transparent font-hanken"
+                    style={{
+                      backgroundImage: isDark
+                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                    }}
+                  >
+                    About me
+                  </span>
+                </h2>
+              </div>
+            </div>
+
+            {/* What I Focus On - Full width section */}
+            <div className="mb-6 sm:mb-8 lg:mb-12">
+              <div
+                className="border-2 border-neutral-80/40 rounded-3xl px-4 py-4 lg:px-6 lg:py-5 flex flex-col justify-start hover:border-neutral-80/60 transition-all duration-500 relative group row-span-1 topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("skills-dotted")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("skills-dotted")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-lg font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      What I focus on{" "}
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-flash-dynamic-premium.png"
+                    alt="What I focus on"
+                    width={60}
+                    height={60}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
+                  />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("ux-design") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "ux-design")}
+                    onMouseLeave={() => handleCardMouseLeave("ux-design")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-bulb-dynamic-premium.png"
+                              alt="UX Design"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            UX Design
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Research synthesis and insights
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              User journeys and flows
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Usability and validation
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("ui-design") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "ui-design")}
+                    onMouseLeave={() => handleCardMouseLeave("ui-design")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-color-palette-dynamic-premium.png"
+                              alt="UI Design"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            UI Design
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Scalable design systems
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              High-fidelity prototyping
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Interaction and visual clarity
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className="group/card relative"
+                    style={{ transform: getCardTransform("product") }}
+                    onMouseMove={(e) => handleCardMouseMove(e, "product")}
+                    onMouseLeave={() => handleCardMouseLeave("product")}
+                  >
+                    <div className="absolute inset-0 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300 pointer-events-none z-0">
+                      <RadialGradientBorder
+                        variant="dash"
+                        shineColor={["#8B5CF6", "#A855F7"]}
+                        borderWidth={4}
+                        duration={3}
+                        size="md"
+                        className="w-full h-full"
+                      />
+                    </div>
+                    {/* Noise background overlay */}
+                    <div
+                      className="absolute inset-0 opacity-[0.25] dark:opacity-[0.15] pointer-events-none rounded-2xl z-10"
+                      style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                        backgroundSize: "256px 256px",
+                      }}
+                    />
+                    <div
+                      className={`relative backdrop-blur-sm rounded-2xl p-4 h-48 lg:cursor-pointer transition-all duration-300 ${
+                        isDark
+                          ? "bg-neutral-100/50 lg:group-hover/card:bg-transparent"
+                          : "bg-neutral-10/50 lg:group-hover/card:bg-transparent"
+                      }`}
+                    >
+                      <div className="flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-2">
+                          <div className="relative mb-2">
+                            <Image
+                              src="/assets/icons/3dicons-chart-dynamic-premium.png"
+                              alt="Product Strategy"
+                              width={40}
+                              height={40}
+                              className="lg:group-hover/card:scale-110 transition-all duration-300"
+                            />
+                            {/* Glow effect only on card hover */}
+                            <div className="absolute inset-0 bg-[#8B5CF6]/20 blur-md rounded-full scale-150 opacity-0 lg:group-hover/card:opacity-100 transition-opacity duration-300"></div>
+                          </div>
+                          <h3
+                            className="font-black text-base tracking-wide transition-colors duration-200"
+                            style={{
+                              color: isDark ? "rgb(255, 255, 255)" : "#000000",
+                            }}
+                          >
+                            Product Strategy
+                          </h3>
+                        </div>
+                        <div className="flex-1 flex flex-col justify-center">
+                          <ul className="space-y-1 flex flex-col items-start">
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Product discovery and prioritization
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Roadmaps tied to outcomes
+                            </li>
+                            <li
+                              className={`text-neutral-60 text-sm font-semibold flex items-center gap-1.5 transition-colors duration-200 ${
+                                isDark
+                                  ? "lg:group-hover/card:text-neutral-3"
+                                  : "lg:group-hover/card:text-neutral-90"
+                              }`}
+                            >
+                              <div className="w-2 h-2 bg-neutral-60 lg:group-hover/card:bg-[#8B5CF6] rounded-full flex-shrink-0 transition-colors duration-200"></div>
+                              Growth, retention, and learning
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bento Box Layout */}
+            <div className="grid grid-cols-1 lg:grid-cols-8 gap-6 sm:gap-8 lg:gap-12 auto-rows-[280px] sm:auto-rows-[300px] lg:auto-rows-[320px]">
+              {/* About Me - Copy 1 - 50% width */}
+              <div
+                className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("about1")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("about1")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      RASMUS.TXT
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-boy-dynamic-premium.png"
+                    alt="Rasmus"
+                    width={60}
+                    height={60}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
+                  />
+                </div>
+                <div className="mt-4 sm:mt-6 relative z-10">
+                  <p
+                    className="leading-relaxed text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-2xl 2xl:text-4xl"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I design digital solutions with a passion for creating
+                    experiences that feel seamless, make a difference and evoke emotion.
+                  </p>
+                  <p
+                    className="leading-relaxed text-xl xs:text-2xl sm:text-3xl md:text-4xl lg:text-2xl 2xl:text-4xl mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I specialize in UX/UI design and Frontend development using
+                    tools such as Figma, Framer and Cursor to get the job done. I
+                    enjoy tackling the full journey from concept to finished
+                    product.
+                  </p>
+                </div>
+              </div>
+
+              {/* About Me - Copy 2 - 50% width */}
+              <div
+                className="lg:col-span-4 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("about2")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("about2")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      BACKGROUND
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-notebook-dynamic-premium.png"
+                    alt="About Me"
+                    width={60}
+                    height={60}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
+                  />
+                </div>
+                <div className="mt-4 sm:mt-6 relative z-10">
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    I've designed across{" "}
+                    <span
+                      style={{
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
+                      }}
+                    >
+                      multiple industries
+                    </span>
+                    , including health-tech, travel, retail, SaaS and AI.
+                    Gaining{" "}
+                    <span
+                      style={{
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
+                      }}
+                    >
+                      experience at startups, medium-sized businesses, and
+                      larger enterprises.
+                    </span>{" "}
+                    Each one broadening my{" "}
+                    <span
+                      style={{
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
+                      }}
+                    >
+                      experience of how design can work and be thought about
+                      differently.
+                    </span>{" "}
+                    This mix has taught me how to adapt quickly, balance
+                    creativity with structure, and design solutions that scale.
+                  </p>
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    My background spans UX/UI design, research, frontend
+                    development, all the way to how to connect, understand and
+                    support a customer or user on a micro level. Whether I'm
+                    crafting dashboards, shaping brand experiences, or
+                    experimenting with side projects, I always aim to create
+                    digital products that are clear, accessible, and impactful.
+                  </p>
+                  <p
+                    className="leading-relaxed text-xs xs:text-sm sm:text-base md:text-lg lg:text-sm 2xl:text-lg mt-4"
+                    style={{
+                      color: isDark ? "#A7A7A7" : "#5D5E63",
+                    }}
+                  >
+                    Most recently, I've spent{" "}
+                    <span
+                      style={{
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
+                      }}
+                    >
+                      two years at Chas Academy in Stockholm, specializing in
+                      UX/UI design and frontend development.
+                    </span>{" "}
+                    This gave me the space to dive deep into design thinking,
+                    accessibility, research methodologies, conducting user
+                    interviews, and design systems while also{" "}
+                    <span
+                      style={{
+                        color: isDark
+                          ? "rgba(144, 126, 255, 1)"
+                          : "rgba(139, 92, 246, 1)",
+                      }}
+                    >
+                      building real-world projects from concept to launch.
+                    </span>{" "}
+                    It's where I combined creativity with learning the technical
+                    know-how to get the job done.
+                  </p>
+                </div>
+              </div>
+
+              {/* Personal Identity - Full width section */}
+              <div
+                className="lg:col-span-8 border-2 border-neutral-80/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 flex flex-col hover:shadow-lg hover:border-neutral-80/60 transition-all duration-500 row-span-2 relative group topography-bg"
+                style={{
+                  transform: `scale(${getBoxScale("identity")})`,
+                  backgroundColor: isDark ? "#060608" : "#ffffff",
+                  userSelect: "none",
+                }}
+                draggable="false"
+                onContextMenu={(e) => e.preventDefault()}
+                onDragStart={(e) => e.preventDefault()}
+                onMouseEnter={() => setHoveredBox("identity")}
+                onMouseLeave={() => setHoveredBox(null)}
+              >
+                {/* Radial shine effect */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-3xl"
+                  style={{
+                    background: isDark
+                      ? "radial-gradient(ellipse at top, rgba(255,255,255,0.05) 0%, transparent 70%)"
+                      : "radial-gradient(ellipse at top, rgba(139,92,246,0.1) 0%, transparent 70%)",
+                  }}
+                ></div>
+                <div className="flex items-center justify-between -mt-2 relative z-10">
+                  <h2 className="text-lg sm:text-xl font-bold font-montserrat uppercase tracking-wider">
+                    <span
+                      className="bg-clip-text text-transparent"
+                      style={{
+                        backgroundImage: isDark
+                          ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                          : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                      }}
+                    >
+                      Identity
+                    </span>
+                  </h2>
+                  <Image
+                    src="/assets/icons/3dicons-puzzle-dynamic-premium.png"
+                    alt="Identity"
+                    width={60}
+                    height={60}
+                    className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 animate-pulse-subtle"
+                  />
+                </div>
+                <div className="mt-8 relative z-10">
+                  <IdentityCarousel
+                    isDark={isDark}
+                    identity={[
+                      {
+                        title: "Home Cook",
+                        description:
+                          "I cook a lot and love experimenting with new recipes. Food is one of my creative outlets outside of design.",
+                        emoji: "👨‍🍳",
+                        image: HomeCookImage.src,
+                      },
+                      {
+                        title: "Tech Explorer",
+                        description:
+                          "Always curious about new technologies and how they can improve user experiences.",
+                        emoji: "🔬",
+                        image: TechExplorerImage.src,
+                      },
+                      {
+                        title: "AI Advocate",
+                        description:
+                          "I'm fascinated by AI and use it strategically to enhance my creative work. From code generation to ideation, AI helps me push the boundaries of what's possible.",
+                        emoji: "🤖",
+                        image: AiAdvocateImage.src,
+                      },
+                      {
+                        title: "Design Thinker",
+                        description:
+                          "I approach problems with empathy and user-centered design principles. I find myself thinking about design a lot even in everyday scenarios.",
+                        emoji: "💭",
+                        image: DesignThinkerImage.src,
+                      },
+                      {
+                        title: "Stockholm Local",
+                        description:
+                          "Living in one of the world's most design-forward cities inspires my work daily.",
+                        emoji: "🏙️",
+                        image: StockholmImage.src,
+                      },
+                      {
+                        title: "Animal Lover",
+                        description:
+                          "I love animals - I have had both cats and dogs as pets.",
+                        emoji: "🐶",
+                        image: AnimalLoverImage.src,
+                      },
+                      {
+                        title: "From Mellbystrand, Sweden",
+                        description:
+                          "Born in coastal Mellbystrand with its warm summers and quiet winters — shaped my appreciation for nature and serenity.",
+                        emoji: "🌅",
+                        image: MellbystrandImage.src,
+                      },
+                      {
+                        title: "Night Owl",
+                        description:
+                          "I'm most productive and creative during the late hours when the world is quiet.",
+                        emoji: "🦉",
+                        image: NightOwlImage.src,
+                      },
+                      {
+                        title: "Formula 1 Enthusiast",
+                        description:
+                          "Passionate about Formula 1 racing. My favorite team is Mercedes and driver is Lewis Hamilton. I love the engineering, strategy, and pure speed of the sport.",
+                        emoji: "🏎️",
+                        image: Formula1Image.src,
+                      },
+                      {
+                        title: "Avid Gamer",
+                        description:
+                          "I love gaming and exploring virtual worlds. From strategy games to action RPGs, gaming fuels my creativity and problem-solving skills.",
+                        emoji: "🎮",
+                        image: AvidGamerImage.src,
+                      },
+                      {
+                        title: "Music & Festivals",
+                        description:
+                          "I used to produce my own electronic music and DJ sets. Now I enjoy discovering new artists and experiencing live music at festivals.",
+                        emoji: "🎵",
+                        image: MusicFestivalsImage.src,
+                      },
+                      {
+                        title: "INFJ-A",
+                        description:
+                          "According to MBTI tests - I'm a slightly introverted, intuitive, and feeling individual with an assertive nature and vivid imagination.",
+                        emoji: "🧠",
+                        image: InfjAImage.src,
+                      },
+                    ]}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Footer Section */}
-        <div className="pt-16 pb-16">
+        <div id="contact" className="pt-16 pb-16">
           <div className="container mx-auto pr-4 pl-4 lg:pr-0 lg:pl-0">
             <Footer />
           </div>

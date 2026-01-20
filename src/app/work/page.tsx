@@ -52,14 +52,14 @@ export default function WorkPage() {
                     </h2>
                     <p className="text-neutral-80 dark:text-neutral-20 leading-relaxed mb-6">
                       This page showcases my work and projects. You can explore
-                      my case studies, design gallery, and other creative work.
+                      my case studies, archives, and other creative work.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                       <button
-                        onClick={() => router.push("/projects")}
+                        onClick={() => router.push("/")}
                         className="px-6 py-3 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-lg transition-colors duration-300"
                       >
-                        View Projects
+                        Back to Home
                       </button>
                       <button
                         onClick={() => router.push("/case-studies")}

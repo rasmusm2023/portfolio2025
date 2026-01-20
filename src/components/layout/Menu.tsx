@@ -17,16 +17,16 @@ const Menu = () => {
   const { isDark } = useTheme();
   const pillRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
-  const [activeSection, setActiveSection] = useState("home");
+  const [activeSection, setActiveSection] = useState<string>("home");
+  const [activeHash, setActiveHash] = useState<string>("");
   const isInitialized = useRef(false);
 
   const menuItems = useMemo<MenuItem[]>(
     () => [
       { label: "Home", href: "/" },
-      { label: "Projects", href: "/projects" },
-      { label: "Design Gallery", href: "/design-gallery" },
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" },
+      { label: "About", href: "/#about-me" },
+      { label: "Contact", href: "/#contact" },
+      { label: "Archives", href: "/archives" },
     ],
     []
   );
@@ -56,18 +56,66 @@ const Menu = () => {
       : withOpacity(colors.neutral[100], 0.4);
   };
 
+  // Scroll detection for sections on home-v2 page
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveHash("");
+      return;
+    }
+
+    const aboutSection = document.getElementById("about-me");
+    const contactSection = document.getElementById("contact");
+
+    if (!aboutSection || !contactSection) return;
+
+    const checkActiveSection = () => {
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% from top of viewport
+      const aboutTop = aboutSection.offsetTop;
+      const contactTop = contactSection.offsetTop;
+
+      // Determine which section is currently in view
+      if (scrollPosition >= contactTop) {
+        setActiveHash("contact");
+      } else if (scrollPosition >= aboutTop) {
+        setActiveHash("about-me");
+      } else {
+        setActiveHash(""); // Home section
+      }
+    };
+
+    // Check initial position
+    setTimeout(checkActiveSection, 100);
+
+    // Listen to scroll events
+    window.addEventListener("scroll", checkActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", checkActiveSection);
+    };
+  }, [pathname]);
+
   useEffect(() => {
     // Set active section based on current pathname
     const currentPath = pathname === "/" ? "home" : pathname.substring(1);
     setActiveSection(currentPath);
 
-    // Move pill to active item
-    let activeItem = menuItems.find((item) => item.href === pathname);
-
-    // If we're on a case study page, make "Projects" active instead
-    if (!activeItem && pathname.startsWith("/case-studies/")) {
-      activeItem = menuItems.find((item) => item.href === "/projects");
+    // Determine which menu item should be active
+    let activeHref = "";
+    
+    if (pathname === "/") {
+      if (activeHash === "about-me") {
+        activeHref = "/#about-me";
+      } else if (activeHash === "contact") {
+        activeHref = "/#contact";
+      } else {
+        activeHref = "/"; // Default to Home when on home but not in a specific section
+      }
+    } else {
+      activeHref = pathname;
     }
+
+    // Move pill to active item
+    const activeItem = menuItems.find((item) => item.href === activeHref || (pathname === "/" && activeHash === "" && item.href === "/"));
 
     if (activeItem) {
       // Skip animation on first load for better performance
@@ -98,7 +146,7 @@ const Menu = () => {
         });
       }
     }
-  }, [pathname, movePill, menuItems]);
+  }, [pathname, movePill, menuItems, activeHash]);
 
   return (
     <nav className="flex items-center justify-center">
@@ -114,21 +162,44 @@ const Menu = () => {
           }}
         />
         {menuItems.map((item) => {
-          let isActive = item.href === pathname;
-
-          // If we're on a case study page, make "Projects" appear active
-          if (
-            !isActive &&
-            pathname.startsWith("/case-studies/") &&
-            item.href === "/projects"
-          ) {
-            isActive = true;
+          // Determine if item is active based on pathname and active hash
+          let isActive = false;
+          if (pathname === "/") {
+            if (activeHash === "about-me" && item.href === "/#about-me") {
+              isActive = true;
+            } else if (activeHash === "contact" && item.href === "/#contact") {
+              isActive = true;
+            } else if (activeHash === "" && item.href === "/") {
+              isActive = true; // Home is active when on home but not in a specific section
+            }
+          } else {
+            isActive = item.href === pathname;
           }
+          const isHashLink = item.href.includes("#");
+
+          const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            if (isHashLink) {
+              e.preventDefault();
+              const hash = item.href.split("#")[1];
+              
+              // If we're on the home page, scroll to the section
+              if (pathname === "/") {
+                const element = document.getElementById(hash);
+                if (element) {
+                  element.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              } else {
+                // If we're on a different page, navigate to home first, then scroll
+                window.location.href = item.href;
+              }
+            }
+          };
 
           return (
             <li key={item.href}>
               <Link
                 href={item.href}
+                onClick={handleClick}
                 className={`
                   relative
                   z-10

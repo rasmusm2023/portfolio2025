@@ -18,6 +18,7 @@ const Header = () => {
   const [showBackground, setShowBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
+  const [activeHash, setActiveHash] = useState<string>("");
   const menuToggleRef = useRef<HTMLButtonElement>(null);
   const menuTextRef = useRef<HTMLSpanElement>(null);
   const hamburgerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +77,44 @@ const Header = () => {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, []);
+
+  // Scroll detection for sections on home-v2 page
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveHash("");
+      return;
+    }
+
+    const aboutSection = document.getElementById("about-me");
+    const contactSection = document.getElementById("contact");
+
+    if (!aboutSection || !contactSection) return;
+
+    const checkActiveSection = () => {
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% from top of viewport
+      const aboutTop = aboutSection.offsetTop;
+      const contactTop = contactSection.offsetTop;
+
+      // Determine which section is currently in view
+      if (scrollPosition >= contactTop) {
+        setActiveHash("contact");
+      } else if (scrollPosition >= aboutTop) {
+        setActiveHash("about-me");
+      } else {
+        setActiveHash(""); // Home section
+      }
+    };
+
+    // Check initial position
+    setTimeout(checkActiveSection, 100);
+
+    // Listen to scroll events
+    window.addEventListener("scroll", checkActiveSection, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", checkActiveSection);
+    };
+  }, [pathname]);
 
   // Component unmount cleanup
   useEffect(() => {
@@ -378,7 +417,7 @@ const Header = () => {
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Home"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/"
+                      : pathname === "/" && activeHash === ""
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
@@ -389,63 +428,81 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/projects"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
-                    clickedMenuItem === "Projects"
-                      ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/projects" ||
-                        pathname.startsWith("/case-studies/")
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
-                  }`}
-                  onClick={() => handleMenuItemClick("Projects")}
-                >
-                  Projects
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/design-gallery"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
-                    clickedMenuItem === "Design Gallery"
-                      ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/design-gallery"
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
-                  }`}
-                  onClick={() => handleMenuItemClick("Design Gallery")}
-                >
-                  Design Gallery
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
+                  href="/#about-me"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "About"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/about"
+                      : pathname === "/" && activeHash === "about-me"
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
-                  onClick={() => handleMenuItemClick("About")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMenuItemClick("About");
+                    setIsMobileMenuOpen(false);
+                    
+                    // If we're on the home page, scroll to the section
+                    if (pathname === "/") {
+                      setTimeout(() => {
+                        const element = document.getElementById("about-me");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }, 100);
+                    } else {
+                      // If we're on a different page, navigate to home first
+                      window.location.href = "/#about-me";
+                    }
+                  }}
                 >
                   About
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/contact"
+                  href="/#contact"
                   className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
                     clickedMenuItem === "Contact"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/contact"
+                      : pathname === "/" && activeHash === "contact"
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
-                  onClick={() => handleMenuItemClick("Contact")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMenuItemClick("Contact");
+                    setIsMobileMenuOpen(false);
+                    
+                    // If we're on the home page, scroll to the section
+                    if (pathname === "/") {
+                      setTimeout(() => {
+                        const element = document.getElementById("contact");
+                        if (element) {
+                          element.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                      }, 100);
+                    } else {
+                      // If we're on a different page, navigate to home first
+                      window.location.href = "/#contact";
+                    }
+                  }}
                 >
                   Contact
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/archives"
+                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
+                    clickedMenuItem === "Archives"
+                      ? "text-purple-500 dark:text-purple-400 scale-95"
+                      : pathname === "/archives"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                  }`}
+                  onClick={() => handleMenuItemClick("Archives")}
+                >
+                  Archives
                 </Link>
               </li>
             </ul>

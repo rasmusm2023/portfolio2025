@@ -102,7 +102,7 @@ const galleryImages = [
   ...printsImages,
 ];
 
-export default function DesignGalleryPage() {
+export default function ArchivesPage() {
   const { isDark } = useTheme();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
@@ -111,7 +111,7 @@ export default function DesignGalleryPage() {
   // Update page title
   useEffect(() => {
     document.title =
-      "Design Gallery — Rasmus Mattsson | Product Designer Portfolio";
+      "Archives — Rasmus Mattsson | Product Designer Portfolio";
   }, []);
 
   // Refs for entrance animations
@@ -250,8 +250,8 @@ export default function DesignGalleryPage() {
                   ref={titleRef}
                   className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
                 >
-                  <span className="[background-image:var(--gradient-hero-design-gallery)] dark:[background-image:var(--gradient-hero-design-gallery-dark)] bg-clip-text text-transparent font-hanken">
-                    Design Gallery
+                  <span className="[background-image:var(--gradient-hero-archives)] dark:[background-image:var(--gradient-hero-archives-dark)] bg-clip-text text-transparent font-hanken">
+                    Archives
                   </span>
                 </h1>
                 <div className="flex flex-col lg:flex-row justify-between items-start gap-8 lg:gap-0 mt-8 sm:mt-12 lg:mt-16">

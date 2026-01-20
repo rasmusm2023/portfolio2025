@@ -1,12 +1,10 @@
 "use client";
 
 import CustomCursor from "@/components/CustomCursor";
-import ProjectShowcase from "@/components/pages/ProjectShowcase";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
 import Footer from "@/components/layout/Footer";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import CircularScrollText from "@/components/ui/CircularScrollText";
-import Link from "next/link";
 import { Hanken_Grotesk } from "next/font/google";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
@@ -14,13 +12,13 @@ import { useTheme } from "@/contexts/ThemeContext";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
-export default function ProjectsPage() {
+export default function ArchivePage() {
   const { isDark } = useTheme();
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
 
   // Update page title
   useEffect(() => {
-    document.title = "Projects — Rasmus Mattsson | Product Designer Portfolio";
+    document.title = "Archive — Rasmus Mattsson | Product Designer Portfolio";
   }, []);
 
   // Refs for entrance animations
@@ -146,14 +144,14 @@ export default function ProjectsPage() {
 
               <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
                 <div className="text-left w-full">
-                  {/* Main Projects Title */}
+                  {/* Main Archive Title */}
                   <div className="mb-8 sm:mb-12 lg:mb-16">
                     <h1
                       ref={titleRef}
                       className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold font-hanken leading-none"
                     >
                       <span className="[background-image:var(--gradient-hero-projects)] dark:[background-image:var(--gradient-hero-projects-dark)] bg-clip-text text-transparent font-hanken">
-                        Projects
+                        Archive
                       </span>
                     </h1>
                   </div>
@@ -164,10 +162,10 @@ export default function ProjectsPage() {
                         ref={descriptionRef}
                         className="text-neutral-70 dark:text-neutral-30 text-lg sm:text-xl lg:text-2xl font-semibold leading-relaxed tracking-wide"
                       >
-                        This is a selection of projects to showcase my design
-                        process. Moving from clear problem statements to
-                        meaningful solutions with a focus on process, impact and
-                        learnings.
+                        A collection of older case studies that are complete but
+                        may be outdated or no longer part of my primary
+                        showcase. These projects represent my journey and growth
+                        as a designer.
                       </p>
                     </div>
                     <div className="lg:ml-8 mt-4 lg:mt-0">
@@ -196,40 +194,6 @@ export default function ProjectsPage() {
             <div className="pt-[200px] pb-8 sm:pb-12 lg:pb-16">
               <CaseStudiesShowcase showTitle={false} />
             </div>
-
-            {/* Call to Action */}
-            <section className="py-8 sm:py-12 lg:py-16">
-              <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <div className="max-w-4xl mx-auto text-center">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-neutral-70 dark:text-neutral-30 mb-6 sm:mb-8">
-                    Want to see what else I do?
-                  </h2>
-                  <p className="text-lg sm:text-xl text-neutral-50 dark:text-neutral-50 mb-8 sm:mb-12 leading-relaxed">
-                    Browse my archives to see more of my creative work and
-                    visual projects.
-                  </p>
-                  <div className="flex justify-center">
-                    <Link href="/archives">
-                      <button className="px-8 sm:px-12 py-4 sm:py-6 bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 text-sm sm:text-base font-bold rounded-lg transition-all duration-500 ease-in-out flex items-center gap-2 sm:gap-3 relative overflow-hidden group">
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                        <span className="relative z-10 flex items-center gap-2 sm:gap-3">
-                          <svg
-                            width="18"
-                            height="18"
-                            viewBox="0 0 256 256"
-                            fill="currentColor"
-                            className="sm:w-5 sm:h-5"
-                          >
-                            <path d="M104,60H52A16,16,0,0,0,36,76v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V76A16,16,0,0,0,104,60Zm0,64H52V76h52v48Zm100-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V76A16,16,0,0,0,204,60Zm0,64H152V76h52v48Zm-100,32H52a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V172A16,16,0,0,0,104,156Zm0,64H52V172h52v48Zm100-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h52a16,16,0,0,0,16-16V172A16,16,0,0,0,204,156Zm0,64H152V172h52v48Z" />
-                          </svg>
-                          Browse Archives
-                        </span>
-                      </button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </section>
 
             {/* Footer Section */}
             <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">

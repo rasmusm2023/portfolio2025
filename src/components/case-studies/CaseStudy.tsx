@@ -159,8 +159,8 @@ const CaseStudy = ({
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const handleCaseStudiesClick = () => {
-    // Navigate to Projects page instead of home
-    router.push("/projects");
+    // Navigate to home page
+    router.push("/");
   };
 
   const nextImage = () => {
@@ -500,7 +500,8 @@ const CaseStudy = ({
       const problemTop = problemRef.current?.offsetTop || 0;
       const processTop = processRef.current?.offsetTop || 0;
       const challengeTop = challengeRef.current?.offsetTop || 0;
-      const goalsAndConstraintsTop = goalsAndConstraintsRef.current?.offsetTop || 0;
+      const goalsAndConstraintsTop =
+        goalsAndConstraintsRef.current?.offsetTop || 0;
       const solutionTop = solutionRef.current?.offsetTop || 0;
       const craftTop = craftRef.current?.offsetTop || 0;
       const designExplorationsTop =
@@ -524,7 +525,8 @@ const CaseStudy = ({
       const challengeBottom =
         challengeTop + (challengeRef.current?.offsetHeight || 0);
       const goalsAndConstraintsBottom =
-        goalsAndConstraintsTop + (goalsAndConstraintsRef.current?.offsetHeight || 0);
+        goalsAndConstraintsTop +
+        (goalsAndConstraintsRef.current?.offsetHeight || 0);
       const solutionBottom =
         solutionTop + (solutionRef.current?.offsetHeight || 0);
       const craftBottom = craftTop + (craftRef.current?.offsetHeight || 0);
@@ -549,10 +551,7 @@ const CaseStudy = ({
         activeSectionId = "summary";
       } else if (scrollCenter >= aboutTop && scrollCenter < aboutBottom) {
         activeSectionId = "about";
-      } else if (
-        scrollCenter >= problemTop &&
-        scrollCenter < problemBottom
-      ) {
+      } else if (scrollCenter >= problemTop && scrollCenter < problemBottom) {
         activeSectionId = "problem";
       } else if (
         scrollCenter >= businessObjectiveTop &&
@@ -956,7 +955,7 @@ const CaseStudy = ({
           <Summary description={description} />
 
           {/* About Section - Only render if "about" is in sections */}
-          {sections.some(section => section.sections?.includes("about")) && (
+          {sections.some((section) => section.sections?.includes("about")) && (
             <About
               aboutText={aboutText}
               appIconPath={appIconPath}
@@ -966,16 +965,26 @@ const CaseStudy = ({
           )}
 
           {/* Business Objective or Problem Section */}
-          {sections.some(section => section.sections?.includes("problem")) ? (
+          {sections.some((section) => section.sections?.includes("problem")) ? (
             <Problem problemText={problemText} problemRef={problemRef} />
-          ) : sections.some(section => section.sections?.includes("business-objective")) ? (
-            <BusinessObjective businessObjectivesText={businessObjectivesText} />
+          ) : sections.some((section) =>
+              section.sections?.includes("business-objective")
+            ) ? (
+            <BusinessObjective
+              businessObjectivesText={businessObjectivesText}
+            />
           ) : null}
 
           {/* The challenge or Goals & Constraints Section */}
-          {sections.some(section => section.sections?.includes("goals-and-constraints")) ? (
-            <GoalsAndConstraints goalsAndConstraintsRef={goalsAndConstraintsRef} />
-          ) : sections.some(section => section.sections?.includes("challenge")) ? (
+          {sections.some((section) =>
+            section.sections?.includes("goals-and-constraints")
+          ) ? (
+            <GoalsAndConstraints
+              goalsAndConstraintsRef={goalsAndConstraintsRef}
+            />
+          ) : sections.some((section) =>
+              section.sections?.includes("challenge")
+            ) ? (
             <Challenge challenge="AI-powered job application platform" />
           ) : null}
 
