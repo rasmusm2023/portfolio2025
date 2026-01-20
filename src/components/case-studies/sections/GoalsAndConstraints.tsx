@@ -2,7 +2,7 @@ import React from "react";
 import { useTheme } from "@/contexts/ThemeContext";
 
 interface GoalsAndConstraintsProps {
-  goalsAndConstraintsRef?: React.RefObject<HTMLElement>;
+  goalsAndConstraintsRef?: React.RefObject<HTMLElement | null>;
 }
 
 const GoalsAndConstraints: React.FC<GoalsAndConstraintsProps> = ({
