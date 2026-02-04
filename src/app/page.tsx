@@ -13,7 +13,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
 import { useTheme } from "@/contexts/ThemeContext";
-import { MapPin } from "@phosphor-icons/react";
 
 // Import images for Identity Carousel
 import MellbystrandImage from "@/../public/assets/images/16bit/mellbystrand.webp";
@@ -266,10 +265,10 @@ export default function Home() {
               }}
             />
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 relative z-10">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-                {/* Text Card - Hero Content (Top Left) */}
+              <div className="w-full min-h-[70vh] md:min-h-[80vh]">
+                {/* Info Card - Hero Content (full width, spans entire hero) */}
                 <div
-                  className="border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group topography-bg h-[450px] sm:h-[500px] md:h-[550px]"
+                  className="border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl px-4 py-4 sm:px-5 sm:py-5 md:px-6 md:py-6 flex flex-col justify-center hover:border-neutral-80/60 transition-all duration-500 relative group topography-bg w-full min-h-[70vh] md:min-h-[80vh]"
                   style={{
                     transform: `scale(${getBoxScale("hero-text")})`,
                     backgroundColor: isDark ? "#060608" : "#ffffff",
@@ -348,556 +347,279 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
-                {/* Project Card 1 - Emplojd */}
-                {caseStudies[0] && (
-                  <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
-                    style={{
-                      transform: `scale(${getBoxScale(
-                        `project-${caseStudies[0].id}`
-                      )})`,
-                      backgroundColor: isDark ? "#060608" : "#ffffff",
-                    }}
-                    onMouseEnter={() => {
-                      handleMouseEnter(caseStudies[0].id);
-                      setHoveredBox(`project-${caseStudies[0].id}`);
-                    }}
-                    onMouseLeave={() => {
-                      handleMouseLeave();
-                      setHoveredBox(null);
-                    }}
-                    data-cursor-target="case-study"
-                  >
-                    <div className="w-full flex-1 overflow-hidden relative">
-                      <Image
-                        src={caseStudies[0].image}
-                        alt={caseStudies[0].alt}
-                        width={400}
-                        height={300}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute top-2 right-2 flex items-center gap-2">
-                        {caseStudies[0].id === "emplojd" && (
-                          <DatePill year="2024" isDark={isDark} />
-                        )}
-                        <div className="bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                          Case study
-                        </div>
-                      </div>
-                      {caseStudies[0].id === "emplojd" && (
-                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="UX/UI design" isDark={isDark} />
-                          <HollowPill text="Mobile" isDark={isDark} />
-                          <HollowPill text="AI" isDark={isDark} />
-                        </div>
-                      )}
-                    </div>
-                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-1">
-                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
-                            {caseStudies[0].title}
-                          </h3>
-                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
-                            {caseStudies[0].subtitle}
-                          </span>
-                        </div>
-                        <div
-                          ref={(el) => {
-                            buttonRefs.current[caseStudies[0].id] = el;
-                          }}
-                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
-                        >
-                          <svg
-                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
-                        {caseStudies[0].category}
-                      </div>
-                    </div>
-                    <Link
-                      href={caseStudies[0].link}
-                      className="absolute inset-0 z-20"
-                      aria-label={`View ${caseStudies[0].title} case study`}
-                      data-cursor-target="case-study"
-                    />
-                  </div>
-                )}
-
-                {/* Project Card 2 - Noted */}
-                {caseStudies[1] && (
-                  <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
-                    style={{
-                      transform: `scale(${getBoxScale(
-                        `project-${caseStudies[1].id}`
-                      )})`,
-                      backgroundColor: isDark ? "#060608" : "#ffffff",
-                    }}
-                    onMouseEnter={() => {
-                      handleMouseEnter(caseStudies[1].id);
-                      setHoveredBox(`project-${caseStudies[1].id}`);
-                    }}
-                    onMouseLeave={() => {
-                      handleMouseLeave();
-                      setHoveredBox(null);
-                    }}
-                    data-cursor-target="case-study"
-                  >
-                    <div className="w-full flex-1 overflow-hidden relative">
-                      <Image
-                        src={caseStudies[1].image}
-                        alt={caseStudies[1].alt}
-                        width={400}
-                        height={300}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute top-2 right-2 flex items-center gap-2">
-                        {caseStudies[1].id === "noted" && (
-                          <DatePill year="2025" isDark={isDark} />
-                        )}
-                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                          Coming soon
-                        </div>
-                      </div>
-                      {caseStudies[1].id === "noted" && (
-                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="Product design" isDark={isDark} />
-                          <HollowPill text="Multiple devices" isDark={isDark} />
-                          <HollowPill text="Task management" isDark={isDark} />
-                        </div>
-                      )}
-                    </div>
-                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-1">
-                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
-                            {caseStudies[1].title}
-                          </h3>
-                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
-                            {caseStudies[1].subtitle}
-                          </span>
-                        </div>
-                        <div
-                          ref={(el) => {
-                            buttonRefs.current[caseStudies[1].id] = el;
-                          }}
-                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
-                        >
-                          <svg
-                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
-                        {caseStudies[1].category}
-                      </div>
-                    </div>
-                    <Link
-                      href={caseStudies[1].link}
-                      className="absolute inset-0 z-20"
-                      aria-label={`View ${caseStudies[1].title} case study`}
-                      data-cursor-target="case-study"
-                    />
-                  </div>
-                )}
-
-                {/* Project Card 3 - Zmartrest AI */}
-                {caseStudies[2] && (
-                  <div
-                    className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
-                    style={{
-                      transform: `scale(${getBoxScale(
-                        `project-${caseStudies[2].id}`
-                      )})`,
-                      backgroundColor: isDark ? "#060608" : "#ffffff",
-                    }}
-                    onMouseEnter={() => {
-                      handleMouseEnter(caseStudies[2].id);
-                      setHoveredBox(`project-${caseStudies[2].id}`);
-                    }}
-                    onMouseLeave={() => {
-                      handleMouseLeave();
-                      setHoveredBox(null);
-                    }}
-                    data-cursor-target="case-study"
-                  >
-                    <div className="w-full flex-1 overflow-hidden relative">
-                      <Image
-                        src={caseStudies[2].image}
-                        alt={caseStudies[2].alt}
-                        width={400}
-                        height={300}
-                        className="absolute inset-0 w-full h-full object-cover"
-                      />
-                      <div className="absolute top-2 right-2 flex items-center gap-2">
-                        {caseStudies[2].id === "zmartrest-ai" && (
-                          <DatePill year="2025" isDark={isDark} />
-                        )}
-                        <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
-                          Coming soon
-                        </div>
-                      </div>
-                      {caseStudies[2].id === "zmartrest-ai" && (
-                        <div className="absolute top-2 left-2 flex flex-wrap gap-1">
-                          <HollowPill text="UX/UI design" isDark={isDark} />
-                          <HollowPill text="Mobile" isDark={isDark} />
-                          <HollowPill text="Health-tech" isDark={isDark} />
-                        </div>
-                      )}
-                    </div>
-                    <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-1">
-                          <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
-                            {caseStudies[2].title}
-                          </h3>
-                          <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
-                            {caseStudies[2].subtitle}
-                          </span>
-                        </div>
-                        <div
-                          ref={(el) => {
-                            buttonRefs.current[caseStudies[2].id] = el;
-                          }}
-                          className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
-                        >
-                          <svg
-                            className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M9 5l7 7-7 7"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                      <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
-                        {caseStudies[2].category}
-                      </div>
-                    </div>
-                    <Link
-                      href={caseStudies[2].link}
-                      className="absolute inset-0 z-20"
-                      aria-label={`View ${caseStudies[2].title} case study`}
-                      data-cursor-target="case-study"
-                    />
-                  </div>
-                )}
               </div>
             </div>
           </section>
+
+          {/* Case studies below the fold - separate grid */}
+          <section className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
+              {/* Emplojd */}
+              {caseStudies[0] && (
+                <div
+                  className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                  style={{
+                    transform: `scale(${getBoxScale(
+                      `project-${caseStudies[0].id}`
+                    )})`,
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
+                  }}
+                  onMouseEnter={() => {
+                    handleMouseEnter(caseStudies[0].id);
+                    setHoveredBox(`project-${caseStudies[0].id}`);
+                  }}
+                  onMouseLeave={() => {
+                    handleMouseLeave();
+                    setHoveredBox(null);
+                  }}
+                  data-cursor-target="case-study"
+                >
+                  <div className="w-full flex-1 overflow-hidden relative">
+                    <Image
+                      src={caseStudies[0].image}
+                      alt={caseStudies[0].alt}
+                      width={400}
+                      height={300}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex items-center gap-2">
+                      {caseStudies[0].id === "emplojd" && (
+                        <DatePill year="2024" isDark={isDark} />
+                      )}
+                      <div className="bg-white/90 text-neutral-800 px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                        Case study
+                      </div>
+                    </div>
+                    {caseStudies[0].id === "emplojd" && (
+                      <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                        <HollowPill text="UX/UI design" isDark={isDark} />
+                        <HollowPill text="Mobile" isDark={isDark} />
+                        <HollowPill text="AI" isDark={isDark} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-1">
+                        <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                          {caseStudies[0].title}
+                        </h3>
+                        <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                          {caseStudies[0].subtitle}
+                        </span>
+                      </div>
+                      <div
+                        ref={(el) => {
+                          buttonRefs.current[caseStudies[0].id] = el;
+                        }}
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                      >
+                        <svg
+                          className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                      {caseStudies[0].category}
+                    </div>
+                  </div>
+                  <Link
+                    href={caseStudies[0].link}
+                    className="absolute inset-0 z-20"
+                    aria-label={`View ${caseStudies[0].title} case study`}
+                    data-cursor-target="case-study"
+                  />
+                </div>
+              )}
+
+              {/* Noted */}
+              {caseStudies[1] && (
+                <div
+                  className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                  style={{
+                    transform: `scale(${getBoxScale(
+                      `project-${caseStudies[1].id}`
+                    )})`,
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
+                  }}
+                  onMouseEnter={() => {
+                    handleMouseEnter(caseStudies[1].id);
+                    setHoveredBox(`project-${caseStudies[1].id}`);
+                  }}
+                  onMouseLeave={() => {
+                    handleMouseLeave();
+                    setHoveredBox(null);
+                  }}
+                  data-cursor-target="case-study"
+                >
+                  <div className="w-full flex-1 overflow-hidden relative">
+                    <Image
+                      src={caseStudies[1].image}
+                      alt={caseStudies[1].alt}
+                      width={400}
+                      height={300}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex items-center gap-2">
+                      {caseStudies[1].id === "noted" && (
+                        <DatePill year="2025" isDark={isDark} />
+                      )}
+                      <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                        Coming soon
+                      </div>
+                    </div>
+                    {caseStudies[1].id === "noted" && (
+                      <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                        <HollowPill text="Product design" isDark={isDark} />
+                        <HollowPill text="Multiple devices" isDark={isDark} />
+                        <HollowPill text="Task management" isDark={isDark} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-1">
+                        <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                          {caseStudies[1].title}
+                        </h3>
+                        <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                          {caseStudies[1].subtitle}
+                        </span>
+                      </div>
+                      <div
+                        ref={(el) => {
+                          buttonRefs.current[caseStudies[1].id] = el;
+                        }}
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                      >
+                        <svg
+                          className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                      {caseStudies[1].category}
+                    </div>
+                  </div>
+                  <Link
+                    href={caseStudies[1].link}
+                    className="absolute inset-0 z-20"
+                    aria-label={`View ${caseStudies[1].title} case study`}
+                    data-cursor-target="case-study"
+                  />
+                </div>
+              )}
+
+              {/* Zmartrest AI */}
+              {caseStudies[2] && (
+                <div
+                  className="group relative transition-all duration-300 overflow-hidden cursor-pointer border-2 border-neutral-80/40 rounded-xl sm:rounded-2xl hover:border-purple-500/60 case-study-card h-[450px] sm:h-[500px] md:h-[550px] flex flex-col"
+                  style={{
+                    transform: `scale(${getBoxScale(
+                      `project-${caseStudies[2].id}`
+                    )})`,
+                    backgroundColor: isDark ? "#060608" : "#ffffff",
+                  }}
+                  onMouseEnter={() => {
+                    handleMouseEnter(caseStudies[2].id);
+                    setHoveredBox(`project-${caseStudies[2].id}`);
+                  }}
+                  onMouseLeave={() => {
+                    handleMouseLeave();
+                    setHoveredBox(null);
+                  }}
+                  data-cursor-target="case-study"
+                >
+                  <div className="w-full flex-1 overflow-hidden relative">
+                    <Image
+                      src={caseStudies[2].image}
+                      alt={caseStudies[2].alt}
+                      width={400}
+                      height={300}
+                      className="absolute inset-0 w-full h-full object-cover"
+                    />
+                    <div className="absolute top-2 right-2 flex items-center gap-2">
+                      {caseStudies[2].id === "zmartrest-ai" && (
+                        <DatePill year="2025" isDark={isDark} />
+                      )}
+                      <div className="bg-gradient-to-r from-purple-500 to-violet-500 text-white px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-semibold shadow-lg">
+                        Coming soon
+                      </div>
+                    </div>
+                    {caseStudies[2].id === "zmartrest-ai" && (
+                      <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                        <HollowPill text="UX/UI design" isDark={isDark} />
+                        <HollowPill text="Mobile" isDark={isDark} />
+                        <HollowPill text="Health-tech" isDark={isDark} />
+                      </div>
+                    )}
+                  </div>
+                  <div className="px-4 py-2 sm:px-5 sm:py-2.5 pb-4 sm:pb-5 md:pb-6 flex-shrink-0">
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center gap-1">
+                        <h3 className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base md:text-lg font-semibold font-hanken">
+                          {caseStudies[2].title}
+                        </h3>
+                        <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                          {caseStudies[2].subtitle}
+                        </span>
+                      </div>
+                      <div
+                        ref={(el) => {
+                          buttonRefs.current[caseStudies[2].id] = el;
+                        }}
+                        className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-neutral-100/5 dark:bg-neutral-0/5 border border-neutral-100/20 dark:border-neutral-0/20 group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-purple-600 group-hover:border-purple-500/40 flex items-center justify-center flex-shrink-0"
+                      >
+                        <svg
+                          className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 text-neutral-100/60 dark:text-neutral-0/60 group-hover:text-white transition-colors duration-300"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                      {caseStudies[2].category}
+                    </div>
+                  </div>
+                  <Link
+                    href={caseStudies[2].link}
+                    className="absolute inset-0 z-20"
+                    aria-label={`View ${caseStudies[2].title} case study`}
+                    data-cursor-target="case-study"
+                  />
+                </div>
+              )}
+            </div>
+          </section>
         </main>
-
-        {/* Experience Section */}
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-            <div className="mb-12 sm:mb-16 md:mb-20">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
-                  01
-                </span>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-                  <span
-                    className="bg-clip-text text-transparent font-hanken"
-                    style={{
-                      backgroundImage: isDark
-                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                    }}
-                  >
-                    Experience
-                  </span>
-                </h2>
-              </div>
-            </div>
-
-            {/* Experience Timeline */}
-            <div className="space-y-12">
-              {/* Experience Entry 1 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    JAN, 2025 - MAY, 2025
-                  </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer Intern, Zmartrest AI
-                  </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Spearheaded new app features and data visualizations to
-                    tackle usability pain points. Engineered a streak mechanic
-                    that boosted daily activity, while mapping user journeys and
-                    shaping a leader portal MVP that drove a 68% increase in
-                    engagement by transforming insights into actionable
-                    guidance.
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Company Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <Image
-                      src={
-                        isDark
-                          ? "/assets/logos/Experience/zmartrest-logo-dark-mode.svg"
-                          : "/assets/logos/Experience/zmartrest-logo-light-mode.svg"
-                      }
-                      alt="Zmartrest AI Logo"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Entry 2 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    NOV, 2024 - JAN, 2025
-                  </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer Intern, Xbrandify
-                  </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Thrived in a fast-paced travel startup, crafting tailored
-                    landing pages and demo sites that reflected diverse customer
-                    brands. Initiated the company's first style guide to unify
-                    design efforts, while energizing sales and investor outreach
-                    through impactful pitch decks, logos, and social campaigns.
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Company Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <Image
-                      src={
-                        isDark
-                          ? "/assets/logos/Experience/xbrandify-logo-dark-mode.svg"
-                          : "/assets/logos/Experience/xbrandify-logo-light-mode.svg"
-                      }
-                      alt="Xbrandify Logo"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Entry 3 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    MAY, 2025
-                  </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Product Designer & Developer, Noted
-                  </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Championed a solo passion project by conceiving, designing,
-                    and coding a productivity web app. Empowered individuals to
-                    streamline tasks and capture ideas seamlessly across desktop
-                    and mobile. Forged a scalable design system that balanced
-                    simplicity, flexibility, and daily usability.
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Company Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <Image
-                      src={
-                        isDark
-                          ? "/assets/logos/Experience/noted-logo-dark-mode.svg"
-                          : "/assets/logos/Experience/noted-logo-light-mode.svg"
-                      }
-                      alt="Noted Logo"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Experience Entry 4 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <div className="text-base font-medium text-neutral-60 dark:text-neutral-40 mb-3">
-                    SEP, 2024 - NOV, 2024
-                  </div>
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer, Fokus
-                  </h3>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Drove a collaborative design process to develop a study-tech
-                    app prototype. Defined goals and KPIs, mapped user journeys,
-                    and facilitated workshops on ethics and ideation. Iterative
-                    usability testing refined the final solution, supported by
-                    empathy mapping, flowcharts, and structured outcomes.
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Company Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <Image
-                      src={
-                        isDark
-                          ? "/assets/logos/Experience/fokus-logo-dark-mode.svg"
-                          : "/assets/logos/Experience/fokus-logo-light-mode.svg"
-                      }
-                      alt="Fokus Logo"
-                      width={192}
-                      height={192}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Education Section */}
-        <section className="py-16 sm:py-20 md:py-24 lg:py-32">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-            <div className="mb-12 sm:mb-16 md:mb-20">
-              <div className="flex items-center gap-4">
-                <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
-                  02
-                </span>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-                  <span
-                    className="bg-clip-text text-transparent font-hanken"
-                    style={{
-                      backgroundImage: isDark
-                        ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                        : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                    }}
-                  >
-                    Education
-                  </span>
-                </h2>
-              </div>
-            </div>
-
-            {/* Education Timeline */}
-            <div className="space-y-12">
-              {/* Education Entry 1 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    UX/UI Designer with Frontend – Diploma
-                  </h3>
-                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
-                    <MapPin
-                      size={16}
-                      weight="regular"
-                      className="flex-shrink-0"
-                    />
-                    Chas Academy, Stockholm, Sweden
-                  </p>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Specialized in UX/UI design and frontend development, diving
-                    deep into design thinking, accessibility, research
-                    methodologies, user interviews, and design systems. Built
-                    real-world projects from concept to launch, combining
-                    creativity with technical expertise.
-                  </p>
-                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
-                    Relevant Coursework: UX/UI design, Web design, Frontend
-                    development, Design systems, UX research, WCAG
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Institution Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
-                      <Image
-                        src="/assets/logos/Education/chas-academy-emblem.png"
-                        alt="Chas Academy"
-                        width={192}
-                        height={192}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Education Entry 2 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-start gap-6 lg:gap-8">
-                <div className="flex-1">
-                  <h3 className="text-3xl font-bold text-neutral-80 dark:text-neutral-20 mb-4 font-instrument-serif">
-                    Digital Accessibility and Inclusive Design – Diploma
-                  </h3>
-                  <p className="text-base font-medium text-neutral-50 dark:text-neutral-50 mb-2 flex items-center gap-2">
-                    <MapPin
-                      size={16}
-                      weight="regular"
-                      className="flex-shrink-0"
-                    />
-                    Axess Labs, Stockholm, Sweden
-                  </p>
-                  <p className="text-base text-neutral-70 dark:text-neutral-30 leading-relaxed max-w-[70ch]">
-                    Focused on creating inclusive digital experiences through
-                    comprehensive understanding of accessibility principles,
-                    assistive technologies, and WCAG guidelines. Learned to
-                    conduct accessibility audits and design with diverse user
-                    needs in mind.
-                  </p>
-                  <p className="text-sm text-neutral-60 dark:text-neutral-40 mt-3 italic">
-                    Relevant Coursework: Inclusive design principles, Assistive
-                    technology, Accessibility auditing, WCAG, Accessibility
-                    guidelines, User needs
-                  </p>
-                </div>
-                <div className="lg:ml-2 flex-shrink-0 flex items-center gap-6">
-                  {/* Institution Logo */}
-                  <div className="w-48 h-48 flex items-center justify-center">
-                    <div className="w-full h-full bg-neutral-100/10 dark:bg-neutral-0/10 border border-neutral-100/20 dark:border-neutral-0/20 rounded-xl flex items-center justify-center p-4">
-                      <Image
-                        src="/assets/logos/Education/axesslab_social.png"
-                        alt="Axess Labs"
-                        width={192}
-                        height={192}
-                        className="w-full h-full object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* About Me Section */}
         <section id="about-me" className="py-16 sm:py-20 md:py-24 lg:py-32">
@@ -905,7 +627,7 @@ export default function Home() {
             <div className="mb-12 sm:mb-16 md:mb-20">
               <div className="flex items-center gap-4">
                 <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
-                  03
+                  01
                 </span>
                 <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
                   <span
