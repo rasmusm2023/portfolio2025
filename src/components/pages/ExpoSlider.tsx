@@ -266,12 +266,12 @@ export default function ExpoSlider({ images, onImageClick }: ExpoSliderProps) {
                   }}
                   onClick={() => {
                     if (!isDragging) {
-                      // If clicking a side image, navigate to it
-                      if (index !== currentIndex) {
-                        goToSlide(index);
-                      } else if (onImageClick) {
-                        // If clicking the center image, open lightbox
+                      if (onImageClick) {
+                        // Click any card: open (case study, lightbox, etc.)
                         onImageClick(index);
+                      } else if (index !== currentIndex) {
+                        // No handler: clicking side card just centers it
+                        goToSlide(index);
                       }
                     }
                   }}

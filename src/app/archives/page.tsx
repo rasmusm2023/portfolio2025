@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import CustomLightbox from "@/components/ui/Lightbox";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import Footer from "@/components/layout/Footer";
@@ -9,6 +10,28 @@ import CircularScrollText from "@/components/ui/CircularScrollText";
 import { useTheme } from "@/contexts/ThemeContext";
 import { gsap } from "gsap";
 import ExpoSlider from "@/components/pages/ExpoSlider";
+
+// Case studies for the archives carousel (section 1)
+const caseStudiesForArchives = [
+  {
+    src: "/assets/case-study-assets/emplojd/Projects-Case-Card-Thumbnail-Emplojd.webp",
+    alt: "Emplojd SaaS Platform Case Study",
+    title: "Emplojd",
+    link: "/case-studies/emplojd",
+  },
+  {
+    src: "/assets/case-study-assets/noted/Projects-Case-Card-Thumbnail-Noted.webp",
+    alt: "Noted App",
+    title: "Noted",
+    link: "/case-studies/noted",
+  },
+  {
+    src: "/assets/case-study-assets/zmartrest-ai/Projects-Case-Card-Thumbnail-Zmartrest-AI.webp",
+    alt: "Zmartrest AI Platform",
+    title: "Zmartrest AI",
+    link: "/case-studies/zmartrest-ai",
+  },
+];
 
 // Gallery data - organized by category
 const appsAndWebsitesImages = [
@@ -104,9 +127,15 @@ const galleryImages = [
 
 export default function ArchivesPage() {
   const { isDark } = useTheme();
+  const router = useRouter();
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [isCircularTextVisible, setIsCircularTextVisible] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleCaseStudyClick = (index: number) => {
+    const item = caseStudiesForArchives[index];
+    if (item?.link) router.push(item.link);
+  };
 
   // Update page title
   useEffect(() => {
@@ -290,12 +319,39 @@ export default function ArchivesPage() {
           {/* Expo Sliders */}
           <section className="py-8 sm:py-12 lg:py-16">
             <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-              {/* Expo Slider - Apps & Websites */}
+              {/* Expo Slider - Case Studies (section 1) */}
               <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
                 <div className="mb-0">
                   <div className="flex items-center gap-4">
                     <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
                       1
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                      <span
+                        className="bg-clip-text text-transparent font-hanken"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
+                        Case Studies
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+                <ExpoSlider
+                  images={caseStudiesForArchives}
+                  onImageClick={handleCaseStudyClick}
+                />
+              </div>
+
+              {/* Expo Slider - Apps & Websites (section 2) */}
+              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+                <div className="mb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                      2
                     </span>
                     <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
                       <span
@@ -313,35 +369,11 @@ export default function ArchivesPage() {
                 </div>
                 <ExpoSlider
                   images={appsAndWebsitesImages}
-                  onImageClick={openLightbox}
+                  onImageClick={(index) => openLightbox(index)}
                 />
               </div>
 
-              {/* Expo Slider - Games */}
-              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
-                <div className="mb-0">
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
-                      2
-                    </span>
-                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
-                      <span
-                        className="bg-clip-text text-transparent font-hanken"
-                        style={{
-                          backgroundImage: isDark
-                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
-                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
-                        }}
-                      >
-                        Games
-                      </span>
-                    </h2>
-                  </div>
-                </div>
-                <ExpoSlider images={gamesImages} onImageClick={openLightbox} />
-              </div>
-
-              {/* Expo Slider - Prints */}
+              {/* Expo Slider - Games (section 3) */}
               <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
                 <div className="mb-0">
                   <div className="flex items-center gap-4">
@@ -357,12 +389,48 @@ export default function ArchivesPage() {
                             : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
                         }}
                       >
+                        Games
+                      </span>
+                    </h2>
+                  </div>
+                </div>
+                <ExpoSlider
+                  images={gamesImages}
+                  onImageClick={(index) =>
+                    openLightbox(appsAndWebsitesImages.length + index)
+                  }
+                />
+              </div>
+
+              {/* Expo Slider - Prints (section 4) */}
+              <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+                <div className="mb-0">
+                  <div className="flex items-center gap-4">
+                    <span className="text-2xl sm:text-3xl font-regular text-neutral-60 dark:text-neutral-40">
+                      4
+                    </span>
+                    <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
+                      <span
+                        className="bg-clip-text text-transparent font-hanken"
+                        style={{
+                          backgroundImage: isDark
+                            ? "linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #9ca3af 100%)"
+                            : "linear-gradient(135deg, #1f2937 0%, #374151 50%, #6b7280 100%)",
+                        }}
+                      >
                         Prints
                       </span>
                     </h2>
                   </div>
                 </div>
-                <ExpoSlider images={printsImages} onImageClick={openLightbox} />
+                <ExpoSlider
+                  images={printsImages}
+                  onImageClick={(index) =>
+                    openLightbox(
+                      appsAndWebsitesImages.length + gamesImages.length + index
+                    )
+                  }
+                />
               </div>
             </div>
           </section>
