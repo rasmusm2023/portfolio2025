@@ -279,7 +279,7 @@ const Header = () => {
       {/* Background Layer */}
       <div
         className={`absolute inset-0 transition-all duration-1000 mobile-header-bg xl:bg-transparent ${
-          showBackground ? "xl:bg-white/80 xl:dark:bg-[#060608]/80" : ""
+          showBackground ? "xl:bg-white/80 xl:dark:bg-[#0a0a0a]/80" : ""
         }`}
       />
 

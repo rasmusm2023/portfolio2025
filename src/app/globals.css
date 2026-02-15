@@ -1495,13 +1495,13 @@ body.mobile-menu-open {
   height: 100% !important;
 }
 
-/* Mobile header background */
+/* Mobile header background - matches page background (white / #0a0a0a) */
 .mobile-header-bg {
   background-color: #ffffff;
 }
 
 .dark .mobile-header-bg {
-  background-color: #060608;
+  background-color: #0a0a0a;
 }
 
 /* Scrolling animation for keywords banner */
