@@ -12,7 +12,8 @@ module.exports = {
         xs: "500px",
       },
       fontFamily: {
-        sans: ["var(--font-nunito-sans)"],
+        sans: ["var(--font-figtree)", "sans-serif"],
+        figtree: ["var(--font-figtree)", "sans-serif"],
         hanken: ["var(--font-hanken-grotesk)", "sans-serif"],
         orbitron: ["var(--font-orbitron)", "monospace"],
         audiowide: ["var(--font-audiowide)", "cursive"],

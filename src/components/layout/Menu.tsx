@@ -153,7 +153,7 @@ const Menu = () => {
       <ul ref={menuRef} className="flex space-x-0 py-2 px-0 relative">
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-neutral-90 dark:bg-neutral-0 rounded-lg -z-10"
+          className="absolute h-[calc(100%+4px)] bg-neutral-90 dark:bg-neutral-0 rounded-full -z-10"
           style={{
             top: "-2px",
             left: "0px",

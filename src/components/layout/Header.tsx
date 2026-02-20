@@ -285,7 +285,7 @@ const Header = () => {
 
       {/* Content Layer */}
       <div
-        className={`relative z-10 px-4 sm:px-6 xl:px-12 h-full ${hanken.className}`}
+        className={`relative z-10 px-4 sm:px-6 xl:px-16 h-full ${hanken.className}`}
       >
         <div className="flex justify-between items-center h-full">
           {/* Logo */}

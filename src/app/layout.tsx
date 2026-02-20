@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import {
+  figtree,
   hankenGrotesk,
   orbitron,
   audiowide,
@@ -131,7 +132,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
+        className={`${figtree.className} ${figtree.variable} ${hankenGrotesk.variable} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
       >
         <ErrorBoundary>
           <ThemeProvider>
