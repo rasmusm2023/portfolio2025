@@ -17,7 +17,9 @@ import PerformanceMonitor from "@/components/performance/PerformanceMonitor";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { NavbarProvider } from "@/contexts/NavbarContext";
 import { CaseStudyProvider } from "@/contexts/CaseStudyContext";
+import { PreviewModalProvider } from "@/contexts/PreviewModalContext";
 import FloatingNavbar from "@/components/layout/FloatingNavbar";
+import PreviewModalGate from "@/components/work/PreviewModalGate";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 export const metadata: Metadata = {
@@ -138,12 +140,15 @@ export default function RootLayout({
           <ThemeProvider>
             <NavbarProvider>
               <CaseStudyProvider>
-                <PerformanceOptimizer />
-                <PerformanceMonitor />
-                <Header />
-                {/* <CustomCursor /> */}
-                <ClientLayout>{children}</ClientLayout>
-                <FloatingNavbar />
+                <PreviewModalProvider>
+                  <PerformanceOptimizer />
+                  <PerformanceMonitor />
+                  <Header />
+                  {/* <CustomCursor /> */}
+                  <ClientLayout>{children}</ClientLayout>
+                  <FloatingNavbar />
+                  <PreviewModalGate />
+                </PreviewModalProvider>
               </CaseStudyProvider>
             </NavbarProvider>
           </ThemeProvider>

@@ -51,8 +51,8 @@ export default function ClientLayout({
   }, [pathname]);
 
   return (
-    <div className="relative w-full h-full">
-      <div ref={contentRef} className="relative w-full h-full">
+    <div className="relative w-full min-h-full">
+      <div ref={contentRef} className="relative w-full min-h-full">
         {children}
       </div>
     </div>

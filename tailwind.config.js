@@ -52,11 +52,38 @@ module.exports = {
       },
       animation: {
         "fade-in": "fadeIn 0.8s ease-out",
+        "preview-overlay": "previewOverlayIn 0.3s ease-out forwards",
+        "preview-content": "previewContentIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards",
+        "preview-overlay-out": "previewOverlayOut 0.25s ease-in forwards",
+        "preview-content-out": "previewContentOut 0.25s ease-in forwards",
+        "preview-expand": "previewExpandVerticalThenHorizontal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards",
       },
       keyframes: {
         fadeIn: {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        previewOverlayIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        previewContentIn: {
+          "0%": { opacity: "0", transform: "scale(0.96)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
+        previewOverlayOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        previewContentOut: {
+          "0%": { opacity: "1", transform: "scale(1)" },
+          "100%": { opacity: "0", transform: "scale(0.96)" },
+        },
+        /* Expand: first vertical (up/down), then horizontal — clearly visible growth */
+        previewExpandVerticalThenHorizontal: {
+          "0%": { transform: "scale(1)" },
+          "45%": { transform: "scaleX(1) scaleY(1.6)" },
+          "100%": { transform: "scale(1.85)" },
         },
       },
     },

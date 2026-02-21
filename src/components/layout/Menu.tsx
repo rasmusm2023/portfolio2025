@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
 import { useTheme } from "@/contexts/ThemeContext";
+import { figtree } from "@/app/fonts";
 
 interface MenuItem {
   label: string;
@@ -18,14 +19,13 @@ const Menu = () => {
   const pillRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLUListElement>(null);
   const [activeSection, setActiveSection] = useState<string>("home");
-  const [activeHash, setActiveHash] = useState<string>("");
+  const [activeHref, setActiveHref] = useState<string>("/");
   const isInitialized = useRef(false);
 
   const menuItems = useMemo<MenuItem[]>(
     () => [
-      { label: "Home", href: "/" },
-      { label: "About", href: "/#about-me" },
-      { label: "Contact", href: "/#contact" },
+      { label: "Work", href: "/" },
+      { label: "About", href: "/about" },
       { label: "Archives", href: "/archives" },
     ],
     []
@@ -56,66 +56,15 @@ const Menu = () => {
       : withOpacity(colors.neutral[100], 0.4);
   };
 
-  // Scroll detection for sections on home-v2 page
   useEffect(() => {
-    if (pathname !== "/") {
-      setActiveHash("");
-      return;
-    }
-
-    const aboutSection = document.getElementById("about-me");
-    const contactSection = document.getElementById("contact");
-
-    if (!aboutSection || !contactSection) return;
-
-    const checkActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% from top of viewport
-      const aboutTop = aboutSection.offsetTop;
-      const contactTop = contactSection.offsetTop;
-
-      // Determine which section is currently in view
-      if (scrollPosition >= contactTop) {
-        setActiveHash("contact");
-      } else if (scrollPosition >= aboutTop) {
-        setActiveHash("about-me");
-      } else {
-        setActiveHash(""); // Home section
-      }
-    };
-
-    // Check initial position
-    setTimeout(checkActiveSection, 100);
-
-    // Listen to scroll events
-    window.addEventListener("scroll", checkActiveSection, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", checkActiveSection);
-    };
-  }, [pathname]);
-
-  useEffect(() => {
-    // Set active section based on current pathname
+    // Set active section and href based on pathname
     const currentPath = pathname === "/" ? "home" : pathname.substring(1);
     setActiveSection(currentPath);
-
-    // Determine which menu item should be active
-    let activeHref = "";
-    
-    if (pathname === "/") {
-      if (activeHash === "about-me") {
-        activeHref = "/#about-me";
-      } else if (activeHash === "contact") {
-        activeHref = "/#contact";
-      } else {
-        activeHref = "/"; // Default to Home when on home but not in a specific section
-      }
-    } else {
-      activeHref = pathname;
-    }
+    const href = pathname === "/" ? "/" : pathname;
+    setActiveHref(href);
 
     // Move pill to active item
-    const activeItem = menuItems.find((item) => item.href === activeHref || (pathname === "/" && activeHash === "" && item.href === "/"));
+    const activeItem = menuItems.find((item) => item.href === href);
 
     if (activeItem) {
       // Skip animation on first load for better performance
@@ -146,35 +95,23 @@ const Menu = () => {
         });
       }
     }
-  }, [pathname, movePill, menuItems, activeHash]);
+  }, [pathname, movePill, menuItems]);
 
   return (
-    <nav className="flex items-center justify-center">
-      <ul ref={menuRef} className="flex space-x-0 py-2 px-0 relative">
+    <nav className={`flex items-center justify-center ${figtree.className}`}>
+      <ul ref={menuRef} className="flex space-x-0 py-1.5 px-0 relative">
         <div
           ref={pillRef}
-          className="absolute h-[calc(100%+4px)] bg-neutral-90 dark:bg-neutral-0 rounded-full -z-10"
+          className="absolute h-[calc(100%+2px)] bg-neutral-90 dark:bg-neutral-0 rounded-full -z-10"
           style={{
-            top: "-2px",
+            top: "-1px",
             left: "0px",
             width: "0px",
             boxShadow: `0 0 12px ${getShadowColor()}`,
           }}
         />
         {menuItems.map((item) => {
-          // Determine if item is active based on pathname and active hash
-          let isActive = false;
-          if (pathname === "/") {
-            if (activeHash === "about-me" && item.href === "/#about-me") {
-              isActive = true;
-            } else if (activeHash === "contact" && item.href === "/#contact") {
-              isActive = true;
-            } else if (activeHash === "" && item.href === "/") {
-              isActive = true; // Home is active when on home but not in a specific section
-            }
-          } else {
-            isActive = item.href === pathname;
-          }
+          const isActive = item.href === activeHref;
           const isHashLink = item.href.includes("#");
 
           const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -205,15 +142,15 @@ const Menu = () => {
                   z-10
                   transition-all
                   duration-200
-                  font-bold
+                  font-semibold
                   text-sm
                   xl:text-base
                   tracking-wide
-                  px-4
-                  sm:px-6
-                  xl:px-8
-                  py-3
-                  xl:py-4
+                  px-3
+                  sm:px-4
+                  xl:px-6
+                  py-2
+                  xl:py-2.5
                   rounded-full
                   ${
                     isActive

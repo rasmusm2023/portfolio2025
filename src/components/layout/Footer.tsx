@@ -1,1208 +1,255 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import {
-  Copy,
-  Check,
-  ArrowsOutCardinal,
-  FileText,
-} from "@phosphor-icons/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedinIn,
-  faDribbble,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
-import { gsap } from "gsap";
+import Link from "next/link";
+import { figtree } from "@/app/fonts";
 
-// Custom Floating Label Input Component
-function FloatingLabelInput({
-  id,
-  name,
-  type = "text",
-  placeholder,
-  required = false,
-  rows = 4,
-  isTextarea = false,
-  value,
-  onChange,
-}: {
-  id: string;
-  name: string;
-  type?: string;
-  placeholder: string;
-  required?: boolean;
-  rows?: number;
-  isTextarea?: boolean;
-  value: string;
-  onChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void;
-}) {
-  const [isFocused, setIsFocused] = useState(false);
-  const [hasValue, setHasValue] = useState(value.length > 0);
-  const [isResizing, setIsResizing] = useState(false);
-  const [textareaHeight, setTextareaHeight] = useState(rows * 24);
+const email = "hello@rasmusmattsson.com";
 
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setIsFocused(false);
-    setHasValue(e.target.value.length > 0);
-  };
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setHasValue(e.target.value.length > 0);
-    onChange(e);
-  };
+// Update this when you ship changes (format MM-DD-YY like liumichelle.com)
+const CHANGELOG_DATE = "02-04-26";
+const CHANGELOG_URL = "https://github.com/rasmusm2023"; // or your repo URL
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!isTextarea) return;
-    e.preventDefault();
-    setIsResizing(true);
+const iconClass = "size-5 text-[#9ca3af] dark:text-[#6b7280]";
 
-    const startY = e.clientY;
-    const startHeight = textareaHeight;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const deltaY = e.clientY - startY;
-      const newHeight = Math.max(rows * 24, startHeight + deltaY);
-      setTextareaHeight(newHeight);
-    };
-
-    const handleMouseUp = () => {
-      setIsResizing(false);
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-  };
-
-  const isActive = isFocused || hasValue;
-
-  if (isTextarea) {
-    return (
-      <div className="relative">
-        <textarea
-          id={id}
-          name={name}
-          value={value}
-          required={required}
-          rows={rows}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          style={{ height: `${textareaHeight}px` }}
-          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none overflow-y-auto"
-          placeholder={placeholder}
-        />
-        <div
-          className="absolute bottom-2 right-2 cursor-nw-resize opacity-50 hover:opacity-100 transition-opacity duration-200"
-          onMouseDown={handleMouseDown}
-        >
-          <ArrowsOutCardinal
-            size={16}
-            className="text-neutral-60 dark:text-neutral-40"
-          />
-        </div>
-        <label
-          htmlFor={id}
-          className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
-            isActive
-              ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
-              : "top-3 text-base text-neutral-60 dark:text-neutral-40 font-bold"
-          }`}
-        >
-          {placeholder}
-        </label>
-      </div>
-    );
-  }
-
+function InstagramIcon() {
   return (
-    <div className="relative">
-      <input
-        type={type}
-        id={id}
-        name={name}
-        value={value}
-        required={required}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
-        placeholder={placeholder}
-      />
-      <label
-        htmlFor={id}
-        className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
-          isActive
-            ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-40 font-bold"
-        }`}
-      >
-        {placeholder}
-      </label>
-    </div>
+    <svg
+      className={iconClass}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M10 1.80078C12.6719 1.80078 12.9883 1.8125 14.0391 1.85937C15.0156 1.90234 15.543 2.06641 15.8945 2.20313C16.3594 2.38281 16.6953 2.60156 17.043 2.94922C17.3945 3.30078 17.6094 3.63281 17.7891 4.09766C17.9258 4.44922 18.0898 4.98047 18.1328 5.95312C18.1797 7.00781 18.1914 7.32422 18.1914 9.99219C18.1914 12.6641 18.1797 12.9805 18.1328 14.0313C18.0898 15.0078 17.9258 15.5352 17.7891 15.8867C17.6094 16.3516 17.3906 16.6875 17.043 17.0352C16.6914 17.3867 16.3594 17.6016 15.8945 17.7813C15.543 17.918 15.0117 18.082 14.0391 18.125C12.9844 18.1719 12.668 18.1836 10 18.1836C7.32813 18.1836 7.01172 18.1719 5.96094 18.125C4.98438 18.082 4.45703 17.918 4.10547 17.7813C3.64063 17.6016 3.30469 17.3828 2.95703 17.0352C2.60547 16.6836 2.39063 16.3516 2.21094 15.8867C2.07422 15.5352 1.91016 15.0039 1.86719 14.0313C1.82031 12.9766 1.80859 12.6602 1.80859 9.99219C1.80859 7.32031 1.82031 7.00391 1.86719 5.95312C1.91016 4.97656 2.07422 4.44922 2.21094 4.09766C2.39063 3.63281 2.60938 3.29688 2.95703 2.94922C3.30859 2.59766 3.64063 2.38281 4.10547 2.20313C4.45703 2.06641 4.98828 1.90234 5.96094 1.85937C7.01172 1.8125 7.32813 1.80078 10 1.80078ZM10 0C7.28516 0 6.94531 0.0117188 5.87891 0.0585938C4.81641 0.105469 4.08594 0.277344 3.45313 0.523438C2.79297 0.78125 2.23438 1.12109 1.67969 1.67969C1.12109 2.23438 0.78125 2.79297 0.523438 3.44922C0.277344 4.08594 0.105469 4.8125 0.0585938 5.875C0.0117188 6.94531 0 7.28516 0 10C0 12.7148 0.0117188 13.0547 0.0585938 14.1211C0.105469 15.1836 0.277344 15.9141 0.523438 16.5469C0.78125 17.207 1.12109 17.7656 1.67969 18.3203C2.23438 18.875 2.79297 19.2188 3.44922 19.4727C4.08594 19.7188 4.8125 19.8906 5.875 19.9375C6.94141 19.9844 7.28125 19.9961 9.99609 19.9961C12.7109 19.9961 13.0508 19.9844 14.1172 19.9375C15.1797 19.8906 15.9102 19.7188 16.543 19.4727C17.1992 19.2188 17.7578 18.875 18.3125 18.3203C18.8672 17.7656 19.2109 17.207 19.4648 16.5508C19.7109 15.9141 19.8828 15.1875 19.9297 14.125C19.9766 13.0586 19.9883 12.7188 19.9883 10.0039C19.9883 7.28906 19.9766 6.94922 19.9297 5.88281C19.8828 4.82031 19.7109 4.08984 19.4648 3.45703C19.2188 2.79297 18.8789 2.23438 18.3203 1.67969C17.7656 1.125 17.207 0.78125 16.5508 0.527344C15.9141 0.28125 15.1875 0.109375 14.125 0.0625C13.0547 0.0117188 12.7148 0 10 0Z" />
+      <path d="M10 4.86328C7.16406 4.86328 4.86328 7.16406 4.86328 10C4.86328 12.8359 7.16406 15.1367 10 15.1367C12.8359 15.1367 15.1367 12.8359 15.1367 10C15.1367 7.16406 12.8359 4.86328 10 4.86328ZM10 13.332C8.16016 13.332 6.66797 11.8398 6.66797 10C6.66797 8.16016 8.16016 6.66797 10 6.66797C11.8398 6.66797 13.332 8.16016 13.332 10C13.332 11.8398 11.8398 13.332 10 13.332Z" />
+      <path d="M16.5391 4.66016C16.5391 5.32422 16 5.85938 15.3398 5.85938C14.6758 5.85938 14.1406 5.32031 14.1406 4.66016C14.1406 3.99609 14.6797 3.46094 15.3398 3.46094C16 3.46094 16.5391 4 16.5391 4.66016Z" />
+    </svg>
   );
 }
 
-const Footer = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [emailCopied, setEmailCopied] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<
-    "idle" | "success" | "error"
-  >("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showForm, setShowForm] = useState(false);
-
-  // Refs for entrance animations
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const descriptionRef = useRef<HTMLDivElement>(null);
-  const chatCardRef = useRef<HTMLDivElement>(null);
-  const chatCardLgRef = useRef<HTMLDivElement>(null);
-  const chatCardMobileRef = useRef<HTMLDivElement>(null);
-  const contactInfoRef = useRef<HTMLDivElement>(null);
-  const contactInfoLgRef = useRef<HTMLDivElement>(null);
-  const contactInfoMobileRef = useRef<HTMLDivElement>(null);
-
-  // Hero entrance animation
-  useEffect(() => {
-    if (
-      !titleRef.current ||
-      !descriptionRef.current ||
-      !chatCardRef.current ||
-      !chatCardLgRef.current ||
-      !chatCardMobileRef.current ||
-      !contactInfoRef.current ||
-      !contactInfoLgRef.current ||
-      !contactInfoMobileRef.current
-    ) {
-      return;
-    }
-
-    const tl = gsap.timeline({ delay: 0.1 });
-
-    gsap.set(
-      [
-        titleRef.current,
-        descriptionRef.current,
-        chatCardRef.current,
-        chatCardLgRef.current,
-        chatCardMobileRef.current,
-        contactInfoRef.current,
-        contactInfoLgRef.current,
-        contactInfoMobileRef.current,
-      ],
-      {
-        opacity: 0,
-        y: 30,
-      }
-    );
-
-    tl.to(
-      [
-        titleRef.current,
-        descriptionRef.current,
-        chatCardRef.current,
-        chatCardLgRef.current,
-        chatCardMobileRef.current,
-        contactInfoRef.current,
-        contactInfoLgRef.current,
-        contactInfoMobileRef.current,
-      ],
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: "power3.out",
-      }
-    );
-
-    return () => {
-      tl.kill();
-    };
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus("idle");
-    setErrorMessage("");
-
-    try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        // Close form after successful submission
-        setTimeout(() => {
-          setShowForm(false);
-          setSubmitStatus("idle");
-        }, 3000);
-      } else {
-        const errorData = await response.json();
-        setSubmitStatus("error");
-        setErrorMessage(errorData.error || "Failed to send message");
-      }
-    } catch (error) {
-      setSubmitStatus("error");
-      setErrorMessage("Network error. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText("hello@rasmusmattsson.com");
-    setEmailCopied(true);
-    setTimeout(() => {
-      setEmailCopied(false);
-    }, 4000); // Brief green flash - 4 seconds
-  };
-
+function XIcon() {
   return (
-    <section className="py-12 sm:py-14 md:py-16 pb-32 sm:pb-36 md:pb-40 lg:pb-48 xl:pb-56 relative">
-      {/* Large Desktop Layout (xl and above) */}
-      <div className="hidden xl:block min-h-[80vh] relative">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-full min-h-[80vh]">
-            <div className="text-left w-full flex flex-col justify-between h-full">
-              <div className="flex-1 flex items-start">
-                <div className="w-full">
-                  <h1
-                    ref={titleRef}
-                    className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
-                  >
-                    <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                      Contact
-                    </span>
-                  </h1>
-                  <div ref={descriptionRef} className="mt-16 max-w-[48rem]">
-                    <div className="flex flex-col gap-6">
-                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                        I'm always excited to discuss new opportunities and
-                        possibilities.
-                      </p>
-                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                        Whether you have a specific role in mind or just want to
-                        discuss how I can contribute, let's start a
-                        conversation.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form centered */}
-          <div
-            className="absolute right-0 w-[32rem]"
-            style={{ top: "65%", transform: "translateY(-50%)" }}
-          >
-            <div
-              ref={chatCardRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
-            >
-              {/* Noise background overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
-              <div className="relative z-10">
-                <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <div className="flex flex-col items-center justify-center gap-4">
-                      <span
-                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={24}
-                            weight="regular"
-                            className="text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={24}
-                            weight="regular"
-                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
-                  {!showForm && (
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-8 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
-                    >
-                      Fill out contact form
-                    </button>
-                  )}
-
-                  {/* Contact Form - Secondary */}
-                  {showForm && (
-                    <>
-                      <FloatingLabelInput
-                        id="name"
-                        name="name"
-                        type="text"
-                        placeholder="Name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="email"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        placeholder="Subject"
-                        required
-                        value={formData.subject}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="message"
-                        name="message"
-                        placeholder="Message"
-                        required
-                        rows={8}
-                        isTextarea
-                        value={formData.message}
-                        onChange={handleChange}
-                      />
-
-                      <div className="flex gap-4">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                        >
-                          {isSubmitting ? "Sending..." : "Send message"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowForm(false);
-                            setFormData({
-                              name: "",
-                              email: "",
-                              subject: "",
-                              message: "",
-                            });
-                            setSubmitStatus("idle");
-                            setErrorMessage("");
-                          }}
-                          className="px-6 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-
-                      {/* Success/Error Messages */}
-                      {submitStatus === "success" && (
-                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                            ✅ Message sent successfully! I'll get back to you
-                            within 24 hours.
-                          </p>
-                        </div>
-                      )}
-
-                      {submitStatus === "error" && (
-                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                            ❌ {errorMessage}
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </form>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Information positioned to align with email alternative */}
-          <div className="absolute left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 bottom-0">
-            <div ref={contactInfoRef} className="flex flex-col space-y-16">
-              <div className="flex items-center space-x-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
-                  Dribbble
-                </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Medium Desktop Layout (lg to xl) - Stacked */}
-      <div className="hidden lg:block xl:hidden min-h-screen px-8 pt-24 pb-8">
-        <div className="w-full max-w-[1600px] mx-auto">
-          {/* Hero Section */}
-          <div className="flex flex-col justify-center mb-12">
-            <h1 className="text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.6] mb-8">
-              <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                Contact
-              </span>
-            </h1>
-
-            <div className="flex flex-col gap-6 mb-12">
-              <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
-                I'm always excited to discuss new opportunities and
-                possibilities.
-              </p>
-              <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
-                Whether you have a specific role in mind or just want to discuss
-                how I can contribute, let's start a conversation.
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="mb-12">
-            <div ref={contactInfoLgRef} className="flex flex-col space-y-16">
-              <div className="flex items-center space-x-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
-                  Dribbble
-                </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto mb-12">
-            <div
-              ref={chatCardLgRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
-            >
-              {/* Noise background overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
-              <div className="relative z-10">
-                <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
-                      Prefer to email directly?
-                    </p>
-                    <div className="flex flex-col items-center justify-center gap-4">
-                      <span
-                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={24}
-                            weight="regular"
-                            className="text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={24}
-                            weight="regular"
-                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
-                  {!showForm && (
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-8 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
-                    >
-                      Fill out contact form
-                    </button>
-                  )}
-
-                  {/* Contact Form - Secondary */}
-                  {showForm && (
-                    <>
-                      <FloatingLabelInput
-                        id="name-lg"
-                        name="name"
-                        type="text"
-                        placeholder="Name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="email-lg"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="subject-lg"
-                        name="subject"
-                        type="text"
-                        placeholder="Subject"
-                        required
-                        value={formData.subject}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="message-lg"
-                        name="message"
-                        placeholder="Message"
-                        required
-                        rows={8}
-                        isTextarea
-                        value={formData.message}
-                        onChange={handleChange}
-                      />
-
-                      <div className="flex gap-4">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                        >
-                          {isSubmitting ? "Sending..." : "Send message"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setShowForm(false);
-                            setFormData({
-                              name: "",
-                              email: "",
-                              subject: "",
-                              message: "",
-                            });
-                            setSubmitStatus("idle");
-                            setErrorMessage("");
-                          }}
-                          className="px-6 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-
-                      {/* Success/Error Messages */}
-                      {submitStatus === "success" && (
-                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                            ✅ Message sent successfully! I'll get back to you
-                            within 24 hours.
-                          </p>
-                        </div>
-                      )}
-
-                      {submitStatus === "error" && (
-                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                            ❌ {errorMessage}
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile/Tablet Layout */}
-      <div className="lg:hidden flex flex-col min-h-screen px-4 sm:px-6 pt-24 sm:pt-28 pb-8 sm:pb-12">
-        <div className="w-full max-w-[1600px] mx-auto">
-          {/* Hero Section */}
-          <div className="flex-1 flex flex-col justify-center">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.6] mb-8 sm:mb-12">
-              <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                Contact
-              </span>
-            </h1>
-
-            <div className="flex flex-col gap-4 sm:gap-6 mb-8 sm:mb-12">
-              <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg font-semibold leading-relaxed tracking-wide">
-                I'm always excited to discuss new opportunities and
-                possibilities.
-              </p>
-              <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg font-semibold leading-relaxed tracking-wide">
-                Whether you have a specific role in mind or just want to discuss
-                how I can contribute, let's start a conversation.
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Information */}
-          <div className="mb-8 sm:mb-12">
-            <div
-              ref={contactInfoMobileRef}
-              className="flex flex-col space-y-16"
-            >
-              <div className="flex flex-row items-center space-x-4 sm:space-x-8">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
-                  Dribbble
-                </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="mb-8 sm:mb-12">
-            <div
-              ref={chatCardMobileRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
-            >
-              {/* Noise background overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
-              <div className="relative z-10">
-                <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 sm:mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-4 sm:space-y-6"
-                >
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-4 sm:space-y-6 p-4 sm:p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <p className="text-neutral-70 dark:text-neutral-30 text-sm sm:text-base font-medium">
-                      Prefer to email directly?
-                    </p>
-                    <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
-                      <span
-                        className={`font-bold text-xl sm:text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={20}
-                            weight="regular"
-                            className="sm:w-6 sm:h-6 text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={20}
-                            weight="regular"
-                            className="sm:w-6 sm:h-6 text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-base sm:text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-4 sm:my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
-                  {!showForm && (
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-base sm:text-lg rounded-xl transition-all duration-200"
-                    >
-                      Fill out contact form
-                    </button>
-                  )}
-
-                  {/* Contact Form - Secondary */}
-                  {showForm && (
-                    <>
-                      <FloatingLabelInput
-                        id="name-mobile"
-                        name="name"
-                        type="text"
-                        placeholder="Name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="email-mobile"
-                        name="email"
-                        type="email"
-                        placeholder="Email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="subject-mobile"
-                        name="subject"
-                        type="text"
-                        placeholder="Subject"
-                        required
-                        value={formData.subject}
-                        onChange={handleChange}
-                      />
-
-                      <FloatingLabelInput
-                        id="message-mobile"
-                        name="message"
-                        placeholder="Message"
-                        required
-                        rows={8}
-                        isTextarea
-                        value={formData.message}
-                        onChange={handleChange}
-                      />
-
-                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                        <button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="flex-1 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                        >
-                          {isSubmitting ? "Sending..." : "Send message"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => setShowForm(false)}
-                          className="px-6 py-3 sm:py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-base sm:text-lg rounded-xl transition-all duration-200"
-                        >
-                          Cancel
-                        </button>
-                      </div>
-
-                      {/* Success/Error Messages */}
-                      {submitStatus === "success" && (
-                        <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
-                          <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                            ✅ Message sent successfully! I'll get back to you
-                            within 24 hours.
-                          </p>
-                        </div>
-                      )}
-
-                      {submitStatus === "error" && (
-                        <div className="p-4 bg-red-100 dark:bg-red-900/20 border border-red-300 dark:border-red-700 rounded-xl">
-                          <p className="text-red-800 dark:text-red-200 font-bold text-base text-center">
-                            ❌ {errorMessage}
-                          </p>
-                        </div>
-                      )}
-                    </>
-                  )}
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <svg
+      className={iconClass}
+      viewBox="0 0 19 18"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M14.7031 0.84375H17.418L11.4023 7.75781L18.4883 17.1562H12.9492L8.60547 11.5039L3.63672 17.1562H0.917969L7.35547 9.76172L0.542969 0.84375H6.23047L10.1562 5.99609L14.7031 0.84375ZM13.7305 15.5039H15.2695L5.36719 2.42188H3.71484L13.7305 15.5039Z" />
+    </svg>
   );
-};
+}
 
-export default Footer;
+function LinkedInIcon() {
+  return (
+    <svg
+      className={iconClass}
+      viewBox="0 0 18 18"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path d="M16.5 0.5H1.5C0.945312 0.5 0.5 0.945312 0.5 1.5V16.5C0.5 17.0547 0.945312 17.5 1.5 17.5H16.5C17.0547 17.5 17.5 17.0547 17.5 16.5V1.5C17.5 0.945312 17.0547 0.5 16.5 0.5ZM5.57031 15.0625H3.0625V7.00781H5.57031V15.0625ZM4.31641 5.89844C3.50781 5.89844 2.85547 5.24219 2.85547 4.4375C2.85547 3.63281 3.50781 2.97656 4.31641 2.97656C5.12109 2.97656 5.77734 3.63281 5.77734 4.4375C5.77734 5.23828 5.12109 5.89844 4.31641 5.89844ZM15.0625 15.0625H12.5586V11.1562C12.5586 10.2188 12.5391 9.01562 11.2578 9.01562C9.95703 9.01562 9.76172 10.0352 9.76172 11.0898V15.0625H7.26172V7.00781H9.66406V8.11328H9.69922C10.0352 7.48047 10.8516 6.80469 12.0508 6.80469C14.5898 6.80469 15.0625 8.46875 15.0625 10.6406V15.0625Z" />
+    </svg>
+  );
+}
+
+function NavLink({ href, children }: { href: string; children: string }) {
+  return (
+    <Link
+      href={href}
+      className={`${figtree.className} leading-5 text-[#9ca3af] dark:text-[#6b7280] text-base text-nowrap tracking-[0.16px] hover:text-[#6b7280] dark:hover:text-[#9ca3af] transition-colors cursor-pointer`}
+    >
+      {children}
+    </Link>
+  );
+}
+
+export default function Footer() {
+  return (
+    <footer className={`relative shrink-0 w-full ${figtree.className}`}>
+      <div className="flex flex-col items-center size-full">
+        <div className="flex flex-col gap-16 items-center px-8 md:px-16 pt-8 pb-8 md:pb-8 max-md:pb-16 max-md:pt-4 relative w-full">
+          <div className="flex flex-col gap-5 items-start relative shrink-0 w-full">
+            {/* Top divider — same as hers */}
+            <div className="bg-[#e5e7eb] dark:bg-zinc-700 h-px shrink-0 w-full" />
+
+            {/* Desktop: 4-column grid (logo | empty | nav | contact) */}
+            <div className="hidden md:grid gap-5 grid-cols-[repeat(4,_minmax(0,_1fr))] relative shrink-0 w-full">
+              {/* Column 1: Logo + name */}
+              <div className="flex flex-col items-start relative shrink-0">
+                <Link
+                  href="/"
+                  className="flex gap-3 items-center justify-center relative shrink-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded"
+                >
+                  <img
+                    src="/assets/logos/rm/rm-logo-portfolio-white.svg"
+                    alt=""
+                    className="object-contain size-12 dark:block hidden shrink-0"
+                  />
+                  <img
+                    src="/assets/logos/rm/rm-logo-portfolio-dark.svg"
+                    alt=""
+                    className="object-contain size-12 block dark:hidden shrink-0"
+                  />
+                  <span className="font-medium leading-normal text-[32px] text-[#374151] dark:text-[#e5e7eb] whitespace-nowrap">
+                    rasmus mattsson
+                  </span>
+                </Link>
+              </div>
+
+              {/* Column 2: empty */}
+              <div />
+
+              {/* Column 3: Nav */}
+              <div className="flex flex-col gap-2 items-start relative shrink-0">
+                <NavLink href="/">Work</NavLink>
+                <NavLink href="/about">About</NavLink>
+                <NavLink href="/archives">Archives</NavLink>
+              </div>
+
+              {/* Column 4: Contact + social */}
+              <div className="flex flex-col gap-4 items-start relative shrink-0">
+                <div className="flex flex-col font-normal items-start text-gray-400 dark:text-gray-500 w-full">
+                  <p className="leading-6 text-base">
+                    Let&apos;s work together!
+                  </p>
+                  <p className="leading-6 text-base break-all">
+                    <a
+                      href={`mailto:${email}`}
+                      className="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+                    >
+                      <span>{email} </span>
+                      <span className="font-bold">↗</span>
+                    </a>
+                  </p>
+                </div>
+                <div className="flex gap-6 items-start">
+                  <a
+                    href="https://instagram.com/rasmusmattsson"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:opacity-70 transition-opacity"
+                    aria-label="Instagram"
+                  >
+                    <InstagramIcon />
+                  </a>
+                  <a
+                    href="https://x.com/rasmusmattsson"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:opacity-70 transition-opacity"
+                    aria-label="X"
+                  >
+                    <XIcon />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/rasmus-mattsson"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:opacity-70 transition-opacity"
+                    aria-label="LinkedIn"
+                  >
+                    <LinkedInIcon />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile: vertical stack */}
+            <div className="md:hidden flex flex-col gap-10 items-start w-full">
+              <div className="flex flex-col gap-1.5 items-start">
+                <Link
+                  href="/"
+                  className="flex gap-2 items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded"
+                >
+                  <img
+                    src="/assets/logos/rm/rm-logo-portfolio-white.svg"
+                    alt=""
+                    className="object-contain size-12 dark:block hidden shrink-0"
+                  />
+                  <img
+                    src="/assets/logos/rm/rm-logo-portfolio-dark.svg"
+                    alt=""
+                    className="object-contain size-12 block dark:hidden shrink-0"
+                  />
+                  <span className="font-medium leading-normal text-[28px] sm:text-[32px] text-[#374151] dark:text-[#e5e7eb] whitespace-nowrap">
+                    rasmus mattsson
+                  </span>
+                </Link>
+              </div>
+              <div className="flex flex-col gap-10 items-start">
+                <div className="flex flex-col gap-4 items-start">
+                  <div className="flex flex-col font-normal items-start text-gray-400 dark:text-gray-500 w-full">
+                    <p className="leading-6 text-base w-full">
+                      Let&apos;s work together!
+                    </p>
+                    <p className="leading-6 text-base w-full break-all">
+                      <a
+                        href={`mailto:${email}`}
+                        className="text-gray-500 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+                      >
+                        <span>{email} </span>
+                        <span className="font-bold">↗</span>
+                      </a>
+                    </p>
+                  </div>
+                  <div className="flex gap-6 items-start">
+                    <a
+                      href="https://instagram.com/rasmusmattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-70 transition-opacity"
+                      aria-label="Instagram"
+                    >
+                      <InstagramIcon />
+                    </a>
+                    <a
+                      href="https://x.com/rasmusmattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-70 transition-opacity"
+                      aria-label="X"
+                    >
+                      <XIcon />
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/rasmus-mattsson"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-70 transition-opacity"
+                      aria-label="LinkedIn"
+                    >
+                      <LinkedInIcon />
+                    </a>
+                  </div>
+                </div>
+                <nav
+                  className="flex flex-col gap-2 items-start"
+                  aria-label="Footer"
+                >
+                  <NavLink href="/">WORK</NavLink>
+                  <NavLink href="/about">ABOUT</NavLink>
+                  <NavLink href="/archives">ARCHIVES</NavLink>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          {/* Built with + changelog (like liumichelle.com) */}
+          <div className="flex flex-col gap-0.5 items-center text-center">
+            <p className="font-normal leading-7 text-gray-500 dark:text-gray-400 text-sm">
+              Built with Next.js
+            </p>
+            <Link
+              href={CHANGELOG_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-normal leading-5 tracking-wider text-[#9ca3af] dark:text-[#6b7280] text-xs text-nowrap hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 rounded"
+            >
+              CHANGELOG: {CHANGELOG_DATE}
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
