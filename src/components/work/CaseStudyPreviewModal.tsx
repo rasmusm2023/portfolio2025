@@ -5,12 +5,13 @@ import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { X } from "@phosphor-icons/react";
 import { Maximize2 } from "lucide-react";
+import { gsap } from "gsap";
 import { figtree } from "@/app/fonts";
 import CaseStudyPreviewHero from "./CaseStudyPreviewHero";
 
 const CLOSE_DURATION_MS = 250;
-const EXPAND_DURATION_MS = 800;
-const NAVIGATE_AFTER_EXPAND_MS = 880;
+const EXPAND_DURATION = 0.9;
+const EXPAND_EASE = "power2.inOut";
 const CLOSE_AFTER_NAVIGATE_MS = 100;
 
 export interface CaseStudyPreviewData {
@@ -42,7 +43,7 @@ export default function CaseStudyPreviewModal({
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const expandTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const expandTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const router = useRouter();
 
   const [isExiting, setIsExiting] = useState(false);
@@ -56,7 +57,10 @@ export default function CaseStudyPreviewModal({
     return () => {
       document.body.style.overflow = "";
       if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-      if (expandTimeoutRef.current) clearTimeout(expandTimeoutRef.current);
+      if (expandTimelineRef.current) {
+        expandTimelineRef.current.kill();
+        expandTimelineRef.current = null;
+      }
     };
   }, [isOpen]);
 
@@ -83,15 +87,47 @@ export default function CaseStudyPreviewModal({
   };
 
   const handleExpandClick = (e: React.MouseEvent) => {
-    if (!data || isExpanding) return;
+    if (!data || isExpanding || !contentRef.current) return;
     e.preventDefault();
     setIsExpanding(true);
-    // Wait for expand animation to finish, then navigate
-    expandTimeoutRef.current = setTimeout(() => {
-      expandTimeoutRef.current = null;
-      router.push(data.fullLink);
-      setTimeout(() => onClose(), CLOSE_AFTER_NAVIGATE_MS);
-    }, NAVIGATE_AFTER_EXPAND_MS);
+
+    const content = contentRef.current;
+    const rect = content.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Snap content to fixed position at current rect so it doesn’t jump
+    gsap.set(content, {
+      position: "fixed",
+      left: rect.left,
+      top: rect.top,
+      width: rect.width,
+      height: rect.height,
+      margin: 0,
+      maxWidth: rect.width,
+      maxHeight: "none",
+    });
+
+    expandTimelineRef.current = gsap.timeline({
+      onComplete: () => {
+        expandTimelineRef.current = null;
+        router.push(data.fullLink);
+        setTimeout(() => onClose(), CLOSE_AFTER_NAVIGATE_MS);
+      },
+    });
+
+    // Grow outer to full viewport; keep inner at scale 1 so content doesn’t shrink
+    expandTimelineRef.current.to(content, {
+      left: 0,
+      top: 0,
+      width: vw,
+      height: vh,
+      borderRadius: 0,
+      maxWidth: vw,
+      duration: EXPAND_DURATION,
+      ease: EXPAND_EASE,
+      overwrite: true,
+    });
   };
 
   if (!isOpen) return null;
@@ -118,16 +154,12 @@ export default function CaseStudyPreviewModal({
           isExiting
             ? "animate-preview-content-out"
             : isExpanding
-              ? "preview-expand-outer w-full max-w-6xl xl:max-w-[1400px] max-h-[92vh]"
+              ? "w-full max-w-6xl xl:max-w-[1400px] max-h-[92vh]"
               : "opacity-0 scale-[0.96] animate-preview-content w-full max-w-6xl xl:max-w-[1400px] max-h-[92vh]"
         }`}
         style={data ? ({ viewTransitionName: "case-preview-hero" } as React.CSSProperties) : undefined}
       >
-        {/* Inner wrapper counter-scaled so content stays crisp while outer grows */}
-        <div
-          className={`flex flex-col gap-8 items-start w-full min-h-0 ${isExpanding ? "preview-expand-inner" : ""}`}
-          style={isExpanding ? { transformOrigin: "center center" } : undefined}
-        >
+        <div className="flex flex-col gap-8 items-start w-full min-h-0">
           {/* Top left: expand to full case study */}
           {data && (
             <button

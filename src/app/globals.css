@@ -1713,34 +1713,7 @@ body.mobile-menu-open {
   transform: translateY(0);
 }
 
-/* Preview modal expand: transform-based so keyframes interpolate smoothly; inner counter-scaled so content doesn't stretch */
-@keyframes preview-expand-outer {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1.18);
-  }
-}
-
-@keyframes preview-expand-inner {
-  0% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.8475);  /* 1 / 1.18 */
-  }
-}
-
-.preview-expand-outer {
-  transform-origin: center center;
-  animation: preview-expand-outer 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.preview-expand-inner {
-  transform-origin: center center;
-  animation: preview-expand-inner 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
+/* Preview modal expand is GSAP-driven in CaseStudyPreviewModal (grows to full viewport then navigates) */
 
 /* View Transition: modal expand → case study page (same content, feels like growing into page) */
 @supports (view-transition-name: none) {
