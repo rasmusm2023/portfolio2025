@@ -291,6 +291,30 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: glow 3s ease-in-out infinite;
 }
 
+/* Home hero entrance: unblur + fade in (no JS/refs so it works with Lenis) */
+@keyframes hero-entrance {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance-1 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+.hero-entrance-2 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.32s both;
+}
+.hero-entrance-3 {
+  animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.54s both;
+}
+
 @keyframes mask-rotate {
   0% {
     --mask: 0deg;

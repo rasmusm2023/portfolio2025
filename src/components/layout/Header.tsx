@@ -4,17 +4,57 @@ import Link from "next/link";
 import Menu from "./Menu";
 import { LegoIcon, FileText, List, X, Equals } from "@phosphor-icons/react";
 import { Hanken_Grotesk } from "next/font/google";
+import { figtree } from "@/app/fonts";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedinIn } from "@fortawesome/free-brands-svg-icons";
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { gsap } from "gsap";
+import { useLenis } from "lenis/react";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
+/** Stockholm time; Europe/Stockholm follows Swedish DST (CET/CEST) automatically */
+function useStockholmTime(): { time: string; zone: string } {
+  const [display, setDisplay] = useState({ time: "", zone: "" });
+  useEffect(() => {
+    const format = () => {
+      const date = new Date();
+      const formatter = new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Stockholm",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+        timeZoneName: "short",
+      });
+      const parts = formatter.formatToParts(date);
+      let hour = "";
+      let minute = "";
+      let second = "";
+      let zone = "";
+      for (const p of parts) {
+        if (p.type === "hour") hour = p.value;
+        else if (p.type === "minute") minute = p.value;
+        else if (p.type === "second") second = p.value;
+        else if (p.type === "timeZoneName") zone = p.value; // "CET" or "CEST"
+      }
+      setDisplay({
+        time: `${hour}:${minute}:${second}`,
+        zone,
+      });
+    };
+    format();
+    const id = setInterval(format, 1000);
+    return () => clearInterval(id);
+  }, []);
+  return display;
+}
+
 const Header = () => {
   const pathname = usePathname();
+  const stockholmTime = useStockholmTime();
   const [showBackground, setShowBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
@@ -23,34 +63,30 @@ const Header = () => {
   const menuTextRef = useRef<HTMLSpanElement>(null);
   const hamburgerRef = useRef<HTMLDivElement>(null);
   const xIconRef = useRef<HTMLDivElement>(null);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const [scrollY, setScrollY] = useState(0);
+  const lenis = useLenis((instance) => {
+    setScrollY(instance.scroll);
+    setShowBackground(true);
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => setShowBackground(false), 1500);
+  });
 
   useEffect(() => {
+    if (lenis) return;
     let timeoutId: NodeJS.Timeout;
-
     const handleScroll = () => {
-      // Show background when user scrolls
       setShowBackground(true);
-
-      // Clear existing timeout
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-
-      // Hide background after 1.5 seconds (1 second longer than before)
-      timeoutId = setTimeout(() => {
-        setShowBackground(false);
-      }, 1500);
+      if (timeoutId) clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => setShowBackground(false), 1500);
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
+      if (timeoutId) clearTimeout(timeoutId);
     };
-  }, []);
+  }, [lenis]);
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -78,43 +114,30 @@ const Header = () => {
     setIsMobileMenuOpen(false);
   }, []);
 
-  // Scroll detection for sections on home-v2 page
+  // When Lenis is inactive, sync scrollY from window
+  useEffect(() => {
+    if (lenis) return;
+    const onScroll = () => setScrollY(window.scrollY);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [lenis]);
+
   useEffect(() => {
     if (pathname !== "/") {
       setActiveHash("");
       return;
     }
-
     const aboutSection = document.getElementById("about-me");
     const contactSection = document.getElementById("contact");
-
     if (!aboutSection || !contactSection) return;
-
-    const checkActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% from top of viewport
-      const aboutTop = aboutSection.offsetTop;
-      const contactTop = contactSection.offsetTop;
-
-      // Determine which section is currently in view
-      if (scrollPosition >= contactTop) {
-        setActiveHash("contact");
-      } else if (scrollPosition >= aboutTop) {
-        setActiveHash("about-me");
-      } else {
-        setActiveHash(""); // Home section
-      }
-    };
-
-    // Check initial position
-    setTimeout(checkActiveSection, 100);
-
-    // Listen to scroll events
-    window.addEventListener("scroll", checkActiveSection, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", checkActiveSection);
-    };
-  }, [pathname]);
+    const scrollPosition = scrollY + (typeof window !== "undefined" ? window.innerHeight * 0.3 : 0);
+    const aboutTop = aboutSection.offsetTop;
+    const contactTop = contactSection.offsetTop;
+    if (scrollPosition >= contactTop) setActiveHash("contact");
+    else if (scrollPosition >= aboutTop) setActiveHash("about-me");
+    else setActiveHash("");
+  }, [pathname, scrollY]);
 
   // Component unmount cleanup
   useEffect(() => {
@@ -312,6 +335,18 @@ const Header = () => {
 
           {/* Desktop Actions */}
           <div className="hidden 2xl:flex items-center gap-4">
+            {/* Stockholm time (CET/CEST updates automatically with Swedish summer time) */}
+            {stockholmTime.time && (
+              <span
+                className="text-sm tabular-nums text-neutral-500 dark:text-neutral-400 whitespace-nowrap"
+                aria-label={`Stockholm time ${stockholmTime.zone} ${stockholmTime.time}`}
+              >
+                <span className="font-medium text-neutral-600 dark:text-neutral-500">
+                  {stockholmTime.zone}
+                </span>
+                <span className="ml-1">{stockholmTime.time}</span>
+              </span>
+            )}
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -357,6 +392,17 @@ const Header = () => {
 
           {/* Mobile Actions */}
           <div className="flex 2xl:hidden items-center gap-2">
+            {stockholmTime.time && (
+              <span
+                className="text-xs sm:text-sm tabular-nums text-neutral-500 dark:text-neutral-400 whitespace-nowrap"
+                aria-label={`Stockholm time ${stockholmTime.zone} ${stockholmTime.time}`}
+              >
+                <span className="font-medium text-neutral-600 dark:text-neutral-500">
+                  {stockholmTime.zone}
+                </span>
+                <span className="ml-0.5 sm:ml-1">{stockholmTime.time}</span>
+              </span>
+            )}
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
@@ -409,12 +455,12 @@ const Header = () => {
       >
         <div className="flex flex-col h-full pt-4 pb-8 px-6">
           {/* Mobile Menu Items */}
-          <nav className="flex-1 flex flex-col justify-center">
+          <nav className={`flex-1 flex flex-col justify-center ${figtree.className}`}>
             <ul className="space-y-8">
               <li>
                 <Link
                   href="/"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
+                  className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "Home"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === ""
@@ -428,8 +474,23 @@ const Header = () => {
               </li>
               <li>
                 <Link
+                  href="/works"
+                  className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
+                    clickedMenuItem === "Works"
+                      ? "text-purple-500 dark:text-purple-400 scale-95"
+                      : pathname === "/works"
+                      ? "text-neutral-100 dark:text-neutral-0"
+                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                  }`}
+                  onClick={() => handleMenuItemClick("Works")}
+                >
+                  Works
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/#about-me"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
+                  className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "About"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === "about-me"
@@ -446,7 +507,8 @@ const Header = () => {
                       setTimeout(() => {
                         const element = document.getElementById("about-me");
                         if (element) {
-                          element.scrollIntoView({ behavior: "smooth", block: "start" });
+                          if (lenis) lenis.scrollTo(element, { offset: 0 });
+                          else element.scrollIntoView({ behavior: "smooth", block: "start" });
                         }
                       }, 100);
                     } else {
@@ -461,7 +523,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/#contact"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
+                  className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "Contact"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === "contact"
@@ -478,7 +540,8 @@ const Header = () => {
                       setTimeout(() => {
                         const element = document.getElementById("contact");
                         if (element) {
-                          element.scrollIntoView({ behavior: "smooth", block: "start" });
+                          if (lenis) lenis.scrollTo(element, { offset: 0 });
+                          else element.scrollIntoView({ behavior: "smooth", block: "start" });
                         }
                       }, 100);
                     } else {
@@ -493,7 +556,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/archives"
-                  className={`block text-4xl sm:text-5xl font-bold transition-all duration-200 ${
+                  className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "Archives"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/archives"

@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface WorkItem {
   id: string;
@@ -85,82 +86,117 @@ const career = [
   { period: "Sep – Nov 2024", role: "UX/UI Designer, Fokus" },
 ];
 
+const heroHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "translateY(14px)" as const };
+const subtitleHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "translateY(12px)" as const };
+
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
+  const pathname = usePathname();
   const [heroScrollStyle, setHeroScrollStyle] = useState({
-    translateY: 0,
+    scale: 1,
     blur: 0,
-    opacity: 1,
   });
+
+  // Run entrance every time we're on home: new key + delay adding class so browser always runs the animation (works even if Next.js reuses the component)
+  const [entranceKey, setEntranceKey] = useState(() => (typeof window !== "undefined" ? Date.now() : 0));
+  const [runHeroEntrance, setRunHeroEntrance] = useState(false);
+  useEffect(() => {
+    if (pathname !== "/") {
+      setRunHeroEntrance(false);
+      return;
+    }
+    setEntranceKey(Date.now());
+    setRunHeroEntrance(false);
+    // Two frames so the DOM sees the class removed before we add it back (forces animation to replay)
+    let id2: number | undefined;
+    const id1 = requestAnimationFrame(() => {
+      id2 = requestAnimationFrame(() => setRunHeroEntrance(true));
+    });
+    return () => {
+      cancelAnimationFrame(id1);
+      if (id2 !== undefined) cancelAnimationFrame(id2);
+    };
+  }, [pathname]);
 
   useEffect(() => {
     document.title = "Rasmus Mattsson | Product Designer Portfolio";
   }, []);
+  const [scrollEffectReady, setScrollEffectReady] = useState(false);
 
-  // Scroll-driven parallax (slide down behind cards), blur, and fade for hero text
+  // Sticky hero: text stays centered; on scroll it shrinks and blurs
+  const SCROLL_DISTANCE = 680;
+  const updateHeroScroll = (scrollY: number) => {
+    const progress = Math.min(1, scrollY / SCROLL_DISTANCE);
+    const scale = 1 - progress * 0.4; // 1 → 0.6
+    const blur = progress * 8; // 0 → 8px
+    setHeroScrollStyle({ scale, blur });
+  };
+
+  // Delay enabling scroll-based scale/blur until after entrance so nothing can hide the hero on load
   useEffect(() => {
-    const handleScroll = () => {
-      const hero = heroRef.current;
-      if (!hero) return;
-      const rect = hero.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      // Blur: only when hero top has left the viewport (rect.top < 0), then ramp 0→8
-      const blur =
-        rect.top >= 0
-          ? 0
-          : Math.min(8, (-rect.top / viewportHeight) * 12);
-      // Fade: 0 when hero in view, 1 when scrolled well up
-      const fadeProgress = Math.max(
-        0,
-        Math.min(1, (viewportHeight * 0.5 - rect.top) / viewportHeight)
-      );
-      const opacity = Math.max(0.2, 1 - fadeProgress * 0.9);
-      // Parallax: text slides downward as user scrolls, so it glides behind the cards section
-      const slideFactor = 0.4;
-      const translateY = rect.top <= 0 ? -rect.top * slideFactor : 0;
-      setHeroScrollStyle({ translateY, blur, opacity });
-    };
+    if (pathname !== "/") {
+      setScrollEffectReady(false);
+      return;
+    }
+    const t = setTimeout(() => setScrollEffectReady(true), 1600);
+    return () => clearTimeout(t);
+  }, [pathname]);
+
+  // Hero shrink/blur: use window.scrollY only (not Lenis) so we never get a wrong value that hides the hero
+  useEffect(() => {
+    if (!scrollEffectReady || pathname !== "/") return;
+    setHeroScrollStyle({ scale: 1, blur: 0 });
+    const handleScroll = () => updateHeroScroll(window.scrollY);
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrollEffectReady, pathname]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
-      <div className="relative z-10">
-        {/* Hero - scroll-driven parallax, blur, and slide */}
-        <section
-          ref={heroRef}
-          id="home"
-          className="min-h-[85vh] flex flex-col justify-center items-center text-center px-4 sm:px-6 md:px-8 lg:px-12 max-w-6xl mx-auto pt-24 pb-16"
+      {/* Hero text: fixed to viewport center, behind scrolling content; key forces remount on navigate back so entrance replays */}
+      <div
+        id="home"
+        className="fixed inset-0 z-0 flex items-center justify-center px-4 pointer-events-none"
+      >
+        <div
+          key={entranceKey}
+          className="will-change-transform origin-center text-center"
+          style={{
+            transform: `scale(${heroScrollStyle.scale})`,
+            filter: `blur(${heroScrollStyle.blur}px)`,
+            transition:
+              "transform 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          }}
         >
-          <div
-            className="will-change-transform"
-            style={{
-              transform: `translateY(${heroScrollStyle.translateY}px)`,
-              filter: `blur(${heroScrollStyle.blur}px)`,
-              opacity: heroScrollStyle.opacity,
-              transition: "filter 0.1s ease-out, opacity 0.1s ease-out",
-            }}
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-semibold tracking-tighter text-neutral-900 dark:text-white mb-4 uppercase whitespace-nowrap">
+            <span className={`inline-block ${runHeroEntrance ? "hero-entrance-1" : ""}`} style={!runHeroEntrance ? heroHiddenStyle : undefined}>Rasmus</span>
+            <span className={`inline-block ml-5 sm:ml-6 ${runHeroEntrance ? "hero-entrance-2" : ""}`} style={!runHeroEntrance ? heroHiddenStyle : undefined}>Mattsson</span>
+          </h1>
+          <p
+            className={`text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 font-normal uppercase tracking-wide max-w-2xl mx-auto text-center ${runHeroEntrance ? "hero-entrance-3" : ""}`}
+            style={!runHeroEntrance ? subtitleHiddenStyle : undefined}
           >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem] font-semibold tracking-tight text-neutral-900 dark:text-white mb-4 uppercase whitespace-nowrap">
-              Rasmus Mattsson
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg text-neutral-600 dark:text-neutral-400 font-normal uppercase tracking-wide max-w-2xl">
-              Product Designer from Sweden, currently living in Stockholm.
-            </p>
-          </div>
-        </section>
+            <span className="text-neutral-500 dark:text-neutral-200">Product Designer</span>
+            {" "}
+            from Sweden, currently living in Stockholm.
+          </p>
+        </div>
+      </div>
 
+      {/* Spacer so page content starts at expected height */}
+      <div className="min-h-[100vh]" aria-hidden />
+
+      {/* Main content: higher z-index and background so it scrolls over hero text */}
+      <div className="relative z-10 bg-white dark:bg-[#0a0a0a]">
         {/* Selected Works - two cards span almost full viewport width */}
-        <section className="px-5 sm:px-8 md:px-12 lg:px-16 py-16 md:py-24 w-full">
+        <section className="px-5 sm:px-8 md:px-12 lg:px-16 pt-2 md:pt-4 pb-16 md:pb-24 w-full border-t border-[#1a1a1a]">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter">
               Selected Works
             </h2>
             <Link
               href="/archives"
-              className="text-base font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4"
+              className="text-sm font-medium text-neutral-900 dark:text-white hover:opacity-80 transition-opacity underline underline-offset-4 uppercase"
             >
               See all works
             </Link>

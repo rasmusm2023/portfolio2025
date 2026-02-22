@@ -9,6 +9,7 @@ import {
 } from "./fonts";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
+import SmoothScroll from "./SmoothScroll";
 // import CustomCursor from "@/components/CustomCursor";
 import Header from "@/components/layout/Header";
 import PerformanceOptimizer from "@/components/performance/PerformanceOptimizer";
@@ -133,20 +134,22 @@ export default function RootLayout({
       <body
         className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
       >
-        <ErrorBoundary>
-          <ThemeProvider>
-            <NavbarProvider>
-              <CaseStudyProvider>
-                <PerformanceOptimizer />
-                <PerformanceMonitor />
-                <Header />
-                {/* <CustomCursor /> */}
-                <ClientLayout>{children}</ClientLayout>
-                <FloatingNavbar />
-              </CaseStudyProvider>
-            </NavbarProvider>
-          </ThemeProvider>
-        </ErrorBoundary>
+        <SmoothScroll>
+          <ErrorBoundary>
+            <ThemeProvider>
+              <NavbarProvider>
+                <CaseStudyProvider>
+                  <PerformanceOptimizer />
+                  <PerformanceMonitor />
+                  <Header />
+                  {/* <CustomCursor /> */}
+                  <ClientLayout>{children}</ClientLayout>
+                  <FloatingNavbar />
+                </CaseStudyProvider>
+              </NavbarProvider>
+            </ThemeProvider>
+          </ErrorBoundary>
+        </SmoothScroll>
       </body>
     </html>
   );

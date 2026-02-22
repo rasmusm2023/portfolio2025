@@ -1,4 +1,5 @@
 import {
+  Figtree,
   Hanken_Grotesk,
   Orbitron,
   Audiowide,
@@ -6,6 +7,12 @@ import {
   Instrument_Serif,
   Instrument_Sans,
 } from "next/font/google";
+
+export const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-figtree",
+  display: "swap",
+});
 
 export const hankenGrotesk = Hanken_Grotesk({
   subsets: ["latin"],

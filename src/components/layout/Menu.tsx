@@ -6,6 +6,8 @@ import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import gsap from "gsap";
 import { colors, withOpacity } from "@/styles/colors";
 import { useTheme } from "@/contexts/ThemeContext";
+import { figtree } from "@/app/fonts";
+import { useLenis } from "lenis/react";
 
 interface MenuItem {
   label: string;
@@ -24,6 +26,7 @@ const Menu = () => {
   const menuItems = useMemo<MenuItem[]>(
     () => [
       { label: "Home", href: "/" },
+      { label: "Works", href: "/works" },
       { label: "About", href: "/#about-me" },
       { label: "Contact", href: "/#contact" },
       { label: "Archives", href: "/archives" },
@@ -56,43 +59,32 @@ const Menu = () => {
       : withOpacity(colors.neutral[100], 0.4);
   };
 
-  // Scroll detection for sections on home-v2 page
+  // Scroll position from Lenis or window (for section detection)
+  const [scrollY, setScrollY] = useState(0);
+  const lenis = useLenis((instance) => setScrollY(instance.scroll));
+  useEffect(() => {
+    if (lenis) return;
+    const onScroll = () => setScrollY(window.scrollY);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [lenis]);
+
   useEffect(() => {
     if (pathname !== "/") {
       setActiveHash("");
       return;
     }
-
     const aboutSection = document.getElementById("about-me");
     const contactSection = document.getElementById("contact");
-
     if (!aboutSection || !contactSection) return;
-
-    const checkActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.3; // 30% from top of viewport
-      const aboutTop = aboutSection.offsetTop;
-      const contactTop = contactSection.offsetTop;
-
-      // Determine which section is currently in view
-      if (scrollPosition >= contactTop) {
-        setActiveHash("contact");
-      } else if (scrollPosition >= aboutTop) {
-        setActiveHash("about-me");
-      } else {
-        setActiveHash(""); // Home section
-      }
-    };
-
-    // Check initial position
-    setTimeout(checkActiveSection, 100);
-
-    // Listen to scroll events
-    window.addEventListener("scroll", checkActiveSection, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", checkActiveSection);
-    };
-  }, [pathname]);
+    const scrollPosition = scrollY + (typeof window !== "undefined" ? window.innerHeight * 0.3 : 0);
+    const aboutTop = aboutSection.offsetTop;
+    const contactTop = contactSection.offsetTop;
+    if (scrollPosition >= contactTop) setActiveHash("contact");
+    else if (scrollPosition >= aboutTop) setActiveHash("about-me");
+    else setActiveHash("");
+  }, [pathname, scrollY]);
 
   useEffect(() => {
     // Set active section based on current pathname
@@ -149,7 +141,7 @@ const Menu = () => {
   }, [pathname, movePill, menuItems, activeHash]);
 
   return (
-    <nav className="flex items-center justify-center">
+    <nav className={`flex items-center justify-center ${figtree.className}`}>
       <ul ref={menuRef} className="flex space-x-0 py-2 px-0 relative">
         <div
           ref={pillRef}
@@ -186,7 +178,8 @@ const Menu = () => {
               if (pathname === "/") {
                 const element = document.getElementById(hash);
                 if (element) {
-                  element.scrollIntoView({ behavior: "smooth", block: "start" });
+                  if (lenis) lenis.scrollTo(element, { offset: 0 });
+                  else element.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
               } else {
                 // If we're on a different page, navigate to home first, then scroll
@@ -205,10 +198,11 @@ const Menu = () => {
                   z-10
                   transition-all
                   duration-200
-                  font-bold
-                  text-sm
-                  xl:text-base
+                  font-semibold
+                  text-xs
+                  xl:text-sm
                   tracking-wide
+                  uppercase
                   px-4
                   sm:px-6
                   xl:px-8
