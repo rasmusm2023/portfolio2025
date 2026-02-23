@@ -308,7 +308,7 @@ const Header = () => {
 
       {/* Content Layer */}
       <div
-        className={`relative z-10 px-4 sm:px-6 xl:px-12 h-full ${hanken.className}`}
+        className={`relative z-10 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] h-full ${hanken.className}`}
       >
         <div className="flex justify-between items-center h-full">
           {/* Logo */}
@@ -319,12 +319,12 @@ const Header = () => {
             <img
               src="/assets/logos/rm/rm-logo-portfolio-white.svg"
               alt="Logo"
-              className="h-6 sm:h-7 xl:h-8 dark:block hidden"
+              className="h-5 sm:h-6 xl:h-7 dark:block hidden"
             />
             <img
               src="/assets/logos/rm/rm-logo-portfolio-dark.svg"
               alt="Logo"
-              className="h-6 sm:h-7 xl:h-8 block dark:hidden"
+              className="h-5 sm:h-6 xl:h-7 block dark:hidden"
             />
           </Link>
 
@@ -349,22 +349,6 @@ const Header = () => {
             )}
             {/* Theme Toggle Button */}
             <ThemeToggle />
-
-            {/* LinkedIn Button */}
-            <Link
-              href="https://www.linkedin.com/in/rasmus-mattsson/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative p-2 rounded-lg transition-all duration-200 hover:bg-neutral-100/10 dark:hover:bg-neutral-0/10 group"
-            >
-              <FontAwesomeIcon
-                icon={faLinkedinIn}
-                className="w-5 h-5 text-neutral-40 group-hover:text-neutral-0 transition-all duration-200"
-              />
-
-              {/* Hover effect */}
-              <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-neutral-100/5 to-neutral-0/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-            </Link>
 
             {/* My Resume Button */}
             <Link

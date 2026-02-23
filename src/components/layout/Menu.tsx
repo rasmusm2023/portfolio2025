@@ -203,9 +203,9 @@ const Menu = () => {
                   xl:text-sm
                   tracking-wide
                   uppercase
-                  px-4
-                  sm:px-6
-                  xl:px-8
+                  px-3
+                  sm:px-4
+                  xl:px-5
                   py-3
                   xl:py-4
                   rounded-full
