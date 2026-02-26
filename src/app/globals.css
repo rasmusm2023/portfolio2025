@@ -318,6 +318,17 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.84s both;
 }
 
+/* Works page: sequenced unblur + fade-in (title → filters → list) */
+.works-entrance-1 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+.works-entrance-2 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.2s both;
+}
+.works-entrance-3 {
+  animation: hero-entrance 0.7s cubic-bezier(0.33, 1, 0.68, 1) 0.4s both;
+}
+
 /* Selected Works case cards: fade + slide up when row reaches center of viewport (2-by-2) */
 .case-card-entrance {
   opacity: 0;
@@ -1619,4 +1630,19 @@ body.mobile-menu-open {
 
 .circular-scroll-text svg {
   display: block;
+}
+
+/* Works page: smooth fade when filter results change */
+@keyframes works-list-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.works-list-fade {
+  opacity: 0;
+  animation: works-list-fade-in 0.4s ease-out forwards;
 }

@@ -258,7 +258,7 @@ export default function Home() {
               Selected Works
             </h2>
             <Link
-              href="/archives"
+              href="/works"
               className="text-sm font-medium text-neutral-900 dark:text-white hover:opacity-80 transition-opacity underline underline-offset-4 uppercase"
             >
               See all works
