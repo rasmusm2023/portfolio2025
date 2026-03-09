@@ -55,7 +55,6 @@ function useStockholmTime(): { time: string; zone: string } {
 const Header = () => {
   const pathname = usePathname();
   const stockholmTime = useStockholmTime();
-  const [showBackground, setShowBackground] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [clickedMenuItem, setClickedMenuItem] = useState<string | null>(null);
   const [activeHash, setActiveHash] = useState<string>("");
@@ -63,30 +62,9 @@ const Header = () => {
   const menuTextRef = useRef<HTMLSpanElement>(null);
   const hamburgerRef = useRef<HTMLDivElement>(null);
   const xIconRef = useRef<HTMLDivElement>(null);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [scrollY, setScrollY] = useState(0);
-  const lenis = useLenis((instance) => {
-    setScrollY(instance.scroll);
-    setShowBackground(true);
-    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = setTimeout(() => setShowBackground(false), 1500);
-  });
-
-  useEffect(() => {
-    if (lenis) return;
-    let timeoutId: NodeJS.Timeout;
-    const handleScroll = () => {
-      setShowBackground(true);
-      if (timeoutId) clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => setShowBackground(false), 1500);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (timeoutId) clearTimeout(timeoutId);
-    };
-  }, [lenis]);
+  const lenis = useLenis((instance) => setScrollY(instance.scroll));
 
   // Close mobile menu when clicking outside
   useEffect(() => {
@@ -298,13 +276,9 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[60] h-16 sm:h-20 xl:h-24">
-      {/* Background Layer */}
-      <div
-        className={`absolute inset-0 transition-all duration-1000 mobile-header-bg xl:bg-transparent ${
-          showBackground ? "xl:bg-white/80 xl:dark:bg-[#0a0a0a]/80" : ""
-        }`}
-      />
+    <header className="fixed top-0 left-0 right-0 z-[60] h-12 sm:h-14 xl:h-16">
+      {/* Background Layer - always solid, never see-through */}
+      <div className="absolute inset-0 bg-white dark:bg-[#0a0a0a]" />
 
       {/* Content Layer */}
       <div
@@ -319,12 +293,12 @@ const Header = () => {
             <img
               src="/assets/logos/rm/rm-logo-portfolio-white.svg"
               alt="Logo"
-              className="h-5 sm:h-6 xl:h-7 dark:block hidden"
+              className="h-4 sm:h-5 xl:h-6 dark:block hidden"
             />
             <img
               src="/assets/logos/rm/rm-logo-portfolio-dark.svg"
               alt="Logo"
-              className="h-5 sm:h-6 xl:h-7 block dark:hidden"
+              className="h-4 sm:h-5 xl:h-6 block dark:hidden"
             />
           </Link>
 
@@ -431,7 +405,7 @@ const Header = () => {
 
       {/* Mobile Menu Full Screen */}
       <div
-        className={`mobile-menu 2xl:hidden fixed top-16 sm:top-20 xl:top-24 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-[#060608] z-50 transition-all duration-300 ease-in-out ${
+        className={`mobile-menu 2xl:hidden fixed top-12 sm:top-14 xl:top-16 left-0 right-0 bottom-0 bg-neutral-0 dark:bg-[#060608] z-50 transition-all duration-300 ease-in-out ${
           isMobileMenuOpen
             ? "opacity-100 visible translate-y-0"
             : "opacity-0 invisible translate-y-4"

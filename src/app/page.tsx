@@ -51,37 +51,37 @@ const services = [
     title: "UX Research",
     description:
       "I uncover user needs through research synthesis, interviews, and usability testing, turning insights into clear direction for product and design decisions.",
-    image: "https://picsum.photos/seed/ux-research/800/600",
+    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
   },
   {
     title: "UI Design",
     description:
       "I design scalable design systems and high-fidelity interfaces that are clear, accessible, and aligned with your product and brand.",
-    image: "https://picsum.photos/seed/ui-design/800/600",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop",
   },
   {
     title: "Product Strategy",
     description:
       "I help shape product discovery, prioritization, and roadmaps tied to outcomes—focusing on growth, retention, and continuous learning.",
-    image: "https://picsum.photos/seed/product-strategy/800/600",
+    image: "https://images.unsplash.com/photo-1558403194-611308249627?w=800&h=600&fit=crop",
   },
   {
     title: "Design Systems",
     description:
       "I build and document component libraries and patterns so teams can ship consistent, maintainable UIs at scale.",
-    image: "https://picsum.photos/seed/design-systems/800/600",
+    image: "https://images.unsplash.com/photo-1561070791-2526d31cc5b5?w=800&h=600&fit=crop",
   },
   {
     title: "Prototyping",
     description:
       "I create interactive prototypes to validate flows and interactions early, from concept to handoff for development.",
-    image: "https://picsum.photos/seed/prototyping/800/600",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
   },
   {
     title: "Frontend",
     description:
       "I implement designs in code when needed, using modern tools to bridge design and development and ship real products.",
-    image: "https://picsum.photos/seed/frontend/800/600",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
   },
 ];
 
@@ -102,12 +102,22 @@ export default function Home() {
   const [rowInView, setRowInView] = useState<boolean[]>(() =>
     Array(rowCount).fill(false)
   );
+  const servicesRowCount = Math.ceil(services.length / 3);
+  const servicesRowRefs = useRef<(HTMLElement | null)[]>([]);
+  const [servicesRowInView, setServicesRowInView] = useState<boolean[]>(() =>
+    Array(servicesRowCount).fill(false)
+  );
+  const [sectionTitlesInView, setSectionTitlesInView] = useState({
+    selectedWorks: false,
+    services: false,
+    aboutMe: false,
+  });
   const [heroScrollStyle, setHeroScrollStyle] = useState({
     scale: 1,
     blur: 0,
   });
 
-  // Case cards: fade + slide up when first card of each row reaches center of viewport (2-by-2)
+  // Case cards: entire row fades in when that row’s top edge reaches the center of the viewport
   useLayoutEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -123,8 +133,8 @@ export default function Home() {
         });
       },
       {
-        threshold: 0.1,
-        rootMargin: "-35% 0px -35% 0px", // trigger when row is in center ~30% of viewport
+        threshold: 0,
+        rootMargin: "0px 0px -50% 0px", // root = top half of viewport; trigger when row top reaches center
       }
     );
     const refs = rowRefs.current;
@@ -135,10 +145,8 @@ export default function Home() {
         observer.observe(el);
         if (typeof window !== "undefined") {
           const rect = el.getBoundingClientRect();
-          const centerY = rect.top + rect.height / 2;
           const viewportCenter = window.innerHeight / 2;
-          if (Math.abs(centerY - viewportCenter) < window.innerHeight * 0.4)
-            alreadyInView.push(i);
+          if (rect.top <= viewportCenter) alreadyInView.push(i);
         }
       }
     }
@@ -151,6 +159,73 @@ export default function Home() {
     }
     return () => observer.disconnect();
   }, [rowCount]);
+
+  // Services grid: same row entrance as Selected Works (row top reaches viewport center)
+  useLayoutEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const i = Number((entry.target as HTMLElement).dataset.rowIndex);
+          if (Number.isInteger(i) && i >= 0)
+            setServicesRowInView((prev) => {
+              const next = [...prev];
+              next[i] = true;
+              return next;
+            });
+        });
+      },
+      { threshold: 0, rootMargin: "0px 0px -50% 0px" }
+    );
+    const refs = servicesRowRefs.current;
+    const alreadyInView: number[] = [];
+    for (let i = 0; i < servicesRowCount; i++) {
+      const el = refs[i];
+      if (el) {
+        observer.observe(el);
+        if (typeof window !== "undefined") {
+          const rect = el.getBoundingClientRect();
+          const viewportCenter = window.innerHeight / 2;
+          if (rect.top <= viewportCenter) alreadyInView.push(i);
+        }
+      }
+    }
+    if (alreadyInView.length > 0) {
+      setServicesRowInView((prev) => {
+        const next = [...prev];
+        alreadyInView.forEach((i) => (next[i] = true));
+        return next;
+      });
+    }
+    return () => observer.disconnect();
+  }, [servicesRowCount]);
+
+  // Section titles: unblur + fade in when scrolled into view (left-to-right)
+  // Observe section elements (larger) so intersection fires reliably; set title in view when section enters
+  useEffect(() => {
+    const keys: ("selectedWorks" | "services" | "aboutMe")[] = ["selectedWorks", "services", "aboutMe"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const key = (entry.target as HTMLElement).getAttribute("data-section-name") as "selectedWorks" | "services" | "aboutMe" | null;
+          if (key && keys.includes(key))
+            setSectionTitlesInView((prev) => ({ ...prev, [key]: true }));
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px -5% 0px" }
+    );
+    const timer = setTimeout(() => {
+      const nodes = document.querySelectorAll<HTMLElement>("[data-section-name]");
+      nodes.forEach((el) => observer.observe(el));
+    }, 100);
+    return () => {
+      clearTimeout(timer);
+      const nodes = document.querySelectorAll<HTMLElement>("[data-section-name]");
+      nodes.forEach((el) => observer.unobserve(el));
+      observer.disconnect();
+    };
+  }, []);
 
   // Run entrance every time we're on home: new key + delay adding class so browser always runs the animation (works even if Next.js reuses the component)
   const [entranceKey, setEntranceKey] = useState(() => (typeof window !== "undefined" ? Date.now() : 0));
@@ -252,10 +327,17 @@ export default function Home() {
       {/* Main content: higher z-index and background so it scrolls over hero text */}
       <div className="relative z-10 bg-white dark:bg-[#0a0a0a]">
         {/* Selected Works - two cards span almost full viewport width */}
-        <section className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] pt-8 md:pt-12 pb-16 md:pb-24 w-full border-t border-neutral-200 dark:border-[#1a1a1a]">
+        <section
+          data-section-name="selectedWorks"
+          className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] pt-8 md:pt-12 pb-16 md:pb-24 w-full border-t border-neutral-200 dark:border-[#1a1a1a]"
+        >
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-6">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter">
-              Selected Works
+            <h2
+              data-section-title="selectedWorks"
+              className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter ${sectionTitlesInView.selectedWorks ? "section-title-in-view" : ""}`}
+            >
+              <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Selected</span>{" "}
+              <span className="section-title-word" style={{ ["--word-index" as string]: 1 }}>Works</span>
             </h2>
             <Link
               href="/works"
@@ -292,7 +374,7 @@ export default function Home() {
                     <h3 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white uppercase tracking-tight">
                       {work.title}
                     </h3>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-sm sm:text-base font-medium">
+                    <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg font-medium">
                       {work.subtitle}
                     </p>
                   </div>
@@ -302,7 +384,6 @@ export default function Home() {
                 <Link
                   href={work.link}
                   className={`group block case-card-entrance case-card-row-${rowIndex}`}
-                  style={{ ["--card-index" as string]: cardIndexInRow }}
                   aria-label={`View ${work.title} case study`}
                 >
                   {cardContent}
@@ -325,56 +406,107 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services - same image grid as Selected Works: 3×2, title on image, description slides in on hover */}
-        <section className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-16 md:py-24 w-full">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter">
-            Services
+        {/* Services - image grid: title at top, plus/minus icon top-right, description on hover */}
+        <section
+          data-section-name="services"
+          className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-16 md:py-24 w-full"
+        >
+          <h2
+            data-section-title="services"
+            className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter ${sectionTitlesInView.services ? "section-title-in-view" : ""}`}
+          >
+            <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Services</span>
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-            {services.map((service) => (
-              <article
-                key={service.title}
-                className="group block relative overflow-hidden bg-neutral-100 dark:bg-neutral-900 aspect-[6/5] sm:aspect-[1/1]"
-              >
+          <div
+            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ${servicesRowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
+          >
+            {services.map((service, index) => {
+              const rowIndex = Math.floor(index / 3);
+              const isFirstInRow = index % 3 === 0;
+              const article = (
+                <article
+                  key={service.title}
+                  className={`group block relative overflow-hidden bg-neutral-100 dark:bg-neutral-900 aspect-[6/5] sm:aspect-[1/1] case-card-entrance case-card-row-${rowIndex}`}
+                >
                 <Image
                   src={service.image}
                   alt=""
                   fill
-                  className="object-cover"
+                  className="object-cover transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:blur-[2px]"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
                 <div
-                  className="card-hover-overlay absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+                  className="services-card-overlay absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
                   aria-hidden
                 />
-                {/* Overlay bottom-left: title visible; on hover title slides up, description slides in just below */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent pt-24 pb-4 px-4 md:px-5">
-                  <div className="flex flex-col justify-end gap-1.5">
-                    <div className="max-h-0 overflow-hidden transition-[max-height] duration-300 ease-out group-hover:max-h-20">
+                {/* Overlay spanning full image: light by default, hover adds services-card-overlay for more darkness */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/10 pb-4 pt-4 px-4 md:px-5">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex flex-col gap-12 min-w-0">
+                      <h3 className="text-base sm:text-lg font-semibold text-white uppercase tracking-tight">
+                        {service.title}
+                      </h3>
                       <p
-                        className="text-white/90 text-xs sm:text-sm leading-relaxed font-semibold pt-0.5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+                        className="text-white/90 text-sm sm:text-base leading-relaxed font-medium opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
                         aria-hidden
                       >
                         {service.description}
                       </p>
                     </div>
-                    <h3 className="text-sm sm:text-base font-semibold text-white uppercase tracking-tight shrink-0 transition-transform duration-300 ease-out translate-y-0 group-hover:-translate-y-1">
-                      {service.title}
-                    </h3>
+                    {/* Plus icon: both lines spin on hover; vertical rotates 90° to form minus */}
+                    <div className="relative w-10 h-10 shrink-0 flex items-center justify-center text-white" aria-hidden>
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
+                        {/* Horizontal line: full spin on hover */}
+                        <line
+                          x1="4"
+                          y1="12"
+                          x2="20"
+                          y2="12"
+                          className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-180"
+                        />
+                        {/* Vertical line: rotates 90° on hover to overlap horizontal → minus */}
+                        <line
+                          x1="12"
+                          y1="4"
+                          x2="12"
+                          y2="20"
+                          className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-90"
+                        />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </article>
-            ))}
+              );
+              if (isFirstInRow) {
+                return (
+                  <div
+                    key={service.title}
+                    ref={(el) => { if (el) servicesRowRefs.current[rowIndex] = el; }}
+                    data-row-index={rowIndex}
+                    className="block"
+                  >
+                    {article}
+                  </div>
+                );
+              }
+              return <div key={service.title}>{article}</div>;
+            })}
           </div>
         </section>
 
         {/* Info - Jorge template style: content + image (same width as other sections, image right, same size as Services cards) */}
         <section
           id="about-me"
+          data-section-name="aboutMe"
           className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-16 md:py-24 w-full"
         >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter">
-            Info
+          <h2
+            data-section-title="aboutMe"
+            className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter ${sectionTitlesInView.aboutMe ? "section-title-in-view" : ""}`}
+          >
+            <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>About</span>{" "}
+            <span className="section-title-word" style={{ ["--word-index" as string]: 1 }}>Me</span>
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-2 gap-y-10 lg:gap-y-2">
@@ -384,9 +516,10 @@ export default function Home() {
                   What I do
                 </h3>
                 <p className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg leading-relaxed">
-                  I help teams and products find clarity and express it through
-                  strong, thoughtful design—from research and strategy to UI and
-                  implementation.
+                  I’m a product designer looking for my next role. I bring clarity
+                  and craft to digital products—from research and strategy to UI
+                  and implementation—and I’m keen to join a team where I can
+                  contribute and keep learning.
                 </p>
               </div>
               <div>
