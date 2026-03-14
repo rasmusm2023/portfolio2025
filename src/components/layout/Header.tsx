@@ -324,7 +324,7 @@ const Header = () => {
             {/* Theme Toggle Button */}
             <ThemeToggle />
 
-            {/* My Resume Button */}
+            {/* CV Button */}
             <Link
               href="https://drive.google.com/file/d/1M6ZNOPVbQJS9gK_46T3-ceFOe_YIpMVg/view?usp=sharing"
               target="_blank"
@@ -332,19 +332,18 @@ const Header = () => {
               className="text-sm inline-flex items-center justify-center gap-2 px-4 py-2 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-lg transition-all duration-200"
             >
               <FileText size={16} weight="regular" />
-              My resume
+              CV
             </Link>
 
-            {/* Playground Button */}
-            <Link href="/playground" className="shimmer-button">
-              <span className="text">
-                <LegoIcon
-                  weight="fill"
-                  className="w-5 h-5 fill-current shrink-0"
-                />
-                <span className="label">Playground</span>
+            {/* Playground Button - same style as CV, icon only centered by default, expands on hover with icon left */}
+            <Link
+              href="/playground"
+              className="group text-sm inline-flex items-center justify-center group-hover:justify-start gap-2 py-2 px-2 group-hover:px-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-lg transition-all duration-500 ease-in-out"
+            >
+              <LegoIcon weight="fill" className="w-5 h-5 fill-current shrink-0" />
+              <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-in-out group-hover:max-w-[200px] group-hover:opacity-100">
+                Playground
               </span>
-              <span className="shimmer"></span>
             </Link>
           </div>
 
@@ -546,7 +545,7 @@ const Header = () => {
               <span className="text-lg font-semibold">LinkedIn</span>
             </Link>
 
-            {/* My Resume Button */}
+            {/* CV Button */}
             <Link
               href="https://drive.google.com/file/d/1M6ZNOPVbQJS9gK_46T3-ceFOe_YIpMVg/view?usp=sharing"
               target="_blank"
@@ -559,13 +558,13 @@ const Header = () => {
                 weight="regular"
                 className="text-neutral-60 dark:text-neutral-40"
               />
-              <span className="text-lg font-semibold">My Resume</span>
+              <span className="text-lg font-semibold">CV</span>
             </Link>
 
-            {/* Playground Button */}
+            {/* Playground Button - same style as CV */}
             <Link
               href="/playground"
-              className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-purple-500 to-violet-500 text-white hover:from-purple-600 hover:to-violet-600 transition-all duration-200"
+              className="flex items-center gap-3 p-4 rounded-xl bg-neutral-10/50 dark:bg-[#060608]/50 backdrop-blur-sm border border-neutral-20/20 dark:border-neutral-80/20 text-neutral-100 dark:text-neutral-0 hover:bg-neutral-20/50 dark:hover:bg-neutral-80/50 transition-all duration-200"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <LegoIcon weight="fill" className="w-6 h-6" />

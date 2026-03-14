@@ -892,6 +892,99 @@ textarea::-webkit-scrollbar-thumb:hover {
   opacity: 1;
 }
 
+/* White Playground button: same expand + shimmer hover, white/light background + dark text */
+.shimmer-button-white {
+  font-weight: 600;
+  font-size: 1.2em;
+  background: linear-gradient(315deg, #fafafa 0%, #f5f5f5 47%, #e5e5e5 100%);
+  padding: 0.6em;
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  outline: none;
+  border-radius: 0.66em;
+  scale: 1;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+  min-width: 2.8em;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #171717;
+}
+.dark .shimmer-button-white {
+  background: linear-gradient(315deg, #e5e5e5 0%, #d4d4d4 47%, #a3a3a3 100%);
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #171717;
+}
+.shimmer-button-white::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from var(--mask), #e5e5e5, #d4d4d4, #fafafa, #e5e5e5);
+  border-radius: inherit;
+  animation: mask-rotate 2.5s linear infinite;
+  z-index: -2;
+}
+.dark .shimmer-button-white::before {
+  background: conic-gradient(from var(--mask), #a3a3a3, #d4d4d4, #e5e5e5, #a3a3a3);
+}
+.shimmer-button-white::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: inherit;
+  border-radius: calc(0.66em - 1px);
+  z-index: -1;
+}
+.shimmer-button-white .text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #171717;
+  white-space: nowrap;
+  width: 100%;
+  justify-content: flex-start;
+}
+.shimmer-button-white:not(:hover) .text {
+  justify-content: center;
+}
+.shimmer-button-white:hover {
+  padding: 0.6em 1em;
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.12);
+}
+.dark .shimmer-button-white:hover {
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.3);
+}
+.shimmer-button-white .text .label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.shimmer-button-white:hover .text .label {
+  max-width: 200px;
+  opacity: 1;
+}
+.shimmer-button-white .shimmer::before {
+  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.9),
+    0 0 7px 4px rgba(200, 200, 200, 0.6);
+}
+.shimmer-button-white .shimmer::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 3px 1px rgba(0, 0, 0, 0.06);
+}
+.shimmer-button-white:hover .shimmer::before,
+.shimmer-button-white:hover .shimmer::after {
+  opacity: 1;
+}
+
 /* Green shimmer button variant */
 .shimmer-button-green {
   color: theme("colors.neutral.0");

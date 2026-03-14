@@ -86,10 +86,14 @@ const services = [
 ];
 
 const career = [
-  { period: "2025", role: "Product Designer & Developer, Noted" },
-  { period: "Jan – May 2025", role: "Product Designer Intern, Zmartrest AI" },
-  { period: "Nov 2024 – Jan 2025", role: "UX/UI Designer Intern, Xbrandify" },
-  { period: "Sep – Nov 2024", role: "UX/UI Designer, Fokus" },
+  { period: "Sep 2023 – Jun 2025", role: "Full Time UX/UI Design Student at Chas Academy" },
+  { period: "Jan – May 2025", role: "UX/UI Designer Intern at Zmartrest AI" },
+  { period: "Nov – Dec 2024", role: "UX/UI Designer Intern at Xbrandify" },
+];
+
+const personalProjects = [
+  { period: "2025 – Present", role: "Product Designer & Developer on Noted" },
+  { period: "2025 – Present", role: "Product Designer & Developer on Basecamp.space" },
 ];
 
 const heroHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "translateY(14px)" as const };
@@ -406,7 +410,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services - image grid: title at top, plus/minus icon top-right, description on hover */}
+        {/* Skills - image grid: title at top, plus/minus icon top-right, description on hover */}
         <section
           data-section-name="services"
           className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-16 md:py-24 w-full"
@@ -415,7 +419,7 @@ export default function Home() {
             data-section-title="services"
             className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter ${sectionTitlesInView.services ? "section-title-in-view" : ""}`}
           >
-            <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Services</span>
+            <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Skills</span>
           </h2>
           <div
             className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ${servicesRowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
@@ -509,54 +513,60 @@ export default function Home() {
             <span className="section-title-word" style={{ ["--word-index" as string]: 1 }}>Me</span>
           </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-2 gap-y-10 lg:gap-y-2">
-            <div className="flex flex-col gap-10 md:gap-12 order-2 md:order-1 lg:col-span-2">
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-8">
+            <div className="flex flex-col gap-8 md:gap-10 order-2 md:order-1 lg:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
                   What I do
                 </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                   I’m a product designer looking for my next role. I bring clarity
                   and craft to digital products—from research and strategy to UI
                   and implementation—and I’m keen to join a team where I can
                   contribute and keep learning.
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
                   My background
                 </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                   I’ve designed across health-tech, travel, retail, SaaS, and
                   AI—at startups and larger companies. I studied UX/UI design and
                   frontend at Chas Academy in Stockholm and accessibility at Axess
                   Labs.
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-2">
+              <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
                   My approach
                 </h3>
-                <p className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg leading-relaxed">
+                <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                   I start with empathy and user-centered methods: asking
                   questions, listening, and iterating so the result is honest,
                   usable, and built to last.
                 </p>
               </div>
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-3">
+              <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
                   Career
                 </h3>
-                <ul className="space-y-2">
+                <ul className="space-y-2 text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                   {career.map((item) => (
-                    <li
-                      key={item.role}
-                      className="text-neutral-700 dark:text-neutral-300 text-base md:text-lg"
-                    >
-                      <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-                        ({item.period})
-                      </span>{" "}
-                      {item.role}
+                    <li key={item.role}>
+                      {item.period} — {item.role}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                  Personal projects
+                </h3>
+                <ul className="space-y-2 text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+                  {personalProjects.map((item) => (
+                    <li key={item.role}>
+                      {item.period} — {item.role}
                     </li>
                   ))}
                 </ul>
