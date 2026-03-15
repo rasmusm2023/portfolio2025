@@ -27,7 +27,7 @@ const Menu = () => {
     () => [
       { label: "Home", href: "/" },
       { label: "Works", href: "/works" },
-      { label: "About", href: "/#about-me" },
+      { label: "About Me", href: "/#about-me" },
       { label: "Contact", href: "/#contact" },
       { label: "Archives", href: "/archives" },
     ],
@@ -77,12 +77,17 @@ const Menu = () => {
     }
     const aboutSection = document.getElementById("about-me");
     const contactSection = document.getElementById("contact");
-    if (!aboutSection || !contactSection) return;
-    const scrollPosition = scrollY + (typeof window !== "undefined" ? window.innerHeight * 0.3 : 0);
-    const aboutTop = aboutSection.offsetTop;
-    const contactTop = contactSection.offsetTop;
-    if (scrollPosition >= contactTop) setActiveHash("contact");
-    else if (scrollPosition >= aboutTop) setActiveHash("about-me");
+    if (!aboutSection || !contactSection || typeof window === "undefined") return;
+    const aboutTop = aboutSection.getBoundingClientRect().top + scrollY;
+    const contactTop = contactSection.getBoundingClientRect().top + scrollY;
+    const contactRect = contactSection.getBoundingClientRect();
+    const isContactInView = contactRect.top < window.innerHeight && contactRect.bottom > 0;
+    const isAtBottom = scrollY >= document.documentElement.scrollHeight - window.innerHeight - 50;
+    // Earlier detection for About Me (0.6 viewport) so it activates before you reach the section
+    const aboutTrigger = scrollY + window.innerHeight * 0.6;
+    const contactTrigger = scrollY + window.innerHeight * 0.3;
+    if (contactTrigger >= contactTop || isContactInView || isAtBottom) setActiveHash("contact");
+    else if (aboutTrigger >= aboutTop) setActiveHash("about-me");
     else setActiveHash("");
   }, [pathname, scrollY]);
 

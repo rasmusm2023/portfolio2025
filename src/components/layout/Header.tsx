@@ -108,14 +108,41 @@ const Header = () => {
     }
     const aboutSection = document.getElementById("about-me");
     const contactSection = document.getElementById("contact");
-    if (!aboutSection || !contactSection) return;
-    const scrollPosition = scrollY + (typeof window !== "undefined" ? window.innerHeight * 0.3 : 0);
-    const aboutTop = aboutSection.offsetTop;
-    const contactTop = contactSection.offsetTop;
-    if (scrollPosition >= contactTop) setActiveHash("contact");
-    else if (scrollPosition >= aboutTop) setActiveHash("about-me");
+    if (!aboutSection || !contactSection || typeof window === "undefined") return;
+    const aboutTop = aboutSection.getBoundingClientRect().top + scrollY;
+    const contactTop = contactSection.getBoundingClientRect().top + scrollY;
+    const contactRect = contactSection.getBoundingClientRect();
+    const isContactInView = contactRect.top < window.innerHeight && contactRect.bottom > 0;
+    const isAtBottom = scrollY >= document.documentElement.scrollHeight - window.innerHeight - 50;
+    // Earlier detection for About Me (0.6 viewport) so it activates before you reach the section
+    const aboutTrigger = scrollY + window.innerHeight * 0.6;
+    const contactTrigger = scrollY + window.innerHeight * 0.3;
+    if (contactTrigger >= contactTop || isContactInView || isAtBottom) setActiveHash("contact");
+    else if (aboutTrigger >= aboutTop) setActiveHash("about-me");
     else setActiveHash("");
   }, [pathname, scrollY]);
+
+  // Scroll to section when landing on / with a hash (e.g. /#about-me or /#contact)
+  const hasScrolledToHash = useRef(false);
+  useEffect(() => {
+    if (pathname !== "/") {
+      hasScrolledToHash.current = false;
+      return;
+    }
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash?.slice(1);
+    if (!hash || (hash !== "about-me" && hash !== "contact")) return;
+    if (hasScrolledToHash.current) return;
+    hasScrolledToHash.current = true;
+    const timeout = setTimeout(() => {
+      const element = document.getElementById(hash);
+      if (element) {
+        if (lenis) lenis.scrollTo(element, { offset: 0 });
+        else element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, 150);
+    return () => clearTimeout(timeout);
+  }, [pathname, lenis]);
 
   // Component unmount cleanup
   useEffect(() => {
@@ -448,7 +475,7 @@ const Header = () => {
                 <Link
                   href="/#about-me"
                   className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
-                    clickedMenuItem === "About"
+                    clickedMenuItem === "About Me"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === "about-me"
                       ? "text-neutral-100 dark:text-neutral-0"
@@ -456,7 +483,7 @@ const Header = () => {
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
-                    handleMenuItemClick("About");
+                    handleMenuItemClick("About Me");
                     setIsMobileMenuOpen(false);
                     
                     // If we're on the home page, scroll to the section
@@ -474,7 +501,7 @@ const Header = () => {
                     }
                   }}
                 >
-                  About
+                  About Me
                 </Link>
               </li>
               <li>

@@ -86,14 +86,14 @@ const services = [
 ];
 
 const career = [
-  { period: "Sep 2023 – Jun 2025", role: "Full Time UX/UI Design Student at Chas Academy" },
-  { period: "Jan – May 2025", role: "UX/UI Designer Intern at Zmartrest AI" },
-  { period: "Nov – Dec 2024", role: "UX/UI Designer Intern at Xbrandify" },
+  { period: "(2025)", role: "UX/UI Designer Intern at Zmartrest AI" },
+  { period: "(2024)", role: "UX/UI Designer Intern at Xbrandify" },
+  { period: "(2023 – 2025)", role: "Full Time UX/UI Design Student at Chas Academy" },
 ];
 
 const personalProjects = [
-  { period: "2025 – Present", role: "Product Designer & Developer on Noted" },
-  { period: "2025 – Present", role: "Product Designer & Developer on Basecamp.space" },
+  { period: "(2025 – now)", role: "Product Designer & Developer on Noted" },
+  { period: "(2025 – now)", role: "Product Designer & Developer on Basecamp.space" },
 ];
 
 const heroHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "translateY(14px)" as const };
@@ -574,8 +574,8 @@ export default function Home() {
             </div>
             <div className="relative aspect-[6/5] sm:aspect-[1/1] overflow-hidden bg-neutral-200 dark:bg-neutral-800 order-1 md:order-2 lg:col-span-1">
               <Image
-                src="https://picsum.photos/seed/about-info/600/800"
-                alt=""
+                src="/assets/about/profile-4.png"
+                alt="Rasmus Mattsson"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -584,12 +584,13 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Get in touch */}
-        <div id="contact" className="pt-16 pb-16">
-          <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px]">
-            <Footer />
-          </div>
-        </div>
+        {/* Get in touch / Contact - reduced vertical padding */}
+        <section
+          id="contact"
+          className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-10 md:py-14 w-full border-t border-neutral-200 dark:border-[#1a1a1a]"
+        >
+          <Footer />
+        </section>
       </div>
     </div>
   );
