@@ -51,13 +51,13 @@ const services = [
     title: "UX Research",
     description:
       "I uncover user needs through research synthesis, interviews, and usability testing, turning insights into clear direction for product and design decisions.",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+    image: "/assets/skills/ux-research.webp",
   },
   {
     title: "UI Design",
     description:
       "I design scalable design systems and high-fidelity interfaces that are clear, accessible, and aligned with your product and brand.",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=600&fit=crop",
+    image: "/assets/skills/ui-design.webp",
   },
   {
     title: "Product Strategy",
