@@ -51,37 +51,43 @@ const services = [
     title: "UX Research",
     description:
       "I uncover user needs through research synthesis, interviews, and usability testing, turning insights into clear direction for product and design decisions.",
-    image: "/assets/skills/ux-research.webp",
+    accentGradient:
+      "linear-gradient(145deg, #0f766e 0%, #14b8a6 38%, #5eead4 72%, #a7f3d0 100%)",
   },
   {
     title: "UI Design",
     description:
       "I design scalable design systems and high-fidelity interfaces that are clear, accessible, and aligned with your product and brand.",
-    image: "/assets/skills/ui-design.webp",
-  },
-  {
-    title: "Product Strategy",
-    description:
-      "I help shape product discovery, prioritization, and roadmaps tied to outcomes—focusing on growth, retention, and continuous learning.",
-    image: "https://images.unsplash.com/photo-1558403194-611308249627?w=800&h=600&fit=crop",
+    accentGradient:
+      "linear-gradient(145deg, #6d28d9 0%, #8b5cf6 35%, #c084fc 65%, #f0abfc 100%)",
   },
   {
     title: "Design Systems",
     description:
       "I build and document component libraries and patterns so teams can ship consistent, maintainable UIs at scale.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d31cc5b5?w=800&h=600&fit=crop",
+    accentGradient:
+      "linear-gradient(145deg, #1d4ed8 0%, #2563eb 35%, #38bdf8 70%, #7dd3fc 100%)",
+  },
+  {
+    title: "Product Strategy",
+    description:
+      "I help shape product discovery, prioritization, and roadmaps tied to outcomes—focusing on growth, retention, and continuous learning.",
+    accentGradient:
+      "linear-gradient(145deg, #c2410c 0%, #ea580c 32%, #fb923c 62%, #fcd34d 100%)",
   },
   {
     title: "Prototyping",
     description:
       "I create interactive prototypes to validate flows and interactions early, from concept to handoff for development.",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop",
+    accentGradient:
+      "linear-gradient(145deg, #be185d 0%, #db2777 35%, #f472b6 68%, #fbcfe8 100%)",
   },
   {
     title: "Frontend",
     description:
       "I implement designs in code when needed, using modern tools to bridge design and development and ship real products.",
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
+    accentGradient:
+      "linear-gradient(145deg, #047857 0%, #059669 32%, #34d399 65%, #a7f3d0 100%)",
   },
 ];
 
@@ -325,8 +331,8 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Spacer so page content starts at expected height */}
-      <div className="min-h-[100vh]" aria-hidden />
+      {/* Spacer: less than full viewport so Selected Works teases above the fold */}
+      <div className="min-h-[85vh]" aria-hidden />
 
       {/* Main content: higher z-index and background so it scrolls over hero text */}
       <div className="relative z-10 bg-white dark:bg-[#0a0a0a]">
@@ -410,77 +416,74 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Skills - image grid: title at top, plus/minus icon top-right, description on hover */}
+        {/* Skills — gradient morphs into alternating bottom corners (clip-path), black fills the rest */}
         <section
           data-section-name="services"
-          className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-16 md:py-24 w-full"
+          className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-10 md:py-14 w-full"
         >
           <h2
             data-section-title="services"
-            className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white mb-6 uppercase tracking-tighter ${sectionTitlesInView.services ? "section-title-in-view" : ""}`}
+            className={`text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white mb-4 md:mb-5 uppercase tracking-tighter ${sectionTitlesInView.services ? "section-title-in-view" : ""}`}
           >
             <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Skills</span>
           </h2>
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ${servicesRowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
+            className={`skills-cards-root grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ${servicesRowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
           >
             {services.map((service, index) => {
               const rowIndex = Math.floor(index / 3);
               const isFirstInRow = index % 3 === 0;
+              const cornerPos =
+                index % 2 === 0
+                  ? ({ "--skills-corner-x": "100%", "--skills-corner-y": "100%" } as const)
+                  : ({ "--skills-corner-x": "0%", "--skills-corner-y": "100%" } as const);
               const article = (
                 <article
-                  key={service.title}
-                  className={`group block relative overflow-hidden bg-neutral-100 dark:bg-neutral-900 aspect-[6/5] sm:aspect-[1/1] case-card-entrance case-card-row-${rowIndex}`}
+                  tabIndex={0}
+                  className={`group relative overflow-hidden aspect-[3/2] sm:aspect-[4/3] case-card-entrance case-card-row-${rowIndex} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950`}
                 >
-                <Image
-                  src={service.image}
-                  alt=""
-                  fill
-                  className="object-cover transition-[transform,filter] duration-700 ease-in-out group-hover:scale-[1.04] group-hover:blur-[2px]"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
-                <div
-                  className="services-card-overlay absolute inset-0 pointer-events-none opacity-0 transition-opacity duration-700 ease-in-out group-hover:opacity-100"
-                  aria-hidden
-                />
-                {/* Overlay spanning full image: light by default, hover adds services-card-overlay for more darkness */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/25 to-black/10 pb-4 pt-4 px-4 md:px-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex flex-col gap-12 min-w-0">
-                      <h3 className="text-base sm:text-lg font-semibold text-white uppercase tracking-tight">
-                        {service.title}
-                      </h3>
-                      <p
-                        className="text-white/90 text-sm sm:text-base leading-relaxed font-medium opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
+                  <div className="absolute inset-0 pointer-events-none bg-black" aria-hidden />
+                  <div
+                    className="skills-card-gradient-morph absolute inset-0"
+                    style={{
+                      backgroundImage: service.accentGradient,
+                      ...cornerPos,
+                    }}
+                  />
+                  <div className="absolute inset-0 z-10 pb-3 pt-3 px-4 md:px-5 flex flex-col">
+                    <div className="flex items-start justify-between gap-3 flex-1 min-h-0">
+                      <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
+                        <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.4)]">
+                          {service.title}
+                        </h3>
+                        <p className="text-base sm:text-lg font-normal leading-snug text-neutral-300 dark:text-neutral-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                          — {service.description}
+                        </p>
+                      </div>
+                      <div
+                        className="relative w-10 h-10 shrink-0 flex items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
                         aria-hidden
                       >
-                        {service.description}
-                      </p>
-                    </div>
-                    {/* Plus icon: both lines spin on hover; vertical rotates 90° to form minus */}
-                    <div className="relative w-10 h-10 shrink-0 flex items-center justify-center text-white" aria-hidden>
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
-                        {/* Horizontal line: full spin on hover */}
-                        <line
-                          x1="4"
-                          y1="12"
-                          x2="20"
-                          y2="12"
-                          className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-180"
-                        />
-                        {/* Vertical line: rotates 90° on hover to overlap horizontal → minus */}
-                        <line
-                          x1="12"
-                          y1="4"
-                          x2="12"
-                          y2="20"
-                          className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-90"
-                        />
-                      </svg>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round">
+                          <line
+                            x1="4"
+                            y1="12"
+                            x2="20"
+                            y2="12"
+                            className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-180 group-focus-within:rotate-180"
+                          />
+                          <line
+                            x1="12"
+                            y1="4"
+                            x2="12"
+                            y2="20"
+                            className="origin-center transition-transform duration-500 ease-in-out group-hover:rotate-90 group-focus-within:rotate-90"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </article>
+                </article>
               );
               if (isFirstInRow) {
                 return (

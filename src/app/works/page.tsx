@@ -25,9 +25,12 @@ interface WorkEntry {
   primaryTag: PrimaryTag;
   /** Secondary tags (lower hierarchy): e.g. DESIGN SYSTEMS, PROTOTYPING */
   categories: string[];
+  /** Case study URL; ignored when comingSoon is true */
   link: string;
   /** Placeholder image for hover (right-side diagonal reveal) */
   image: string;
+  /** Row is preview-only (no navigation to a case study yet) */
+  comingSoon?: boolean;
 }
 
 const CASE_STUDIES: WorkEntry[] = [
@@ -58,6 +61,28 @@ const CASE_STUDIES: WorkEntry[] = [
     link: "/case-studies/zmartrest-ai",
     image: "https://picsum.photos/seed/zmartrest/800/500",
   },
+  {
+    id: "el-portero",
+    title: "El Portero",
+    subtitle:
+      "A website for a restaurant in Spain—I designed and built it end-to-end, including an admin portal hooked into booking and payment systems.",
+    primaryTag: "DESIGN & DEVELOPMENT",
+    categories: ["WEB", "BOOKING & PAYMENTS"],
+    link: "#",
+    image: "https://picsum.photos/seed/el-portero/800/500",
+    comingSoon: true,
+  },
+  {
+    id: "basecamp-space",
+    title: "basecamp.space",
+    subtitle:
+      "Save and organize links you need to remember—an empowered bookmark experience I designed and developed end-to-end.",
+    primaryTag: "DESIGN & DEVELOPMENT",
+    categories: ["PRODUCT", "FULL STACK"],
+    link: "#",
+    image: "https://picsum.photos/seed/basecamp-space/800/500",
+    comingSoon: true,
+  },
 ];
 
 const ARCHIVES_ENTRY: WorkEntry = {
@@ -69,6 +94,87 @@ const ARCHIVES_ENTRY: WorkEntry = {
   link: "/archives",
   image: "https://picsum.photos/seed/archives/800/500",
 };
+
+function WorkProjectRow({ work }: { work: WorkEntry }) {
+  const rowInner = (
+    <div className="flex items-center justify-between min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:min-h-[200px] xl:min-h-[220px] pl-0 pr-4 sm:pr-6 md:pr-8 lg:pr-10 py-5 md:py-6 transition-[padding] duration-300 group-hover:pl-5 group-hover:sm:pl-6 group-hover:md:pl-7 group-hover:lg:pl-8">
+      <div className="flex flex-col gap-2 z-10 max-w-xl">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h2
+            className={`text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight text-neutral-900 dark:text-white transition-colors duration-300 ${
+              work.comingSoon
+                ? "group-hover:text-neutral-800 dark:group-hover:text-neutral-100"
+                : "group-hover:text-white dark:group-hover:text-black"
+            }`}
+          >
+            {work.title}
+          </h2>
+          {work.comingSoon && (
+            <span className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 border border-neutral-300 dark:border-neutral-600 px-2 py-0.5 rounded-full shrink-0">
+              Coming soon
+            </span>
+          )}
+        </div>
+        <p className="text-base sm:text-lg font-normal text-neutral-500 dark:text-neutral-400 leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:text-neutral-300 dark:group-hover:text-neutral-600">
+          — {work.subtitle}
+        </p>
+        <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 text-sm uppercase tracking-wider transition-colors duration-300">
+          <span
+            className={`font-medium transition-colors duration-300 ${
+              work.comingSoon
+                ? "text-neutral-700 dark:text-neutral-300 group-hover:text-neutral-800 dark:group-hover:text-neutral-200"
+                : "text-neutral-700 dark:text-neutral-300 group-hover:text-white dark:group-hover:text-neutral-900"
+            }`}
+          >
+            {work.primaryTag}
+          </span>
+          {work.categories.length > 0 && (
+            <>
+              <span className="text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-200 dark:group-hover:text-neutral-700" aria-hidden>
+                ·
+              </span>
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-200 dark:group-hover:text-neutral-700">
+                {work.categories.join(" · ")}
+              </span>
+            </>
+          )}
+        </div>
+      </div>
+      <div
+        className="works-row-image absolute right-0 top-0 bottom-0 w-[48%] min-w-[240px] max-w-[480px] opacity-0 pointer-events-none transition-opacity duration-500 ease-out group-hover:opacity-100"
+        aria-hidden
+      >
+        <div
+          className="absolute inset-0 bg-neutral-100 dark:bg-neutral-100 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
+          style={{
+            clipPath: "polygon(22% 0, 100% 0, 100% 100%, 0% 100%)",
+          }}
+        >
+          <Image src={work.image} alt="" fill className="object-cover" sizes="(max-width: 1024px) 400px, 480px" />
+        </div>
+      </div>
+    </div>
+  );
+
+  const interactiveClasses =
+    "works-row group block border-b border-neutral-100 dark:border-neutral-700 relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-black dark:hover:bg-white";
+  const comingSoonClasses =
+    "works-row group block border-b border-neutral-100 dark:border-neutral-700 relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-neutral-100 dark:hover:bg-neutral-900/60 cursor-default";
+
+  if (work.comingSoon) {
+    return (
+      <div className={comingSoonClasses} aria-disabled="true" aria-label={`${work.title} — coming soon`}>
+        {rowInner}
+      </div>
+    );
+  }
+
+  return (
+    <Link href={work.link} className={interactiveClasses} aria-label={`View ${work.title}`}>
+      {rowInner}
+    </Link>
+  );
+}
 
 const worksPageHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "translateY(14px)" as const };
 
@@ -142,55 +248,7 @@ export default function WorksPage() {
           <div key={selectedFilter} className="works-list-fade">
           {/* Case studies */}
           {filteredCaseStudies.map((work) => (
-            <Link
-              key={work.id}
-              href={work.link}
-              className="works-row group block border-b border-neutral-100 dark:border-neutral-700 relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-black dark:hover:bg-white"
-              aria-label={`View ${work.title}`}
-            >
-              <div className="flex items-center justify-between min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:min-h-[200px] xl:min-h-[220px] pl-0 pr-4 sm:pr-6 md:pr-8 lg:pr-10 py-5 md:py-6 transition-[padding] duration-300 group-hover:pl-5 group-hover:sm:pl-6 group-hover:md:pl-7 group-hover:lg:pl-8">
-                <div className="flex flex-col gap-2 z-10 max-w-xl">
-                  <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-extrabold tracking-tight text-neutral-900 dark:text-white transition-colors duration-300 group-hover:text-white dark:group-hover:text-black">
-                    {work.title}
-                  </h2>
-                  <p className="text-base sm:text-lg font-normal text-neutral-500 dark:text-neutral-400 leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:text-neutral-300 dark:group-hover:text-neutral-600">
-                    — {work.subtitle}
-                  </p>
-                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0 text-sm uppercase tracking-wider transition-colors duration-300">
-                    <span className="font-medium text-neutral-700 dark:text-neutral-300 group-hover:text-white dark:group-hover:text-neutral-900">
-                      {work.primaryTag}
-                    </span>
-                    {work.categories.length > 0 && (
-                      <>
-                        <span className="text-neutral-400 dark:text-neutral-500 group-hover:text-neutral-200 dark:group-hover:text-neutral-700" aria-hidden>·</span>
-                        <span className="text-xs text-neutral-500 dark:text-neutral-400 group-hover:text-neutral-200 dark:group-hover:text-neutral-700">
-                          {work.categories.join(" · ")}
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-                <div
-                  className="works-row-image absolute right-0 top-0 bottom-0 w-[48%] min-w-[240px] max-w-[480px] opacity-0 pointer-events-none transition-opacity duration-500 ease-out group-hover:opacity-100"
-                  aria-hidden
-                >
-                  <div
-                    className="absolute inset-0 bg-neutral-100 dark:bg-neutral-100 transition-transform duration-700 ease-out group-hover:scale-[1.02]"
-                    style={{
-                      clipPath: "polygon(22% 0, 100% 0, 100% 100%, 0% 100%)",
-                    }}
-                  >
-                    <Image
-                      src={work.image}
-                      alt=""
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 400px, 480px"
-                    />
-                  </div>
-                </div>
-              </div>
-            </Link>
+            <WorkProjectRow key={work.id} work={work} />
           ))}
 
           {/* Archives — lower contrast (navigation to other work, not a case study) */}

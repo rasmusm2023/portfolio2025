@@ -389,15 +389,21 @@ textarea::-webkit-scrollbar-thumb:hover {
   );
 }
 
-/* Services cards: dark overlay (darkest at top, lighter toward bottom), entire image affected */
-.services-card-overlay {
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.5) 40%,
-    rgba(0, 0, 0, 0.35) 70%,
-    rgba(0, 0, 0, 0.25) 100%
-  );
+/* Skills cards: full gradient morphs into corner via clip-path (black shows outside circle) */
+.skills-card-gradient-morph {
+  clip-path: circle(155% at var(--skills-corner-x, 100%) var(--skills-corner-y, 100%));
+  transition: clip-path 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-card-gradient-morph {
+    transition-duration: 0.05s;
+  }
+}
+
+.skills-cards-root article.group:hover .skills-card-gradient-morph,
+.skills-cards-root article.group:focus-within .skills-card-gradient-morph {
+  clip-path: circle(46% at var(--skills-corner-x, 100%) var(--skills-corner-y, 100%));
 }
 
 @keyframes mask-rotate {

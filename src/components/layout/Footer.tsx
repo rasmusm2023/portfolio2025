@@ -13,6 +13,28 @@ const socialLinkClass =
 const getInTouchClass =
   "inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter hover:opacity-80 transition-opacity group";
 
+/** Light: white lift + soft shadow (matches dark layered panels). Dark: translucent stack */
+const chatCardShellClass =
+  "bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
+
+const chatEmailBoxCopiedClass =
+  "border border-emerald-300 bg-emerald-50 dark:bg-green-950/30 dark:border-green-800/50";
+
+const chatEmailBoxIdleClass =
+  "border border-neutral-20 bg-white hover:bg-neutral-10 hover:border-neutral-30 dark:bg-neutral-800/50 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:hover:border-neutral-500";
+
+/** Outline secondary actions (e.g. Cancel) */
+const chatOutlineButtonClass =
+  "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 hover:border-neutral-400 dark:border-neutral-600 dark:bg-transparent dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-500";
+
+/** Opens form — hover matches filled primary (dark surface, light label) */
+const chatOpenFormButtonClass =
+  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 dark:border-neutral-500 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-900 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
+
+/** Light: no ring (avoids browser blue focus); neutral border only when focused */
+const chatFieldSurfaceClass =
+  "bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent shadow-[inset_0_1px_3px_rgba(15,23,42,0.06)] dark:shadow-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus:border-neutral-900 dark:focus:border-neutral-400 transition-[color,background-color,border-color,box-shadow] duration-200";
+
 // Custom Floating Label Input Component
 function FloatingLabelInput({
   id,
@@ -95,7 +117,7 @@ function FloatingLabelInput({
           onBlur={handleBlur}
           onChange={handleChange}
           style={{ height: `${textareaHeight}px` }}
-          className="w-full px-4 py-4 pr-12 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 transition-all duration-200 resize-none overflow-y-auto"
+          className={`w-full px-4 py-4 pr-12 ${chatFieldSurfaceClass} resize-none overflow-y-auto`}
           placeholder={placeholder}
         />
         <div
@@ -111,7 +133,7 @@ function FloatingLabelInput({
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg"
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg shadow-sm dark:shadow-none"
               : "top-3 text-base text-neutral-500 dark:text-neutral-400 font-medium"
           }`}
         >
@@ -132,15 +154,15 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 focus:border-neutral-400 dark:focus:border-neutral-500 transition-all duration-200"
+        className={`w-full px-4 py-4 ${chatFieldSurfaceClass}`}
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
-          isActive
-            ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-500 dark:text-neutral-400 font-medium"
+            isActive
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg shadow-sm dark:shadow-none"
+              : "top-1/2 -translate-y-1/2 text-base text-neutral-500 dark:text-neutral-400 font-medium"
         }`}
       >
         {placeholder}
@@ -368,26 +390,26 @@ const Footer = () => {
             <div className="w-[32rem] shrink-0">
               <div
                 ref={chatCardRef}
-                className="bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 relative overflow-hidden"
+                className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
               >
                 <div className="relative z-10">
-                  <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-6">
+                  <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
                     Let's have a chat
                   </h3>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email Alternative - Prioritized at top */}
                     <div
-                      className={`text-center space-y-4 p-5 rounded-xl border transition-colors duration-200 cursor-pointer ${
+                      className={`text-center space-y-4 p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
                         emailCopied
-                          ? "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/50"
-                          : "bg-neutral-100/80 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600"
+                          ? chatEmailBoxCopiedClass
+                          : chatEmailBoxIdleClass
                       }`}
                       onClick={handleCopyEmail}
                     >
                       <span
                         className={`block font-medium text-base transition-colors ${
                           emailCopied
-                            ? "text-green-700 dark:text-green-400"
+                            ? "text-emerald-800 dark:text-green-400"
                             : "text-neutral-900 dark:text-white"
                         }`}
                       >
@@ -398,7 +420,7 @@ const Footer = () => {
                           <Check
                             size={18}
                             weight="regular"
-                            className="text-green-600 dark:text-green-400"
+                            className="text-emerald-700 dark:text-green-400"
                           />
                         ) : (
                           <Copy
@@ -409,7 +431,7 @@ const Footer = () => {
                         )}
                         <span
                           className={`text-sm font-medium ${
-                            emailCopied ? "text-green-700 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                            emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
                           }`}
                         >
                           {emailCopied ? "Copied!" : "Copy email"}
@@ -431,7 +453,7 @@ const Footer = () => {
                       <button
                         type="button"
                         onClick={openFormAndScrollToIt}
-                        className="w-full px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium text-base rounded-xl transition-colors"
+                        className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
                       >
                         Fill out contact form
                       </button>
@@ -502,7 +524,7 @@ const Footer = () => {
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
-                          className="px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white font-medium text-base rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
@@ -581,37 +603,37 @@ const Footer = () => {
           <div className="max-w-2xl mx-auto">
             <div
               ref={chatCardLgRef}
-              className="bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-8 relative overflow-hidden"
+              className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
             >
               <div className="relative z-10">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-6">
+                <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
                   Let's have a chat
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div
-                    className={`text-center space-y-4 p-5 rounded-xl border transition-colors duration-200 cursor-pointer ${
+                    className={`text-center space-y-4 p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
                       emailCopied
-                        ? "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/50"
-                        : "bg-neutral-100/80 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600"
+                        ? chatEmailBoxCopiedClass
+                        : chatEmailBoxIdleClass
                     }`}
                     onClick={handleCopyEmail}
                   >
                     <span
                       className={`block font-medium text-base transition-colors ${
-                        emailCopied ? "text-green-700 dark:text-green-400" : "text-neutral-900 dark:text-white"
+                        emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-900 dark:text-white"
                       }`}
                     >
                       hello@rasmusmattsson.com
                     </span>
                     <div className="flex items-center justify-center gap-2">
                       {emailCopied ? (
-                        <Check size={18} weight="regular" className="text-green-600 dark:text-green-400" />
+                        <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
                       ) : (
                         <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-400" />
                       )}
                       <span
                         className={`text-sm font-medium ${
-                          emailCopied ? "text-green-700 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
                         }`}
                       >
                         {emailCopied ? "Copied!" : "Copy email"}
@@ -629,7 +651,7 @@ const Footer = () => {
                     <button
                       type="button"
                       onClick={openFormAndScrollToIt}
-                      className="w-full px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium text-base rounded-xl transition-colors"
+                      className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
                     >
                       Fill out contact form
                     </button>
@@ -699,7 +721,7 @@ const Footer = () => {
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
-                          className="px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white font-medium text-base rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
@@ -773,37 +795,37 @@ const Footer = () => {
           <div>
             <div
               ref={chatCardMobileRef}
-              className="bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 rounded-2xl p-6 sm:p-8 relative overflow-hidden"
+              className={`${chatCardShellClass} rounded-2xl p-6 sm:p-8 relative overflow-hidden`}
             >
               <div className="relative z-10">
-                <h3 className="text-lg font-semibold text-neutral-900 dark:text-white mb-4 sm:mb-6">
+                <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-4 sm:mb-6">
                   Let's have a chat
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   <div
-                    className={`text-center space-y-4 p-4 sm:p-5 rounded-xl border transition-colors duration-200 cursor-pointer ${
+                    className={`text-center space-y-4 p-4 sm:p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
                       emailCopied
-                        ? "bg-green-50 dark:bg-green-950/30 border-green-200 dark:border-green-800/50"
-                        : "bg-neutral-100/80 dark:bg-neutral-800/50 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600"
+                        ? chatEmailBoxCopiedClass
+                        : chatEmailBoxIdleClass
                     }`}
                     onClick={handleCopyEmail}
                   >
                     <span
                       className={`block font-medium text-base transition-colors ${
-                        emailCopied ? "text-green-700 dark:text-green-400" : "text-neutral-900 dark:text-white"
+                        emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-900 dark:text-white"
                       }`}
                     >
                       hello@rasmusmattsson.com
                     </span>
                     <div className="flex items-center justify-center gap-2">
                       {emailCopied ? (
-                        <Check size={18} weight="regular" className="text-green-600 dark:text-green-400" />
+                        <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
                       ) : (
                         <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-400" />
                       )}
                       <span
                         className={`text-sm font-medium ${
-                          emailCopied ? "text-green-700 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
                         }`}
                       >
                         {emailCopied ? "Copied!" : "Copy email"}
@@ -821,7 +843,7 @@ const Footer = () => {
                     <button
                       type="button"
                       onClick={openFormAndScrollToIt}
-                      className="w-full px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-neutral-800 font-medium text-base rounded-xl transition-colors"
+                      className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
                     >
                       Fill out contact form
                     </button>
@@ -886,7 +908,7 @@ const Footer = () => {
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
-                          className="px-6 py-3 border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white font-medium text-base rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
