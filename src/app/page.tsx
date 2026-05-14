@@ -113,7 +113,7 @@ export default function Home() {
     Array(rowCount).fill(false)
   );
   const servicesRowCount = Math.ceil(services.length / 3);
-  const servicesRowRefs = useRef<(HTMLElement | null)[]>([]);
+  const servicesGridRef = useRef<HTMLDivElement>(null);
   const [servicesRowInView, setServicesRowInView] = useState<boolean[]>(() =>
     Array(servicesRowCount).fill(false)
   );
@@ -170,43 +170,34 @@ export default function Home() {
     return () => observer.disconnect();
   }, [rowCount]);
 
-  // Services grid: same row entrance as Selected Works (row top reaches viewport center)
+  // Skills grid: reveal all rows together when the grid crosses the same threshold (was per-row)
   useLayoutEffect(() => {
+    const grid = servicesGridRef.current;
+    if (!grid) return;
+
+    const markAllInView = () => {
+      setServicesRowInView((prev) =>
+        prev.every(Boolean) ? prev : Array(servicesRowCount).fill(true)
+      );
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const i = Number((entry.target as HTMLElement).dataset.rowIndex);
-          if (Number.isInteger(i) && i >= 0)
-            setServicesRowInView((prev) => {
-              const next = [...prev];
-              next[i] = true;
-              return next;
-            });
+          if (entry.isIntersecting) markAllInView();
         });
       },
       { threshold: 0, rootMargin: "0px 0px -50% 0px" }
     );
-    const refs = servicesRowRefs.current;
-    const alreadyInView: number[] = [];
-    for (let i = 0; i < servicesRowCount; i++) {
-      const el = refs[i];
-      if (el) {
-        observer.observe(el);
-        if (typeof window !== "undefined") {
-          const rect = el.getBoundingClientRect();
-          const viewportCenter = window.innerHeight / 2;
-          if (rect.top <= viewportCenter) alreadyInView.push(i);
-        }
-      }
+
+    observer.observe(grid);
+
+    if (typeof window !== "undefined") {
+      const rect = grid.getBoundingClientRect();
+      const viewportCenter = window.innerHeight / 2;
+      if (rect.top <= viewportCenter) markAllInView();
     }
-    if (alreadyInView.length > 0) {
-      setServicesRowInView((prev) => {
-        const next = [...prev];
-        alreadyInView.forEach((i) => (next[i] = true));
-        return next;
-      });
-    }
+
     return () => observer.disconnect();
   }, [servicesRowCount]);
 
@@ -428,11 +419,11 @@ export default function Home() {
             <span className="section-title-word" style={{ ["--word-index" as string]: 0 }}>Skills</span>
           </h2>
           <div
+            ref={servicesGridRef}
             className={`skills-cards-root grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full ${servicesRowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
           >
             {services.map((service, index) => {
               const rowIndex = Math.floor(index / 3);
-              const isFirstInRow = index % 3 === 0;
               const cornerPos =
                 index % 2 === 0
                   ? ({ "--skills-corner-x": "100%", "--skills-corner-y": "100%" } as const)
@@ -485,19 +476,11 @@ export default function Home() {
                   </div>
                 </article>
               );
-              if (isFirstInRow) {
-                return (
-                  <div
-                    key={service.title}
-                    ref={(el) => { if (el) servicesRowRefs.current[rowIndex] = el; }}
-                    data-row-index={rowIndex}
-                    className="block"
-                  >
-                    {article}
-                  </div>
-                );
-              }
-              return <div key={service.title}>{article}</div>;
+              return (
+                <div key={service.title} className="block">
+                  {article}
+                </div>
+              );
             })}
           </div>
         </section>

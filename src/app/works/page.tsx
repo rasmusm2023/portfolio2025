@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { figtree } from "@/app/fonts";
@@ -27,8 +27,10 @@ interface WorkEntry {
   categories: string[];
   /** Case study URL; ignored when comingSoon is true */
   link: string;
-  /** Placeholder image for hover (right-side diagonal reveal) */
+  /** Image for hover (right-side diagonal reveal); used as video poster when hoverVideo is set */
   image: string;
+  /** Optional looping WebM (or other) clip for the hover panel instead of a static image */
+  hoverVideo?: string;
   /** Row is preview-only (no navigation to a case study yet) */
   comingSoon?: boolean;
 }
@@ -69,7 +71,8 @@ const CASE_STUDIES: WorkEntry[] = [
     primaryTag: "DESIGN & DEVELOPMENT",
     categories: ["WEB", "BOOKING & PAYMENTS"],
     link: "#",
-    image: "https://picsum.photos/seed/el-portero/800/500",
+    image: "/assets/case-study-assets/el-portero/el-portero-works-thumbnail.webp",
+    hoverVideo: "/assets/case-study-assets/el-portero/el-portero-works-video-thumbnail.webm",
     comingSoon: true,
   },
   {
@@ -96,6 +99,22 @@ const ARCHIVES_ENTRY: WorkEntry = {
 };
 
 function WorkProjectRow({ work }: { work: WorkEntry }) {
+  const hoverVideoRef = useRef<HTMLVideoElement>(null);
+
+  const rowPointerHandlers = work.hoverVideo
+    ? {
+        onPointerEnter: () => {
+          void hoverVideoRef.current?.play();
+        },
+        onPointerLeave: () => {
+          const v = hoverVideoRef.current;
+          if (!v) return;
+          v.pause();
+          v.currentTime = 0;
+        },
+      }
+    : {};
+
   const rowInner = (
     <div className="flex items-center justify-between min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:min-h-[200px] xl:min-h-[220px] pl-0 pr-4 sm:pr-6 md:pr-8 lg:pr-10 py-5 md:py-6 transition-[padding] duration-300 group-hover:pl-5 group-hover:sm:pl-6 group-hover:md:pl-7 group-hover:lg:pl-8">
       <div className="flex flex-col gap-2 z-10 max-w-xl">
@@ -150,7 +169,21 @@ function WorkProjectRow({ work }: { work: WorkEntry }) {
             clipPath: "polygon(22% 0, 100% 0, 100% 100%, 0% 100%)",
           }}
         >
-          <Image src={work.image} alt="" fill className="object-cover" sizes="(max-width: 1024px) 400px, 480px" />
+          {work.hoverVideo ? (
+            <video
+              ref={hoverVideoRef}
+              className="absolute inset-0 h-full w-full object-cover"
+              poster={work.image}
+              muted
+              playsInline
+              loop
+              preload="metadata"
+            >
+              <source src={work.hoverVideo} type="video/webm" />
+            </video>
+          ) : (
+            <Image src={work.image} alt="" fill className="object-cover" sizes="(max-width: 1024px) 400px, 480px" />
+          )}
         </div>
       </div>
     </div>
@@ -163,14 +196,19 @@ function WorkProjectRow({ work }: { work: WorkEntry }) {
 
   if (work.comingSoon) {
     return (
-      <div className={comingSoonClasses} aria-disabled="true" aria-label={`${work.title} — coming soon`}>
+      <div
+        className={comingSoonClasses}
+        aria-disabled="true"
+        aria-label={`${work.title} — coming soon`}
+        {...rowPointerHandlers}
+      >
         {rowInner}
       </div>
     );
   }
 
   return (
-    <Link href={work.link} className={interactiveClasses} aria-label={`View ${work.title}`}>
+    <Link href={work.link} className={interactiveClasses} aria-label={`View ${work.title}`} {...rowPointerHandlers}>
       {rowInner}
     </Link>
   );
