@@ -18,6 +18,10 @@ module.exports = {
         audiowide: ["var(--font-audiowide)", "cursive"],
         "instrument-serif": ["var(--font-instrument-serif)", "serif"],
         "instrument-sans": ["var(--font-instrument-sans)", "sans-serif"],
+        "bricolage-grotesque": [
+          "var(--font-bricolage-grotesque)",
+          "sans-serif",
+        ],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

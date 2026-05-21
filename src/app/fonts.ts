@@ -6,6 +6,7 @@ import {
   Montserrat,
   Instrument_Serif,
   Instrument_Sans,
+  Bricolage_Grotesque,
 } from "next/font/google";
 
 export const figtree = Figtree({
@@ -50,5 +51,11 @@ export const instrumentSerif = Instrument_Serif({
 export const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
   variable: "--font-instrument-sans",
+  display: "swap",
+});
+
+export const bricolageGrotesque = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage-grotesque",
   display: "swap",
 });

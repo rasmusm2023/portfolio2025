@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { bricolageGrotesque } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: "Emplojd — Case Study | Rasmus Mattsson",
@@ -11,5 +12,5 @@ export default function EmplojdEditorialLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return children;
+  return <div className={bricolageGrotesque.variable}>{children}</div>;
 }
