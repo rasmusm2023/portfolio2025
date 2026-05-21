@@ -29,7 +29,7 @@ const chatOutlineButtonClass =
 
 /** Opens form — hover matches filled primary (dark surface, light label) */
 const chatOpenFormButtonClass =
-  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-900 hover:text-white hover:border-neutral-900 dark:border-neutral-500 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-900 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
+  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-10 hover:border-neutral-30 hover:text-neutral-900 dark:border-neutral-500 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-900 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
 
 /** Light: no ring (avoids browser blue focus); neutral border only when focused */
 const chatFieldSurfaceClass =

@@ -266,10 +266,10 @@ export default function WorksPage() {
                 key={value}
                 type="button"
                 onClick={() => setSelectedFilter(value)}
-                className={`py-2 pr-4 text-sm font-medium lg:text-left lg:w-full border-b-2 border-transparent rounded-none transition-all duration-300 ease-out ${
+                className={`py-2 pr-4 text-sm font-medium lg:text-left lg:w-full border-b-2 rounded-none transition-all duration-300 ease-out ${
                   selectedFilter === value
-                    ? "pl-0 border-neutral-900 dark:border-white text-neutral-900 dark:text-white bg-transparent"
-                    : "pl-4 bg-transparent text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-200"
+                    ? "pl-0 border-neutral-100 dark:border-white text-neutral-100 dark:text-white bg-transparent"
+                    : "pl-4 border-transparent bg-transparent text-neutral-60 dark:text-neutral-40 hover:text-neutral-100 dark:hover:text-neutral-20"
                 }`}
               >
                 {label}

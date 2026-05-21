@@ -92,6 +92,7 @@ const services = [
 ];
 
 const career = [
+  { period: "(2025 – now)", role: "Freelance Product Designer" },
   { period: "(2025)", role: "UX/UI Designer Intern at Zmartrest AI" },
   { period: "(2024)", role: "UX/UI Designer Intern at Xbrandify" },
   { period: "(2023 – 2025)", role: "Full Time UX/UI Design Student at Chas Academy" },
