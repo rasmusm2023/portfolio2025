@@ -314,8 +314,48 @@ textarea::-webkit-scrollbar-thumb:hover {
 .hero-entrance-3 {
   animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.54s both;
 }
+
+@keyframes hero-entrance-lite {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance-3-lite {
+  animation: hero-entrance-lite 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.54s both;
+}
 .hero-entrance-4 {
   animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.84s both;
+}
+
+/* El Portero case study — stat titles (matches el-portero.com brand gold) */
+.el-portero-stat-figure {
+  background: linear-gradient(
+    90deg,
+    rgba(230, 212, 138, 0.95) 0%,
+    #c9a44a 50%,
+    rgba(230, 212, 138, 0.95) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Home hero: cycling role title (blur swap) */
+.hero-title-cycle {
+  display: inline;
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-cycle {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* Works page: sequenced unblur + fade-in (title → filters → list) */

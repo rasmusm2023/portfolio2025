@@ -1,6 +1,7 @@
 "use client";
 
 import Footer from "@/components/layout/Footer";
+import HeroTitleCycle from "@/components/ui/HeroTitleCycle";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,6 +18,15 @@ interface WorkItem {
 }
 
 const works: WorkItem[] = [
+  {
+    id: "el-portero",
+    title: "El Portero",
+    subtitle: "A modern, warm, and premium online presence with effortless booking for visitors",
+    image: "/assets/case-study-assets/el-portero/el-portero-works-thumbnail.webp",
+    alt: "El Portero Restaurant Website",
+    link: "/case-studies/el-portero",
+    badge: "Coming soon",
+  },
   {
     id: "emplojd",
     title: "Emplojd",
@@ -293,33 +303,51 @@ export default function Home() {
       >
         <div
           key={entranceKey}
-          className="will-change-transform origin-center text-center"
+          className="will-change-transform origin-center flex flex-col items-center"
           style={{
             transform: `scale(${heroScrollStyle.scale})`,
-            filter: `blur(${heroScrollStyle.blur}px)`,
-            transition:
-              "transform 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            transition: "transform 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
           }}
         >
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-semibold tracking-tighter text-neutral-900 dark:text-white mb-4 uppercase whitespace-nowrap">
+          <div className="w-fit max-w-full">
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl font-semibold tracking-tighter text-neutral-900 dark:text-white mb-4 uppercase whitespace-nowrap"
+            style={{
+              filter: `blur(${heroScrollStyle.blur}px)`,
+              transition: "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            }}
+          >
             <span className={`inline-block ${runHeroEntrance ? "hero-entrance-1" : ""}`} style={!runHeroEntrance ? heroHiddenStyle : undefined}>Rasmus</span>
             <span className={`inline-block ml-5 sm:ml-6 ${runHeroEntrance ? "hero-entrance-2" : ""}`} style={!runHeroEntrance ? heroHiddenStyle : undefined}>Mattsson</span>
           </h1>
-          <p className="text-sm sm:text-base md:text-lg font-normal uppercase tracking-wide max-w-2xl mx-auto text-center">
+          <p className="text-sm sm:text-base md:text-lg font-normal uppercase tracking-wide w-full text-right md:whitespace-nowrap">
             <span
-              className={`inline-block ${runHeroEntrance ? "hero-entrance-3" : ""}`}
-              style={!runHeroEntrance ? subtitleHiddenStyle : undefined}
+              className={`inline ${runHeroEntrance ? "hero-entrance-3-lite" : ""}`}
+              style={!runHeroEntrance ? { opacity: 0, transform: "translateY(12px)" } : undefined}
             >
-              <span className="text-neutral-800 dark:text-neutral-200">Product Designer</span>
-            </span>
-            {" "}
-            <span
-              className={`inline-block text-neutral-500 dark:text-neutral-400 ${runHeroEntrance ? "hero-entrance-4" : ""}`}
-              style={!runHeroEntrance ? subtitleHiddenStyle : undefined}
-            >
-              from Sweden, currently living in Stockholm.
+              <span className="text-lg sm:text-xl md:text-2xl font-medium text-neutral-800 dark:text-neutral-200">
+                <HeroTitleCycle scrollBlur={heroScrollStyle.blur} />{" "}
+                <span
+                  style={{
+                    filter: `blur(${heroScrollStyle.blur}px)`,
+                    transition: "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                  }}
+                >
+                  Designer
+                </span>
+              </span>{" "}
+              <span
+                className="text-neutral-500 dark:text-neutral-400"
+                style={{
+                  filter: `blur(${heroScrollStyle.blur}px)`,
+                  transition: "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                }}
+              >
+                from Sweden, currently living in Stockholm.
+              </span>
             </span>
           </p>
+          </div>
         </div>
       </div>
 

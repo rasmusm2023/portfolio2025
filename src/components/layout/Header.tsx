@@ -462,7 +462,7 @@ const Header = () => {
                   className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "Works"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/works"
+                      : pathname === "/works" || pathname.startsWith("/case-studies")
                       ? "text-neutral-100 dark:text-neutral-0"
                       : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}

@@ -14,6 +14,10 @@ interface MenuItem {
   href: string;
 }
 
+function isWorksRoute(pathname: string) {
+  return pathname === "/works" || pathname.startsWith("/case-studies");
+}
+
 const Menu = () => {
   const pathname = usePathname();
   const { isDark } = useTheme();
@@ -107,6 +111,8 @@ const Menu = () => {
       } else {
         activeHref = "/"; // Default to Home when on home but not in a specific section
       }
+    } else if (isWorksRoute(pathname)) {
+      activeHref = "/works";
     } else {
       activeHref = pathname;
     }
@@ -169,6 +175,8 @@ const Menu = () => {
             } else if (activeHash === "" && item.href === "/") {
               isActive = true; // Home is active when on home but not in a specific section
             }
+          } else if (item.href === "/works") {
+            isActive = isWorksRoute(pathname);
           } else {
             isActive = item.href === pathname;
           }

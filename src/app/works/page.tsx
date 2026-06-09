@@ -70,7 +70,7 @@ const CASE_STUDIES: WorkEntry[] = [
       "A website for a restaurant in Spain—I designed and built it end-to-end, including an admin portal hooked into booking and payment systems.",
     primaryTag: "DESIGN & DEVELOPMENT",
     categories: ["WEB", "BOOKING & PAYMENTS"],
-    link: "#",
+    link: "/case-studies/el-portero",
     image: "/assets/case-study-assets/el-portero/el-portero-works-thumbnail.webp",
     hoverVideo: "/assets/case-study-assets/el-portero/el-portero-works-video-thumbnail.webm",
     comingSoon: true,
