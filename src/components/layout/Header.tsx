@@ -339,10 +339,10 @@ const Header = () => {
             {/* Stockholm time (CET/CEST updates automatically with Swedish summer time) */}
             {stockholmTime.time && (
               <span
-                className="text-sm tabular-nums text-neutral-500 dark:text-neutral-400 whitespace-nowrap"
+                className="text-sm tabular-nums text-neutral-500 dark:text-neutral-40 whitespace-nowrap"
                 aria-label={`Stockholm time ${stockholmTime.zone} ${stockholmTime.time}`}
               >
-                <span className="font-medium text-neutral-600 dark:text-neutral-500">
+                <span className="font-medium text-neutral-600 dark:text-neutral-50">
                   {stockholmTime.zone}
                 </span>
                 <span className="ml-1">{stockholmTime.time}</span>
@@ -378,10 +378,10 @@ const Header = () => {
           <div className="flex 2xl:hidden items-center gap-2">
             {stockholmTime.time && (
               <span
-                className="text-xs sm:text-sm tabular-nums text-neutral-500 dark:text-neutral-400 whitespace-nowrap"
+                className="text-xs sm:text-sm tabular-nums text-neutral-500 dark:text-neutral-40 whitespace-nowrap"
                 aria-label={`Stockholm time ${stockholmTime.zone} ${stockholmTime.time}`}
               >
-                <span className="font-medium text-neutral-600 dark:text-neutral-500">
+                <span className="font-medium text-neutral-600 dark:text-neutral-50">
                   {stockholmTime.zone}
                 </span>
                 <span className="ml-0.5 sm:ml-1">{stockholmTime.time}</span>

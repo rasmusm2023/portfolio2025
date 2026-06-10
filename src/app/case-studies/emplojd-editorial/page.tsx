@@ -110,7 +110,7 @@ function Workstream({
             {decision}
           </p>
           <p className="text-xs sm:text-sm text-neutral-70 dark:text-neutral-40 leading-relaxed">
-            <span className="font-semibold text-neutral-80 dark:text-neutral-25">
+            <span className="font-semibold text-neutral-80 dark:text-neutral-20">
               Why:{" "}
             </span>
             {rationale}
@@ -156,7 +156,7 @@ export default function EmplojdEditorialCaseStudyPage() {
       <article className="mx-auto max-w-[1440px] px-5 pt-12 sm:px-6 md:px-8 md:pt-16 lg:pt-20">
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-60 dark:text-neutral-40">
           Case study ·{" "}
-          <span className="text-neutral-80 dark:text-neutral-25">Emplojd</span>
+          <span className="text-neutral-80 dark:text-neutral-20">Emplojd</span>
         </p>
 
         <h1 className="font-bricolage-grotesque mt-4 text-[clamp(2rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-neutral-100 dark:text-neutral-0">

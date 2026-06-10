@@ -22,10 +22,10 @@ const works: WorkItem[] = [
     id: "el-portero",
     title: "El Portero",
     subtitle: "A modern, warm, and premium online presence with effortless booking for visitors",
-    image: "/assets/case-study-assets/el-portero/el-portero-works-thumbnail.webp",
+    image: "/assets/case-study-assets/el-portero/Projects-Case-Card-Thumbnail-El-Portero.webp",
     alt: "El Portero Restaurant Website",
     link: "/case-studies/el-portero",
-    badge: "Coming soon",
+    badge: "Case study",
   },
   {
     id: "emplojd",
@@ -39,7 +39,7 @@ const works: WorkItem[] = [
   {
     id: "noted",
     title: "Noted",
-    subtitle: "Revolutionary note-taking experience",
+    subtitle: "Task management with organizing features built for everyday life",
     image: "/assets/case-study-assets/noted/Projects-Case-Card-Thumbnail-Noted.webp",
     alt: "Noted App",
     link: "/case-studies/noted",
@@ -48,7 +48,7 @@ const works: WorkItem[] = [
   {
     id: "zmartrest-ai",
     title: "Zmartrest AI",
-    subtitle: "Intelligent restaurant management system",
+    subtitle: "Wearable-connected coaching for stress, activity, and healthier work—powered by AI",
     image: "/assets/case-study-assets/zmartrest-ai/Projects-Case-Card-Thumbnail-Zmartrest-AI.webp",
     alt: "Zmartrest AI Platform",
     link: "/case-studies/zmartrest-ai",
@@ -325,7 +325,7 @@ export default function Home() {
               className={`inline ${runHeroEntrance ? "hero-entrance-3-lite" : ""}`}
               style={!runHeroEntrance ? { opacity: 0, transform: "translateY(12px)" } : undefined}
             >
-              <span className="text-lg sm:text-xl md:text-2xl font-medium text-neutral-800 dark:text-neutral-200">
+              <span className="text-lg sm:text-xl md:text-2xl font-medium text-neutral-800 dark:text-neutral-20">
                 <HeroTitleCycle scrollBlur={heroScrollStyle.blur} />{" "}
                 <span
                   style={{
@@ -337,7 +337,7 @@ export default function Home() {
                 </span>
               </span>{" "}
               <span
-                className="text-neutral-500 dark:text-neutral-400"
+                className="text-neutral-500 dark:text-neutral-40"
                 style={{
                   filter: `blur(${heroScrollStyle.blur}px)`,
                   transition: "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
@@ -386,7 +386,7 @@ export default function Home() {
               const isFirstInRow = cardIndexInRow === 0;
               const cardContent = (
                 <>
-                  <div className="aspect-[6/5] sm:aspect-[1/1] relative overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+                  <div className="aspect-[6/5] sm:aspect-[1/1] relative overflow-hidden bg-neutral-100 dark:bg-neutral-90">
                     <Image
                       src={work.image}
                       alt={work.alt}
@@ -404,7 +404,7 @@ export default function Home() {
                     <h3 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white uppercase tracking-tight">
                       {work.title}
                     </h3>
-                    <p className="text-neutral-600 dark:text-neutral-400 text-base sm:text-lg font-medium">
+                    <p className="text-neutral-600 dark:text-neutral-40 text-base sm:text-lg font-medium">
                       {work.subtitle}
                     </p>
                   </div>
@@ -476,7 +476,7 @@ export default function Home() {
                         <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.4)]">
                           {service.title}
                         </h3>
-                        <p className="text-base sm:text-lg font-normal leading-snug text-neutral-300 dark:text-neutral-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                        <p className="text-base sm:text-lg font-normal leading-snug text-neutral-300 dark:text-neutral-40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
                           — {service.description}
                         </p>
                       </div>
@@ -531,7 +531,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12 lg:gap-8">
             <div className="flex flex-col gap-8 md:gap-10 order-2 md:order-1 lg:col-span-2">
               <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
-                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-40 shrink-0">
                   What I do
                 </h3>
                 <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -542,7 +542,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
-                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-40 shrink-0">
                   My background
                 </h3>
                 <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -553,7 +553,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
-                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-40 shrink-0">
                   My approach
                 </h3>
                 <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -563,7 +563,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
-                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-40 shrink-0">
                   Career
                 </h3>
                 <ul className="space-y-2 text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -575,7 +575,7 @@ export default function Home() {
                 </ul>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
-                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 shrink-0">
+                <h3 className="text-base font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-40 shrink-0">
                   Personal projects
                 </h3>
                 <ul className="space-y-2 text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -587,7 +587,7 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-            <div className="relative aspect-[6/5] sm:aspect-[1/1] overflow-hidden bg-neutral-200 dark:bg-neutral-800 order-1 md:order-2 lg:col-span-1">
+            <div className="relative aspect-[6/5] sm:aspect-[1/1] overflow-hidden bg-neutral-200 dark:bg-neutral-80 order-1 md:order-2 lg:col-span-1">
               <Image
                 src="/assets/about/profile-4.png"
                 alt="Rasmus Mattsson"

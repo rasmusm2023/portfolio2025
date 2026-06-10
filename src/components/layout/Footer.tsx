@@ -8,32 +8,32 @@ import { faDribbble, faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg
 import { gsap } from "gsap";
 
 const socialLinkClass =
-  "text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4 inline-flex items-center gap-2 uppercase";
+  "text-sm font-medium text-neutral-600 dark:text-neutral-40 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4 inline-flex items-center gap-2 uppercase";
 
 const getInTouchClass =
   "inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter hover:opacity-80 transition-opacity group";
 
 /** Light: white lift + soft shadow (matches dark layered panels). Dark: translucent stack */
 const chatCardShellClass =
-  "bg-white dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
+  "bg-white dark:bg-neutral-90/50 border border-neutral-200 dark:border-neutral-80 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
 
 const chatEmailBoxCopiedClass =
   "border border-emerald-300 bg-emerald-50 dark:bg-green-950/30 dark:border-green-800/50";
 
 const chatEmailBoxIdleClass =
-  "border border-neutral-20 bg-white hover:bg-neutral-10 hover:border-neutral-30 dark:bg-neutral-800/50 dark:border-neutral-700 dark:hover:bg-neutral-800 dark:hover:border-neutral-500";
+  "border border-neutral-20 bg-white hover:bg-neutral-10 hover:border-neutral-30 dark:bg-neutral-80/50 dark:border-neutral-70 dark:hover:bg-neutral-80 dark:hover:border-neutral-50";
 
 /** Outline secondary actions (e.g. Cancel) */
 const chatOutlineButtonClass =
-  "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 hover:border-neutral-400 dark:border-neutral-600 dark:bg-transparent dark:text-white dark:hover:bg-neutral-800 dark:hover:border-neutral-500";
+  "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 hover:border-neutral-400 dark:border-neutral-60 dark:bg-transparent dark:text-white dark:hover:bg-neutral-80 dark:hover:border-neutral-50";
 
 /** Opens form — hover matches filled primary (dark surface, light label) */
 const chatOpenFormButtonClass =
-  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-10 hover:border-neutral-30 hover:text-neutral-900 dark:border-neutral-500 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-900 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
+  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-10 hover:border-neutral-30 hover:text-neutral-900 dark:border-neutral-50 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-90 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
 
 /** Light: no ring (avoids browser blue focus); neutral border only when focused */
 const chatFieldSurfaceClass =
-  "bg-white dark:bg-neutral-900 border border-neutral-300 dark:border-neutral-700 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent shadow-[inset_0_1px_3px_rgba(15,23,42,0.06)] dark:shadow-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus:border-neutral-900 dark:focus:border-neutral-400 transition-[color,background-color,border-color,box-shadow] duration-200";
+  "bg-white dark:bg-neutral-90 border border-neutral-300 dark:border-neutral-70 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent shadow-[inset_0_1px_3px_rgba(15,23,42,0.06)] dark:shadow-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus:border-neutral-900 dark:focus:border-neutral-40 transition-[color,background-color,border-color,box-shadow] duration-200";
 
 // Custom Floating Label Input Component
 function FloatingLabelInput({
@@ -126,15 +126,15 @@ function FloatingLabelInput({
         >
           <ArrowsOutCardinal
             size={16}
-            className="text-neutral-500 dark:text-neutral-400"
+            className="text-neutral-500 dark:text-neutral-40"
           />
         </div>
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg shadow-sm dark:shadow-none"
-              : "top-3 text-base text-neutral-500 dark:text-neutral-400 font-medium"
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-90 rounded-lg shadow-sm dark:shadow-none"
+              : "top-3 text-base text-neutral-500 dark:text-neutral-40 font-medium"
           }`}
         >
           {placeholder}
@@ -161,8 +161,8 @@ function FloatingLabelInput({
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-900 rounded-lg shadow-sm dark:shadow-none"
-              : "top-1/2 -translate-y-1/2 text-base text-neutral-500 dark:text-neutral-400 font-medium"
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-90 rounded-lg shadow-sm dark:shadow-none"
+              : "top-1/2 -translate-y-1/2 text-base text-neutral-500 dark:text-neutral-40 font-medium"
         }`}
       >
         {placeholder}
@@ -426,12 +426,12 @@ const Footer = () => {
                           <Copy
                             size={18}
                             weight="regular"
-                            className="text-neutral-500 dark:text-neutral-400"
+                            className="text-neutral-500 dark:text-neutral-40"
                           />
                         )}
                         <span
                           className={`text-sm font-medium ${
-                            emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                            emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
                           }`}
                         >
                           {emailCopied ? "Copied!" : "Copy email"}
@@ -441,11 +441,11 @@ const Footer = () => {
 
                     {/* OR Divider */}
                     <div className="flex items-center gap-4">
-                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
-                      <span className="text-neutral-500 dark:text-neutral-400 text-sm font-medium">
+                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                      <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">
                         OR
                       </span>
-                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
+                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                     </div>
 
                     {/* Toggle Form Button */}
@@ -507,7 +507,7 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>
@@ -629,11 +629,11 @@ const Footer = () => {
                       {emailCopied ? (
                         <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
                       ) : (
-                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-400" />
+                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-40" />
                       )}
                       <span
                         className={`text-sm font-medium ${
-                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
                         }`}
                       >
                         {emailCopied ? "Copied!" : "Copy email"}
@@ -642,9 +642,9 @@ const Footer = () => {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
-                    <span className="text-neutral-500 dark:text-neutral-400 text-sm font-medium">OR</span>
-                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                    <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">OR</span>
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                   </div>
 
                   {!showForm && (
@@ -704,7 +704,7 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>
@@ -821,11 +821,11 @@ const Footer = () => {
                       {emailCopied ? (
                         <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
                       ) : (
-                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-400" />
+                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-40" />
                       )}
                       <span
                         className={`text-sm font-medium ${
-                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-400"
+                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
                         }`}
                       >
                         {emailCopied ? "Copied!" : "Copy email"}
@@ -834,9 +834,9 @@ const Footer = () => {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
-                    <span className="text-neutral-500 dark:text-neutral-400 text-sm font-medium">OR</span>
-                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-700" />
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                    <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">OR</span>
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                   </div>
 
                   {!showForm && (
@@ -896,7 +896,7 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>

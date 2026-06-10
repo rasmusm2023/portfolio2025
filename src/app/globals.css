@@ -333,17 +333,64 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.84s both;
 }
 
-/* El Portero case study — stat titles (matches el-portero.com brand gold) */
+/* El Portero case study — accent (home skills Product Strategy card gradient) */
 .el-portero-stat-figure {
   background: linear-gradient(
-    90deg,
-    rgba(230, 212, 138, 0.95) 0%,
-    #c9a44a 50%,
-    rgba(230, 212, 138, 0.95) 100%
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* Horizontal section rules — subtle but readable on #060608 in dark mode */
+.dark .el-portero-section-rule {
+  border-color: #28282c;
+}
+
+.el-portero-quote {
+  position: relative;
+}
+
+.el-portero-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+.el-portero-scroll-progress-strategy {
+  background: linear-gradient(
+    to right,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+.el-portero-scroll-progress-frontend {
+  background: linear-gradient(
+    to right,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
 }
 
 /* Home hero: cycling role title (blur swap) */

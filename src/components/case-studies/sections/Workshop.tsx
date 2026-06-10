@@ -67,55 +67,55 @@ const Workshop: React.FC = () => {
           {/* Workshop Insights Cards - Full Width */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 w-full">
             {/* User Experience Card */}
-            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-20/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-20/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
               <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-2 sm:mb-3">
                 User Experience
               </h3>
-              <p className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-800 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                 The platform should feel simple, modern, and stress-free, with
                 no learning curve.
               </p>
             </div>
 
             {/* Personalisation Card */}
-            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-20/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-20/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
               <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-2 sm:mb-3">
                 Personalisation
               </h3>
-              <p className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-800 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                 AI should assist the user while preserving their individuality,
                 avoiding anything that feels "generic" or "robotic."
               </p>
             </div>
 
             {/* Value for Both Sides Card */}
-            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-20/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-20/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
               <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-2 sm:mb-3">
                 Value for Both Sides
               </h3>
-              <p className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-800 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                 The service must be useful to job seekers and recruiters,
                 ensuring quality applications that stand out.
               </p>
             </div>
 
             {/* Accessibility & Inclusivity Card */}
-            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-20/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-20/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
               <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-2 sm:mb-3">
                 Accessibility & Inclusivity
               </h3>
-              <p className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-800 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                 The product should be easy to use for everyone, including those
                 with less experience or language challenges.
               </p>
             </div>
 
             {/* Efficiency Card */}
-            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-200/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-200/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
+            <div className="bg-gradient-to-br from-neutral-800/10 to-neutral-700/10 dark:from-neutral-20/10 dark:to-neutral-100/10 backdrop-blur-sm border border-neutral-700/20 dark:border-neutral-20/20 rounded-2xl p-4 sm:p-6 hover:shadow-lg hover:shadow-neutral-500/25 transition-all duration-300">
               <h3 className="text-base sm:text-lg font-bold text-neutral-900 dark:text-white mb-2 sm:mb-3">
                 Efficiency
               </h3>
-              <p className="text-neutral-800 dark:text-neutral-200 text-sm sm:text-base leading-relaxed">
+              <p className="text-neutral-800 dark:text-neutral-20 text-sm sm:text-base leading-relaxed">
                 The process should save time, reduce anxiety, and encourage
                 applicants to apply to more jobs with confidence.
               </p>
