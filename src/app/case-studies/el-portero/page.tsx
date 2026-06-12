@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLenis } from "lenis/react";
 import Footer from "@/components/layout/Footer";
+import HorizontalScrollGallery from "@/components/case-studies/HorizontalScrollGallery";
 import CustomLightbox from "@/components/ui/Lightbox";
 
 const LOGOTYPE_GALLERY_IMAGES = [
@@ -20,13 +21,31 @@ const LOGOTYPE_GALLERY_IMAGES = [
   },
 ];
 
-const ADMIN_PORTAL_GALLERY_IMAGES = [
-  {
-    src: "/assets/case-study-assets/el-portero/el-portero-admin-portal-dashboard-mockup.webp",
-    alt: "El Portero admin portal dashboard",
-    title: "Admin portal dashboard",
-  },
+const ADMIN_PORTAL_IMAGE = {
+  src: "/assets/case-study-assets/el-portero/el-portero-admin-portal-dashboard-mockup.webp",
+  alt: "El Portero admin portal dashboard",
+  title: "Admin portal dashboard",
+};
+
+const ADMIN_PORTAL_CAPTIONS = [
+  "Dashboard overview: staff land here to manage day-to-day restaurant operations.",
+  "Events: create and edit listings before publishing them to the guest site.",
+  "Menus: update food and drink offerings whenever the kitchen team needs to.",
+  "Opening hours: keep guest-facing hours aligned with the restaurant schedule.",
 ];
+
+const ADMIN_PORTAL_GALLERY_IMAGES = Array.from({ length: 4 }, (_, index) => ({
+  ...ADMIN_PORTAL_IMAGE,
+  caption: ADMIN_PORTAL_CAPTIONS[index],
+  alt:
+    index === 0
+      ? ADMIN_PORTAL_IMAGE.alt
+      : `${ADMIN_PORTAL_IMAGE.alt} — view ${index + 1}`,
+  title:
+    index === 0
+      ? ADMIN_PORTAL_IMAGE.title
+      : `${ADMIN_PORTAL_IMAGE.title} ${index + 1}`,
+}));
 
 const CASE_STUDY_LIGHTBOX_IMAGES = [
   ...LOGOTYPE_GALLERY_IMAGES,
@@ -835,28 +854,25 @@ function ElPorteroEditorialContent() {
                   and changing opening hours, published to the guest-facing site
                   when staff choose to push changes live.
                 </p>
-                <figure>
-                  <div className="grid gap-2.5 sm:gap-3">
-                    {ADMIN_PORTAL_GALLERY_IMAGES.map((image, index) => (
-                      <ClickableCaseImage
-                        key={image.src}
-                        src={image.src}
-                        alt={image.alt}
-                        width={1440}
-                        height={900}
-                        sizes="(max-width: 768px) 100vw, 720px"
-                        onClick={() =>
-                          openLightbox(LOGOTYPE_GALLERY_IMAGES.length + index)
-                        }
-                      />
-                    ))}
-                  </div>
-                  <figcaption className="mt-3 text-xs text-neutral-60 dark:text-neutral-40">
-                    Admin portal dashboard: staff-facing views for events,
-                    menus, and opening hours, with changes published to the
-                    guest site on demand.
-                  </figcaption>
-                </figure>
+                <HorizontalScrollGallery
+                  images={ADMIN_PORTAL_GALLERY_IMAGES}
+                  onImageClick={(index) =>
+                    openLightbox(LOGOTYPE_GALLERY_IMAGES.length + index)
+                  }
+                  stickyTopClassName="top-28 xl:top-32"
+                  renderImage={(image, _index, onClick) => (
+                    <ClickableCaseImage
+                      src={image.src}
+                      alt={image.alt}
+                      width={image.width ?? 1440}
+                      height={image.height ?? 900}
+                      sizes={
+                        image.sizes ?? "(max-width: 768px) 82vw, (max-width: 1200px) 62vw, 780px"
+                      }
+                      onClick={onClick}
+                    />
+                  )}
+                />
               </Workstream>
 
               <Workstream
