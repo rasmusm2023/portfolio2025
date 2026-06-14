@@ -118,11 +118,6 @@ const subtitleHiddenStyle = { opacity: 0, filter: "blur(12px)", transform: "tran
 
 export default function Home() {
   const pathname = usePathname();
-  const rowCount = Math.ceil(works.length / 2);
-  const rowRefs = useRef<(HTMLElement | null)[]>([]);
-  const [rowInView, setRowInView] = useState<boolean[]>(() =>
-    Array(rowCount).fill(false)
-  );
   const servicesRowCount = Math.ceil(services.length / 3);
   const servicesGridRef = useRef<HTMLDivElement>(null);
   const [servicesRowInView, setServicesRowInView] = useState<boolean[]>(() =>
@@ -137,49 +132,6 @@ export default function Home() {
     scale: 1,
     blur: 0,
   });
-
-  // Case cards: entire row fades in when that row’s top edge reaches the center of the viewport
-  useLayoutEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          const i = Number((entry.target as HTMLElement).dataset.rowIndex);
-          if (Number.isInteger(i) && i >= 0)
-            setRowInView((prev) => {
-              const next = [...prev];
-              next[i] = true;
-              return next;
-            });
-        });
-      },
-      {
-        threshold: 0,
-        rootMargin: "0px 0px -50% 0px", // root = top half of viewport; trigger when row top reaches center
-      }
-    );
-    const refs = rowRefs.current;
-    const alreadyInView: number[] = [];
-    for (let i = 0; i < rowCount; i++) {
-      const el = refs[i];
-      if (el) {
-        observer.observe(el);
-        if (typeof window !== "undefined") {
-          const rect = el.getBoundingClientRect();
-          const viewportCenter = window.innerHeight / 2;
-          if (rect.top <= viewportCenter) alreadyInView.push(i);
-        }
-      }
-    }
-    if (alreadyInView.length > 0) {
-      setRowInView((prev) => {
-        const next = [...prev];
-        alreadyInView.forEach((i) => (next[i] = true));
-        return next;
-      });
-    }
-    return () => observer.disconnect();
-  }, [rowCount]);
 
   // Skills grid: reveal all rows together when the grid crosses the same threshold (was per-row)
   useLayoutEffect(() => {
@@ -356,7 +308,7 @@ export default function Home() {
 
       {/* Main content: higher z-index and background so it scrolls over hero text */}
       <div className="relative z-10 bg-white dark:bg-[#0a0a0a]">
-        {/* Selected Works - two cards span almost full viewport width */}
+        {/* Selected Works — 2×2 up to 1920px; 3-up from 1921px; 4-up from 2560px */}
         <section
           data-section-name="selectedWorks"
           className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] pt-8 md:pt-12 pb-16 md:pb-24 w-full border-t border-neutral-200 dark:border-[#1a1a1a]"
@@ -378,61 +330,42 @@ export default function Home() {
           </div>
 
           <div
-            className={`grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 w-full ${rowInView.map((v, i) => (v ? `case-row-${i}-in-view` : "")).join(" ")}`}
+            className={`grid grid-cols-1 sm:grid-cols-2 works-3col:grid-cols-3 works-4col:grid-cols-4 gap-4 md:gap-5 w-full ${
+              sectionTitlesInView.selectedWorks ? "selected-works-in-view" : ""
+            }`}
           >
-            {works.map((work, index) => {
-              const rowIndex = Math.floor(index / 2);
-              const cardIndexInRow = index % 2;
-              const isFirstInRow = cardIndexInRow === 0;
-              const cardContent = (
-                <>
-                  <div className="aspect-[6/5] sm:aspect-[1/1] relative overflow-hidden bg-neutral-100 dark:bg-neutral-90">
-                    <Image
-                      src={work.image}
-                      alt={work.alt}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                    />
-                    {work.badge && (
-                      <span className="absolute top-4 right-4 px-3 py-1 text-xs font-medium rounded-full bg-white/90 dark:bg-black/80 text-neutral-800 dark:text-white backdrop-blur-sm">
-                        {work.badge}
-                      </span>
-                    )}
-                  </div>
-                  <div className="mt-4 flex flex-col gap-0.5">
-                    <h3 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white uppercase tracking-tight">
-                      {work.title}
-                    </h3>
-                    <p className="text-neutral-600 dark:text-neutral-40 text-base sm:text-lg font-medium">
-                      {work.subtitle}
-                    </p>
-                  </div>
-                </>
-              );
-              const card = (
-                <Link
-                  href={work.link}
-                  className={`group block case-card-entrance case-card-row-${rowIndex}`}
-                  aria-label={`View ${work.title} case study`}
-                >
-                  {cardContent}
-                </Link>
-              );
-              if (isFirstInRow) {
-                return (
-                  <div
-                    key={work.id}
-                    ref={(el) => { if (el) rowRefs.current[rowIndex] = el; }}
-                    data-row-index={rowIndex}
-                    className="block"
-                  >
-                    {card}
-                  </div>
-                );
-              }
-              return <div key={work.id}>{card}</div>;
-            })}
+            {works.map((work, index) => (
+              <Link
+                key={work.id}
+                href={work.link}
+                className="group block case-card-entrance"
+                style={{ ["--card-index" as string]: index }}
+                aria-label={`View ${work.title} case study`}
+              >
+                <div className="aspect-[6/5] sm:aspect-square relative overflow-hidden bg-neutral-100 dark:bg-neutral-90">
+                  <Image
+                    src={work.image}
+                    alt={work.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1920px) 50vw, (max-width: 2559px) 33vw, 25vw"
+                  />
+                  {work.badge && (
+                    <span className="absolute top-4 right-4 px-3 py-1 text-xs font-medium rounded-full bg-white/90 dark:bg-black/80 text-neutral-800 dark:text-white backdrop-blur-sm">
+                      {work.badge}
+                    </span>
+                  )}
+                </div>
+                <div className="mt-4 flex flex-col gap-0.5">
+                  <h3 className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white uppercase tracking-tight">
+                    {work.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-40 text-base sm:text-lg font-medium">
+                    {work.subtitle}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
         </section>
 
@@ -460,7 +393,7 @@ export default function Home() {
               const article = (
                 <article
                   tabIndex={0}
-                  className={`group relative overflow-hidden aspect-[3/2] sm:aspect-[4/3] case-card-entrance case-card-row-${rowIndex} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950`}
+                  className={`group relative overflow-hidden aspect-[3/2] sm:aspect-[4/3] skills-card-entrance skills-card-row-${rowIndex} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950`}
                 >
                   <div className="absolute inset-0 pointer-events-none bg-black" aria-hidden />
                   <div

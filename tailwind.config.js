@@ -10,6 +10,8 @@ module.exports = {
     extend: {
       screens: {
         xs: "500px",
+        "works-3col": "1921px",
+        "works-4col": "2560px",
       },
       fontFamily: {
         sans: ["var(--font-nunito-sans)"],

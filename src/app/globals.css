@@ -440,16 +440,30 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation-delay: calc(var(--word-index, 0) * 0.1s);
 }
 
-/* Selected Works case cards: entire row fades in when row top reaches viewport center */
+/* Selected Works case cards: fade in when section enters view */
 .case-card-entrance {
   opacity: 0;
   transform: translateY(12px);
   transition:
     opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
     transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--card-index, 0) * 0.12s);
 }
-.case-row-0-in-view .case-card-row-0.case-card-entrance,
-.case-row-1-in-view .case-card-row-1.case-card-entrance {
+.selected-works-in-view .case-card-entrance {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skills cards: same entrance motion, revealed when grid rows enter view */
+.skills-card-entrance {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.case-row-0-in-view .skills-card-row-0.skills-card-entrance,
+.case-row-1-in-view .skills-card-row-1.skills-card-entrance {
   opacity: 1;
   transform: translateY(0);
 }
