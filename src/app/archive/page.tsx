@@ -2,7 +2,6 @@
 
 import CustomCursor from "@/components/CustomCursor";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
-import Footer from "@/components/layout/Footer";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import CircularScrollText from "@/components/ui/CircularScrollText";
 import { Hanken_Grotesk } from "next/font/google";
@@ -193,13 +192,6 @@ export default function ArchivePage() {
             {/* Case Studies Cards Section */}
             <div className="pt-[200px] pb-8 sm:pb-12 lg:pb-16">
               <CaseStudiesShowcase showTitle={false} />
-            </div>
-
-            {/* Footer Section */}
-            <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">
-              <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <Footer />
-              </div>
             </div>
           </main>
         </div>

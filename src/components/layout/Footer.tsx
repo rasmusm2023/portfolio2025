@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Copy, Check, ArrowsOutCardinal, ArrowRight } from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDribbble, faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { gsap } from "gsap";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import { OPEN_CONTACT_FORM_EVENT } from "@/lib/contactForm";
 
 const socialLinkClass =
   "text-sm font-medium text-neutral-600 dark:text-neutral-40 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4 inline-flex items-center gap-2 uppercase";
@@ -14,9 +14,14 @@ const socialLinkClass =
 const getInTouchClass =
   "font-bricolage-grotesque inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white tracking-tighter hover:opacity-80 transition-opacity group";
 
-/** Light: white lift + soft shadow (matches dark layered panels). Dark: translucent stack */
-const chatCardShellClass =
-  "bg-white dark:bg-neutral-90/50 border border-neutral-200 dark:border-neutral-80 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
+/** Light: white lift + soft shadow. Dark: translucent when collapsed, solid when form is open */
+function getChatCardShellClass(expanded: boolean) {
+  const surface = expanded
+    ? "bg-white dark:bg-neutral-90"
+    : "bg-white dark:bg-neutral-90/50";
+
+  return `${surface} border border-neutral-200 dark:border-neutral-80 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none`;
+}
 
 /** Outline secondary actions (e.g. Cancel) */
 const chatOutlineButtonClass =
@@ -231,7 +236,7 @@ const Footer = () => {
   const [showForm, setShowForm] = useState(false);
 
   // Refs for entrance animations
-  const titleRef = useRef<HTMLAnchorElement>(null);
+  const titleRef = useRef<HTMLButtonElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const chatCardRef = useRef<HTMLDivElement>(null);
   const chatCardLgRef = useRef<HTMLDivElement>(null);
@@ -352,19 +357,39 @@ const Footer = () => {
     }, 4000); // Brief green flash - 4 seconds
   };
 
-  const openFormAndScrollToIt = () => {
+  const openFormAndScrollToIt = useCallback(() => {
     setShowForm(true);
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        const visible = [chatCardRef.current, chatCardLgRef.current, chatCardMobileRef.current].find(
-          (el) => el && el.offsetParent !== null
-        );
+        const visible = [
+          chatCardRef.current,
+          chatCardLgRef.current,
+          chatCardMobileRef.current,
+        ].find((el) => el && el.offsetParent !== null);
         if (visible) {
           visible.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
     });
-  };
+  }, []);
+
+  useEffect(() => {
+    const onOpenForm = () => openFormAndScrollToIt();
+    window.addEventListener(OPEN_CONTACT_FORM_EVENT, onOpenForm);
+    return () => window.removeEventListener(OPEN_CONTACT_FORM_EVENT, onOpenForm);
+  }, [openFormAndScrollToIt]);
+
+  useEffect(() => {
+    const openFromHash = () => {
+      if (window.location.hash === "#contact") {
+        window.setTimeout(() => openFormAndScrollToIt(), 200);
+      }
+    };
+
+    openFromHash();
+    window.addEventListener("hashchange", openFromHash);
+    return () => window.removeEventListener("hashchange", openFromHash);
+  }, [openFormAndScrollToIt]);
 
   return (
     <section className="py-0 relative">
@@ -374,15 +399,16 @@ const Footer = () => {
           <div className="flex items-start justify-between gap-12 lg:gap-16">
             <div className="text-left flex-1 min-w-0">
               <SectionEyebrow>Contact</SectionEyebrow>
-              <Link
+              <button
                 ref={titleRef}
-                href="/#contact"
+                type="button"
+                onClick={openFormAndScrollToIt}
                 className={`${getInTouchClass} mb-4`}
-                aria-label="Go to contact section"
+                aria-label="Open contact form"
               >
                 Get in touch
                 <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
-              </Link>
+              </button>
               <div ref={descriptionRef} className="max-w-[36rem]">
                 <div className="flex flex-col gap-4">
                   <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -435,7 +461,7 @@ const Footer = () => {
             <div className="w-[32rem] shrink-0">
               <div
                 ref={chatCardRef}
-                className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
+                className={`${getChatCardShellClass(showForm)} rounded-2xl p-8 relative overflow-hidden`}
               >
                 <div className="relative z-10">
                   <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
@@ -570,14 +596,15 @@ const Footer = () => {
       <div className="hidden lg:block xl:hidden">
         <div className="w-full">
           <SectionEyebrow>Contact</SectionEyebrow>
-          <Link
-            href="/#contact"
+          <button
+            type="button"
+            onClick={openFormAndScrollToIt}
             className={`${getInTouchClass} mb-4`}
-            aria-label="Go to contact section"
+            aria-label="Open contact form"
           >
             Get in touch
             <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
-          </Link>
+          </button>
 
           <div className="flex flex-col gap-4 mb-6">
             <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -613,7 +640,7 @@ const Footer = () => {
           <div className="max-w-2xl mx-auto">
             <div
               ref={chatCardLgRef}
-              className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
+              className={`${getChatCardShellClass(showForm)} rounded-2xl p-8 relative overflow-hidden`}
             >
               <div className="relative z-10">
                 <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
@@ -739,14 +766,15 @@ const Footer = () => {
       <div className="lg:hidden flex flex-col">
         <div className="w-full">
           <SectionEyebrow>Contact</SectionEyebrow>
-          <Link
-            href="/#contact"
+          <button
+            type="button"
+            onClick={openFormAndScrollToIt}
             className={`${getInTouchClass} mb-4`}
-            aria-label="Go to contact section"
+            aria-label="Open contact form"
           >
             Get in touch
             <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
-          </Link>
+          </button>
 
           <div className="flex flex-col gap-4 mb-5">
             <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
@@ -780,7 +808,7 @@ const Footer = () => {
           <div>
             <div
               ref={chatCardMobileRef}
-              className={`${chatCardShellClass} rounded-2xl p-6 sm:p-8 relative overflow-hidden`}
+              className={`${getChatCardShellClass(showForm)} rounded-2xl p-6 sm:p-8 relative overflow-hidden`}
             >
               <div className="relative z-10">
                 <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-4 sm:mb-6">

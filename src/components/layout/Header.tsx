@@ -12,6 +12,7 @@ import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { gsap } from "gsap";
 import { useLenis } from "lenis/react";
+import { scrollToContactAndOpenForm } from "@/lib/contactForm";
 
 const hanken = Hanken_Grotesk({ subsets: ["latin"] });
 
@@ -127,13 +128,13 @@ const Header = () => {
     else setActiveHash("");
   }, [pathname, scrollY]);
 
-  // Scroll to section when landing on / with a hash (e.g. /#about-me or /#contact)
+  // Scroll to section when landing with a hash (e.g. /#about-me or /#contact)
   const hasScrolledToHash = useRef(false);
   useEffect(() => {
-    if (pathname !== "/") {
-      hasScrolledToHash.current = false;
-      return;
-    }
+    hasScrolledToHash.current = false;
+  }, [pathname]);
+
+  useEffect(() => {
     if (typeof window === "undefined") return;
     const hash = window.location.hash?.slice(1);
     if (!hash || (hash !== "about-me" && hash !== "contact")) return;
@@ -144,6 +145,9 @@ const Header = () => {
       if (element) {
         if (lenis) lenis.scrollTo(element, { offset: 0 });
         else element.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (hash === "contact") {
+          scrollToContactAndOpenForm(lenis as Parameters<typeof scrollToContactAndOpenForm>[0]);
+        }
       }
     }, 150);
     return () => clearTimeout(timeout);
@@ -533,24 +537,9 @@ const Header = () => {
                     e.preventDefault();
                     handleMenuItemClick("Contact");
                     setIsMobileMenuOpen(false);
-
-                    // If we're on the home page, scroll to the section
-                    if (pathname === "/") {
-                      setTimeout(() => {
-                        const element = document.getElementById("contact");
-                        if (element) {
-                          if (lenis) lenis.scrollTo(element, { offset: 0 });
-                          else
-                            element.scrollIntoView({
-                              behavior: "smooth",
-                              block: "start",
-                            });
-                        }
-                      }, 100);
-                    } else {
-                      // If we're on a different page, navigate to home first
-                      window.location.href = "/#contact";
-                    }
+                    scrollToContactAndOpenForm(
+                      lenis as Parameters<typeof scrollToContactAndOpenForm>[0]
+                    );
                   }}
                 >
                   Contact

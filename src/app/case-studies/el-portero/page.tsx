@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLenis } from "lenis/react";
-import Footer from "@/components/layout/Footer";
 import HorizontalScrollGallery from "@/components/case-studies/HorizontalScrollGallery";
 import CustomLightbox from "@/components/ui/Lightbox";
 
@@ -270,86 +269,6 @@ function Workstream({
     </article>
   );
 }
-
-const PasswordProtection = ({
-  onPasswordCorrect,
-}: {
-  onPasswordCorrect: () => void;
-}) => {
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError("");
-
-    if (password === "elportero2026") {
-      onPasswordCorrect();
-    } else {
-      setError("Incorrect password. Please try again.");
-    }
-
-    setIsLoading(false);
-  };
-
-  return (
-    <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] flex items-center justify-center px-4">
-      <div className="max-w-2xl w-full">
-        <div className="text-center mb-12">
-          <h1 className="font-bricolage-grotesque text-5xl md:text-6xl font-bold text-neutral-100 dark:text-neutral-0 mb-4">
-            El Portero Case Study
-          </h1>
-          <p className="text-xl md:text-2xl text-neutral-60 dark:text-neutral-40">
-            Enter the password to access this case study
-          </p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="space-y-8">
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-lg font-medium text-neutral-80 dark:text-neutral-20 mb-4"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-6 py-5 text-lg border-2 border-neutral-20 dark:border-neutral-80 rounded-xl bg-neutral-0 dark:bg-[#060608] text-neutral-100 dark:text-neutral-0 focus:outline-none focus:ring-4 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-              placeholder="Enter password"
-              required
-            />
-          </div>
-
-          {error && (
-            <div className="text-red-500 text-lg text-center">{error}</div>
-          )}
-
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold text-lg py-5 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-4 focus:ring-purple-500/50"
-          >
-            {isLoading ? "Checking..." : "Access Case Study"}
-          </button>
-        </form>
-
-        <div className="mt-8 text-center">
-          <button
-            onClick={() => window.history.back()}
-            className="text-lg text-neutral-60 dark:text-neutral-40 hover:text-neutral-80 dark:hover:text-neutral-20 transition-colors duration-200"
-          >
-            ← Back to work
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 function smoothstep01(value: number) {
   const x = Math.min(1, Math.max(0, value));
@@ -1067,23 +986,10 @@ function ElPorteroEditorialContent() {
         currentIndex={lightboxIndex}
         onNavigate={setLightboxIndex}
       />
-      <section className="py-10 md:py-14 w-full border-t border-neutral-10 el-portero-section-rule bg-neutral-0 dark:bg-[#060608]">
-        <div className="site-content-shell px-4 sm:px-6 md:px-8 lg:px-12">
-          <Footer />
-        </div>
-      </section>
     </>
   );
 }
 
 export default function ElPorteroCaseStudyPage() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  if (!isAuthenticated) {
-    return (
-      <PasswordProtection onPasswordCorrect={() => setIsAuthenticated(true)} />
-    );
-  }
-
   return <ElPorteroEditorialContent />;
 }

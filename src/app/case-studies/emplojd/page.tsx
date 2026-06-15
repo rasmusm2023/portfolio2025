@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useLenis } from "lenis/react";
-import Footer from "@/components/layout/Footer";
 import EmplojdFlowPrototypeShowcase from "@/components/case-studies/EmplojdFlowPrototypeShowcase";
 import HorizontalScrollGallery from "@/components/case-studies/HorizontalScrollGallery";
 import CustomLightbox from "@/components/ui/Lightbox";
@@ -854,11 +853,6 @@ export default function EmplojdCaseStudyPage() {
         currentIndex={lightboxIndex}
         onNavigate={setLightboxIndex}
       />
-      <section className="py-10 md:py-14 w-full border-t border-neutral-10 emplojd-section-rule bg-neutral-0 dark:bg-[#060608]">
-        <div className="site-content-shell px-4 sm:px-6 md:px-8 lg:px-12">
-          <Footer />
-        </div>
-      </section>
     </>
   );
 }

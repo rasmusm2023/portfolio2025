@@ -1,6 +1,5 @@
 import BentoBox from "@/components/ui/BentoBox";
 import BentoBoxWhite from "@/components/ui/BentoBoxWhite";
-import Footer from "@/components/layout/Footer";
 
 export default function ComparePage() {
   return (
@@ -26,13 +25,6 @@ export default function ComparePage() {
             </h2>
             <BentoBoxWhite />
           </div>
-        </div>
-      </div>
-
-      {/* Footer Section */}
-      <div className="pt-16 pb-16">
-        <div className="container mx-auto">
-          <Footer />
         </div>
       </div>
     </div>

@@ -8,7 +8,6 @@ import { Hanken_Grotesk } from "next/font/google";
 import { gsap } from "gsap";
 import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 import { useNavbar } from "@/contexts/NavbarContext";
-import Footer from "@/components/layout/Footer";
 import VerticalFloatingNavbar from "@/components/layout/VerticalFloatingNavbar";
 import Hero from "./sections/Hero";
 import Summary from "./sections/Summary";
@@ -1022,13 +1021,6 @@ const CaseStudy = ({
         {/* Other Case Studies Section */}
         <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative">
           <OtherStudies excludeIds={excludeIds} />
-
-          {/* Footer Section */}
-          <div className="pt-16 pb-16 pr-4 pl-4">
-            <div className="container mx-auto">
-              <Footer />
-            </div>
-          </div>
         </div>
       </div>
     </>

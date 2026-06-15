@@ -1,6 +1,5 @@
 "use client";
 
-import Footer from "@/components/layout/Footer";
 import HeroTitleCycle from "@/components/ui/HeroTitleCycle";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
@@ -634,16 +633,6 @@ export default function Home() {
                 />
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Get in touch / Contact - reduced vertical padding */}
-        <section
-          id="contact"
-          className="py-10 md:py-14 w-full border-t border-neutral-200 dark:border-[#1a1a1a]"
-        >
-          <div className="site-content-shell px-4 sm:px-6 md:px-8 lg:px-12">
-            <Footer />
           </div>
         </section>
       </div>

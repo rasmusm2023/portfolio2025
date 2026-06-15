@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLenis } from "lenis/react";
+import Footer from "@/components/layout/Footer";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -55,6 +56,14 @@ export default function ClientLayout({
       <div ref={contentRef} className="relative w-full h-full" key={pathname}>
         {children}
       </div>
+      <section
+        id="contact"
+        className="relative z-10 py-10 md:py-14 w-full border-t border-neutral-200 dark:border-[#1a1a1a] bg-neutral-0 dark:bg-[#060608]"
+      >
+        <div className="site-content-shell px-4 sm:px-6 md:px-8 lg:px-12">
+          <Footer />
+        </div>
+      </section>
     </div>
   );
 }
