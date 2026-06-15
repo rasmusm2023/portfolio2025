@@ -4,8 +4,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { bricolageGrotesque, figtree } from "@/app/fonts";
-import Footer from "@/components/layout/Footer";
-
 type FilterValue = "both" | "design" | "development";
 
 const FILTERS: { value: FilterValue; label: string }[] = [
@@ -402,10 +400,6 @@ export default function WorksPage() {
             </a>
           </div>
         </section>
-
-        <div className="mt-16">
-          <Footer />
-        </div>
       </div>
     </div>
   );

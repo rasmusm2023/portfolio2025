@@ -3,7 +3,6 @@
 import CustomCursor from "@/components/CustomCursor";
 import ProjectShowcase from "@/components/pages/ProjectShowcase";
 import CaseStudiesShowcase from "@/components/case-studies/CaseStudiesShowcase";
-import Footer from "@/components/layout/Footer";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import CircularScrollText from "@/components/ui/CircularScrollText";
 import Link from "next/link";
@@ -230,13 +229,6 @@ export default function ProjectsPage() {
                 </div>
               </div>
             </section>
-
-            {/* Footer Section */}
-            <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">
-              <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-                <Footer />
-              </div>
-            </div>
           </main>
         </div>
       </div>

@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import CustomLightbox from "@/components/ui/Lightbox";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
-import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import CircularScrollText from "@/components/ui/CircularScrollText";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -435,13 +434,6 @@ export default function ArchivesPage() {
             </div>
           </section>
         </main>
-
-        {/* Footer Section */}
-        <div className="pt-8 sm:pt-12 lg:pt-16 pb-8 sm:pb-12 lg:pb-16">
-          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-            <Footer />
-          </div>
-        </div>
       </div>
 
       {/* Lightbox */}

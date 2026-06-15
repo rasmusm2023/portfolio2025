@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import CustomCursor from "@/components/CustomCursor";
-import Footer from "@/components/layout/Footer";
 import AnimatedBlob from "@/components/ui/AnimatedBlob";
 import { Hanken_Grotesk } from "next/font/google";
 import { useRouter } from "next/navigation";
@@ -116,13 +115,6 @@ export default function WorkInProgressPage() {
               </div>
             </div>
           </section>
-
-          {/* Footer Section */}
-          <div className="pt-16 pb-16">
-            <div className="container mx-auto">
-              <Footer />
-            </div>
-          </div>
         </div>
       </>
     );
@@ -182,13 +174,6 @@ export default function WorkInProgressPage() {
             </div>
           </div>
         </section>
-
-        {/* Footer Section */}
-        <div className="pt-16 pb-16">
-          <div className="container mx-auto">
-            <Footer />
-          </div>
-        </div>
       </div>
     </>
   );

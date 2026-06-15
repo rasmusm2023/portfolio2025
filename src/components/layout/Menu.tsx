@@ -8,6 +8,7 @@ import { colors, withOpacity } from "@/styles/colors";
 import { useTheme } from "@/contexts/ThemeContext";
 import { figtree } from "@/app/fonts";
 import { useLenis } from "lenis/react";
+import { scrollToContactAndOpenForm } from "@/lib/contactForm";
 
 interface MenuItem {
   label: string;
@@ -186,16 +187,26 @@ const Menu = () => {
             if (isHashLink) {
               e.preventDefault();
               const hash = item.href.split("#")[1];
-              
-              // If we're on the home page, scroll to the section
+
+              if (hash === "contact") {
+                scrollToContactAndOpenForm(
+                  lenis as Parameters<typeof scrollToContactAndOpenForm>[0]
+                );
+                return;
+              }
+
+              // about-me exists on the home page only
               if (pathname === "/") {
                 const element = document.getElementById(hash);
                 if (element) {
                   if (lenis) lenis.scrollTo(element, { offset: 0 });
-                  else element.scrollIntoView({ behavior: "smooth", block: "start" });
+                  else
+                    element.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
                 }
               } else {
-                // If we're on a different page, navigate to home first, then scroll
                 window.location.href = item.href;
               }
             }
