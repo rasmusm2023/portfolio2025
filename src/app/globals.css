@@ -152,16 +152,24 @@
   box-sizing: border-box;
 }
 
-/* Text selection styling */
+/* Text selection — pink accent (gradient mid-tone; ::selection cannot use gradients) */
 ::selection {
-  background-color: rgba(139, 92, 246, 0.3);
-  /* Purple with transparency */
+  background-color: rgba(219, 39, 119, 0.35);
   color: inherit;
 }
 
 ::-moz-selection {
-  background-color: rgba(139, 92, 246, 0.3);
-  /* Purple with transparency for Firefox */
+  background-color: rgba(219, 39, 119, 0.35);
+  color: inherit;
+}
+
+.dark ::selection {
+  background-color: rgba(244, 114, 182, 0.42);
+  color: inherit;
+}
+
+.dark ::-moz-selection {
+  background-color: rgba(244, 114, 182, 0.42);
   color: inherit;
 }
 
@@ -333,8 +341,109 @@ textarea::-webkit-scrollbar-thumb:hover {
   animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.84s both;
 }
 
-/* El Portero case study — accent (home skills Product Strategy card gradient) */
+/* El Portero / Emplojd case study — gradient accent text */
+.el-portero-stat-figure,
+.emplojd-stat-figure {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
 .el-portero-stat-figure {
+  background-image: linear-gradient(
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+/* Emplojd case study — accent (home skills UI Design card gradient) */
+.emplojd-stat-figure {
+  background-image: linear-gradient(
+    145deg,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
+/* Horizontal section rules — subtle but readable on #060608 in dark mode */
+.dark .el-portero-section-rule,
+.dark .emplojd-section-rule {
+  border-color: #28282c;
+}
+
+/* Shared max-width shell — caps line length on ultrawide displays */
+.site-content-shell {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1440px;
+}
+
+@media (min-width: 2560px) {
+  .site-content-shell {
+    max-width: 1920px;
+  }
+}
+
+/* Case study galleries — native horizontal swipe on touch devices */
+.case-study-gallery-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 128, 0.45) transparent;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 128, 0.45);
+  border-radius: 999px;
+}
+
+.dark .case-study-gallery-scroll {
+  scrollbar-color: rgba(180, 180, 188, 0.35) transparent;
+}
+
+.dark .case-study-gallery-scroll::-webkit-scrollbar-thumb {
+  background: rgba(180, 180, 188, 0.35);
+}
+
+/* Home page — small pink gradient labels above section titles */
+.home-section-eyebrow {
+  background: linear-gradient(
+    145deg,
+    #be185d 0%,
+    #db2777 35%,
+    #f472b6 68%,
+    #fbcfe8 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Footer — copy email box gradient layers (green swipes over orange) */
+.chat-email-box {
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.chat-email-box-bg--orange {
   background: linear-gradient(
     145deg,
     #c2410c 0%,
@@ -342,17 +451,26 @@ textarea::-webkit-scrollbar-thumb:hover {
     #fb923c 62%,
     #fcd34d 100%
   );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
-/* Horizontal section rules — subtle but readable on #060608 in dark mode */
-.dark .el-portero-section-rule {
-  border-color: #28282c;
+.chat-email-box-bg--green {
+  background: linear-gradient(
+    145deg,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
+  transform: translateX(-101%);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.el-portero-quote {
+.chat-email-box.is-copied .chat-email-box-bg--green {
+  transform: translateX(0);
+}
+
+.el-portero-quote,
+.emplojd-quote {
   position: relative;
 }
 
@@ -373,6 +491,23 @@ textarea::-webkit-scrollbar-thumb:hover {
   );
 }
 
+.emplojd-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    145deg,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
 .el-portero-scroll-progress-strategy {
   background: linear-gradient(
     to right,
@@ -383,7 +518,27 @@ textarea::-webkit-scrollbar-thumb:hover {
   );
 }
 
+.emplojd-scroll-progress-design {
+  background: linear-gradient(
+    to right,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
 .el-portero-scroll-progress-frontend {
+  background: linear-gradient(
+    to right,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
+}
+
+.emplojd-scroll-progress-delivery {
   background: linear-gradient(
     to right,
     #047857 0%,
@@ -505,6 +660,11 @@ textarea::-webkit-scrollbar-thumb:hover {
 .skills-cards-root article.group:hover .skills-card-gradient-morph,
 .skills-cards-root article.group:focus-within .skills-card-gradient-morph {
   clip-path: circle(46% at var(--skills-corner-x, 100%) var(--skills-corner-y, 100%));
+}
+
+.skills-card-description {
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 }
 
 @keyframes mask-rotate {

@@ -145,7 +145,7 @@ export default function EmplojdEditorialCaseStudyPage() {
             Work
           </Link>
           <Link
-            href="/case-studies/emplojd"
+            href="/case-studies/emplojd-old"
             className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-60 dark:text-neutral-40 underline-offset-4 hover:text-neutral-100 dark:hover:text-neutral-0 hover:underline"
           >
             Classic layout

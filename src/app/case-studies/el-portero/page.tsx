@@ -21,31 +21,64 @@ const LOGOTYPE_GALLERY_IMAGES = [
   },
 ];
 
-const ADMIN_PORTAL_IMAGE = {
-  src: "/assets/case-study-assets/el-portero/el-portero-admin-portal-dashboard-mockup.webp",
-  alt: "El Portero admin portal dashboard",
-  title: "Admin portal dashboard",
-};
-
-const ADMIN_PORTAL_CAPTIONS = [
-  "Dashboard overview: staff land here to manage day-to-day restaurant operations.",
-  "Events: create and edit listings before publishing them to the guest site.",
-  "Menus: update food and drink offerings whenever the kitchen team needs to.",
-  "Opening hours: keep guest-facing hours aligned with the restaurant schedule.",
+const ADMIN_PORTAL_GALLERY_IMAGES = [
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-admin-portal-dashboard-mockup.webp",
+    alt: "El Portero admin portal dashboard",
+    title: "Admin portal dashboard",
+    caption:
+      "Dashboard: where staff start for day-to-day operations.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-dashboard-sign-in.webp",
+    alt: "El Portero admin portal sign-in screen",
+    title: "Admin sign-in",
+    caption:
+      "Staff sign-in before any changes to events, menus, or hours.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-events.webp",
+    alt: "El Portero admin portal events list",
+    title: "Events overview",
+    caption:
+      "Events list: what's live and what still needs attention.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-events-editor.webp",
+    alt: "El Portero admin portal events editor",
+    title: "Events editor",
+    caption:
+      "Events editor: create and update listings before publishing.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-menu-editor.webp",
+    alt: "El Portero admin portal menu editor",
+    title: "Menu editor",
+    caption:
+      "Menu editor: update food and drink when the kitchen needs to.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-opening-hours-editor.webp",
+    alt: "El Portero admin portal opening hours editor",
+    title: "Opening hours editor",
+    caption:
+      "Opening hours: keep what guests see in sync with the real schedule.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-dinner-menu.webp",
+    alt: "El Portero dinner menu on the guest site",
+    title: "Published dinner menu",
+    caption:
+      "Published dinner menu on the guest site, updated from the admin when staff publish.",
+  },
+  {
+    src: "/assets/case-study-assets/el-portero/el-portero-case-snapshot-home.webp",
+    alt: "El Portero guest website homepage",
+    title: "Guest website homepage",
+    caption:
+      "Guest homepage: kept current by staff through the admin portal.",
+  },
 ];
-
-const ADMIN_PORTAL_GALLERY_IMAGES = Array.from({ length: 4 }, (_, index) => ({
-  ...ADMIN_PORTAL_IMAGE,
-  caption: ADMIN_PORTAL_CAPTIONS[index],
-  alt:
-    index === 0
-      ? ADMIN_PORTAL_IMAGE.alt
-      : `${ADMIN_PORTAL_IMAGE.alt} — view ${index + 1}`,
-  title:
-    index === 0
-      ? ADMIN_PORTAL_IMAGE.title
-      : `${ADMIN_PORTAL_IMAGE.title} ${index + 1}`,
-}));
 
 const CASE_STUDY_LIGHTBOX_IMAGES = [
   ...LOGOTYPE_GALLERY_IMAGES,
@@ -54,7 +87,7 @@ const CASE_STUDY_LIGHTBOX_IMAGES = [
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="el-portero-stat-figure text-xs font-bold uppercase tracking-[0.2em] mb-3">
+    <p className="el-portero-stat-figure text-xs font-bold uppercase tracking-[0.14em] mb-3 w-fit max-w-full">
       {children}
     </p>
   );
@@ -346,7 +379,7 @@ function ElPorteroEditorialContent() {
 
   useEffect(() => {
     document.title =
-      "El Portero — Case Study | Rasmus Mattsson | Product Designer Portfolio";
+      "El Portero | Case Study | Rasmus Mattsson | Product Designer Portfolio";
   }, []);
 
   useEffect(() => {
@@ -375,7 +408,7 @@ function ElPorteroEditorialContent() {
     <>
       <main className="min-h-screen bg-neutral-0 dark:bg-[#060608] pb-16 md:pb-20 pt-12 sm:pt-14 xl:pt-16">
         <header className="sticky top-12 sm:top-14 xl:top-16 z-50 bg-neutral-0/95 dark:bg-[#060608]/95 backdrop-blur-md border-b border-neutral-10/80 el-portero-section-rule">
-          <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8 md:py-4">
+          <div className="site-content-shell flex items-center justify-between gap-4 px-5 py-3 sm:px-6 md:px-8 md:py-4">
             <Link
               href="/works"
               className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-neutral-70 dark:text-neutral-40 transition-colors hover:text-neutral-100 dark:hover:text-neutral-0"
@@ -413,21 +446,39 @@ function ElPorteroEditorialContent() {
           </div>
         </header>
 
-        <article className="mx-auto max-w-[1440px] px-5 pt-12 sm:px-6 md:px-8 md:pt-16 lg:pt-20">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-60 dark:text-neutral-40">
-            Case study ·{" "}
-            <span className="text-neutral-80 dark:text-neutral-20">
-              El Portero
-            </span>
-          </p>
+        <article className="site-content-shell px-5 pt-12 sm:px-6 md:px-8 md:pt-16 lg:pt-20">
+          <div className="grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,17.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] xl:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] md:gap-10 lg:gap-12 md:items-end">
+            <div className="min-w-0">
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-neutral-60 dark:text-neutral-40">
+                Case study ·{" "}
+                <span className="text-neutral-80 dark:text-neutral-20">
+                  El Portero
+                </span>
+              </p>
 
-          <h1 className="font-bricolage-grotesque mt-4 text-[clamp(2rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-neutral-100 dark:text-neutral-0">
-            Website Design &amp; Development
-          </h1>
-          <p className="font-bricolage-grotesque mt-5 text-lg sm:text-xl md:text-2xl font-normal leading-snug text-neutral-70 dark:text-neutral-30 max-w-3xl lg:max-w-4xl">
-            A modern, warm, and premium online presence with effortless paths to
-            booking for visitors.
-          </p>
+              <h1 className="font-bricolage-grotesque mt-4 text-[clamp(2rem,6vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-neutral-100 dark:text-neutral-0">
+                Website Design &amp; Development
+              </h1>
+              <p className="font-bricolage-grotesque mt-5 text-lg sm:text-xl md:text-2xl font-normal leading-snug text-neutral-70 dark:text-neutral-30 max-w-3xl lg:max-w-none">
+                A warm, premium site where browsing menus and booking a table
+                feel effortless.
+              </p>
+            </div>
+
+            <figure className="min-w-0 w-full max-w-sm mx-auto md:max-w-none md:mx-0 md:justify-self-end">
+              <div className="overflow-hidden rounded-xl border border-neutral-10 dark:border-neutral-80 bg-neutral-3 dark:bg-neutral-90/25 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.35)]">
+                <Image
+                  src="/assets/case-study-assets/el-portero/el-portero-works-thumbnail.webp"
+                  alt="El Portero website preview"
+                  width={1600}
+                  height={1000}
+                  className="w-full h-auto object-cover"
+                  sizes="(max-width: 768px) 88vw, (max-width: 1280px) 280px, 416px"
+                  priority
+                />
+              </div>
+            </figure>
+          </div>
 
           <hr className="my-12 md:my-16 border-neutral-10 el-portero-section-rule" />
 
@@ -436,56 +487,44 @@ function ElPorteroEditorialContent() {
               <SectionLabel>Background</SectionLabel>
               <div className="space-y-5 text-base leading-relaxed text-neutral-80 dark:text-neutral-20">
                 <p>
-                  El Portero is a restaurant in Spain that needed a digital
-                  presence matching the quality of the in-room experience:
-                  modern, premium, warm, and welcoming, without feeling cold or
-                  inaccessible to guests browsing menus and making a
-                  reservation.
+                  El Portero is a restaurant in Spain. They wanted a site that
+                  felt as warm and polished as dining in the room, not cold or
+                  over-designed, and made it easy to browse menus and book a
+                  table.
                 </p>
                 <p>
-                  Rather than a popular site builder, we designed and built a
-                  custom website and admin portal. Through discussions with
-                  restaurant management, it became clear they wanted a system
-                  that could be shaped over time to fit their specific needs,
-                  without the sudden limitations that off-the-shelf tools and
-                  builders often introduce later.
+                  The brief came with a tight deadline and almost nothing to
+                  start from: no website, no brand kit, and an owner and manager
+                  who knew hospitality, not tech. We skipped a site builder and
+                  built a custom guest site and admin portal instead, shaped in
+                  ongoing dialogue so it could grow with new features and,
+                  eventually, more locations.
                 </p>
                 <p>
-                  The project spans two connected surfaces: a{" "}
+                  Two surfaces, one system: a{" "}
                   <strong className="font-semibold text-neutral-100 dark:text-neutral-0">
                     public website
                   </strong>{" "}
-                  focused on atmosphere, clarity, and clear paths to booking via
-                  BokaBord, and a{" "}
+                  for atmosphere, menus, and BokaBord booking, and a{" "}
                   <strong className="font-semibold text-neutral-100 dark:text-neutral-0">
-                    tailor-made admin portal
+                    staff admin portal
                   </strong>{" "}
-                  for staff, where the team can update events, menus, and
-                  opening hours, publishing to the guest site when they choose
-                  to.
-                </p>
-                <p>
-                  I designed and built the experience end-to-end, including the
-                  logo and menu designs, from visual direction and interaction
-                  design through to frontend implementation, performance
-                  optimization, and admin tooling.
+                  for events, menus, and hours, published when the team is ready.
                 </p>
               </div>
               <p className="mt-8 text-base font-semibold leading-relaxed text-neutral-90 dark:text-neutral-10">
-                How might we give a restaurant a modern yet warm and premium
-                digital presence while making browsing and booking feel
-                effortless for every visitor?
+                How might we give guests that same warm, premium feeling
+                online, and make booking feel effortless?
               </p>
             </div>
 
             <div>
               <SectionLabel>My role</SectionLabel>
               <p className="text-base leading-relaxed text-neutral-80 dark:text-neutral-20">
-                Product Designer, Digital Designer &amp; Developer: logo and
-                menu design, brand and UI direction, information architecture,
-                frontend development, performance optimization, admin portal
-                design and build, and BokaBord booking button integration. I
-                owned the full journey from concept to shipped product.
+                Sole designer and developer from concept to launch: brand
+                (logo and menus), guest website, and staff admin portal, plus
+                BokaBord integration, performance tuning, and hands-on training
+                so the team could publish updates on their own.
               </p>
             </div>
           </div>
@@ -509,24 +548,27 @@ function ElPorteroEditorialContent() {
           </div>
 
           <div className="border-t border-neutral-10 el-portero-section-rule pt-10">
-            <div className="flex flex-nowrap items-start gap-x-6 sm:gap-x-8 md:gap-x-10 overflow-x-auto pb-1">
-              <MetaCell title="Role" nowrap>
+            <div className="grid grid-cols-1 min-[480px]:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 sm:gap-x-8 md:gap-x-10">
+              <MetaCell title="Role">
                 Product Designer, Digital Designer &amp; Developer
               </MetaCell>
-              <MetaCell title="Tools" nowrap>
-                Figma · Next.js · TypeScript · Tailwind CSS · GitHub · Cursor
+              <MetaCell title="Tools">
+                Figma · Next.js · TypeScript · Tailwind CSS · Firebase ·
+                Google Gemini · GitHub · Cursor
               </MetaCell>
-              <MetaCell title="Timeline" nowrap>
+              <MetaCell title="Timeline">
                 2026
               </MetaCell>
-              <MetaCell title="Context" nowrap>
+              <MetaCell title="Context">
                 Freelance project · Client project · Restaurant in Spain
               </MetaCell>
             </div>
             <div className="mt-10 md:mt-12 max-w-2xl">
               <MetaCell title="Collaboration">
-                Worked directly with the restaurant team to align on brand tone,
-                operational needs, and booking workflows before implementation.
+                Stayed in close touch with the owner and manager on brand,
+                day-to-day operations, and booking, before and after launch.
+                Once the admin portal was live, I trained staff on updating
+                events, menus, and hours, and on publishing when they were ready.
               </MetaCell>
             </div>
           </div>
@@ -544,8 +586,8 @@ function ElPorteroEditorialContent() {
               />
             </div>
             <figcaption className="mt-4 text-xs sm:text-sm text-neutral-60 dark:text-neutral-40 leading-relaxed">
-              Hero: public-facing site direction, modern, warm, premium, and
-              built around effortless browsing and booking.
+              The public site: warm, premium, and built around easy browsing
+              and booking.
             </figcaption>
           </figure>
 
@@ -559,16 +601,34 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Ran early sessions with restaurant management to
-                      understand how they wanted the brand to feel online, what
-                      guests ask about before booking, and which content staff
-                      update most often: events, menus, and opening hours.
+                      Early and ongoing conversations with the owner and
+                      manager: how the brand should feel online, what guests ask
+                      before booking, and what staff update most: events, menus,
+                      and hours.
                     </p>
                     <p>
-                      These conversations surfaced a clear tension: the team
-                      wanted something that looked modern and premium, but never
-                      cold or over-designed. The digital experience had to feel
-                      as welcoming as walking through the door.
+                      The tension was familiar: modern and premium, but never
+                      cold. It had to feel as welcoming as walking through the
+                      door.
+                    </p>
+                  </>
+                }
+              />
+              <ProcessStep
+                icon="🧭"
+                title="Direction before screens"
+                body={
+                  <>
+                    <p>
+                      Sat down with the owner and manager to walk through early
+                      ideas: mood, layout approaches, and how the site could feel
+                      premium without going cold. We discussed options and agreed
+                      on a general direction before any deep screen work.
+                    </p>
+                    <p>
+                      The point was to avoid pouring hours into explorations that
+                      would miss the mark. Locking in the feel upfront made the
+                      detailed design phase faster and more confident.
                     </p>
                   </>
                 }
@@ -579,16 +639,14 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Mapped how visitors typically arrive via search, social,
-                      or word of mouth, and what they need before committing to
-                      a reservation: atmosphere, menu clarity, practical
-                      details, and a booking path that works on mobile as well
-                      as desktop.
+                      Mapped how people find the restaurant (search, social,
+                      word of mouth) and what they need before booking: the vibe,
+                      readable menus, practical details, and booking that works
+                      on a phone.
                     </p>
                     <p>
-                      The journey made it obvious that browsing and booking are
-                      one continuous flow; friction anywhere in the middle costs
-                      trust before a guest ever reaches BokaBord.
+                      Browsing and booking are one flow. Friction in the middle
+                      costs trust before anyone reaches BokaBord.
                     </p>
                   </>
                 }
@@ -599,16 +657,13 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Reviewed restaurant sites in a similar tier, both locally
-                      and in comparable hospitality markets, to see what reads
-                      as premium, what feels like a template, and where booking
-                      gets buried behind brand theatre.
+                      Looked at peer restaurant sites to see what felt premium,
+                      what looked like a template, and where booking got buried.
                     </p>
                     <p>
-                      Common patterns emerged: heavy imagery with weak menu
-                      hierarchy, booking CTAs hidden in navigation, and admin
-                      workflows bolted onto generic site builders that break
-                      when operational needs grow.
+                      The same patterns kept showing up: beautiful photos, messy
+                      menus, hidden booking buttons, and admin tools that break
+                      when the restaurant outgrows them.
                     </p>
                   </>
                 }
@@ -626,16 +681,14 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Mapped how guests discover the restaurant online and what
-                      signals trust before booking: menu clarity, atmosphere,
-                      location, and a reservation path that feels
-                      straightforward on mobile and desktop.
+                      Mapped what guests need before they trust enough to book:
+                      clear menus, atmosphere, location, and a straight path to
+                      reserve, on mobile or desktop.
                     </p>
                     <p>
-                      Aligned with the team on a visual tone that reads premium,
-                      warm, and welcoming without losing seriousness: restrained
-                      typography, generous spacing, and video- and
-                      photography-led layouts.
+                      That guest lens, together with the direction agreed with
+                      the owner and manager, shaped restrained type, generous
+                      space, and photography-led layouts.
                     </p>
                   </>
                 }
@@ -646,15 +699,12 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Structured browsing paths for menu exploration, practical
-                      information, and clear paths to BokaBord booking, keeping
-                      the journey short and legible at every step.
+                      Built clear paths for menus, practical info, and BokaBord
+                      booking, short and easy to follow.
                     </p>
                     <p>
-                      In parallel, defined admin workflows for staff: creating
-                      and editing events, updating food and drink menus, and
-                      managing opening hours, with every change publishing
-                      straight to the public site when the staff wishes it.
+                      For staff: workflows for events, menus, and hours that
+                      publish to the public site only when they&apos;re ready.
                     </p>
                   </>
                 }
@@ -665,18 +715,15 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Implemented the guest site and admin portal in code,
-                      connecting booking buttons on the guest site to BokaBord
-                      while keeping staff-controlled admin updates in sync
-                      across both surfaces. The codebase is version-controlled
-                      in GitHub; Cursor supported day-to-day design and
-                      development work.
+                      Built the guest site and admin portal in code, wired
+                      booking to BokaBord, and kept staff updates in sync across
+                      both. GitHub for version control; Cursor for day-to-day
+                      design and development.
                     </p>
                     <p>
-                      Optimized the site for sustained heavy traffic: where
-                      content is stored, how images and video are served, and
-                      how pages load under continuous visitor load, not just
-                      ideal demo conditions.
+                      Tuned how content, images, and video are stored and
+                      served so the site stays fast under real traffic, not just
+                      on launch day.
                     </p>
                   </>
                 }
@@ -689,39 +736,39 @@ function ElPorteroEditorialContent() {
           <EditorialSection label="Challenges" title="What made this hard">
             <div className="space-y-10 md:space-y-12">
               <ProcessStep
-                icon="⚖️"
-                title="Premium without feeling cold"
-                body={
-                  <>
-                    <p>
-                      Hospitality brands often swing too far toward minimal
-                      luxury: dark palettes, tight type, and layouts that
-                      impress designers but intimidate guests looking for a warm
-                      evening out.
-                    </p>
-                    <p>
-                      Finding a visual language that felt serious and premium
-                      while still approachable took repeated iteration on
-                      photography, spacing, and tone, not just a prettier hero.
-                    </p>
-                  </>
-                }
-              />
-              <ProcessStep
                 icon="🏗️"
                 title="Custom scope on a real deadline"
                 body={
                   <>
                     <p>
-                      Building both a guest site and a tailor-made admin portal,
-                      instead of reaching for a site builder, meant owning
-                      design, frontend, integrations, and performance as one
-                      continuous thread, without a large team to split the work.
+                      A guest site plus a custom admin portal on a short
+                      deadline: no site builder, no big team. Brand, menus, and
+                      visual direction all had to be created in the same push,
+                      with no existing assets to lean on.
                     </p>
                     <p>
-                      Every architectural choice had to balance what the
-                      restaurant needed on day one with room to grow, without
-                      over-building features staff would never touch.
+                      Every choice had to work for day one while leaving room to
+                      add features and scale beyond one location, without
+                      building tools staff would never use.
+                    </p>
+                  </>
+                }
+              />
+              <ProcessStep
+                icon="⏱️"
+                title="A shareholder with limited time"
+                body={
+                  <>
+                    <p>
+                      The main shareholder had very little time to spare and was
+                      often hard to reach. Quick check-ins were the exception,
+                      not the rhythm of the project.
+                    </p>
+                    <p>
+                      To keep momentum on a tight deadline, many decisions had
+                      to be made from research, peer benchmarks, and design
+                      instinct, then brought back for validation when we did
+                      connect.
                     </p>
                   </>
                 }
@@ -732,15 +779,14 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      Guests need atmosphere, clarity, and a fast path to
-                      booking. Staff need simple tools to update events, menus,
-                      and hours, with control over when changes go live.
+                      Guests want atmosphere, clear menus, and a fast path to
+                      book. Staff want simple tools to update events, menus, and
+                      hours, and control over when changes go live.
                     </p>
                     <p>
-                      Designing for both without letting the admin complexity
-                      leak into the public experience, or the brand polish
-                      complicate back-office tasks, was a constant balancing
-                      act.
+                      The hard part was serving both without admin complexity
+                      leaking into the public site, or brand polish getting in
+                      the way of back-office tasks.
                     </p>
                   </>
                 }
@@ -751,15 +797,13 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      With thousands of monthly pageviews and a steady stream of
-                      unique visitors, the site could not only look good on
-                      launch day. It had to stay fast when menus, images, and
-                      video were served continuously under real traffic.
+                      With thousands of monthly visitors, the site had to stay
+                      fast after launch, not just look good on day one, while
+                      serving menus, images, and video under real load.
                     </p>
                     <p>
-                      Performance became a design constraint alongside layout
-                      and typography: heavy media had to feel rich without
-                      punishing load times on mobile networks.
+                      Performance became a design constraint: rich media without
+                      punishing load times on mobile.
                     </p>
                   </>
                 }
@@ -770,16 +814,15 @@ function ElPorteroEditorialContent() {
                 body={
                   <>
                     <p>
-                      BokaBord handles reservations reliably, but the handoff
-                      from the restaurant&apos;s own site to an external booking
-                      system is where many integrations feel bolted on, with
-                      different visual language, an unclear next step, or CTAs
-                      that break the brand moment.
+                      BokaBord handles reservations well, but the handoff from
+                      the restaurant&apos;s site often feels bolted on: wrong
+                      visuals, unclear next step, CTAs that break the brand
+                      moment.
                     </p>
                     <p>
-                      The challenge was making BokaBord feel native to El
-                      Portero&apos;s environment while accepting that the
-                      booking experience itself lived outside my design scope.
+                      The job was making BokaBord feel native to El Portero
+                      while accepting that the booking flow itself lived outside
+                      my scope.
                     </p>
                   </>
                 }
@@ -795,17 +838,14 @@ function ElPorteroEditorialContent() {
                 index="01"
                 title="Premium without friction"
                 subtitle="Brand & guest experience"
-                decision="Led with video and photography, restrained type, and calm navigation. BokaBord booking always one honest step away, never buried."
-                rationale="Guests needed to feel the restaurant's warmth and quality immediately; hiding reservations behind heavy brand theatre would hurt conversion."
+                decision="Led with video and photography, restrained type, and calm navigation. Booking via BokaBord always one clear step away."
+                rationale="Guests should feel the restaurant's warmth right away. Burying reservations behind brand theatre would hurt conversion."
               >
                 <p>
-                  Shaped a public site that communicates seriousness and care
-                  through layout and pacing, not decorative noise, so browsing
-                  feels premium and booking feels obvious. I also designed the
-                  logotype and food and drink menus, carrying the same visual
-                  language from screen to street so the online presence feels
-                  like a natural extension of the restaurant&apos;s atmosphere,
-                  physical environment, and locale.
+                  A public site that reads premium through layout and pacing,
+                  not decoration: browsing feels considered, booking feels
+                  obvious. I also designed the logotype and print menus so the
+                  brand carries from screen to street.
                 </p>
                 <figure className="my-8 md:my-10">
                   <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
@@ -819,9 +859,8 @@ function ElPorteroEditorialContent() {
                     ))}
                   </div>
                   <figcaption className="mt-3 text-xs text-neutral-60 dark:text-neutral-40">
-                    Logotype in context: how the mark reads on the building and
-                    in print, and how the digital brand aligns with the
-                    restaurant&apos;s real-world setting.
+                    The logotype on the building and in print, aligned with how
+                    the brand shows up online.
                   </figcaption>
                 </figure>
               </Workstream>
@@ -830,14 +869,13 @@ function ElPorteroEditorialContent() {
                 index="02"
                 title="Booking without reinventing the wheel"
                 subtitle="BokaBord integration"
-                decision="Connected booking buttons on the guest site to BokaBord, an industry-leading restaurant booking system in Sweden, rather than designing or building a reservation flow from scratch."
-                rationale="BokaBord already handles the booking experience reliably; my work was integrating it cleanly so guests reach it naturally from the restaurant's own site."
+                decision="Linked booking on the guest site to BokaBord instead of building a reservation flow from scratch."
+                rationale="BokaBord already works. My job was making it easy to reach from the restaurant's own site."
               >
                 <p>
-                  I did not design the booking flow itself. Booking CTAs across
-                  the site link into BokaBord&apos;s service, placed where
-                  guests expect them and styled to feel native to the
-                  restaurant&apos;s brand environment.
+                  I didn&apos;t design the booking flow itself. CTAs across the
+                  site link to BokaBord where guests expect them, styled to fit
+                  the restaurant&apos;s look and feel.
                 </p>
               </Workstream>
 
@@ -845,14 +883,19 @@ function ElPorteroEditorialContent() {
                 index="03"
                 title="Tools the team actually needs"
                 subtitle="Admin portal"
-                decision="Built a dedicated staff portal instead of bending a generic CMS or site builder, shaped around events, menus, and opening hours, with room to grow."
-                rationale="The client wanted a system they could evolve over time without hitting sudden platform limits. Custom tooling gave them that flexibility from day one."
+                decision="Built a staff portal around events, menus, and hours, not a generic CMS, with room to add features and scale beyond one location."
+                rationale="The client needed something they could grow into. Off-the-shelf builders tend to hit walls when operations change or new locations come online."
               >
                 <p>
-                  Designed admin views for the tasks staff own day to day:
-                  creating and editing events, updating food and drink menus,
-                  and changing opening hours, published to the guest-facing site
-                  when staff choose to push changes live.
+                  Admin views for what staff do every day: events, food and drink
+                  menus, opening hours, published to the guest site when they
+                  choose.
+                </p>
+                <p>
+                  The owner, manager, and floor team aren&apos;t technical, so
+                  delivery included walking them through the portal: what each
+                  screen does, how drafts work, and how changes show up
+                  publicly.
                 </p>
                 <HorizontalScrollGallery
                   images={ADMIN_PORTAL_GALLERY_IMAGES}
@@ -879,15 +922,14 @@ function ElPorteroEditorialContent() {
                 index="04"
                 title="One system, two audiences"
                 subtitle="Integrations & delivery"
-                decision="Treated guest site and admin portal as one product with shared data, not two separate builds that drift apart."
-                rationale="When booking integrations and live admin updates live in one coherent system, staff and guests see the same truth."
+                decision="One product, shared data: guest site and admin portal built together, not as separate projects that drift apart."
+                rationale="When booking and admin updates live in the same system, staff and guests always see the same information."
               >
                 <p>
-                  Connected BokaBord booking buttons on the guest side and
-                  staff-controlled admin publishing on the back office, then
-                  shipped both surfaces so the restaurant could run the full
-                  loop from day one: discover, book via BokaBord, and keep
-                  menus, events, and hours current.
+                  Wired BokaBord on the guest side to staff publishing on the
+                  back office, then shipped both so the restaurant could run
+                  the full loop from day one: discover, book, and keep menus,
+                  events, and hours current.
                 </p>
               </Workstream>
 
@@ -895,14 +937,12 @@ function ElPorteroEditorialContent() {
                 index="05"
                 title="Built for sustained traffic"
                 subtitle="Performance optimization"
-                decision="Treated performance as a design requirement from the start, optimizing content storage, images, and video for continuous heavy visitor load."
-                rationale="We expected a steady stream of guests browsing menus and booking; a premium site that stutters under load would undermine the brand as quickly as a weak layout."
+                decision="Treated performance as a design requirement from the start, not a polish pass at the end."
+                rationale="Guests browse menus and book in steady numbers. A site that stutters under load undermines the brand as fast as a weak layout."
               >
                 <p>
-                  Audited how content is stored and delivered, tuned image and
-                  video handling, and optimized page loading so the experience
-                  stays fast and stable even when visitor numbers stay high, not
-                  only on launch day.
+                  Tuned storage, images, and page loading so the experience stays
+                  fast when traffic is high, not only on launch day.
                 </p>
               </Workstream>
             </div>
@@ -912,9 +952,9 @@ function ElPorteroEditorialContent() {
             <div className="hidden md:block" aria-hidden />
             <blockquote className="el-portero-quote w-full justify-self-stretch pl-6 md:pl-8 py-1">
               <p className="font-bricolage-grotesque text-base leading-relaxed text-neutral-90 dark:text-neutral-10 italic">
-                &ldquo;The site had to feel like the restaurant, not like a
-                template with a logo swapped in. That constraint shaped every
-                layout and every booking decision.&rdquo;
+                &ldquo;The site had to feel like the restaurant, not a template
+                with a logo dropped in. That shaped every layout and every
+                booking decision.&rdquo;
               </p>
               <footer className="mt-4 text-xs sm:text-sm font-medium not-italic text-neutral-60 dark:text-neutral-40">
                 Reflection note, project retrospective
@@ -929,23 +969,23 @@ function ElPorteroEditorialContent() {
               {[
                 {
                   n: "01",
-                  t: "Guests decide on trust long before they book. Atmosphere, menu legibility, and practical information carry more weight than decorative brand flourishes.",
+                  t: "Guests decide on trust long before they book. Atmosphere, readable menus, and practical details matter more than decorative flourishes.",
                 },
                 {
                   n: "02",
-                  t: "Staff did not want a CMS that publishes instantly by default; they needed confidence that edits to events, menus, and hours go live only when they choose.",
+                  t: "Staff didn't want a CMS that publishes instantly by default. They needed to know edits go live only when they choose.",
                 },
                 {
                   n: "03",
-                  t: "Off-the-shelf site builders would have worked for a launch, but would have fought the restaurant later. Custom admin tooling paid off when operational needs became specific.",
+                  t: "A site builder might have worked for launch, but would have fought the restaurant later, especially as operations grew and more locations became part of the plan.",
                 },
                 {
                   n: "04",
-                  t: "Booking conversion lives in placement and clarity, not in reinventing the reservation flow. Honest CTAs that reach BokaBord naturally outperformed clever navigation tricks.",
+                  t: "Booking conversion is about placement and clarity, not reinventing the reservation flow. Clear CTAs to BokaBord beat clever navigation.",
                 },
                 {
                   n: "05",
-                  t: "For a high-traffic hospitality site, a slow load reads as unprofessional faster than a weak photograph. Performance is part of the brand promise, not a technical afterthought.",
+                  t: "On a busy hospitality site, a slow load feels unprofessional faster than a weak photo. Performance is part of the brand promise.",
                 },
               ].map((item) => (
                 <li key={item.n} className="flex gap-5">
@@ -971,15 +1011,15 @@ function ElPorteroEditorialContent() {
                 },
                 {
                   n: "02",
-                  t: "Designing for staff is as important as designing for guests; a beautiful public site fails if the team can't run it reliably.",
+                  t: "Design for staff as much as guests. A beautiful public site fails if the team can't run it, and training non-technical staff was as important as the UI.",
                 },
                 {
                   n: "03",
-                  t: "Performance and brand craft deserve the same rigour as the hero flows. A site that looks premium but loads slowly, or collapses under traffic, breaks the promise immediately.",
+                  t: "Performance deserves the same care as the hero section. A premium site that loads slowly, or chokes under traffic, breaks the promise immediately.",
                 },
                 {
                   n: "04",
-                  t: "End-to-end ownership helped: decisions made in Figma survived implementation because the same person carried them into code, integrations, and optimization.",
+                  t: "End-to-end ownership helped: decisions in Figma survived in code because the same person carried them through build, integrations, and optimization.",
                 },
               ].map((item) => (
                 <li key={item.n} className="flex gap-5">
@@ -1027,8 +1067,10 @@ function ElPorteroEditorialContent() {
         currentIndex={lightboxIndex}
         onNavigate={setLightboxIndex}
       />
-      <section className="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-[120px] py-10 md:py-14 w-full border-t border-neutral-10 el-portero-section-rule bg-neutral-0 dark:bg-[#060608]">
-        <Footer />
+      <section className="py-10 md:py-14 w-full border-t border-neutral-10 el-portero-section-rule bg-neutral-0 dark:bg-[#060608]">
+        <div className="site-content-shell px-4 sm:px-6 md:px-8 lg:px-12">
+          <Footer />
+        </div>
       </section>
     </>
   );

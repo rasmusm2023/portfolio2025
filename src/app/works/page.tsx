@@ -16,6 +16,9 @@ const FILTERS: { value: FilterValue; label: string }[] = [
 
 type PrimaryTag = "DESIGN" | "DEVELOPMENT" | "DESIGN & DEVELOPMENT";
 
+/** Bottom border on row hover — matches Works page shell (white / #0a0a0a) */
+const WORKS_ROW_HOVER_BORDER = "hover:border-white dark:hover:border-[#0a0a0a]";
+
 /** Matches home skills card accent gradients (vertical for left border) */
 const WORK_HOVER_GRADIENTS = {
   prototyping:
@@ -77,7 +80,7 @@ const CASE_STUDIES: WorkEntry[] = [
     primaryTag: "DESIGN",
     categories: ["PRODUCT STRATEGY", "UI DESIGN"],
     link: "/case-studies/emplojd",
-    image: "https://picsum.photos/seed/emplojd/800/500",
+    image: "/assets/case-study-assets/emplojd/Emplojd-Case-Image-3.jpg",
     hoverAccentGradient: WORK_HOVER_GRADIENTS.uiDesign,
   },
   {
@@ -87,7 +90,7 @@ const CASE_STUDIES: WorkEntry[] = [
     primaryTag: "DESIGN",
     categories: ["PROTOTYPING", "UI DESIGN"],
     link: "/case-studies/noted",
-    image: "https://picsum.photos/seed/noted/800/500",
+    image: "/assets/case-study-assets/noted/Projects-Case-Card-Thumbnail-Noted.webp",
     hoverAccentGradient: WORK_HOVER_GRADIENTS.designSystems,
   },
   {
@@ -97,7 +100,7 @@ const CASE_STUDIES: WorkEntry[] = [
     primaryTag: "DESIGN & DEVELOPMENT",
     categories: ["PRODUCT STRATEGY", "DESIGN SYSTEMS"],
     link: "/case-studies/zmartrest-ai",
-    image: "https://picsum.photos/seed/zmartrest/800/500",
+    image: "/assets/case-study-assets/zmartrest-ai/Projects-Case-Card-Thumbnail-Zmartrest-AI.webp",
     hoverAccentGradient: WORK_HOVER_GRADIENTS.uxResearch,
   },
   {
@@ -108,8 +111,10 @@ const CASE_STUDIES: WorkEntry[] = [
     primaryTag: "DESIGN & DEVELOPMENT",
     categories: ["PRODUCT", "FULL STACK"],
     link: "#",
-    image: "https://picsum.photos/seed/basecamp-space/800/500",
-    hoverAccentGradient: WORK_HOVER_GRADIENTS.productStrategy,
+    image: "",
+    hoverVideo:
+      "/assets/case-study-assets/basecamp.space/basecamp.space-landing-page.webm",
+    hoverAccentGradient: WORK_HOVER_GRADIENTS.prototyping,
     comingSoon: true,
   },
 ];
@@ -199,7 +204,7 @@ function WorkProjectRow({ work }: { work: WorkEntry }) {
             <video
               ref={hoverVideoRef}
               className="absolute inset-0 h-full w-full object-cover"
-              poster={work.image}
+              {...(work.image ? { poster: work.image } : {})}
               muted
               playsInline
               loop
@@ -215,10 +220,10 @@ function WorkProjectRow({ work }: { work: WorkEntry }) {
     </div>
   );
 
-  const interactiveClasses =
-    "works-row group block border-b border-neutral-10 dark:border-neutral-70 hover:border-b-transparent relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-black dark:hover:bg-white";
-  const comingSoonClasses =
-    "works-row group block border-b border-neutral-10 dark:border-neutral-70 hover:border-b-transparent relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-neutral-10 dark:hover:bg-neutral-90/60 cursor-default";
+  const worksRowBase = `works-row group block border-b border-neutral-10 dark:border-neutral-70 relative overflow-hidden transition-[color,background-color,border-color] duration-300 ${WORKS_ROW_HOVER_BORDER}`;
+
+  const interactiveClasses = `${worksRowBase} bg-transparent hover:bg-black dark:hover:bg-white`;
+  const comingSoonClasses = `${worksRowBase} bg-transparent hover:bg-neutral-10 dark:hover:bg-neutral-90/60 cursor-default`;
 
   const hoverAccentBorder = (
     <div
@@ -329,7 +334,7 @@ export default function WorksPage() {
           {showArchives && (
             <Link
                 href={ARCHIVES_ENTRY.link}
-                className="works-row group block border-b border-neutral-10 dark:border-neutral-70 hover:border-b-transparent relative overflow-hidden transition-colors duration-300 bg-transparent hover:bg-neutral-70 dark:hover:bg-neutral-30"
+                className={`works-row group block border-b border-neutral-10 dark:border-neutral-70 relative overflow-hidden transition-[color,background-color,border-color] duration-300 ${WORKS_ROW_HOVER_BORDER} bg-transparent hover:bg-neutral-70 dark:hover:bg-neutral-30`}
                 aria-label={`View ${ARCHIVES_ENTRY.title}`}
               >
                 <div className="flex items-center justify-end min-h-[140px] sm:min-h-[160px] md:min-h-[180px] lg:min-h-[200px] xl:min-h-[220px] pl-4 sm:pl-6 md:pl-8 lg:pl-10 pr-4 sm:pr-6 md:pr-8 lg:pr-10 py-5 md:py-6 transition-[padding] duration-300 group-hover:pl-5 group-hover:sm:pl-6 group-hover:md:pl-7 group-hover:lg:pl-8">

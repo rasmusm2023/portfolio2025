@@ -6,6 +6,7 @@ import {
   montserrat,
   instrumentSerif,
   instrumentSans,
+  bricolageGrotesque,
 } from "./fonts";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
@@ -132,7 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} ${instrumentSerif.variable} ${instrumentSans.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
+        className={`${hankenGrotesk.className} ${orbitron.variable} ${audiowide.variable} ${montserrat.variable} ${instrumentSerif.variable} ${instrumentSans.variable} ${bricolageGrotesque.variable} antialiased bg-neutral-0 dark:bg-[#060608] transition-colors duration-300`}
       >
         <SmoothScroll>
           <ErrorBoundary>

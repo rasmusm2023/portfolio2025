@@ -6,22 +6,17 @@ import { Copy, Check, ArrowsOutCardinal, ArrowRight } from "@phosphor-icons/reac
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDribbble, faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { gsap } from "gsap";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 const socialLinkClass =
   "text-sm font-medium text-neutral-600 dark:text-neutral-40 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4 inline-flex items-center gap-2 uppercase";
 
 const getInTouchClass =
-  "inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white uppercase tracking-tighter hover:opacity-80 transition-opacity group";
+  "font-bricolage-grotesque inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white tracking-tighter hover:opacity-80 transition-opacity group";
 
 /** Light: white lift + soft shadow (matches dark layered panels). Dark: translucent stack */
 const chatCardShellClass =
   "bg-white dark:bg-neutral-90/50 border border-neutral-200 dark:border-neutral-80 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
-
-const chatEmailBoxCopiedClass =
-  "border border-emerald-300 bg-emerald-50 dark:bg-green-950/30 dark:border-green-800/50";
-
-const chatEmailBoxIdleClass =
-  "border border-neutral-20 bg-white hover:bg-neutral-10 hover:border-neutral-30 dark:bg-neutral-80/50 dark:border-neutral-70 dark:hover:bg-neutral-80 dark:hover:border-neutral-50";
 
 /** Outline secondary actions (e.g. Cancel) */
 const chatOutlineButtonClass =
@@ -167,6 +162,55 @@ function FloatingLabelInput({
       >
         {placeholder}
       </label>
+    </div>
+  );
+}
+
+function ChatEmailCopyBox({
+  emailCopied,
+  onCopy,
+  paddingClass = "p-5",
+}: {
+  emailCopied: boolean;
+  onCopy: () => void;
+  paddingClass?: string;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      className={`chat-email-box relative overflow-hidden rounded-xl ${paddingClass} ${emailCopied ? "is-copied" : ""}`}
+      onClick={onCopy}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onCopy();
+        }
+      }}
+    >
+      <div
+        className="chat-email-box-bg--orange absolute inset-0"
+        aria-hidden
+      />
+      <div
+        className="chat-email-box-bg--green absolute inset-0"
+        aria-hidden
+      />
+      <div className="relative z-10 text-center space-y-4">
+        <span className="block font-medium text-base text-white">
+          hello@rasmusmattsson.com
+        </span>
+        <div className="flex items-center justify-center gap-2">
+          {emailCopied ? (
+            <Check size={18} weight="regular" className="text-white" />
+          ) : (
+            <Copy size={18} weight="regular" className="text-white/85" />
+          )}
+          <span className="text-sm font-medium text-white/90">
+            {emailCopied ? "Copied!" : "Copy email"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -329,6 +373,7 @@ const Footer = () => {
         <div className="w-full">
           <div className="flex items-start justify-between gap-12 lg:gap-16">
             <div className="text-left flex-1 min-w-0">
+              <SectionEyebrow>Contact</SectionEyebrow>
               <Link
                 ref={titleRef}
                 href="/#contact"
@@ -398,46 +443,10 @@ const Footer = () => {
                   </h3>
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email Alternative - Prioritized at top */}
-                    <div
-                      className={`text-center space-y-4 p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
-                        emailCopied
-                          ? chatEmailBoxCopiedClass
-                          : chatEmailBoxIdleClass
-                      }`}
-                      onClick={handleCopyEmail}
-                    >
-                      <span
-                        className={`block font-medium text-base transition-colors ${
-                          emailCopied
-                            ? "text-emerald-800 dark:text-green-400"
-                            : "text-neutral-900 dark:text-white"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center justify-center gap-2">
-                        {emailCopied ? (
-                          <Check
-                            size={18}
-                            weight="regular"
-                            className="text-emerald-700 dark:text-green-400"
-                          />
-                        ) : (
-                          <Copy
-                            size={18}
-                            weight="regular"
-                            className="text-neutral-500 dark:text-neutral-40"
-                          />
-                        )}
-                        <span
-                          className={`text-sm font-medium ${
-                            emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
+                    <ChatEmailCopyBox
+                      emailCopied={emailCopied}
+                      onCopy={handleCopyEmail}
+                    />
 
                     {/* OR Divider */}
                     <div className="flex items-center gap-4">
@@ -560,6 +569,7 @@ const Footer = () => {
       {/* Medium Desktop Layout (lg to xl) - Stacked */}
       <div className="hidden lg:block xl:hidden">
         <div className="w-full">
+          <SectionEyebrow>Contact</SectionEyebrow>
           <Link
             href="/#contact"
             className={`${getInTouchClass} mb-4`}
@@ -610,36 +620,10 @@ const Footer = () => {
                   Let's have a chat
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div
-                    className={`text-center space-y-4 p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
-                      emailCopied
-                        ? chatEmailBoxCopiedClass
-                        : chatEmailBoxIdleClass
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <span
-                      className={`block font-medium text-base transition-colors ${
-                        emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-900 dark:text-white"
-                      }`}
-                    >
-                      hello@rasmusmattsson.com
-                    </span>
-                    <div className="flex items-center justify-center gap-2">
-                      {emailCopied ? (
-                        <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
-                      ) : (
-                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-40" />
-                      )}
-                      <span
-                        className={`text-sm font-medium ${
-                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
-                        }`}
-                      >
-                        {emailCopied ? "Copied!" : "Copy email"}
-                      </span>
-                    </div>
-                  </div>
+                  <ChatEmailCopyBox
+                    emailCopied={emailCopied}
+                    onCopy={handleCopyEmail}
+                  />
 
                   <div className="flex items-center gap-4">
                     <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
@@ -754,6 +738,7 @@ const Footer = () => {
       {/* Mobile/Tablet Layout */}
       <div className="lg:hidden flex flex-col">
         <div className="w-full">
+          <SectionEyebrow>Contact</SectionEyebrow>
           <Link
             href="/#contact"
             className={`${getInTouchClass} mb-4`}
@@ -802,36 +787,11 @@ const Footer = () => {
                   Let's have a chat
                 </h3>
                 <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                  <div
-                    className={`text-center space-y-4 p-4 sm:p-5 rounded-xl cursor-pointer transition-[background-color,border-color] duration-300 ease-in-out ${
-                      emailCopied
-                        ? chatEmailBoxCopiedClass
-                        : chatEmailBoxIdleClass
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <span
-                      className={`block font-medium text-base transition-colors ${
-                        emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-900 dark:text-white"
-                      }`}
-                    >
-                      hello@rasmusmattsson.com
-                    </span>
-                    <div className="flex items-center justify-center gap-2">
-                      {emailCopied ? (
-                        <Check size={18} weight="regular" className="text-emerald-700 dark:text-green-400" />
-                      ) : (
-                        <Copy size={18} weight="regular" className="text-neutral-500 dark:text-neutral-40" />
-                      )}
-                      <span
-                        className={`text-sm font-medium ${
-                          emailCopied ? "text-emerald-800 dark:text-green-400" : "text-neutral-500 dark:text-neutral-40"
-                        }`}
-                      >
-                        {emailCopied ? "Copied!" : "Copy email"}
-                      </span>
-                    </div>
-                  </div>
+                  <ChatEmailCopyBox
+                    emailCopied={emailCopied}
+                    onCopy={handleCopyEmail}
+                    paddingClass="p-4 sm:p-5"
+                  />
 
                   <div className="flex items-center gap-4">
                     <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />

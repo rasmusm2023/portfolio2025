@@ -12,6 +12,7 @@ module.exports = {
         xs: "500px",
         "works-3col": "1921px",
         "works-4col": "2560px",
+        "3xl": "2560px",
       },
       fontFamily: {
         sans: ["var(--font-nunito-sans)"],

@@ -108,16 +108,21 @@ const Header = () => {
     }
     const aboutSection = document.getElementById("about-me");
     const contactSection = document.getElementById("contact");
-    if (!aboutSection || !contactSection || typeof window === "undefined") return;
+    if (!aboutSection || !contactSection || typeof window === "undefined")
+      return;
     const aboutTop = aboutSection.getBoundingClientRect().top + scrollY;
     const contactTop = contactSection.getBoundingClientRect().top + scrollY;
     const contactRect = contactSection.getBoundingClientRect();
-    const isContactInView = contactRect.top < window.innerHeight && contactRect.bottom > 0;
-    const isAtBottom = scrollY >= document.documentElement.scrollHeight - window.innerHeight - 50;
+    const isContactInView =
+      contactRect.top < window.innerHeight && contactRect.bottom > 0;
+    const isAtBottom =
+      scrollY >=
+      document.documentElement.scrollHeight - window.innerHeight - 50;
     // Earlier detection for About Me (0.6 viewport) so it activates before you reach the section
     const aboutTrigger = scrollY + window.innerHeight * 0.6;
     const contactTrigger = scrollY + window.innerHeight * 0.3;
-    if (contactTrigger >= contactTop || isContactInView || isAtBottom) setActiveHash("contact");
+    if (contactTrigger >= contactTop || isContactInView || isAtBottom)
+      setActiveHash("contact");
     else if (aboutTrigger >= aboutTop) setActiveHash("about-me");
     else setActiveHash("");
   }, [pathname, scrollY]);
@@ -211,7 +216,7 @@ const Header = () => {
           y: 0,
           ease: "power2.out",
         },
-        "-=0.1"
+        "-=0.1",
       );
 
       // Icon morphing animation with null checks
@@ -367,7 +372,10 @@ const Header = () => {
               href="/playground"
               className="group text-sm inline-flex items-center justify-center group-hover:justify-start gap-2 py-2 px-2 group-hover:px-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold rounded-lg transition-all duration-500 ease-in-out"
             >
-              <LegoIcon weight="fill" className="w-5 h-5 fill-current shrink-0" />
+              <LegoIcon
+                weight="fill"
+                className="w-5 h-5 fill-current shrink-0"
+              />
               <span className="max-w-0 overflow-hidden opacity-0 whitespace-nowrap transition-all duration-500 ease-in-out group-hover:max-w-[200px] group-hover:opacity-100">
                 Playground
               </span>
@@ -439,7 +447,9 @@ const Header = () => {
       >
         <div className="flex flex-col h-full pt-4 pb-8 px-6">
           {/* Mobile Menu Items */}
-          <nav className={`flex-1 flex flex-col justify-center ${figtree.className}`}>
+          <nav
+            className={`flex-1 flex flex-col justify-center ${figtree.className}`}
+          >
             <ul className="space-y-8">
               <li>
                 <Link
@@ -448,8 +458,8 @@ const Header = () => {
                     clickedMenuItem === "Home"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === ""
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                        ? "text-neutral-100 dark:text-neutral-0"
+                        : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Home")}
                 >
@@ -462,9 +472,10 @@ const Header = () => {
                   className={`block text-3xl sm:text-4xl font-semibold uppercase transition-all duration-200 ${
                     clickedMenuItem === "Works"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
-                      : pathname === "/works" || pathname.startsWith("/case-studies")
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                      : pathname === "/works" ||
+                          pathname.startsWith("/case-studies")
+                        ? "text-neutral-100 dark:text-neutral-0"
+                        : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Works")}
                 >
@@ -478,21 +489,25 @@ const Header = () => {
                     clickedMenuItem === "About Me"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === "about-me"
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                        ? "text-neutral-100 dark:text-neutral-0"
+                        : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleMenuItemClick("About Me");
                     setIsMobileMenuOpen(false);
-                    
+
                     // If we're on the home page, scroll to the section
                     if (pathname === "/") {
                       setTimeout(() => {
                         const element = document.getElementById("about-me");
                         if (element) {
                           if (lenis) lenis.scrollTo(element, { offset: 0 });
-                          else element.scrollIntoView({ behavior: "smooth", block: "start" });
+                          else
+                            element.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
                         }
                       }, 100);
                     } else {
@@ -501,7 +516,7 @@ const Header = () => {
                     }
                   }}
                 >
-                  About Me
+                  About me
                 </Link>
               </li>
               <li>
@@ -511,21 +526,25 @@ const Header = () => {
                     clickedMenuItem === "Contact"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/" && activeHash === "contact"
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                        ? "text-neutral-100 dark:text-neutral-0"
+                        : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={(e) => {
                     e.preventDefault();
                     handleMenuItemClick("Contact");
                     setIsMobileMenuOpen(false);
-                    
+
                     // If we're on the home page, scroll to the section
                     if (pathname === "/") {
                       setTimeout(() => {
                         const element = document.getElementById("contact");
                         if (element) {
                           if (lenis) lenis.scrollTo(element, { offset: 0 });
-                          else element.scrollIntoView({ behavior: "smooth", block: "start" });
+                          else
+                            element.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
                         }
                       }, 100);
                     } else {
@@ -544,8 +563,8 @@ const Header = () => {
                     clickedMenuItem === "Archives"
                       ? "text-purple-500 dark:text-purple-400 scale-95"
                       : pathname === "/archives"
-                      ? "text-neutral-100 dark:text-neutral-0"
-                      : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
+                        ? "text-neutral-100 dark:text-neutral-0"
+                        : "text-neutral-40 dark:text-neutral-60 hover:text-purple-500 dark:hover:text-purple-400"
                   }`}
                   onClick={() => handleMenuItemClick("Archives")}
                 >

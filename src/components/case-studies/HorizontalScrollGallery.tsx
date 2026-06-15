@@ -154,34 +154,58 @@ export default function HorizontalScrollGallery({
     );
   }
 
+  const slideClassName =
+    "w-[min(88vw,420px)] shrink-0 sm:w-[min(82vw,480px)] md:w-[min(62vw,720px)] lg:w-[min(56vw,780px)]";
+
   return (
-    <figure>
-      <div
-        ref={containerRef}
-        style={{ height: sectionHeight ?? "100vh" }}
-        className="relative"
-        aria-label="Scroll horizontally through admin portal screens"
-      >
+    <>
+      {/* Native horizontal scroll on small screens (sticky scroll-jack is unreliable on touch) */}
+      <figure className="md:hidden">
         <div
-          ref={stickyRef}
-          className={`sticky ${stickyTopClassName} flex min-h-[min(72vh,640px)] flex-col justify-center overflow-hidden py-2`}
+          className="case-study-gallery-scroll -mx-5 overflow-x-auto overscroll-x-contain px-5 pb-2 sm:-mx-6 sm:px-6"
+          data-lenis-prevent
+          aria-label="Swipe horizontally through admin portal screens"
         >
-          <div
-            ref={trackRef}
-            className="flex w-max items-start gap-4 sm:gap-5 md:gap-6 will-change-transform"
-          >
+          <div className="flex w-max items-start gap-4 sm:gap-5">
             {images.map((image, index) => (
-              <div
-                key={`${image.src}-${index}`}
-                className="w-[82vw] shrink-0 sm:w-[72vw] md:w-[min(62vw,720px)] lg:w-[min(56vw,780px)]"
-              >
+              <div key={`${image.src}-mobile-${index}`} className={slideClassName}>
                 {renderImage(image, index, () => onImageClick(index))}
                 <SlideCaption caption={image.caption} className={captionClassName} />
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </figure>
+      </figure>
+
+      {/* Sticky vertical-scroll-driven gallery on md+ */}
+      <figure className="hidden md:block">
+        <div
+          ref={containerRef}
+          style={{ height: sectionHeight ?? "100vh" }}
+          className="relative"
+          aria-label="Scroll horizontally through admin portal screens"
+        >
+          <div
+            ref={stickyRef}
+            className={`sticky ${stickyTopClassName} flex min-h-[min(72vh,640px)] flex-col justify-center overflow-hidden py-2`}
+          >
+            <div
+              ref={trackRef}
+              className="flex w-max items-start gap-4 sm:gap-5 md:gap-6 will-change-transform"
+            >
+              {images.map((image, index) => (
+                <div key={`${image.src}-${index}`} className={slideClassName}>
+                  {renderImage(image, index, () => onImageClick(index))}
+                  <SlideCaption
+                    caption={image.caption}
+                    className={captionClassName}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </figure>
+    </>
   );
 }
