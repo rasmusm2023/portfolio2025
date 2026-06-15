@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useLenis } from "lenis/react";
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -16,43 +17,42 @@ export default function ClientLayout({
   const pathname = usePathname();
   const contentRef = useRef<HTMLDivElement>(null);
   const isFirstLoad = useRef(true);
+  const prevPathnameRef = useRef(pathname);
+  const lenis = useLenis();
 
   useEffect(() => {
+    const pathnameChanged = prevPathnameRef.current !== pathname;
+    prevPathnameRef.current = pathname;
+
     // Skip animation on first load for better performance
     if (isFirstLoad.current) {
       isFirstLoad.current = false;
       return;
     }
 
-    // Scroll to top on page navigation with smooth behavior
-    const scrollToTop = () => {
+    // Only scroll to top and run content animation when the route actually changed (not when lenis becomes available)
+    if (!pathnameChanged) return;
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
-    };
+    }
 
-    // Scroll to top immediately when pathname changes
-    scrollToTop();
-
+    // Skip content fade when navigating TO home so the hero entrance animation is visible
+    if (pathname === "/") return;
     if (contentRef.current) {
-      // Use a lighter animation for better performance
       gsap.fromTo(
         contentRef.current,
-        {
-          opacity: 0,
-          y: 10, // Reduced from 20
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.3, // Reduced from 0.5
-          ease: "power1.out", // Lighter easing
-        }
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.3, ease: "power1.out" }
       );
     }
-  }, [pathname]);
+  }, [pathname, lenis]);
 
   return (
     <div className="relative w-full h-full">
-      <div ref={contentRef} className="relative w-full h-full">
+      <div ref={contentRef} className="relative w-full h-full" key={pathname}>
         {children}
       </div>
     </div>

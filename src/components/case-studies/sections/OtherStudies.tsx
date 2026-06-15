@@ -9,7 +9,7 @@ interface OtherStudiesProps {
 
 const OtherStudies: React.FC<OtherStudiesProps> = ({ excludeIds = [] }) => {
   return (
-    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90 fade-in-section">
+    <section className="py-16 sm:py-20 md:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-100 dark:to-neutral-90 fade-in-section">
       <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         {/* Section Title */}
         <div className="text-center mb-8 sm:mb-10 md:mb-12 lg:mb-16">

@@ -1,19 +1,34 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import {
-  Copy,
-  Check,
-  ArrowsOutCardinal,
-  FileText,
-} from "@phosphor-icons/react";
+import Link from "next/link";
+import { Copy, Check, ArrowsOutCardinal, ArrowRight } from "@phosphor-icons/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLinkedinIn,
-  faDribbble,
-  faGithub,
-} from "@fortawesome/free-brands-svg-icons";
+import { faDribbble, faLinkedinIn, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { gsap } from "gsap";
+import SectionEyebrow from "@/components/ui/SectionEyebrow";
+
+const socialLinkClass =
+  "text-sm font-medium text-neutral-600 dark:text-neutral-40 hover:text-neutral-900 dark:hover:text-white transition-colors underline underline-offset-4 inline-flex items-center gap-2 uppercase";
+
+const getInTouchClass =
+  "font-bricolage-grotesque inline-flex items-center gap-3 text-3xl sm:text-4xl md:text-5xl font-semibold text-neutral-900 dark:text-white tracking-tighter hover:opacity-80 transition-opacity group";
+
+/** Light: white lift + soft shadow (matches dark layered panels). Dark: translucent stack */
+const chatCardShellClass =
+  "bg-white dark:bg-neutral-90/50 border border-neutral-200 dark:border-neutral-80 shadow-[0_2px_14px_-4px_rgba(15,23,42,0.09)] dark:shadow-none";
+
+/** Outline secondary actions (e.g. Cancel) */
+const chatOutlineButtonClass =
+  "border border-neutral-300 bg-white text-neutral-900 hover:bg-neutral-50 hover:border-neutral-400 dark:border-neutral-60 dark:bg-transparent dark:text-white dark:hover:bg-neutral-80 dark:hover:border-neutral-50";
+
+/** Opens form — hover matches filled primary (dark surface, light label) */
+const chatOpenFormButtonClass =
+  "border border-neutral-900 bg-white text-neutral-900 hover:bg-neutral-10 hover:border-neutral-30 hover:text-neutral-900 dark:border-neutral-50 dark:bg-transparent dark:text-white dark:hover:bg-white dark:hover:text-neutral-90 dark:hover:border-white transition-[background-color,border-color,color] duration-300 ease-in-out";
+
+/** Light: no ring (avoids browser blue focus); neutral border only when focused */
+const chatFieldSurfaceClass =
+  "bg-white dark:bg-neutral-90 border border-neutral-300 dark:border-neutral-70 rounded-xl text-neutral-900 dark:text-white text-base font-medium placeholder-transparent shadow-[inset_0_1px_3px_rgba(15,23,42,0.06)] dark:shadow-none outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 focus-visible:ring-0 focus:border-neutral-900 dark:focus:border-neutral-40 transition-[color,background-color,border-color,box-shadow] duration-200";
 
 // Custom Floating Label Input Component
 function FloatingLabelInput({
@@ -97,7 +112,7 @@ function FloatingLabelInput({
           onBlur={handleBlur}
           onChange={handleChange}
           style={{ height: `${textareaHeight}px` }}
-          className="w-full px-4 py-4 pr-12 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200 resize-none overflow-y-auto"
+          className={`w-full px-4 py-4 pr-12 ${chatFieldSurfaceClass} resize-none overflow-y-auto`}
           placeholder={placeholder}
         />
         <div
@@ -106,15 +121,15 @@ function FloatingLabelInput({
         >
           <ArrowsOutCardinal
             size={16}
-            className="text-neutral-60 dark:text-neutral-40"
+            className="text-neutral-500 dark:text-neutral-40"
           />
         </div>
         <label
           htmlFor={id}
           className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
             isActive
-              ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
-              : "top-3 text-base text-neutral-60 dark:text-neutral-40 font-bold"
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-90 rounded-lg shadow-sm dark:shadow-none"
+              : "top-3 text-base text-neutral-500 dark:text-neutral-40 font-medium"
           }`}
         >
           {placeholder}
@@ -134,19 +149,68 @@ function FloatingLabelInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         onChange={handleChange}
-        className="w-full px-4 py-4 bg-neutral-20/50 dark:bg-neutral-80/50 border border-neutral-30/20 dark:border-neutral-100/20 rounded-xl text-neutral-100 dark:text-neutral-0 text-base font-bold placeholder-transparent focus:outline-none focus:ring-2 focus:ring-purple-600/50 focus:border-purple-600 transition-all duration-200"
+        className={`w-full px-4 py-4 ${chatFieldSurfaceClass}`}
         placeholder={placeholder}
       />
       <label
         htmlFor={id}
         className={`absolute left-4 transition-all duration-200 pointer-events-none px-2 ${
-          isActive
-            ? "-top-2 text-sm text-neutral-0 font-bold bg-purple-600 rounded-lg"
-            : "top-1/2 -translate-y-1/2 text-base text-neutral-60 dark:text-neutral-40 font-bold"
+            isActive
+              ? "-top-2 text-sm text-neutral-900 dark:text-white font-medium bg-white dark:bg-neutral-90 rounded-lg shadow-sm dark:shadow-none"
+              : "top-1/2 -translate-y-1/2 text-base text-neutral-500 dark:text-neutral-40 font-medium"
         }`}
       >
         {placeholder}
       </label>
+    </div>
+  );
+}
+
+function ChatEmailCopyBox({
+  emailCopied,
+  onCopy,
+  paddingClass = "p-5",
+}: {
+  emailCopied: boolean;
+  onCopy: () => void;
+  paddingClass?: string;
+}) {
+  return (
+    <div
+      role="button"
+      tabIndex={0}
+      className={`chat-email-box relative overflow-hidden rounded-xl ${paddingClass} ${emailCopied ? "is-copied" : ""}`}
+      onClick={onCopy}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onCopy();
+        }
+      }}
+    >
+      <div
+        className="chat-email-box-bg--orange absolute inset-0"
+        aria-hidden
+      />
+      <div
+        className="chat-email-box-bg--green absolute inset-0"
+        aria-hidden
+      />
+      <div className="relative z-10 text-center space-y-4">
+        <span className="block font-medium text-base text-white">
+          hello@rasmusmattsson.com
+        </span>
+        <div className="flex items-center justify-center gap-2">
+          {emailCopied ? (
+            <Check size={18} weight="regular" className="text-white" />
+          ) : (
+            <Copy size={18} weight="regular" className="text-white/85" />
+          )}
+          <span className="text-sm font-medium text-white/90">
+            {emailCopied ? "Copied!" : "Copy email"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
@@ -167,7 +231,7 @@ const Footer = () => {
   const [showForm, setShowForm] = useState(false);
 
   // Refs for entrance animations
-  const titleRef = useRef<HTMLHeadingElement>(null);
+  const titleRef = useRef<HTMLAnchorElement>(null);
   const descriptionRef = useRef<HTMLDivElement>(null);
   const chatCardRef = useRef<HTMLDivElement>(null);
   const chatCardLgRef = useRef<HTMLDivElement>(null);
@@ -288,126 +352,121 @@ const Footer = () => {
     }, 4000); // Brief green flash - 4 seconds
   };
 
+  const openFormAndScrollToIt = () => {
+    setShowForm(true);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const visible = [chatCardRef.current, chatCardLgRef.current, chatCardMobileRef.current].find(
+          (el) => el && el.offsetParent !== null
+        );
+        if (visible) {
+          visible.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  };
+
   return (
-    <section className="py-12 sm:py-14 md:py-16 pb-32 sm:pb-36 md:pb-40 lg:pb-48 xl:pb-56 relative">
+    <section className="py-0 relative">
       {/* Large Desktop Layout (xl and above) */}
-      <div className="hidden xl:block min-h-[80vh] relative">
-        <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          <div className="flex items-center justify-between h-full min-h-[80vh]">
-            <div className="text-left w-full flex flex-col justify-between h-full">
-              <div className="flex-1 flex items-start">
-                <div className="w-full">
-                  <h1
-                    ref={titleRef}
-                    className="text-5xl sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl 2xl:text-[7.5rem] font-extrabold tracking-tight leading-[0.9] sm:leading-[0.8] lg:leading-[0.6] mb-4 sm:mb-6 lg:mb-8"
+      <div className="hidden xl:block relative">
+        <div className="w-full">
+          <div className="flex items-start justify-between gap-12 lg:gap-16">
+            <div className="text-left flex-1 min-w-0">
+              <SectionEyebrow>Contact</SectionEyebrow>
+              <Link
+                ref={titleRef}
+                href="/#contact"
+                className={`${getInTouchClass} mb-4`}
+                aria-label="Go to contact section"
+              >
+                Get in touch
+                <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
+              </Link>
+              <div ref={descriptionRef} className="max-w-[36rem]">
+                <div className="flex flex-col gap-4">
+                  <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+                    I'm always excited to discuss new opportunities and
+                    possibilities.
+                  </p>
+                  <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+                    Whether you have a specific role in mind or just want to
+                    discuss how I can contribute, let's start a
+                    conversation.
+                  </p>
+                </div>
+              </div>
+
+              {/* Contact Information */}
+              <div ref={contactInfoRef} className="flex flex-col gap-6 mt-6">
+                <div className="flex gap-6">
+                  <a
+                    href="https://dribbble.com/rasmusmattsson"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={socialLinkClass}
                   >
-                    <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                      Contact
-                    </span>
-                  </h1>
-                  <div ref={descriptionRef} className="mt-16 max-w-[48rem]">
-                    <div className="flex flex-col gap-6">
-                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                        I'm always excited to discuss new opportunities and
-                        possibilities.
-                      </p>
-                      <p className="text-neutral-70 dark:text-neutral-30 text-2xl font-semibold leading-relaxed tracking-wide">
-                        Whether you have a specific role in mind or just want to
-                        discuss how I can contribute, let's start a
-                        conversation.
-                      </p>
-                    </div>
-                  </div>
+                    <FontAwesomeIcon icon={faDribbble} className="w-4 h-4 shrink-0" aria-hidden />
+                    Dribbble
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/rasmus-mattsson"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={socialLinkClass}
+                  >
+                    <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4 shrink-0" aria-hidden />
+                    LinkedIn
+                  </a>
+                  <a
+                    href="https://github.com/rasmusm2023"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={socialLinkClass}
+                  >
+                    <FontAwesomeIcon icon={faGithub} className="w-4 h-4 shrink-0" aria-hidden />
+                    GitHub
+                  </a>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Contact Form centered */}
-          <div
-            className="absolute right-0 w-[32rem]"
-            style={{ top: "65%", transform: "translateY(-50%)" }}
-          >
-            <div
-              ref={chatCardRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
-            >
-              {/* Noise background overlay */}
+            {/* Contact Form */}
+            <div className="w-[32rem] shrink-0">
               <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
-              <div className="relative z-10">
-                <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <div className="flex flex-col items-center justify-center gap-4">
-                      <span
-                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
+                ref={chatCardRef}
+                className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
+              >
+                <div className="relative z-10">
+                  <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
+                    Let's have a chat
+                  </h3>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Email Alternative - Prioritized at top */}
+                    <ChatEmailCopyBox
+                      emailCopied={emailCopied}
+                      onCopy={handleCopyEmail}
+                    />
+
+                    {/* OR Divider */}
+                    <div className="flex items-center gap-4">
+                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                      <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">
+                        OR
                       </span>
-                      <div className="flex items-center gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={24}
-                            weight="regular"
-                            className="text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={24}
-                            weight="regular"
-                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
+                      <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                     </div>
-                  </div>
 
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
-                  {!showForm && (
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-8 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
-                    >
-                      Fill out contact form
-                    </button>
-                  )}
+                    {/* Toggle Form Button */}
+                    {!showForm && (
+                      <button
+                        type="button"
+                        onClick={openFormAndScrollToIt}
+                        className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
+                      >
+                        Fill out contact form
+                      </button>
+                    )}
 
                   {/* Contact Form - Secondary */}
                   {showForm && (
@@ -457,7 +516,7 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>
@@ -474,7 +533,7 @@ const Footer = () => {
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
-                          className="px-6 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
@@ -504,217 +563,46 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Contact Information positioned to align with email alternative */}
-          <div className="absolute left-4 sm:left-6 md:left-8 lg:left-12 xl:left-16 bottom-0">
-            <div ref={contactInfoRef} className="flex flex-col space-y-16">
-              <div className="flex items-center space-x-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
-                  Dribbble
-                </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
-                  LinkedIn
-                </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
       {/* Medium Desktop Layout (lg to xl) - Stacked */}
-      <div className="hidden lg:block xl:hidden min-h-screen px-8 pt-24 pb-8">
-        <div className="w-full max-w-[1600px] mx-auto">
-          {/* Hero Section */}
-          <div className="flex flex-col justify-center mb-12">
-            <h1 className="text-7xl lg:text-8xl font-extrabold tracking-tight leading-[0.6] mb-8">
-              <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                Contact
-              </span>
-            </h1>
+      <div className="hidden lg:block xl:hidden">
+        <div className="w-full">
+          <SectionEyebrow>Contact</SectionEyebrow>
+          <Link
+            href="/#contact"
+            className={`${getInTouchClass} mb-4`}
+            aria-label="Go to contact section"
+          >
+            Get in touch
+            <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
+          </Link>
 
-            <div className="flex flex-col gap-6 mb-12">
-              <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
-                I'm always excited to discuss new opportunities and
-                possibilities.
-              </p>
-              <p className="text-neutral-70 dark:text-neutral-30 text-xl font-semibold leading-relaxed tracking-wide">
-                Whether you have a specific role in mind or just want to discuss
-                how I can contribute, let's start a conversation.
-              </p>
-            </div>
+          <div className="flex flex-col gap-4 mb-6">
+            <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+              I'm always excited to discuss new opportunities and possibilities.
+            </p>
+            <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+              Whether you have a specific role in mind or just want to discuss
+              how I can contribute, let's start a conversation.
+            </p>
           </div>
 
           {/* Contact Information */}
-          <div className="mb-12">
-            <div ref={contactInfoLgRef} className="flex flex-col space-y-16">
-              <div className="flex items-center space-x-8">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
+          <div className="mb-6">
+            <div ref={contactInfoLgRef} className="flex flex-col gap-6">
+              <div className="flex gap-6">
+                <a href="https://dribbble.com/rasmusmattsson" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4 shrink-0" aria-hidden />
                   Dribbble
                 </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
+                <a href="https://linkedin.com/in/rasmus-mattsson" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4 shrink-0" aria-hidden />
                   LinkedIn
                 </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
+                <a href="https://github.com/rasmusm2023" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4 shrink-0" aria-hidden />
                   GitHub
                 </a>
               </div>
@@ -722,92 +610,37 @@ const Footer = () => {
           </div>
 
           {/* Contact Form */}
-          <div className="max-w-2xl mx-auto mb-12">
+          <div className="max-w-2xl mx-auto">
             <div
               ref={chatCardLgRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
+              className={`${chatCardShellClass} rounded-2xl p-8 relative overflow-hidden`}
             >
-              {/* Noise background overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
               <div className="relative z-10">
-                <h2 className="text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
+                <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-6">
+                  Let's have a chat
+                </h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-6 p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <p className="text-neutral-70 dark:text-neutral-30 text-base font-medium">
-                      Prefer to email directly?
-                    </p>
-                    <div className="flex flex-col items-center justify-center gap-4">
-                      <span
-                        className={`font-bold text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={24}
-                            weight="regular"
-                            className="text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={24}
-                            weight="regular"
-                            className="text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
+                  <ChatEmailCopyBox
+                    emailCopied={emailCopied}
+                    onCopy={handleCopyEmail}
+                  />
+
+                  <div className="flex items-center gap-4">
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                    <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">OR</span>
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                   </div>
 
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
                   {!showForm && (
                     <button
                       type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-8 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
+                      onClick={openFormAndScrollToIt}
+                      className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
                     >
                       Fill out contact form
                     </button>
                   )}
 
-                  {/* Contact Form - Secondary */}
                   {showForm && (
                     <>
                       <FloatingLabelInput
@@ -855,7 +688,7 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-8 py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>
@@ -872,18 +705,16 @@ const Footer = () => {
                             setSubmitStatus("idle");
                             setErrorMessage("");
                           }}
-                          className="px-6 py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-lg rounded-xl transition-all duration-200"
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
                       </div>
 
-                      {/* Success/Error Messages */}
                       {submitStatus === "success" && (
                         <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
                           <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                            ✅ Message sent successfully! I'll get back to you
-                            within 24 hours.
+                            ✅ Message sent successfully! I'll get back to you within 24 hours.
                           </p>
                         </div>
                       )}
@@ -905,217 +736,79 @@ const Footer = () => {
       </div>
 
       {/* Mobile/Tablet Layout */}
-      <div className="lg:hidden flex flex-col min-h-screen px-4 sm:px-6 pt-24 sm:pt-28 pb-8 sm:pb-12">
-        <div className="w-full max-w-[1600px] mx-auto">
-          {/* Hero Section */}
-          <div className="flex-1 flex flex-col justify-center">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl font-extrabold tracking-tight leading-[0.6] mb-8 sm:mb-12">
-              <span className="[background-image:var(--gradient-hero-contact)] dark:[background-image:var(--gradient-hero-contact-dark)] bg-clip-text text-transparent font-hanken">
-                Contact
-              </span>
-            </h1>
+      <div className="lg:hidden flex flex-col">
+        <div className="w-full">
+          <SectionEyebrow>Contact</SectionEyebrow>
+          <Link
+            href="/#contact"
+            className={`${getInTouchClass} mb-4`}
+            aria-label="Go to contact section"
+          >
+            Get in touch
+            <ArrowRight size={32} className="shrink-0 transition-transform group-hover:translate-x-1" aria-hidden />
+          </Link>
 
-            <div className="flex flex-col gap-4 sm:gap-6 mb-8 sm:mb-12">
-              <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg font-semibold leading-relaxed tracking-wide">
-                I'm always excited to discuss new opportunities and
-                possibilities.
-              </p>
-              <p className="text-neutral-70 dark:text-neutral-30 text-base sm:text-lg font-semibold leading-relaxed tracking-wide">
-                Whether you have a specific role in mind or just want to discuss
-                how I can contribute, let's start a conversation.
-              </p>
-            </div>
+          <div className="flex flex-col gap-4 mb-5">
+            <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+              I'm always excited to discuss new opportunities and possibilities.
+            </p>
+            <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
+              Whether you have a specific role in mind or just want to discuss
+              how I can contribute, let's start a conversation.
+            </p>
           </div>
 
-          {/* Contact Information */}
-          <div className="mb-8 sm:mb-12">
-            <div
-              ref={contactInfoMobileRef}
-              className="flex flex-col space-y-16"
-            >
-              <div className="flex flex-row items-center space-x-4 sm:space-x-8">
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Location
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
-                      Stockholm, Sweden
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 sm:space-x-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-violet-500 rounded-full flex items-center justify-center">
-                    <svg
-                      className="w-5 h-5 sm:w-6 sm:h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-sm sm:text-lg font-semibold text-neutral-100 dark:text-neutral-0">
-                      Response Time
-                    </h3>
-                    <p className="text-neutral-60 dark:text-neutral-60 text-sm sm:text-lg">
-                      Within 24 hours
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Social Links */}
-              <div className="flex gap-6 xl:gap-8 2xl:gap-12">
-                <a
-                  href="https://dribbble.com/rasmusmattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4" />
+          <div className="mb-5">
+            <div ref={contactInfoMobileRef} className="flex flex-col gap-6">
+              <div className="flex gap-6">
+                <a href="https://dribbble.com/rasmusmattsson" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faDribbble} className="w-4 h-4 shrink-0" aria-hidden />
                   Dribbble
                 </a>
-                <a
-                  href="https://linkedin.com/in/rasmus-mattsson"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4" />
+                <a href="https://linkedin.com/in/rasmus-mattsson" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faLinkedinIn} className="w-4 h-4 shrink-0" aria-hidden />
                   LinkedIn
                 </a>
-                <a
-                  href="https://github.com/rasmusm2023"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-neutral-60 dark:text-neutral-50 hover:text-neutral-100 dark:hover:text-neutral-0 transition-colors duration-200 text-base font-medium flex items-center gap-2"
-                >
-                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
+                <a href="https://github.com/rasmusm2023" target="_blank" rel="noopener noreferrer" className={socialLinkClass}>
+                  <FontAwesomeIcon icon={faGithub} className="w-4 h-4 shrink-0" aria-hidden />
                   GitHub
                 </a>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="mb-8 sm:mb-12">
+          <div>
             <div
               ref={chatCardMobileRef}
-              className="bg-neutral-10/50 dark:bg-[#060608] backdrop-blur-sm border border-neutral-20/10 dark:border-neutral-80/30 rounded-3xl p-6 sm:p-8 shadow-xl shadow-black/10 dark:shadow-black/20 relative overflow-hidden"
+              className={`${chatCardShellClass} rounded-2xl p-6 sm:p-8 relative overflow-hidden`}
             >
-              {/* Noise background overlay */}
-              <div
-                className="absolute inset-0 opacity-[0.35] dark:opacity-[0.16] pointer-events-none rounded-3xl"
-                style={{
-                  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                  backgroundSize: "256px 256px",
-                }}
-              />
               <div className="relative z-10">
-                <h2 className="text-2xl sm:text-3xl font-bold text-neutral-100 dark:text-neutral-0 mb-4 sm:mb-6 font-hanken">
-                  Let's have a chat 💬
-                </h2>
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-4 sm:space-y-6"
-                >
-                  {/* Email Alternative - Prioritized at top */}
-                  <div
-                    className={`text-center space-y-4 sm:space-y-6 p-4 sm:p-6 rounded-xl border transition-all duration-500 ease-in-out cursor-pointer hover:scale-[1.02] hover:shadow-lg ${
-                      emailCopied
-                        ? "bg-gradient-to-r from-green-500/10 to-green-500/10 border-green-500/20"
-                        : "bg-gradient-to-r from-purple-500/10 to-violet-500/10 border-purple-500/20 hover:from-purple-500/20 hover:to-violet-500/20 hover:border-purple-500/30"
-                    }`}
-                    onClick={handleCopyEmail}
-                  >
-                    <p className="text-neutral-70 dark:text-neutral-30 text-sm sm:text-base font-medium">
-                      Prefer to email directly?
-                    </p>
-                    <div className="flex flex-col items-center justify-center gap-3 sm:gap-4">
-                      <span
-                        className={`font-bold text-xl sm:text-2xl transition-colors duration-500 ease-in-out hover:opacity-90 ${
-                          emailCopied
-                            ? "text-green-500"
-                            : "bg-gradient-to-r from-purple-500 to-violet-500 bg-clip-text text-transparent"
-                        }`}
-                      >
-                        hello@rasmusmattsson.com
-                      </span>
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        {emailCopied ? (
-                          <Check
-                            size={20}
-                            weight="regular"
-                            className="sm:w-6 sm:h-6 text-green-500 transition-colors duration-500 ease-in-out"
-                          />
-                        ) : (
-                          <Copy
-                            size={20}
-                            weight="regular"
-                            className="sm:w-6 sm:h-6 text-neutral-70 dark:text-white/50 transition-colors duration-500 ease-in-out"
-                          />
-                        )}
-                        <span
-                          className={`text-base sm:text-lg font-semibold transition-colors duration-500 ease-in-out ${
-                            emailCopied ? "text-green-500" : "text-neutral-70 dark:text-white/50"
-                          }`}
-                        >
-                          {emailCopied ? "Copied!" : "Copy email"}
-                        </span>
-                      </div>
-                    </div>
+                <h3 className="text-lg font-semibold text-neutral-800 dark:text-white mb-4 sm:mb-6">
+                  Let's have a chat
+                </h3>
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <ChatEmailCopyBox
+                    emailCopied={emailCopied}
+                    onCopy={handleCopyEmail}
+                    paddingClass="p-4 sm:p-5"
+                  />
+
+                  <div className="flex items-center gap-4">
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
+                    <span className="text-neutral-500 dark:text-neutral-40 text-sm font-medium">OR</span>
+                    <div className="flex-1 h-px bg-neutral-200 dark:bg-neutral-70" />
                   </div>
 
-                  {/* OR Divider */}
-                  <div className="flex items-center justify-center space-x-4 my-4 sm:my-6">
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                    <span className="text-neutral-60 dark:text-neutral-60 text-sm font-medium px-4">
-                      OR
-                    </span>
-                    <div className="flex-1 h-px bg-neutral-60/30"></div>
-                  </div>
-
-                  {/* Toggle Form Button */}
                   {!showForm && (
                     <button
                       type="button"
-                      onClick={() => setShowForm(true)}
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-base sm:text-lg rounded-xl transition-all duration-200"
+                      onClick={openFormAndScrollToIt}
+                      className={`w-full px-6 py-3 ${chatOpenFormButtonClass} font-medium text-base rounded-xl`}
                     >
                       Fill out contact form
                     </button>
                   )}
 
-                  {/* Contact Form - Secondary */}
                   {showForm && (
                     <>
                       <FloatingLabelInput
@@ -1163,25 +856,28 @@ const Footer = () => {
                         <button
                           type="submit"
                           disabled={isSubmitting}
-                          className="flex-1 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-purple-500 to-violet-500 text-neutral-white font-semibold text-base sm:text-lg rounded-xl hover:from-purple-600 hover:to-violet-600 transform hover:scale-[1.02] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-600/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                          className="flex-1 px-6 py-3 bg-neutral-900 dark:bg-white text-white dark:text-neutral-90 font-medium text-base rounded-xl hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isSubmitting ? "Sending..." : "Send message"}
                         </button>
                         <button
                           type="button"
-                          onClick={() => setShowForm(false)}
-                          className="px-6 py-3 sm:py-4 bg-neutral-20/30 dark:bg-white/10 backdrop-blur-sm border border-neutral-30/40 dark:border-white/20 text-neutral-70 dark:text-neutral-30 hover:text-neutral-100 dark:hover:text-white hover:border-neutral-30/60 dark:hover:border-white/40 font-semibold text-base sm:text-lg rounded-xl transition-all duration-200"
+                          onClick={() => {
+                            setShowForm(false);
+                            setFormData({ name: "", email: "", subject: "", message: "" });
+                            setSubmitStatus("idle");
+                            setErrorMessage("");
+                          }}
+                          className={`px-6 py-3 ${chatOutlineButtonClass} font-medium text-base rounded-xl transition-colors`}
                         >
                           Cancel
                         </button>
                       </div>
 
-                      {/* Success/Error Messages */}
                       {submitStatus === "success" && (
                         <div className="p-4 bg-green-100 dark:bg-green-900/20 border border-green-300 dark:border-green-700 rounded-xl">
                           <p className="text-green-800 dark:text-green-200 font-bold text-base text-center">
-                            ✅ Message sent successfully! I'll get back to you
-                            within 24 hours.
+                            ✅ Message sent successfully! I'll get back to you within 24 hours.
                           </p>
                         </div>
                       )}
@@ -1200,6 +896,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

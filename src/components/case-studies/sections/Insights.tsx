@@ -339,7 +339,7 @@ const Insights: React.FC = () => {
                       </p>
                       {/* Custom cursor tooltip for gradual AI assistance */}
                       <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-80 sm:w-96">
-                        <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm leading-relaxed">
+                        <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-80 text-xs sm:text-sm leading-relaxed">
                           <div className="mb-3">
                             This insight led us to include an "Independence /
                             AI-creativity" slider where users can control how

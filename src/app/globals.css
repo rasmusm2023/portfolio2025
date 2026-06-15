@@ -152,16 +152,24 @@
   box-sizing: border-box;
 }
 
-/* Text selection styling */
+/* Text selection — pink accent (gradient mid-tone; ::selection cannot use gradients) */
 ::selection {
-  background-color: rgba(139, 92, 246, 0.3);
-  /* Purple with transparency */
+  background-color: rgba(219, 39, 119, 0.35);
   color: inherit;
 }
 
 ::-moz-selection {
-  background-color: rgba(139, 92, 246, 0.3);
-  /* Purple with transparency for Firefox */
+  background-color: rgba(219, 39, 119, 0.35);
+  color: inherit;
+}
+
+.dark ::selection {
+  background-color: rgba(244, 114, 182, 0.42);
+  color: inherit;
+}
+
+.dark ::-moz-selection {
+  background-color: rgba(244, 114, 182, 0.42);
   color: inherit;
 }
 
@@ -289,6 +297,374 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .glow-line {
   animation: glow 3s ease-in-out infinite;
+}
+
+/* Home hero entrance: unblur + fade in (no JS/refs so it works with Lenis) */
+@keyframes hero-entrance {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance-1 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+.hero-entrance-2 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.32s both;
+}
+.hero-entrance-3 {
+  animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.54s both;
+}
+
+@keyframes hero-entrance-lite {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-entrance-3-lite {
+  animation: hero-entrance-lite 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.54s both;
+}
+.hero-entrance-4 {
+  animation: hero-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) 0.84s both;
+}
+
+/* El Portero / Emplojd case study — gradient accent text */
+.el-portero-stat-figure,
+.emplojd-stat-figure {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.el-portero-stat-figure {
+  background-image: linear-gradient(
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+/* Emplojd case study — accent (home skills UI Design card gradient) */
+.emplojd-stat-figure {
+  background-image: linear-gradient(
+    145deg,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
+/* Horizontal section rules — subtle but readable on #060608 in dark mode */
+.dark .el-portero-section-rule,
+.dark .emplojd-section-rule {
+  border-color: #28282c;
+}
+
+/* Shared max-width shell — caps line length on ultrawide displays */
+.site-content-shell {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 1440px;
+}
+
+@media (min-width: 2560px) {
+  .site-content-shell {
+    max-width: 1920px;
+  }
+}
+
+/* Case study galleries — native horizontal swipe on touch devices */
+.case-study-gallery-scroll {
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 120, 128, 0.45) transparent;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar {
+  height: 4px;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.case-study-gallery-scroll::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 128, 0.45);
+  border-radius: 999px;
+}
+
+.dark .case-study-gallery-scroll {
+  scrollbar-color: rgba(180, 180, 188, 0.35) transparent;
+}
+
+.dark .case-study-gallery-scroll::-webkit-scrollbar-thumb {
+  background: rgba(180, 180, 188, 0.35);
+}
+
+/* Home page — small pink gradient labels above section titles */
+.home-section-eyebrow {
+  background: linear-gradient(
+    145deg,
+    #be185d 0%,
+    #db2777 35%,
+    #f472b6 68%,
+    #fbcfe8 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Footer — copy email box gradient layers (green swipes over orange) */
+.chat-email-box {
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.chat-email-box-bg--orange {
+  background: linear-gradient(
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+.chat-email-box-bg--green {
+  background: linear-gradient(
+    145deg,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
+  transform: translateX(-101%);
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chat-email-box.is-copied .chat-email-box-bg--green {
+  transform: translateX(0);
+}
+
+.el-portero-quote,
+.emplojd-quote {
+  position: relative;
+}
+
+.el-portero-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    145deg,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+.emplojd-quote::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    145deg,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
+.el-portero-scroll-progress-strategy {
+  background: linear-gradient(
+    to right,
+    #c2410c 0%,
+    #ea580c 32%,
+    #fb923c 62%,
+    #fcd34d 100%
+  );
+}
+
+.emplojd-scroll-progress-design {
+  background: linear-gradient(
+    to right,
+    #6d28d9 0%,
+    #8b5cf6 35%,
+    #c084fc 65%,
+    #f0abfc 100%
+  );
+}
+
+.el-portero-scroll-progress-frontend {
+  background: linear-gradient(
+    to right,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
+}
+
+.emplojd-scroll-progress-delivery {
+  background: linear-gradient(
+    to right,
+    #047857 0%,
+    #059669 32%,
+    #34d399 65%,
+    #a7f3d0 100%
+  );
+}
+
+/* Home hero: cycling role title (blur swap) */
+.hero-title-cycle {
+  display: inline;
+  font: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-cycle {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Works page: sequenced unblur + fade-in (title → filters → list) */
+.works-entrance-1 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+.works-entrance-2 {
+  animation: hero-entrance 0.6s cubic-bezier(0.33, 1, 0.68, 1) 0.2s both;
+}
+.works-entrance-3 {
+  animation: hero-entrance 0.7s cubic-bezier(0.33, 1, 0.68, 1) 0.4s both;
+}
+
+/* Home section titles: each word unblurs, scales up (0.8→1), fades in; words staggered */
+@keyframes section-title-word-entrance {
+  0% {
+    opacity: 0;
+    filter: blur(12px);
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+.section-title-word {
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(0.8);
+  display: inline-block;
+}
+.section-title-in-view .section-title-word {
+  animation: section-title-word-entrance 0.65s cubic-bezier(0.33, 1, 0.68, 1) both;
+  animation-delay: calc(var(--word-index, 0) * 0.1s);
+}
+
+/* Selected Works case cards: fade in when section enters view */
+.case-card-entrance {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--card-index, 0) * 0.12s);
+}
+.selected-works-in-view .case-card-entrance {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Skills cards: same entrance motion, revealed when grid rows enter view */
+.skills-card-entrance {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.case-row-0-in-view .skills-card-row-0.skills-card-entrance,
+.case-row-1-in-view .skills-card-row-1.skills-card-entrance {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card image hover: gradual overlay (dark at bottom, fades up) – ref Jorge template */
+.card-hover-overlay {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.5) 2%,
+    rgba(0, 0, 0, 0.48) 14%,
+    rgba(0, 0, 0, 0.46) 20%,
+    rgba(0, 0, 0, 0.4) 31%,
+    rgba(0, 0, 0, 0.33) 41%,
+    rgba(0, 0, 0, 0.26) 49%,
+    rgba(0, 0, 0, 0.2) 55%,
+    rgba(0, 0, 0, 0.15) 61%,
+    rgba(0, 0, 0, 0.1) 67%,
+    rgba(0, 0, 0, 0.06) 76%,
+    rgba(0, 0, 0, 0.03) 84%,
+    rgba(0, 0, 0, 0.01) 90%,
+    rgba(0, 0, 0, 0) 96%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Skills cards: full gradient morphs into corner via clip-path (black shows outside circle) */
+.skills-card-gradient-morph {
+  clip-path: circle(155% at var(--skills-corner-x, 100%) var(--skills-corner-y, 100%));
+  transition: clip-path 0.55s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-card-gradient-morph {
+    transition-duration: 0.05s;
+  }
+}
+
+.skills-cards-root article.group:hover .skills-card-gradient-morph,
+.skills-cards-root article.group:focus-within .skills-card-gradient-morph {
+  clip-path: circle(46% at var(--skills-corner-x, 100%) var(--skills-corner-y, 100%));
+}
+
+.skills-card-description {
+  color: rgba(255, 255, 255, 0.94);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 }
 
 @keyframes mask-rotate {
@@ -780,6 +1156,99 @@ textarea::-webkit-scrollbar-thumb:hover {
 
 .shimmer-button:hover .shimmer::before,
 .shimmer-button:hover .shimmer::after {
+  opacity: 1;
+}
+
+/* White Playground button: same expand + shimmer hover, white/light background + dark text */
+.shimmer-button-white {
+  font-weight: 600;
+  font-size: 1.2em;
+  background: linear-gradient(315deg, #fafafa 0%, #f5f5f5 47%, #e5e5e5 100%);
+  padding: 0.6em;
+  position: relative;
+  isolation: isolate;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  outline: none;
+  border-radius: 0.66em;
+  scale: 1;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: fit-content;
+  min-width: 2.8em;
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #171717;
+}
+.dark .shimmer-button-white {
+  background: linear-gradient(315deg, #e5e5e5 0%, #d4d4d4 47%, #a3a3a3 100%);
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #171717;
+}
+.shimmer-button-white::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(from var(--mask), #e5e5e5, #d4d4d4, #fafafa, #e5e5e5);
+  border-radius: inherit;
+  animation: mask-rotate 2.5s linear infinite;
+  z-index: -2;
+}
+.dark .shimmer-button-white::before {
+  background: conic-gradient(from var(--mask), #a3a3a3, #d4d4d4, #e5e5e5, #a3a3a3);
+}
+.shimmer-button-white::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: inherit;
+  border-radius: calc(0.66em - 1px);
+  z-index: -1;
+}
+.shimmer-button-white .text {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #171717;
+  white-space: nowrap;
+  width: 100%;
+  justify-content: flex-start;
+}
+.shimmer-button-white:not(:hover) .text {
+  justify-content: center;
+}
+.shimmer-button-white:hover {
+  padding: 0.6em 1em;
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.12);
+}
+.dark .shimmer-button-white:hover {
+  box-shadow: 0 4px 12px 2px rgba(0, 0, 0, 0.3);
+}
+.shimmer-button-white .text .label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.shimmer-button-white:hover .text .label {
+  max-width: 200px;
+  opacity: 1;
+}
+.shimmer-button-white .shimmer::before {
+  box-shadow: 0 0 3px 2px rgba(255, 255, 255, 0.9),
+    0 0 7px 4px rgba(200, 200, 200, 0.6);
+}
+.shimmer-button-white .shimmer::after {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8),
+    inset 0 0 3px 1px rgba(0, 0, 0, 0.06);
+}
+.shimmer-button-white:hover .shimmer::before,
+.shimmer-button-white:hover .shimmer::after {
   opacity: 1;
 }
 
@@ -1495,13 +1964,13 @@ body.mobile-menu-open {
   height: 100% !important;
 }
 
-/* Mobile header background */
+/* Mobile header background - matches page background (white / #0a0a0a) */
 .mobile-header-bg {
   background-color: #ffffff;
 }
 
 .dark .mobile-header-bg {
-  background-color: #060608;
+  background-color: #0a0a0a;
 }
 
 /* Scrolling animation for keywords banner */
@@ -1555,4 +2024,19 @@ body.mobile-menu-open {
 
 .circular-scroll-text svg {
   display: block;
+}
+
+/* Works page: smooth fade when filter results change */
+@keyframes works-list-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.works-list-fade {
+  opacity: 0;
+  animation: works-list-fade-in 0.4s ease-out forwards;
 }

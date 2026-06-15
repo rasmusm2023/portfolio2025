@@ -23,7 +23,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
   return (
     <div className="min-h-screen bg-neutral-0 dark:bg-[#060608] relative animate-pulse">
       {/* Loading Progress Bar */}
-      <div className="fixed top-0 left-0 w-full h-1 bg-neutral-200 dark:bg-neutral-600 z-50">
+      <div className="fixed top-0 left-0 w-full h-1 bg-neutral-200 dark:bg-neutral-60 z-50">
         <div
           className="h-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-300 ease-out"
           style={{ width: `${loadingProgress}%` }}
@@ -48,12 +48,12 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
 
           {/* Title Skeleton */}
           <div className="mt-8 sm:mt-16 mb-4 sm:mb-6 max-w-full lg:max-w-[640px]">
-            <div className="w-full h-16 sm:h-20 bg-neutral-200 dark:bg-neutral-600 rounded-lg"></div>
+            <div className="w-full h-16 sm:h-20 bg-neutral-200 dark:bg-neutral-60 rounded-lg"></div>
           </div>
 
           {/* Subtitle Skeleton */}
           <div className="mb-8 sm:mb-12 max-w-full lg:max-w-[640px]">
-            <div className="w-3/4 h-8 sm:h-10 bg-neutral-200 dark:bg-neutral-600 rounded-lg"></div>
+            <div className="w-3/4 h-8 sm:h-10 bg-neutral-200 dark:bg-neutral-60 rounded-lg"></div>
           </div>
 
           {/* Bento Boxes Skeleton */}
@@ -72,13 +72,13 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
             </div>
 
             {/* Button Skeleton */}
-            <div className="w-full mt-4 h-12 sm:h-14 bg-neutral-200 dark:bg-neutral-600 rounded-xl"></div>
+            <div className="w-full mt-4 h-12 sm:h-14 bg-neutral-200 dark:bg-neutral-60 rounded-xl"></div>
           </div>
         </div>
 
         {/* Right Side Skeleton */}
         <div className="mt-8 sm:mt-12 lg:absolute lg:top-24 lg:left-[calc(50%+150px)] lg:right-0 lg:z-10">
-          <div className="w-full h-[300px] sm:h-[500px] lg:h-[860px] bg-neutral-200 dark:bg-neutral-600 rounded-tl-2xl rounded-bl-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl"></div>
+          <div className="w-full h-[300px] sm:h-[500px] lg:h-[860px] bg-neutral-200 dark:bg-neutral-60 rounded-tl-2xl rounded-bl-2xl lg:rounded-tl-2xl lg:rounded-bl-2xl"></div>
         </div>
 
         {/* Spacer - Responsive height */}
@@ -90,14 +90,14 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
             <div className="w-full lg:w-[600px]">
-              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded mb-6 sm:mb-8"></div>
+              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded mb-6 sm:mb-8"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-4 sm:space-y-6">
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               </div>
             </div>
           </div>
@@ -109,14 +109,14 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
             <div className="w-full lg:w-[600px]">
-              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-4 sm:space-y-6">
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               </div>
               {/* Logo Box Skeleton */}
               <div className="w-full h-24 sm:h-32 mt-4 sm:mt-6 bg-neutral-3 dark:bg-[#060608] rounded-lg flex items-center px-4 sm:px-6"></div>
@@ -130,19 +130,19 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
             <div className="w-full lg:w-[600px]">
-              <div className="w-40 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-40 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16">
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               </div>
               {/* Context Box Skeleton */}
-              <div className="w-full h-32 sm:h-48 bg-neutral-200 dark:bg-neutral-600 rounded-2xl mb-6 sm:mb-8"></div>
+              <div className="w-full h-32 sm:h-48 bg-neutral-200 dark:bg-neutral-60 rounded-2xl mb-6 sm:mb-8"></div>
               {/* Goals Box Skeleton */}
-              <div className="w-full h-32 sm:h-48 bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+              <div className="w-full h-32 sm:h-48 bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
             </div>
           </div>
         </div>
@@ -153,17 +153,17 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
             <div className="w-full lg:w-[600px]">
-              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-4 sm:space-y-6 mb-12 sm:mb-16">
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               </div>
               {/* Features Box Skeleton */}
-              <div className="w-full h-48 sm:h-64 bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+              <div className="w-full h-48 sm:h-64 bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
             </div>
           </div>
         </div>
@@ -174,11 +174,11 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16">
             <div className="w-full lg:w-[600px]">
-              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
-              <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
           </div>
 
@@ -190,7 +190,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
                 className="p-6 sm:p-8 bg-neutral-10/50 dark:bg-neutral-90/50 rounded-2xl"
               >
                 <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                  <div className="w-32 h-32 sm:w-40 sm:h-40 bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+                  <div className="w-32 h-32 sm:w-40 sm:h-40 bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
                   <div className="flex-1 w-full sm:w-auto"></div>
                 </div>
               </div>
@@ -203,10 +203,10 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
       <section className="py-12 sm:py-16 bg-neutral-10 dark:bg-neutral-90">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="w-full lg:w-[600px] mb-6 sm:mb-8">
-            <div className="w-64 sm:w-80 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-            <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+            <div className="w-64 sm:w-80 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+            <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
           </div>
-          <div className="w-full h-[400px] sm:h-[600px] lg:h-[800px] bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+          <div className="w-full h-[400px] sm:h-[600px] lg:h-[800px] bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
         </div>
       </section>
 
@@ -215,10 +215,10 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12">
             <div className="w-full lg:w-[600px]">
-              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-32 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               {/* Morphing SVG Skeleton */}
-              <div className="mt-6 sm:mt-8 w-full sm:w-96 h-64 sm:h-96 bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+              <div className="mt-6 sm:mt-8 w-full sm:w-96 h-64 sm:h-96 bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-3 sm:space-y-4"></div>
@@ -232,13 +232,13 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12 mb-12 sm:mb-16">
             <div className="w-full lg:w-[600px]">
-              <div className="w-48 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-48 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
               <div className="space-y-4 sm:space-y-6">
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
-                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
+                <div className="w-full h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
               </div>
             </div>
           </div>
@@ -248,13 +248,13 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
-                className="p-4 sm:p-6 bg-neutral-200 dark:bg-neutral-600 rounded-2xl"
+                className="p-4 sm:p-6 bg-neutral-200 dark:bg-neutral-60 rounded-2xl"
               ></div>
             ))}
           </div>
 
           {/* Workshop Image Skeleton */}
-          <div className="w-full h-[400px] sm:h-[600px] lg:h-[800px] bg-neutral-200 dark:bg-neutral-600 rounded-2xl"></div>
+          <div className="w-full h-[400px] sm:h-[600px] lg:h-[800px] bg-neutral-200 dark:bg-neutral-60 rounded-2xl"></div>
         </div>
       </section>
 
@@ -263,11 +263,11 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex flex-col lg:flex-row justify-center gap-8 sm:gap-10 lg:gap-12 mb-16 sm:mb-20">
             <div className="w-full lg:w-[600px]">
-              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
             <div className="w-full lg:w-[600px]">
-              <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-3/4 h-6 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
           </div>
 
@@ -278,7 +278,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
                 key={i}
                 className="bg-neutral-3 dark:bg-neutral-90 rounded-2xl p-6 sm:p-8 md:p-10"
               >
-                <div className="w-32 h-8 bg-neutral-200 dark:bg-neutral-600 rounded mb-6 sm:mb-8"></div>
+                <div className="w-32 h-8 bg-neutral-200 dark:bg-neutral-60 rounded mb-6 sm:mb-8"></div>
                 <div className="space-y-4 sm:space-y-6"></div>
               </div>
             ))}
@@ -299,29 +299,29 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8">
           <div className="flex justify-start mb-6 sm:mb-8">
             <div className="w-full lg:w-[600px]">
-              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-600 rounded-lg mb-4"></div>
-              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-600 rounded"></div>
+              <div className="w-24 h-16 bg-neutral-200 dark:bg-neutral-60 rounded-lg mb-4"></div>
+              <div className="w-full h-1 bg-neutral-200 dark:bg-neutral-60 rounded"></div>
             </div>
           </div>
           {/* Prototype Showcase Skeleton */}
-          <div className="w-full h-[400px] sm:h-[600px] lg:h-[987px] bg-neutral-200 dark:bg-neutral-600 rounded-2xl mb-12 sm:mb-16"></div>
+          <div className="w-full h-[400px] sm:h-[600px] lg:h-[987px] bg-neutral-200 dark:bg-neutral-60 rounded-2xl mb-12 sm:mb-16"></div>
         </div>
       </section>
 
       {/* Other Case Studies Section Skeleton */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-95 dark:to-neutral-90">
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-br from-neutral-5 to-neutral-10 dark:from-neutral-100 dark:to-neutral-90">
         <div className="flex flex-col lg:flex-row">
           <div className="w-full lg:w-[10%]"></div>
           <div className="w-full lg:w-[80%] px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-12">
-              <div className="w-48 sm:w-64 h-6 sm:h-8 bg-neutral-200 dark:bg-neutral-600 rounded mb-3 sm:mb-4 mx-auto"></div>
-              <div className="w-80 sm:w-96 h-5 sm:h-6 bg-neutral-200 dark:bg-neutral-600 rounded mx-auto"></div>
+              <div className="w-48 sm:w-64 h-6 sm:h-8 bg-neutral-200 dark:bg-neutral-60 rounded mb-3 sm:mb-4 mx-auto"></div>
+              <div className="w-80 sm:w-96 h-5 sm:h-6 bg-neutral-200 dark:bg-neutral-60 rounded mx-auto"></div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {[1, 2].map((i) => (
                 <div
                   key={i}
-                  className="aspect-[3/2] bg-neutral-200 dark:bg-neutral-600 rounded-xl"
+                  className="aspect-[3/2] bg-neutral-200 dark:bg-neutral-60 rounded-xl"
                 ></div>
               ))}
             </div>
@@ -333,7 +333,7 @@ const CaseStudySkeleton = ({ loadingProgress = 0 }: CaseStudySkeletonProps) => {
       {/* Footer Skeleton */}
       <div className="pt-12 sm:pt-16 pb-12 sm:pb-16">
         <div className="container mx-auto">
-          <div className="w-full h-24 sm:h-32 bg-neutral-200 dark:bg-neutral-600 rounded-lg"></div>
+          <div className="w-full h-24 sm:h-32 bg-neutral-200 dark:bg-neutral-60 rounded-lg"></div>
         </div>
       </div>
     </div>

@@ -124,14 +124,14 @@ const About: React.FC<AboutProps> = ({
                   id="chas-tooltip"
                   className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-3 opacity-0 transition-opacity duration-300 pointer-events-none z-50 w-80 sm:w-96 lg:group-hover:opacity-100 lg:group-hover:pointer-events-auto"
                 >
-                  <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-800 text-xs sm:text-sm leading-relaxed">
+                  <div className="bg-neutral-100 dark:bg-neutral-0 text-neutral-0 dark:text-neutral-100 px-4 sm:px-6 py-3 sm:py-4 rounded-lg shadow-lg border border-neutral-200 dark:border-neutral-80 text-xs sm:text-sm leading-relaxed">
                     <div className="mb-3">
                       Chas Academy's annual, cross-program student project where
                       first-year students team up across disciplines over an
                       8‑week period (2024's theme: AI) to ideate and prototype
                       real solutions, then pitch them to industry professionals.
                     </div>
-                    <div className="text-xs text-neutral-60 dark:text-neutral-40 font-medium border-t border-neutral-200 dark:border-neutral-700 pt-3">
+                    <div className="text-xs text-neutral-60 dark:text-neutral-40 font-medium border-t border-neutral-200 dark:border-neutral-70 pt-3">
                       <a
                         href="https://chasacademy.se/article/chas-challenge-2024"
                         target="_blank"

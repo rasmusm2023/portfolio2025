@@ -10,6 +10,9 @@ module.exports = {
     extend: {
       screens: {
         xs: "500px",
+        "works-3col": "1921px",
+        "works-4col": "2560px",
+        "3xl": "2560px",
       },
       fontFamily: {
         sans: ["var(--font-nunito-sans)"],
@@ -18,6 +21,10 @@ module.exports = {
         audiowide: ["var(--font-audiowide)", "cursive"],
         "instrument-serif": ["var(--font-instrument-serif)", "serif"],
         "instrument-sans": ["var(--font-instrument-sans)", "sans-serif"],
+        "bricolage-grotesque": [
+          "var(--font-bricolage-grotesque)",
+          "sans-serif",
+        ],
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

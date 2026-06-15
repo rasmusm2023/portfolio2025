@@ -220,10 +220,10 @@ const CaseStudiesShowcase = ({
                 {/* Project title and arrow */}
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-1 sm:gap-2">
-                    <h3 className="text-neutral-800 dark:text-neutral-200 text-base sm:text-lg md:text-xl font-semibold font-hanken">
+                    <h3 className="text-neutral-800 dark:text-neutral-20 text-base sm:text-lg md:text-xl font-semibold font-hanken">
                       {caseStudy.title}
                     </h3>
-                    <span className="text-neutral-700 dark:text-neutral-300 text-xs sm:text-sm md:text-base font-medium">
+                    <span className="text-neutral-700 dark:text-neutral-30 text-xs sm:text-sm md:text-base font-medium">
                       {caseStudy.subtitle}
                     </span>
                   </div>
@@ -250,7 +250,7 @@ const CaseStudiesShowcase = ({
                 </div>
 
                 {/* Tags */}
-                <div className="text-neutral-600 dark:text-neutral-400 text-xs sm:text-sm font-medium tracking-wide">
+                <div className="text-neutral-600 dark:text-neutral-40 text-xs sm:text-sm font-medium tracking-wide">
                   {caseStudy.category}
                 </div>
               </div>
