@@ -625,10 +625,10 @@ export default function Home() {
               </div>
               <div className="relative aspect-[6/5] sm:aspect-[1/1] overflow-hidden bg-neutral-200 dark:bg-neutral-80 order-1 md:order-2 lg:col-span-1">
                 <Image
-                  src="/assets/about/profile-4.png"
+                  src="/assets/about/profile-img.jpg"
                   alt="Rasmus Mattsson"
                   fill
-                  className="object-cover"
+                  className="object-cover object-[center_32%]"
                   sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
