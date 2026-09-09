@@ -578,9 +578,10 @@ export default function Home() {
                   </h3>
                   <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                     I’ve designed across health-tech, travel, retail, SaaS, and
-                    AI—at startups and larger companies. I studied UX/UI design
+                    AI—at startups and medium companies. I studied UX/UI design
                     and frontend at Chas Academy in Stockholm and accessibility
-                    at Axess Labs.
+                    at Axess Labs. I’m currently studying software development
+                    at Folkuniversitetet.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
