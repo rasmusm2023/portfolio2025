@@ -548,10 +548,19 @@ textarea::-webkit-scrollbar-thumb:hover {
   );
 }
 
-/* Home hero: cycling role title (blur swap) */
+/* Home hero: cycling role title — solid burgundy (eyebrow gradient’s
+   light stops wash out at this size). */
 .hero-title-cycle {
   display: inline;
   font: inherit;
+}
+
+.hero-title-cycle-text {
+  color: #be185d;
+}
+
+.dark .hero-title-cycle-text {
+  color: #db2777;
 }
 
 @media (prefers-reduced-motion: reduce) {

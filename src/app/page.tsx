@@ -110,12 +110,16 @@ const services = [
 ];
 
 const career = [
+  {
+    period: "(2026 – now)",
+    role: "Software development student specializing in mobility services at Folkuniversitetet",
+  },
   { period: "(2025 – now)", role: "Freelance Product Designer" },
   { period: "(2025)", role: "UX/UI Designer Intern at Zmartrest AI" },
   { period: "(2024)", role: "UX/UI Designer Intern at Xbrandify" },
   {
     period: "(2023 – 2025)",
-    role: "Full Time UX/UI Design Student at Chas Academy",
+    role: "UX/UI Design Student at Chas Academy",
   },
 ];
 
@@ -327,17 +331,8 @@ export default function Home() {
                     : undefined
                 }
               >
-                <span className="text-lg sm:text-xl md:text-2xl font-medium text-neutral-800 dark:text-neutral-20">
-                  <HeroTitleCycle scrollBlur={heroScrollStyle.blur} />{" "}
-                  <span
-                    style={{
-                      filter: `blur(${heroScrollStyle.blur}px)`,
-                      transition:
-                        "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                    }}
-                  >
-                    Designer
-                  </span>
+                <span className="text-lg sm:text-xl md:text-2xl font-medium">
+                  <HeroTitleCycle scrollBlur={heroScrollStyle.blur} />
                 </span>{" "}
                 <span
                   className="text-neutral-500 dark:text-neutral-40"
@@ -347,7 +342,7 @@ export default function Home() {
                       "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                   }}
                 >
-                  from Sweden, currently living in Stockholm.
+                  based in Sweden.
                 </span>
               </span>
             </p>
@@ -571,10 +566,10 @@ export default function Home() {
                     What I do
                   </h3>
                   <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
-                    I’m a product designer looking for my next role. I bring
-                    clarity and craft to digital products—from research and
-                    strategy to UI and implementation—and I’m keen to join a
-                    team where I can contribute and keep learning.
+                    I’m a UX/UI designer training as a software developer. I
+                    design digital products and I ship them in code. I’m looking
+                    for my next role at that intersection — somewhere I can
+                    contribute and keep learning.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">
@@ -583,9 +578,10 @@ export default function Home() {
                   </h3>
                   <p className="text-neutral-900 dark:text-white text-base md:text-lg leading-relaxed">
                     I’ve designed across health-tech, travel, retail, SaaS, and
-                    AI—at startups and larger companies. I studied UX/UI design
+                    AI—at startups and medium companies. I studied UX/UI design
                     and frontend at Chas Academy in Stockholm and accessibility
-                    at Axess Labs.
+                    at Axess Labs. I’m currently studying software development
+                    at Folkuniversitetet.
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-[11rem_1fr] gap-x-6 md:gap-x-10 gap-y-2 items-start">

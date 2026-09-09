@@ -2,7 +2,13 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const TITLES = ["Product", "UX", "UI", "Digital"] as const;
+const TITLES = [
+  { lead: "Product", role: "Designer" },
+  { lead: "UX", role: "Designer" },
+  { lead: "UI", role: "Designer" },
+  { lead: "Digital", role: "Designer" },
+  { lead: "Software", role: "Developer" },
+] as const;
 const HOLD_MS = 3000;
 const SWAP_DURATION_MS = 1100;
 const ENTRANCE_DELAY_MS = 1300;
@@ -100,25 +106,28 @@ export default function HeroTitleCycle({ scrollBlur = 0 }: HeroTitleCycleProps) 
   const isScrolling = scrollBlur > 0;
   const blurPx = isScrolling ? scrollBlur : swapBlur;
   const opacity = isScrolling ? 1 : swapOpacity;
+  const { lead, role } = TITLES[activeIndex];
 
   return (
     <>
       <span
         className="hero-title-cycle"
         style={{
-          filter: `blur(${blurPx}px)`,
           opacity,
           transition: isScrolling
             ? "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
             : "none",
+          ...(blurPx > 0.05 ? { filter: `blur(${blurPx}px)` } : {}),
         }}
         aria-live="polite"
         aria-atomic="true"
       >
-        {TITLES[activeIndex]}
+        <span className="hero-title-cycle-text">
+          {lead} {role}
+        </span>
       </span>
       <span className="sr-only">
-        {TITLES[activeIndex]} Designer
+        {lead} {role}
       </span>
     </>
   );
