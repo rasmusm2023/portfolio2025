@@ -652,7 +652,8 @@ textarea::-webkit-scrollbar-thumb:hover {
     transform 1.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .case-row-0-in-view .skills-card-row-0.skills-card-entrance,
-.case-row-1-in-view .skills-card-row-1.skills-card-entrance {
+.case-row-1-in-view .skills-card-row-1.skills-card-entrance,
+.case-row-2-in-view .skills-card-row-2.skills-card-entrance {
   opacity: 1;
   transform: translateY(0);
 }
