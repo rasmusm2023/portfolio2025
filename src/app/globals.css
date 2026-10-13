@@ -548,24 +548,49 @@ textarea::-webkit-scrollbar-thumb:hover {
   );
 }
 
-/* Home hero: cycling role title — solid burgundy (eyebrow gradient’s
-   light stops wash out at this size). */
+/* Home hero: cycling role title. Neutral while letters scramble, accent
+   once the real title has locked in. Width is reserved by the longest
+   phrase so "based in Sweden" stays put. */
 .hero-title-cycle {
-  display: inline;
+  position: relative;
+  display: inline-block;
   font: inherit;
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+.hero-title-cycle-sizer {
+  visibility: hidden;
+  user-select: none;
+  white-space: nowrap;
 }
 
 .hero-title-cycle-text {
-  color: #be185d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  white-space: nowrap;
+  color: #000000;
+  transition:
+    color 0.2s ease,
+    filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .dark .hero-title-cycle-text {
+  color: #ffffff;
+}
+
+.hero-title-cycle-text.is-settled {
+  color: #be185d;
+}
+
+.dark .hero-title-cycle-text.is-settled {
   color: #db2777;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-title-cycle {
-    transition-duration: 0.01ms !important;
+  .hero-title-cycle-text {
+    transition: none;
   }
 }
 
