@@ -66,46 +66,67 @@ const works: WorkItem[] = [
 
 const services = [
   {
-    title: "UX Research",
+    title: "Frontend",
     description:
-      "I uncover user needs through research synthesis, interviews, and usability testing, turning insights into clear direction for product and design decisions.",
+      "I ship interfaces in React, Next.js, and TypeScript.",
     accentGradient:
-      "linear-gradient(145deg, #0f766e 0%, #14b8a6 38%, #5eead4 72%, #a7f3d0 100%)",
+      "linear-gradient(145deg, #047857 0%, #059669 32%, #34d399 65%, #a7f3d0 100%)",
   },
   {
-    title: "UI Design",
+    title: "Backend",
     description:
-      "I design scalable design systems and high-fidelity interfaces that are clear, accessible, and aligned with your product and brand.",
+      "I design APIs and data models that products can rely on.",
     accentGradient:
-      "linear-gradient(145deg, #6d28d9 0%, #8b5cf6 35%, #c084fc 65%, #f0abfc 100%)",
+      "linear-gradient(145deg, #0e7490 0%, #06b6d4 35%, #22d3ee 68%, #a5f3fc 100%)",
   },
   {
-    title: "Design Systems",
+    title: "Mobile",
     description:
-      "I build and document component libraries and patterns so teams can ship consistent, maintainable UIs at scale.",
+      "I build for phones, where people use mobility products.",
     accentGradient:
-      "linear-gradient(145deg, #1d4ed8 0%, #2563eb 35%, #38bdf8 70%, #7dd3fc 100%)",
+      "linear-gradient(145deg, #312e81 0%, #4f46e5 35%, #818cf8 68%, #c7d2fe 100%)",
   },
   {
-    title: "Product Strategy",
+    title: "Mobility Services",
     description:
-      "I help shape product discovery, prioritization, and roadmaps tied to outcomes—focusing on growth, retention, and continuous learning.",
+      "I work with location, routing, and live travel data.",
     accentGradient:
-      "linear-gradient(145deg, #c2410c 0%, #ea580c 32%, #fb923c 62%, #fcd34d 100%)",
+      "linear-gradient(145deg, #1a2e05 0%, #3f6212 26%, #65a30d 68%, #d9f99d 100%)",
   },
   {
     title: "Prototyping",
     description:
-      "I create interactive prototypes to validate flows and interactions early, from concept to handoff for development.",
+      "I prototype flows early, from concept to development.",
     accentGradient:
       "linear-gradient(145deg, #be185d 0%, #db2777 35%, #f472b6 68%, #fbcfe8 100%)",
   },
   {
-    title: "Frontend",
+    title: "Design Systems",
     description:
-      "I implement designs in code when needed, using modern tools to bridge design and development and ship real products.",
+      "I build component libraries for consistent interfaces.",
     accentGradient:
-      "linear-gradient(145deg, #047857 0%, #059669 32%, #34d399 65%, #a7f3d0 100%)",
+      "linear-gradient(145deg, #1d4ed8 0%, #2563eb 35%, #38bdf8 70%, #7dd3fc 100%)",
+  },
+  {
+    title: "UI Design",
+    description:
+      "I design clear interfaces aligned with product and brand.",
+    accentGradient:
+      "linear-gradient(145deg, #6d28d9 0%, #8b5cf6 35%, #c084fc 65%, #f0abfc 100%)",
+  },
+  {
+    title: "UX Research",
+    description:
+      "I turn research and testing into what to build next.",
+    accentGradient:
+      "linear-gradient(145deg, #0f766e 0%, #14b8a6 38%, #5eead4 72%, #a7f3d0 100%)",
+  },
+  {
+    title: "Product Strategy",
+    description:
+      "I tie priorities to growth, retention, and learning.",
+    accentGradient:
+      "linear-gradient(145deg, #c2410c 0%, #ea580c 32%, #fb923c 62%, #fcd34d 100%)",
   },
 ];
 
@@ -467,7 +488,7 @@ export default function Home() {
                 const article = (
                   <article
                     tabIndex={0}
-                    className={`group relative overflow-hidden aspect-[3/2] sm:aspect-[4/3] skills-card-entrance skills-card-row-${rowIndex} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950`}
+                    className={`group relative overflow-hidden aspect-[3/1] sm:aspect-[8/3] skills-card-entrance skills-card-row-${rowIndex} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/90 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-950`}
                   >
                     <div
                       className="absolute inset-0 pointer-events-none bg-black"
@@ -480,18 +501,18 @@ export default function Home() {
                         ...cornerPos,
                       }}
                     />
-                    <div className="absolute inset-0 z-10 pb-3 pt-3 px-4 md:px-5 flex flex-col">
+                    <div className="absolute inset-0 z-10 py-2.5 sm:py-3 px-4 md:px-5 flex flex-col">
                       <div className="flex items-start justify-between gap-3 flex-1 min-h-0">
-                        <div className="flex flex-col gap-3 sm:gap-4 min-w-0">
-                          <h3 className="font-bricolage-grotesque text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.4)]">
+                        <div className="flex flex-col gap-1 sm:gap-1.5 min-w-0">
+                          <h3 className="font-bricolage-grotesque text-lg sm:text-xl xl:text-2xl font-extrabold leading-tight tracking-tight text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.4)]">
                             {service.title}
                           </h3>
-                          <p className="skills-card-description text-sm sm:text-base font-normal leading-snug opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
+                          <p className="skills-card-description text-xs sm:text-sm font-normal leading-snug line-clamp-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100">
                             — {service.description}
                           </p>
                         </div>
                         <div
-                          className="relative w-10 h-10 shrink-0 flex items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+                          className="relative w-8 h-8 shrink-0 flex items-center justify-center text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
                           aria-hidden
                         >
                           <svg

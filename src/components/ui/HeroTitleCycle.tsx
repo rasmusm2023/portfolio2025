@@ -1,75 +1,73 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 const TITLES = [
-  { lead: "Product", role: "Designer" },
-  { lead: "UX", role: "Designer" },
-  { lead: "UI", role: "Designer" },
-  { lead: "Digital", role: "Designer" },
-  { lead: "Software", role: "Developer" },
+  "SOFTWARE DEVELOPER",
+  "UX/UI DESIGNER",
+  "PRODUCT DESIGNER",
 ] as const;
-const HOLD_MS = 3000;
-const SWAP_DURATION_MS = 1100;
-const ENTRANCE_DELAY_MS = 1300;
-const SWAP_BLUR_PX = 7;
-const SWAP_OPACITY_DIP = 0.45;
+
+const LONGEST_TITLE = TITLES[0];
+const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+/** How long the resolved title stays in the accent color. */
+const HOLD_MS = 1500;
+/** Wait until the hero subtitle has started fading in. */
+const ENTRANCE_DELAY_MS = 520;
+/** Slowest step, used at the start and end of a title. */
+const SLOW_STEP_MS = 110;
+/** Fastest step, used through the middle of a title. */
+const FAST_STEP_MS = 28;
+/** Random glyphs shown on a letter before it locks to the correct one. */
+const FLICKS_PER_LETTER = 1;
+
+/** Ease-in-out: slow at the first letter, fast in the middle, slow on the last. */
+function stepInterval(letterIndex: number, letterCount: number) {
+  if (letterCount <= 1) return SLOW_STEP_MS;
+  const progress = letterIndex / (letterCount - 1);
+  const throughMiddle = Math.sin(Math.min(1, Math.max(0, progress)) * Math.PI);
+  return SLOW_STEP_MS + (FAST_STEP_MS - SLOW_STEP_MS) * throughMiddle;
+}
 
 interface HeroTitleCycleProps {
   scrollBlur?: number;
 }
 
+function randomGlyph() {
+  return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+}
+
+function differentGlyph(current: string) {
+  const next = randomGlyph();
+  if (next !== current) return next;
+  return GLYPHS[(GLYPHS.indexOf(current) + 1) % GLYPHS.length];
+}
+
+function isFixedChar(char: string) {
+  return char === " " || char === "/";
+}
+
+/** Stable first paint so server and client match before the scramble starts. */
+function seededScramble(target: string) {
+  let seed = 11;
+  let result = "";
+  for (const char of target) {
+    if (char === " " || char === "/") {
+      result += char;
+      continue;
+    }
+    seed = (seed * 16807) % 2147483647;
+    result += GLYPHS[seed % GLYPHS.length];
+  }
+  return result;
+}
+
 export default function HeroTitleCycle({ scrollBlur = 0 }: HeroTitleCycleProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [swapBlur, setSwapBlur] = useState(0);
-  const [swapOpacity, setSwapOpacity] = useState(1);
+  const [display, setDisplay] = useState(() => seededScramble(TITLES[0]));
+  const [settled, setSettled] = useState(false);
+  const [announced, setAnnounced] = useState<string>(TITLES[0]);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const timeoutIds = useRef<number[]>([]);
-  const cancelAnimation = useRef<(() => void) | null>(null);
-
-  const clearTimers = () => {
-    timeoutIds.current.forEach((id) => window.clearTimeout(id));
-    timeoutIds.current = [];
-    cancelAnimation.current?.();
-    cancelAnimation.current = null;
-  };
-
-  const schedule = (fn: () => void, delay: number) => {
-    const id = window.setTimeout(fn, delay);
-    timeoutIds.current.push(id);
-  };
-
-  const runSwapAnimation = useCallback((nextIndex: number) => {
-    cancelAnimation.current?.();
-
-    const start = performance.now();
-    let frameId = 0;
-    let swapped = false;
-
-    const tick = (now: number) => {
-      const progress = Math.min(1, (now - start) / SWAP_DURATION_MS);
-      const envelope = Math.sin(progress * Math.PI);
-
-      setSwapBlur(envelope * SWAP_BLUR_PX);
-      setSwapOpacity(1 - envelope * SWAP_OPACITY_DIP);
-
-      if (progress >= 0.5 && !swapped) {
-        swapped = true;
-        setActiveIndex(nextIndex);
-      }
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(tick);
-      } else {
-        setSwapBlur(0);
-        setSwapOpacity(1);
-        cancelAnimation.current = null;
-      }
-    };
-
-    frameId = requestAnimationFrame(tick);
-    cancelAnimation.current = () => cancelAnimationFrame(frameId);
-  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -80,54 +78,122 @@ export default function HeroTitleCycle({ scrollBlur = 0 }: HeroTitleCycleProps) 
   }, []);
 
   useEffect(() => {
-    clearTimers();
-
     if (reducedMotion) {
-      setActiveIndex(0);
-      setSwapBlur(0);
-      setSwapOpacity(1);
-      return clearTimers;
+      setDisplay(TITLES[0]);
+      setSettled(true);
+      setAnnounced(TITLES[0]);
+      return;
     }
 
-    let currentIndex = 0;
+    let frame = 0;
+    let timer = 0;
+    let cancelled = false;
 
-    const advance = () => {
-      const nextIndex = (currentIndex + 1) % TITLES.length;
-      runSwapAnimation(nextIndex);
-      currentIndex = nextIndex;
-      schedule(advance, HOLD_MS + SWAP_DURATION_MS);
+    const play = (targetIndex: number, from: string | null) => {
+      const target = TITLES[targetIndex];
+      const chars = target.split("");
+      // Letters not yet reached stay put: the previous title, or a static scramble.
+      const buffer = (from ?? seededScramble(target)).split("");
+      while (buffer.length < chars.length) buffer.push(randomGlyph());
+      buffer.length = chars.length;
+
+      let index = 0;
+      let flicks = 0;
+      let solvedLetters = 0;
+      const letterCount = chars.reduce(
+        (count, char) => count + (isFixedChar(char) ? 0 : 1),
+        0,
+      );
+      let lastGlyphAt = performance.now();
+      let shown = "";
+
+      const publish = () => {
+        const nextDisplay = buffer.join("");
+        if (nextDisplay === shown) return;
+        shown = nextDisplay;
+        setDisplay(nextDisplay);
+      };
+
+      const skipFixed = () => {
+        while (index < chars.length && isFixedChar(chars[index])) {
+          buffer[index] = chars[index];
+          index += 1;
+        }
+      };
+
+      setSettled(false);
+      skipFixed();
+      publish();
+
+      const finish = () => {
+        setDisplay(target);
+        setSettled(true);
+        setAnnounced(target);
+        timer = window.setTimeout(() => {
+          if (!cancelled) play((targetIndex + 1) % TITLES.length, target);
+        }, HOLD_MS);
+      };
+
+      const tick = (now: number) => {
+        if (cancelled) return;
+
+        if (index >= chars.length) {
+          finish();
+          return;
+        }
+
+        if (now - lastGlyphAt >= stepInterval(solvedLetters, letterCount)) {
+          lastGlyphAt = now;
+
+          if (flicks < FLICKS_PER_LETTER) {
+            buffer[index] = differentGlyph(buffer[index]);
+            flicks += 1;
+          } else {
+            buffer[index] = chars[index];
+            index += 1;
+            flicks = 0;
+            solvedLetters += 1;
+            skipFixed();
+          }
+
+          publish();
+
+          if (index >= chars.length) {
+            finish();
+            return;
+          }
+        }
+
+        frame = requestAnimationFrame(tick);
+      };
+
+      frame = requestAnimationFrame(tick);
     };
 
-    schedule(advance, ENTRANCE_DELAY_MS + HOLD_MS);
+    timer = window.setTimeout(() => play(0, null), ENTRANCE_DELAY_MS);
 
-    return clearTimers;
-  }, [reducedMotion, runSwapAnimation]);
-
-  const isScrolling = scrollBlur > 0;
-  const blurPx = isScrolling ? scrollBlur : swapBlur;
-  const opacity = isScrolling ? 1 : swapOpacity;
-  const { lead, role } = TITLES[activeIndex];
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      cancelAnimationFrame(frame);
+    };
+  }, [reducedMotion]);
 
   return (
     <>
-      <span
-        className="hero-title-cycle"
-        style={{
-          opacity,
-          transition: isScrolling
-            ? "filter 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94)"
-            : "none",
-          ...(blurPx > 0.05 ? { filter: `blur(${blurPx}px)` } : {}),
-        }}
-        aria-live="polite"
-        aria-atomic="true"
-      >
-        <span className="hero-title-cycle-text">
-          {lead} {role}
+      <span className="hero-title-cycle" aria-hidden="true">
+        <span className="hero-title-cycle-sizer">{LONGEST_TITLE}</span>
+        <span
+          className={`hero-title-cycle-text${settled ? " is-settled" : ""}`}
+          style={{
+            filter: scrollBlur > 0.05 ? `blur(${scrollBlur}px)` : "none",
+          }}
+        >
+          {display}
         </span>
       </span>
-      <span className="sr-only">
-        {lead} {role}
+      <span className="sr-only" aria-live="polite">
+        {announced}
       </span>
     </>
   );
